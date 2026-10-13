@@ -1,0 +1,22 @@
+{
+  "account1": {
+    "running": true,
+    "pid": 16194,
+    "gid": 65201,
+    "respawn": {
+      "threshold": 60,
+      "timeout": 5,
+      "retry": 5
+    }
+  },
+  "account2": {
+    "running": true,
+    "pid": 16195,
+    "gid": 65202,
+    "respawn": {
+      "threshold": 60,
+      "timeout": 5,
+      "retry": 5
+    }
+  }
+}

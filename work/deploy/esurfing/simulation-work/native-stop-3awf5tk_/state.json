@@ -1,0 +1,150 @@
+{
+  "statuses": [
+    {
+      "up": true,
+      "l3_device": "eswan2",
+      "ipv4-address": [
+        {
+          "address": "10.207.114.16",
+          "mask": 20
+        }
+      ],
+      "route": [
+        {
+          "target": "0.0.0.0",
+          "nexthop": "10.207.112.1"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    "1802: from all fwmark 0x2000000 lookup 25202"
+  ],
+  "kernel_default": true,
+  "uci": {
+    "network.wan2.ip4table": "25202",
+    "network.wan2.defaultroute": "1"
+  },
+  "services": {},
+  "calls": [
+    [
+      "uci",
+      "-q",
+      "get",
+      "network.wan2.ip4table"
+    ],
+    [
+      "uci",
+      "-q",
+      "get",
+      "network.wan2.defaultroute"
+    ],
+    [
+      "ip",
+      "-4",
+      "rule",
+      "show"
+    ],
+    [
+      "ip",
+      "-4",
+      "route",
+      "replace",
+      "unreachable",
+      "default",
+      "metric",
+      "32760",
+      "table",
+      "25202"
+    ],
+    [
+      "ip",
+      "-4",
+      "rule",
+      "add",
+      "priority",
+      "1802",
+      "fwmark",
+      "0x02000000/0xffffffff",
+      "lookup",
+      "25202"
+    ],
+    [
+      "nft",
+      "-c",
+      "-f",
+      "C:/Users/Shizuku/Documents/Codex/2026-10-12/za/work/deploy/esurfing/simulation-work/native-stop-3awf5tk_/etc/esurfing-deploy/netifd-route.nft"
+    ],
+    [
+      "nft",
+      "-f",
+      "C:/Users/Shizuku/Documents/Codex/2026-10-12/za/work/deploy/esurfing/simulation-work/native-stop-3awf5tk_/etc/esurfing-deploy/netifd-route.nft"
+    ],
+    [
+      "esurfingclient",
+      "--list-accounts"
+    ],
+    [
+      "ubus",
+      "call",
+      "network.interface.wan2",
+      "status"
+    ],
+    [
+      "jsonfilter",
+      "-e",
+      "@.up"
+    ],
+    [
+      "jsonfilter",
+      "-e",
+      "@.l3_device"
+    ],
+    [
+      "jsonfilter",
+      "-e",
+      "@[\"ipv4-address\"][0].address"
+    ],
+    [
+      "ip",
+      "-4",
+      "route",
+      "get",
+      "1.1.1.1",
+      "mark",
+      "0x02000000"
+    ],
+    [
+      "ubus",
+      "call",
+      "service",
+      "list",
+      "{\"name\":\"esurfingclient\"}"
+    ],
+    [
+      "jsonfilter",
+      "-e",
+      "@.esurfingclient.instances.account2.command[0]"
+    ]
+  ],
+  "guards": {
+    "25202": true
+  },
+  "current": {
+    "up": true,
+    "l3_device": "eswan2",
+    "ipv4-address": [
+      {
+        "address": "10.207.114.16",
+        "mask": 20
+      }
+    ],
+    "route": [
+      {
+        "target": "0.0.0.0",
+        "nexthop": "10.207.112.1"
+      }
+    ]
+  },
+  "status_index": 1
+}

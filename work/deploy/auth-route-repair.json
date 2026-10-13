@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "default via 10.207.112.1 dev wan src 10.207.127.206 metric 10 \nunreachable default metric 32760 \n10.207.112.0/20 dev wan scope link src 10.207.127.206 \ndefault via 10.207.112.1 dev eswan2 src 10.207.114.16 metric 10 \nunreachable default metric 32760 \n10.207.112.0/20 dev eswan2 scope link src 10.207.114.16 \nup 10.207.127.206 10.207.112.1 wan 10.207.112.0/20\nup 10.207.114.16 10.207.112.1 eswan2 10.207.112.0/20\n",
+  "stderr": ""
+}

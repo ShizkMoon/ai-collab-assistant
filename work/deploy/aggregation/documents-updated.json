@@ -1,0 +1,17 @@
+{
+  "documents": [
+    {
+      "path": "outputs/ax6000-mainline/使用说明.md",
+      "bytes": 46183,
+      "sha256": "a3e91b6b8743bae722995f54c43bb8405df2ff921dba249df650f4c41844fd52"
+    },
+    {
+      "path": "outputs/ax6000-mainline/路由器调优与校园网方案调研.md",
+      "bytes": 89329,
+      "sha256": "03130b2940c5202471cf11eb956d5df79f8ec67d597571fa0e5e72a44151d2ea"
+    }
+  ],
+  "current_stage": "aggregation",
+  "current_backup_pair_unchanged": true,
+  "independent_review_stale_current_phrases_corrected": true
+}

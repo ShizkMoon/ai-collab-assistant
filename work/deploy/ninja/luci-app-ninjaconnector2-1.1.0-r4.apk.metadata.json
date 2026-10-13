@@ -1,0 +1,98 @@
+{
+  "file": "luci-app-ninjaconnector2-1.1.0-r4.apk",
+  "bytes": 11156,
+  "sha256": "2783d1fa4d8e0ed85b8e39dc56c314d4ba5259564386042c307f1be07cfc5292",
+  "metadata": {
+    "name": "luci-app-ninjaconnector2",
+    "version": "1.1.0-r4",
+    "hashes": "1da79cf6c733ec75cfebb6ed61d61b599e312fd5",
+    "description": "Ninja core and subscription support for OpenClash.",
+    "arch": "noarch",
+    "license": "GPL-3.0-only",
+    "origin": "package/luci-app-ninjaconnector2",
+    "maintainer": "Ninja",
+    "url": "https://github.com/kachetong1314/mihomo-ninja",
+    "installed-size": 33356,
+    "depends": [
+      {
+        "name": "ca-bundle",
+        "version": null,
+        "match": null
+      },
+      {
+        "name": "curl",
+        "version": null,
+        "match": null
+      },
+      {
+        "name": "jsonfilter",
+        "version": null,
+        "match": null
+      },
+      {
+        "name": "luci-app-openclash",
+        "version": null,
+        "match": null
+      },
+      {
+        "name": "luci-base",
+        "version": null,
+        "match": null
+      },
+      {
+        "name": "luci-compat",
+        "version": null,
+        "match": null
+      }
+    ]
+  },
+  "file-count": 10,
+  "logical-file-size-sum": 33356,
+  "files": [
+    {
+      "path": "etc/config/ninjaconnector2",
+      "size": 93
+    },
+    {
+      "path": "etc/uci-defaults/40_luci-ninjaconnector2",
+      "size": 664
+    },
+    {
+      "path": "lib/apk/packages/luci-app-ninjaconnector2.conffiles",
+      "size": 28
+    },
+    {
+      "path": "lib/apk/packages/luci-app-ninjaconnector2.conffiles_static",
+      "size": 93
+    },
+    {
+      "path": "lib/apk/packages/luci-app-ninjaconnector2.list",
+      "size": 340
+    },
+    {
+      "path": "usr/lib/lua/luci/controller/ninjaconnector2.lua",
+      "size": 6480
+    },
+    {
+      "path": "usr/lib/lua/luci/i18n/ninjaconnector2.zh-cn.lmo",
+      "size": 784
+    },
+    {
+      "path": "usr/lib/lua/luci/view/ninjaconnector2/main.htm",
+      "size": 9506
+    },
+    {
+      "path": "usr/share/ninjaconnector2/ninja_kernel.sh",
+      "size": 10648
+    },
+    {
+      "path": "usr/share/ninjaconnector2/ninja_sub.sh",
+      "size": 4720
+    }
+  ],
+  "scripts": {
+    "postinst": "#!/bin/sh\n[ -n \"${IPKG_INSTROOT}\" ] || {\n\t[ -f /etc/uci-defaults/40_luci-ninjaconnector2 ] && ( . /etc/uci-defaults/40_luci-ninjaconnector2 ) && rm -f /etc/uci-defaults/40_luci-ninjaconnector2\n\tchmod 0600 /etc/config/ninjaconnector2 2>/dev/null\n\trm -rf /tmp/luci-indexcache /tmp/luci-modulecache /var/luci-indexcache* /var/luci-modulecache 2>/dev/null\n}\nexit 0\n",
+    "predeinst": "#!/bin/sh\nexit 0\n",
+    "postdeinst": "#!/bin/sh\nrm -rf /usr/share/ninjaconnector2 /tmp/ninjaconnector2 2>/dev/null\nrm -rf /tmp/luci-indexcache /tmp/luci-modulecache /var/luci-indexcache* /var/luci-modulecache 2>/dev/null\nexit 0\n"
+  }
+}

@@ -1,0 +1,8 @@
+system.@system[0].log_size='128'
+openclash.config.log_level='0'
+openclash.config.log_size='512'
+364	/tmp/openclash.log
+32	/etc/openclash/history
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/ubi0_1              63076     45608     14204  76% /overlay
+tmpfs                   247000      6952    240048   3% /tmp

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "all.arp_ignore=1\nall.arp_announce=0\nall.rp_filter=0\ndefault.arp_ignore=1\ndefault.arp_announce=0\ndefault.rp_filter=0\nwan.arp_ignore=1\nwan.arp_announce=0\nwan.rp_filter=0\n{\n\t\"up\": false,\n\t\"pending\": false,\n\t\"available\": true,\n\t\"autostart\": false,\n\t\"dynamic\": false,\n\t\"proto\": \"dhcp\",\n\t\"device\": \"eswan2\",\n\t\"data\": {\n\t\t\n\t}\n}\n{\n\t\"up\": false,\n\t\"pending\": false,\n\t\"available\": true,\n\t\"autostart\": false,\n\t\"dynamic\": false,\n\t\"proto\": \"dhcp\",\n\t\"device\": \"eswan3\",\n\t\"data\": {\n\t\t\n\t}\n}\nFilesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     49876      9936  83% /overlay\n              total        used        free      shared  buff/cache   available\nMem:         494004      103676      354520        1928       35808      346888\nSwap:             0           0           0\n",
+  "stderr": "Device \"eswan2\" does not exist.\nDevice \"eswan3\" does not exist.\n"
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "source": "[2026-10-12 13:37:10] [auth#1 pid=3335]",
+    "locations": [
+      "[DialerClient.c:229]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": ""
+  },
+  {
+    "source": "[2026-10-12 13:37:10] [auth#1 pid=3335]",
+    "locations": [
+      "[DialerClient.c:230]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": "程序版本"
+  },
+  {
+    "source": "[2026-10-12 13:37:10] [auth#1 pid=3335]",
+    "locations": [
+      "[DialerClient.c:231]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": "本程序由制作遵循开源协议"
+  },
+  {
+    "source": "[2026-10-12 13:37:10] [auth#1 pid=3335]",
+    "locations": [
+      "[DialerClient.c:232]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": "项目地址"
+  },
+  {
+    "source": "[2026-10-12 13:37:10] [auth#1 pid=3335]",
+    "locations": [
+      "[DialerClient.c:233]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": ""
+  },
+  {
+    "source": "[2026-10-12 13:57:40] [auth#1 pid=3492]",
+    "locations": [
+      "[DialerClient.c:229]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": ""
+  },
+  {
+    "source": "[2026-10-12 13:57:40] [auth#1 pid=3492]",
+    "locations": [
+      "[DialerClient.c:230]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": "程序版本"
+  },
+  {
+    "source": "[2026-10-12 13:57:40] [auth#1 pid=3492]",
+    "locations": [
+      "[DialerClient.c:231]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": "本程序由制作遵循开源协议"
+  },
+  {
+    "source": "[2026-10-12 13:57:40] [auth#1 pid=3492]",
+    "locations": [
+      "[DialerClient.c:232]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": "项目地址"
+  },
+  {
+    "source": "[2026-10-12 13:57:40] [auth#1 pid=3492]",
+    "locations": [
+      "[DialerClient.c:233]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": ""
+  },
+  {
+    "source": "[2026-10-12 15:37:11] [auth#2 pid=7378]",
+    "locations": [
+      "[DialerClient.c:229]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": ""
+  },
+  {
+    "source": "[2026-10-12 15:37:11] [auth#2 pid=7378]",
+    "locations": [
+      "[DialerClient.c:230]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": "程序版本"
+  },
+  {
+    "source": "[2026-10-12 15:37:11] [auth#2 pid=7378]",
+    "locations": [
+      "[DialerClient.c:231]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": "本程序由制作遵循开源协议"
+  },
+  {
+    "source": "[2026-10-12 15:37:11] [auth#2 pid=7378]",
+    "locations": [
+      "[DialerClient.c:232]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": "项目地址"
+  },
+  {
+    "source": "[2026-10-12 15:37:11] [auth#2 pid=7378]",
+    "locations": [
+      "[DialerClient.c:233]"
+    ],
+    "levels": [
+      "[INFO]"
+    ],
+    "message_chinese_only": ""
+  }
+]

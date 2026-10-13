@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "Enable-EdgeTransport.ps1": {
+      "sha256": "076ce5571bfecf961a64adc54f3c6b60da7148791d2ce5b568954bc8101b2b1c",
+      "powershell_parse_errors": 0,
+      "manual_runtime_executed": false
+    },
+    "Restore-EdgeTransport.ps1": {
+      "sha256": "bde22d854c11336aaccf1ef717708d1470256ea0bce80260178d9492eba9063e",
+      "powershell_parse_errors": 0,
+      "manual_runtime_executed": false
+    }
+  },
+  "existing_original_snapshot_preserved": true,
+  "future_manual_snapshot_name": "edge-policy-manual-before.json",
+  "future_manual_success_name": "edge-policy-manual-applied.json",
+  "current_policy_written": false,
+  "automatic_elevation_performed": false,
+  "limitation": "Syntax readback only; no future manual policy update, rollback, Edge recognition or HTTP/3 acceptance was executed."
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "Ruleset passes nftables check.\n",
+  "stderr": "[!] Section openclash specifies unreachable path '/var/etc/openclash.include', ignoring section\n"
+}

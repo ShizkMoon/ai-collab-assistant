@@ -1,0 +1,63 @@
+{
+  "probe": {
+    "exit": 0,
+    "stdout": "{ \"algorithm\": \"bbr\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\", \"algorithm_error\": null, \"tcp_level\": 6, \"congestion_option\": 13, \"established\": true, \"remote\": { \"family\": 2, \"address\": \"223.5.5.5\", \"port\": 443 }, \"local\": { \"family\": 2, \"address\": \"10.207.123.111\", \"port\": 41210 } }\n{ \"tcp_info\": { \"state\": 1, \"ca_state\": 0, \"retransmits\": 0, \"probes\": 0, \"backoff\": 0, \"options\": 7, \"snd_wscale\": 11, \"rcv_wscale\": 7, \"rto\": 210000, \"ato\": 0, \"snd_mss\": 1448, \"rcv_mss\": 536, \"unacked\": 0, \"sacked\": 0, \"lost\": 0, \"retrans\": 0, \"fackets\": 0, \"last_data_sent\": 0, \"last_ack_sent\": 0, \"last_data_recv\": 0, \"last_ack_recv\": 0, \"pmtu\": 1500, \"rcv_ssthresh\": 64088, \"rtt\": 6845, \"rttvar\": 3422, \"snd_ssthresh\": 2147483647, \"snd_cwnd\": 10, \"advmss\": 1448, \"reordering\": 3, \"rcv_rtt\": 0, \"rcv_space\": 14480, \"total_retrans\": 0 } }\n",
+    "stderr": ""
+  },
+  "socket_algorithm_verified": true,
+  "affects_forwarded_pc_tcp": false,
+  "proves_download_speedup": false,
+  "socket": {
+    "algorithm": "bbr\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+    "algorithm_error": null,
+    "tcp_level": 6,
+    "congestion_option": 13,
+    "established": true,
+    "remote": {
+      "family": 2,
+      "address": "223.5.5.5",
+      "port": 443
+    },
+    "local": {
+      "family": 2,
+      "address": "10.207.123.111",
+      "port": 41210
+    }
+  },
+  "socket_info": {
+    "tcp_info": {
+      "state": 1,
+      "ca_state": 0,
+      "retransmits": 0,
+      "probes": 0,
+      "backoff": 0,
+      "options": 7,
+      "snd_wscale": 11,
+      "rcv_wscale": 7,
+      "rto": 210000,
+      "ato": 0,
+      "snd_mss": 1448,
+      "rcv_mss": 536,
+      "unacked": 0,
+      "sacked": 0,
+      "lost": 0,
+      "retrans": 0,
+      "fackets": 0,
+      "last_data_sent": 0,
+      "last_ack_sent": 0,
+      "last_data_recv": 0,
+      "last_ack_recv": 0,
+      "pmtu": 1500,
+      "rcv_ssthresh": 64088,
+      "rtt": 6845,
+      "rttvar": 3422,
+      "snd_ssthresh": 2147483647,
+      "snd_cwnd": 10,
+      "advmss": 1448,
+      "reordering": 3,
+      "rcv_rtt": 0,
+      "rcv_space": 14480,
+      "total_retrans": 0
+    }
+  }
+}

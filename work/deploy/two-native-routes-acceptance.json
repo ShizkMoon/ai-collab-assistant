@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "default via 10.207.112.1 dev wan proto static src 10.207.122.136 metric 10 \n10.207.112.0/20 dev wan proto static scope link metric 10 \n192.168.31.0/24 dev br-lan proto kernel scope link src 192.168.31.1 \n0:\tfrom all lookup local\n1802:\tfrom all fwmark 0x2000000 lookup 25202\n10000:\tfrom 10.207.120.86 lookup 25202\n20000:\tfrom all to 10.207.120.86/20 lookup 25202\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\n90013:\tfrom all iif lo lookup 25202\n[2026-10-12 17:21:29] account=2 event=CURL_TOTAL_SECONDS value=0.000\n[2026-10-12 17:21:29] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 17:21:29] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 17:22:20] account=2 event=AUTH_REQUIRED_HTTP302\n[2026-10-12 17:22:25] account=2 event=LOGIN_KEEP_SECONDS value=6\n[2026-10-12 17:22:25] account=2 event=AUTH_SUCCESS\n[2026-10-12 17:22:31] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 17:22:32] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\nwan2=204\nwan1=204\n",
+  "stderr": ""
+}

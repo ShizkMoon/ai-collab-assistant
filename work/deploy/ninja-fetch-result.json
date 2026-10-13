@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "http_status": 200,
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 217052,
+  "sha256": "cfac074e64386921763c153cf235616217004b3a9dbab13e7ef7e3a9467ab350",
+  "format": "yaml_candidate",
+  "contains_proxies_key": true,
+  "contains_rules_key": true
+}

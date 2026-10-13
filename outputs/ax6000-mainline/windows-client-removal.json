@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-12T14:03:49.6109249+08:00",
+  "task_removed": true,
+  "stopped_processes": [
+    {
+      "id": 24956,
+      "name": "pwsh.exe"
+    }
+  ],
+  "removed_directories": [
+    "C:\\Users\\Shizuku\\AppData\\Local\\ESurfingClient",
+    "C:\\Users\\Shizuku\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\ESurfingClient.before-watchdog-20261001"
+  ],
+  "removed_files": [
+    "C:\\Users\\Shizuku\\Documents\\Codex\\2026-10-01\\http-enet-10000-gd-cn-10001\\work\\source-analysis\\isolated-help\\ESurfingClient.exe",
+    "C:\\Users\\Shizuku\\Documents\\Codex\\2026-10-12\\za\\work\\ax6000\\private\\windows-esurfing-before-migration.dpapi",
+    "C:\\Users\\Shizuku\\Documents\\Codex\\2026-10-12\\za\\work\\ax6000\\esurfing-review\\Switch-ESurfingOwner.ps1",
+    "C:\\Users\\Shizuku\\Documents\\Codex\\2026-10-12\\za\\work\\ax6000\\esurfing-review\\Switch-ESurfingOwner-review.md",
+    "C:\\Users\\Shizuku\\Documents\\Codex\\2026-10-12\\za\\outputs\\ax6000-mainline\\Switch-ESurfingOwner.ps1",
+    "C:\\Users\\Shizuku\\Documents\\Codex\\2026-10-12\\za\\outputs\\ax6000-mainline\\切换到路由器.cmd"
+  ],
+  "removed_startup_values": [],
+  "success": true,
+  "additional_historical_script_deletion": {
+    "completed": false,
+    "reason": "Automatic approval review: blocked by policy",
+    "directory": "C:\\Users\\Shizuku\\Documents\\Codex\\2026-10-01\\http-enet-10000-gd-cn-10001\\work",
+    "retained_files": [
+      "Deploy-ESurfingClient.vbs",
+      "Finalize-ESurfingWatchdog.ps1",
+      "Install-ESurfingWatchdog.ps1",
+      "Launch-ESurfingClient.vbs",
+      "Watch-ESurfingClient.ps1"
+    ]
+  }
+}

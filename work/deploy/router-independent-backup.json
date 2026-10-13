@@ -1,0 +1,22 @@
+{
+  "destination": "E:\\SaveBackups\\AX6000\\2026-10-13-router-optimization",
+  "source_disk_number": 0,
+  "destination_disk_number": 1,
+  "different_physical_disk": true,
+  "same_computer": true,
+  "copied_files_verified": 255,
+  "bytes_copied_verified": 368278581,
+  "all_sha256_match": true,
+  "contains": [
+    "current three-authentication, domestic-DoH, CAKE and BBRv1 config/runtime pair and manifest",
+    "installed firmware and ESurfing packages",
+    "current installed package list",
+    "original vendor recovery materials",
+    "device-specific OEM partition snapshots",
+    "current documentation and linked local evidence",
+    "Ethernet recovery script and saved pre-change state"
+  ],
+  "missing_historical_document_links": [],
+  "isolated_expansion_report": "isolated-expansion-next/verification-report.json",
+  "production_restore_performed": false
+}

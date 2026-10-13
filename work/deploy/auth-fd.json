@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "lr-x------    1 root     root            64 Oct 12 15:44 0 -> /dev/null\nl-wx------    1 root     root            64 Oct 12 15:44 1 -> pipe:[54231]\nl-wx------    1 root     root            64 Oct 12 15:44 2 -> pipe:[54232]\nl-wx------    1 root     root            64 Oct 12 15:44 3 -> /tmp/log/esurfing/logs/logs/run.log\nlr-x------    1 root     root            64 Oct 12 15:33 0 -> /dev/null\nl-wx------    1 root     root            64 Oct 12 15:33 1 -> pipe:[1967]\nl-wx------    1 root     root            64 Oct 12 15:33 2 -> pipe:[1968]\nl-wx------    1 root     root            64 Oct 12 15:33 3 -> /tmp/log/esurfing/logs/logs/run.log\nhrtimer_nanosleepName:\tesurfingclient\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t7378\nNgid:\t0\nPid:\t7378\nPPid:\t1\nTracerPid:\t0\n/var/log/esurfing/logs/logs\n/var/log/esurfing/logs/run.log\n/var/log/esurfing/logs/logs/run.log\n",
+  "stderr": ""
+}

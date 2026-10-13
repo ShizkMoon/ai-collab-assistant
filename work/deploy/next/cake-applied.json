@@ -1,0 +1,66 @@
+{
+  "before": "qdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n8: eswan2@wan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000\n    link/ether 02:66:60:00:00:02 brd ff:ff:ff:ff:ff:ff promiscuity 0 allmulti 0 minmtu 68 maxmtu 15338 \n    macvlan mode bridge bcqueuelen 1000 usedbcqueuelen 1000 addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 tso_max_size 65536 tso_max_segs 65535 gro_max_size 65536 gso_ipv4_max_size 65536 gro_ipv4_max_size 65536 \n12: eswan3@wan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000\n    link/ether 02:66:60:00:00:03 brd ff:ff:ff:ff:ff:ff promiscuity 0 allmulti 0 minmtu 68 maxmtu 15338 \n    macvlan mode bridge bcqueuelen 1000 usedbcqueuelen 1000 addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 tso_max_size 65536 tso_max_segs 65535 gro_max_size 65536 gso_ipv4_max_size 65536 gro_ipv4_max_size 65536 \n",
+  "apply": {
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "after": "qdisc cake ca10: root refcnt 2 bandwidth unlimited besteffort flows nonat nowash no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \n Sent 740 bytes 6 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n memory used: 2304b of 8Mb\n capacity estimate: 0bit\n min/max network layer size:           40 /     444\n min/max overhead-adjusted size:       84 /     482\n active queues:                         0\n average network hdr offset:            0\n\n                  Tin 0\n  thresh           0bit\n  target            5ms\n  interval        100ms\n  pk_delay          5us\n  av_delay          0us\n  sp_delay          0us\n  backlog            0b\n  pkts                6\n  bytes             740\n  way_inds            0\n  way_miss            6\n  way_cols            0\n  drops               0\n  marks               0\n  ack_drop            0\n  sp_flows            3\n  bk_flows            0\n  un_flows            0\n  max_len           458\n  quantum          1514\n\nqdisc ingress ffff: parent ffff:fff1 ---------------- \n Sent 358 bytes 6 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\nqdisc cake ca10: root refcnt 2 bandwidth 650Mbit besteffort flows nonat nowash ingress no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \n Sent 442 bytes 6 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n memory used: 4352b of 8Mb\n capacity estimate: 650Mbit\n min/max network layer size:           46 /      81\n min/max overhead-adjusted size:       84 /     119\n active queues:                         0\n average network hdr offset:            0\n\n                  Tin 0\n  thresh        650Mbit\n  target            5ms\n  interval        100ms\n  pk_delay          6us\n  av_delay          0us\n  sp_delay          0us\n  backlog            0b\n  pkts                6\n  bytes             442\n  way_inds            0\n  way_miss            6\n  way_cols            0\n  drops               0\n  marks               0\n  ack_drop            0\n  sp_flows            3\n  bk_flows            0\n  un_flows            0\n  max_len            95\n  quantum          1514\n\nfilter parent ffff: protocol all pref 49152 matchall chain 0 \nfilter parent ffff: protocol all pref 49152 matchall chain 0 handle 0x1 \n  not_in_hw (rule hit 6)\n\taction order 1: mirred (Egress Redirect to device ifb-cake) stolen\n\tindex 1 ref 1 bind 1 installed 0 sec used 0 sec firstused 0 sec\n\tAction statistics:\n\tSent 358 bytes 6 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\n",
+  "installed_files": {
+    "/usr/libexec/codex-cake": "638394f83f06454a623e4963610c6a9c9b4bba1132f8300a4ded00362651a2e3",
+    "/etc/init.d/codex-cake": "015f672882d1114fc424913c3967185598920e6f207a93cff016429cf5955f55",
+    "/etc/hotplug.d/iface/96-codex-cake": "1ed82e9365549ceb149d082f1b47899ad240e2123cc133e333dfe88cfd1c96a6"
+  },
+  "rollback_timer_pid": 28419,
+  "rollback_timer_seconds": 180,
+  "runtime_active": true,
+  "persistent_service_enabled": true,
+  "network_reloaded": false,
+  "router_rebooted": false,
+  "rollback_timer_disarmed": true,
+  "lan_http": [
+    {
+      "role": "domestic",
+      "exit": 0,
+      "http": "200",
+      "passed": true
+    },
+    {
+      "role": "foreign",
+      "exit": 0,
+      "http": "204",
+      "passed": true
+    }
+  ],
+  "health_readback": {
+    "exit": 0,
+    "stdout": "HEALTHY\n",
+    "stderr": ""
+  },
+  "service": {
+    "codex-cake": {
+      "instances": {
+        "instance1": {
+          "running": true,
+          "pid": 29946,
+          "incarnation": 62,
+          "command": [
+            "/usr/libexec/codex-cake",
+            "watch"
+          ],
+          "term_timeout": 5,
+          "respawn": {
+            "threshold": 3600,
+            "timeout": 5,
+            "retry": 5
+          }
+        }
+      }
+    }
+  },
+  "gso_splitting": true,
+  "final_parameters": "download 650Mbit, upload unlimited, besteffort flows, split-gso, ethernet, each 8MiB",
+  "final_qdisc_readback": "qdisc cake ca10: root refcnt 2 bandwidth unlimited besteffort flows nonat nowash no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n memory used: 0b of 8Mb\n capacity estimate: 0bit\n min/max network layer size:        65535 /       0\n min/max overhead-adjusted size:    65535 /       0\n active queues:                         0\n average network hdr offset:            0\n\n                  Tin 0\n  thresh           0bit\n  target            5ms\n  interval        100ms\n  pk_delay          0us\n  av_delay          0us\n  sp_delay          0us\n  backlog            0b\n  pkts                0\n  bytes               0\n  way_inds            0\n  way_miss            0\n  way_cols            0\n  drops               0\n  marks               0\n  ack_drop            0\n  sp_flows            0\n  bk_flows            0\n  un_flows            0\n  max_len             0\n  quantum          1514\n\nqdisc ingress ffff: parent ffff:fff1 ---------------- \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\nqdisc cake ca10: root refcnt 2 bandwidth 650Mbit besteffort flows nonat nowash ingress no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n memory used: 0b of 8Mb\n capacity estimate: 650Mbit\n min/max network layer size:        65535 /       0\n min/max overhead-adjusted size:    65535 /       0\n active queues:                         0\n average network hdr offset:            0\n\n                  Tin 0\n  thresh        650Mbit\n  target            5ms\n  interval        100ms\n  pk_delay          0us\n  av_delay          0us\n  sp_delay          0us\n  backlog            0b\n  pkts                0\n  bytes               0\n  way_inds            0\n  way_miss            0\n  way_cols            0\n  drops               0\n  marks               0\n  ack_drop            0\n  sp_flows            0\n  bk_flows            0\n  un_flows            0\n  max_len             0\n  quantum          1514\n\n",
+  "reduced_gso_splitting_not_adopted": true,
+  "throughput_gain_not_proven": true
+}

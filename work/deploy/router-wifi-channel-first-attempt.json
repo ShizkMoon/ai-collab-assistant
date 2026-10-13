@@ -1,0 +1,32 @@
+{
+  "original_channel": 1,
+  "candidate_channel": 6,
+  "client_count_before": 2,
+  "client_probes_before": [
+    {
+      "neighbor_known": true,
+      "icmp_success": true,
+      "neighbor_state": "REACHABLE"
+    },
+    {
+      "neighbor_known": true,
+      "icmp_success": true,
+      "neighbor_state": "REACHABLE"
+    }
+  ],
+  "client_light_probes": [
+    {
+      "neighbor_known": true,
+      "icmp_success": false,
+      "neighbor_state": "REACHABLE"
+    },
+    {
+      "neighbor_known": true,
+      "icmp_success": true,
+      "neighbor_state": "REACHABLE"
+    }
+  ],
+  "passed": false,
+  "failure": "AssertionError",
+  "rolled_back": true
+}

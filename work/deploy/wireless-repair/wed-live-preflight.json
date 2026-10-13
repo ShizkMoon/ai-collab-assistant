@@ -1,0 +1,56 @@
+{
+  "utilities": {
+    "exit": 1,
+    "output": "nohup setsid /usr/bin/setsid\nstart-stop-daemon /sbin/start-stop-daemon\nmodprobe /sbin/modprobe\ninsmod /sbin/insmod\nrmmod /sbin/rmmod\nwifi /sbin/wifi\nflock /usr/bin/flock\nucode /usr/bin/ucode\nlrwxrwxrwx    1 root     root            16 Oct 12 03:29 /sbin/insmod -> /sbin/kmodloader\nlrwxrwxrwx    1 root     root            16 Oct 12 03:29 /sbin/modprobe -> /sbin/kmodloader\nlrwxrwxrwx    1 root     root            14 Oct 12 03:29 /sbin/start-stop-daemon -> ../bin/busybox\n-rwxr-xr-x    1 root     root          1864 Oct 12 03:29 /sbin/wifi\n"
+  },
+  "dma_chain": {
+    "exit": 0,
+    "output": "ETHERNET_OF_NODE\n/sys/firmware/devicetree/base/soc/ethernet@15100000\nNODE /sys/firmware/devicetree/base/soc/ethernet@15100000\nphandle compatible NODE /sys/firmware/devicetree/base/soc\ncompatible NODE /sys/firmware/devicetree/base\ncompatible CONFIG\n"
+  },
+  "configuration_and_aql": {
+    "exit": 0,
+    "output": "MODULE_FILES\n/etc/modules.d/mt7915e\nNET_STEERING\nAQL\n/sys/kernel/debug/ieee80211/phy0/aql_txq_limit\nAC\tAQL limit low\tAQL limit high\nVO\t5000\t\t12000\nVI\t5000\t\t12000\nBE\t5000\t\t12000\nBK\t5000\t\t12000\nBC/MC\t50000\n/sys/kernel/debug/ieee80211/phy1/aql_txq_limit\nAC\tAQL limit low\tAQL limit high\nVO\t5000\t\t12000\nVI\t5000\t\t12000\nBE\t5000\t\t12000\nBK\t5000\t\t12000\nBC/MC\t50000\nSYSCTL\nnet.core.rmem_default = 212992\nnet.core.rmem_max = 4194304\nnet.core.netdev_max_backlog = 1000\nnet.ipv4.tcp_rmem = 4096\t131072\t3910688\nnet.ipv4.tcp_mem = 5727\t7638\t11454\n"
+  },
+  "dma_properties": {
+    "/soc/ethernet@15100000": {
+      "phandle": {
+        "hex": "00000041",
+        "text": "|||A"
+      },
+      "compatible": {
+        "hex": "6d6564696174656b2c6d74373938362d65746800",
+        "text": "mediatek,mt7986-eth|"
+      }
+    },
+    "/soc": {
+      "compatible": {
+        "hex": "73696d706c652d62757300",
+        "text": "simple-bus|"
+      }
+    },
+    "/": {
+      "compatible": {
+        "hex": "7869616f6d692c7265646d692d726f757465722d6178363030302d73746f636b006d6564696174656b2c6d74373938366100",
+        "text": "xiaomi,redmi-router-ax6000-stock|mediatek,mt7986a|"
+      }
+    }
+  },
+  "ethernet_device": "/sys/devices/platform/soc/15100000.ethernet",
+  "auth_instances": {
+    "account1": {
+      "pid": 7620,
+      "running": true,
+      "stat": "7620 (esurfingclient) S 1 1 1 0 -1 4194560 223479 0 0 0 4946 6752 0 0 20 0 1 0 7251 806912 112 18446744073709551615 4194304 4716704 549081589632 0 0 0 0 0 16391 1 0 0 17 3 0 0 0 0 0 4774680 4786347 277737472 549081591625 549081591673 549081591673 549081591776 0"
+    },
+    "account2": {
+      "pid": 7679,
+      "running": true,
+      "stat": "7679 (esurfingclient) S 1 1 1 0 -1 4194560 234913 0 0 0 5234 7480 0 0 20 0 2 0 8802 925696 144 18446744073709551615 4194304 4716704 548778835520 0 0 0 0 0 16391 0 0 0 17 3 0 0 0 0 0 4774680 4786347 609722368 548778839881 548778839929 548778839929 548778840032 0"
+    },
+    "account3": {
+      "pid": 9375,
+      "running": true,
+      "stat": "9375 (esurfingclient) S 1 1 1 0 -1 4194560 66146 0 0 0 1135 1510 0 0 20 0 2 0 9392283 905216 144 18446744073709551615 4194304 4716704 548687353952 0 0 0 0 0 16391 0 0 0 17 2 0 0 0 0 0 4774680 4786347 501776384 548687355721 548687355769 548687355769 548687355872 0"
+    }
+  }
+}

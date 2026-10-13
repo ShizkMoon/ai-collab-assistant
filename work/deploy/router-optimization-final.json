@@ -1,0 +1,116 @@
+{
+  "time": "2026-10-13T01:13:18+08:00",
+  "core_sha256": "3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b",
+  "fixed_node": "香港 02（专线；智能）",
+  "auth_pids": "7679 7620",
+  "wan_http": [
+    {
+      "interface": "wan",
+      "device": "wan",
+      "up": true,
+      "http": "204",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "interface": "wan2",
+      "device": "eswan2",
+      "up": true,
+      "http": "204",
+      "exit": 0,
+      "passed": true
+    }
+  ],
+  "dns": [
+    {
+      "name": "www.baidu.com",
+      "port": 53,
+      "rcode": 0,
+      "answers": 2,
+      "passed": true
+    },
+    {
+      "name": "www.google.com",
+      "port": 53,
+      "rcode": 0,
+      "answers": 8,
+      "passed": true
+    },
+    {
+      "name": "ax6000-home31.lan",
+      "port": 53,
+      "rcode": 0,
+      "answers": 1,
+      "passed": true
+    },
+    {
+      "name": "accounts.doubleclick.net",
+      "port": 53,
+      "rcode": 3,
+      "answers": 0,
+      "passed": true
+    },
+    {
+      "name": "www.baidu.com",
+      "port": 7874,
+      "rcode": 0,
+      "answers": 2,
+      "passed": true
+    },
+    {
+      "name": "www.google.com",
+      "port": 7874,
+      "rcode": 0,
+      "answers": 8,
+      "passed": true
+    }
+  ],
+  "https": [
+    {
+      "role": "domestic",
+      "http": "200",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "role": "proxy",
+      "http": "204",
+      "exit": 0,
+      "passed": true
+    }
+  ],
+  "authentication": {
+    "account1": {
+      "pid": 7620,
+      "running": true,
+      "auth_success_events_in_retained_window": 0,
+      "heartbeat_success_events_in_retained_window": 8,
+      "latest_heartbeat": "[2026-10-13 01:10:08] account=1 event=HEARTBEAT_NEXT_SECONDS value=850",
+      "passed": true
+    },
+    "account2": {
+      "pid": 7679,
+      "running": true,
+      "auth_success_events_in_retained_window": 0,
+      "heartbeat_success_events_in_retained_window": 28,
+      "latest_heartbeat": "[2026-10-13 01:11:07] account=2 event=HEARTBEAT_NEXT_SECONDS value=250",
+      "passed": true
+    }
+  },
+  "explicit_ua3f_http_rewrite_fff": true,
+  "wireless_unchanged_from_before": true,
+  "wireless_actual": "\tchannel 1 (2412 MHz), width: 20 MHz, center1: 2412 MHz\n\tchannel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz\n2\n2\n",
+  "health_status": "HEALTHY",
+  "health_events": "",
+  "health_enabled": true,
+  "capacity_helper_matches": true,
+  "core_and_auth_preserved": true,
+  "domestic_campus_dns_preserved": true,
+  "license_comments_preserved": true,
+  "fixed_group_members": [
+    "香港 02（专线；智能）"
+  ],
+  "no_upload_shaper": true,
+  "resources": "Filesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     45868     13948  77% /overlay\ntmpfs                   247000      7528    239472   3% /tmp\nMemAvailable:     196316 kB\n",
+  "passed": true
+}

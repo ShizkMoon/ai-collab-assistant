@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "( 1/14) Installing libnghttp2-14 (1.70.0-r1)\n( 2/14) Installing libcurl4 (8.22.0-r1)\n( 3/14) Installing curl (8.22.0-r1)\n( 4/14) Installing libelf1 (0.196-r1)\n( 5/14) Installing libbpf1 (1.7.0-r1)\n( 6/14) Installing ip-full (6.18.0-r2)\n( 7/14) Installing kmod-inet-diag (6.18.55-r1)\n( 8/14) Installing kmod-macvlan (6.18.55-r1)\n( 9/14) Installing kmod-nf-tproxy (6.18.55-r1)\n(10/14) Installing kmod-nft-tproxy (6.18.55-r1)\n(11/14) Installing kmod-sched-bpf (6.18.55-r1)\n(12/14) Installing kmod-sched-core (6.18.55-r1)\n(13/14) Installing libxtables12 (1.8.10-r3)\n(14/14) Installing tc-full (6.18.0-r2)\nOK: 26.8 MiB in 168 packages\n(1/7) Purging dnsmasq (2.93-r4)\n(2/7) Installing kmod-nf-conntrack-netlink (6.18.55-r1)\n(3/7) Installing libnfnetlink0 (1.0.2-r1)\n(4/7) Installing libnetfilter-conntrack3 (1.1.0-r1)\n(5/7) Installing libgmp10 (6.3.0-r2)\n(6/7) Installing libnettle8 (3.10.2-r1)\n(7/7) Installing dnsmasq-full (2.93-r4)\nOK: 25.4 MiB in 159 packages\nadblock-fast-1.2.4-r4\nluci-app-adblock-fast-1.2.4-r4\nluci-app-smartdns-1.2023.42-r1\nsmartdns-46.1-r1\n",
+  "stderr": ""
+}

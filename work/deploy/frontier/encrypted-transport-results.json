@@ -1,0 +1,138 @@
+{
+  "time": "2026-10-13T21:25:23+08:00",
+  "production_pids_unchanged": true,
+  "production_settings_unchanged": true,
+  "core_not_replaced": true,
+  "bounded_public_dns_queries": 8,
+  "records": [
+    {
+      "protocol": "doh3",
+      "route": "direct",
+      "single_upstream": "https://cloudflare-dns.com/dns-query#h3=true",
+      "config_valid": true,
+      "new_process_and_cache": true,
+      "fallback_empty": true,
+      "production_dns_changed": false,
+      "queries": [
+        {
+          "name": "example.com",
+          "milliseconds": 591.5,
+          "exit": 0,
+          "passed": true,
+          "rcode": 0,
+          "answers": 2
+        },
+        {
+          "name": "example.org",
+          "milliseconds": 406.6,
+          "exit": 0,
+          "passed": true,
+          "rcode": 0,
+          "answers": 2
+        }
+      ],
+      "listener_ready": true,
+      "resolver_connections": [],
+      "dns_queries_succeeded": true,
+      "quic_connection_observed": false,
+      "actual_protocol_confirmed": false
+    },
+    {
+      "protocol": "doh3",
+      "route": "hk02",
+      "single_upstream": "https://cloudflare-dns.com/dns-query#🚀 节点选择&h3=true",
+      "config_valid": true,
+      "new_process_and_cache": true,
+      "fallback_empty": true,
+      "production_dns_changed": false,
+      "queries": [
+        {
+          "name": "example.com",
+          "milliseconds": 399.2,
+          "exit": 0,
+          "passed": false,
+          "rcode": 2,
+          "answers": 0
+        },
+        {
+          "name": "example.org",
+          "milliseconds": 329.0,
+          "exit": 0,
+          "passed": false,
+          "rcode": 2,
+          "answers": 0
+        }
+      ],
+      "listener_ready": true,
+      "resolver_connections": [],
+      "dns_queries_succeeded": false,
+      "quic_connection_observed": false,
+      "actual_protocol_confirmed": false
+    },
+    {
+      "protocol": "doq",
+      "route": "direct",
+      "single_upstream": "quic://unfiltered.adguard-dns.com:853",
+      "config_valid": true,
+      "new_process_and_cache": true,
+      "fallback_empty": true,
+      "production_dns_changed": false,
+      "queries": [
+        {
+          "name": "example.com",
+          "milliseconds": 5245.4,
+          "exit": 0,
+          "passed": false,
+          "rcode": 2,
+          "answers": 0
+        },
+        {
+          "name": "example.org",
+          "milliseconds": 5252.5,
+          "exit": 0,
+          "passed": false,
+          "rcode": 2,
+          "answers": 0
+        }
+      ],
+      "listener_ready": true,
+      "resolver_connections": [],
+      "dns_queries_succeeded": false,
+      "quic_connection_observed": false,
+      "actual_protocol_confirmed": false
+    },
+    {
+      "protocol": "doq",
+      "route": "hk02",
+      "single_upstream": "quic://unfiltered.adguard-dns.com:853#🚀 节点选择",
+      "config_valid": true,
+      "new_process_and_cache": true,
+      "fallback_empty": true,
+      "production_dns_changed": false,
+      "queries": [
+        {
+          "name": "example.com",
+          "milliseconds": 354.1,
+          "exit": 0,
+          "passed": false,
+          "rcode": 2,
+          "answers": 0
+        },
+        {
+          "name": "example.org",
+          "milliseconds": 328.3,
+          "exit": 0,
+          "passed": false,
+          "rcode": 2,
+          "answers": 0
+        }
+      ],
+      "listener_ready": true,
+      "resolver_connections": [],
+      "dns_queries_succeeded": false,
+      "quic_connection_observed": false,
+      "actual_protocol_confirmed": false
+    }
+  ],
+  "scope": "Protocol queries on fixed fork, separate cache per route. Successful DNS plus actual UDP resolver connection is required; schema parsing alone is insufficient. No production adoption or comparative performance claim."
+}

@@ -1,0 +1,71 @@
+{
+  "time": "2026-10-14T04:57:29+08:00",
+  "wed_parameter": "Y",
+  "actual_attachment": true,
+  "boot_module_file_readback": "mt7915e wed_enable=1",
+  "auth_pid_starttime_preserved": {
+    "account1": {
+      "pid": 7620,
+      "starttime": "7251",
+      "running": true
+    },
+    "account2": {
+      "pid": 7679,
+      "starttime": "8802",
+      "running": true
+    },
+    "account3": {
+      "pid": 9375,
+      "starttime": "9392283",
+      "running": true
+    }
+  },
+  "auth_processes_running": true,
+  "wan_http_probes": {
+    "wan": {
+      "device": "wan",
+      "source": "10.207.123.111",
+      "http": "204",
+      "passed": true
+    },
+    "wan2": {
+      "device": "eswan2",
+      "source": "10.207.112.254",
+      "http": "204",
+      "passed": true
+    },
+    "wan3": {
+      "device": "eswan3",
+      "source": "10.207.117.66",
+      "http": "204",
+      "passed": true
+    }
+  },
+  "ua_fff_via_local_socks_probe": true,
+  "ninja_selected_node": "香港 02（专线；智能）",
+  "ua3f_core_pids": "4940 31352",
+  "pc_interface": {
+    "InterfaceAlias": "WLAN",
+    "IPAddress": "192.168.31.171"
+  },
+  "pc_http_probes": {
+    "domestic": {
+      "exit": 0,
+      "http": "200",
+      "passed": true
+    },
+    "foreign": {
+      "exit": 0,
+      "http": "204",
+      "passed": true
+    }
+  },
+  "ttl64_rules": "\t\toifname \"wan\" ip ttl >= 10 counter packets 3203453 bytes 467963601 ip ttl set 64 comment \"WAN IPv4 TTL64\"\n\t\toifname \"eswan2\" ip ttl >= 10 counter packets 2578747 bytes 439452405 ip ttl set 64 comment \"WAN2 IPv4 TTL64\"\n\t\toifname \"eswan3\" ip ttl >= 10 counter packets 2238671 bytes 382634807 ip ttl set 64 comment \"WAN3 IPv4 TTL64\"\n",
+  "download_cake_mbit": 650,
+  "qdisc_unchanged": true,
+  "retention_timer_disarmed": true,
+  "actual_reboot_test": false,
+  "stable_pc_900_verified": false,
+  "throughput_retested_this_acceptance": false,
+  "local_health": "HEALTHY"
+}

@@ -1,0 +1,173 @@
+{
+  "top_keys": [
+    "mixed-port",
+    "allow-lan",
+    "mode",
+    "log-level",
+    "external-controller",
+    "dns",
+    "proxies",
+    "proxy-groups",
+    "rules"
+  ],
+  "proxy_count": 49,
+  "proxy_types": {
+    "ninja": 49
+  },
+  "proxy_field_names": [
+    "method",
+    "name",
+    "node_password",
+    "password",
+    "port",
+    "server",
+    "tls",
+    "type",
+    "udp"
+  ],
+  "proxy_groups": [
+    {
+      "type": "select",
+      "members": 54,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    },
+    {
+      "type": "url-test",
+      "members": 49,
+      "fields": [
+        "name",
+        "type",
+        "proxies",
+        "url",
+        "interval"
+      ]
+    },
+    {
+      "type": "url-test",
+      "members": 23,
+      "fields": [
+        "name",
+        "type",
+        "proxies",
+        "url",
+        "interval"
+      ]
+    },
+    {
+      "type": "url-test",
+      "members": 28,
+      "fields": [
+        "name",
+        "type",
+        "proxies",
+        "url",
+        "interval"
+      ]
+    },
+    {
+      "type": "url-test",
+      "members": 1,
+      "fields": [
+        "name",
+        "type",
+        "proxies",
+        "url",
+        "interval"
+      ]
+    },
+    {
+      "type": "select",
+      "members": 55,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    },
+    {
+      "type": "select",
+      "members": 55,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    },
+    {
+      "type": "select",
+      "members": 55,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    },
+    {
+      "type": "select",
+      "members": 55,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    },
+    {
+      "type": "select",
+      "members": 55,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    },
+    {
+      "type": "select",
+      "members": 6,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    },
+    {
+      "type": "select",
+      "members": 2,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    },
+    {
+      "type": "select",
+      "members": 2,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    },
+    {
+      "type": "select",
+      "members": 55,
+      "fields": [
+        "name",
+        "type",
+        "proxies"
+      ]
+    }
+  ],
+  "rule_count": 3514,
+  "rule_provider_count": 0,
+  "dns_keys": [
+    "enable",
+    "nameserver",
+    "fallback"
+  ],
+  "mode": "rule",
+  "tun_enabled": null
+}

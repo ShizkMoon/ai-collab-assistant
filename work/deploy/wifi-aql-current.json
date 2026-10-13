@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "/sys/kernel/debug/ieee80211/phy1/aql_threshold\n/sys/kernel/debug/ieee80211/phy1/aql_txq_limit\n/sys/kernel/debug/ieee80211/phy1/airtime_flags\n/sys/kernel/debug/ieee80211/phy1/aql_pending\n/sys/kernel/debug/ieee80211/phy1/aql_enable\nAC\tAQL limit low\tAQL limit high\nVO\t5000\t\t12000\nVI\t5000\t\t12000\nBE\t5000\t\t12000\nBK\t5000\t\t12000\nBC/MC\t50000\n24000\n",
+  "stderr": ""
+}

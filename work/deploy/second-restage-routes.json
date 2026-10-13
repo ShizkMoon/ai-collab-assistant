@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "CANDIDATE_ROUTE\n9.9.9.9 via 10.207.112.1 dev eswan2 table 25202 src 10.207.127.186 mark 0x2000000 uid 0 \n    cache \nPRIMARY_ROUTE\n9.9.9.9 via 10.207.112.1 dev wan src 10.207.122.136 uid 0 \n    cache \n",
+  "stderr": ""
+}

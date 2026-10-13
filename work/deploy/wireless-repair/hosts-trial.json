@@ -1,0 +1,12 @@
+{
+  "applied": true,
+  "only_hosts_one_domain_changed": true,
+  "persistent_generated_unchanged": true,
+  "core_pid_unchanged": true,
+  "source_node_selection_unchanged": true,
+  "core_pid": "31352",
+  "trial_hosts": {
+    "dl.delivery.mp.microsoft.com": "171.108.211.12"
+  },
+  "independent_rollback_seconds": 1200
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "Ruleset passes nftables check.\n",
+  "stderr": "[!] Section esurfing_route is disabled, ignoring section\n"
+}

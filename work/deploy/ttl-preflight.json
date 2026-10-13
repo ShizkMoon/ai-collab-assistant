@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "(1/2) Installing libpcap1 (1.10.7-r1)\n(2/2) Installing tcpdump-mini (4.99.7-r1)\nOK: 86.9 MiB in 239 packages\n0\n0\n00-netstate\n20-firewall\n25-mwan3\n26-mwan3-user\n35-esurfing-route\n95-esurfingclient-wan\n",
+  "stderr": ""
+}

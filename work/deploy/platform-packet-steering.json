@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "/sys/class/net/eth0/queues/rx-0/rps_cpus 4\n 81:          1          0          0          0  mt-eint  66 Level     mt7530\n121:     116487          0          0          0    GICv3 229 Level     15100000.ethernet\n122:     145348          0          0          0    GICv3 230 Level     15100000.ethernet\n124:          0          0          0          0   mt7530   1 Edge      mt7530-0:01\n125:          0          0          0          0   mt7530   2 Edge      mt7530-0:02\n126:          0          0          0          0   mt7530   3 Edge      mt7530-0:03\n127:          0          1          0          0   mt7530   4 Edge      mt7530-0:04\n132:     893976          0          0          0    GICv3 245 Level     mt7915e\n",
+  "stderr": "cat: can't open '/usr/libexec/platform/packet-steering.sh': No such file or directory\nls: /usr/share/mwan3: No such file or directory\n"
+}

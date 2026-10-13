@@ -1,0 +1,3037 @@
+{
+  "applied": false,
+  "cases": 288,
+  "passed": true,
+  "rows": [
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "original",
+      "ip": "",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "subnet",
+      "ip": "",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.171",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.1",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.254",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.0",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.255",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.1.171",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "10.0.0.2",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "127.0.0.1",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "::1",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "fd00::171",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "192.168.31.999",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": false,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": false,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": false,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": false,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": false,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": false,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": true,
+      "host": "dl.delivery.mp.microsoft.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": true,
+      "host": "steamcontent.com",
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": true,
+      "host": "store.steampowered.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": true,
+      "host": "steamcommunity.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": true,
+      "host": "www.baidu.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    },
+    {
+      "version": "sentinel",
+      "ip": "",
+      "sentinel": true,
+      "host": "www.github.com",
+      "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+    }
+  ],
+  "boundaries": [
+    "subnet candidate cannot distinguish another network using 192.168.31.0/24",
+    "myIpAddress may select another adapter or return IPv6, then original PAC remains",
+    "sentinel candidate requires router DNS host record; not deployed",
+    "PAC covers applications honoring PAC, not explicit/environment proxy"
+  ]
+}

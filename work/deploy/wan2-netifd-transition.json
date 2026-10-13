@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "unreachable default metric 32760 \n0:\tfrom all lookup local\n1802:\tfrom all fwmark 0x2000000 lookup 25202\n1812:\tfrom 10.207.127.186 lookup 25202\n1822:\tfrom all oif eswan2 [detached] lookup 25202\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\n{\n\t\"up\": false,\n\t\"pending\": false,\n\t\"available\": true,\n\t\"autostart\": false,\n\t\"dynamic\": false,\n\t\"proto\": \"dhcp\",\n\t\"device\": \"eswan2\",\n\t\"data\": {\n\t\t\n\t}\n}\ntable inet fw4\ntable ip esurfing_candidate\n",
+  "stderr": ""
+}

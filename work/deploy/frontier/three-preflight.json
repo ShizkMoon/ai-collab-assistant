@@ -1,0 +1,108 @@
+{
+  "time": "2026-10-13T21:10:17+08:00",
+  "files": {
+    "/etc/config/esurfingclient": {
+      "sha256": "e779cf241380e6f421fd5491ed4f6e8c406d69e0fa1264f097294026ea03b8bc",
+      "bytes": 617
+    },
+    "/etc/config/network": {
+      "sha256": "20f6e5acc03c82300f282e15c604b46356eafbe56d6228e7e95e04b562170a9b",
+      "bytes": 1491
+    },
+    "/etc/config/mwan3": {
+      "sha256": "c2b70b5409f726245d4e5f4fc27f0b2882fc1cb315040dd9c63162c43c3dbde2",
+      "bytes": 2033
+    },
+    "/etc/init.d/esurfingclient": {
+      "sha256": "9a906c58c98c40b0f71870989a27c963166b4b2aa592d2cea44fcfca97c954b6",
+      "bytes": 4273
+    },
+    "/usr/libexec/esurfing-netifd-guard": {
+      "sha256": "172714d056067ae7c477e9c1af4a9f83b042d5173805cd2b49c4d793096886b8",
+      "bytes": 3606
+    },
+    "/etc/esurfing-deploy/netifd-accounts.allow": {
+      "sha256": "72a351c8e3e665e66688b131708882b5e1fc0d08889425b56ef3f792fce42a7c",
+      "bytes": 94
+    },
+    "/etc/hotplug.d/iface/35-esurfing-route": {
+      "sha256": "a61afd57c78f70d5ca14ebc46267c6d2d03f3b10363e7fc663891e15a27983ed",
+      "bytes": 5572
+    },
+    "/etc/hotplug.d/iface/95-esurfingclient-wan": {
+      "sha256": "20c3ea95d1191982041e1e170f069c3231b86ac2defdf7859968097ab2b04f12",
+      "bytes": 621
+    },
+    "/etc/nftables.d/90-ua3f-wan-ttl.nft": {
+      "sha256": "f55b5838b87fe3c44e57448c60fdeacd7109844c78c6b34e1ae6e80855af5d7f",
+      "bytes": 369
+    }
+  },
+  "config_keys": [
+    "accounts",
+    "conn_timeout",
+    "enabled",
+    "log_dir",
+    "log_lv",
+    "op_timeout",
+    "web_external_acc",
+    "web_port"
+  ],
+  "accounts": [
+    {
+      "index": 1,
+      "keys": [
+        "channel",
+        "mark",
+        "password",
+        "time_windows",
+        "username"
+      ],
+      "channel": 3,
+      "enabled": null,
+      "mark": "",
+      "bind_interface": null,
+      "other_account_from_first": true
+    },
+    {
+      "index": 2,
+      "keys": [
+        "channel",
+        "mark",
+        "password",
+        "time_windows",
+        "username"
+      ],
+      "channel": 2,
+      "enabled": null,
+      "mark": "0x02000000",
+      "bind_interface": null,
+      "other_account_from_first": false
+    },
+    {
+      "index": 3,
+      "keys": [
+        "channel",
+        "mark",
+        "password",
+        "time_windows",
+        "username"
+      ],
+      "channel": 1,
+      "enabled": null,
+      "mark": "0x03000000",
+      "bind_interface": null,
+      "other_account_from_first": false
+    }
+  ],
+  "channel_help": "使用格式: ESurfingClient [选项]\n  [nothing]            直接运行程序 (前台模式)\n  -r, --role <角色>     程序角色: supervisor (守护) / auth (认证) / web (网页)\n  -a, --account <序号>  指定本进程负责的配置序号 (从 1 开始, auth 角色必填)\n  --list-accounts      列出配置文件中所有可用账号的序号后退出 (供 init 脚本使用)\n  --print-log-dir      打印实际使用的日志目录后退出 (日志目录由配置里的 log_dir 决定)\n  -h, --help           显示此帮助信息\n",
+  "allow": "# 只允许已经通过独立保活和实际外网检查的账号由统一服务启动。\n1\n2\n",
+  "pids": "7679 7620\n4940\n31352\n",
+  "third_network": "network.wan3=interface\nnetwork.wan3.device='eswan3'\nnetwork.wan3.proto='dhcp'\nnetwork.wan3.defaultroute='1'\nnetwork.wan3.peerdns='0'\nnetwork.wan3.delegate='0'\nnetwork.wan3.ipv6='0'\nnetwork.wan3.metric='30'\nnetwork.wan3.auto='0'\nnetwork.wan3.ip4table='25203'\n{\n\t\"up\": false,\n\t\"pending\": false,\n\t\"available\": true,\n\t\"autostart\": false,\n\t\"dynamic\": false,\n\t\"proto\": \"dhcp\",\n\t\"device\": \"eswan3\",\n\t\"data\": {\n\t\t\n\t}\n}\n",
+  "mwan": "mwan3.globals=globals\nmwan3.globals.mmx_mask='0x3f000000'\nmwan3.globals.rt_table_lookup='25202'\nmwan3.globals.bypass_network='127.0.0.0/8'\nmwan3.globals.ua3f_output_policy='ua3f_bal'\nmwan3.wan=interface\nmwan3.wan.enabled='1'\nmwan3.wan.family='ipv4'\nmwan3.wan.initial_state='offline'\nmwan3.wan.track_method='curl204'\nmwan3.wan.track_ip='connectivitycheck.platform.hicloud.com' 'connect.rom.miui.com'\nmwan3.wan.curl204_path='/generate_204'\nmwan3.wan.reliability='1'\nmwan3.wan.count='1'\nmwan3.wan.timeout='4'\nmwan3.wan.interval='10'\nmwan3.wan.failure_interval='5'\nmwan3.wan.recovery_interval='5'\nmwan3.wan.down='3'\nmwan3.wan.up='3'\nmwan3.wan.check_quality='0'\nmwan3.wan.track_gateway='0'\nmwan3.wan2=interface\nmwan3.wan2.enabled='1'\nmwan3.wan2.family='ipv4'\nmwan3.wan2.initial_state='offline'\nmwan3.wan2.track_method='curl204'\nmwan3.wan2.track_ip='connectivitycheck.platform.hicloud.com' 'connect.rom.miui.com'\nmwan3.wan2.curl204_path='/generate_204'\nmwan3.wan2.reliability='1'\nmwan3.wan2.count='1'\nmwan3.wan2.timeout='4'\nmwan3.wan2.interval='10'\nmwan3.wan2.failure_interval='5'\nmwan3.wan2.recovery_interval='5'\nmwan3.wan2.down='3'\nmwan3.wan2.up='3'\nmwan3.wan2.check_quality='0'\nmwan3.wan2.track_gateway='0'\nmwan3.wan3=interface\nmwan3.wan3.enabled='0'\nmwan3.wan3.family='ipv4'\nmwan3.wan3.initial_state='offline'\nmwan3.wan_equal=member\nmwan3.wan_equal.interface='wan'\nmwan3.wan_equal.metric='1'\nmwan3.wan_equal.weight='1'\nmwan3.wan2_equal=member\nmwan3.wan2_equal.interface='wan2'\nmwan3.wan2_equal.metric='1'\nmwan3.wan2_equal.weight='1'\nmwan3.balanced=policy\nmwan3.balanced.use_member='wan_equal' 'wan2_equal'\nmwan3.balanced.last_resort='unreachable'\nmwan3.dns_boot_udp=rule\nmwan3.dns_boot_udp.family='ipv4'\nmwan3.dns_boot_udp.proto='udp'\nmwan3.dns_boot_udp.dest_port='53'\nmwan3.dns_boot_udp.use_policy='default'\nmwan3.dns_boot_tcp=rule\nmwan3.dns_boot_tcp.family='ipv4'\nmwan3.dns_boot_tcp.proto='tcp'\nmwan3.dns_boot_tcp.dest_port='53'\nmwan3.dns_boot_tcp.use_policy='default'\nmwan3.default_rule_v4=rule\nmwan3.default_rule_v4.family='ipv4'\nmwan3.default_rule_v4.dest_ip='0.0.0.0/0'\nmwan3.default_rule_v4.use_policy='balanced'\nmwan3.ua3f_bal=policy\nmwan3.ua3f_bal.numgen_mode='inc'\nmwan3.ua3f_bal.last_resort='unreachable'\nmwan3.ua3f_bal.use_member='wan_equal' 'wan2_equal'\n",
+  "routing": "0:\tfrom all lookup local\n99:\tfrom all fwmark 0x162 lookup 354\n100:\tfrom all fwmark 0x162/0xffff lookup 354\n1001:\tfrom all iif wan lookup 1\n1002:\tfrom all iif eswan2 lookup 2\n1802:\tfrom all fwmark 0x2000000 lookup 25202\n2001:\tfrom all fwmark 0x1000000/0x3f000000 lookup 1\n2002:\tfrom all fwmark 0x2000000/0x3f000000 lookup 2\n2061:\tfrom all fwmark 0x3d000000/0x3f000000 blackhole\n2062:\tfrom all fwmark 0x3e000000/0x3f000000 unreachable\n3062:\tfrom 10.207.123.111 lookup 1\n3063:\tfrom 10.207.112.254 lookup 2\n10000:\tfrom 10.207.112.254 lookup 25202\n20000:\tfrom all to 10.207.112.254/20 lookup 25202\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\n90008:\tfrom all iif lo lookup 25202\n9.9.9.9 via 10.207.112.1 dev wan src 10.207.123.111 mark 0x3000000 uid 0 \n    cache \n",
+  "auth_nft": "",
+  "groups": "esauth2:65202\nesauth3:65203\nesauth1:65201\n",
+  "auth_services": "{\n\t\"esurfingclient\": {\n\t\t\"instances\": {\n\t\t\t\"account1\": {\n\t\t\t\t\"running\": true,\n\t\t\t\t\"pid\": 7620,\n\t\t\t\t\"incarnation\": 29,\n\t\t\t\t\"command\": [\n\t\t\t\t\t\"/usr/bin/esurfingclient\",\n\t\t\t\t\t\"--role\",\n\t\t\t\t\t\"auth\",\n\t\t\t\t\t\"--account\",\n\t\t\t\t\t\"1\"\n\t\t\t\t],\n\t\t\t\t\"term_timeout\": 15,\n\t\t\t\t\"respawn\": {\n\t\t\t\t\t\"threshold\": 60,\n\t\t\t\t\t\"timeout\": 5,\n\t\t\t\t\t\"retry\": 5\n\t\t\t\t},\n\t\t\t\t\"group\": \"esauth1\"\n\t\t\t},\n\t\t\t\"account2\": {\n\t\t\t\t\"running\": true,\n\t\t\t\t\"pid\": 7679,\n\t\t\t\t\"incarnation\": 30,\n\t\t\t\t\"command\": [\n\t\t\t\t\t\"/usr/bin/esurfingclient\",\n\t\t\t\t\t\"--role\",\n\t\t\t\t\t\"auth\",\n\t\t\t\t\t\"--account\",\n\t\t\t\t\t\"2\"\n\t\t\t\t],\n\t\t\t\t\"term_timeout\": 15,\n\t\t\t\t\"respawn\": {\n\t\t\t\t\t\"threshold\": 60,\n\t\t\t\t\t\"timeout\": 5,\n\t\t\t\t\t\"retry\": 5\n\t\t\t\t},\n\t\t\t\t\"group\": \"esauth2\"\n\t\t\t}\n\t\t}\n\t}\n}\n",
+  "resources": "Filesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     45872     13944  77% /overlay\ntmpfs                   247000      8148    238852   3% /tmp\nMemAvailable:     192908 kB\n"
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "2026-10-12T20:40:50+08:00\nInterface phy1-ap0\n\tifindex 10\n\twdev 0x100000001\n\taddr 4c:c6:4c:bd:86:62\n\tssid Discorsvesper_5G\n\ttype AP\n\twiphy 1\n\tchannel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz\n\ttxpower 23.00 dBm\n\tmulticast TXQ:\n\t\tqsz-byt\tqsz-pkt\tflows\tdrops\tmarks\toverlmt\thashcol\ttx-bytes\ttx-packets\n\t\t0\t0\t8782\t0\t0\t0\t1\t1749208\t\t12272\nAC\tAQL limit low\tAQL limit high\nVO\t5000\t\t12000\nVI\t5000\t\t12000\nBE\t5000\t\t12000\nBK\t5000\t\t12000\nBC/MC\t50000\n2\nSTEERING_IDLE\nqdisc noqueue 0: root refcnt 2 \nIFB_ABSENT\nSQM_ROLLBACK_REMOVED\na61afd57c78f70d5ca14ebc46267c6d2d03f3b10363e7fc663891e15a27983ed  /etc/hotplug.d/iface/35-esurfing-route\n7620\n7679\nFilesystem                Size      Used Available Use% Mounted on\n/dev/ubi0_1              61.6M     44.1M     14.3M  75% /overlay\n",
+  "stderr": ""
+}

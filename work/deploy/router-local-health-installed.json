@@ -1,0 +1,40 @@
+{
+  "installed": {
+    "/usr/libexec/local-health-recovery": "fad62fc3868db2b0a271445a486495ff0cb601516241cf737b6e93db9b24fdaa",
+    "/usr/libexec/local-health-probe.lua": "80f9d350bcc9961b7efea0ce0c8bb1c0225ff4e84c0cdccef3bdca5ef244b73c",
+    "/etc/init.d/local-health-recovery": "d3383abe3df848edb76125901db0c7b3e2187acb3fe2ee82097fa1b10e8bd635"
+  },
+  "enabled": true,
+  "running": true,
+  "business_pids_unchanged": true,
+  "service": {
+    "local-health-recovery": {
+      "instances": {
+        "instance1": {
+          "running": true,
+          "pid": 31169,
+          "incarnation": 44,
+          "command": [
+            "/usr/libexec/local-health-recovery",
+            "watch"
+          ],
+          "term_timeout": 5,
+          "respawn": {
+            "threshold": 3600,
+            "timeout": 10,
+            "retry": 3
+          }
+        }
+      }
+    }
+  },
+  "sysupgrade_include_paths": [
+    "/usr/libexec/local-health-recovery",
+    "/usr/libexec/local-health-probe.lua",
+    "/etc/init.d/local-health-recovery",
+    "/etc/rc.d/S99local-health-recovery",
+    "/etc/rc.d/K10local-health-recovery"
+  ],
+  "initial_status": "SUPPRESSED:STARTUP_GRACE",
+  "fault_recovery_scope": "Ten DNS wire and 27 state/lock fixtures passed on router; three live local protocol probes passed. No production component was deliberately stopped."
+}

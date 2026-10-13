@@ -1,0 +1,12 @@
+{
+  "interface_guid": "1f42c76b-e849-453f-8608-caa586e00a17",
+  "dhcp": "Enabled",
+  "ipv4": [
+    {
+      "IPAddress": "169.254.161.192",
+      "PrefixLength": 16,
+      "PrefixOrigin": 2
+    }
+  ],
+  "dns": []
+}

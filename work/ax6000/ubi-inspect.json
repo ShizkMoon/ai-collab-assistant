@@ -1,0 +1,22 @@
+{
+  "ubi": {
+    "exit": 0,
+    "output": "UBI version:                    1\nCount of UBI devices:           2\nUBI control device major/minor: 10:62\nPresent UBI devices:            ubi0, ubi1\n\nubi0\nVolumes count:                           2\nLogical eraseblock size:                 126976 bytes, 124.0 KiB\nTotal amount of logical eraseblocks:     240 (30474240 bytes, 29.0 MiB)\nAmount of available logical eraseblocks: 64 (8126464 bytes, 7.7 MiB)\nMaximum count of volumes                 128\nCount of bad physical eraseblocks:       0\nCount of reserved physical eraseblocks:  19\nCurrent maximum erase counter value:     2\nMinimum input/output unit size:          2048 bytes\nCharacter device major/minor:            249:0\nPresent volumes:                         0, 1\n\nVolume ID:   0 (on ubi0)\nType:        dynamic\nAlignment:   1\nSize:        26 LEBs (3301376 bytes, 3.1 MiB)\nState:       OK\nName:        kernel\nCharacter device major/minor: 249:1\n-----------------------------------\nVolume ID:   1 (on ubi0)\nType:        dynamic\nAlignment:   1\nSize:        127 LEBs (16125952 bytes, 15.3 MiB)\nState:       OK\nName:        rootfs\nCharacter device major/minor: 249:2\n\n===================================\n\nubi1\nVolumes count:                           1\nLogical eraseblock size:                 126976 bytes, 124.0 KiB\nTotal amount of logical eraseblocks:     400 (50790400 bytes, 48.4 MiB)\nAmount of available logical eraseblocks: 0 (0 bytes)\nMaximum count of volumes                 128\nCount of bad physical eraseblocks:       0\nCount of reserved physical eraseblocks:  19\nCurrent maximum erase counter value:     1\nMinimum input/output unit size:          2048 bytes\nCharacter device major/minor:            247:0\nPresent volumes:                         0\n\nVolume ID:   0 (on ubi1)\nType:        dynamic\nAlignment:   1\nSize:        377 LEBs (47869952 bytes, 45.6 MiB)\nState:       OK\nName:        data\nCharacter device major/minor: 247:1\n"
+  },
+  "sysfs": {
+    "exit": 0,
+    "output": "/sys/class/ubi/ubi0/mtd_num\n8\n/sys/class/ubi/ubi1/mtd_num\n10\n"
+  },
+  "mtd9": {
+    "exit": 0,
+    "output": "ubi1\n31457280\n"
+  },
+  "boot_flags": {
+    "exit": 0,
+    "output": "0\n0\n1\nconsole=ttyS0,115200n1 loglevel=8 firmware=0 uart_en=0\n"
+  },
+  "tools": {
+    "exit": 0,
+    "output": "/sbin/mtd\n/usr/sbin/nanddump\n/usr/sbin/ubiformat\n/usr/sbin/ubidetach\n"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "table inet mwan3 {\n\tset mwan3_dynamic_v4 {\n\t\ttype ipv4_addr\n\t\tflags interval\n\t\tauto-merge\n\t}\n}\n",
+  "stderr": "ash: line 429: config_load: not found\nash: line 430: config_get_bool: not found\nash: line 437: uci_get_state: not found\nash: line 486: uci_get_state: not found\nash: line 487: uci_get_state: not found\nash: line 488: uci_get_state: not found\nash: line 170: config_list_foreach: not found\n"
+}

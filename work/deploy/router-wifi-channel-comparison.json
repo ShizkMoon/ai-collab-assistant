@@ -1,0 +1,153 @@
+{
+  "original_protection": {
+    "phy1_ifindex": "10",
+    "phy1_channel": [
+      "channel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz"
+    ],
+    "rps": [
+      "2",
+      "2"
+    ],
+    "auth_pids": [
+      "7679",
+      "7620"
+    ],
+    "core_pid": "6005"
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "channel": 1,
+      "elapsed_seconds": 26.0,
+      "original_client_count": 2,
+      "original_clients_reassociated": true,
+      "client_count": 2,
+      "survey_delta_ms": {
+        "channel active time": 15471,
+        "channel busy time": 12962,
+        "channel receive time": 11366,
+        "channel BSS receive time": 13,
+        "channel transmit time": 68
+      },
+      "valid_window": true,
+      "busy_percent": 83.78,
+      "protection": {
+        "phy1_ifindex": "10",
+        "phy1_channel": [
+          "channel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz"
+        ],
+        "rps": [
+          "2",
+          "2"
+        ],
+        "auth_pids": [
+          "7679",
+          "7620"
+        ],
+        "core_pid": "6005"
+      },
+      "protection_unchanged": true
+    },
+    {
+      "round": 2,
+      "channel": 6,
+      "elapsed_seconds": 26.53,
+      "original_client_count": 2,
+      "original_clients_reassociated": true,
+      "client_count": 2,
+      "survey_delta_ms": {
+        "channel active time": 15556,
+        "channel busy time": 11392,
+        "channel receive time": 10143,
+        "channel BSS receive time": 52,
+        "channel transmit time": 117
+      },
+      "valid_window": true,
+      "busy_percent": 73.23,
+      "protection": {
+        "phy1_ifindex": "10",
+        "phy1_channel": [
+          "channel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz"
+        ],
+        "rps": [
+          "2",
+          "2"
+        ],
+        "auth_pids": [
+          "7679",
+          "7620"
+        ],
+        "core_pid": "6005"
+      },
+      "protection_unchanged": true
+    },
+    {
+      "round": 3,
+      "channel": 11,
+      "elapsed_seconds": 26.81,
+      "original_client_count": 2,
+      "original_clients_reassociated": true,
+      "client_count": 2,
+      "survey_delta_ms": {
+        "channel active time": 15448,
+        "channel busy time": 11788,
+        "channel receive time": 10236,
+        "channel BSS receive time": 37,
+        "channel transmit time": 141
+      },
+      "valid_window": true,
+      "busy_percent": 76.31,
+      "protection": {
+        "phy1_ifindex": "10",
+        "phy1_channel": [
+          "channel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz"
+        ],
+        "rps": [
+          "2",
+          "2"
+        ],
+        "auth_pids": [
+          "7679",
+          "7620"
+        ],
+        "core_pid": "6005"
+      },
+      "protection_unchanged": true
+    },
+    {
+      "round": 4,
+      "channel": 1,
+      "elapsed_seconds": 26.34,
+      "original_client_count": 2,
+      "original_clients_reassociated": true,
+      "client_count": 2,
+      "survey_delta_ms": {
+        "channel active time": 15521,
+        "channel busy time": 12447,
+        "channel receive time": 11460,
+        "channel BSS receive time": 36,
+        "channel transmit time": 112
+      },
+      "valid_window": true,
+      "busy_percent": 80.19,
+      "protection": {
+        "phy1_ifindex": "10",
+        "phy1_channel": [
+          "channel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz"
+        ],
+        "rps": [
+          "2",
+          "2"
+        ],
+        "auth_pids": [
+          "7679",
+          "7620"
+        ],
+        "core_pid": "6005"
+      },
+      "protection_unchanged": true
+    }
+  ],
+  "final_channel": 2412,
+  "scope": "Passive 15-second windows after radio0 CSA; does not establish client throughput. No UCI commit."
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "network": "udp",
+    "destination_port": "19302",
+    "destination_ip": "74.125.250.129",
+    "source_port": "63729",
+    "download": 32,
+    "upload": 20,
+    "rule": "DomainKeyword",
+    "direct": false,
+    "via_ua3f": false,
+    "proxy_hops": 3
+  },
+  {
+    "network": "udp",
+    "destination_port": "19302",
+    "destination_ip": "74.125.250.129",
+    "source_port": "62517",
+    "download": 32,
+    "upload": 20,
+    "rule": "DomainKeyword",
+    "direct": false,
+    "via_ua3f": false,
+    "proxy_hops": 3
+  },
+  {
+    "network": "udp",
+    "destination_port": "3478",
+    "destination_ip": "162.159.207.0",
+    "source_port": "63730",
+    "download": 32,
+    "upload": 20,
+    "rule": "Match",
+    "direct": false,
+    "via_ua3f": false,
+    "proxy_hops": 4
+  },
+  {
+    "network": "udp",
+    "destination_port": "123",
+    "destination_ip": "203.107.6.88",
+    "source_port": "62516",
+    "download": 48,
+    "upload": 48,
+    "rule": "DomainSuffix",
+    "direct": true,
+    "via_ua3f": false,
+    "proxy_hops": 2
+  },
+  {
+    "network": "udp",
+    "destination_port": "3478",
+    "destination_ip": "162.159.207.0",
+    "source_port": "62518",
+    "download": 32,
+    "upload": 20,
+    "rule": "Match",
+    "direct": false,
+    "via_ua3f": false,
+    "proxy_hops": 4
+  },
+  {
+    "network": "udp",
+    "destination_port": "123",
+    "destination_ip": "203.107.6.88",
+    "source_port": "63728",
+    "download": 48,
+    "upload": 48,
+    "rule": "DomainSuffix",
+    "direct": true,
+    "via_ua3f": false,
+    "proxy_hops": 2
+  }
+]

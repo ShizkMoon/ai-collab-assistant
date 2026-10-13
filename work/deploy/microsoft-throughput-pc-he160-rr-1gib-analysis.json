@@ -1,0 +1,102 @@
+{
+  "file": "microsoft-throughput-pc-he160-rr-1gib",
+  "observed_mbps": 479.57,
+  "new_flow_candidates": [
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 37616,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 153862744
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 37628,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 156647497
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 37598,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 157068769
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 37582,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 152405866
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 37576,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 163394234
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 37592,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 155760841
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 37640,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 155708372
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 37602,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 152365854
+    }
+  ],
+  "wan_flow_counts": {
+    "1": 4,
+    "2": 4
+  },
+  "wan_download_bytes": {
+    "1": 619045751,
+    "2": 628168426
+  },
+  "cpu_peak_busy_percent": {
+    "cpu": 58.4,
+    "cpu0": 58.5,
+    "cpu1": 52.0,
+    "cpu2": 56.5,
+    "cpu3": 70.0
+  },
+  "physical_wan_interval_mbps": [
+    570.55,
+    552.27,
+    718.6,
+    673.73,
+    597.29,
+    558.85,
+    673.87,
+    592.87,
+    624.55,
+    639.77,
+    526.47,
+    388.86,
+    601.27,
+    462.26,
+    326.65
+  ]
+}

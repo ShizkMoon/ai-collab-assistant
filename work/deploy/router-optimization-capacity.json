@@ -1,0 +1,19 @@
+{
+  "capacity": "Filesystem           1024-blocks    Used Available Capacity Mounted on\n/dev/ubi0_1              63076     45608     14204  76% /overlay\ntmpfs                   247000      6972    240028   3% /tmp\nMemAvailable:     201264 kB\n   217052 /etc/openclash/config/Ninja.yaml\n   289026 /etc/openclash/Ninja.yaml\n   217052 /etc/openclash/config/Ninja.yaml.bak.ninja-update\n   290978 /etc/openclash/Ninja.yaml.bak.ninja-update\n  1014108 total\n512\n0\n",
+  "localhost_dns": [
+    {
+      "port": 53,
+      "id_ok": true,
+      "rcode": 0,
+      "answers": 1,
+      "has_ipv4_loopback": true
+    },
+    {
+      "port": 7874,
+      "id_ok": true,
+      "rcode": 0,
+      "answers": 1,
+      "has_ipv4_loopback": true
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "cases": [
+    {
+      "file": "microsoft-throughput-pc-he160-rr-1gib.json",
+      "mbps": 479.57,
+      "all_complete": true,
+      "parallel_streams": 8,
+      "stream_count": 8,
+      "bytes": 1073741824,
+      "duration_seconds": 17.912,
+      "stream_seconds_min": 11.348,
+      "stream_seconds_median": 16.078,
+      "stream_seconds_max": 17.856,
+      "last_quarter_completion_tail_seconds": 0.474,
+      "tail_share_of_batch_percent": 2.65,
+      "sum_individual_mean_mbps": 559.79,
+      "wan_bytes_per_payload_byte": 1.2106,
+      "reported_cpu": {
+        "cpu": {
+          "busy_percent": 50.5,
+          "softirq_percent": 15.9
+        },
+        "cpu0": {
+          "busy_percent": 49.4,
+          "softirq_percent": 3.0
+        },
+        "cpu1": {
+          "busy_percent": 44.0,
+          "softirq_percent": 16.6
+        },
+        "cpu2": {
+          "busy_percent": 46.9,
+          "softirq_percent": 25.5
+        },
+        "cpu3": {
+          "busy_percent": 61.2,
+          "softirq_percent": 18.2
+        }
+      },
+      "process_cpu_as_percent_of_all_cpus": {
+        "ua3f": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 1.4,
+          "all_cpu_system_percent": 5.5,
+          "all_cpu_percent": 6.9
+        },
+        "clash": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 1.79,
+          "all_cpu_system_percent": 5.17,
+          "all_cpu_percent": 6.96
+        }
+      }
+    },
+    {
+      "file": "microsoft-throughput-pc-he160-rr-16x64m.json",
+      "mbps": 557.61,
+      "all_complete": true,
+      "parallel_streams": 16,
+      "stream_count": 16,
+      "bytes": 1073741824,
+      "duration_seconds": 15.405,
+      "stream_seconds_min": 9.877,
+      "stream_seconds_median": 11.676,
+      "stream_seconds_max": 15.35,
+      "last_quarter_completion_tail_seconds": 2.385,
+      "tail_share_of_batch_percent": 15.48,
+      "sum_individual_mean_mbps": 735.15,
+      "wan_bytes_per_payload_byte": 1.1411,
+      "reported_cpu": {
+        "cpu": {
+          "busy_percent": 58.1,
+          "softirq_percent": 20.7
+        },
+        "cpu0": {
+          "busy_percent": 57.3,
+          "softirq_percent": 3.6
+        },
+        "cpu1": {
+          "busy_percent": 52.8,
+          "softirq_percent": 23.7
+        },
+        "cpu2": {
+          "busy_percent": 55.4,
+          "softirq_percent": 34.4
+        },
+        "cpu3": {
+          "busy_percent": 66.5,
+          "softirq_percent": 20.7
+        }
+      },
+      "process_cpu_as_percent_of_all_cpus": {
+        "ua3f": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 1.22,
+          "all_cpu_system_percent": 6.54,
+          "all_cpu_percent": 7.76
+        },
+        "clash": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 1.49,
+          "all_cpu_system_percent": 5.97,
+          "all_cpu_percent": 7.47
+        }
+      }
+    },
+    {
+      "file": "microsoft-throughput-pc-he160-rr-32x32m.json",
+      "mbps": 574.07,
+      "all_complete": true,
+      "parallel_streams": 32,
+      "stream_count": 32,
+      "bytes": 1073741824,
+      "duration_seconds": 14.963,
+      "stream_seconds_min": 8.134,
+      "stream_seconds_median": 12.781,
+      "stream_seconds_max": 14.905,
+      "last_quarter_completion_tail_seconds": 1.061,
+      "tail_share_of_batch_percent": 7.09,
+      "sum_individual_mean_mbps": 707.96,
+      "wan_bytes_per_payload_byte": 1.2036,
+      "reported_cpu": {
+        "cpu": {
+          "busy_percent": 70.0,
+          "softirq_percent": 25.1
+        },
+        "cpu0": {
+          "busy_percent": 70.2,
+          "softirq_percent": 5.1
+        },
+        "cpu1": {
+          "busy_percent": 65.0,
+          "softirq_percent": 30.3
+        },
+        "cpu2": {
+          "busy_percent": 70.1,
+          "softirq_percent": 44.6
+        },
+        "cpu3": {
+          "busy_percent": 74.7,
+          "softirq_percent": 20.3
+        }
+      },
+      "process_cpu_as_percent_of_all_cpus": {
+        "ua3f": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 1.59,
+          "all_cpu_system_percent": 7.98,
+          "all_cpu_percent": 9.56
+        },
+        "clash": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 2.01,
+          "all_cpu_system_percent": 7.77,
+          "all_cpu_percent": 9.78
+        }
+      }
+    },
+    {
+      "file": "microsoft-throughput-both-direct-1gib.json",
+      "mbps": 617.54,
+      "all_complete": true,
+      "parallel_streams": 8,
+      "stream_count": 8,
+      "bytes": 1073741824,
+      "duration_seconds": 13.91,
+      "stream_seconds_min": 9.463,
+      "stream_seconds_median": 11.472,
+      "stream_seconds_max": 13.9,
+      "last_quarter_completion_tail_seconds": 1.629,
+      "tail_share_of_batch_percent": 11.71,
+      "sum_individual_mean_mbps": 749.4,
+      "wan_bytes_per_payload_byte": 1.0442,
+      "reported_cpu": {
+        "cpu": {
+          "busy_percent": 23.8,
+          "softirq_percent": 6.1
+        },
+        "cpu0": {
+          "busy_percent": 28.5,
+          "softirq_percent": 0.5
+        },
+        "cpu1": {
+          "busy_percent": 18.4,
+          "softirq_percent": 0.1
+        },
+        "cpu2": {
+          "busy_percent": 32.4,
+          "softirq_percent": 22.9
+        },
+        "cpu3": {
+          "busy_percent": 15.9,
+          "softirq_percent": 0.3
+        }
+      },
+      "process_cpu_as_percent_of_all_cpus": {
+        "ua3f": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 0.0,
+          "all_cpu_system_percent": 0.05,
+          "all_cpu_percent": 0.05
+        },
+        "clash": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 0.75,
+          "all_cpu_system_percent": 0.68,
+          "all_cpu_percent": 1.43
+        }
+      }
+    },
+    {
+      "file": "microsoft-throughput-pc-he160-final-counters.json",
+      "mbps": 547.69,
+      "all_complete": true,
+      "parallel_streams": 16,
+      "stream_count": 16,
+      "bytes": 1073741824,
+      "duration_seconds": 15.684,
+      "stream_seconds_min": 7.132,
+      "stream_seconds_median": 11.939,
+      "stream_seconds_max": 15.623,
+      "last_quarter_completion_tail_seconds": 3.167,
+      "tail_share_of_batch_percent": 20.19,
+      "sum_individual_mean_mbps": 756.04,
+      "wan_bytes_per_payload_byte": 1.1135,
+      "reported_cpu": {
+        "cpu": {
+          "busy_percent": 58.8,
+          "softirq_percent": 21.7
+        },
+        "cpu0": {
+          "busy_percent": 57.6,
+          "softirq_percent": 3.7
+        },
+        "cpu1": {
+          "busy_percent": 53.6,
+          "softirq_percent": 24.6
+        },
+        "cpu2": {
+          "busy_percent": 56.9,
+          "softirq_percent": 37.0
+        },
+        "cpu3": {
+          "busy_percent": 66.8,
+          "softirq_percent": 21.3
+        }
+      },
+      "process_cpu_as_percent_of_all_cpus": {
+        "ua3f": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 1.2,
+          "all_cpu_system_percent": 6.45,
+          "all_cpu_percent": 7.65
+        },
+        "clash": {
+          "matching_processes": 1,
+          "all_cpu_user_percent": 1.31,
+          "all_cpu_system_percent": 5.51,
+          "all_cpu_percent": 6.82
+        }
+      }
+    }
+  ],
+  "limits": [
+    "Existing batches were not randomized or repeated; historical differences are not causal proof.",
+    "Process percentages divide by all CPU jiffies; 25 percent corresponds to one fully occupied core on this four-core device.",
+    "Process snapshots cannot locate copy, syscall, allocator, TCP, or wireless cost without profiling.",
+    "Stream start offsets were not recorded. Completion tails approximate concurrency decay for batches started together.",
+    "Sum of individual stream mean speeds is not a measured simultaneous application throughput.",
+    "WAN byte counters include headers, retransmission and background traffic; ratios do not isolate retransmission."
+  ]
+}

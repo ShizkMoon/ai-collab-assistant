@@ -1,0 +1,13 @@
+{
+  "key": "HKCU:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+  "time": "2026-10-13T22:37:11.8244326+08:00",
+  "before": {
+    "QuicAllowed": {
+      "existed": false
+    },
+    "EncryptedClientHelloEnabled": {
+      "existed": false
+    }
+  },
+  "keyExisted": false
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "dhcp_hostrecord_add() {\n\tlocal cfg=\"$1\"\n\tlocal names addresses record val\n\n\tconfig_get names \"$cfg\" name \"$2\"\n\tif [ -z \"$names\" ]; then\n\t\treturn 0\n\tfi\n\n\tconfig_get addresses \"$cfg\" ip \"$3\"\n\tif [ -z \"$addresses\" ]; then\n\t\treturn 0\n\tfi\n\n\tfor val in $names $addresses; do\n\t\trecord=\"${record:+$record,}$val\"\n\tdone\n\n\txappend \"--host-record=$record\"\n}\n\ndhcp_dnsrr_add() {\n\t#This adds arbitrary resource record types (of IN class) whose optional data must be hex\n\tlocal cfg=\"$1\"\n\tlocal rrname rrnumber hexdata\n\n\tconfig_get rrname \"$cfg\" rrname\n\t[ -n \"$rrname\" ] || return 0\n\n\tconfig_get rrnumber \"$cfg\" rrnumber\n\t[ -n \"$rrnumber\" ] && [ \"$rrnumber\" -gt 0 ] || return 0\n\n\tconfig_get hexdata \"$cfg\" hexdata\n\n\t# dnsmasq accepts colon XX:XX:.., space XX XX .., or contiguous XXXX.. hex forms or mixtures thereof\n\tif [ -n \"${hexdata//[0-9a-fA-F\\:\\ ]/}\" ]; then\n\t\t# is invalid hex literal\n\t\techo \"dnsmasq: \\\"$hexdata\\\" is malformed hexadecimal (separate hex with colon, space or not at all).\" >&2\n\t\treturn 1\n\tfi\n\n",
+  "stderr": ""
+}

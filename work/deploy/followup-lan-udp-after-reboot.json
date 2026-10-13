@@ -1,0 +1,35 @@
+[
+  {
+    "host": "ntp.aliyun.com",
+    "port": 123,
+    "protocol": "ntp",
+    "target_ip": "203.107.6.88",
+    "client_port": 60903,
+    "elapsed_ms": 50.16,
+    "response_bytes": 48,
+    "valid": true,
+    "source_matches": true
+  },
+  {
+    "host": "stun.l.google.com",
+    "port": 19302,
+    "protocol": "stun",
+    "target_ip": "74.125.250.129",
+    "client_port": 60904,
+    "elapsed_ms": 78.6,
+    "response_bytes": 32,
+    "valid": true,
+    "source_matches": true
+  },
+  {
+    "host": "stun.cloudflare.com",
+    "port": 3478,
+    "protocol": "stun",
+    "target_ip": "162.159.207.0",
+    "client_port": 60905,
+    "elapsed_ms": 56.93,
+    "response_bytes": 32,
+    "valid": true,
+    "source_matches": true
+  }
+]

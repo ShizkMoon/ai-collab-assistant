@@ -1,0 +1,30 @@
+{
+  "all_document_local_links_exist": true,
+  "utf8_readback_passed": true,
+  "current_aggregation_evidence_consistent": true,
+  "documents": [
+    {
+      "path": "outputs/ax6000-mainline/使用说明.md",
+      "bytes": 46183,
+      "sha256": "a3e91b6b8743bae722995f54c43bb8405df2ff921dba249df650f4c41844fd52",
+      "missing_local_links": []
+    },
+    {
+      "path": "outputs/ax6000-mainline/路由器调优与校园网方案调研.md",
+      "bytes": 89329,
+      "sha256": "03130b2940c5202471cf11eb956d5df79f8ec67d597571fa0e5e72a44151d2ea",
+      "missing_local_links": []
+    },
+    {
+      "path": "work/deploy/aggregation/results.md",
+      "bytes": 6286,
+      "sha256": "d024089a93fc71531adcb78ad0d764bde0f8a1a3d65ac022ed0855ef752395a4",
+      "missing_local_links": []
+    }
+  ],
+  "current_backup_pair_unchanged_and_hashes_match": true,
+  "measurement_state_restored": true,
+  "controlled_aggregation_useful": true,
+  "pc_stable_900_achieved": false,
+  "original_campus_dns_failure_preserved": true
+}

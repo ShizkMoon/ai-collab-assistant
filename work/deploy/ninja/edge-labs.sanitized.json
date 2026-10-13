@@ -1,0 +1,8 @@
+{
+  "enabled_labs_experiments": [
+    "enable-parallel-downloading@1"
+  ],
+  "exe_product_version": "155.0.4283.45",
+  "browser_history_read": false,
+  "effective_parallel_connections_unverified": true
+}

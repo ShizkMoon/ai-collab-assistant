@@ -1,0 +1,17 @@
+{
+  "web_login": true,
+  "hardware": "RB06",
+  "romversion": "1.0.67",
+  "inited": 1,
+  "time_read": true,
+  "diag_read": true,
+  "scene_query_code": 0,
+  "scene_shape": {
+    "code": "int",
+    "msg": "str",
+    "scene_list": "list"
+  },
+  "scene_list_counts": {
+    "scene_list": 0
+  }
+}

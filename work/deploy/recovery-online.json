@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": " 16:45:27 up 1 min,  load average: 0.15, 0.11, 0.04\n1\n6: wan@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000\n    inet 10.207.122.136/20 brd 10.207.127.255 scope global wan\n       valid_lft forever preferred_lft forever\ndefault via 10.207.112.1 dev wan proto static src 10.207.122.136 metric 10 \n10.207.112.0/20 dev wan proto static scope link metric 10 \n192.168.31.0/24 dev br-lan proto kernel scope link src 192.168.31.1 \n10.207.112.1 lladdr 48:46:fb:f7:c4:c9 REACHABLE \n1\n{\n\t\"esurfingclient\": {\n\t\t\"instances\": {\n\t\t\t\"account1\": {\n\t\t\t\t\"running\": true,\n\t\t\t\t\"pid\": 3789,\n\t\t\t\t\"incarnation\": 16,\n\t\t\t\t\"command\": [\n\t\t\t\t\t\"/usr/bin/esurfingclient\",\n\t\t\t\t\t\"--role\",\n\t\t\t\t\t\"auth\",\n\t\t\t\t\t\"--account\",\n\t\t\t\t\t\"1\"\n\t\t\t\t],\n\t\t\t\t\"term_timeout\": 15,\n\t\t\t\t\"respawn\": {\n\t\t\t\t\t\"threshold\": 60,\n\t\t\t\t\t\"timeout\": 5,\n\t\t\t\t\t\"retry\": 5\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\nbaidu=200 t=0.109816\nhttp204=204 t=0.016934\n",
+  "stderr": ""
+}

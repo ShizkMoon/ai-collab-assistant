@@ -1,0 +1,6 @@
+{
+  "http_ua_rewritten": true,
+  "tls_status": "200",
+  "listeners": "tcp        0      0 127.0.0.1:1080          0.0.0.0:*               LISTEN      9078/ua3f\n",
+  "ttl_bpf_disabled": true
+}

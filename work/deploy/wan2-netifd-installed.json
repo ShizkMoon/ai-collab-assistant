@@ -1,0 +1,7 @@
+{
+  "primary_pid_preserved": true,
+  "route_get": "223.5.5.5 via 10.207.112.1 dev eswan2 table 25202 src 10.207.120.86 mark 0x2000000 uid 0 \n    cache \n",
+  "route_table": "default via 10.207.112.1 dev eswan2 proto static src 10.207.120.86 metric 20 \nunreachable default metric 32760 \n10.207.112.0/20 dev eswan2 proto static scope link metric 20 \n",
+  "wan3_auto": "0",
+  "firewall_syntax_valid": true
+}

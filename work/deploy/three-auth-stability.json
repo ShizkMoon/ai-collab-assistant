@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "round=1 account=1 http=200 total=0.099910\nround=1 account=3 http=200 total=0.108988\nround=1 account=2 http=000 total=2.001748\nround=2 account=3 http=200 total=0.097931\nround=2 account=2 http=200 total=0.108909\nround=2 account=1 http=200 total=0.110918\nround=3 account=3 http=200 total=0.090761\nround=3 account=2 http=200 total=0.100906\nround=3 account=1 http=200 total=0.101259\nround=4 account=2 http=200 total=0.092003\nround=4 account=3 http=200 total=0.094883\nround=4 account=1 http=200 total=0.097293\nround=5 account=2 http=200 total=0.098374\nround=5 account=3 http=200 total=0.102620\nround=5 account=1 http=200 total=0.109640\n",
+  "stderr": ""
+}

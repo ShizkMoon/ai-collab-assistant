@@ -1,0 +1,5 @@
+{
+  "exit": 2,
+  "stdout": "common.sh\nlibwrap_mwan3_sockopt.so.1.0\nmwan3-create-iface-route.uc\nmwan3-get-addr.uc\nmwan3-list-routes.uc\nmwan3-manage-rules.uc\nmwan3-skeleton.nft\nmwan3.sh\n",
+  "stderr": ""
+}

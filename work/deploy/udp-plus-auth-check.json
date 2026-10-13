@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "table inet mwan3 {\n\tchain mwan3_prerouting {\n\t\ttype filter hook prerouting priority mangle + 1; policy accept;\n\t\ticmpv6 type { nd-router-solicit, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, nd-redirect } accept\n\t\tmeta nfproto ipv4 meta l4proto udp meta mark & 0x0000ffff == 0x00000162 counter packets 178 bytes 23765 return comment \"OpenClash UDP already TPROXY\"\n[2026-10-12 17:27:55] account=1 event=AUTH_SUCCESS\n[2026-10-12 17:28:04] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-12 17:28:04] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-12 17:42:14] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-12 17:42:14] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-12 17:32:12] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 17:36:23] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 17:36:23] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 17:40:34] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 17:40:34] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\nRuleset passes nftables check.\n",
+  "stderr": ""
+}

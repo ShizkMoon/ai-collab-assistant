@@ -1,0 +1,7 @@
+{
+  "previous_htmode": "HE80",
+  "trial_htmode": "HE160",
+  "country": "CN",
+  "channel": 36,
+  "fallback_after_seconds": 180
+}

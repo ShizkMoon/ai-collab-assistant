@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "table inet mwan3 {\n\tchain mwan3_policy_balanced {\n\t\tmeta mark & 0x3f000000 == 0x00000000 numgen random mod 2 vmap { 0 : jump mwan3_or_meta_0x1000000, 1 : jump mwan3_or_meta_0x2000000 }\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\n",
+  "stderr": ""
+}

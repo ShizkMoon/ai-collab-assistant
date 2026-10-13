@@ -1,0 +1,3276 @@
+{
+  "processes": {
+    "account1": {
+      "pid": 7620,
+      "running": true
+    },
+    "account2": {
+      "pid": 7679,
+      "running": true
+    }
+  },
+  "events": [
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerClient.c:230]"
+      ],
+      "message_chinese_only": "程序版本"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerClient.c:230]"
+      ],
+      "message_chinese_only": "程序版本"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerClient.c:231]"
+      ],
+      "message_chinese_only": "本程序由制作遵循开源协议"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerClient.c:231]"
+      ],
+      "message_chinese_only": "本程序由制作遵循开源协议"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerClient.c:232]"
+      ],
+      "message_chinese_only": "项目地址"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerClient.c:232]"
+      ],
+      "message_chinese_only": "项目地址"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[Config.c:396]"
+      ],
+      "message_chinese_only": "环境本次仅使用配置"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[Config.c:396]"
+      ],
+      "message_chinese_only": "环境本次仅使用配置"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[ConfigAccounts.c:93]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[ConfigAccounts.c:93]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[ConfigAccounts.c:89]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[ConfigAccounts.c:89]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[ConfigAccounts.c:85]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[ConfigAccounts.c:85]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[Config.c:632]"
+      ],
+      "message_chinese_only": "仅加载配置标记值"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[Config.c:632]"
+      ],
+      "message_chinese_only": "仅加载配置标记值"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerAuth.c:182]"
+      ],
+      "message_chinese_only": "以认证进程运行负责配置"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerAuth.c:182]"
+      ],
+      "message_chinese_only": "以认证进程运行负责配置"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#1 pid=4818]",
+      "locations": [
+        "[Watchdog.c:145]"
+      ],
+      "message_chinese_only": "看门狗已启动检查间隔毫秒宽限毫秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:09] [auth#2 pid=4819]",
+      "locations": [
+        "[Watchdog.c:145]"
+      ],
+      "message_chinese_only": "看门狗已启动检查间隔毫秒宽限毫秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[NetClientCurl.c:329]"
+      ],
+      "message_chinese_only": "请求失败"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[NetClientCurl.c:335]"
+      ],
+      "message_chinese_only": "错误详情"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[NetClientCurl.c:347]"
+      ],
+      "message_chinese_only": "实际连接耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[NetClientCurl.c:348]"
+      ],
+      "message_chinese_only": "实际总耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[NetClientCurl.c:349]"
+      ],
+      "message_chinese_only": "连接超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[NetClientCurl.c:350]"
+      ],
+      "message_chinese_only": "总超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[NetClientCurl.c:298]"
+      ],
+      "message_chinese_only": "错误码错误信息解析错误"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[CheckNetwork.c:36]"
+      ],
+      "message_chinese_only": "主检测无法连通使用备用"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:329]"
+      ],
+      "message_chinese_only": "请求失败"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:335]"
+      ],
+      "message_chinese_only": "错误详情"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:347]"
+      ],
+      "message_chinese_only": "实际连接耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:348]"
+      ],
+      "message_chinese_only": "实际总耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:349]"
+      ],
+      "message_chinese_only": "连接超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:350]"
+      ],
+      "message_chinese_only": "总超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:298]"
+      ],
+      "message_chinese_only": "错误码错误信息解析错误"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[CheckNetwork.c:36]"
+      ],
+      "message_chinese_only": "主检测无法连通使用备用"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerLocation.c:53]"
+      ],
+      "message_chinese_only": "获取到校园网标志"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerClient.c:104]"
+      ],
+      "message_chinese_only": "需要认证"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerLocation.c:53]"
+      ],
+      "message_chinese_only": "获取到校园网标志"
+    },
+    {
+      "source": "[2026-10-12 19:14:14] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerClient.c:104]"
+      ],
+      "message_chinese_only": "需要认证"
+    },
+    {
+      "source": "[2026-10-12 19:14:20] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerTicket.c:176]"
+      ],
+      "message_chinese_only": "当前通道长度动态模块否"
+    },
+    {
+      "source": "[2026-10-12 19:14:22] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerTicket.c:176]"
+      ],
+      "message_chinese_only": "当前通道长度动态模块否"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:329]"
+      ],
+      "message_chinese_only": "请求失败"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:335]"
+      ],
+      "message_chinese_only": "错误详情"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:347]"
+      ],
+      "message_chinese_only": "实际连接耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:348]"
+      ],
+      "message_chinese_only": "实际总耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:349]"
+      ],
+      "message_chinese_only": "连接超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:350]"
+      ],
+      "message_chinese_only": "总超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:363]"
+      ],
+      "message_chinese_only": "结论总操作时间超时秒"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[NetClientCurl.c:310]"
+      ],
+      "message_chinese_only": "错误码错误信息操作超时"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerNet.c:139]"
+      ],
+      "message_chinese_only": "登录响应失败"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerAuth.c:128]"
+      ],
+      "message_chinese_only": "登录失败"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#2 pid=4819]",
+      "locations": [
+        "[DialerClient.c:122]"
+      ],
+      "message_chinese_only": "配置认证失败下标重试第次最多次下一次重试时间毫秒秒后"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerNet.c:212]"
+      ],
+      "message_chinese_only": "下一次重试秒后"
+    },
+    {
+      "source": "[2026-10-12 19:14:31] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerAuth.c:138]"
+      ],
+      "message_chinese_only": "已认证登录"
+    },
+    {
+      "source": "[2026-10-12 19:14:39] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerClient.c:74]"
+      ],
+      "message_chinese_only": "发送心跳包"
+    },
+    {
+      "source": "[2026-10-12 19:14:39] [auth#1 pid=4818]",
+      "locations": [
+        "[DialerClient.c:90]"
+      ],
+      "message_chinese_only": "下一次重试秒后"
+    },
+    {
+      "source": "[2026-10-12 19:15:21] [auth#1 pid=4818]",
+      "locations": [
+        "[Watchdog.c:0]"
+      ],
+      "message_chinese_only": "看门狗判定本进程卡死主循环声明毫秒内会再来打卡已超时毫秒没有动静本进程将退出由外部监管者重新拉起"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerClient.c:230]"
+      ],
+      "message_chinese_only": "程序版本"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerClient.c:231]"
+      ],
+      "message_chinese_only": "本程序由制作遵循开源协议"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerClient.c:232]"
+      ],
+      "message_chinese_only": "项目地址"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[Config.c:396]"
+      ],
+      "message_chinese_only": "环境本次仅使用配置"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[ConfigAccounts.c:93]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[ConfigAccounts.c:89]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[ConfigAccounts.c:85]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[Config.c:632]"
+      ],
+      "message_chinese_only": "仅加载配置标记值"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerAuth.c:182]"
+      ],
+      "message_chinese_only": "以认证进程运行负责配置"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[Watchdog.c:145]"
+      ],
+      "message_chinese_only": "看门狗已启动检查间隔毫秒宽限毫秒"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerNet.c:295]"
+      ],
+      "message_chinese_only": "检测到文件尝试登出"
+    },
+    {
+      "source": "[2026-10-12 19:15:26] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerNet.c:319]"
+      ],
+      "message_chinese_only": "登出完成会话已从服务端释放"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:329]"
+      ],
+      "message_chinese_only": "请求失败"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:335]"
+      ],
+      "message_chinese_only": "错误详情"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:347]"
+      ],
+      "message_chinese_only": "实际连接耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:348]"
+      ],
+      "message_chinese_only": "实际总耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:349]"
+      ],
+      "message_chinese_only": "连接超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:350]"
+      ],
+      "message_chinese_only": "总超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:298]"
+      ],
+      "message_chinese_only": "错误码错误信息解析错误"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerLocation.c:117]"
+      ],
+      "message_chinese_only": "跟随重定向后未获得认证页面状态码"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerAuth.c:309]"
+      ],
+      "message_chinese_only": "配置需要重新认证重新开始认证流程"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerLocation.c:53]"
+      ],
+      "message_chinese_only": "获取到校园网标志"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerClient.c:104]"
+      ],
+      "message_chinese_only": "需要认证"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerTicket.c:176]"
+      ],
+      "message_chinese_only": "当前通道长度动态模块否"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerNet.c:212]"
+      ],
+      "message_chinese_only": "下一次重试秒后"
+    },
+    {
+      "source": "[2026-10-12 19:15:31] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerAuth.c:138]"
+      ],
+      "message_chinese_only": "已认证登录"
+    },
+    {
+      "source": "[2026-10-12 19:15:36] [auth#2 pid=4819]",
+      "locations": [
+        "[Watchdog.c:0]"
+      ],
+      "message_chinese_only": "看门狗判定本进程卡死主循环声明毫秒内会再来打卡已超时毫秒没有动静本进程将退出由外部监管者重新拉起"
+    },
+    {
+      "source": "[2026-10-12 19:15:40] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerClient.c:74]"
+      ],
+      "message_chinese_only": "发送心跳包"
+    },
+    {
+      "source": "[2026-10-12 19:15:40] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerClient.c:90]"
+      ],
+      "message_chinese_only": "下一次重试秒后"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerClient.c:230]"
+      ],
+      "message_chinese_only": "程序版本"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerClient.c:231]"
+      ],
+      "message_chinese_only": "本程序由制作遵循开源协议"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerClient.c:232]"
+      ],
+      "message_chinese_only": "项目地址"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[Config.c:396]"
+      ],
+      "message_chinese_only": "环境本次仅使用配置"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[ConfigAccounts.c:93]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[ConfigAccounts.c:89]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[ConfigAccounts.c:85]"
+      ],
+      "message_chinese_only": "使用通道"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[Config.c:506]"
+      ],
+      "message_chinese_only": "配置可用将会尝试使用"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[Config.c:632]"
+      ],
+      "message_chinese_only": "仅加载配置标记值"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerAuth.c:182]"
+      ],
+      "message_chinese_only": "以认证进程运行负责配置"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[Watchdog.c:145]"
+      ],
+      "message_chinese_only": "看门狗已启动检查间隔毫秒宽限毫秒"
+    },
+    {
+      "source": "[2026-10-12 19:15:41] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:15:44] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:15:47] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:15:50] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:15:53] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:15:57] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:00] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:03] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:06] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:09] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:12] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:15] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:18] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:21] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:24] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:27] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:30] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:33] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:37] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:40] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:43] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:46] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:49] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:52] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:55] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:16:58] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:01] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:04] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:07] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:10] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:14] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:17] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:20] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:23] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:26] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:29] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:32] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:35] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:38] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:41] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:44] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:47] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:50] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:54] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:17:57] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:00] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:03] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:06] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:08] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:329]"
+      ],
+      "message_chinese_only": "请求失败"
+    },
+    {
+      "source": "[2026-10-12 19:18:08] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:335]"
+      ],
+      "message_chinese_only": "错误详情"
+    },
+    {
+      "source": "[2026-10-12 19:18:08] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:347]"
+      ],
+      "message_chinese_only": "实际连接耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:18:08] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:348]"
+      ],
+      "message_chinese_only": "实际总耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:18:08] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:349]"
+      ],
+      "message_chinese_only": "连接超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:18:08] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:350]"
+      ],
+      "message_chinese_only": "总超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:18:08] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:367]"
+      ],
+      "message_chinese_only": "结论超时原因不明确实际耗时未明显逼近设定阈值请检查网络稳定性或服务器响应"
+    },
+    {
+      "source": "[2026-10-12 19:18:08] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:310]"
+      ],
+      "message_chinese_only": "错误码错误信息操作超时"
+    },
+    {
+      "source": "[2026-10-12 19:18:08] [auth#1 pid=7620]",
+      "locations": [
+        "[CheckNetwork.c:36]"
+      ],
+      "message_chinese_only": "主检测无法连通使用备用"
+    },
+    {
+      "source": "[2026-10-12 19:18:09] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:12] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:15] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:18] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:21] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:24] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:27] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:31] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:34] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:37] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:40] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:43] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:46] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:49] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:52] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:55] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:18:58] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:01] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:04] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:07] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:11] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:14] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:17] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:20] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:23] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:26] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:29] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:32] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:35] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:38] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:41] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:44] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:48] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:51] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:54] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:19:57] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:00] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:03] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:06] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:09] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:12] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:15] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:18] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:21] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:24] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:28] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:31] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:34] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:37] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:40] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:43] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:46] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:49] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:52] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:55] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:20:58] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:01] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:05] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:08] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:11] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:14] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:17] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:20] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:23] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:26] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:29] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:32] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:35] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:38] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:42] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:45] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:48] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:51] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:54] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:21:57] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:00] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:03] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:06] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:09] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:12] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:15] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:18] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:22] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:25] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:28] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:31] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:34] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:37] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:40] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:43] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:46] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:49] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:52] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:55] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:22:58] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:02] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:05] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:08] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:11] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:14] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:17] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:20] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:23] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:26] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:29] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:32] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:35] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:39] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:42] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:45] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:48] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:51] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:54] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:23:57] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:00] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:03] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:06] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:09] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:12] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:16] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:19] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:22] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:25] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:28] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:31] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:34] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:37] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:40] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:43] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:46] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:49] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:52] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:56] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:24:59] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:02] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:05] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:08] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:11] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:14] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:17] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:20] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:23] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:26] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:29] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:32] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:36] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:39] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:42] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:45] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:48] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:51] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:54] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:25:57] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:00] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:03] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:06] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:09] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:13] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:16] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:19] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:22] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:25] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:28] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:31] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:34] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:37] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:40] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:43] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:46] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:50] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:53] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:56] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:26:59] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:02] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:05] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:08] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:11] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:14] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:17] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:20] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:23] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:26] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:30] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:33] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:36] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:39] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:42] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:45] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:48] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:51] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:54] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:27:57] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:00] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:03] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:07] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:10] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:13] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:16] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:19] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:22] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:25] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:28] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:31] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:34] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:37] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:40] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:43] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:47] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:50] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:53] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:56] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:28:59] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:02] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:05] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:08] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:11] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:14] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:17] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:20] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:23] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:27] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:30] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:33] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:36] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:39] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:42] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:45] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:48] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:50] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerClient.c:74]"
+      ],
+      "message_chinese_only": "发送心跳包"
+    },
+    {
+      "source": "[2026-10-12 19:29:50] [auth#1 pid=7620]",
+      "locations": [
+        "[DialerClient.c:90]"
+      ],
+      "message_chinese_only": "下一次重试秒后"
+    },
+    {
+      "source": "[2026-10-12 19:29:51] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:54] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:29:57] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:00] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:04] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:07] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:10] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:13] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:16] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:19] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:22] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:25] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:28] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:31] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:34] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:38] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:41] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:329]"
+      ],
+      "message_chinese_only": "请求失败"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:335]"
+      ],
+      "message_chinese_only": "错误详情"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:347]"
+      ],
+      "message_chinese_only": "实际连接耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:348]"
+      ],
+      "message_chinese_only": "实际总耗时秒"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:349]"
+      ],
+      "message_chinese_only": "连接超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:350]"
+      ],
+      "message_chinese_only": "总超时时长秒"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:367]"
+      ],
+      "message_chinese_only": "结论超时原因不明确实际耗时未明显逼近设定阈值请检查网络稳定性或服务器响应"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#1 pid=7620]",
+      "locations": [
+        "[NetClientCurl.c:310]"
+      ],
+      "message_chinese_only": "错误码错误信息操作超时"
+    },
+    {
+      "source": "[2026-10-12 19:30:44] [auth#1 pid=7620]",
+      "locations": [
+        "[CheckNetwork.c:36]"
+      ],
+      "message_chinese_only": "主检测无法连通使用备用"
+    },
+    {
+      "source": "[2026-10-12 19:30:47] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:50] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:53] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:56] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:30:59] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:02] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:05] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:08] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:11] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:15] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:18] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:21] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:24] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:27] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:30] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:33] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:36] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:39] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:42] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:45] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:48] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:51] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:55] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:31:58] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:01] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:04] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:07] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:10] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:13] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:17] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:20] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:23] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:26] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:29] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:32] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:35] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:38] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:41] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:44] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:47] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:50] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:53] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    },
+    {
+      "source": "[2026-10-12 19:32:57] [auth#2 pid=7679]",
+      "locations": [
+        "[DialerNet.c:258]"
+      ],
+      "message_chinese_only": "已连接至互联网"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "files": [
+    {
+      "path": "/etc/openclash/GeoSite.dat",
+      "bytes": 11147460,
+      "sha256": "e5d2232b6b0fe8eb8f4e7ebe3964fe13e5ff3d4f39065b97d77523eb376b4af9"
+    },
+    {
+      "path": "/etc/openclash/rule_provider/oc-cn-domain.mrs",
+      "bytes": 556732,
+      "sha256": "be926f16330dc672f7226c6f80cd5e37827f70f1338bc6db03caea8c297697df"
+    }
+  ],
+  "core_validation_exit": 0,
+  "before": "Filesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     50148      9664  84% /overlay\n",
+  "after": "Filesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     45120     14696  75% /overlay\n",
+  "reason": "No GEOSITE references outside geox-url and no active rule-providers"
+}

@@ -1,0 +1,17 @@
+{
+  "before": "net.ipv4.tcp_ecn = 2\nnet.ipv4.tcp_ecn_option = 2\nnet.ipv4.tcp_ecn_option_beacon = 3\nnet.ipv4.tcp_ecn_fallback = 1\n",
+  "after": {
+    "exit": 0,
+    "stdout": "net.ipv4.tcp_ecn = 2\nnet.ipv4.tcp_ecn_option = 2\nnet.ipv4.tcp_ecn_option_beacon = 3\nnet.ipv4.tcp_ecn_fallback = 1\n",
+    "stderr": "sysctl: write error: Invalid argument\n"
+  },
+  "persisted_file": null,
+  "persisted_sha256": null,
+  "original_file_existed": false,
+  "runtime_rollback": "sysctl -w net.ipv4.tcp_ecn=2",
+  "negotiation_verified": false,
+  "router_rebooted": false,
+  "enabled": false,
+  "invalid_persistence_removed": true,
+  "kernel_write_rejected": true
+}

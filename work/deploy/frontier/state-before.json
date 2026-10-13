@@ -1,0 +1,237 @@
+{
+  "time": "2026-10-13T20:50:05+08:00",
+  "files": {
+    "/etc/openclash/config/Ninja.yaml": {
+      "sha256": "d0de3f4779853622ee10d5b253919270c93569009f5cce538f924faa26766ebc",
+      "bytes": 217052
+    },
+    "/etc/openclash/Ninja.yaml": {
+      "sha256": "c62df9e12496f71a5dcad690e77eb8eac02163530153c4dac4ce6a4638cd2ffe",
+      "bytes": 289026
+    },
+    "/etc/openclash/custom/openclash_custom_overwrite.sh": {
+      "sha256": "4149591ee1d0bd27efa4fd919cbd895c351a642bfa7fbc113884ac6007c08aca",
+      "bytes": 9420
+    },
+    "/etc/openclash/custom/ninja-production-options.yaml": {
+      "sha256": "7044b26f7402ab62327cdb2d59c0b4e2f066c4ab36f8224423e27889f036db31",
+      "bytes": 1507
+    },
+    "/etc/openclash/custom/restore-ninja-license.rb": {
+      "sha256": "b9cead8badcf57b167bfa74b9f7df107000c1c03bc31d52e7b1038eb72ac358a",
+      "bytes": 1136
+    }
+  },
+  "dns": {
+    "enable": true,
+    "nameserver": [
+      "223.5.5.5",
+      "119.29.29.29"
+    ],
+    "fallback": [
+      "https://1.1.1.1/dns-query#🚀 节点选择"
+    ],
+    "ipv6": false,
+    "enhanced-mode": "redir-host",
+    "listen": "0.0.0.0:7874",
+    "respect-rules": false,
+    "use-hosts": true,
+    "nameserver-policy": {
+      "+.189.cn": [
+        "202.96.128.86"
+      ],
+      "+.gdpu.edu.cn": [
+        "10.50.11.15",
+        "202.96.128.86"
+      ]
+    },
+    "default-nameserver": [
+      "223.5.5.5",
+      "119.29.29.29"
+    ],
+    "fallback-filter": {
+      "domain": [
+        "+.google.com",
+        "+.googleapis.com",
+        "+.gstatic.com",
+        "+.youtube.com",
+        "+.github.com",
+        "+.githubusercontent.com",
+        "+.openai.com",
+        "+.chatgpt.com"
+      ],
+      "geoip": true,
+      "geoip-code": "CN",
+      "ipcidr": [
+        "240.0.0.0/4"
+      ]
+    },
+    "proxy-server-nameserver": [
+      "223.5.5.5",
+      "119.29.29.29"
+    ]
+  },
+  "option_keys": [
+    "direct_cidrs",
+    "direct_domain_suffixes",
+    "direct_domains",
+    "dns_nameserver_policy",
+    "dns_overrides",
+    "dns_proxy_server_nameserver",
+    "download_direct_rules",
+    "enable_ua3f_tcp",
+    "fixed_selections",
+    "tcp_targets",
+    "ua3f_name",
+    "ua3f_port",
+    "ua3f_server"
+  ],
+  "options_dns_overrides": {
+    "default-nameserver": [
+      "223.5.5.5",
+      "119.29.29.29"
+    ],
+    "fallback": [
+      "https://1.1.1.1/dns-query#🚀 节点选择"
+    ],
+    "fallback-filter": {
+      "domain": [
+        "+.google.com",
+        "+.googleapis.com",
+        "+.gstatic.com",
+        "+.youtube.com",
+        "+.github.com",
+        "+.githubusercontent.com",
+        "+.openai.com",
+        "+.chatgpt.com"
+      ],
+      "geoip": true,
+      "geoip-code": "CN",
+      "ipcidr": [
+        "240.0.0.0/4"
+      ]
+    },
+    "nameserver": [
+      "223.5.5.5",
+      "119.29.29.29"
+    ]
+  },
+  "options_dns_nameserver_policy": {
+    "+.189.cn": [
+      "202.96.128.86"
+    ],
+    "+.gdpu.edu.cn": [
+      "10.50.11.15",
+      "202.96.128.86"
+    ]
+  },
+  "options_dns_proxy_server_nameserver": [
+    "223.5.5.5",
+    "119.29.29.29"
+  ],
+  "rule_domain_counts": {
+    "DOMAIN": 151,
+    "DOMAIN-SUFFIX": 2848,
+    "IP-CIDR": 386,
+    "AND": 919,
+    "IP-CIDR6": 14,
+    "DOMAIN-KEYWORD": 92,
+    "PROCESS-NAME": 3,
+    "GEOIP": 1,
+    "MATCH": 1
+  },
+  "pids": {
+    "esurfingclient": "7679 7620",
+    "clash_meta": "22914",
+    "ua3f": "4940"
+  },
+  "resources": "Filesystem           1024-blocks    Used Available Capacity Mounted on\n/dev/ubi0_1              63076     45868     13948  77% /overlay\ntmpfs                   247000      6588    240412   3% /tmp\nMemAvailable:     151448 kB\n",
+  "core_sha256": "3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b",
+  "core_version": [
+    "Mihomo Meta ab32ad2d linux arm64 with go1.26.2 Sat 26 Sep 2026 16:37:24 UTC",
+    "Use tags: with_gvisor"
+  ],
+  "installed_package_lines": [
+    "esurfingclient-2.1.5-r6 aarch64_cortex-a53 {feeds/base/esurfingclient} (Apache-2.0) [installed]",
+    "kmod-sched-bpf-6.18.55-r1 aarch64_cortex-a53 {feeds/base/kernel/linux} (GPL-2.0-only) [installed]",
+    "kmod-sched-core-6.18.55-r1 aarch64_cortex-a53 {feeds/base/kernel/linux} (GPL-2.0-only) [installed]",
+    "luci-app-esurfingclient-2.1.5-r6 noarch {feeds/base/luci-app-esurfingclient} (Apache-2.0) [installed]",
+    "luci-app-ninjaconnector2-1.1.0-r4 noarch {package/luci-app-ninjaconnector2} (GPL-3.0-only) [installed]",
+    "luci-app-openclash-0.48.002 noarch {feeds/base/luci-app-openclash} () [installed]",
+    "mwan3-3.6.12-r1 aarch64_cortex-a53 {/feed/mwan3} (GPL-2.0) [installed]",
+    "ruby-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]",
+    "ruby-bigdecimal-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]",
+    "ruby-date-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]",
+    "ruby-digest-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]",
+    "ruby-enc-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]",
+    "ruby-pstore-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]",
+    "ruby-psych-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]",
+    "ruby-stringio-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]",
+    "ruby-yaml-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]",
+    "tc-full-6.18.0-r2 aarch64_cortex-a53 {feeds/base/network/utils/iproute2} (GPL-2.0) [installed]",
+    "ua3f-3.7.0-r1 aarch64_cortex-a53 {/feed/openwrt} (GPL-3.0-only) [installed]"
+  ],
+  "world_packages": [
+    "adblock-fast",
+    "apk-mbedtls",
+    "base-files=1716~f29dfe25ba",
+    "bash",
+    "ca-bundle",
+    "curl",
+    "dnsmasq",
+    "dnsmasq-full",
+    "dropbear",
+    "esurfingclient><Q1F4N25qxvjshmvas4KPLUdsA4aBo=",
+    "firewall4",
+    "fitblk",
+    "fstools",
+    "ip-full",
+    "kernel=6.18.55~b218d80d146ac6c85db4989df73b5de9-r1",
+    "kmod-crypto-hw-safexcel",
+    "kmod-gpio-button-hotplug",
+    "kmod-inet-diag",
+    "kmod-leds-gpio",
+    "kmod-leds-ws2812b",
+    "kmod-macvlan",
+    "kmod-mt7915e",
+    "kmod-mt7986-firmware",
+    "kmod-nft-offload",
+    "kmod-nft-tproxy",
+    "kmod-sched-bpf",
+    "libc=1.2.6-r5",
+    "libgcc1",
+    "libustream-mbedtls20201210",
+    "logd",
+    "luci-app-esurfingclient><Q15XXTP+83mrwAc6wfRtbwwzD0Wg0=",
+    "luci-app-ninjaconnector2><Q1Haec9scz7HXP67btYdYbWZ4xL9U=",
+    "luci-app-openclash><Q1vvvM3fn5f9KlWNvqA24QFILLLhw=",
+    "luci-compat",
+    "luci-i18n-base-zh-cn",
+    "luci-ssl",
+    "mt7986-wo-firmware",
+    "mtd",
+    "mwan3><Q18n+8aNLcHPrdTDFLv64I7z6aGCE=",
+    "netifd",
+    "nftables",
+    "odhcp6c",
+    "odhcpd-ipv6only",
+    "openssh-sftp-server",
+    "ppp",
+    "ppp-mod-pppoe",
+    "procd-ujail",
+    "ruby",
+    "ruby-yaml",
+    "smartdns",
+    "tc-full",
+    "tcpdump-mini",
+    "ua3f><Q1cva40dtcB+V6JTW7CU2Qx2di/2M=",
+    "uboot-envtools",
+    "uci",
+    "uclient-fetch",
+    "unzip",
+    "urandom-seed",
+    "urngd",
+    "wpad-basic-mbedtls"
+  ],
+  "core_help": "Usage of /etc/openclash/core/clash_meta:\n  -age-secret-key string\n    \tspecify age secret key to decrypt configuration\n  -config string\n    \tspecify base64-encoded configuration string\n  -d string\n    \tset configuration directory\n  -ext-ctl string\n    \toverride external controller address\n  -ext-ctl-pipe string\n    \toverride external controller pipe address\n  -ext-ctl-routing-mark int\n    \toverride external controller routing mark\n  -ext-ctl-tls string\n    \toverride external controller tls address\n  -ext-ctl-unix string\n    \toverride external controller unix address\n  -ext-ui string\n    \toverride external ui directory\n  -f string\n    \tspecify configuration file\n  -m\tset geodata mode\n  -post-down string\n    \tset post-down script\n  -post-up string\n    \tset post-up script\n  -secret string\n    \toverride secret for RESTful API\n  -t\ttest configuration and exit\n  -v\tshow current version of mihomo\n"
+}

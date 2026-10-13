@@ -1,0 +1,29 @@
+{
+  "path": "router RAM file to Windows via current 5GHz Wi-Fi",
+  "samples": [
+    {
+      "round": 0,
+      "exit": 0,
+      "http": 200,
+      "bytes": 67108864,
+      "mbps": 763.23,
+      "seconds": 0.703427
+    },
+    {
+      "round": 1,
+      "exit": 0,
+      "http": 200,
+      "bytes": 67108864,
+      "mbps": 695.39,
+      "seconds": 0.772048
+    },
+    {
+      "round": 2,
+      "exit": 0,
+      "http": 200,
+      "bytes": 67108864,
+      "mbps": 713.97,
+      "seconds": 0.75195
+    }
+  ]
+}

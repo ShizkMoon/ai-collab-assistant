@@ -1,0 +1,73 @@
+{
+  "three_bound_requests": [
+    {
+      "interface": "wan",
+      "device": "wan",
+      "source": "10.207.123.111",
+      "mark": "0x3f000000",
+      "http_result": "204 0.084234",
+      "captured_own_http_tcp_headers_on_ifb": [
+        "22:52:00.176937 IP 220.181.104.183.80 > 10.207.123.111.51932: Flags [S.], seq 1900929562, ack 2700862848, win 42340, options [mss 1452,nop,nop,sackOK,nop,wscale 7], length 0",
+        "22:52:00.214380 IP 220.181.104.183.80 > 10.207.123.111.51932: Flags [.], ack 223, win 330, length 0",
+        "22:52:00.215960 IP 220.181.104.183.80 > 10.207.123.111.51932: Flags [P.], seq 1:110, ack 223, win 330, length 109: HTTP: HTTP/1.1 204 No Content",
+        "22:52:00.253619 IP 220.181.104.183.80 > 10.207.123.111.51932: Flags [F.], seq 110, ack 224, win 330, length 0",
+        "22:52:00.369254 IP 202.69.4.32.80 > 10.207.123.111.44947: Flags [S.], seq 1769867056, ack 3342841156, win 42340, options [mss 1452,nop,nop,sackOK,nop,wscale 7], length 0",
+        "22:52:00.410242 IP 202.69.4.32.80 > 10.207.123.111.44947: Flags [.], ack 97, win 331, length 0",
+        "22:52:00.410442 IP 202.69.4.32.80 > 10.207.123.111.44947: Flags [P.], seq 1:110, ack 97, win 331, length 109: HTTP: HTTP/1.1 204 No Content",
+        "22:52:00.451821 IP 202.69.4.32.80 > 10.207.123.111.44947: Flags [F.], seq 110, ack 98, win 331, length 0",
+        "22:52:00.751223 IP 183.47.118.145.80 > 10.207.123.111.41510: Flags [S.], seq 4083790493, ack 930089431, win 64240, options [mss 1424,nop,nop,sackOK,nop,wscale 7], length 0",
+        "22:52:00.761389 IP 183.47.118.145.80 > 10.207.123.111.41510: Flags [.], ack 784, win 501, length 0",
+        "22:52:00.857742 IP 183.47.118.145.80 > 10.207.123.111.41510: Flags [P.], seq 1:379, ack 784, win 501, length 378: HTTP: HTTP/1.1 200 OK",
+        "22:52:00.857999 IP 183.47.118.145.80 > 10.207.123.111.41510: Flags [F.], seq 379, ack 784, win 501, length 0"
+      ],
+      "ifb_bytes_delta": 106309,
+      "passed": true,
+      "capture_payload_saved": false
+    },
+    {
+      "interface": "wan2",
+      "device": "eswan2",
+      "source": "10.207.112.254",
+      "mark": "0x02000000",
+      "http_result": "204 0.074238",
+      "captured_own_http_tcp_headers_on_ifb": [
+        "22:52:02.474504 IP 220.181.104.183.80 > 10.207.112.254.36296: Flags [.], ack 3817071190, win 330, length 0",
+        "22:52:02.477012 IP 220.181.104.183.80 > 10.207.112.254.36296: Flags [P.], seq 0:109, ack 1, win 330, length 109: HTTP: HTTP/1.1 204 No Content",
+        "22:52:02.514592 IP 220.181.104.183.80 > 10.207.112.254.36296: Flags [F.], seq 109, ack 2, win 330, length 0",
+        "22:52:03.516632 IP 220.181.104.183.80 > 10.207.112.254.36312: Flags [S.], seq 2995476964, ack 3549334766, win 42340, options [mss 1452,nop,nop,sackOK,nop,wscale 7], length 0",
+        "22:52:03.555633 IP 220.181.104.183.80 > 10.207.112.254.36312: Flags [.], ack 218, win 330, length 0",
+        "22:52:03.557196 IP 220.181.104.183.80 > 10.207.112.254.36312: Flags [P.], seq 1:110, ack 218, win 330, length 109: HTTP: HTTP/1.1 204 No Content",
+        "22:52:03.596242 IP 220.181.104.183.80 > 10.207.112.254.36312: Flags [F.], seq 110, ack 219, win 330, length 0"
+      ],
+      "ifb_bytes_delta": 98541,
+      "passed": true,
+      "capture_payload_saved": false
+    },
+    {
+      "interface": "wan3",
+      "device": "eswan3",
+      "source": "10.207.117.66",
+      "mark": "0x03000000",
+      "http_result": "204 0.084536",
+      "captured_own_http_tcp_headers_on_ifb": [
+        "22:52:05.983840 IP 125.88.255.52.80 > 10.207.117.66.43321: Flags [S.], seq 2161391380, ack 4223697999, win 65535, options [mss 1460,sackOK,TS val 2227989479 ecr 4248378309,nop,wscale 10], length 0",
+        "22:52:05.987810 IP 125.88.255.52.80 > 10.207.117.66.43321: Flags [.], ack 115, win 128, options [nop,nop,TS val 2227989483 ecr 4248378314], length 0",
+        "22:52:05.989203 IP 125.88.255.52.80 > 10.207.117.66.43321: Flags [P.], seq 1:196, ack 115, win 128, options [nop,nop,TS val 2227989484 ecr 4248378314], length 195: HTTP [|http]",
+        "22:52:05.993514 IP 125.88.255.52.80 > 10.207.117.66.43321: Flags [F.], seq 196, ack 116, win 128, options [nop,nop,TS val 2227989488 ecr 4248378319], length 0",
+        "22:52:06.220857 IP 220.181.104.183.80 > 10.207.117.66.35516: Flags [S.], seq 1249608758, ack 2343170937, win 42340, options [mss 1452,nop,nop,sackOK,nop,wscale 7], length 0",
+        "22:52:06.257241 IP 220.181.104.183.80 > 10.207.117.66.35516: Flags [.], ack 223, win 330, length 0",
+        "22:52:06.259177 IP 220.181.104.183.80 > 10.207.117.66.35516: Flags [P.], seq 1:110, ack 223, win 330, length 109: HTTP: HTTP/1.1 204 No Content",
+        "22:52:06.295838 IP 220.181.104.183.80 > 10.207.117.66.35516: Flags [F.], seq 110, ack 224, win 330, length 0",
+        "22:52:07.297228 IP 220.181.104.183.80 > 10.207.117.66.35522: Flags [S.], seq 2655157228, ack 1951193633, win 42340, options [mss 1452,nop,nop,sackOK,nop,wscale 7], length 0",
+        "22:52:07.334774 IP 220.181.104.183.80 > 10.207.117.66.35522: Flags [.], ack 223, win 330, length 0",
+        "22:52:07.336609 IP 220.181.104.183.80 > 10.207.117.66.35522: Flags [P.], seq 1:110, ack 223, win 330, length 109: HTTP: HTTP/1.1 204 No Content",
+        "22:52:07.374607 IP 220.181.104.183.80 > 10.207.117.66.35522: Flags [F.], seq 110, ack 224, win 330, length 0"
+      ],
+      "ifb_bytes_delta": 243352,
+      "passed": true,
+      "capture_payload_saved": false
+    }
+  ],
+  "all_three_own_receive_paths_observed_on_ifb": true,
+  "large_pc_download_outer_flow_assignment_proven": false
+}

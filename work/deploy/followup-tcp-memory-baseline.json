@@ -1,0 +1,5 @@
+{
+  "exit": 127,
+  "stdout": "net.ipv4.tcp_mem = 5727\t7638\t11454\nnet.ipv4.tcp_rmem = 4096\t131072\t3910688\nnet.ipv4.tcp_wmem = 4096\t16384\t3910688\nnet.core.rmem_max = 4194304\nnet.core.wmem_max = 4194304\nnet.core.netdev_max_backlog = 1000\nsockets: used 623\nTCP: inuse 260 orphan 1 tw 128 alloc 490 mem 609\nUDP: inuse 20 mem 339\nUDPLITE: inuse 0\nRAW: inuse 0\nFRAG: inuse 0 memory 0\nMemTotal:         494004 kB\nMemFree:          202948 kB\nMemAvailable:     222288 kB\nBuffers:               0 kB\nCached:            82616 kB\nSwapCached:            0 kB\nActive:           157236 kB\nInactive:          19252 kB\n",
+  "stderr": "ash: line 0: getconf: not found\n"
+}

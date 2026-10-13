@@ -1,0 +1,454 @@
+{
+  "created_utc": "2026-10-13T20:21:36.428550+00:00",
+  "schema": "owned-buffer-trial-v1",
+  "source_url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/79f6dea5-67d3-4861-94ab-0aaa9d006847/26300.9457.260913-1737.26h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_x64FRE_zh-cn.esd",
+  "server": "171.108.211.12",
+  "network": {
+    "wan": {
+      "up": true,
+      "device": "wan",
+      "address": "10.207.123.111"
+    },
+    "wan2": {
+      "up": true,
+      "device": "eswan2",
+      "address": "10.207.112.254"
+    },
+    "wan3": {
+      "up": true,
+      "device": "eswan3",
+      "address": "10.207.117.66"
+    }
+  },
+  "cases": [],
+  "wireless_interface": "phy11-ap0",
+  "persistent_changes": false,
+  "rollback": "close all own test sockets; new default sockets in following case",
+  "request_rcvbuf_bytes": 1048576,
+  "actual_rcvbuf_expected_bytes": 2097152,
+  "before_contract": {
+    "auth": {
+      "account1": {
+        "pid": 7620,
+        "starttime": "7251",
+        "running": true
+      },
+      "account2": {
+        "pid": 7679,
+        "starttime": "8802",
+        "running": true
+      },
+      "account3": {
+        "pid": 9375,
+        "starttime": "9392283",
+        "running": true
+      }
+    },
+    "core_pids": "4940 31352",
+    "config_hashes": "10cdd03527e3c18d8d4886e2fadd4f68fd708bedd462d217f979d6fc9dd50fda  /etc/config/network\n647aa6ceb2071915227879117809efb824b4e1e3b20e860aca9deccd76f471cd  /etc/config/wireless\nadfca004e2e3d48c9e4ea2237a35c4293989ef17fe303db6e5953337d645ee9b  /etc/config/firewall\n9ede6327fa09bbb9fc15720bb4ded50f91d3edc4f63f19ba4f6014b487aef831  /etc/openclash/Ninja.yaml\n",
+    "addresses": "wan@eth0         UP             10.207.123.111/20 \neswan2@wan       UP             10.207.112.254/20 \neswan3@wan       UP             10.207.117.66/20 \n",
+    "congestion": "bbr"
+  },
+  "before_queue": "qdisc cake ca10: root refcnt 2 bandwidth unlimited besteffort flows nonat nowash no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \nqdisc ingress ffff: parent ffff:fff1 ---------------- \nqdisc cake ca10: root refcnt 2 bandwidth 650Mbit besteffort flows nonat nowash ingress no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \n",
+  "snapshot_core_pids": "4940 31352",
+  "preflight": {
+    "helper": {
+      "action": "inspect",
+      "ok": true,
+      "schema": "owned-rcvbuf-v1",
+      "sockets": [
+        {
+          "fd": 62,
+          "inode": 4056269,
+          "cookie": "0000000000003320",
+          "local_ip": "10.207.123.111",
+          "local_port": 44058,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 70,
+          "inode": 4056272,
+          "cookie": "0000000000003321",
+          "local_ip": "10.207.123.111",
+          "local_port": 44066,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 77,
+          "inode": 4054001,
+          "cookie": "0000000000003322",
+          "local_ip": "10.207.123.111",
+          "local_port": 44082,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 96,
+          "inode": 4055374,
+          "cookie": "0000000000003323",
+          "local_ip": "10.207.123.111",
+          "local_port": 44088,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 101,
+          "inode": 4054003,
+          "cookie": "0000000000003324",
+          "local_ip": "10.207.123.111",
+          "local_port": 44104,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 106,
+          "inode": 4056283,
+          "cookie": "0000000000003325",
+          "local_ip": "10.207.123.111",
+          "local_port": 44116,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 112,
+          "inode": 4054666,
+          "cookie": "0000000000003326",
+          "local_ip": "10.207.123.111",
+          "local_port": 44126,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 116,
+          "inode": 4055389,
+          "cookie": "0000000000003327",
+          "local_ip": "10.207.123.111",
+          "local_port": 44128,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 118,
+          "inode": 4055392,
+          "cookie": "0000000000003303",
+          "local_ip": "10.207.123.111",
+          "local_port": 44130,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 136,
+          "inode": 4057090,
+          "cookie": "0000000000003304",
+          "local_ip": "10.207.123.111",
+          "local_port": 44138,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 146,
+          "inode": 4055401,
+          "cookie": "0000000000003305",
+          "local_ip": "10.207.123.111",
+          "local_port": 44148,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        },
+        {
+          "fd": 154,
+          "inode": 4056291,
+          "cookie": "0000000000003306",
+          "local_ip": "10.207.123.111",
+          "local_port": 44150,
+          "peer_ip": "171.108.211.12",
+          "peer_port": 80,
+          "before_rcvbuf": 131072,
+          "after_rcvbuf": 131072,
+          "before_bytes_received": 0,
+          "mark": 201
+        }
+      ]
+    },
+    "outer_routes": [
+      {
+        "pid": "4940",
+        "inode": "4056291",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44150",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.123.111",
+          "sport": "80",
+          "dport": "44150"
+        },
+        "exit": "wan",
+        "mark": 16777216,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4055401",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44148",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.117.66",
+          "sport": "80",
+          "dport": "44148"
+        },
+        "exit": "wan3",
+        "mark": 50331648,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4055389",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44128",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.117.66",
+          "sport": "80",
+          "dport": "44128"
+        },
+        "exit": "wan3",
+        "mark": 50331648,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4055392",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44130",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.123.111",
+          "sport": "80",
+          "dport": "44130"
+        },
+        "exit": "wan",
+        "mark": 16777216,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4054666",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44126",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.112.254",
+          "sport": "80",
+          "dport": "44126"
+        },
+        "exit": "wan2",
+        "mark": 33554432,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4057090",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44138",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.112.254",
+          "sport": "80",
+          "dport": "44138"
+        },
+        "exit": "wan2",
+        "mark": 33554432,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4056283",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44116",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.123.111",
+          "sport": "80",
+          "dport": "44116"
+        },
+        "exit": "wan",
+        "mark": 16777216,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4054001",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44082",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.123.111",
+          "sport": "80",
+          "dport": "44082"
+        },
+        "exit": "wan",
+        "mark": 16777216,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4054003",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44104",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.117.66",
+          "sport": "80",
+          "dport": "44104"
+        },
+        "exit": "wan3",
+        "mark": 50331648,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4056269",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44058",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.112.254",
+          "sport": "80",
+          "dport": "44058"
+        },
+        "exit": "wan2",
+        "mark": 33554432,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4055374",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44088",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.112.254",
+          "sport": "80",
+          "dport": "44088"
+        },
+        "exit": "wan2",
+        "mark": 33554432,
+        "reply_bytes": 52
+      },
+      {
+        "pid": "4940",
+        "inode": "4056272",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "171.108.211.12",
+          "sport": "44066",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "171.108.211.12",
+          "dst": "10.207.117.66",
+          "sport": "80",
+          "dport": "44066"
+        },
+        "exit": "wan3",
+        "mark": 50331648,
+        "reply_bytes": 52
+      }
+    ],
+    "before_get_verified": true
+  },
+  "preflight_closed": true,
+  "after_queue": "qdisc cake ca10: root refcnt 2 bandwidth unlimited besteffort flows nonat nowash no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \nqdisc ingress ffff: parent ffff:fff1 ---------------- \nqdisc cake ca10: root refcnt 2 bandwidth 650Mbit besteffort flows nonat nowash ingress no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \n",
+  "queue_restored": true,
+  "protected_state_unchanged": true
+}

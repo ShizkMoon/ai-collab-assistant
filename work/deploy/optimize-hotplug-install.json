@@ -1,0 +1,36 @@
+{
+  "before_sha256": "1754e27fc59138d00a3ab241b7f501211800e09fc6fda4bf887dbb69f2f5607b",
+  "after_sha256": "a61afd57c78f70d5ca14ebc46267c6d2d03f3b10363e7fc663891e15a27983ed",
+  "events": {
+    "wan": {
+      "exit": 0,
+      "stderr": ""
+    },
+    "wan2": {
+      "exit": 0,
+      "stderr": ""
+    }
+  },
+  "before_instances": {
+    "account1": {
+      "pid": 7620,
+      "running": true
+    },
+    "account2": {
+      "pid": 7679,
+      "running": true
+    }
+  },
+  "after_instances": {
+    "account1": {
+      "pid": 7620,
+      "running": true
+    },
+    "account2": {
+      "pid": 7679,
+      "running": true
+    }
+  },
+  "same_pids": true,
+  "readback_equal": true
+}

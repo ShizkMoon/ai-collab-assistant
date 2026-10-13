@@ -1,0 +1,482 @@
+{
+  "same_source_ip_used": true,
+  "off": {
+    "status": "inconclusive",
+    "reasons": [
+      "active_wan_same_source_coverage_insufficient"
+    ],
+    "all_complete": true,
+    "load_bytes": 805306368,
+    "load_seconds": 27.672,
+    "effective_payload_mbps": 232.81,
+    "steady_window_seconds": 25.672,
+    "coverage": {
+      "eswan2": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 254441963,
+        "estimated_main_only_bytes": null,
+        "covered": false
+      },
+      "eswan3": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 252751312,
+        "estimated_main_only_bytes": null,
+        "covered": false
+      },
+      "wan": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 827600237,
+        "estimated_main_only_bytes": 320406962,
+        "covered": false
+      }
+    },
+    "physical_wan_not_added_to_macvlan": true,
+    "coverage_requires_matching_download_client_port": true,
+    "same_source_first_two_5s_buckets": [
+      {
+        "n": 5,
+        "median_ms": 74.423,
+        "p95_ms": 95.8,
+        "max_ms": 95.8,
+        "p95_descriptive_only": true
+      },
+      {
+        "n": 5,
+        "median_ms": 71.77600000000001,
+        "p95_ms": 95.137,
+        "max_ms": 95.137,
+        "p95_descriptive_only": true
+      }
+    ],
+    "same_source_added_median_ms": [
+      11.077000000000005,
+      8.430000000000014
+    ],
+    "recovered_within_5ms": true,
+    "same_source_latency": {
+      "idle": {
+        "n": 15,
+        "median_ms": 63.346,
+        "p95_ms": 98.03399999999999,
+        "max_ms": 98.03399999999999,
+        "p95_descriptive_only": true,
+        "attempts": 15,
+        "complete": 15,
+        "failures": 0
+      },
+      "load": {
+        "n": 28,
+        "median_ms": 68.40599999999999,
+        "p95_ms": 95.137,
+        "max_ms": 95.8,
+        "p95_descriptive_only": true,
+        "attempts": 28,
+        "complete": 28,
+        "failures": 0
+      },
+      "recovery": {
+        "n": 10,
+        "median_ms": 54.448,
+        "p95_ms": 64.279,
+        "max_ms": 64.279,
+        "p95_descriptive_only": true,
+        "attempts": 10,
+        "complete": 10,
+        "failures": 0
+      }
+    },
+    "native_ping": {
+      "192.168.31.1": {
+        "idle": {
+          "n": 15,
+          "median_ms": 1,
+          "p95_ms": 8,
+          "max_ms": 8,
+          "p95_descriptive_only": true,
+          "replies": 15,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "load": {
+          "n": 28,
+          "median_ms": 2,
+          "p95_ms": 12,
+          "max_ms": 17,
+          "p95_descriptive_only": true,
+          "replies": 28,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "recovery": {
+          "n": 10,
+          "median_ms": 2,
+          "p95_ms": 9,
+          "max_ms": 9,
+          "p95_descriptive_only": true,
+          "replies": 10,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        }
+      },
+      "223.5.5.5": {
+        "idle": {
+          "n": 15,
+          "median_ms": 7,
+          "p95_ms": 16,
+          "max_ms": 16,
+          "p95_descriptive_only": true,
+          "replies": 15,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "load": {
+          "n": 28,
+          "median_ms": 10,
+          "p95_ms": 16,
+          "max_ms": 18,
+          "p95_descriptive_only": true,
+          "replies": 28,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "recovery": {
+          "n": 10,
+          "median_ms": 9,
+          "p95_ms": 12,
+          "max_ms": 12,
+          "p95_descriptive_only": true,
+          "replies": 10,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        }
+      }
+    },
+    "max_observed_per_core_busy_percent": 94.4,
+    "cpu_limit_candidate": false,
+    "steady_router_intervals": 24,
+    "consecutive_high_cpu_observations": 1,
+    "note": "HTTP TTFB 包含新连接与源站响应；仅为同路径候选证据。短窗无信号不证明长期无队列。"
+  },
+  "on_split_gso": {
+    "status": "inconclusive",
+    "reasons": [
+      "active_wan_same_source_coverage_insufficient"
+    ],
+    "all_complete": true,
+    "load_bytes": 805306368,
+    "load_seconds": 24.422,
+    "effective_payload_mbps": 263.8,
+    "steady_window_seconds": 22.422,
+    "coverage": {
+      "eswan2": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 262067633,
+        "estimated_main_only_bytes": null,
+        "covered": false
+      },
+      "eswan3": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 312567927,
+        "estimated_main_only_bytes": null,
+        "covered": false
+      },
+      "wan": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 834053674,
+        "estimated_main_only_bytes": 259418114,
+        "covered": false
+      }
+    },
+    "physical_wan_not_added_to_macvlan": true,
+    "coverage_requires_matching_download_client_port": true,
+    "same_source_first_two_5s_buckets": [
+      {
+        "n": 5,
+        "median_ms": 86.662,
+        "p95_ms": 279.886,
+        "max_ms": 279.886,
+        "p95_descriptive_only": true
+      },
+      {
+        "n": 5,
+        "median_ms": 85.84,
+        "p95_ms": 94.606,
+        "max_ms": 94.606,
+        "p95_descriptive_only": true
+      }
+    ],
+    "same_source_added_median_ms": [
+      22.198999999999998,
+      21.376999999999995
+    ],
+    "recovered_within_5ms": true,
+    "same_source_latency": {
+      "idle": {
+        "n": 15,
+        "median_ms": 64.46300000000001,
+        "p95_ms": 74.40299999999999,
+        "max_ms": 74.40299999999999,
+        "p95_descriptive_only": true,
+        "attempts": 15,
+        "complete": 15,
+        "failures": 0
+      },
+      "load": {
+        "n": 25,
+        "median_ms": 82.684,
+        "p95_ms": 131.52800000000002,
+        "max_ms": 279.886,
+        "p95_descriptive_only": true,
+        "attempts": 25,
+        "complete": 25,
+        "failures": 0
+      },
+      "recovery": {
+        "n": 10,
+        "median_ms": 57.644,
+        "p95_ms": 64.108,
+        "max_ms": 64.108,
+        "p95_descriptive_only": true,
+        "attempts": 10,
+        "complete": 10,
+        "failures": 0
+      }
+    },
+    "native_ping": {
+      "192.168.31.1": {
+        "idle": {
+          "n": 15,
+          "median_ms": 1,
+          "p95_ms": 17,
+          "max_ms": 17,
+          "p95_descriptive_only": true,
+          "replies": 15,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "load": {
+          "n": 25,
+          "median_ms": 3,
+          "p95_ms": 8,
+          "max_ms": 43,
+          "p95_descriptive_only": true,
+          "replies": 25,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "recovery": {
+          "n": 10,
+          "median_ms": 1,
+          "p95_ms": 7,
+          "max_ms": 7,
+          "p95_descriptive_only": true,
+          "replies": 10,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        }
+      },
+      "223.5.5.5": {
+        "idle": {
+          "n": 15,
+          "median_ms": 10,
+          "p95_ms": 15,
+          "max_ms": 15,
+          "p95_descriptive_only": true,
+          "replies": 15,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "load": {
+          "n": 25,
+          "median_ms": 11,
+          "p95_ms": 42,
+          "max_ms": 48,
+          "p95_descriptive_only": true,
+          "replies": 25,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "recovery": {
+          "n": 10,
+          "median_ms": 9,
+          "p95_ms": 16,
+          "max_ms": 16,
+          "p95_descriptive_only": true,
+          "replies": 10,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        }
+      }
+    },
+    "max_observed_per_core_busy_percent": 94.4,
+    "cpu_limit_candidate": true,
+    "steady_router_intervals": 17,
+    "consecutive_high_cpu_observations": 14,
+    "note": "HTTP TTFB 包含新连接与源站响应；仅为同路径候选证据。短窗无信号不证明长期无队列。"
+  },
+  "on_no_split_gso": {
+    "status": "inconclusive",
+    "reasons": [
+      "load_request_failed_or_inexact",
+      "load_not_complete",
+      "active_wan_same_source_coverage_insufficient",
+      "same_source_latency_samples_insufficient",
+      "native_ping_failure_lines_seen"
+    ],
+    "all_complete": false,
+    "load_bytes": 803143174,
+    "load_seconds": 30.094,
+    "effective_payload_mbps": 213.5,
+    "steady_window_seconds": 28.094,
+    "coverage": {
+      "eswan2": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 313240166,
+        "estimated_main_only_bytes": null,
+        "covered": false
+      },
+      "eswan3": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 261384448,
+        "estimated_main_only_bytes": null,
+        "covered": false
+      },
+      "wan": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 840309523,
+        "estimated_main_only_bytes": 265684909,
+        "covered": false
+      }
+    },
+    "physical_wan_not_added_to_macvlan": true,
+    "coverage_requires_matching_download_client_port": true,
+    "same_source_first_two_5s_buckets": [
+      {
+        "n": 5,
+        "median_ms": 89.572,
+        "p95_ms": 200.742,
+        "max_ms": 200.742,
+        "p95_descriptive_only": true
+      },
+      {
+        "n": 5,
+        "median_ms": 88.68900000000001,
+        "p95_ms": 103.967,
+        "max_ms": 103.967,
+        "p95_descriptive_only": true
+      }
+    ],
+    "same_source_added_median_ms": [
+      26.592000000000006,
+      25.70900000000001
+    ],
+    "recovered_within_5ms": false,
+    "same_source_latency": {
+      "idle": {
+        "n": 15,
+        "median_ms": 62.98,
+        "p95_ms": 259.442,
+        "max_ms": 259.442,
+        "p95_descriptive_only": true,
+        "attempts": 15,
+        "complete": 15,
+        "failures": 0
+      },
+      "load": {
+        "n": 30,
+        "median_ms": 84.691,
+        "p95_ms": 254.697,
+        "max_ms": 291.085,
+        "p95_descriptive_only": false,
+        "attempts": 30,
+        "complete": 30,
+        "failures": 0
+      },
+      "recovery": {
+        "n": 0,
+        "median_ms": null,
+        "p95_ms": null,
+        "max_ms": null,
+        "p95_descriptive_only": true,
+        "attempts": 0,
+        "complete": 0,
+        "failures": 0
+      }
+    },
+    "native_ping": {
+      "192.168.31.1": {
+        "idle": {
+          "n": 13,
+          "median_ms": 1,
+          "p95_ms": 4,
+          "max_ms": 4,
+          "p95_descriptive_only": true,
+          "replies": 15,
+          "less_than_1ms": 2,
+          "failure_lines": 0
+        },
+        "load": {
+          "n": 31,
+          "median_ms": 3,
+          "p95_ms": 15,
+          "max_ms": 27,
+          "p95_descriptive_only": false,
+          "replies": 31,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "recovery": {
+          "n": 10,
+          "median_ms": 1,
+          "p95_ms": 30,
+          "max_ms": 30,
+          "p95_descriptive_only": true,
+          "replies": 10,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        }
+      },
+      "223.5.5.5": {
+        "idle": {
+          "n": 15,
+          "median_ms": 8,
+          "p95_ms": 11,
+          "max_ms": 11,
+          "p95_descriptive_only": true,
+          "replies": 15,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "load": {
+          "n": 31,
+          "median_ms": 11,
+          "p95_ms": 16,
+          "max_ms": 17,
+          "p95_descriptive_only": false,
+          "replies": 31,
+          "less_than_1ms": 0,
+          "failure_lines": 0
+        },
+        "recovery": {
+          "n": 9,
+          "median_ms": 8,
+          "p95_ms": 12,
+          "max_ms": 12,
+          "p95_descriptive_only": true,
+          "replies": 9,
+          "less_than_1ms": 0,
+          "failure_lines": 1
+        }
+      }
+    },
+    "max_observed_per_core_busy_percent": 90.5,
+    "cpu_limit_candidate": false,
+    "steady_router_intervals": 26,
+    "consecutive_high_cpu_observations": 1,
+    "note": "HTTP TTFB 包含新连接与源站响应；仅为同路径候选证据。短窗无信号不证明长期无队列。"
+  },
+  "adopted": "split-gso",
+  "matched_randomized_trial": false,
+  "old_581_mbps_sample_not_a_contemporaneous_control": true,
+  "causal_speedup_or_stable_loaded_latency_proven": false
+}

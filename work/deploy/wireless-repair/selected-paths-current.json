@@ -1,0 +1,14 @@
+{
+  "openclash": "table inet fw4 {\n\tchain openclash { # handle 687\n\t\tip daddr @localnetwork counter packets 2205 bytes 115680 return # handle 688\n\t\tct direction reply counter packets 0 bytes 0 return # handle 689\n\t\tip protocol tcp ip daddr 198.18.0.0/16 counter packets 0 bytes 0 redirect to :7892 # handle 690\n\t\tip protocol tcp counter packets 28491 bytes 1620354 redirect to :7892 # handle 691\n\t}\n}\ntable inet fw4 {\n\tchain mangle_output { # handle 28\n\t\ttype route hook output priority mangle; policy accept;\n\t}\n}\n",
+  "routing": "table ip esurfing_route { # handle 2\n\tchain output { # handle 1\n\t\ttype route hook output priority mangle - 10; policy accept;\n\t\tmeta skgid 65201 counter packets 93821 bytes 8317520 meta mark set meta mark | 0x3f000000 comment \"esurfing account1 main bypass\" # handle 65\n\t\tmeta skgid 65202 counter packets 94747 bytes 8370948 meta mark set 0x02000000 comment \"esurfing account2 wan2\" # handle 66\n\t\tmeta skgid 65203 counter packets 94719 bytes 8402487 meta mark set 0x03000000 comment \"esurfing account3 wan3\" # handle 67\n\t}\n}\n0:\tfrom all lookup local\n99:\tfrom all fwmark 0x162 lookup 354\n100:\tfrom all fwmark 0x162/0xffff lookup 354\n1001:\tfrom all iif wan lookup 1\n1002:\tfrom all iif eswan2 lookup 2\n1003:\tfrom all iif eswan3 lookup 3\n1802:\tfrom all fwmark 0x2000000 lookup 25202\n1803:\tfrom all fwmark 0x3000000 lookup 25203\n2001:\tfrom all fwmark 0x1000000/0x3f000000 lookup 1\n2002:\tfrom all fwmark 0x2000000/0x3f000000 lookup 2\n2003:\tfrom all fwmark 0x3000000/0x3f000000 lookup 3\n2061:\tfrom all fwmark 0x3d000000/0x3f000000 blackhole\n2062:\tfrom all fwmark 0x3e000000/0x3f000000 unreachable\n3003:\tfrom all fwmark 0x3000000/0x3f000000 unreachable\n3062:\tfrom 10.207.123.111 lookup 1\n3063:\tfrom 10.207.112.254 lookup 2\n3064:\tfrom 10.207.117.66 lookup 3\n10000:\tfrom 10.207.112.254 lookup 25202\n10000:\tfrom 10.207.117.66 lookup 25203\n20000:\tfrom all to 10.207.112.254/20 lookup 25202\n20000:\tfrom all to 10.207.117.66/20 lookup 25203\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\n90008:\tfrom all iif lo lookup 25202\n90012:\tfrom all iif lo lookup 25203\n",
+  "ports": {
+    "ua3f_owned_socket_count": 803,
+    "listening": [
+      {
+        "address": "127.0.0.1",
+        "port": 1080
+      }
+    ]
+  },
+  "cake_service": "#!/bin/sh /etc/rc.common\nSTART=96\nSTOP=10\nUSE_PROCD=1\n\nstart_service() {\n    procd_open_instance\n    procd_set_param command /usr/libexec/codex-cake watch\n    procd_set_param respawn 3600 5 5\n    procd_close_instance\n}\n\nstop_service() {\n    /usr/libexec/codex-cake stop\n}\n"
+}

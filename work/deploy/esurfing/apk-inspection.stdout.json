@@ -1,0 +1,396 @@
+[
+  {
+    "name": "mwan3-3.6.12-1_openwrt-25.12_aarch64_cortex-a53.apk",
+    "length": 85713,
+    "sha256": "7123dc1c306241e40870c0402ba503396b45f84625731dbf0c8979053e3959a4",
+    "decompressed_length": 348848,
+    "magic": "4144422e70636b677c36000000000000",
+    "metadata": {
+      "name": "mwan3",
+      "version": "3.6.12-r1",
+      "hashes": {
+        "hex": "f27fbc68d2dc1cfadd4c314bbfae08ef3e9a1821"
+      },
+      "description": "Hotplug script which makes configuration of multiple WAN interfaces simple and manageable. With loadbalancing/failover support for up to 250 wan interfaces, connection tracking and an easy to manage traffic ruleset. mwan3rtmon now uses a ucode implementation leveraging ucode-mod-rtnl for direct netlink access instead of forking ip commands.",
+      "arch": "aarch64_cortex-a53",
+      "license": "GPL-2.0",
+      "origin": "/feed/mwan3",
+      "maintainer": "Florian Eckert <fe@dev.tdt.de>",
+      "url": null,
+      "repo_commit": null,
+      "build_time": null,
+      "installed_size": 334460,
+      "file_size": null,
+      "provider_priority": null,
+      "depends": [
+        [
+          "ip-full"
+        ],
+        [
+          "jshn"
+        ],
+        [
+          "kmod-nft-core"
+        ],
+        [
+          "libc"
+        ],
+        [
+          "libnetfilter-conntrack3"
+        ],
+        [
+          "nftables-json"
+        ],
+        [
+          "rpcd-mod-ucode"
+        ],
+        [
+          "ucode"
+        ],
+        [
+          "ucode-mod-fs"
+        ],
+        [
+          "ucode-mod-log"
+        ],
+        [
+          "ucode-mod-rtnl"
+        ],
+        [
+          "ucode-mod-socket"
+        ],
+        [
+          "ucode-mod-ubus"
+        ],
+        [
+          "ucode-mod-uci"
+        ],
+        [
+          "ucode-mod-uloop"
+        ]
+      ],
+      "provides": [
+        [
+          "mwan3-any"
+        ]
+      ]
+    },
+    "files": [
+      {
+        "path": "etc/mwan3.user",
+        "size": 968,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "etc/config/mwan3",
+        "size": 3070,
+        "acl": [
+          384,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "etc/hotplug.d/iface/25-mwan3",
+        "size": 5159,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "etc/hotplug.d/iface/26-mwan3-user",
+        "size": 525,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "etc/init.d/mwan3",
+        "size": 11253,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "etc/uci-defaults/mwan3-migrate-flush_conntrack",
+        "size": 482,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "etc/uci-defaults/mwan3-remove-firewall-include",
+        "size": 229,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/apk/packages/mwan3.conffiles",
+        "size": 34,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/apk/packages/mwan3.conffiles_static",
+        "size": 164,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/apk/packages/mwan3.list",
+        "size": 698,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/mwan3/common.sh",
+        "size": 18681,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/mwan3/libwrap_mwan3_sockopt.so.1.0",
+        "size": 65731,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/mwan3/mwan3-create-iface-route.uc",
+        "size": 3493,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/mwan3/mwan3-get-addr.uc",
+        "size": 1203,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/mwan3/mwan3-list-routes.uc",
+        "size": 1442,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/mwan3/mwan3-manage-rules.uc",
+        "size": 5434,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/mwan3/mwan3-migrate-ipset-v4.sh",
+        "size": 2329,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/mwan3/mwan3-skeleton.nft",
+        "size": 2963,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/mwan3/mwan3.sh",
+        "size": 77261,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "usr/bin/mwan3ipcheck",
+        "size": 4059,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "usr/sbin/mwan3",
+        "size": 5087,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "usr/sbin/mwan3-diag",
+        "size": 18664,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "usr/sbin/mwan3-lb-test",
+        "size": 28042,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "usr/sbin/mwan3ct",
+        "size": 8155,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "usr/sbin/mwan3rtmon",
+        "size": 24268,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "usr/sbin/mwan3track",
+        "size": 18392,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "usr/share/rpcd/ucode/mwan3",
+        "size": 22753,
+        "acl": [
+          493,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "usr/share/ucode/mwan3/common.uc",
+        "size": 3921,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      }
+    ],
+    "script_names": [
+      "trigger",
+      "preinst",
+      "postinst",
+      "predeinst",
+      "postdeinst",
+      "preupgrade",
+      "postupgrade"
+    ],
+    "elf": [
+      {
+        "offset": 55412,
+        "class": "ELF64",
+        "type": 3,
+        "machine": 183,
+        "program_headers": [
+          1,
+          1,
+          2,
+          1685382480,
+          1685382481,
+          1685382482
+        ],
+        "PT_INTERP": false,
+        "PT_DYNAMIC": true
+      },
+      {
+        "offset": 215388,
+        "class": "ELF64",
+        "type": 2,
+        "machine": 183,
+        "program_headers": [
+          6,
+          3,
+          1,
+          1,
+          2,
+          1685382480,
+          1685382481,
+          1685382482
+        ],
+        "PT_INTERP": true,
+        "PT_DYNAMIC": true
+      },
+      {
+        "offset": 271300,
+        "class": "ELF64",
+        "type": 2,
+        "machine": 183,
+        "program_headers": [
+          6,
+          3,
+          1,
+          1,
+          2,
+          1685382480,
+          1685382481,
+          1685382482
+        ],
+        "PT_INTERP": true,
+        "PT_DYNAMIC": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,371 @@
+{
+  "timestamp": "2026-10-12T20:31:04+08:00",
+  "objective": "Current PC position: speed, concurrency, signal and reliability; retain HE160.",
+  "persistent_change": "Authentication hotplug commits the address only after the recovery request succeeds; revalidates enabled state, lease and route before acting.",
+  "hotplug": {
+    "before_sha256": "1754e27fc59138d00a3ab241b7f501211800e09fc6fda4bf887dbb69f2f5607b",
+    "after_sha256": "a61afd57c78f70d5ca14ebc46267c6d2d03f3b10363e7fc663891e15a27983ed",
+    "events": {
+      "wan": {
+        "exit": 0,
+        "stderr": ""
+      },
+      "wan2": {
+        "exit": 0,
+        "stderr": ""
+      }
+    },
+    "before_instances": {
+      "account1": {
+        "pid": 7620,
+        "running": true
+      },
+      "account2": {
+        "pid": 7679,
+        "running": true
+      }
+    },
+    "after_instances": {
+      "account1": {
+        "pid": 7620,
+        "running": true
+      },
+      "account2": {
+        "pid": 7679,
+        "running": true
+      }
+    },
+    "same_pids": true,
+    "readback_equal": true
+  },
+  "hotplug_fixture_cases_passed": 12,
+  "aql_trial": {
+    "order": "A/B/A/B",
+    "default_be_us": [
+      5000,
+      12000
+    ],
+    "trial_be_us": [
+      2500,
+      6000
+    ],
+    "results": [
+      {
+        "evidence": "loaded-latency-lan-native-a1.json",
+        "mbps": 886.32,
+        "seconds": 9.692,
+        "cpu_percent": 38.5,
+        "max_core_percent": 66.2,
+        "successful_api_load_p95_ms": {
+          "192.168.31.1": 33,
+          "223.5.5.5": 33,
+          "119.29.29.29": 33,
+          "180.76.76.76": 35
+        },
+        "native_load": {
+          "192.168.31.1": {
+            "samples": 9,
+            "received": 9,
+            "loss_percent": 0.0,
+            "median_ms": 17.0,
+            "p95_ms": 30.0,
+            "max_ms": 30.0
+          },
+          "223.5.5.5": {
+            "samples": 9,
+            "received": 9,
+            "loss_percent": 0.0,
+            "median_ms": 20.0,
+            "p95_ms": 33.0,
+            "max_ms": 33.0
+          }
+        }
+      },
+      {
+        "evidence": "loaded-latency-lan-aql2500-6000-b.json",
+        "mbps": 975.06,
+        "seconds": 8.81,
+        "cpu_percent": 38.9,
+        "max_core_percent": 79.4,
+        "successful_api_load_p95_ms": {
+          "192.168.31.1": 21,
+          "223.5.5.5": 26,
+          "119.29.29.29": 26,
+          "180.76.76.76": 24
+        },
+        "native_load": {
+          "192.168.31.1": {
+            "samples": 9,
+            "received": 9,
+            "loss_percent": 0.0,
+            "median_ms": 13.0,
+            "p95_ms": 22.0,
+            "max_ms": 22.0
+          },
+          "223.5.5.5": {
+            "samples": 9,
+            "received": 9,
+            "loss_percent": 0.0,
+            "median_ms": 18.0,
+            "p95_ms": 28.0,
+            "max_ms": 28.0
+          }
+        }
+      },
+      {
+        "evidence": "loaded-latency-lan-native-a2.json",
+        "mbps": 868.7,
+        "seconds": 9.888,
+        "cpu_percent": 34.5,
+        "max_core_percent": 72.1,
+        "successful_api_load_p95_ms": {
+          "192.168.31.1": 28,
+          "223.5.5.5": 30,
+          "119.29.29.29": 29,
+          "180.76.76.76": 29
+        },
+        "native_load": {
+          "192.168.31.1": {
+            "samples": 10,
+            "received": 10,
+            "loss_percent": 0.0,
+            "median_ms": 20.0,
+            "p95_ms": 44.0,
+            "max_ms": 44.0
+          },
+          "223.5.5.5": {
+            "samples": 10,
+            "received": 10,
+            "loss_percent": 0.0,
+            "median_ms": 22.0,
+            "p95_ms": 45.0,
+            "max_ms": 45.0
+          }
+        }
+      },
+      {
+        "evidence": "loaded-latency-lan-aql2500-6000-b2.json",
+        "mbps": 838.09,
+        "seconds": 10.249,
+        "cpu_percent": 33.6,
+        "max_core_percent": 69.7,
+        "successful_api_load_p95_ms": {
+          "192.168.31.1": 29,
+          "223.5.5.5": 27,
+          "119.29.29.29": 30,
+          "180.76.76.76": 28
+        },
+        "native_load": {
+          "192.168.31.1": {
+            "samples": 10,
+            "received": 10,
+            "loss_percent": 0.0,
+            "median_ms": 18.0,
+            "p95_ms": 28.0,
+            "max_ms": 28.0
+          },
+          "223.5.5.5": {
+            "samples": 10,
+            "received": 10,
+            "loss_percent": 0.0,
+            "median_ms": 19.0,
+            "p95_ms": 35.0,
+            "max_ms": 35.0
+          }
+        }
+      }
+    ],
+    "decision": "Default restored; speed gain did not repeat."
+  },
+  "downlink_sqm_trial": {
+    "algorithm": "Single aggregate WAN ingress IFB, HTB 520 Mbps plus fq_codel",
+    "results": [
+      {
+        "evidence": "loaded-latency-wan-1g-a1.json",
+        "mbps": 536.58,
+        "seconds": 16.009,
+        "cpu_percent": 44.8,
+        "max_core_percent": 60.3,
+        "successful_api_load_p95_ms": {
+          "192.168.31.1": 21,
+          "223.5.5.5": 36,
+          "119.29.29.29": 41,
+          "180.76.76.76": 40
+        },
+        "native_load": {}
+      },
+      {
+        "evidence": "loaded-latency-wan-1g-sqm520-b.json",
+        "mbps": 489.07,
+        "seconds": 17.564,
+        "cpu_percent": 74.7,
+        "max_core_percent": 88.2,
+        "successful_api_load_p95_ms": {
+          "192.168.31.1": 14,
+          "223.5.5.5": 18,
+          "119.29.29.29": 17,
+          "180.76.76.76": 20
+        },
+        "native_load": {}
+      },
+      {
+        "evidence": "loaded-latency-wan-1g-a2-native.json",
+        "mbps": 612.86,
+        "seconds": 14.016,
+        "cpu_percent": 51.3,
+        "max_core_percent": 60.7,
+        "successful_api_load_p95_ms": {
+          "192.168.31.1": 17,
+          "223.5.5.5": 31,
+          "119.29.29.29": 32,
+          "180.76.76.76": 29
+        },
+        "native_load": {
+          "192.168.31.1": {
+            "samples": 14,
+            "received": 14,
+            "loss_percent": 0.0,
+            "median_ms": 5.0,
+            "p95_ms": 20.0,
+            "max_ms": 20.0
+          },
+          "223.5.5.5": {
+            "samples": 14,
+            "received": 14,
+            "loss_percent": 0.0,
+            "median_ms": 14.0,
+            "p95_ms": 19.0,
+            "max_ms": 19.0
+          }
+        }
+      }
+    ],
+    "decision": "Removed: lower successful-sample latency but lower throughput and higher CPU cost. CAKE and persistent sqm-scripts were not installed; upload shaping was not tested."
+  },
+  "download_queue_trial": {
+    "order": "16x64MiB / 32x32MiB / 16x64MiB, at most 16 workers",
+    "results": [
+      {
+        "parallel_streams": 16,
+        "total_streams": 16,
+        "bytes_per_stream": 67108864,
+        "observed_mbps": 462.0,
+        "seconds": 18.593,
+        "cpu": {
+          "cpu": {
+            "busy_percent": 42.0,
+            "softirq_percent": 15.7
+          },
+          "cpu0": {
+            "busy_percent": 37.5,
+            "softirq_percent": 0.9
+          },
+          "cpu1": {
+            "busy_percent": 37.0,
+            "softirq_percent": 16.9
+          },
+          "cpu2": {
+            "busy_percent": 39.7,
+            "softirq_percent": 28.0
+          },
+          "cpu3": {
+            "busy_percent": 53.2,
+            "softirq_percent": 16.2
+          }
+        }
+      },
+      {
+        "parallel_streams": 16,
+        "total_streams": 32,
+        "bytes_per_stream": 33554432,
+        "observed_mbps": 499.29,
+        "seconds": 17.204,
+        "cpu": {
+          "cpu": {
+            "busy_percent": 43.9,
+            "softirq_percent": 15.7
+          },
+          "cpu0": {
+            "busy_percent": 40.8,
+            "softirq_percent": 0.8
+          },
+          "cpu1": {
+            "busy_percent": 39.1,
+            "softirq_percent": 18.3
+          },
+          "cpu2": {
+            "busy_percent": 40.3,
+            "softirq_percent": 27.5
+          },
+          "cpu3": {
+            "busy_percent": 54.8,
+            "softirq_percent": 16.0
+          }
+        }
+      },
+      {
+        "parallel_streams": 16,
+        "total_streams": 16,
+        "bytes_per_stream": 67108864,
+        "observed_mbps": 529.53,
+        "seconds": 16.222,
+        "cpu": {
+          "cpu": {
+            "busy_percent": 45.7,
+            "softirq_percent": 17.2
+          },
+          "cpu0": {
+            "busy_percent": 42.2,
+            "softirq_percent": 0.8
+          },
+          "cpu1": {
+            "busy_percent": 39.3,
+            "softirq_percent": 19.4
+          },
+          "cpu2": {
+            "busy_percent": 42.4,
+            "softirq_percent": 30.9
+          },
+          "cpu3": {
+            "busy_percent": 58.0,
+            "softirq_percent": 17.2
+          }
+        }
+      }
+    ],
+    "decision": "No consistent gain; no production downloader changed."
+  },
+  "authentication": {
+    "account1": {
+      "pid": 7620,
+      "auth_success": [
+        "[2026-10-12 19:15:31] account=1 event=AUTH_SUCCESS"
+      ],
+      "heartbeat_success_count": 6,
+      "first_heartbeat": "[2026-10-12 19:15:40] account=1 event=HEARTBEAT_NEXT_SECONDS value=850",
+      "latest_heartbeat": "[2026-10-12 20:26:32] account=1 event=HEARTBEAT_NEXT_SECONDS value=850"
+    },
+    "account2": {
+      "pid": 7679,
+      "auth_success": [
+        "[2026-10-12 19:45:06] account=2 event=AUTH_SUCCESS"
+      ],
+      "heartbeat_success_count": 11,
+      "first_heartbeat": "[2026-10-12 19:45:12] account=2 event=HEARTBEAT_NEXT_SECONDS value=250",
+      "latest_heartbeat": "[2026-10-12 20:26:59] account=2 event=HEARTBEAT_NEXT_SECONDS value=250"
+    }
+  },
+  "native_probe_limit": "Each native load phase has only about 9-14 samples. No missing replies were recorded in these phases; this is not a long-term loss-rate estimate.",
+  "api_probe_limit": "Several IcmpSendEcho failures returned before their configured 900 ms timeout. API no-reply counts do not establish network packet loss; their cause remains unresolved. P95 uses successful replies only.",
+  "restoration": {
+    "exit": 0,
+    "stdout": "(1/1) Purging kmod-ifb (6.18.55-r1)\n  Executing kmod-ifb-6.18.55-r1.pre-deinstall\nOK: 86.9 MiB in 239 packages\nqdisc noqueue 0: root refcnt 2 \nAC\tAQL limit low\tAQL limit high\nVO\t5000\t\t12000\nVI\t5000\t\t12000\nBE\t5000\t\t12000\nBK\t5000\t\t12000\nBC/MC\t50000\nnet.ipv4.tcp_mem = 5727\t7638\t11454\n",
+    "stderr": "WARNING: opening from cache https://downloads.openwrt.org/snapshots/targets/mediatek/filogic/packages/packages.adb: No such file or directory\nWARNING: opening from cache https://downloads.openwrt.org/snapshots/packages/aarch64_cortex-a53/base/packages.adb: No such file or directory\nWARNING: opening from cache https://downloads.openwrt.org/snapshots/targets/mediatek/filogic/kmods/6.18.55-1-b218d80d146ac6c85db4989df73b5de9/packages.adb: No such file or directory\nWARNING: opening from cache https://downloads.openwrt.org/snapshots/packages/aarch64_cortex-a53/luci/packages.adb: No such file or directory\nWARNING: opening from cache https://downloads.openwrt.org/snapshots/packages/aarch64_cortex-a53/packages/packages.adb: No such file or directory\nWARNING: opening from cache https://downloads.openwrt.org/snapshots/packages/aarch64_cortex-a53/routing/packages.adb: No such file or directory\nWARNING: opening from cache https://downloads.openwrt.org/snapshots/packages/aarch64_cortex-a53/telephony/packages.adb: No such file or directory\nWARNING: opening from cache https://downloads.openwrt.org/snapshots/packages/aarch64_cortex-a53/video/packages.adb: No such file or directory\n"
+  },
+  "limits": [
+    "No proven persistent speed increase from this round.",
+    "Short-window throughput varies with source, flow assignment, Wi-Fi and concurrent load.",
+    "No formal power-cycle, multi-day reliability or upload-loaded-latency test.",
+    "The new hotplug failure-retry cases were tested in shell fixtures; real same-IP events preserved both running authentication PIDs."
+  ]
+}

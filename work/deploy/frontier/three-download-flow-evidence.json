@@ -1,0 +1,1472 @@
+{
+  "schema": "three-download-flow-evidence/1",
+  "generated_utc": "2026-10-13T13:48:09.516238+00:00",
+  "scope": "仅离线分析已保存的 baseline JSON；没有网络请求、SSH、设备操作、队列或生产配置修改。",
+  "source": {
+    "path": "work/deploy/frontier/queue-baseline-a1-final3.json",
+    "sha256": "5e19155910ce9c3d375ce11a94bb3277f800661f7c8d1201c5e38e9c69d906a9",
+    "created_utc": "2026-10-13T13:37:20.722454+00:00",
+    "label": "a1-final3",
+    "source_url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/79f6dea5-67d3-4861-94ab-0aaa9d006847/26300.9457.260913-1737.26h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_x64FRE_zh-cn.esd",
+    "fixed_remote_ipv4": "117.31.116.56",
+    "fixed_remote_port": 80
+  },
+  "conclusion": {
+    "status": "partial_evidence",
+    "three_wan_large_download_outer_established_proven": false,
+    "three_marks_on_16_inner_download_connections_proven": true,
+    "text": "本文件中，16 条 curl 下载客户端的透明代理内层 ESTABLISHED 连接带有三组标记，分布为 6/5/5。三个 DHCP 出口地址可见于 4 条负载前已有的外层 TIME_WAIT 记录，且收包计数很小。全文件未记录同一固定下载源的 WAN 外层 ESTABLISHED 连接，因此不能据此确认三路实际承载本轮大下载。"
+  },
+  "baseline_summary_preserved": {
+    "status": "inconclusive",
+    "reasons": [
+      "steady_load_window_below_10_seconds",
+      "active_wan_same_source_coverage_insufficient",
+      "same_source_latency_samples_insufficient"
+    ],
+    "coverage": {
+      "eswan2": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 389138344,
+        "estimated_main_only_bytes": null,
+        "covered": false
+      },
+      "eswan3": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 107022652,
+        "estimated_main_only_bytes": null,
+        "covered": false
+      },
+      "wan": {
+        "same_source_connections_seen": 0,
+        "rx_delta_bytes": 844879047,
+        "estimated_main_only_bytes": 348718051,
+        "covered": false
+      }
+    },
+    "coverage_requires_matching_download_client_port": true,
+    "steady_window_seconds": 9.078,
+    "effective_payload_mbps": 581.55,
+    "all_complete": true,
+    "load_bytes": 805306368,
+    "original_baseline_file_changed": false
+  },
+  "method": {
+    "outer_filter": "TCP original dst=fixed_remote_ipv4,dport=80; original src is a current WAN address; reply src=fixed_remote_ipv4,sport=80 and reply dst is a current WAN address. Egress source address is inferred from reply dst after NAT, not original src.",
+    "inner_filter": "load phase TCP ESTABLISHED with original destination fixed_remote_ipv4:80 and original source port equal to one of the 16 recorded curl local ports.",
+    "unique_key": "original 4-tuple + reply 4-tuple + mark; repeated snapshots are not new connections.",
+    "time_base": "Monotonic timestamps copied from baseline; no conversion to wall-clock attempted.",
+    "process_attribution": "Conntrack contains no socket owner PID; UA3F process ownership cannot be verified from these rows alone.",
+    "counter_use": "Time-wait counters are kernel per-connection counters, not application payload totals. They only establish these stored outer rows are small; no WAN payload total inferred."
+  },
+  "data_quality": {
+    "observation_count": 35,
+    "valid_observation_count": 35,
+    "load_observation_count": 9,
+    "flow_truncated_count": 0,
+    "raw_and_connections_tuple_sets_equal_all_observations": true,
+    "network_addresses_stable_all_observations": true,
+    "tuple_consistency_by_observation": [
+      {
+        "observation_index": 0,
+        "raw_tuple_count": 2,
+        "parsed_connections_count": 2,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 1,
+        "raw_tuple_count": 6,
+        "parsed_connections_count": 6,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 2,
+        "raw_tuple_count": 8,
+        "parsed_connections_count": 8,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 3,
+        "raw_tuple_count": 9,
+        "parsed_connections_count": 9,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 4,
+        "raw_tuple_count": 10,
+        "parsed_connections_count": 10,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 5,
+        "raw_tuple_count": 11,
+        "parsed_connections_count": 11,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 6,
+        "raw_tuple_count": 12,
+        "parsed_connections_count": 12,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 7,
+        "raw_tuple_count": 13,
+        "parsed_connections_count": 13,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 8,
+        "raw_tuple_count": 14,
+        "parsed_connections_count": 14,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 9,
+        "raw_tuple_count": 15,
+        "parsed_connections_count": 15,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 10,
+        "raw_tuple_count": 16,
+        "parsed_connections_count": 16,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 11,
+        "raw_tuple_count": 17,
+        "parsed_connections_count": 17,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 12,
+        "raw_tuple_count": 18,
+        "parsed_connections_count": 18,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 13,
+        "raw_tuple_count": 19,
+        "parsed_connections_count": 19,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 14,
+        "raw_tuple_count": 20,
+        "parsed_connections_count": 20,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 15,
+        "raw_tuple_count": 37,
+        "parsed_connections_count": 37,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 16,
+        "raw_tuple_count": 39,
+        "parsed_connections_count": 39,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 17,
+        "raw_tuple_count": 40,
+        "parsed_connections_count": 40,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 18,
+        "raw_tuple_count": 42,
+        "parsed_connections_count": 42,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 19,
+        "raw_tuple_count": 43,
+        "parsed_connections_count": 43,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 20,
+        "raw_tuple_count": 44,
+        "parsed_connections_count": 44,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 21,
+        "raw_tuple_count": 46,
+        "parsed_connections_count": 46,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 22,
+        "raw_tuple_count": 47,
+        "parsed_connections_count": 47,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 23,
+        "raw_tuple_count": 48,
+        "parsed_connections_count": 48,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 24,
+        "raw_tuple_count": 49,
+        "parsed_connections_count": 49,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 25,
+        "raw_tuple_count": 49,
+        "parsed_connections_count": 49,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 26,
+        "raw_tuple_count": 50,
+        "parsed_connections_count": 50,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 27,
+        "raw_tuple_count": 51,
+        "parsed_connections_count": 51,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 28,
+        "raw_tuple_count": 52,
+        "parsed_connections_count": 52,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 29,
+        "raw_tuple_count": 53,
+        "parsed_connections_count": 53,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 30,
+        "raw_tuple_count": 54,
+        "parsed_connections_count": 54,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 31,
+        "raw_tuple_count": 55,
+        "parsed_connections_count": 55,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 32,
+        "raw_tuple_count": 56,
+        "parsed_connections_count": 56,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 33,
+        "raw_tuple_count": 58,
+        "parsed_connections_count": 58,
+        "tuple_sets_equal": true
+      },
+      {
+        "observation_index": 34,
+        "raw_tuple_count": 58,
+        "parsed_connections_count": 58,
+        "tuple_sets_equal": true
+      }
+    ]
+  },
+  "network_before": [
+    {
+      "interface": "wan2",
+      "device": "eswan2",
+      "up": true,
+      "addresses": [
+        "10.207.112.254"
+      ]
+    },
+    {
+      "interface": "wan3",
+      "device": "eswan3",
+      "up": true,
+      "addresses": [
+        "10.207.117.66"
+      ]
+    },
+    {
+      "interface": "wan",
+      "device": "wan",
+      "up": true,
+      "addresses": [
+        "10.207.123.111"
+      ]
+    }
+  ],
+  "per_wan_evidence": [
+    {
+      "interface": "wan2",
+      "device": "eswan2",
+      "addresses": [
+        "10.207.112.254"
+      ],
+      "observed_marks_from_outer_time_wait": [
+        "0x02000000"
+      ],
+      "outer_established_unique_connections_all_phases": 0,
+      "outer_established_unique_connections_load_phase": 0,
+      "outer_time_wait_unique_connections": 1,
+      "outer_time_wait_unique_connection_max_reply_bytes_sum": 2084,
+      "load_inner_download_connections_with_corresponding_mark": 5,
+      "interpretation": "出口标记已出现在下载内层连接；本文件没有对应大下载外层 ESTABLISHED 连接。"
+    },
+    {
+      "interface": "wan3",
+      "device": "eswan3",
+      "addresses": [
+        "10.207.117.66"
+      ],
+      "observed_marks_from_outer_time_wait": [
+        "0x03000000"
+      ],
+      "outer_established_unique_connections_all_phases": 0,
+      "outer_established_unique_connections_load_phase": 0,
+      "outer_time_wait_unique_connections": 1,
+      "outer_time_wait_unique_connection_max_reply_bytes_sum": 2084,
+      "load_inner_download_connections_with_corresponding_mark": 5,
+      "interpretation": "出口标记已出现在下载内层连接；本文件没有对应大下载外层 ESTABLISHED 连接。"
+    },
+    {
+      "interface": "wan",
+      "device": "wan",
+      "addresses": [
+        "10.207.123.111"
+      ],
+      "observed_marks_from_outer_time_wait": [
+        "0x01000000"
+      ],
+      "outer_established_unique_connections_all_phases": 0,
+      "outer_established_unique_connections_load_phase": 0,
+      "outer_time_wait_unique_connections": 2,
+      "outer_time_wait_unique_connection_max_reply_bytes_sum": 4064,
+      "load_inner_download_connections_with_corresponding_mark": 6,
+      "interpretation": "出口标记已出现在下载内层连接；本文件没有对应大下载外层 ESTABLISHED 连接。"
+    }
+  ],
+  "inner_download_unique_established_counts_by_mark": {
+    "0x01000000": 6,
+    "0x02000000": 5,
+    "0x03000000": 5
+  },
+  "inner_download_established_connections": [
+    {
+      "stream_id": 0,
+      "curl_local_port": 54644,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 50331648,
+        "mark_hex": "0x03000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54644",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54644"
+        },
+        "original_packets": 366,
+        "original_bytes": 14947,
+        "reply_packets": 209,
+        "reply_bytes": 2887336,
+        "raw_line": "ipv4     2 tcp      6 300 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54644 dport=80 packets=366 bytes=14947 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54644 packets=209 bytes=2887336 [ASSURED] mark=50331648 zone=0 use=93",
+        "observation_index": 15,
+        "raw_line_number": 10,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "max_reply_bytes": 42478836
+    },
+    {
+      "stream_id": 1,
+      "curl_local_port": 54646,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 50331648,
+        "mark_hex": "0x03000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54646",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "63874"
+        },
+        "original_packets": 192,
+        "original_bytes": 7999,
+        "reply_packets": 77,
+        "reply_bytes": 1325032,
+        "raw_line": "ipv4     2 tcp      6 7439 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54646 dport=80 packets=192 bytes=7999 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=63874 packets=77 bytes=1325032 [ASSURED] mark=50331648 zone=0 use=2",
+        "observation_index": 15,
+        "raw_line_number": 1,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "max_reply_bytes": 42126148
+    },
+    {
+      "stream_id": 2,
+      "curl_local_port": 54633,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 16777216,
+        "mark_hex": "0x01000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54633",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54633"
+        },
+        "original_packets": 679,
+        "original_bytes": 27467,
+        "reply_packets": 376,
+        "reply_bytes": 8699740,
+        "raw_line": "ipv4     2 tcp      6 300 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54633 dport=80 packets=679 bytes=27467 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54633 packets=376 bytes=8699740 [ASSURED] mark=16777216 zone=0 use=60",
+        "observation_index": 15,
+        "raw_line_number": 33,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "max_reply_bytes": 48656164
+    },
+    {
+      "stream_id": 3,
+      "curl_local_port": 54653,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 33554432,
+        "mark_hex": "0x02000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54653",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54653"
+        },
+        "original_packets": 500,
+        "original_bytes": 20307,
+        "reply_packets": 220,
+        "reply_bytes": 3876420,
+        "raw_line": "ipv4     2 tcp      6 300 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54653 dport=80 packets=500 bytes=20307 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54653 packets=220 bytes=3876420 [ASSURED] mark=33554432 zone=0 use=19",
+        "observation_index": 15,
+        "raw_line_number": 22,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "max_reply_bytes": 50063456
+    },
+    {
+      "stream_id": 4,
+      "curl_local_port": 54637,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 16777216,
+        "mark_hex": "0x01000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54637",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54637"
+        },
+        "original_packets": 485,
+        "original_bytes": 19707,
+        "reply_packets": 247,
+        "reply_bytes": 5142396,
+        "raw_line": "ipv4     2 tcp      6 7440 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54637 dport=80 packets=485 bytes=19707 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54637 packets=247 bytes=5142396 [ASSURED] mark=16777216 zone=0 use=2",
+        "observation_index": 15,
+        "raw_line_number": 9,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "max_reply_bytes": 49428220
+    },
+    {
+      "stream_id": 5,
+      "curl_local_port": 54632,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 33554432,
+        "mark_hex": "0x02000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54632",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54632"
+        },
+        "original_packets": 893,
+        "original_bytes": 36027,
+        "reply_packets": 806,
+        "reply_bytes": 17874740,
+        "raw_line": "ipv4     2 tcp      6 300 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54632 dport=80 packets=893 bytes=36027 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54632 packets=806 bytes=17874740 [ASSURED] mark=33554432 zone=0 use=87",
+        "observation_index": 15,
+        "raw_line_number": 35,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17
+      ],
+      "max_reply_bytes": 47167836
+    },
+    {
+      "stream_id": 6,
+      "curl_local_port": 54648,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 16777216,
+        "mark_hex": "0x01000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54648",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54648"
+        },
+        "original_packets": 307,
+        "original_bytes": 12587,
+        "reply_packets": 115,
+        "reply_bytes": 2219898,
+        "raw_line": "ipv4     2 tcp      6 300 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54648 dport=80 packets=307 bytes=12587 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54648 packets=115 bytes=2219898 [ASSURED] mark=16777216 zone=0 use=21",
+        "observation_index": 15,
+        "raw_line_number": 12,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "max_reply_bytes": 40821458
+    },
+    {
+      "stream_id": 7,
+      "curl_local_port": 54655,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 50331648,
+        "mark_hex": "0x03000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54655",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54655"
+        },
+        "original_packets": 290,
+        "original_bytes": 11907,
+        "reply_packets": 110,
+        "reply_bytes": 2160252,
+        "raw_line": "ipv4     2 tcp      6 7439 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54655 dport=80 packets=290 bytes=11907 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54655 packets=110 bytes=2160252 [ASSURED] mark=50331648 zone=0 use=2",
+        "observation_index": 15,
+        "raw_line_number": 6,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "max_reply_bytes": 50105268
+    },
+    {
+      "stream_id": 8,
+      "curl_local_port": 54652,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 16777216,
+        "mark_hex": "0x01000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54652",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54652"
+        },
+        "original_packets": 208,
+        "original_bytes": 8627,
+        "reply_packets": 81,
+        "reply_bytes": 1488756,
+        "raw_line": "ipv4     2 tcp      6 299 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54652 dport=80 packets=208 bytes=8627 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54652 packets=81 bytes=1488756 [ASSURED] mark=16777216 zone=0 use=20",
+        "observation_index": 15,
+        "raw_line_number": 15,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "max_reply_bytes": 44507620
+    },
+    {
+      "stream_id": 9,
+      "curl_local_port": 54645,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 16777216,
+        "mark_hex": "0x01000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54645",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54645"
+        },
+        "original_packets": 233,
+        "original_bytes": 9627,
+        "reply_packets": 80,
+        "reply_bytes": 1581532,
+        "raw_line": "ipv4     2 tcp      6 7439 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54645 dport=80 packets=233 bytes=9627 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54645 packets=80 bytes=1581532 [ASSURED] mark=16777216 zone=0 use=2",
+        "observation_index": 15,
+        "raw_line_number": 4,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "max_reply_bytes": 44359156
+    },
+    {
+      "stream_id": 10,
+      "curl_local_port": 54650,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 16777216,
+        "mark_hex": "0x01000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54650",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54650"
+        },
+        "original_packets": 662,
+        "original_bytes": 26787,
+        "reply_packets": 228,
+        "reply_bytes": 5009076,
+        "raw_line": "ipv4     2 tcp      6 300 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54650 dport=80 packets=662 bytes=26787 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54650 packets=228 bytes=5009076 [ASSURED] mark=16777216 zone=0 use=47",
+        "observation_index": 15,
+        "raw_line_number": 24,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "max_reply_bytes": 41529900
+    },
+    {
+      "stream_id": 11,
+      "curl_local_port": 54654,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 50331648,
+        "mark_hex": "0x03000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54654",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54654"
+        },
+        "original_packets": 681,
+        "original_bytes": 27547,
+        "reply_packets": 287,
+        "reply_bytes": 6604908,
+        "raw_line": "ipv4     2 tcp      6 300 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54654 dport=80 packets=681 bytes=27547 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54654 packets=287 bytes=6604908 [ASSURED] mark=50331648 zone=0 use=54",
+        "observation_index": 15,
+        "raw_line_number": 18,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "max_reply_bytes": 47967396
+    },
+    {
+      "stream_id": 12,
+      "curl_local_port": 54651,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 33554432,
+        "mark_hex": "0x02000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54651",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54651"
+        },
+        "original_packets": 371,
+        "original_bytes": 15147,
+        "reply_packets": 136,
+        "reply_bytes": 2449522,
+        "raw_line": "ipv4     2 tcp      6 7439 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54651 dport=80 packets=371 bytes=15147 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54651 packets=136 bytes=2449522 [ASSURED] mark=33554432 zone=0 use=2",
+        "observation_index": 15,
+        "raw_line_number": 14,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "max_reply_bytes": 45256522
+    },
+    {
+      "stream_id": 13,
+      "curl_local_port": 54657,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 33554432,
+        "mark_hex": "0x02000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54657",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54657"
+        },
+        "original_packets": 567,
+        "original_bytes": 22987,
+        "reply_packets": 282,
+        "reply_bytes": 4153018,
+        "raw_line": "ipv4     2 tcp      6 299 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54657 dport=80 packets=567 bytes=22987 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54657 packets=282 bytes=4153018 [ASSURED] mark=33554432 zone=0 use=36",
+        "observation_index": 15,
+        "raw_line_number": 26,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "max_reply_bytes": 39646626
+    },
+    {
+      "stream_id": 14,
+      "curl_local_port": 54649,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 50331648,
+        "mark_hex": "0x03000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54649",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54649"
+        },
+        "original_packets": 670,
+        "original_bytes": 27107,
+        "reply_packets": 324,
+        "reply_bytes": 6127876,
+        "raw_line": "ipv4     2 tcp      6 300 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54649 dport=80 packets=670 bytes=27107 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54649 packets=324 bytes=6127876 [ASSURED] mark=50331648 zone=0 use=36",
+        "observation_index": 15,
+        "raw_line_number": 19,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "max_reply_bytes": 50417708
+    },
+    {
+      "stream_id": 15,
+      "curl_local_port": 54658,
+      "curl_payload_bytes": 50331648,
+      "curl_complete": true,
+      "first_seen": {
+        "state": "ESTABLISHED",
+        "mark_decimal": 33554432,
+        "mark_hex": "0x02000000",
+        "original": {
+          "src": "192.168.31.171",
+          "dst": "117.31.116.56",
+          "sport": "54658",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "192.168.31.1",
+          "dst": "192.168.31.171",
+          "sport": "7892",
+          "dport": "54658"
+        },
+        "original_packets": 179,
+        "original_bytes": 7467,
+        "reply_packets": 84,
+        "reply_bytes": 1287740,
+        "raw_line": "ipv4     2 tcp      6 7439 ESTABLISHED src=192.168.31.171 dst=117.31.116.56 sport=54658 dport=80 packets=179 bytes=7467 src=192.168.31.1 dst=192.168.31.171 sport=7892 dport=54658 packets=84 bytes=1287740 [ASSURED] mark=33554432 zone=0 use=2",
+        "observation_index": 15,
+        "raw_line_number": 8,
+        "phase": "load",
+        "sample_started_monotonic": 123877.093,
+        "sample_ended_monotonic": 123878.468
+      },
+      "observation_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "max_reply_bytes": 49059172
+    }
+  ],
+  "outer_unique_connections_all_states": [
+    {
+      "first_seen": {
+        "state": "TIME_WAIT",
+        "mark_decimal": 33554432,
+        "mark_hex": "0x02000000",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "117.31.116.56",
+          "sport": "43778",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "117.31.116.56",
+          "dst": "10.207.112.254",
+          "sport": "80",
+          "dport": "43778"
+        },
+        "original_packets": 6,
+        "original_bytes": 594,
+        "reply_packets": 6,
+        "reply_bytes": 2084,
+        "raw_line": "ipv4     2 tcp      6 119 TIME_WAIT src=10.207.123.111 dst=117.31.116.56 sport=43778 dport=80 packets=6 bytes=594 src=117.31.116.56 dst=10.207.112.254 sport=80 dport=43778 packets=6 bytes=2084 [ASSURED] mark=33554432 zone=0 use=2",
+        "observation_index": 1,
+        "raw_line_number": 1,
+        "phase": "idle",
+        "sample_started_monotonic": 123863.062,
+        "sample_ended_monotonic": 123863.828,
+        "egress_address_from_reply_destination": "10.207.112.254",
+        "egress_device": "eswan2"
+      },
+      "states_seen": [
+        "TIME_WAIT"
+      ],
+      "observation_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "max_reply_bytes": 2084,
+      "max_original_bytes": 594
+    },
+    {
+      "first_seen": {
+        "state": "TIME_WAIT",
+        "mark_decimal": 50331648,
+        "mark_hex": "0x03000000",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "117.31.116.56",
+          "sport": "43764",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "117.31.116.56",
+          "dst": "10.207.117.66",
+          "sport": "80",
+          "dport": "43764"
+        },
+        "original_packets": 6,
+        "original_bytes": 594,
+        "reply_packets": 6,
+        "reply_bytes": 2084,
+        "raw_line": "ipv4     2 tcp      6 119 TIME_WAIT src=10.207.123.111 dst=117.31.116.56 sport=43764 dport=80 packets=6 bytes=594 src=117.31.116.56 dst=10.207.117.66 sport=80 dport=43764 packets=6 bytes=2084 [ASSURED] mark=50331648 zone=0 use=2",
+        "observation_index": 0,
+        "raw_line_number": 1,
+        "phase": "setup",
+        "sample_started_monotonic": 123861.203,
+        "sample_ended_monotonic": 123862.031,
+        "egress_address_from_reply_destination": "10.207.117.66",
+        "egress_device": "eswan3"
+      },
+      "states_seen": [
+        "TIME_WAIT"
+      ],
+      "observation_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "max_reply_bytes": 2084,
+      "max_original_bytes": 594
+    },
+    {
+      "first_seen": {
+        "state": "TIME_WAIT",
+        "mark_decimal": 16777216,
+        "mark_hex": "0x01000000",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "117.31.116.56",
+          "sport": "43772",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "117.31.116.56",
+          "dst": "10.207.123.111",
+          "sport": "80",
+          "dport": "43772"
+        },
+        "original_packets": 5,
+        "original_bytes": 542,
+        "reply_packets": 5,
+        "reply_bytes": 2032,
+        "raw_line": "ipv4     2 tcp      6 118 TIME_WAIT src=10.207.123.111 dst=117.31.116.56 sport=43772 dport=80 packets=5 bytes=542 src=117.31.116.56 dst=10.207.123.111 sport=80 dport=43772 packets=5 bytes=2032 [ASSURED] mark=16777216 zone=0 use=2",
+        "observation_index": 1,
+        "raw_line_number": 3,
+        "phase": "idle",
+        "sample_started_monotonic": 123863.062,
+        "sample_ended_monotonic": 123863.828,
+        "egress_address_from_reply_destination": "10.207.123.111",
+        "egress_device": "wan"
+      },
+      "states_seen": [
+        "TIME_WAIT"
+      ],
+      "observation_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "max_reply_bytes": 2032,
+      "max_original_bytes": 542
+    },
+    {
+      "first_seen": {
+        "state": "TIME_WAIT",
+        "mark_decimal": 16777216,
+        "mark_hex": "0x01000000",
+        "original": {
+          "src": "10.207.123.111",
+          "dst": "117.31.116.56",
+          "sport": "43794",
+          "dport": "80"
+        },
+        "reply": {
+          "src": "117.31.116.56",
+          "dst": "10.207.123.111",
+          "sport": "80",
+          "dport": "43794"
+        },
+        "original_packets": 5,
+        "original_bytes": 542,
+        "reply_packets": 5,
+        "reply_bytes": 2032,
+        "raw_line": "ipv4     2 tcp      6 119 TIME_WAIT src=10.207.123.111 dst=117.31.116.56 sport=43794 dport=80 packets=5 bytes=542 src=117.31.116.56 dst=10.207.123.111 sport=80 dport=43794 packets=5 bytes=2032 [ASSURED] mark=16777216 zone=0 use=2",
+        "observation_index": 2,
+        "raw_line_number": 5,
+        "phase": "idle",
+        "sample_started_monotonic": 123864.078,
+        "sample_ended_monotonic": 123864.843,
+        "egress_address_from_reply_destination": "10.207.123.111",
+        "egress_device": "wan"
+      },
+      "states_seen": [
+        "TIME_WAIT"
+      ],
+      "observation_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "max_reply_bytes": 2032,
+      "max_original_bytes": 542
+    }
+  ],
+  "load_snapshots": [
+    {
+      "observation_index": 15,
+      "started_monotonic": 123877.093,
+      "ended_monotonic": 123878.468,
+      "boundary": false,
+      "valid": true,
+      "flow_truncated": false,
+      "inner_download_established_counts_by_mark": {
+        "0x01000000": 6,
+        "0x02000000": 5,
+        "0x03000000": 5
+      },
+      "outer_established_counts_by_device": {}
+    },
+    {
+      "observation_index": 16,
+      "started_monotonic": 123878.468,
+      "ended_monotonic": 123879.906,
+      "boundary": false,
+      "valid": true,
+      "flow_truncated": false,
+      "inner_download_established_counts_by_mark": {
+        "0x01000000": 6,
+        "0x02000000": 5,
+        "0x03000000": 5
+      },
+      "outer_established_counts_by_device": {}
+    },
+    {
+      "observation_index": 17,
+      "started_monotonic": 123879.906,
+      "ended_monotonic": 123881.296,
+      "boundary": false,
+      "valid": true,
+      "flow_truncated": false,
+      "inner_download_established_counts_by_mark": {
+        "0x01000000": 6,
+        "0x02000000": 5,
+        "0x03000000": 5
+      },
+      "outer_established_counts_by_device": {}
+    },
+    {
+      "observation_index": 18,
+      "started_monotonic": 123881.296,
+      "ended_monotonic": 123882.64,
+      "boundary": false,
+      "valid": true,
+      "flow_truncated": false,
+      "inner_download_established_counts_by_mark": {
+        "0x01000000": 6,
+        "0x02000000": 4,
+        "0x03000000": 5
+      },
+      "outer_established_counts_by_device": {}
+    },
+    {
+      "observation_index": 19,
+      "started_monotonic": 123882.64,
+      "ended_monotonic": 123883.984,
+      "boundary": false,
+      "valid": true,
+      "flow_truncated": false,
+      "inner_download_established_counts_by_mark": {
+        "0x01000000": 6,
+        "0x02000000": 4,
+        "0x03000000": 5
+      },
+      "outer_established_counts_by_device": {}
+    },
+    {
+      "observation_index": 20,
+      "started_monotonic": 123883.984,
+      "ended_monotonic": 123885.328,
+      "boundary": false,
+      "valid": true,
+      "flow_truncated": false,
+      "inner_download_established_counts_by_mark": {
+        "0x01000000": 5,
+        "0x02000000": 4,
+        "0x03000000": 5
+      },
+      "outer_established_counts_by_device": {}
+    },
+    {
+      "observation_index": 21,
+      "started_monotonic": 123885.328,
+      "ended_monotonic": 123886.531,
+      "boundary": false,
+      "valid": true,
+      "flow_truncated": false,
+      "inner_download_established_counts_by_mark": {
+        "0x01000000": 3,
+        "0x02000000": 4,
+        "0x03000000": 3
+      },
+      "outer_established_counts_by_device": {}
+    },
+    {
+      "observation_index": 22,
+      "started_monotonic": 123886.531,
+      "ended_monotonic": 123887.453,
+      "boundary": false,
+      "valid": true,
+      "flow_truncated": false,
+      "inner_download_established_counts_by_mark": {
+        "0x01000000": 2,
+        "0x02000000": 3,
+        "0x03000000": 1
+      },
+      "outer_established_counts_by_device": {}
+    },
+    {
+      "observation_index": 23,
+      "started_monotonic": 123887.546,
+      "ended_monotonic": 123888.343,
+      "boundary": true,
+      "valid": true,
+      "flow_truncated": false,
+      "inner_download_established_counts_by_mark": {
+        "0x02000000": 1
+      },
+      "outer_established_counts_by_device": {}
+    }
+  ],
+  "limits": [
+    "三组内层 mark 只证明这些连接被标记，不能单独证明对应出口真正发包、回包或承载多少下载字节。",
+    "外层 TIME_WAIT 在 load 开始前已存在；它们可能来自预检或小探针，不能归入 16 条大下载。",
+    "本文件未记录外层 ESTABLISHED，并不证明现场没有外层连接；只证明该采集结果不足以作此验收。",
+    "不推断每个 curl 的实际 WAN；不将物理 wan 与 macvlan RX 相加；不修改 CAKE/原队列评估的 inconclusive 结论；不据此提出追加下载。"
+  ]
+}

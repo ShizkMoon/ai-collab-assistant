@@ -1,0 +1,27 @@
+{
+  "passed": 15,
+  "checks": [
+    "default-allow-12-does-not-create-third-route",
+    "third-only-full-mark-guard-keeps-netifd-default",
+    "reject-allow-duplicate-before-route-write",
+    "reject-allow-unknown-before-route-write",
+    "reject-allow-fields-before-route-write",
+    "init-two-groups-and-interface-baseline",
+    "init-three-groups-and-interface-baseline",
+    "third-disabled-never-starts-from-hotplug",
+    "third-unregistered-never-starts-from-hotplug",
+    "third-changed-keeps-original-two-instances",
+    "third-same-keeps-original-two-instances",
+    "third-baseline-keeps-original-two-instances",
+    "third-stopped-register-merges-only-account3",
+    "third-signal-failure-preserves-old-address",
+    "third-service-list-failure-preserves-old-address"
+  ],
+  "scope": "actual candidate shell with fake ip/ubus/uci/nft; no device, real kernel, authentication or performance acceptance",
+  "candidate_sha256": {
+    "three-35-esurfing-route.sh": "a61afd57c78f70d5ca14ebc46267c6d2d03f3b10363e7fc663891e15a27983ed",
+    "three-95-esurfingclient-wan.sh": "20c3ea95d1191982041e1e170f069c3231b86ac2defdf7859968097ab2b04f12",
+    "three-esurfing-netifd-guard.sh": "8735743a080ffa113fe2765351164185c40cd0ab227c6a8afb10d38029414a87",
+    "three-esurfingclient.sh": "edd5c7939f0bdd77e6161fae8dd8935ce547a63e97829d129b42363777d4142b"
+  }
+}

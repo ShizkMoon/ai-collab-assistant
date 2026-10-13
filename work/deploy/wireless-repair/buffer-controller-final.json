@@ -1,0 +1,6 @@
+{
+  "queue": "qdisc cake ca10: root refcnt 2 bandwidth unlimited besteffort flows nonat nowash no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \nqdisc ingress ffff: parent ffff:fff1 ---------------- \nqdisc cake ca10: root refcnt 2 bandwidth 650Mbit besteffort flows nonat nowash ingress no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \n",
+  "original_queue_verified": true,
+  "only_owned_timer_closed": true,
+  "owned_directory_closed": true
+}

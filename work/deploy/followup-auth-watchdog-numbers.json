@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "source": "[2026-10-12 19:15:21] [auth#1 pid=4818]",
+      "message_chinese_only": "看门狗判定本进程卡死主循环声明毫秒内会再来打卡已超时毫秒没有动静本进程将退出由外部监管者重新拉起",
+      "numeric_values": [
+        "1000",
+        "29375"
+      ]
+    },
+    {
+      "source": "[2026-10-12 19:15:36] [auth#2 pid=4819]",
+      "message_chinese_only": "看门狗判定本进程卡死主循环声明毫秒内会再来打卡已超时毫秒没有动静本进程将退出由外部监管者重新拉起",
+      "numeric_values": [
+        "60000",
+        "5397"
+      ]
+    }
+  ],
+  "numeric_settings": {
+    "conn_timeout": 7,
+    "op_timeout": 10
+  }
+}

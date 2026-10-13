@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "scope": "isolated regular-file expansion and archive metadata verification",
+  "production_restore_performed": false,
+  "archive_scripts_executed": false,
+  "links_created": false,
+  "restoration_of_permissions_owners_or_runtime_behavior": false,
+  "archives": {
+    "config": {
+      "archive_bytes": 18521658,
+      "sha256_verified": true,
+      "member_count": 95,
+      "regular_file_count": 91,
+      "directory_count": 0,
+      "expanded_regular_file_bytes": 20346325,
+      "linkmetadata_count": 4,
+      "regular_file_hashes_verified": 91,
+      "all_regular_files_match_archive": true
+    },
+    "runtime": {
+      "archive_bytes": 202329,
+      "sha256_verified": true,
+      "member_count": 98,
+      "regular_file_count": 91,
+      "directory_count": 5,
+      "expanded_regular_file_bytes": 1108274,
+      "linkmetadata_count": 2,
+      "regular_file_hashes_verified": 91,
+      "all_regular_files_match_archive": true
+    }
+  },
+  "required_runtime_files": {
+    "expected": 33,
+    "verified": 33,
+    "all_passed": true
+  },
+  "fixed_core": {
+    "path": "etc/openclash/core/clash_meta",
+    "present_in_config": true,
+    "verified": true
+  },
+  "linkmetadata_count": 6
+}

@@ -1,0 +1,230 @@
+{
+  "ordinary_and_fallback_resolvers_unreachable": true,
+  "isolated_cache": true,
+  "production_dns_unchanged": true,
+  "records": [
+    {
+      "name": "www.baidu.com",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 2,
+      "a": [
+        "183.2.172.177"
+      ],
+      "rr_types": [
+        5,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 302.9
+    },
+    {
+      "name": "www.bilibili.com",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 11,
+      "a": [
+        "14.17.92.70",
+        "14.17.92.71",
+        "14.17.92.72",
+        "14.17.92.73",
+        "14.17.92.74",
+        "58.63.237.115",
+        "58.63.237.162",
+        "58.63.237.169",
+        "58.63.237.245",
+        "58.63.237.26"
+      ],
+      "rr_types": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 234.3
+    },
+    {
+      "name": "www.jd.com",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 4,
+      "a": [
+        "119.147.159.135"
+      ],
+      "rr_types": [
+        5,
+        5,
+        5,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 261.1
+    },
+    {
+      "name": "www.qq.com",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 3,
+      "a": [
+        "121.14.77.201",
+        "121.14.77.221"
+      ],
+      "rr_types": [
+        5,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 220.1
+    },
+    {
+      "name": "www.taobao.com",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 3,
+      "a": [
+        "113.105.156.163",
+        "113.105.156.164"
+      ],
+      "rr_types": [
+        5,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 227.2
+    },
+    {
+      "name": "www.tmall.com",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 13,
+      "a": [
+        "14.119.85.80",
+        "14.119.85.81",
+        "14.29.63.36",
+        "183.3.205.40",
+        "183.3.205.41",
+        "183.36.18.63",
+        "183.61.230.59",
+        "183.61.230.60",
+        "183.61.236.79",
+        "59.36.70.78",
+        "59.37.80.46",
+        "59.37.80.47"
+      ],
+      "rr_types": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 243.1
+    },
+    {
+      "name": "www.alipay.com",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 10,
+      "a": [
+        "14.119.85.82",
+        "14.119.85.83",
+        "14.119.85.84",
+        "14.119.85.85",
+        "14.119.85.86",
+        "14.119.85.87",
+        "14.119.85.88",
+        "14.119.85.89"
+      ],
+      "rr_types": [
+        5,
+        5,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 272.3
+    },
+    {
+      "name": "www.weibo.com",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 5,
+      "a": [
+        "106.63.15.10",
+        "106.63.15.9",
+        "49.7.37.74",
+        "49.7.37.75"
+      ],
+      "rr_types": [
+        5,
+        1,
+        1,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 230.1
+    },
+    {
+      "name": "www.163.com",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 4,
+      "a": [
+        "113.96.130.201"
+      ],
+      "rr_types": [
+        5,
+        5,
+        5,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 246.0
+    }
+  ],
+  "passed": true
+}

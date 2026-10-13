@@ -1,0 +1,11 @@
+{
+  "started_only_account3": true,
+  "first_two_pids_unchanged": true,
+  "third_source": "10.207.117.66",
+  "third_channel": 3,
+  "router_reboot": false,
+  "network_restart": false,
+  "existing_auth_restart": false,
+  "mwan_third_enabled": false,
+  "time": "2026-10-13T21:19:35+08:00"
+}

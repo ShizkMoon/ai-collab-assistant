@@ -1,0 +1,112 @@
+{
+  "system_proxy_modified": false,
+  "candidate_applied": false,
+  "temporary_loopback_service_stopped": true,
+  "rows": [
+    {
+      "version": "original",
+      "host": "dl.delivery.mp.microsoft.com",
+      "ok": true,
+      "access_type": 3,
+      "decision": "127.0.0.1:7897"
+    },
+    {
+      "version": "original",
+      "host": "steamcontent.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "original",
+      "host": "store.steampowered.com",
+      "ok": true,
+      "access_type": 3,
+      "decision": "127.0.0.1:7897"
+    },
+    {
+      "version": "original",
+      "host": "www.baidu.com",
+      "ok": true,
+      "access_type": 3,
+      "decision": "127.0.0.1:7897"
+    },
+    {
+      "version": "original",
+      "host": "www.github.com",
+      "ok": true,
+      "access_type": 3,
+      "decision": "127.0.0.1:7897"
+    },
+    {
+      "version": "subnet",
+      "host": "dl.delivery.mp.microsoft.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "host": "steamcontent.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "host": "store.steampowered.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "host": "www.baidu.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "subnet",
+      "host": "www.github.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "host": "dl.delivery.mp.microsoft.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "host": "steamcontent.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "host": "store.steampowered.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "host": "www.baidu.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "version": "sentinel",
+      "host": "www.github.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    }
+  ]
+}

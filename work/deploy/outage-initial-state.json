@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "Mon Oct 12 16:11:34 CST 2026\n0.30 0.09 0.03 1/131 3509\nMemFree:          372444 kB\nMemAvailable:     362920 kB\ntable ip esurfing_route {\n\tchain output {\n\t\ttype route hook output priority mangle - 10; policy accept;\n\t\tmeta skgid 65201 counter packets 0 bytes 0 meta mark set 0x01000000 comment \"esurfing account1 wan\"\n\t\tmeta skgid 65202 counter packets 0 bytes 0 meta mark set 0x02000000 comment \"esurfing account2 wan2\"\n\t\tmeta skgid 65203 counter packets 0 bytes 0 meta mark set 0x03000000 comment \"esurfing account3 wan3\"\n\t}\n}\n",
+  "stderr": "Error: ipv4: FIB table does not exist.\nDump terminated\nError: ipv4: FIB table does not exist.\nDump terminated\nError: ipv4: FIB table does not exist.\nDump terminated\n"
+}

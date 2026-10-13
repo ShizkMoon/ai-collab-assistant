@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-10-12T12:01:00+08:00",
+  "device": "Redmi AX6000 RB06, reported stock firmware, previously AP mode",
+  "action": "Prepare only; no router login, unlock, downgrade or flash executed",
+  "recovery_firmware": {
+    "url": "https://cdn.cnbj1.fds.api.mi-img.com/xiaoqiang/rom/rb06/miwifi_rb06_firmware_847e9_1.0.48.bin",
+    "sha256": "BA5C3B0BEB08F374EE7143DAADDB523C0E60E351A61FA587907695FCF8112637",
+    "file": "miwifi_rb06_firmware_847e9_1.0.48.bin",
+    "length": 20972472,
+    "md5": "0D10C91C5816A29C5A785D0E09C847E9"
+  },
+  "xmir": {
+    "archive_sha256": "B33EDCF1B5A6406D12428D681E0E117A86826A56FAE7ED03AC99C1FC556BDC56",
+    "commit": "16a46e350e3de2cb3415ab2cb652df53783998dc"
+  },
+  "desired_firmware": {
+    "source_commit": "ec9ef10efc65da1e6d1de4e2c043c0e13d08eed8",
+    "repository": "padavanonly/immortalwrt-mt798x-6.6",
+    "branch": "openwrt-24.10-6.6",
+    "layout_preference": "stock, actual compatible image not yet selected"
+  },
+  "host_ethernet": {
+    "default_gateway": null,
+    "description": "Realtek Gaming 2.5GbE Family Controller",
+    "interface_guid": "{1F42C76B-E849-453F-8608-CAA586E00A17}",
+    "current_ipv4": "169.254.161.192/16",
+    "index": 4,
+    "dhcp": "Enabled"
+  },
+  "host_uplink": {
+    "interface": "WLAN",
+    "ssid": "ChinaNet_ZS_Student",
+    "alternative": "User confirmed mobile data hotspot or USB sharing is available"
+  }
+}

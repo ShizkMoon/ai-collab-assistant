@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "[2026-10-12 19:34:11] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 19:34:11] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 19:34:11] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 19:34:11] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 19:34:11] account=1 event=CHECK_PRIMARY_FAILED\nFilesystem                Size      Used Available Use% Mounted on\n/dev/ubi0_1              61.6M     44.2M     14.2M  76% /overlay\n",
+  "stderr": ""
+}

@@ -1,0 +1,8 @@
+{
+  "actual_pid": "27095",
+  "ppid": "1",
+  "session_id": "27095",
+  "detached_after_ssh_exit": true,
+  "deadline_action_verified": true,
+  "nohup_present": false
+}

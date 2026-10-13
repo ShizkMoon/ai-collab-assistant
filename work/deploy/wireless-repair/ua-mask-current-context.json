@@ -1,0 +1,33 @@
+{
+  "ua3f_binary_matches_saved_package": true,
+  "ua3f_local_outbound": {
+    "type": "socks5",
+    "server": "127.0.0.1",
+    "port": 1080,
+    "udp": false
+  },
+  "ua3f_total_rule_count": 919,
+  "ua3f_tcp_rule_count": 919,
+  "ua3f_download_prefix_rule_count": 1,
+  "proxy_host_uci": "0\n0\n",
+  "pids_and_gids": "PID 4940 ua3f\nUid:\t0\t0\t0\t0\nGid:\t65534\t65534\t65534\t65534\nPID 31352 clash\nUid:\t0\t0\t0\t0\nGid:\t65534\t65534\t65534\t65534\n",
+  "wed": "Y",
+  "queue": "qdisc cake ca10: root refcnt 2 bandwidth unlimited besteffort flows nonat nowash no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \nqdisc ingress ffff: parent ffff:fff1 ---------------- \nqdisc cake ca10: root refcnt 2 bandwidth 650Mbit besteffort flows nonat nowash ingress no-ack-filter split-gso rtt 100ms noatm overhead 38 mpu 84 memlimit 8Mb \n",
+  "ttl": "\t\toifname \"wan\" ip ttl >= 10 counter packets 3199531 bytes 467148365 ip ttl set 64 comment \"WAN IPv4 TTL64\"\n\t\toifname \"eswan2\" ip ttl >= 10 counter packets 2574204 bytes 438357088 ip ttl set 64 comment \"WAN2 IPv4 TTL64\"\n\t\toifname \"eswan3\" ip ttl >= 10 counter packets 2233228 bytes 380861962 ip ttl set 64 comment \"WAN3 IPv4 TTL64\"\n",
+  "owned_trials_closed": true,
+  "memory": "MemAvailable:     109624 kB\n",
+  "auth": {
+    "account1": {
+      "pid": 7620,
+      "running": true
+    },
+    "account2": {
+      "pid": 7679,
+      "running": true
+    },
+    "account3": {
+      "pid": 9375,
+      "running": true
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# 主账号用 MWAN DEFAULT 高位绕过健康分类；第二账号用专用表。
+add table ip esurfing_route
+flush table ip esurfing_route
+add chain ip esurfing_route output { type route hook output priority -160; policy accept; }
+add rule ip esurfing_route output meta skgid 65201 counter meta mark set meta mark & 0xc0ffffff | 0x3f000000 comment "esurfing account1 main bypass"
+add rule ip esurfing_route output meta skgid 65202 counter meta mark set 0x02000000 comment "esurfing account2 wan2"
+add rule ip esurfing_route output meta skgid 65203 counter meta mark set 0x03000000 comment "esurfing account3 wan3"

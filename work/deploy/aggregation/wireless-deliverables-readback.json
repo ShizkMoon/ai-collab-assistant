@@ -1,0 +1,53 @@
+{
+  "current_wireless_evidence_consistent": true,
+  "all_local_links_exist": true,
+  "utf8_readback_passed": true,
+  "wireless_constraint_preserved": true,
+  "original_config_backup_hashes_match": true,
+  "original_campus_dns_failure_preserved": true,
+  "new_throughput_comparison_not_claimed": true,
+  "documents": [
+    {
+      "path": "outputs/ax6000-mainline/使用说明.md",
+      "bytes": 48463,
+      "sha256": "9c5e2f9908a7427ec41e70c099a8caf698cd1eb5d3a373093f45560e78f70f77",
+      "missing_local_links": []
+    },
+    {
+      "path": "outputs/ax6000-mainline/路由器调优与校园网方案调研.md",
+      "bytes": 91606,
+      "sha256": "8c1deb37639b37c2c5159fff3d170f99b3f55d841dfedec70ec285f5e8b409d8",
+      "missing_local_links": []
+    },
+    {
+      "path": "work/deploy/aggregation/results.md",
+      "bytes": 8361,
+      "sha256": "1be048f57474f19205482c5cd607773f2f793203e1a890b516bbf44912f01349",
+      "missing_local_links": []
+    },
+    {
+      "path": "work/deploy/aggregation/wireless-cause-results.md",
+      "bytes": 5433,
+      "sha256": "111638b95536f3ea767629838432363eb27eda561c60a34e0d21ad7343fa198b",
+      "missing_local_links": []
+    },
+    {
+      "path": "work/deploy/aggregation/wireless-sample-analysis.md",
+      "bytes": 13013,
+      "sha256": "e1b5748b26684e78c462178fcb721e39b451b9a3a5fd845269195e13f674a661",
+      "missing_local_links": []
+    },
+    {
+      "path": "work/deploy/aggregation/wireless-antidetection-analysis.md",
+      "bytes": 10211,
+      "sha256": "7eca9da97a972b3abe91e0bd363c6709cabea4e0d68ce8e25934adc91081f725",
+      "missing_local_links": []
+    },
+    {
+      "path": "work/deploy/aggregation/wireless-proxy-path-review.md",
+      "bytes": 9187,
+      "sha256": "5dd6c88b9a8d5b00743e5836b5a7ef562c93c912f4df5787c66857e381c79dbe",
+      "missing_local_links": []
+    }
+  ]
+}

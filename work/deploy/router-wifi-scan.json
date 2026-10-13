@@ -1,0 +1,196 @@
+{
+  "exit": 0,
+  "networks": [
+    {
+      "channel": 1,
+      "signal_dbm": -43.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -56.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -51.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -65.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -61.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -62.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -62.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -67.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -67.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -74.0,
+      "ht40": false
+    },
+    {
+      "channel": 2,
+      "signal_dbm": -65.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -71.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -68.0,
+      "ht40": false
+    },
+    {
+      "channel": 3,
+      "signal_dbm": -66.0,
+      "ht40": false
+    },
+    {
+      "channel": 5,
+      "signal_dbm": -39.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -75.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -65.0,
+      "ht40": false
+    },
+    {
+      "channel": 13,
+      "signal_dbm": -54.0,
+      "ht40": false
+    },
+    {
+      "channel": 13,
+      "signal_dbm": -26.0,
+      "ht40": false
+    },
+    {
+      "channel": 1,
+      "signal_dbm": -61.0,
+      "ht40": false
+    },
+    {
+      "channel": 2,
+      "signal_dbm": -71.0,
+      "ht40": false
+    },
+    {
+      "channel": 5,
+      "signal_dbm": -53.0,
+      "ht40": false
+    },
+    {
+      "channel": 5,
+      "signal_dbm": -37.0,
+      "ht40": false
+    },
+    {
+      "channel": 5,
+      "signal_dbm": -59.0,
+      "ht40": false
+    },
+    {
+      "channel": 5,
+      "signal_dbm": -64.0,
+      "ht40": false
+    },
+    {
+      "channel": 5,
+      "signal_dbm": -64.0,
+      "ht40": false
+    },
+    {
+      "channel": 6,
+      "signal_dbm": -49.0,
+      "ht40": false
+    },
+    {
+      "channel": 6,
+      "signal_dbm": -39.0,
+      "ht40": false
+    },
+    {
+      "channel": 8,
+      "signal_dbm": -57.0,
+      "ht40": false
+    },
+    {
+      "channel": 9,
+      "signal_dbm": -59.0,
+      "ht40": false
+    },
+    {
+      "channel": 9,
+      "signal_dbm": -68.0,
+      "ht40": false
+    },
+    {
+      "channel": 11,
+      "signal_dbm": -67.0,
+      "ht40": false
+    },
+    {
+      "channel": 11,
+      "signal_dbm": -63.0,
+      "ht40": false
+    },
+    {
+      "channel": 11,
+      "signal_dbm": -69.0,
+      "ht40": false
+    },
+    {
+      "channel": 11,
+      "signal_dbm": -25.0,
+      "ht40": false
+    },
+    {
+      "channel": 11,
+      "signal_dbm": -70.0,
+      "ht40": false
+    },
+    {
+      "channel": 11,
+      "signal_dbm": -65.0,
+      "ht40": false
+    }
+  ],
+  "stderr": "",
+  "phy1_ifindex": "10",
+  "phy1_info_safe": [
+    "channel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz",
+    "txpower 23.00 dBm"
+  ]
+}

@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-13T01:07:04.475806+08:00",
+  "status": "verified_bounded_upload_no_sqm",
+  "decision": "维持无上传SQM状态；本轮未形成新增整形依据，不再增加请求。",
+  "total_complete_payload_bytes": 235085824,
+  "total_payload_description": "224 MiB + 200 KiB",
+  "budget_limit_bytes": 268435456,
+  "requests_complete": 12,
+  "runs": [
+    {
+      "run_number": 1,
+      "label": "transparent-20261013",
+      "created_at": "2026-10-13T01:00:04.370171+08:00",
+      "result_file": "work/deploy/upload/20261013T010004-transparent-20261013/result.json",
+      "result_sha256": "61d4efae9781ee6394edf6681d2b7bf3632654576480749ec6f381eba384ecba",
+      "overall_complete": true,
+      "payload_bytes": 117542912,
+      "batch_wall_seconds": 18.015,
+      "batch_effective_mbps": 52.197796,
+      "route_claim": "电脑 curl 未使用显式代理，透明路由器路径按另行观测解释。",
+      "route_observation": "未观测，不能标为国内直连",
+      "ping_encoding": "cp936",
+      "stages": [
+        {
+          "stage": "probe",
+          "request_count": 1,
+          "complete": true,
+          "payload_bytes": 102400,
+          "wall_seconds": 0.828,
+          "effective_mbps": 0.989372,
+          "all_http_200": true,
+          "all_curl_exit_zero": true,
+          "all_tls_verify_zero": true,
+          "all_upload_bytes_exact": true,
+          "max_curl_request_seconds": 0.758931,
+          "http_versions": [
+            "1.1"
+          ]
+        },
+        {
+          "stage": "single",
+          "request_count": 1,
+          "complete": true,
+          "payload_bytes": 33554432,
+          "wall_seconds": 5.062,
+          "effective_mbps": 53.029525,
+          "all_http_200": true,
+          "all_curl_exit_zero": true,
+          "all_tls_verify_zero": true,
+          "all_upload_bytes_exact": true,
+          "max_curl_request_seconds": 4.962468,
+          "http_versions": [
+            "1.1"
+          ]
+        },
+        {
+          "stage": "concurrent",
+          "request_count": 4,
+          "complete": true,
+          "payload_bytes": 83886080,
+          "wall_seconds": 12.125,
+          "effective_mbps": 55.347517,
+          "all_http_200": true,
+          "all_curl_exit_zero": true,
+          "all_tls_verify_zero": true,
+          "all_upload_bytes_exact": true,
+          "max_curl_request_seconds": 12.027935,
+          "http_versions": [
+            "1.1"
+          ]
+        }
+      ],
+      "ping": {
+        "192.168.31.1": {
+          "idle": {
+            "reply_count": 15,
+            "failure_lines": 0,
+            "exact_rtt_samples": 15,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 1,
+            "exact_p95_ms": 4,
+            "exact_max_ms": 4
+          },
+          "probe": {
+            "reply_count": 1,
+            "failure_lines": 0,
+            "exact_rtt_samples": 1,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 14,
+            "exact_p95_ms": 14,
+            "exact_max_ms": 14
+          },
+          "single": {
+            "reply_count": 5,
+            "failure_lines": 0,
+            "exact_rtt_samples": 5,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 1,
+            "exact_p95_ms": 5,
+            "exact_max_ms": 5
+          },
+          "concurrent": {
+            "reply_count": 12,
+            "failure_lines": 0,
+            "exact_rtt_samples": 12,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 1,
+            "exact_p95_ms": 19,
+            "exact_max_ms": 19
+          },
+          "recovery": {
+            "reply_count": 8,
+            "failure_lines": 0,
+            "exact_rtt_samples": 7,
+            "less_than_1ms_count": 1,
+            "exact_median_ms": 4,
+            "exact_p95_ms": 44,
+            "exact_max_ms": 44
+          }
+        },
+        "223.5.5.5": {
+          "idle": {
+            "reply_count": 15,
+            "failure_lines": 0,
+            "exact_rtt_samples": 15,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 10,
+            "exact_p95_ms": 27,
+            "exact_max_ms": 27
+          },
+          "probe": {
+            "reply_count": 1,
+            "failure_lines": 0,
+            "exact_rtt_samples": 1,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 9,
+            "exact_p95_ms": 9,
+            "exact_max_ms": 9
+          },
+          "single": {
+            "reply_count": 5,
+            "failure_lines": 0,
+            "exact_rtt_samples": 5,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 10,
+            "exact_p95_ms": 12,
+            "exact_max_ms": 12
+          },
+          "concurrent": {
+            "reply_count": 12,
+            "failure_lines": 0,
+            "exact_rtt_samples": 12,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 9,
+            "exact_p95_ms": 17,
+            "exact_max_ms": 17
+          },
+          "recovery": {
+            "reply_count": 8,
+            "failure_lines": 0,
+            "exact_rtt_samples": 8,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 9,
+            "exact_p95_ms": 42,
+            "exact_max_ms": 42
+          }
+        }
+      }
+    },
+    {
+      "run_number": 2,
+      "label": "observed-20261013",
+      "created_at": "2026-10-13T01:03:17.103778+08:00",
+      "result_file": "work/deploy/upload/20261013T010317-observed-20261013/result.json",
+      "result_sha256": "7ea831c164d66a17fb48f8d9b50674ef67f93e2f21d3108756cae5fbec80357a",
+      "overall_complete": true,
+      "payload_bytes": 117542912,
+      "batch_wall_seconds": 16.359,
+      "batch_effective_mbps": 57.48171,
+      "route_claim": "电脑 curl 未使用显式代理，透明路由器路径按另行观测解释。",
+      "route_observation": "单连接与4并发请求端口均匹配 HK02；100KiB探针未被观测",
+      "ping_encoding": "cp936",
+      "stages": [
+        {
+          "stage": "probe",
+          "request_count": 1,
+          "complete": true,
+          "payload_bytes": 102400,
+          "wall_seconds": 0.203,
+          "effective_mbps": 4.035468,
+          "all_http_200": true,
+          "all_curl_exit_zero": true,
+          "all_tls_verify_zero": true,
+          "all_upload_bytes_exact": true,
+          "max_curl_request_seconds": 0.151227,
+          "http_versions": [
+            "1.1"
+          ]
+        },
+        {
+          "stage": "single",
+          "request_count": 1,
+          "complete": true,
+          "payload_bytes": 33554432,
+          "wall_seconds": 4.875,
+          "effective_mbps": 55.063683,
+          "all_http_200": true,
+          "all_curl_exit_zero": true,
+          "all_tls_verify_zero": true,
+          "all_upload_bytes_exact": true,
+          "max_curl_request_seconds": 4.787015,
+          "http_versions": [
+            "1.1"
+          ]
+        },
+        {
+          "stage": "concurrent",
+          "request_count": 4,
+          "complete": true,
+          "payload_bytes": 83886080,
+          "wall_seconds": 11.281,
+          "effective_mbps": 59.4884,
+          "all_http_200": true,
+          "all_curl_exit_zero": true,
+          "all_tls_verify_zero": true,
+          "all_upload_bytes_exact": true,
+          "max_curl_request_seconds": 11.189183,
+          "http_versions": [
+            "1.1"
+          ]
+        }
+      ],
+      "ping": {
+        "192.168.31.1": {
+          "idle": {
+            "reply_count": 15,
+            "failure_lines": 0,
+            "exact_rtt_samples": 15,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 1,
+            "exact_p95_ms": 54,
+            "exact_max_ms": 54
+          },
+          "probe": {
+            "reply_count": 1,
+            "failure_lines": 0,
+            "exact_rtt_samples": 1,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 2,
+            "exact_p95_ms": 2,
+            "exact_max_ms": 2
+          },
+          "single": {
+            "reply_count": 5,
+            "failure_lines": 0,
+            "exact_rtt_samples": 5,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 1,
+            "exact_p95_ms": 21,
+            "exact_max_ms": 21
+          },
+          "concurrent": {
+            "reply_count": 11,
+            "failure_lines": 0,
+            "exact_rtt_samples": 11,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 1,
+            "exact_p95_ms": 9,
+            "exact_max_ms": 9
+          },
+          "recovery": {
+            "reply_count": 8,
+            "failure_lines": 0,
+            "exact_rtt_samples": 8,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 1,
+            "exact_p95_ms": 18,
+            "exact_max_ms": 18
+          }
+        },
+        "223.5.5.5": {
+          "idle": {
+            "reply_count": 15,
+            "failure_lines": 0,
+            "exact_rtt_samples": 15,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 10,
+            "exact_p95_ms": 48,
+            "exact_max_ms": 48
+          },
+          "probe": {
+            "reply_count": 1,
+            "failure_lines": 0,
+            "exact_rtt_samples": 1,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 9,
+            "exact_p95_ms": 9,
+            "exact_max_ms": 9
+          },
+          "single": {
+            "reply_count": 5,
+            "failure_lines": 0,
+            "exact_rtt_samples": 5,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 11,
+            "exact_p95_ms": 17,
+            "exact_max_ms": 17
+          },
+          "concurrent": {
+            "reply_count": 11,
+            "failure_lines": 0,
+            "exact_rtt_samples": 11,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 10,
+            "exact_p95_ms": 18,
+            "exact_max_ms": 18
+          },
+          "recovery": {
+            "reply_count": 8,
+            "failure_lines": 0,
+            "exact_rtt_samples": 8,
+            "less_than_1ms_count": 0,
+            "exact_median_ms": 10,
+            "exact_p95_ms": 13,
+            "exact_max_ms": 13
+          }
+        }
+      }
+    }
+  ],
+  "path_observation": {
+    "file": "work/deploy/router-upload-path-observation.json",
+    "sha256": "9f2c0117a5704cacb167ba040efe130cfe51f55e04298dc2cab74fba5206c3b2",
+    "observed_run_number": 2,
+    "sample_window_seconds": 40.75,
+    "matched_request_count": 5,
+    "matched_observation_rows": 37,
+    "matched_stages": [
+      "single",
+      "concurrent"
+    ],
+    "observed_route": "HK02",
+    "probe_route_observed": false,
+    "first_run_route_observed": false,
+    "physical_wan_tx_delta_bytes": 137364810,
+    "macvlan_eswan2_tx_delta_bytes": 713913,
+    "interface_counters_additive": false,
+    "tx_note": "wan包含macvlan底层发送，不能相加；窗口含idle和recovery及背景流量。",
+    "physical_root_noqueue_in_all_samples": true
+  },
+  "verified_findings": [
+    "12个原始随机body POST均完整发送并获得HTTP200，TLS校验返回0。",
+    "公网ping重新由原始本地化输出解析，统计与两份result一致。",
+    "两轮公网median约9至10ms，并发P95均小于idleP95，没有可复核的上传排队增加。",
+    "第二轮主要上传经过物理wan，eswan2流量很少，不能证明双出口均满载。"
+  ],
+  "limitations": [
+    "第一轮透明链未观测，不能把两轮写成DIRECT与HK02对照。",
+    "第二轮100KiB探针未被路径采样抓到，HK02链证据覆盖32MiB和4x20MiB。",
+    "国内223.5.5.5 ping不经HK02代理隧道，不证明远端代理满载延迟。",
+    "各窗口仅5至15个回复，P95接近最大值，不证明长期稳定或损包率。",
+    "未确认校园两账号、物理上行、Cloudflare sink或HK02各自的容量上限。",
+    "noqueue统计只说明观察点未显示软件排队，不能证明上游无队列。",
+    "仅HTTP/1.1 TCP上传，未验UDP/QUIC、其它上传源或长期并发。"
+  ],
+  "sensitive_data_policy": "摘要未保存公网源IP、认证、订阅、完整节点身份或原始curl私密字段。"
+}

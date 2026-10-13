@@ -1,0 +1,121 @@
+{
+  "capturedUtc": "2026-10-13T18:52:15.3731612Z",
+  "administrator": false,
+  "advanced": [
+    {
+      "DisplayName": "吞吐量助推器",
+      "DisplayValue": "已禁用",
+      "RegistryKeyword": "ThroughputBoosterEnabled",
+      "RegistryValue": [
+        "0"
+      ],
+      "ValidDisplayValues": [
+        "已禁用",
+        "已启用"
+      ],
+      "ValidRegistryValues": [
+        "0",
+        "1"
+      ]
+    },
+    {
+      "DisplayName": "MIMO 节能模式",
+      "DisplayValue": "自动 SMPS",
+      "RegistryKeyword": "MIMOPowerSaveMode",
+      "RegistryValue": [
+        "0"
+      ],
+      "ValidDisplayValues": [
+        "自动 SMPS",
+        "静态 SMPS",
+        "动态 SMPS",
+        "无 SMPS"
+      ],
+      "ValidRegistryValues": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    }
+  ],
+  "rsc": [
+    {
+      "Name": "WLAN",
+      "IPv4Enabled": true,
+      "IPv6Enabled": true,
+      "IPv4Operational": null,
+      "IPv6Operational": null,
+      "IPv4FailureReason": 0,
+      "IPv6FailureReason": 0
+    }
+  ],
+  "statistics": [
+    {
+      "ReceivedBytes": 52215713171,
+      "ReceivedUnicastPackets": 14352845,
+      "ReceivedPacketErrors": 0,
+      "ReceivedDiscardedPackets": 0,
+      "SentBytes": 12073062483,
+      "SentPacketErrors": null
+    }
+  ],
+  "tcp": [
+    {
+      "SettingName": "Automatic",
+      "AutoTuningLevelLocal": null
+    },
+    {
+      "SettingName": "InternetCustom",
+      "AutoTuningLevelLocal": 3
+    },
+    {
+      "SettingName": "DatacenterCustom",
+      "AutoTuningLevelLocal": 3
+    },
+    {
+      "SettingName": "Compat",
+      "AutoTuningLevelLocal": 3
+    },
+    {
+      "SettingName": "Datacenter",
+      "AutoTuningLevelLocal": 3
+    },
+    {
+      "SettingName": "Internet",
+      "AutoTuningLevelLocal": 3
+    }
+  ],
+  "global": [
+    "Querying active state...",
+    "",
+    "TCP Global Parameters",
+    "----------------------------------------------",
+    "Receive-Side Scaling State          : enabled ",
+    "Receive Window Auto-Tuning Level    : normal ",
+    "Add-On Congestion Control Provider  : default ",
+    "ECN Capability                      : disabled ",
+    "RFC 1323 Timestamps                 : allowed ",
+    "Initial RTO                         : 1000 ",
+    "Receive Segment Coalescing State    : enabled ",
+    "Non Sack Rtt Resiliency             : disabled ",
+    "Max SYN Retransmissions             : 4 ",
+    "Fast Open                           : enabled ",
+    "Fast Open Fallback                  : enabled ",
+    "HyStart                             : enabled ",
+    "Proportional Rate Reduction         : enabled ",
+    "Pacing Profile                      : off ",
+    ""
+  ],
+  "heuristics": [
+    "TCP Window Scaling heuristics Parameters",
+    "----------------------------------------------",
+    "Window Scaling heuristics         : disabled ",
+    "Qualifying Destination Threshold  : 3 ",
+    "Profile type unknown              : normal ",
+    "Profile type public               : normal ",
+    "Profile type private              : normal ",
+    "Profile type domain               : normal ",
+    ""
+  ]
+}

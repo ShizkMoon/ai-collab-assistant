@@ -1,0 +1,216 @@
+{
+  "time": "2026-10-13T21:06:17+08:00",
+  "only_added_dns_policies": true,
+  "source_unchanged": true,
+  "core_unchanged": true,
+  "license_preserved": true,
+  "fixed_node": "香港 02（专线；智能）",
+  "authentication_pids_unchanged": true,
+  "ua3f_pid_unchanged": true,
+  "dns": [
+    {
+      "name": "www.baidu.com",
+      "port": 53,
+      "type": 1,
+      "rcode": 0,
+      "answers": 2,
+      "a": [
+        "183.2.172.177"
+      ],
+      "rr_types": [
+        5,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 21.7
+    },
+    {
+      "name": "www.bilibili.com",
+      "port": 7874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 11,
+      "a": [
+        "14.17.92.70",
+        "14.17.92.71",
+        "14.17.92.72",
+        "14.17.92.73",
+        "14.17.92.74",
+        "58.63.237.115",
+        "58.63.237.162",
+        "58.63.237.169",
+        "58.63.237.245",
+        "58.63.237.26"
+      ],
+      "rr_types": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 12.8
+    },
+    {
+      "name": "www.jd.com",
+      "port": 7874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 4,
+      "a": [
+        "119.147.159.135"
+      ],
+      "rr_types": [
+        5,
+        5,
+        5,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 11.6
+    },
+    {
+      "name": "www.google.com",
+      "port": 53,
+      "type": 1,
+      "rcode": 0,
+      "answers": 8,
+      "a": [
+        "142.251.150.119",
+        "142.251.151.119",
+        "142.251.152.119",
+        "142.251.153.119",
+        "142.251.154.119",
+        "142.251.155.119",
+        "142.251.156.119",
+        "142.251.157.119"
+      ],
+      "rr_types": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 29.4
+    },
+    {
+      "name": "www.google.com",
+      "port": 7874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 8,
+      "a": [
+        "142.251.150.119",
+        "142.251.151.119",
+        "142.251.152.119",
+        "142.251.153.119",
+        "142.251.154.119",
+        "142.251.155.119",
+        "142.251.156.119",
+        "142.251.157.119"
+      ],
+      "rr_types": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 2.3
+    },
+    {
+      "name": "crypto.cloudflare.com",
+      "port": 7874,
+      "type": 65,
+      "rcode": 0,
+      "answers": 1,
+      "a": [],
+      "rr_types": [
+        65
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 10.2
+    },
+    {
+      "name": "ax6000-home31.lan",
+      "port": 53,
+      "type": 1,
+      "rcode": 0,
+      "answers": 1,
+      "a": [
+        "192.168.31.1"
+      ],
+      "rr_types": [
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 1.8
+    },
+    {
+      "name": "www.gdpu.edu.cn",
+      "port": 7874,
+      "type": 1,
+      "rcode": 2,
+      "answers": 0,
+      "a": [],
+      "rr_types": [],
+      "truncated": false,
+      "passed": false,
+      "ms": 5003.3
+    },
+    {
+      "name": "accounts.doubleclick.net",
+      "port": 53,
+      "type": 1,
+      "rcode": 3,
+      "answers": 0,
+      "a": [],
+      "rr_types": [],
+      "truncated": false,
+      "passed": true,
+      "ms": 1.7
+    }
+  ],
+  "https": [
+    {
+      "role": "domestic",
+      "exit": 0,
+      "http": "200",
+      "passed": true
+    },
+    {
+      "role": "foreign",
+      "exit": 0,
+      "http": "204",
+      "passed": true
+    }
+  ],
+  "dns_policy_count": 11,
+  "generated_sha256": "9ede6327fa09bbb9fc15720bb4ded50f91d3edc4f63f19ba4f6014b487aef831",
+  "options_sha256": "401becdedbef2eaaba94de0da9d0cc0f68d5e23424ec621906d883f1e12be0cb",
+  "health": "SUPPRESSED:STARTUP_GRACE",
+  "passed": false
+}

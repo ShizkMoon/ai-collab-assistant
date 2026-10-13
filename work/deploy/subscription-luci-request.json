@@ -1,0 +1,10 @@
+{
+  "started": true,
+  "helper_sha256": "d9122b8b06e995a20b24d87c4b0855bc604d31e5b738ce2632a8d182f9075b34",
+  "before_source_sha256": "cfac074e64386921763c153cf235616217004b3a9dbab13e7ef7e3a9467ab350",
+  "before_core_pid": "6234",
+  "before_esurfing_pids": "7679 7620",
+  "http_status": 202,
+  "initial_update_status": "RUNNING:VALIDATING",
+  "luci_post_authenticated": true
+}

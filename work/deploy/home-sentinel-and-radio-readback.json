@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "Server:\t\t127.0.0.1\nAddress:\t127.0.0.1:53\n\nName:\tax6000-home31.lan\nAddress: 192.168.31.1\n\nNon-authoritative answer:\n\nFilesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     45240     14572  76% /overlay\n              total        used        free      shared  buff/cache   available\nMem:         494004      201664      197960       24904       94380      216540\nSwap:             0           0           0\n4\n0\n\ttx packets:\t2667922\n\ttx retries:\t8417\n\ttx failed:\t8419\n\tsignal:  \t-39 [-48, -50, -46, -40] dBm\n\tsignal avg:\t-38 [-47, -49, -46, -39] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\tlast ack signal:-37 dBm\n\tavg ack signal:\t-36 dBm\n",
+  "stderr": ""
+}

@@ -1,0 +1,98 @@
+{
+  "file": "smartdns-46.1-r1.apk",
+  "bytes": 182010,
+  "sha256": "68bcab0121093c21a015a8db77c6cdb44028d3c585ff5e4dc70855822b6ee8f7",
+  "metadata": {
+    "name": "smartdns",
+    "version": "46.1-r1",
+    "hashes": "4a4bfa9c78a64ab091295175677cd1270e2a1796",
+    "description": "SmartDNS is a local DNS server which accepts DNS query requests from local network clients, gets DNS query results from multiple upstream DNS servers concurrently, and returns the fastest IP to clients. Unlike dnsmasq's all-servers, smartdns returns the fastest IP, and encrypt DNS queries with DoT or DoH.",
+    "arch": "aarch64_cortex-a53",
+    "license": "GPL-3.0-or-later",
+    "origin": "feeds/packages/feeds/packages/net/smartdns",
+    "maintainer": "Nick Peng <pymumu@gmail.com>",
+    "url": "https://www.github.com/pymumu/smartdns/",
+    "installed-size": 396556,
+    "depends": [
+      {
+        "name": "libc",
+        "version": null,
+        "match": null
+      },
+      {
+        "name": "libopenssl3",
+        "version": null,
+        "match": null
+      },
+      {
+        "name": "libpthread",
+        "version": null,
+        "match": null
+      }
+    ],
+    "provides": [
+      {
+        "name": "smartdns-any",
+        "version": null,
+        "match": null
+      }
+    ],
+    "tags": [
+      "openwrt:section=net",
+      "openwrt:cpe=cpe:/a:pymumu:smartdns"
+    ]
+  },
+  "file-count": 11,
+  "logical-file-size-sum": 396556,
+  "files": [
+    {
+      "path": "etc/config/smartdns",
+      "size": 62
+    },
+    {
+      "path": "etc/init.d/smartdns",
+      "size": 33998
+    },
+    {
+      "path": "etc/smartdns/address.conf",
+      "size": 824
+    },
+    {
+      "path": "etc/smartdns/blacklist-ip.conf",
+      "size": 231
+    },
+    {
+      "path": "etc/smartdns/custom.conf",
+      "size": 97
+    },
+    {
+      "path": "etc/smartdns/domain-block.list",
+      "size": 96
+    },
+    {
+      "path": "etc/smartdns/domain-forwarding.list",
+      "size": 106
+    },
+    {
+      "path": "lib/apk/packages/smartdns.conffiles",
+      "size": 175
+    },
+    {
+      "path": "lib/apk/packages/smartdns.conffiles_static",
+      "size": 565
+    },
+    {
+      "path": "lib/apk/packages/smartdns.list",
+      "size": 215
+    },
+    {
+      "path": "usr/sbin/smartdns",
+      "size": 360187
+    }
+  ],
+  "scripts": {
+    "postinst": "#!/bin/sh\n[ \"${IPKG_NO_SCRIPT}\" = \"1\" ] && exit 0\n[ -s ${IPKG_INSTROOT}/lib/functions.sh ] || exit 0\n. ${IPKG_INSTROOT}/lib/functions.sh\nexport root=\"${IPKG_INSTROOT}\"\nexport pkgname=\"smartdns\"\nadd_group_and_user\ndefault_postinst\n",
+    "predeinst": "#!/bin/sh\n[ -s ${IPKG_INSTROOT}/lib/functions.sh ] || exit 0\n. ${IPKG_INSTROOT}/lib/functions.sh\nexport root=\"${IPKG_INSTROOT}\"\nexport pkgname=\"smartdns\"\ndefault_prerm\n",
+    "postupgrade": "#!/bin/sh\nexport PKG_UPGRADE=1\n[ \"${IPKG_NO_SCRIPT}\" = \"1\" ] && exit 0\n[ -s ${IPKG_INSTROOT}/lib/functions.sh ] || exit 0\n. ${IPKG_INSTROOT}/lib/functions.sh\nexport root=\"${IPKG_INSTROOT}\"\nexport pkgname=\"smartdns\"\nadd_group_and_user\ndefault_postinst\n"
+  }
+}

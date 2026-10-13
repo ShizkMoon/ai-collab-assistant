@@ -1,0 +1,14 @@
+{
+  "fixed_group": "🚀 节点选择",
+  "fixed_node": "香港 02（专线；智能）",
+  "prior_selection": "♻️ 自动选择",
+  "current_selection": "香港 02（专线；智能）",
+  "runtime_api_selection_verified": true,
+  "persistent_hook_verified": true,
+  "candidate_core_validation": true,
+  "candidate_single_member": true,
+  "candidate_idempotent": true,
+  "rules_dns_other_groups_unchanged": true,
+  "core_pid": "6234",
+  "note": "Runtime selection changed by API without restart. Singleton group persists at next complete generation; update transaction will verify restart."
+}

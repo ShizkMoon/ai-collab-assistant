@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "790:dhcp_hostrecord_add() {\n1218:\tconfig_foreach filter_dnsmasq hostrecord dhcp_hostrecord_add \"$cfg\"\nServer:\t\t127.0.0.1\nAddress:\t127.0.0.1:53\n\n** server can't find ax6000-home31.lan: NXDOMAIN\n\n** server can't find ax6000-home31.lan: NXDOMAIN\n\nax6000-home31.lan,192.168.31.1\nFilesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     45240     14572  76% /overlay\n",
+  "stderr": ""
+}

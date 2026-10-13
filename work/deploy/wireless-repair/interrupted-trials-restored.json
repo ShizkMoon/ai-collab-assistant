@@ -1,0 +1,12 @@
+{
+  "congestion_before": "cubic",
+  "congestion_after": "bbr",
+  "congestion_watcher_alive": false,
+  "congestion_watcher_owned": false,
+  "congestion_trial_cleaned": true,
+  "original_runtime_reloaded": true,
+  "core_pid_unchanged": true,
+  "hosts_watcher_alive": false,
+  "hosts_watcher_owned": false,
+  "hosts_trial_cleaned": true
+}

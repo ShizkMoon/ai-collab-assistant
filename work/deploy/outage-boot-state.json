@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "80.98 305.13\n#!/bin/sh /etc/rc.common\n\nSTART=99\nSTOP=10\n\nUSE_PROCD=1\n{\n\t\"up\": false,\n\t\"pending\": false,\n\t\"available\": true,\n\t\"autostart\": true,\n\t\"dynamic\": false,\n\t\"proto\": \"dhcp\",\n\t\"device\": \"wan\",\n\t\"data\": {\n\t\t\n\t}\n}\n",
+  "stderr": ""
+}

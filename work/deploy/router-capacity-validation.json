@@ -1,0 +1,11 @@
+{
+  "exit": 0,
+  "output": "Syntax OK\nSyntax OK\nSyntax OK\nSyntax OK\nOK:CAPACITY_FIXTURES:26\nOK:SELF_TEST:12\nOK:TRANSACTION_FIXTURES:13\n{\"overlay_free_bytes\" => 14413824, \"tmp_free_bytes\" => 245510144, \"memory_available_bytes\" => 214523904}\n",
+  "stderr": "",
+  "candidate_hashes": {
+    "ninja-capacity.rb": "ab29db606c1ef4c04ad5a65661da840200b6e618b64245620765e4b0e71f9f42",
+    "ninja-capacity-fixtures.candidate.rb": "0d72adae19db0843be2ace39f52c5bf55ec9cb1c9b6f94b2015351dd50977e96",
+    "ninja-subscription-update.capacity.rb": "818c56f692ddba88c008a58f18b40d2938eeac94378e5236e59a7e2b89e16320",
+    "ninja-subscription-update.capacity-fixtures.rb": "0f9982b0367a4dbba6d25c66528f761a5b9baa0aeda230af2cacb4cf60d44fb7"
+  }
+}

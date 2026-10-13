@@ -1,0 +1,80 @@
+{
+  "configuration_modified_by_this_check": false,
+  "checks": {
+    "served_pac_equals_candidate": true,
+    "disk_pac_equals_candidate": true,
+    "loopback_pac_url_preserved": true,
+    "pac_mode_enabled": true,
+    "all_native_pac_decisions_direct": true,
+    "tun_still_disabled": true,
+    "kernel_version_preserved": true,
+    "group_names_types_preserved": true,
+    "selector_choices_preserved": true,
+    "rule_count_preserved": true,
+    "user_env_proxy_preserved": true
+  },
+  "all_passed": true,
+  "pac_url_shape": {
+    "loopback": true,
+    "port": 33331,
+    "path": "/commands/pac"
+  },
+  "pac_sha256": "3d3089d2aa0913bae61e74c776770f7427ced156e3de8e1d885d993e6aef611d",
+  "pac_bytes": 1517,
+  "native_decisions": [
+    {
+      "host": "dl.delivery.mp.microsoft.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "host": "steamcontent.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "host": "store.steampowered.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "host": "steamcommunity.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "host": "www.baidu.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "host": "www.github.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    },
+    {
+      "host": "www.google.com",
+      "ok": true,
+      "access_type": 1,
+      "decision": "DIRECT"
+    }
+  ],
+  "kernel": {
+    "version": "ab32ad2d",
+    "meta": true
+  },
+  "microsoft_group": {
+    "now": "🎯 全球直连",
+    "type": "Selector"
+  },
+  "limits": [
+    "Applications may retain earlier PAC or environment state",
+    "Real away-network transition and phone behavior are not tested"
+  ]
+}

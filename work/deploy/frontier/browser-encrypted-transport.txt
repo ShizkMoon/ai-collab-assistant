@@ -1,0 +1,9 @@
+{
+  "host": "crypto.cloudflare.com",
+  "http": "http/2",
+  "tls": "TLSv1.3",
+  "server_sni": "encrypted",
+  "browser_navigation_protocol": "h2",
+  "location": "HK",
+  "host_reported_gateway": "off"
+}

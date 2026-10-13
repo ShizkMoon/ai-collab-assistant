@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "account_count": 1,
+  "channel_preserved": 3,
+  "private_config_transfer_verified": true,
+  "desktop_configuration_unchanged": true,
+  "boot_enabled": true,
+  "wan_ifup_start_installed": true,
+  "wan_connected": false,
+  "authentication_attempted": false,
+  "service_state": {},
+  "log_directory": "/var/log/esurfing/logs",
+  "log_level": 3
+}

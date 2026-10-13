@@ -1,0 +1,10 @@
+{
+  "read_backups": [
+    "hook-before-subscription-maintenance.sh",
+    "options-before-subscription-maintenance.yaml",
+    "controller-before-subscription-maintenance.lua",
+    "helper-before-subscription-maintenance.sh",
+    "init-before-subscription-maintenance.sh"
+  ],
+  "runtime": "yaml=yes\ndigest=yes\nopen3=no\nnet/http=no\nuri=no\nsocket=no\nopenssl=no\njson=no\ntimeout=no\n1\n/usr/bin/jsonfilter\n/usr/bin/timeout\n"
+}

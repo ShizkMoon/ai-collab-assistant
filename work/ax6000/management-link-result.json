@@ -1,0 +1,6 @@
+{
+  "action": "Probe",
+  "time": "2026-10-12T12:03:44.4701683+08:00",
+  "success": false,
+  "status": "Default management address did not respond; original wired DHCP setting restored."
+}

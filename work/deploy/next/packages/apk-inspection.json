@@ -1,0 +1,293 @@
+[
+  {
+    "name": "kmod-ifb-6.18.55-r1.apk",
+    "length": 4399,
+    "sha256": "9208237e9449800a2f9d0734101f81eef0995f2fb9991df954a69804ed69dd1b",
+    "decompressed_length": 13336,
+    "magic": "4144422e70636b674806000000000000",
+    "metadata": {
+      "name": "kmod-ifb",
+      "version": "6.18.55-r1",
+      "hashes": {
+        "hex": "17335f3a202aff7c1e97d4724f91006c7b0f8a79"
+      },
+      "description": "The Intermediate Functional Block",
+      "arch": "aarch64_cortex-a53",
+      "license": "GPL-2.0-only",
+      "origin": "feeds/base/kernel/linux",
+      "maintainer": null,
+      "url": null,
+      "repo_commit": null,
+      "build_time": null,
+      "installed_size": 11672,
+      "file_size": null,
+      "provider_priority": null,
+      "depends": [
+        [
+          "kernel",
+          "6.18.55~b218d80d146ac6c85db4989df73b5de9-r1"
+        ]
+      ],
+      "provides": [
+        [
+          "kmod-ifb-any"
+        ]
+      ],
+      "replaces": null,
+      "install_if": null,
+      "recommends": null,
+      "layer": null,
+      "tags": [
+        "openwrt:section=kernel",
+        "openwrt:cpe=cpe:/o:linux:linux_kernel"
+      ]
+    },
+    "files": [
+      {
+        "path": "etc/modules.d/34-ifb",
+        "size": 14,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/apk/packages/kmod-ifb.list",
+        "size": 50,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/modules/6.18.55/ifb.ko",
+        "size": 11608,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      }
+    ],
+    "script_names": [
+      "trigger",
+      "preinst",
+      "postinst",
+      "predeinst",
+      "postdeinst",
+      "preupgrade",
+      "postupgrade"
+    ],
+    "elf": [
+      {
+        "offset": 1724,
+        "class": "ELF64",
+        "type": 1,
+        "machine": 183,
+        "program_headers": [],
+        "PT_INTERP": false,
+        "PT_DYNAMIC": false
+      }
+    ]
+  },
+  {
+    "name": "kmod-sched-cake-6.18.55-r1.apk",
+    "length": 18528,
+    "sha256": "e3c033179df761248b6a2a86f88d845651017a8cb247d6879cc1958e18ab4da2",
+    "decompressed_length": 40848,
+    "magic": "4144422e70636b67b806000000000000",
+    "metadata": {
+      "name": "kmod-sched-cake",
+      "version": "6.18.55-r1",
+      "hashes": {
+        "hex": "ee0fc9d63a49b8ec4712e07e9b8777604feeec93"
+      },
+      "description": "Common Applications Kept Enhanced fq_codel/blue derived shaper",
+      "arch": "aarch64_cortex-a53",
+      "license": "GPL-2.0-only",
+      "origin": "feeds/base/kernel/linux",
+      "maintainer": null,
+      "url": null,
+      "repo_commit": null,
+      "build_time": null,
+      "installed_size": 39076,
+      "file_size": null,
+      "provider_priority": null,
+      "depends": [
+        [
+          "kernel",
+          "6.18.55~b218d80d146ac6c85db4989df73b5de9-r1"
+        ],
+        [
+          "kmod-sched-core"
+        ]
+      ],
+      "provides": [
+        [
+          "kmod-sched-cake-any"
+        ]
+      ],
+      "replaces": null,
+      "install_if": null,
+      "recommends": null,
+      "layer": null,
+      "tags": [
+        "openwrt:section=kernel",
+        "openwrt:cpe=cpe:/o:linux:linux_kernel"
+      ]
+    },
+    "files": [
+      {
+        "path": "etc/modules.d/sched-cake",
+        "size": 9,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/apk/packages/kmod-sched-cake.list",
+        "size": 59,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/modules/6.18.55/sch_cake.ko",
+        "size": 39008,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      }
+    ],
+    "script_names": [
+      "trigger",
+      "preinst",
+      "postinst",
+      "predeinst",
+      "postdeinst",
+      "preupgrade",
+      "postupgrade"
+    ],
+    "elf": [
+      {
+        "offset": 1836,
+        "class": "ELF64",
+        "type": 1,
+        "machine": 183,
+        "program_headers": [],
+        "PT_INTERP": false,
+        "PT_DYNAMIC": false
+      }
+    ]
+  },
+  {
+    "name": "kmod-tcp-bbr-6.18.55-r1.apk",
+    "length": 5915,
+    "sha256": "e486eb1558f21b4b04312dbeffcc0141c0554e2f5be400ddb3f118c26461dedb",
+    "decompressed_length": 13224,
+    "magic": "4144422e70636b678807000000000000",
+    "metadata": {
+      "name": "kmod-tcp-bbr",
+      "version": "6.18.55-r1",
+      "hashes": {
+        "hex": "6cf4c5dcd4911753af5c3f7683a4580e50c1fe75"
+      },
+      "description": "Kernel module for BBR (Bottleneck Bandwidth and RTT) TCP congestion control. It requires the fq (\"Fair Queue\") pacing packet scheduler. For kernel 4.13+, TCP internal pacing is implemented as fallback.",
+      "arch": "aarch64_cortex-a53",
+      "license": "GPL-2.0-only",
+      "origin": "feeds/base/kernel/linux",
+      "maintainer": null,
+      "url": null,
+      "repo_commit": null,
+      "build_time": null,
+      "installed_size": 11219,
+      "file_size": null,
+      "provider_priority": null,
+      "depends": [
+        [
+          "kernel",
+          "6.18.55~b218d80d146ac6c85db4989df73b5de9-r1"
+        ]
+      ],
+      "provides": [
+        [
+          "kmod-tcp-bbr-any"
+        ]
+      ],
+      "replaces": null,
+      "install_if": null,
+      "recommends": null,
+      "layer": null,
+      "tags": [
+        "openwrt:section=kernel",
+        "openwrt:cpe=cpe:/o:linux:linux_kernel"
+      ]
+    },
+    "files": [
+      {
+        "path": "etc/modules.d/tcp-bbr",
+        "size": 8,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "etc/sysctl.d/12-tcp-bbr.conf",
+        "size": 158,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/apk/packages/kmod-tcp-bbr.list",
+        "size": 85,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      },
+      {
+        "path": "lib/modules/6.18.55/tcp_bbr.ko",
+        "size": 10968,
+        "acl": [
+          420,
+          "root",
+          "root"
+        ]
+      }
+    ],
+    "script_names": [
+      "trigger",
+      "preinst",
+      "postinst",
+      "predeinst",
+      "postdeinst",
+      "preupgrade",
+      "postupgrade"
+    ],
+    "elf": [
+      {
+        "offset": 2252,
+        "class": "ELF64",
+        "type": 1,
+        "machine": 183,
+        "program_headers": [],
+        "PT_INTERP": false,
+        "PT_DYNAMIC": false
+      }
+    ]
+  }
+]

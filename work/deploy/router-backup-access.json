@@ -1,0 +1,30 @@
+{
+  "source_disk": 0,
+  "destination_disk": 1,
+  "access": [
+    {
+      "Path": "E:/SaveBackups/AX6000/2026-10-13-router-optimization",
+      "Principals": [
+        "BUILTIN\\Administrators",
+        "DESKTOP-QVTQ11O\\Shizuku",
+        "NT AUTHORITY\\SYSTEM"
+      ]
+    },
+    {
+      "Path": "E:\\SaveBackups\\AX6000\\2026-10-13-router-optimization\\outputs\\ax6000-mainline\\private-configuration\\router-tuned-final-config.tar.gz",
+      "Principals": [
+        "BUILTIN\\Administrators",
+        "DESKTOP-QVTQ11O\\Shizuku",
+        "NT AUTHORITY\\SYSTEM"
+      ]
+    },
+    {
+      "Path": "E:\\SaveBackups\\AX6000\\2026-10-13-router-optimization\\isolated-expansion\\config\\etc\\config\\network",
+      "Principals": [
+        "BUILTIN\\Administrators",
+        "DESKTOP-QVTQ11O\\Shizuku",
+        "NT AUTHORITY\\SYSTEM"
+      ]
+    }
+  ]
+}

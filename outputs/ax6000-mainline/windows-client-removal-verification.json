@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-12T14:08:16.8305361+08:00",
+  "tasks": 0,
+  "client_processes": 0,
+  "watchdog_processes": 0,
+  "port_8888_listeners": 0,
+  "current_client_directory_exists": false,
+  "old_client_directory_exists": false,
+  "wifi_ip": {
+    "IPAddress": "192.168.31.171",
+    "PrefixLength": 24,
+    "PrefixOrigin": 3
+  },
+  "default_routes": [
+    {
+      "InterfaceIndex": 10,
+      "NextHop": "192.168.31.1"
+    }
+  ],
+  "direct_http_code": "204",
+  "direct_http_exit": 0
+}

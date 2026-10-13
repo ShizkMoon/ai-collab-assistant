@@ -1,0 +1,35 @@
+{
+  "time": "2026-10-12T22:32:10+08:00",
+  "config_sha256": "51dcec9c400e8e0ace4c57b5973e8556f2c5a825c4a4ac069c0d6137a06c0daf",
+  "runtime_sha256": "d066bec6aaa374c27b68f442614eec1466b8cd18ecdbd5b9cb0bdc1f1e0dfb74",
+  "config_bytes": 18514214,
+  "runtime_bytes": 193581,
+  "runtime_archive_files": 90,
+  "hotplug_sha256": "a61afd57c78f70d5ca14ebc46267c6d2d03f3b10363e7fc663891e15a27983ed",
+  "verified_archive_live_files": {
+    "/etc/hotplug.d/iface/35-esurfing-route": "a61afd57c78f70d5ca14ebc46267c6d2d03f3b10363e7fc663891e15a27983ed",
+    "/etc/esurfing-deploy/netifd-route.nft": "6d803ff7006d523a5fb26b002ffd293269950c00ed2fc0ba83edd211615eb03c",
+    "/usr/libexec/wireless-steering-reload": "9e6196343c762d28ca2dddc25d12c7415bf47102b7b5f1f7f7384f6c4838a738",
+    "/etc/hotplug.d/net/99-wireless-steering": "ad45acc06aa0dbcd77f254b6342bd20c1e9c1cef89a535006a6e0eca197d6580",
+    "/etc/openclash/custom/ninja-subscription-update.sh": "960061112bca10b70119a1ee78dfb5e87fb7eee651f4adab48deeabeb5199df5",
+    "/etc/openclash/custom/ninja-subscription-update.rb": "d9122b8b06e995a20b24d87c4b0855bc604d31e5b738ce2632a8d182f9075b34",
+    "/etc/openclash/custom/ninja-subscription-update-options.yaml": "82d55f74a95bed2a67596b5e52062a54ad28d9d04db3967b3e7a9ee72dfd030a",
+    "/etc/openclash/custom/ninja-production-options.yaml": "7044b26f7402ab62327cdb2d59c0b4e2f066c4ab36f8224423e27889f036db31",
+    "/etc/openclash/custom/openclash_custom_overwrite.sh": "4149591ee1d0bd27efa4fd919cbd895c351a642bfa7fbc113884ac6007c08aca",
+    "/etc/init.d/openclash": "6272d300b9f15a75107b354cffc0954294c491660abf33a9de67b8acbe444360",
+    "/usr/lib/lua/luci/controller/ninjaconnector2.lua": "8c3555fee92b9edda2acb72b0091032b86ffceeadeb1cd61422eceec6669c4f4",
+    "/usr/share/ninjaconnector2/ninja_sub.sh": "14958d1f818f072c5d33d541c86891fa63f0d4ac8faa3dd3341d9d2a3a900264",
+    "/usr/share/openclash/openclash.sh": "2b79e1db551022cd8159e3ac6765b514273cc4bcb82245fa7605255f957e49c0",
+    "/usr/share/openclash/openclash_core.sh": "02100d99e5f15fb6a4b28ea071ebd03ebdfd6bad10727ea66b7fd461c829f42a",
+    "/usr/share/openclash/openclash_update.sh": "391f14bd749062975a98a10fb7aea3b843cad3544a7b52313ed9d846463dca6c",
+    "/etc/openclash/config/Ninja.yaml": "f65cacd5ed68a3f6d6caec60b788744022cf7707b92b0300f6ec1b3c5b598434",
+    "/etc/openclash/Ninja.yaml": "c62df9e12496f71a5dcad690e77eb8eac02163530153c4dac4ce6a4638cd2ffe",
+    "/etc/sysupgrade.conf": "ff7c1a52b3d3e84f939774bd6b31d599a17e29950ec9efb60da03721c445d5a9"
+  },
+  "license_helper_members": [
+    "etc/openclash/custom/restore-ninja-license.rb"
+  ],
+  "standard_config_contains_custom_hotplug": false,
+  "restore_tested": false,
+  "note": "Private credential-bearing archives. Preserve config and runtime together. Runtime includes the fixed Hong Kong policy, final subscription updater, LuCI controller, stock-update guards, license recovery and custom hotplug. Required runtime files match the live router byte for byte. Previous pair remains in the protected working directory. Restore has not been exercised."
+}

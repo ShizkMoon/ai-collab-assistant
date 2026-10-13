@@ -1,0 +1,27 @@
+{
+  "geosite_references": [
+    {
+      "path": ".geox-url.geosite",
+      "kind": "key"
+    },
+    {
+      "path": ".geox-url.geosite",
+      "geosite_usage": "(url or configuration value)"
+    }
+  ],
+  "dns_keys": [
+    "enable",
+    "nameserver",
+    "fallback",
+    "ipv6",
+    "enhanced-mode",
+    "listen",
+    "respect-rules",
+    "use-hosts",
+    "nameserver-policy",
+    "default-nameserver",
+    "fallback-filter",
+    "proxy-server-nameserver"
+  ],
+  "rule_sets": []
+}

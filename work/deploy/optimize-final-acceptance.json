@@ -1,0 +1,116 @@
+{
+  "time": "2026-10-12T20:31:04+08:00",
+  "boot_id": "758e5f0e-d71f-4fd9-b7ed-6a9a05756cad",
+  "interfaces": {
+    "wan": {
+      "up": true,
+      "l3_device": "wan",
+      "ipv4-address": [
+        {
+          "address": "10.207.123.111",
+          "mask": 20
+        }
+      ],
+      "bound_http_probe": {
+        "exit": 0,
+        "http": "204"
+      }
+    },
+    "wan2": {
+      "up": true,
+      "l3_device": "eswan2",
+      "ipv4-address": [
+        {
+          "address": "10.207.112.254",
+          "mask": 20
+        }
+      ],
+      "bound_http_probe": {
+        "exit": 0,
+        "http": "204"
+      }
+    }
+  },
+  "authentication": {
+    "account1": {
+      "running": true,
+      "pid": 7620,
+      "gid": 65201,
+      "events": "[2026-10-12 19:15:31] account=1 event=CURL_ERROR_CODE value=6\n[2026-10-12 19:15:31] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 19:15:31] account=1 event=CURL_TOTAL_SECONDS value=5.002\n[2026-10-12 19:15:31] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 19:15:31] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 19:15:31] account=1 event=AUTH_REQUIRED_HTTP302\n[2026-10-12 19:15:31] account=1 event=LOGIN_KEEP_SECONDS value=8\n[2026-10-12 19:15:31] account=1 event=AUTH_SUCCESS\n[2026-10-12 19:15:40] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-12 19:15:40] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-12 19:18:08] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-12 19:18:08] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 19:18:08] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-12 19:18:08] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 19:18:08] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 19:18:08] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-12 19:29:50] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-12 19:29:50] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-12 19:30:44] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-12 19:30:44] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 19:30:44] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 19:30:44] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 19:30:44] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 19:30:44] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-12 19:33:40] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-12 19:33:40] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 19:33:40] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 19:33:40] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 19:33:40] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 19:33:40] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-12 19:34:11] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-12 19:34:11] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 19:34:11] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 19:34:11] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 19:34:11] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 19:34:11] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-12 19:44:00] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-12 19:44:00] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-12 19:48:09] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-12 19:48:09] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 19:48:09] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-12 19:48:09] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 19:48:09] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 19:48:09] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-12 19:58:11] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-12 19:58:11] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-12 20:04:22] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-12 20:04:22] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 20:04:22] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 20:04:22] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 20:04:22] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 20:04:22] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-12 20:05:08] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-12 20:05:08] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 20:05:08] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 20:05:08] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 20:05:08] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 20:05:08] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-12 20:12:22] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-12 20:12:22] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-12 20:15:58] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-12 20:15:58] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 20:15:58] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 20:15:58] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 20:15:58] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 20:15:58] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-12 20:26:32] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-12 20:26:32] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-12 20:27:14] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-12 20:27:14] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 20:27:14] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 20:27:14] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 20:27:14] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 20:27:14] account=1 event=CHECK_PRIMARY_FAILED\n",
+      "current_pid_authenticated_and_keepalive": true,
+      "current_pid_existing_session_online_checks": 0
+    },
+    "account2": {
+      "running": true,
+      "pid": 7679,
+      "gid": 65202,
+      "events": "[2026-10-12 19:36:39] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-12 19:36:39] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 19:36:39] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 19:36:39] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 19:36:39] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 19:36:39] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-12 19:45:01] account=2 event=AUTH_REQUIRED_HTTP302\n[2026-10-12 19:45:06] account=2 event=LOGIN_KEEP_SECONDS value=6\n[2026-10-12 19:45:06] account=2 event=AUTH_SUCCESS\n[2026-10-12 19:45:12] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 19:45:12] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 19:49:23] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 19:49:23] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 19:53:34] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 19:53:34] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 19:57:45] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 19:57:45] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 20:01:30] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-12 20:01:30] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 20:01:30] account=2 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-12 20:01:30] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 20:01:30] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 20:01:30] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-12 20:01:55] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 20:01:55] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 20:06:06] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 20:06:06] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 20:10:16] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 20:10:17] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 20:14:27] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 20:14:28] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 20:18:38] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 20:18:38] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 20:20:10] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-12 20:20:10] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 20:20:10] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-12 20:20:10] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 20:20:10] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 20:20:10] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-12 20:22:48] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 20:22:48] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 20:26:59] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 20:26:59] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n",
+      "current_pid_authenticated_and_keepalive": true,
+      "current_pid_existing_session_online_checks": 569
+    }
+  },
+  "ua3f": {
+    "disabled_options": {
+      "l3_rewrite_ttl": "0",
+      "l3_rewrite_bpf_offload": "0",
+      "l3_rewrite_ipid": "0",
+      "l3_rewrite_tcpts": "0",
+      "l3_rewrite_tcpwin": "0",
+      "l3_rewrite_block_quic": "0",
+      "mitm_enabled": "0",
+      "desync_reorder": "0",
+      "desync_inject": "0"
+    },
+    "http_ua_is_fff": true
+  },
+  "openclash": {
+    "running": true,
+    "dns_mode": "redir-host",
+    "udp_enabled": true,
+    "router_self_proxy": "0",
+    "ua3f_tcp_wrappers": 919,
+    "source_proxy_count": 49,
+    "source_group_count": 14,
+    "ninja_license_comments_retained": true,
+    "rotated_proxy_credential_matches_runtime": true
+  },
+  "mwan_status": "Interface status:\n interface wan is online and tracking is active (online 01h:15m:56s, uptime 01h:16m:42s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan2 is online and tracking is active (online 01h:08m:40s, uptime 01h:16m:42s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan3 is unknown and tracking is disabled (31)\n\nCurrent policies:\nbalanced:\n wan (50%)\n wan2 (50%)\nua3f_bal:\n wan (50%)\n wan2 (50%)\n\nDirectly connected ipv4 networks:\n10.207.112.0/20\n192.168.31.0/24\n224.0.0.0/3\n\nDirectly connected ipv6 networks:\nfd3c:162d:9e76::/48\n\nActive user rules:\n udp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n tcp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n ip daddr 0.0.0.0/0 meta mark & 0x3f000000 == 0x00000000 - balanced\n\n",
+  "routing": "0:\tfrom all lookup local\n100:\tfrom all fwmark 0x162/0xffff lookup 354\n1000:\tfrom all fwmark 0x162 lookup 354\n1001:\tfrom all iif wan lookup 1\n1002:\tfrom all iif eswan2 lookup 2\n1802:\tfrom all fwmark 0x2000000 lookup 25202\n2001:\tfrom all fwmark 0x1000000/0x3f000000 lookup 1\n2002:\tfrom all fwmark 0x2000000/0x3f000000 lookup 2\n2061:\tfrom all fwmark 0x3d000000/0x3f000000 blackhole\n2062:\tfrom all fwmark 0x3e000000/0x3f000000 unreachable\n3062:\tfrom 10.207.123.111 lookup 1\n3063:\tfrom 10.207.112.254 lookup 2\n10000:\tfrom 10.207.112.254 lookup 25202\n20000:\tfrom all to 10.207.112.254/20 lookup 25202\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\n90008:\tfrom all iif lo lookup 25202\ndefault via 10.207.112.1 dev wan proto unspec src 10.207.123.111 metric 10 \n10.207.112.0/20 dev wan proto unspec scope link metric 10 \n192.168.31.0/24 dev br-lan proto unspec scope link src 192.168.31.1 \ndefault via 10.207.112.1 dev eswan2 proto unspec src 10.207.112.254 metric 20 \n10.207.112.0/20 dev eswan2 proto unspec scope link metric 20 \n192.168.31.0/24 dev br-lan proto unspec scope link src 192.168.31.1 \ndefault via 10.207.112.1 dev eswan2 proto static src 10.207.112.254 metric 20 \nunreachable default metric 32760 \n10.207.112.0/20 dev eswan2 proto static scope link metric 20 \n",
+  "policy": "table inet mwan3 {\n\tchain mwan3_policy_balanced {\n\t\tmeta mark & 0x3f000000 == 0x00000000 numgen random mod 2 vmap { 0 : jump mwan3_or_meta_0x1000000, 1 : jump mwan3_or_meta_0x2000000 }\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\ntable inet mwan3 {\n\tchain mwan3_policy_ua3f_bal {\n\t\tmeta mark & 0x3f000000 == 0x00000000 numgen inc mod 2 vmap { 0 : jump mwan3_or_meta_0x1000000, 1 : jump mwan3_or_meta_0x2000000 }\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\ntable inet mwan3 {\n\tchain mwan3_output {\n\t\ttype route hook output priority mangle + 1; policy accept;\n\t\ticmpv6 type { nd-router-solicit, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, nd-redirect } accept\n\t\tip6 daddr { fe80::/10, ff01::-ff02:ffff:ffff:ffff:ffff:ffff:ffff:ffff } accept\n\t\tmeta mark & 0x3f000000 == 0x00000000 ct mark & 0x3f000000 vmap { 0x01000000 : jump mwan3_or_meta_0x1000000, 0x02000000 : jump mwan3_or_meta_0x2000000, 0x03000000 : jump mwan3_or_meta_0x3000000, 0x04000000 : jump mwan3_or_meta_0x4000000, 0x05000000 : jump mwan3_or_meta_0x5000000, 0x06000000 : jump mwan3_or_meta_0x6000000, 0x07000000 : jump mwan3_or_meta_0x7000000, 0x08000000 : jump mwan3_or_meta_0x8000000, 0x09000000 : jump mwan3_or_meta_0x9000000, 0x0a000000 : jump mwan3_or_meta_0xa000000, 0x0b000000 : jump mwan3_or_meta_0xb000000, 0x0c000000 : jump mwan3_or_meta_0xc000000, 0x0d000000 : jump mwan3_or_meta_0xd000000, 0x0e000000 : jump mwan3_or_meta_0xe000000, 0x0f000000 : jump mwan3_or_meta_0xf000000, 0x10000000 : jump mwan3_or_meta_0x10000000, 0x11000000 : jump mwan3_or_meta_0x11000000, 0x12000000 : jump mwan3_or_meta_0x12000000, 0x13000000 : jump mwan3_or_meta_0x13000000, 0x14000000 : jump mwan3_or_meta_0x14000000, 0x15000000 : jump mwan3_or_meta_0x15000000, 0x16000000 : jump mwan3_or_meta_0x16000000, 0x17000000 : jump mwan3_or_meta_0x17000000, 0x18000000 : jump mwan3_or_meta_0x18000000, 0x19000000 : jump mwan3_or_meta_0x19000000, 0x1a000000 : jump mwan3_or_meta_0x1a000000, 0x1b000000 : jump mwan3_or_meta_0x1b000000, 0x1c000000 : jump mwan3_or_meta_0x1c000000, 0x1d000000 : jump mwan3_or_meta_0x1d000000, 0x1e000000 : jump mwan3_or_meta_0x1e000000, 0x1f000000 : jump mwan3_or_meta_0x1f000000, 0x20000000 : jump mwan3_or_meta_0x20000000, 0x21000000 : jump mwan3_or_meta_0x21000000, 0x22000000 : jump mwan3_or_meta_0x22000000, 0x23000000 : jump mwan3_or_meta_0x23000000, 0x24000000 : jump mwan3_or_meta_0x24000000, 0x25000000 : jump mwan3_or_meta_0x25000000, 0x26000000 : jump mwan3_or_meta_0x26000000, 0x27000000 : jump mwan3_or_meta_0x27000000, 0x28000000 : jump mwan3_or_meta_0x28000000, 0x29000000 : jump mwan3_or_meta_0x29000000, 0x2a000000 : jump mwan3_or_meta_0x2a000000, 0x2b000000 : jump mwan3_or_meta_0x2b000000, 0x2c000000 : jump mwan3_or_meta_0x2c000000, 0x2d000000 : jump mwan3_or_meta_0x2d000000, 0x2e000000 : jump mwan3_or_meta_0x2e000000, 0x2f000000 : jump mwan3_or_meta_0x2f000000, 0x30000000 : jump mwan3_or_meta_0x30000000, 0x31000000 : jump mwan3_or_meta_0x31000000, 0x32000000 : jump mwan3_or_meta_0x32000000, 0x33000000 : jump mwan3_or_meta_0x33000000, 0x34000000 : jump mwan3_or_meta_0x34000000, 0x35000000 : jump mwan3_or_meta_0x35000000, 0x36000000 : jump mwan3_or_meta_0x36000000, 0x37000000 : jump mwan3_or_meta_0x37000000, 0x38000000 : jump mwan3_or_meta_0x38000000, 0x39000000 : jump mwan3_or_meta_0x39000000, 0x3a000000 : jump mwan3_or_meta_0x3a000000, 0x3b000000 : jump mwan3_or_meta_0x3b000000, 0x3c000000 : jump mwan3_or_meta_0x3c000000, 0x3d000000 : jump mwan3_or_meta_0x3d000000, 0x3e000000 : jump mwan3_or_meta_0x3e000000, 0x3f000000 : jump mwan3_or_meta_0x3f000000 }\n\t\tmeta mark & 0x3f000000 == 0x00000000 jump mwan3_ifaces_in\n\t\tmeta mark & 0x3f000000 == 0x00000000 jump mwan3_custom\n\t\tmeta mark & 0x3f000000 == 0x00000000 jump mwan3_connected\n\t\tmeta mark & 0x3f000000 == 0x00000000 jump mwan3_dynamic\n\t\tmeta nfproto ipv4 meta l4proto tcp meta mark & 0x00ffffff == 0x000000c9 meta mark & 0x3f000000 == 0x00000000 counter packets 2818 bytes 178744 jump mwan3_policy_ua3f_bal\n\t\tmeta mark & 0x3f000000 == 0x00000000 jump mwan3_rules\n\t\tmeta mark & 0x3f000000 vmap { 0x01000000 : jump mwan3_or_ct_0x1000000, 0x02000000 : jump mwan3_or_ct_0x2000000, 0x03000000 : jump mwan3_or_ct_0x3000000, 0x04000000 : jump mwan3_or_ct_0x4000000, 0x05000000 : jump mwan3_or_ct_0x5000000, 0x06000000 : jump mwan3_or_ct_0x6000000, 0x07000000 : jump mwan3_or_ct_0x7000000, 0x08000000 : jump mwan3_or_ct_0x8000000, 0x09000000 : jump mwan3_or_ct_0x9000000, 0x0a000000 : jump mwan3_or_ct_0xa000000, 0x0b000000 : jump mwan3_or_ct_0xb000000, 0x0c000000 : jump mwan3_or_ct_0xc000000, 0x0d000000 : jump mwan3_or_ct_0xd000000, 0x0e000000 : jump mwan3_or_ct_0xe000000, 0x0f000000 : jump mwan3_or_ct_0xf000000, 0x10000000 : jump mwan3_or_ct_0x10000000, 0x11000000 : jump mwan3_or_ct_0x11000000, 0x12000000 : jump mwan3_or_ct_0x12000000, 0x13000000 : jump mwan3_or_ct_0x13000000, 0x14000000 : jump mwan3_or_ct_0x14000000, 0x15000000 : jump mwan3_or_ct_0x15000000, 0x16000000 : jump mwan3_or_ct_0x16000000, 0x17000000 : jump mwan3_or_ct_0x17000000, 0x18000000 : jump mwan3_or_ct_0x18000000, 0x19000000 : jump mwan3_or_ct_0x19000000, 0x1a000000 : jump mwan3_or_ct_0x1a000000, 0x1b000000 : jump mwan3_or_ct_0x1b000000, 0x1c000000 : jump mwan3_or_ct_0x1c000000, 0x1d000000 : jump mwan3_or_ct_0x1d000000, 0x1e000000 : jump mwan3_or_ct_0x1e000000, 0x1f000000 : jump mwan3_or_ct_0x1f000000, 0x20000000 : jump mwan3_or_ct_0x20000000, 0x21000000 : jump mwan3_or_ct_0x21000000, 0x22000000 : jump mwan3_or_ct_0x22000000, 0x23000000 : jump mwan3_or_ct_0x23000000, 0x24000000 : jump mwan3_or_ct_0x24000000, 0x25000000 : jump mwan3_or_ct_0x25000000, 0x26000000 : jump mwan3_or_ct_0x26000000, 0x27000000 : jump mwan3_or_ct_0x27000000, 0x28000000 : jump mwan3_or_ct_0x28000000, 0x29000000 : jump mwan3_or_ct_0x29000000, 0x2a000000 : jump mwan3_or_ct_0x2a000000, 0x2b000000 : jump mwan3_or_ct_0x2b000000, 0x2c000000 : jump mwan3_or_ct_0x2c000000, 0x2d000000 : jump mwan3_or_ct_0x2d000000, 0x2e000000 : jump mwan3_or_ct_0x2e000000, 0x2f000000 : jump mwan3_or_ct_0x2f000000, 0x30000000 : jump mwan3_or_ct_0x30000000, 0x31000000 : jump mwan3_or_ct_0x31000000, 0x32000000 : jump mwan3_or_ct_0x32000000, 0x33000000 : jump mwan3_or_ct_0x33000000, 0x34000000 : jump mwan3_or_ct_0x34000000, 0x35000000 : jump mwan3_or_ct_0x35000000, 0x36000000 : jump mwan3_or_ct_0x36000000, 0x37000000 : jump mwan3_or_ct_0x37000000, 0x38000000 : jump mwan3_or_ct_0x38000000, 0x39000000 : jump mwan3_or_ct_0x39000000, 0x3a000000 : jump mwan3_or_ct_0x3a000000, 0x3b000000 : jump mwan3_or_ct_0x3b000000, 0x3c000000 : jump mwan3_or_ct_0x3c000000, 0x3d000000 : jump mwan3_or_ct_0x3d000000, 0x3e000000 : jump mwan3_or_ct_0x3e000000, 0x3f000000 : jump mwan3_or_ct_0x3f000000 }\n\t\tmeta mark & 0x3f000000 != 0x3f000000 jump mwan3_custom\n\t\tmeta mark & 0x3f000000 != 0x3f000000 jump mwan3_connected\n\t\tmeta mark & 0x3f000000 != 0x3f000000 jump mwan3_dynamic\n\t}\n}\ntable inet mwan3 {\n\tchain mwan3_rules {\n\t\tudp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n\t\ttcp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n\t\tip daddr 0.0.0.0/0 meta mark & 0x3f000000 == 0x00000000 jump mwan3_policy_balanced\n\t}\n}\ntable inet fw4 {\n\tchain ua3f_wan_ttl {\n\t\ttype filter hook postrouting priority mangle; policy accept;\n\t\toifname \"wan\" ip ttl >= 10 counter packets 770974 bytes 129872186 ip ttl set 64 comment \"WAN IPv4 TTL64\"\n\t\toifname \"eswan2\" ip ttl >= 10 counter packets 759707 bytes 120937842 ip ttl set 64 comment \"WAN2 IPv4 TTL64\"\n\t}\n}\ntable ip esurfing_route {\n\tchain output {\n\t\ttype route hook output priority mangle - 10; policy accept;\n\t\tmeta skgid 65201 counter packets 3401 bytes 301692 meta mark set meta mark | 0x3f000000 comment \"esurfing account1 main bypass\"\n\t\tmeta skgid 65202 counter packets 3417 bytes 301838 meta mark set 0x02000000 comment \"esurfing account2 wan2\"\n\t}\n}\n",
+  "adblock_status": "[STAT] adblock-fast 1.2.4-r4 is blocking 55349 domains (with dnsmasq.servers)\n\u001b[0;33m[WARN]\u001b[0m Recommended packages are missing: gawk, grep, sed, coreutils-sort!\n",
+  "ad_domain_lookup": "Server:\t\t127.0.0.1\nAddress:\t127.0.0.1:53\n\n** server can't find accounts.doubleclick.net: NXDOMAIN\n\n** server can't find accounts.doubleclick.net: NXDOMAIN\n\n",
+  "resources": "Filesystem                Size      Used Available Use% Mounted on\n/dev/ubi0_1              61.6M     44.1M     14.3M  75% /overlay\n              total        used        free      shared  buff/cache   available\nMem:         494004      206400      192528       24260       95076      212532\nSwap:             0           0           0\n\tsignal:  \t-40 [-49, -48, -45, -42] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\tlast ack signal:-41 dBm\n\tavg ack signal:\t-40 dBm\n\tsignal:  \t-49 [-53, -61, -56, -52] dBm\n\ttx bitrate:\t1729.6 MBit/s 160MHz HE-MCS 8 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\tlast ack signal:-51 dBm\n\tavg ack signal:\t-51 dBm\n",
+  "wireless": "Interface phy1-ap0\n\tifindex 10\n\twdev 0x100000001\n\taddr 4c:c6:4c:bd:86:62\n\tssid Discorsvesper_5G\n\ttype AP\n\twiphy 1\n\tchannel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz\n\ttxpower 23.00 dBm\n\tmulticast TXQ:\n\t\tqsz-byt\tqsz-pkt\tflows\tdrops\tmarks\toverlmt\thashcol\ttx-bytes\ttx-packets\n\t\t0\t0\t8654\t0\t0\t0\t1\t1730718\t\t12131\n2\nSTEERING_IDLE\n",
+  "unused_geosite_absent": true,
+  "home_dns_marker": "Server:\t\t127.0.0.1\nAddress:\t127.0.0.1:53\n\nName:\tax6000-home31.lan\nAddress: 192.168.31.1\n\nNon-authoritative answer:\n\n",
+  "download_rules": [
+    "DOMAIN-SUFFIX,steamcontent.com,DIRECT",
+    "DOMAIN,steampipe.akamaized.net,DIRECT",
+    "DOMAIN,dl.steam.clngaa.com,DIRECT",
+    "DOMAIN,dl.steam.ksyna.com,DIRECT",
+    "DOMAIN,st.dl.eccdnx.com,DIRECT",
+    "DOMAIN,xz.pphimalayanrt.com,DIRECT",
+    "DOMAIN,steampipe.steamcontent.tnkjmec.com,DIRECT",
+    "DOMAIN,steampowered.com.8686c.com,DIRECT",
+    "DOMAIN,steamstatic.com.8686c.com,DIRECT",
+    "DOMAIN,wmsjsteam.com,DIRECT",
+    "DOMAIN,dl.delivery.mp.microsoft.com,DIRECT"
+  ],
+  "disabled_third_wan": true,
+  "smartdns_disabled": true,
+  "flow_offload": [
+    "0",
+    "0"
+  ],
+  "firewall_check": true,
+  "lan_http": {
+    "domestic": {
+      "exit": 0,
+      "http": "200"
+    },
+    "ninja": {
+      "exit": 0,
+      "http": "204"
+    }
+  }
+}

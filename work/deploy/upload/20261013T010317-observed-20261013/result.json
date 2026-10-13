@@ -1,0 +1,1086 @@
+{
+  "label": "observed-20261013",
+  "created_at": "2026-10-13T01:03:17.103778+08:00",
+  "route_claim": "电脑 curl 未使用显式代理；路由器透明生产路径由主代理另验。",
+  "endpoint": "https://speed.cloudflare.com/__up",
+  "max_request_seconds": 20,
+  "response_limit_bytes": 4096,
+  "budget_bytes": 117542912,
+  "allocated_attempt_bytes": 117542912,
+  "body_manifest": {
+    "probe": {
+      "file": "probe-random.bin",
+      "bytes": 102400,
+      "sha256": "79baf2d0bb866a80fbde3e7677bf96e78c7c55bf062c33b47f038c192f721879"
+    },
+    "single": {
+      "file": "single-random.bin",
+      "bytes": 33554432,
+      "sha256": "476c1293943e868e7c455f49a53ef0bc29cd200dd071d087640b8eabbcde8a61"
+    },
+    "concurrent": {
+      "file": "concurrent-random.bin",
+      "bytes": 20971520,
+      "sha256": "a90c38a4a50eaa71f96d846fcbf98a232d48b7425c0ac862a659ca1c82f5b53f"
+    }
+  },
+  "stages": [
+    {
+      "stage": "probe",
+      "complete": true,
+      "allocated_payload_bytes": 102400,
+      "wall_seconds": 0.20300000000133878,
+      "started_monotonic": 49832.25,
+      "finished_monotonic": 49832.453,
+      "requests": [
+        {
+          "id": 0,
+          "payload_bytes": 102400,
+          "started_monotonic": 49832.25,
+          "complete": true,
+          "curl_exit": 0,
+          "http_code": 200,
+          "size_upload": 102400,
+          "size_download": 0,
+          "time_total": 0.151227,
+          "time_connect": 0.008121,
+          "time_appconnect": 0.098692,
+          "time_starttransfer": 0.15097,
+          "speed_upload": 678208,
+          "remote_ip": "162.159.140.220",
+          "remote_port": 443,
+          "local_port": 62208,
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "finished_monotonic": 49832.453,
+          "wall_seconds": 0.20300000000133878
+        }
+      ],
+      "complete_payload_bytes": 102400,
+      "effective_mbps": 4.035467980268953
+    },
+    {
+      "stage": "single",
+      "complete": true,
+      "allocated_payload_bytes": 33554432,
+      "wall_seconds": 4.875,
+      "started_monotonic": 49832.453,
+      "finished_monotonic": 49837.328,
+      "requests": [
+        {
+          "id": 0,
+          "payload_bytes": 33554432,
+          "started_monotonic": 49832.453,
+          "complete": true,
+          "curl_exit": 0,
+          "http_code": 200,
+          "size_upload": 33554432,
+          "size_download": 0,
+          "time_total": 4.787015,
+          "time_connect": 0.006474,
+          "time_appconnect": 0.119031,
+          "time_starttransfer": 4.786774,
+          "speed_upload": 7009802,
+          "remote_ip": "162.159.140.220",
+          "remote_port": 443,
+          "local_port": 62210,
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "finished_monotonic": 49837.328,
+          "wall_seconds": 4.875
+        }
+      ],
+      "complete_payload_bytes": 33554432,
+      "effective_mbps": 55.06368328205128
+    },
+    {
+      "stage": "concurrent",
+      "complete": true,
+      "allocated_payload_bytes": 83886080,
+      "wall_seconds": 11.280999999995402,
+      "started_monotonic": 49837.328,
+      "finished_monotonic": 49848.609,
+      "requests": [
+        {
+          "id": 0,
+          "payload_bytes": 20971520,
+          "started_monotonic": 49837.328,
+          "complete": true,
+          "curl_exit": 0,
+          "http_code": 200,
+          "size_upload": 20971520,
+          "size_download": 0,
+          "time_total": 9.848552,
+          "time_connect": 0.073829,
+          "time_appconnect": 0.182824,
+          "time_starttransfer": 9.84828,
+          "speed_upload": 2129456,
+          "remote_ip": "162.159.140.220",
+          "remote_port": 443,
+          "local_port": 62237,
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "finished_monotonic": 49847.265,
+          "wall_seconds": 9.93699999999808
+        },
+        {
+          "id": 1,
+          "payload_bytes": 20971520,
+          "started_monotonic": 49837.328,
+          "complete": true,
+          "curl_exit": 0,
+          "http_code": 200,
+          "size_upload": 20971520,
+          "size_download": 0,
+          "time_total": 9.7225,
+          "time_connect": 0.063518,
+          "time_appconnect": 0.182915,
+          "time_starttransfer": 9.722229,
+          "speed_upload": 2157065,
+          "remote_ip": "162.159.140.220",
+          "remote_port": 443,
+          "local_port": 62240,
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "finished_monotonic": 49847.14,
+          "wall_seconds": 9.81199999999808
+        },
+        {
+          "id": 2,
+          "payload_bytes": 20971520,
+          "started_monotonic": 49837.328,
+          "complete": true,
+          "curl_exit": 0,
+          "http_code": 200,
+          "size_upload": 20971520,
+          "size_download": 0,
+          "time_total": 11.146894,
+          "time_connect": 0.073865,
+          "time_appconnect": 0.182876,
+          "time_starttransfer": 11.146618,
+          "speed_upload": 1881419,
+          "remote_ip": "162.159.140.220",
+          "remote_port": 443,
+          "local_port": 62239,
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "finished_monotonic": 49848.562,
+          "wall_seconds": 11.23399999999674
+        },
+        {
+          "id": 3,
+          "payload_bytes": 20971520,
+          "started_monotonic": 49837.328,
+          "complete": true,
+          "curl_exit": 0,
+          "http_code": 200,
+          "size_upload": 20971520,
+          "size_download": 0,
+          "time_total": 11.189183,
+          "time_connect": 0.073861,
+          "time_appconnect": 0.182876,
+          "time_starttransfer": 11.188911,
+          "speed_upload": 1874310,
+          "remote_ip": "162.159.140.220",
+          "remote_port": 443,
+          "local_port": 62238,
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "finished_monotonic": 49848.609,
+          "wall_seconds": 11.280999999995402
+        }
+      ],
+      "complete_payload_bytes": 83886080,
+      "effective_mbps": 59.488399964566405
+    }
+  ],
+  "overall_complete": true,
+  "effective_mbps": 57.48171012899245,
+  "complete_payload_bytes": 117542912,
+  "upload_batch_wall_seconds": 16.35899999999674,
+  "ping": {
+    "encoding": "cp936",
+    "locale": [
+      "Chinese (Simplified)_China",
+      "936"
+    ],
+    "phase_events": [
+      {
+        "phase": "idle",
+        "monotonic": 49817.25,
+        "elapsed_seconds": 0.01600000000325963
+      },
+      {
+        "phase": "probe",
+        "monotonic": 49832.25,
+        "elapsed_seconds": 15.01600000000326
+      },
+      {
+        "phase": "single",
+        "monotonic": 49832.453,
+        "elapsed_seconds": 15.219000000004598
+      },
+      {
+        "phase": "concurrent",
+        "monotonic": 49837.328,
+        "elapsed_seconds": 20.0940000000046
+      },
+      {
+        "phase": "recovery",
+        "monotonic": 49848.609,
+        "elapsed_seconds": 31.375
+      }
+    ],
+    "samples": {
+      "192.168.31.1": [
+        {
+          "monotonic": 49817.265,
+          "elapsed_seconds": 0.031000000002677552,
+          "phase": "idle",
+          "raw": "",
+          "kind": "other"
+        },
+        {
+          "monotonic": 49817.265,
+          "elapsed_seconds": 0.031000000002677552,
+          "phase": "idle",
+          "raw": "正在 Ping 192.168.31.1 具有 32 字节的数据:",
+          "kind": "other"
+        },
+        {
+          "monotonic": 49817.265,
+          "elapsed_seconds": 0.031000000002677552,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49818.281,
+          "elapsed_seconds": 1.0470000000059372,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=8ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 8,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49819.281,
+          "elapsed_seconds": 2.047000000005937,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=3ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 3,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49820.281,
+          "elapsed_seconds": 3.047000000005937,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49821.281,
+          "elapsed_seconds": 4.047000000005937,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49822.281,
+          "elapsed_seconds": 5.047000000005937,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=3ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 3,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49823.281,
+          "elapsed_seconds": 6.047000000005937,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49824.281,
+          "elapsed_seconds": 7.047000000005937,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49825.343,
+          "elapsed_seconds": 8.109000000004016,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=54ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 54,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49826.312,
+          "elapsed_seconds": 9.078000000001339,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=24ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 24,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49827.281,
+          "elapsed_seconds": 10.047000000005937,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49828.296,
+          "elapsed_seconds": 11.062000000005355,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49829.296,
+          "elapsed_seconds": 12.062000000005355,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=4ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 4,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49830.296,
+          "elapsed_seconds": 13.062000000005355,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49831.296,
+          "elapsed_seconds": 14.062000000005355,
+          "phase": "idle",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=2ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 2,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49832.296,
+          "elapsed_seconds": 15.062000000005355,
+          "phase": "probe",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=2ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 2,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49833.296,
+          "elapsed_seconds": 16.062000000005355,
+          "phase": "single",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49834.296,
+          "elapsed_seconds": 17.062000000005355,
+          "phase": "single",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49835.296,
+          "elapsed_seconds": 18.062000000005355,
+          "phase": "single",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49836.312,
+          "elapsed_seconds": 19.07800000000134,
+          "phase": "single",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=21ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 21,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49837.312,
+          "elapsed_seconds": 20.07800000000134,
+          "phase": "single",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=12ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 12,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49838.296,
+          "elapsed_seconds": 21.062000000005355,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49839.312,
+          "elapsed_seconds": 22.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=9ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49840.312,
+          "elapsed_seconds": 23.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=7ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 7,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49841.312,
+          "elapsed_seconds": 24.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49842.312,
+          "elapsed_seconds": 25.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49843.312,
+          "elapsed_seconds": 26.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49844.312,
+          "elapsed_seconds": 27.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=3ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 3,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49845.312,
+          "elapsed_seconds": 28.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49846.312,
+          "elapsed_seconds": 29.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49847.312,
+          "elapsed_seconds": 30.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=6ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 6,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49848.328,
+          "elapsed_seconds": 31.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=7ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 7,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49849.312,
+          "elapsed_seconds": 32.07800000000134,
+          "phase": "recovery",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=3ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 3,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49850.312,
+          "elapsed_seconds": 33.07800000000134,
+          "phase": "recovery",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49851.328,
+          "elapsed_seconds": 34.0940000000046,
+          "phase": "recovery",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=18ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 18,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49852.312,
+          "elapsed_seconds": 35.07800000000134,
+          "phase": "recovery",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49853.328,
+          "elapsed_seconds": 36.0940000000046,
+          "phase": "recovery",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49854.328,
+          "elapsed_seconds": 37.0940000000046,
+          "phase": "recovery",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49855.328,
+          "elapsed_seconds": 38.0940000000046,
+          "phase": "recovery",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49856.328,
+          "elapsed_seconds": 39.0940000000046,
+          "phase": "recovery",
+          "raw": "来自 192.168.31.1 的回复: 字节=32 时间=1ms TTL=64",
+          "kind": "reply",
+          "rtt_ms": 1,
+          "rtt_lt_ms": null
+        }
+      ],
+      "223.5.5.5": [
+        {
+          "monotonic": 49817.281,
+          "elapsed_seconds": 0.04700000000593718,
+          "phase": "idle",
+          "raw": "",
+          "kind": "other"
+        },
+        {
+          "monotonic": 49817.281,
+          "elapsed_seconds": 0.04700000000593718,
+          "phase": "idle",
+          "raw": "正在 Ping 223.5.5.5 具有 32 字节的数据:",
+          "kind": "other"
+        },
+        {
+          "monotonic": 49817.281,
+          "elapsed_seconds": 0.04700000000593718,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49818.281,
+          "elapsed_seconds": 1.0470000000059372,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49819.281,
+          "elapsed_seconds": 2.047000000005937,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=10ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 10,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49820.281,
+          "elapsed_seconds": 3.047000000005937,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=10ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 10,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49821.296,
+          "elapsed_seconds": 4.062000000005355,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=12ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 12,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49822.296,
+          "elapsed_seconds": 5.062000000005355,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=12ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 12,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49823.296,
+          "elapsed_seconds": 6.062000000005355,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=10ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 10,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49824.296,
+          "elapsed_seconds": 7.062000000005355,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49825.328,
+          "elapsed_seconds": 8.094000000004598,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=45ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 45,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49826.328,
+          "elapsed_seconds": 9.094000000004598,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=48ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 48,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49827.296,
+          "elapsed_seconds": 10.062000000005355,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49828.296,
+          "elapsed_seconds": 11.062000000005355,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49829.296,
+          "elapsed_seconds": 12.062000000005355,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=12ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 12,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49830.312,
+          "elapsed_seconds": 13.078000000001339,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=12ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 12,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49831.296,
+          "elapsed_seconds": 14.062000000005355,
+          "phase": "idle",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=10ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 10,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49832.312,
+          "elapsed_seconds": 15.078000000001339,
+          "phase": "probe",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49833.312,
+          "elapsed_seconds": 16.07800000000134,
+          "phase": "single",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=11ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 11,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49834.312,
+          "elapsed_seconds": 17.07800000000134,
+          "phase": "single",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49835.312,
+          "elapsed_seconds": 18.07800000000134,
+          "phase": "single",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49836.312,
+          "elapsed_seconds": 19.07800000000134,
+          "phase": "single",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=17ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 17,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49837.312,
+          "elapsed_seconds": 20.07800000000134,
+          "phase": "single",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=11ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 11,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49838.312,
+          "elapsed_seconds": 21.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49839.328,
+          "elapsed_seconds": 22.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=18ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 18,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49840.328,
+          "elapsed_seconds": 23.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=15ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 15,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49841.328,
+          "elapsed_seconds": 24.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=16ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 16,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49842.312,
+          "elapsed_seconds": 25.07800000000134,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49843.328,
+          "elapsed_seconds": 26.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49844.328,
+          "elapsed_seconds": 27.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49845.328,
+          "elapsed_seconds": 28.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=10ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 10,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49846.328,
+          "elapsed_seconds": 29.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49847.328,
+          "elapsed_seconds": 30.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=12ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 12,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49848.328,
+          "elapsed_seconds": 31.0940000000046,
+          "phase": "concurrent",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=10ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 10,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49849.328,
+          "elapsed_seconds": 32.0940000000046,
+          "phase": "recovery",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=11ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 11,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49850.328,
+          "elapsed_seconds": 33.0940000000046,
+          "phase": "recovery",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49851.328,
+          "elapsed_seconds": 34.0940000000046,
+          "phase": "recovery",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=13ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 13,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49852.328,
+          "elapsed_seconds": 35.0940000000046,
+          "phase": "recovery",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49853.343,
+          "elapsed_seconds": 36.109000000004016,
+          "phase": "recovery",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=9ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 9,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49854.343,
+          "elapsed_seconds": 37.109000000004016,
+          "phase": "recovery",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=11ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 11,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49855.343,
+          "elapsed_seconds": 38.109000000004016,
+          "phase": "recovery",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=10ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 10,
+          "rtt_lt_ms": null
+        },
+        {
+          "monotonic": 49856.343,
+          "elapsed_seconds": 39.109000000004016,
+          "phase": "recovery",
+          "raw": "来自 223.5.5.5 的回复: 字节=32 时间=10ms TTL=53",
+          "kind": "reply",
+          "rtt_ms": 10,
+          "rtt_lt_ms": null
+        }
+      ]
+    },
+    "summaries": {
+      "192.168.31.1": {
+        "idle": {
+          "reply_count": 15,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 15,
+          "exact_median_ms": 1,
+          "exact_p95_ms": 54,
+          "exact_max_ms": 54
+        },
+        "probe": {
+          "reply_count": 1,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 1,
+          "exact_median_ms": 2,
+          "exact_p95_ms": 2,
+          "exact_max_ms": 2
+        },
+        "single": {
+          "reply_count": 5,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 5,
+          "exact_median_ms": 1,
+          "exact_p95_ms": 21,
+          "exact_max_ms": 21
+        },
+        "concurrent": {
+          "reply_count": 11,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 11,
+          "exact_median_ms": 1,
+          "exact_p95_ms": 9,
+          "exact_max_ms": 9
+        },
+        "recovery": {
+          "reply_count": 8,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 8,
+          "exact_median_ms": 1,
+          "exact_p95_ms": 18,
+          "exact_max_ms": 18
+        }
+      },
+      "223.5.5.5": {
+        "idle": {
+          "reply_count": 15,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 15,
+          "exact_median_ms": 10,
+          "exact_p95_ms": 48,
+          "exact_max_ms": 48
+        },
+        "probe": {
+          "reply_count": 1,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 1,
+          "exact_median_ms": 9,
+          "exact_p95_ms": 9,
+          "exact_max_ms": 9
+        },
+        "single": {
+          "reply_count": 5,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 5,
+          "exact_median_ms": 11,
+          "exact_p95_ms": 17,
+          "exact_max_ms": 17
+        },
+        "concurrent": {
+          "reply_count": 11,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 11,
+          "exact_median_ms": 10,
+          "exact_p95_ms": 18,
+          "exact_max_ms": 18
+        },
+        "recovery": {
+          "reply_count": 8,
+          "failure_lines": 0,
+          "less_than_1ms_count": 0,
+          "exact_rtt_samples": 8,
+          "exact_median_ms": 10,
+          "exact_p95_ms": 13,
+          "exact_max_ms": 13
+        }
+      }
+    },
+    "summary_note": "exact_* 排除 <1ms 上界；短窗不等于长期损包率。"
+  }
+}

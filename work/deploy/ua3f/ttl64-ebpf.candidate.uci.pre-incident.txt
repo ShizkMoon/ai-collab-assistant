@@ -1,0 +1,10 @@
+# Candidate only. Apply after the SOCKS5 baseline and actual eBPF preflight.
+# This is input for `uci batch`, not an independent service or YAML file.
+set ua3f.main.l3_rewrite_ttl='1'
+set ua3f.main.l3_rewrite_ttl_value='64'
+set ua3f.main.l3_rewrite_bpf_offload='1'
+set ua3f.main.l3_rewrite_ipid='0'
+set ua3f.main.l3_rewrite_tcpts='0'
+set ua3f.main.l3_rewrite_tcpwin='0'
+set ua3f.main.l3_rewrite_block_quic='0'
+commit ua3f

@@ -1,0 +1,94 @@
+{
+  "time": "2026-10-13T01:36:41+08:00",
+  "openclash_uci": {
+    "en_mode": "redir-host",
+    "proxy_mode": "rule",
+    "china_ip_route": "0",
+    "china_ip6_route": "0",
+    "enable_meta_sniffer": "",
+    "enable_meta_sniffer_pure_ip": "",
+    "enable_respect_rules": "0",
+    "enable_redirect_dns": "1",
+    "enable_custom_dns": "0",
+    "enable_udp_proxy": "1",
+    "router_self_proxy": "0",
+    "stream_auto_select": "0",
+    "auto_update": "0",
+    "log_size": "512"
+  },
+  "ua3f_options": {
+    "enabled.enabled": "1",
+    "main.server_mode": "SOCKS5",
+    "main.port": "1080",
+    "main.bind": "127.0.0.1",
+    "main.rewrite_mode": "GLOBAL",
+    "main.ua": "FFF",
+    "main.partial_replace": "0",
+    "main.l3_rewrite_ttl": "0",
+    "main.l3_rewrite_ttl_value": "64",
+    "main.l3_rewrite_ipid": "0",
+    "main.l3_rewrite_tcpts": "0",
+    "main.l3_rewrite_tcpwin": "0",
+    "main.l3_rewrite_block_quic": "0",
+    "main.l3_rewrite_bpf_offload": "0",
+    "main.desync_reorder": "0",
+    "main.desync_reorder_bytes": "1500",
+    "main.desync_reorder_packets": "8",
+    "main.desync_inject": "0",
+    "main.desync_inject_ttl": "3",
+    "main.mitm_enabled": "0"
+  },
+  "core_summary": {
+    "mode": "rule",
+    "ipv6": false,
+    "tcp-concurrent": null,
+    "unified-delay": null,
+    "find-process-mode": null,
+    "log-level": "info",
+    "tun": {
+      "enable": null,
+      "stack": null,
+      "auto-route": null,
+      "auto-detect-interface": null
+    },
+    "sniffer": {
+      "enable": null,
+      "override-destination": null,
+      "parse-pure-ip": null
+    },
+    "dns": {
+      "enable": true,
+      "listen": "0.0.0.0:7874",
+      "enhanced-mode": "redir-host",
+      "respect-rules": false,
+      "ipv6": false
+    },
+    "rules_count": 4415,
+    "ua3f_rule_count": 919,
+    "ua3f_nodes": [
+      {
+        "name": "UA3FLocal",
+        "type": "socks5",
+        "server": "127.0.0.1",
+        "port": 1080,
+        "udp": false
+      }
+    ],
+    "main_selection": "香港 02（专线；智能）",
+    "main_members": [
+      "香港 02（专线；智能）"
+    ]
+  },
+  "ttl_live_chain": "table inet fw4 {\n\tchain ua3f_wan_ttl {\n\t\ttype filter hook postrouting priority mangle; policy accept;\n\t\toifname \"wan\" ip ttl >= 10 counter packets 1777378 bytes 548651194 ip ttl set 64 comment \"WAN IPv4 TTL64\"\n\t\toifname \"eswan2\" ip ttl >= 10 counter packets 1700571 bytes 506979672 ip ttl set 64 comment \"WAN2 IPv4 TTL64\"\n\t}\n}\n",
+  "dnsmasq_upstreams": "127.0.0.1#7874",
+  "health_status": "HEALTHY",
+  "changes_applied": false,
+  "shortcut_source_check": {
+    "function": "action_switch_oc_setting",
+    "matches_fixed_source": true,
+    "contains_yaml_dump": true,
+    "writes_runtime_config": true,
+    "calls_core_hot_reload": true,
+    "runtime_toggle_test_performed": false
+  }
+}

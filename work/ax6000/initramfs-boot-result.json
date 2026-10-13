@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "reboot_requested": true,
+  "boot_flags_verified": {
+    "boot_wait": "on",
+    "uart_en": "1",
+    "flag_boot_rootfs": "1",
+    "flag_last_success": "1",
+    "flag_boot_success": "1",
+    "flag_try_sys1_failed": "0",
+    "flag_try_sys2_failed": "0"
+  },
+  "next_expected_address": "192.168.1.1",
+  "boot_confirmed": false
+}

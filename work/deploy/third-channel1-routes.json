@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "9.9.9.9 via 10.207.112.1 dev eswan3 table 25203 src 10.207.124.112 mark 0x3000000 uid 0 \n    cache \n9.9.9.9 via 10.207.112.1 dev wan src 10.207.122.136 uid 0 \n    cache \n",
+  "stderr": ""
+}

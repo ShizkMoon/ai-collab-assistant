@@ -1,0 +1,22 @@
+### Result
+{
+  "host": "crypto.cloudflare.com",
+  "status": 200,
+  "fields": {
+    "http": "http/2",
+    "tls": "TLSv1.3",
+    "sni": "encrypted",
+    "warp": "off"
+  },
+  "timing": [
+    {
+      "nextHopProtocol": "h2",
+      "duration": 525.3999999910593
+    }
+  ],
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0"
+}
+### Ran Playwright code
+```js
+await page.evaluate('async () => { const url=new URL(\'/cdn-cgi/trace?codex-next=\'+Date.now(),location.href).href; const response=await fetch(url,{cache:\'no-store\'}); const body=await response.text(); const fields=Object.fromEntries(body.split(\'\\n\').filter(x=>/^(http|tls|sni|warp)=/.test(x)).map(x=>x.split(\'=\'))); const timing=performance.getEntriesByName(url).slice(-1).map(x=>({nextHopProtocol:x.nextHopProtocol,duration:x.duration})); return {host:location.hostname,status:response.status,fields,timing,userAgent:navigator.userAgent}; }');
+```

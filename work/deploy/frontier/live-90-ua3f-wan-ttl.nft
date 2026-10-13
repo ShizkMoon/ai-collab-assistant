@@ -1,0 +1,7 @@
+# IPv4 only. Scoped egress; preserve low-TTL diagnostics.
+# Keep UA3F L3/BPF and flow offload disabled with this path.
+chain ua3f_wan_ttl {
+    type filter hook postrouting priority mangle; policy accept;
+    oifname "wan" ip ttl >= 10 counter ip ttl set 64 comment "WAN IPv4 TTL64";
+    oifname "eswan2" ip ttl >= 10 counter ip ttl set 64 comment "WAN2 IPv4 TTL64";
+}
