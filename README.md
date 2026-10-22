@@ -7,6 +7,8 @@
 - [设计原则](docs/principles.md)：约束先行、单一来源、作用域分层、可回退
 - [多 agent 协作](docs/agent-collaboration.md)：全局规则统一、入口与上下文的分层加载、任务边界
 - [助理系统架构](docs/assistant-system.md)：常驻服务、入口包装、状态与凭证的归属、自动化边界
+- [系统拓扑](docs/system-topology.md)：云端 Hermes 入口、本地 Orca 编排、worker 执行的分层与下发链路
+- [本机工具链选型](docs/local-toolchain.md)：CLI/脚本优先的软件清单——游戏开发、视频摄影、游戏、音乐、美术
 
 ## 维护约定
 
