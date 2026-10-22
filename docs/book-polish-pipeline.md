@@ -52,7 +52,7 @@
 ### 6. 推送(Deliver)
 
 - **私有渠道**:上传到云服务器(静态/目录服务)→ Kindle KOReader 经 OPDS/KOSync 拉取;或 Send-to-Kindle 邮箱。
-- **Calibre 归库**:成品进 `~/Calibre Library`,和原文件并存(版本标记如 `_polished`)。
+- **Calibre 归库**:成品进 `/home/shizuku/EBook/Calibre`,和原文件并存(版本标记如 `_polished`)。
 - **任务记录**:每本书产出一条任务记录(清洗报告+转换参数+门禁结果+耗时),反哺提示模板和规则候选——不自动改写 AGENTS.md,候选变更显式确认。
 
 ## 质量与兜底
@@ -70,7 +70,7 @@
 - **编排**:就是 `orchestration run-create` + worker;Calibre watcher 是"事件源",Hermes 是"入口"。
 - **执行工具**:`calibredb`/`ebook-convert`/`ebook-meta`/`epubcheck`/`pandoc`/`weasyprint`(或 typst)+ worker 的 LLM 能力做语义清洗。
 - **呈现**:IM 渠道给"清洗报告"文本图;App/Web 渠道给书籍卡片(封面+清洗 diff 摘要+成品下载/推送按钮)。
-- **固化的细节**(以原生文件为准):书库 `~/Calibre Library`,Kindle 侧 `/mnt/us/Books/` 是 KOReader 的 `home_dir`,字体思源宋体/Literata/苹方已在 `/mnt/us/fonts/`。
+- **固化的细节**(以原生文件为准):书库 `/home/shizuku/EBook/Calibre`,Kindle 侧 `/mnt/us/Books/` 是 KOReader 的 `home_dir`,字体思源宋体/Literata/苹方已在 `/mnt/us/fonts/`。
 - **尚缺**:云端服务器(书成品托管)+ KOSync 账号——这两件等云端 Hermes 就绪一起上,现在不部署。
 
 ## 未决项
