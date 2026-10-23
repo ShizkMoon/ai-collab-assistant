@@ -84,7 +84,52 @@ OEPL 兼容表筛选:`resources/tagtypes/` 全量 JSON(2026-10 拉取)。
 4. **第一屏**:T5 显助手卡;三个标签分别贴 NAS/打印机/绿植
 5. **验收**:断网关 10 分钟,标签仍显最后帧+stale 时间戳=达标
 
-## 6. 未决项
+## 6. AP 网关刷机预备(货未到,步骤先备)
+
+固件源:`github.com/OpenEPaperLink/OpenEPaperLink/releases`(v3.00+)。
+按板子选 bin(`_full.bin` = 合并镜像,单文件烧 0x0 即可):
+
+| AP 硬件 | 固件 | 适用 |
+|---|---|---|
+| **任意 ESP32/ESP32-S3 开发板** ⭐ | `BLE_ONLY_AP_full.bin` | **BLE 路线就选它**——裸板即网关,不带 sub-GHz 射频 |
+| ESP32-S3 16MB/8MB 板 | `ESP32_S3_SIMPLE_AP_full.bin` | 带全套 AP 功能的 S3 板 |
+| LilyGo T-Display 等成品 | `ESP32_S3_16_8_LILYGO_*` 系列 | 按板型号选 |
+| Mini AP v4 成品 | `OpenEPaperLink_Mini_AP_v4_full.bin` | sub-GHz 路线才需要 |
+| ESP32-C6/H2 小板 | `OpenEPaperLink_esp32_C6/H2` 对应 bin | 新芯片备选 |
+
+### 刷写步骤(两条路,任选)
+
+**A. Web 刷机器(最简单)**:Chrome/Edge 打开 OEPL 官方 web flasher
+(仓库 wiki 首页有链)或 `espressif.github.io/esptool-js` → 接 USB →
+选 `BLE_ONLY_AP_full.bin` → 烧 0x0 → 复位。无需装任何软件。
+
+**B. esptool CLI(本机现成)**:
+```bash
+pipx run esptool --chip esp32s3 -p /dev/ttyUSB0 \
+  write_flash 0x0 BLE_ONLY_AP_full.bin
+# esptool 可 pip/pipx 装;或 nix profile add nixpkgs#esptool
+```
+
+### AP 配网与标签入网
+
+1. 烧完 AP 自起 AP 热点(SSID 形如 `OpenEPaperLink`)→ 手机/电脑连上 →
+   Web UI 填家里 WiFi → AP 重启入网,浏览器开 `http://<AP-IP>` 到管理台
+2. **标签入网**:标签长按/上电唤醒 → AP 管理台自动发现 → 一键推送
+   OEPL 固件到标签(BLE OTA)
+3. **锁区注意**:闲鱼下单问卖家"价签能否配网/已解锁否"——部分拆机件
+   被原商户锁网,AP 发现不了;能进 AP 管理台的才是好件
+4. 推图验证:管理台里给标签发一张测试图→显示即通;之后走
+   HTTP API(`POST /imgupload`)交给渲染服务自动喂
+
+### 验收清单
+
+- [ ] AP 热点起得来,Web UI 可进
+- [ ] AP 上家 WiFi 后管理台可访问
+- [ ] 3 个标签全部被发现且 OEPL 固件推送成功
+- [ ] 测试图下发→标签正确显示
+- [ ] 拔 AP 5 分钟再插回,标签自动重连
+
+## 7. 未决项
 
 - AP 路线终选:BLE(HS 系)vs sub-GHz(M2 系)——先买 BLE,若闲鱼
   遇到超便宜 M2/M3 再补第二网关,两条射频并存无冲突
