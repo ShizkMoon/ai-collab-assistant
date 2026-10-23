@@ -11,6 +11,7 @@
 - [本机工具链选型](docs/local-toolchain.md)：CLI/脚本优先的软件清单——游戏开发、视频摄影、游戏、音乐、美术
 - [书籍精修流水线](docs/book-polish-pipeline.md)：云端/Calibre 双触发，清洗/重排/元数据/成品/推送全自动的设计
 - [电子墨水改造两条路线](docs/eink-devkit-plan.md)：KPW5 拆件自研 vs 现成套件——先买套件保体验，屏改造当并行工程
+- [墨水屏显示模块产品线](docs/eink-display-modules.md)：标签/桌面卡/看板/大标牌四梯队选型——OpenEPaperLink ESL + Inkplate + TRMNL，模块作哑渲染终端，KPW5 逆向当选型范例
 
 ## 能力件（随设计沉淀的可执行模块）
 
