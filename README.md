@@ -14,15 +14,16 @@
 - [墨水屏显示模块产品线](docs/eink-display-modules.md)：标签/桌面卡/看板/大标牌四梯队，全部国内现货+高性价比——拆机 ESL 价签(OEPL 开源固件) + LilyGo T5 + 微雪/佳显模组，模块作哑渲染终端，KPW5 逆向当选型范例
 - [墨水屏模块体验设计](docs/eink-modules-ux.md)：环境智能体验原则(2秒可读/零打扰/永远在线/一屏一事/无输入)+ 点位地图 + 筛过的 OEPL 兼容型号采购清单 + ¥300-500 最小落地路径
 
-## 能力件（随设计沉淀的可执行模块）
+## 工具层（可执行工具不属本仓库）
 
-- [Shared RE Toolkit](re-toolkit/)：通用固件/设备/软件逆向 MCP 服务（15 工具）——
+- **Shared RE Toolkit**：通用固件/设备/软件逆向 MCP 服务（15 工具）——已迁至
+  `/data/Agent/nixpkgs-shizuku/pkgs/re-toolkit/` 作为标准 nix 包（`re-toolkit-mcp`，以原生文件为准）。
   注册在 `~/.config/devin/mcp_config.json` 与 `~/.mcporter/mcporter.json`；
   `.venv/` 不入库，重建 `python3 -m venv .venv && pip install 'mcp<2'`
 
 ## 维护约定
 
-- 一件作品一个主目录；本仓库以设计文档为主，但**能力件代码也归属于此**
-  （如 `re-toolkit/`——它是协作体系的能力沉淀，不是独立项目）。
+- 本仓库只放设计文档；**可执行工具归 `/data/Agent/nixpkgs-shizuku`**（标准 nix 包），
+  agent 契约归 `~/.config/devin/skills/`，MCP 注册归 `~/.config/devin/mcp_config.json`。
 - 文档用中文撰写；文件名、目录用稳定的英文 slug。
 - 涉及本机实际配置时，以对应系统的原生文件为准，本仓库记录设计意图与决策，不复制运行中的配置。
