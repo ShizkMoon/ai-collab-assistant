@@ -2,3 +2,5 @@
 Thumbs.db
 *.tmp
 *~
+re-toolkit/.venv/
+re-toolkit/__pycache__/

@@ -12,8 +12,15 @@
 - [书籍精修流水线](docs/book-polish-pipeline.md)：云端/Calibre 双触发，清洗/重排/元数据/成品/推送全自动的设计
 - [电子墨水改造两条路线](docs/eink-devkit-plan.md)：KPW5 拆件自研 vs 现成套件——先买套件保体验，屏改造当并行工程
 
+## 能力件（随设计沉淀的可执行模块）
+
+- [Shared RE Toolkit](re-toolkit/)：通用固件/设备/软件逆向 MCP 服务（15 工具）——
+  注册在 `~/.config/devin/mcp_config.json` 与 `~/.mcporter/mcporter.json`；
+  `.venv/` 不入库，重建 `python3 -m venv .venv && pip install 'mcp<2'`
+
 ## 维护约定
 
-- 一件作品一个主目录；本仓库是设计文档集，不放代码项目本身。
+- 一件作品一个主目录；本仓库以设计文档为主，但**能力件代码也归属于此**
+  （如 `re-toolkit/`——它是协作体系的能力沉淀，不是独立项目）。
 - 文档用中文撰写；文件名、目录用稳定的英文 slug。
 - 涉及本机实际配置时，以对应系统的原生文件为准，本仓库记录设计意图与决策，不复制运行中的配置。
