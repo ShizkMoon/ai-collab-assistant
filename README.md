@@ -13,13 +13,15 @@
 - [电子墨水改造两条路线](docs/eink-devkit-plan.md)：KPW5 拆件自研 vs 现成套件——先买套件保体验，屏改造当并行工程
 - [墨水屏显示模块产品线](docs/eink-display-modules.md)：标签/桌面卡/看板/大标牌四梯队，全部国内现货+高性价比——拆机 ESL 价签(OEPL 开源固件) + LilyGo T5 + 微雪/佳显模组，模块作哑渲染终端，KPW5 逆向当选型范例
 - [墨水屏模块体验设计](docs/eink-modules-ux.md)：环境智能体验原则(2秒可读/零打扰/永远在线/一屏一事/无输入)+ 点位地图 + 筛过的 OEPL 兼容型号采购清单 + ¥300-500 最小落地路径
+- [Personal Agent 设计](docs/personal-agent.md)：入口/编排/执行/记录四层制度——能力登记表、任务生命周期(简报→派发→落定→记录→反哺)、记忆分层;参考 AIWORKSTATION 的 contracts/ADR/体验先行但不照搬其重型中心
+- [宿舍全智能设计](docs/dorm-smart.md)：不动电路/全可拆走/¥1000 内的环境智能——BLE+Zigbee 传感器、HA 本地兜底+agent 增强、墨水屏作环境表面、六场景与分阶段实施清单
 
 ## 工具层（可执行工具不属本仓库）
 
 - **Shared RE Toolkit**：通用固件/设备/软件逆向 MCP 服务（15 工具）——已迁至
   `/data/Agent/nixpkgs-shizuku/pkgs/re-toolkit/` 作为标准 nix 包（`re-toolkit-mcp`，以原生文件为准）。
   注册在 `~/.config/devin/mcp_config.json` 与 `~/.mcporter/mcporter.json`；
-  `.venv/` 不入库，重建 `python3 -m venv .venv && pip install 'mcp<2'`
+  安装 `nix profile add path:/data/Agent/nixpkgs-shizuku#re-toolkit`。
 
 ## 维护约定
 
