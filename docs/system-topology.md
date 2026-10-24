@@ -20,7 +20,7 @@
 
 ## 通道
 
-- **网络层**:Tailscale 组网;云端到本机只暴露 SSH,ACL 收敛到 Hermes 主机。**已落地**:workstation(100.106.191.99,systemd 常驻)、KPW5(100.119.37.98,userspace 模式——只能出不能入,找它走 WiFi 侧 SSH);Hermes 云端待加入。
+- **网络层**:Tailscale 组网;云端到本机只暴露 SSH,ACL 收敛到 Hermes 主机。**已落地**:workstation(systemd 常驻)、KPW5(userspace 模式——只能出不能入,找它走 WiFi 侧 SSH);Hermes 云端待加入。节点地址以 `tailscale status` 为准。
 - **命令面**:Hermes 经 SSH 调用本机 `orca` CLI(解析规则见 orca-cli skill;当前 shim 为 `~/.config/orca/linux-orca-cli-shim/orca`,以原生安装为准)。不另造 RPC,Orca CLI 已覆盖 worktree、agent launch、orchestration、terminal 读写。
 - **入口收敛**:SSH 侧放一个薄入口脚本(`~/.local/bin/`,与入口层约定一致),只暴露四类动作——创建任务、查询状态、读取输出、发送跟进;不给裸 shell 自由操作。
 
@@ -107,5 +107,5 @@ Linux 兼容与速度约定:
 ## 当前状态与阶段
 
 - 已就绪:Orca 1.4.237(NixOS 本机),`orca-cli` / `computer-use` / `orchestration` 三个 skill 已全局安装,worker 侧可被驱动。
-- 未就绪:Hermes 云端部署、Tailscale 组网、薄入口脚本。
+- 未就绪:Hermes 云端部署及其加入 Tailscale(workstation、KPW5 已入网)、薄入口脚本。
 - 顺序:先在本机手动扮演 Hermes 角色把编排链路跑通(建 Run → 派 worker → check 回收 → 回报),链路验证稳定后再上云;通道和入口收敛最后做,且每一步留可回退路径。

@@ -2,7 +2,7 @@
 
 视角:不是"买一堆屏",是**给家里装一套环境智能**——信息长在对的地方,
 路过扫一眼就有答案,永不打扰。配套选型:`eink-display-modules.md`;
-OEPL 兼容表筛选:`resources/tagtypes/` 全量 JSON(2026-10 拉取)。
+OEPL 兼容表筛选:OEPL 上游仓 `resources/tagtypes/` 全量 JSON(2026-10 拉取)。
 
 ## 1. 体验原则(先定规矩再选件)
 
