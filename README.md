@@ -25,6 +25,7 @@
 - [epdiy 内部机制](docs/epdiy-internals.md)：波形系统（`.epw`/`wbf`/LUT/温度档）、16 灰渲染管线、ESP32-S3 LCD_CAM 并行驱动、支持面板对照、ESPHome/HA 集成现状
 - [E-Ink 技术术语对照表](docs/eink-tech-glossary.md)：GDEY/GDEW/ED/OTP 命名、波形模式与 Regal、LUT/VCOM/FPL、协议与刷机缩写速查
 - [智能家居落地技术档案](docs/home-automation-stack.md)：NixOS HA 部署形态对比、mosquitto/zigbee2mqtt/esphome 真实选项名与 systemd 细节、ZBDongle-E/P 与 LYWSD03MMC/LD2410 实操、自动化三层兜底、Zigbee 密钥与 Tailscale 安全面、断电断网恢复矩阵
+- [ESL 价签实操档案](docs/esl-tag-ops.md)：ZBS243/TLSR8359/MSP430 等芯片族刷机路径与救砖、OTA 真实边界(未刷标签/锁区/可配网)、不开壳辨 SoC、电池与天线细节、闲鱼问卖家 5 问+收货 10 分钟检查、2021-2026 成交价锚点、灰屏/虚电/改版焊盘等坑实录
 
 ## 工具层（可执行工具不属本仓库）
 
