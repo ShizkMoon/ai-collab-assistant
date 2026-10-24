@@ -58,7 +58,7 @@ agent 驱动优先的软件选择:能写脚本的不开 GUI,能开 GUI 的不靠
 
 | 工具 | 地位 | 自动化路径 |
 | --- | --- | --- |
-| **ArtCraft 全家桶**(getartcraft.com)| **首选套件** | 开源 Rust 原生应用,macOS/Windows/**Linux**/Web 全平台;官方 "agent-ready":每个应用暴露 CLI、JSON 控制通道和 MCP——与调用优先级完全对齐 |
+| **ArtCraft 全家桶**(getartcraft.com)| **待验证(目标首选)** | 开源 Rust 原生应用,macOS/Windows/**Linux**/Web 全平台;官方 "agent-ready":每个应用暴露 CLI、JSON 控制通道和 MCP——与调用优先级完全对齐 |
 | Krita / Inkscape / GIMP | 成熟备选/兜底 | 原生 Linux,均有 CLI-Anything harness;ArtCraft 各应用尚在 alpha/开发期,功能缺口先用它们顶 |
 | Affinity 系 | 不引入 | 无 Linux 原生 |
 
@@ -74,7 +74,7 @@ ArtCraft 已覆盖大半;补两个开源件:LibreOffice(headless `--convert-to` 
 | --- | --- | --- |
 | Calibre | **首选(已装 9.16.0)** | `calibredb`/`ebook-convert`/`ebook-meta` 全套原生 CLI;CLI-Anything `calibre` harness 已装(`cli-anything-calibre`) |
 | KPW5 有线传书 | ✅ 可用 | KPW5 实为 **USB mass storage**(`1949:0324`,不是 MTP),udisks2 自动挂载到 `/run/media/$USER/Kindle`;calibre 已识别。之前"读不到"是设备未挂载;libmtp udev 规则留作其他 MTP 设备兜底 |
-| KOReader(已装)| 已越狱+已装+已接管 | `ssh -p 2222 root@192.168.31.184`(KOReader 运行时,免密);公钥已写 `usbnet/etc/authorized_keys` 备用。OTA 三件(`otaupd`/`otav3`/`otaup`)已全改 `.bck`;metrics/索引守护已停用;广告关闭;KUAL 里加了 KOReader `--framework_stop` 入口 |
+| KOReader(已装)| 已越狱+已装+已接管 | KOReader 运行时 SSH 已通(端口/地址/认证方式以本机 ssh 配置与 KOReader 设置为准,不在此记录);公钥已写 `usbnet/etc/authorized_keys` 备用。OTA 三件(`otaupd`/`otav3`/`otaup`)已全改 `.bck`;metrics/索引守护已停用;广告关闭;KUAL 里加了 KOReader `--framework_stop` 入口 |
 | Send to Kindle | 备选无线路径 | calibre 内置邮件发送,配一次 Amazon 授权邮箱即可,不依赖 USB |
 
 ## 信息获取(agent-reach)
@@ -89,7 +89,7 @@ ArtCraft 已覆盖大半;补两个开源件:LibreOffice(headless `--convert-to` 
 - Boss直聘:专用 Chrome profile + 手动登录
 - 按约定不配:Facebook、Instagram、小宇宙
 
-## 已装与验证状态(2026-10-22)
+## 已装与验证快照(2026-10-22,以本机实际安装为准)
 
 - 运行时:nodejs 24.21(nix profile)、uv/uvx、`~/.local` npm 前缀
 - agent-reach:5/16 渠道可用,skill 已进 `~/.agents/skills/agent-reach`
