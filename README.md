@@ -16,6 +16,7 @@
 - [Personal Agent 设计](docs/personal-agent.md)：入口/编排/执行/记录四层制度——能力登记表、任务生命周期(简报→派发→落定→记录→反哺)、记忆分层;参考 AIWORKSTATION 的 contracts/ADR/体验先行但不照搬其重型中心
 - [宿舍全智能设计](docs/dorm-smart.md)：不动电路/全可拆走/¥1000 内的环境智能——BLE+Zigbee 传感器、HA 本地兜底+agent 增强、墨水屏作环境表面、六场景与分阶段实施清单
 - [统一渲染管线规格](docs/render-pipeline.md)：数据→PNG+元数据→终端的服务端管线——版面系统/bpp 输出档/温度自适应与局部刷新策略/触发路由/最小环验收
+- [ThinkSmart View 桌面主控台](docs/thinksmart-view-console.md)：唯一可交互表面（触控+语音）——CD-18781Y 改造链路与 LOS 15.1 选型/View Assist 入口/渲染管线富终端档/与 e-ink 哑终端的分工
 
 ### 技术参考档案
 
