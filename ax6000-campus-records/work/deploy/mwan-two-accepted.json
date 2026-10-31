@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "table inet mwan3 {\n\tchain mwan3_dynamic {\n\t\tip daddr @mwan3_dynamic_v4 meta mark set meta mark | 0x3f000000 return\n\t\tip6 daddr @mwan3_dynamic_v6 meta mark set meta mark | 0x3f000000 return\n\t}\n}\n",
+  "stderr": ""
+}

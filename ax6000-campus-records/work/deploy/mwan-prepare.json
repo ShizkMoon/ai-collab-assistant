@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "",
+  "stderr": "/lib/ld-musl-aarch64.so.1: /usr/bin/esurfingclient: Not a valid dynamic program\nERROR: unable to select packages:\n  /tmp/codex-router-stage/mwan3.apk (no such package):\n    required by: world[/tmp/codex-router-stage/mwan3.apk]\n"
+}

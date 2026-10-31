@@ -1,0 +1,83 @@
+{
+  "statuses": [
+    {
+      "up": true,
+      "l3_device": "eswan2",
+      "ipv4-address": [
+        {
+          "address": "10.207.114.16",
+          "mask": 20
+        }
+      ],
+      "route": [
+        {
+          "target": "0.0.0.0",
+          "nexthop": "10.207.112.1"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    "1802: from all fwmark 0x2000000 lookup 25199"
+  ],
+  "kernel_default": true,
+  "uci": {
+    "network.wan2.ip4table": "25202",
+    "network.wan2.defaultroute": "1"
+  },
+  "services": {
+    "esurfingclient": {
+      "instances": {
+        "account1": {
+          "running": true,
+          "pid": 100,
+          "command": [
+            "/c/Users/Shizuku/Documents/Codex/2026-10-12/za/work/deploy/esurfing/simulation-work/native-rule-conflict-a58_f4ck/usr/bin/esurfingclient",
+            "--role",
+            "auth",
+            "--account",
+            "1"
+          ]
+        },
+        "account2": {
+          "running": true,
+          "pid": 200,
+          "command": [
+            "/c/Users/Shizuku/Documents/Codex/2026-10-12/za/work/deploy/esurfing/simulation-work/native-rule-conflict-a58_f4ck/usr/bin/esurfingclient",
+            "--role",
+            "auth",
+            "--account",
+            "2"
+          ]
+        }
+      }
+    }
+  },
+  "calls": [
+    [
+      "uci",
+      "-q",
+      "get",
+      "network.wan2.ip4table"
+    ],
+    [
+      "uci",
+      "-q",
+      "get",
+      "network.wan2.defaultroute"
+    ],
+    [
+      "ip",
+      "-4",
+      "rule",
+      "show"
+    ],
+    [
+      "logger",
+      "-t",
+      "esurfing-route",
+      "--",
+      "wan2 的规则优先级被陌生内容占用。"
+    ]
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "dev=wan packets=3 ttl=37 count=3\ndev=eswan2 packets=3 ttl=37 count=3\nProbe saved: /tmp/ua3f-ttl/nft-baseline; inspect packet values and capture errors.\nNo automatic PASS is claimed. Baseline should show 37; the scoped nft TTL64 probe should show 64 with the original Ethernet source MAC.\nDo not enable the retired UA3F v3.7.0 TC TTL implementation for this test.\n",
+  "stderr": ""
+}

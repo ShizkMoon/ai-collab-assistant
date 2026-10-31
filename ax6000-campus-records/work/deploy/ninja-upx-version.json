@@ -1,0 +1,6 @@
+{
+  "exit": 0,
+  "stdout": "Mihomo Meta ab32ad2d linux arm64 with go1.26.2 Sat 26 Sep 2026 16:37:24 UTC\nUse tags: with_gvisor\n",
+  "stderr": "",
+  "all_digests_match": true
+}

@@ -1,0 +1,4 @@
+{
+  "raw": "qdisc noqueue 0: root refcnt 2 \n",
+  "rate_mbps": 520
+}

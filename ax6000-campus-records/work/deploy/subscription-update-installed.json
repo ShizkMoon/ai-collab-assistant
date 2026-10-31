@@ -1,0 +1,20 @@
+{
+  "installed": {
+    "/etc/openclash/custom/ninja-subscription-update.sh": "960061112bca10b70119a1ee78dfb5e87fb7eee651f4adab48deeabeb5199df5",
+    "/etc/openclash/custom/ninja-subscription-update.rb": "eecf0b0d1fc921e82becb5c6dc7cf34d1df7efc203ec8a0f84a49554b71e3dc8",
+    "/etc/openclash/custom/ninja-subscription-update-options.yaml": "82d55f74a95bed2a67596b5e52062a54ad28d9d04db3967b3e7a9ee72dfd030a",
+    "/usr/share/ninjaconnector2/ninja_sub.sh": "14958d1f818f072c5d33d541c86891fa63f0d4ac8faa3dd3341d9d2a3a900264",
+    "/usr/lib/lua/luci/controller/ninjaconnector2.lua": "8c3555fee92b9edda2acb72b0091032b86ffceeadeb1cd61422eceec6669c4f4",
+    "/usr/share/openclash/openclash.sh": "2b79e1db551022cd8159e3ac6765b514273cc4bcb82245fa7605255f957e49c0"
+  },
+  "stock_ninja_entry_guard_exit": 1,
+  "auto_update": "0",
+  "source_bytes": 217052,
+  "core_pid": "6234",
+  "sysupgrade_include_paths": [
+    "/usr/lib/lua/luci/controller/ninjaconnector2.lua",
+    "/usr/share/ninjaconnector2/ninja_sub.sh",
+    "/usr/share/openclash/openclash.sh"
+  ],
+  "note": "Installed and read back. No subscription request or OpenClash restart yet."
+}

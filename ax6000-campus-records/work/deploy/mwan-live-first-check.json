@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "wan wrapper HTTP=204 curl_exit=0\nwan2 wrapper HTTP=204 curl_exit=0\nPASS: two WAN wrapper probes returned exactly HTTP 204; no redirect following.\nThis checks probes only. Tracking state, authentication, LAN forwarding and UDP still need read-back.\n",
+  "stderr": ""
+}

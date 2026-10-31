@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "search lan\nnameserver 127.0.0.1\nnameserver ::1\nwan wrap=204\neswan2 wrap=204\ntrue\nwan\ntrue\neswan2\nfirewall.@zone[0]=zone\nfirewall.@zone[0].name='lan'\nfirewall.@zone[0].network='lan'\nfirewall.@zone[1]=zone\nfirewall.@zone[1].name='wan'\nfirewall.@zone[1].network='wan' 'wan6' 'wan2' 'wan3'\nfirewall.@rule[0].name='Allow-DHCP-Renew'\nfirewall.@rule[1].name='Allow-Ping'\nfirewall.@rule[2].name='Allow-IGMP'\nfirewall.@rule[3].name='Allow-DHCPv6'\nfirewall.@rule[4].name='Allow-MLD'\nfirewall.@rule[5].name='Allow-ICMPv6-Input'\nfirewall.@rule[6].name='Allow-ICMPv6-Forward'\nfirewall.@rule[7].name='Allow-IPSec-ESP'\nfirewall.@rule[8].name='Allow-ISAKMP'\n",
+  "stderr": "Syntax error: Invalid escape sequence\nIn expression @.ipv4-address[0].address\nNear here ----------^\nSyntax error: Invalid escape sequence\nIn expression @.ipv4-address[0].address\nNear here ----------^\n"
+}

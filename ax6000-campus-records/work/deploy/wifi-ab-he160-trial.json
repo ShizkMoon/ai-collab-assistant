@@ -1,0 +1,153 @@
+{
+  "path": "temporary router RAM file to PC over Wi-Fi",
+  "label": "he160-trial",
+  "total_payload_bytes": 1073741824,
+  "cases": [
+    {
+      "workers": 1,
+      "all_complete": true,
+      "seconds": 6.073763599997619,
+      "mbps": 707.13,
+      "samples": [
+        {
+          "round": 0,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 94264084,
+          "time_total": 0.711927
+        },
+        {
+          "round": 1,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 105364005,
+          "time_total": 0.636932
+        },
+        {
+          "round": 2,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 93903861,
+          "time_total": 0.714658
+        },
+        {
+          "round": 3,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 86339858,
+          "time_total": 0.777267
+        },
+        {
+          "round": 4,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 99548255,
+          "time_total": 0.674139
+        },
+        {
+          "round": 5,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 116116551,
+          "time_total": 0.577948
+        },
+        {
+          "round": 6,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 86817247,
+          "time_total": 0.772993
+        },
+        {
+          "round": 7,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 70144214,
+          "time_total": 0.956729
+        }
+      ]
+    },
+    {
+      "workers": 2,
+      "all_complete": true,
+      "seconds": 7.152268400001049,
+      "mbps": 600.5,
+      "samples": [
+        {
+          "round": 0,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 36691199,
+          "time_total": 1.829021
+        },
+        {
+          "round": 1,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 26559938,
+          "time_total": 2.526699
+        },
+        {
+          "round": 2,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 49250850,
+          "time_total": 1.362597
+        },
+        {
+          "round": 3,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 41267009,
+          "time_total": 1.626214
+        },
+        {
+          "round": 4,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 35513329,
+          "time_total": 1.889684
+        },
+        {
+          "round": 5,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 43035854,
+          "time_total": 1.559374
+        },
+        {
+          "round": 6,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 37151536,
+          "time_total": 1.806358
+        },
+        {
+          "round": 7,
+          "exit": 0,
+          "http_code": 200,
+          "size_download": 67108864,
+          "speed_download": 50035052,
+          "time_total": 1.341239
+        }
+      ]
+    }
+  ],
+  "before": "Station e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t2277322\n\trx packets:\t7589\n\ttx bytes:\t4442392\n\ttx packets:\t9377\n\ttx retries:\t119\n\ttx failed:\t119\n\trx drop misc:\t1\n\tsignal:  \t-38 [-47, -49, -44, -39] dBm\n\tsignal avg:\t-37 [-47, -48, -44, -38] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t807829 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t345418 us\n\tlast ack signal:-36 dBm\n\tavg ack signal:\t-35 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort preamble:\tyes\n\tshort slot time:yes\n\tconnected time:\t28 seconds\n\tassociated at [boottime]:\t2957.036s\n\tassociated at:\t1791801483831 ms\n\tcurrent time:\t1791801512775 ms\n\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5180 MHz [in use]\n\tnoise:\t\t\t\t-92 dBm\n\tchannel active time:\t\t2968505 ms\n\tchannel busy time:\t\t1109454 ms\n\tchannel receive time:\t\t995054 ms\n\tchannel BSS receive time:\t28467 ms\n\tchannel transmit time:\t\t96468 ms\ncpu  20038 0 24432 1131393 91 2749 9041 0 0 0\ncpu0 4913 0 6147 284124 24 1095 846 0 0 0\ncpu1 5964 0 4603 284230 24 485 2136 0 0 0\ncpu2 5447 0 4423 283149 20 481 4300 0 0 0\ncpu3 3712 0 9258 279889 22 686 1758 0 0 0\n",
+  "after": "Station e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t4038759\n\trx packets:\t33361\n\ttx bytes:\t1118488302\n\ttx packets:\t746747\n\ttx retries:\t1510\n\ttx failed:\t1510\n\trx drop misc:\t1\n\tsignal:  \t-39 [-48, -49, -45, -40] dBm\n\tsignal avg:\t-38 [-47, -49, -45, -39] dBm\n\ttx bitrate:\t6.0 MBit/s\n\ttx duration:\t5437821 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t723132 us\n\tlast ack signal:-36 dBm\n\tavg ack signal:\t-36 dBm\n\tairtime weight: 256\n\texpected throughput:\t5.242Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort preamble:\tyes\n\tshort slot time:yes\n\tconnected time:\t42 seconds\n\tassociated at [boottime]:\t2957.036s\n\tassociated at:\t1791801483831 ms\n\tcurrent time:\t1791801526253 ms\n\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5180 MHz [in use]\n\tnoise:\t\t\t\t-92 dBm\n\tchannel active time:\t\t2981983 ms\n\tchannel busy time:\t\t1118750 ms\n\tchannel receive time:\t\t999536 ms\n\tchannel BSS receive time:\t29058 ms\n\tchannel transmit time:\t\t101168 ms\ncpu  20137 0 25399 1135440 91 2776 9292 0 0 0\ncpu0 4955 0 6270 285264 24 1105 852 0 0 0\ncpu1 5988 0 4717 285408 24 493 2138 0 0 0\ncpu2 5477 0 4598 284256 20 485 4315 0 0 0\ncpu3 3716 0 9813 280511 22 692 1985 0 0 0\n"
+}

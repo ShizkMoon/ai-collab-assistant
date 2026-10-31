@@ -1,0 +1,969 @@
+{
+  "created_utc": "2026-10-13T16:10:24.565588+00:00",
+  "goal": "PC multi-connection download stable above 900 Mbps",
+  "goal_achieved": false,
+  "stable_900_verified": false,
+  "controlled_aggregation_useful_for_router_download": true,
+  "same_endpoint_same_12_connection_shape": true,
+  "source_url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/79f6dea5-67d3-4861-94ab-0aaa9d006847/26300.9457.260913-1737.26h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_x64FRE_zh-cn.esd",
+  "controlled_outer_server": "171.108.211.12",
+  "single_bracket_mbps": [
+    330.89,
+    348.43
+  ],
+  "single_bracket_drift_percent": 5.3,
+  "dual_mbps": 611.24,
+  "triple_mbps": 921.67,
+  "dual_gain_over_single_mean_percent": 79.96,
+  "triple_gain_over_dual_percent": 50.79,
+  "triple_multiple_of_single_mean": 2.714,
+  "direct_cases": [
+    {
+      "label": "direct_route_preflight",
+      "path": "router_bound_direct",
+      "assignments": [
+        "wan",
+        "wan2",
+        "wan3"
+      ],
+      "total_connections": 3,
+      "bytes_per_connection": 8388608,
+      "payload_bytes": 25165824,
+      "payload_mbps": 25.01,
+      "seconds": 8.05000000000291,
+      "all_complete": true,
+      "strict_direct_route_coverage": true,
+      "new_owned_outer_by_exit": {
+        "wan": 1,
+        "wan2": 1,
+        "wan3": 1
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 3711871,
+        "wan2": 3525708,
+        "wan3": 6130909
+      },
+      "all_three_present_in_same_snapshot": true,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 9.3,
+          "softirq_percent": 1.7
+        },
+        "cpu0": {
+          "busy_percent": 6.8,
+          "softirq_percent": 0.4
+        },
+        "cpu1": {
+          "busy_percent": 9.1,
+          "softirq_percent": 0.9
+        },
+        "cpu2": {
+          "busy_percent": 10.8,
+          "softirq_percent": 4.9
+        },
+        "cpu3": {
+          "busy_percent": 10.4,
+          "softirq_percent": 0.7
+        }
+      },
+      "max_core_busy_percent": 22.2,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 9
+    },
+    {
+      "label": "raw_single_a1",
+      "path": "router_bound_direct",
+      "assignments": [
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan"
+      ],
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 330.89,
+      "seconds": 19.470000000001164,
+      "all_complete": true,
+      "strict_direct_route_coverage": true,
+      "new_owned_outer_by_exit": {
+        "wan": 12,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 709692481,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "all_three_present_in_same_snapshot": false,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 21.6,
+          "softirq_percent": 4.7
+        },
+        "cpu0": {
+          "busy_percent": 23.2,
+          "softirq_percent": 0.7
+        },
+        "cpu1": {
+          "busy_percent": 19.1,
+          "softirq_percent": 1.0
+        },
+        "cpu2": {
+          "busy_percent": 27.4,
+          "softirq_percent": 16.0
+        },
+        "cpu3": {
+          "busy_percent": 16.4,
+          "softirq_percent": 0.6
+        }
+      },
+      "max_core_busy_percent": 33.6,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 18
+    },
+    {
+      "label": "raw_dual",
+      "path": "router_bound_direct",
+      "assignments": [
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan2",
+        "wan2",
+        "wan2",
+        "wan2",
+        "wan2",
+        "wan2"
+      ],
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 611.24,
+      "seconds": 10.540000000008149,
+      "all_complete": true,
+      "strict_direct_route_coverage": true,
+      "new_owned_outer_by_exit": {
+        "wan": 6,
+        "wan2": 6,
+        "wan3": 0
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 273814662,
+        "wan2": 284019519,
+        "wan3": 0
+      },
+      "all_three_present_in_same_snapshot": false,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 28.9,
+          "softirq_percent": 6.0
+        },
+        "cpu0": {
+          "busy_percent": 36.5,
+          "softirq_percent": 0.7
+        },
+        "cpu1": {
+          "busy_percent": 22.5,
+          "softirq_percent": 0.8
+        },
+        "cpu2": {
+          "busy_percent": 33.4,
+          "softirq_percent": 21.7
+        },
+        "cpu3": {
+          "busy_percent": 23.0,
+          "softirq_percent": 0.6
+        }
+      },
+      "max_core_busy_percent": 51.7,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 11
+    },
+    {
+      "label": "raw_triple",
+      "path": "router_bound_direct",
+      "assignments": [
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan2",
+        "wan2",
+        "wan2",
+        "wan2",
+        "wan3",
+        "wan3",
+        "wan3",
+        "wan3"
+      ],
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 921.67,
+      "seconds": 6.990000000005239,
+      "all_complete": true,
+      "strict_direct_route_coverage": true,
+      "new_owned_outer_by_exit": {
+        "wan": 4,
+        "wan2": 4,
+        "wan3": 4
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 211064760,
+        "wan2": 203834832,
+        "wan3": 187076944
+      },
+      "all_three_present_in_same_snapshot": true,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 36.1,
+          "softirq_percent": 7.7
+        },
+        "cpu0": {
+          "busy_percent": 45.2,
+          "softirq_percent": 0.9
+        },
+        "cpu1": {
+          "busy_percent": 26.2,
+          "softirq_percent": 0.9
+        },
+        "cpu2": {
+          "busy_percent": 44.2,
+          "softirq_percent": 28.4
+        },
+        "cpu3": {
+          "busy_percent": 28.7,
+          "softirq_percent": 0.6
+        }
+      },
+      "max_core_busy_percent": 53.9,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 7
+    },
+    {
+      "label": "raw_single_a2",
+      "path": "router_bound_direct",
+      "assignments": [
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan"
+      ],
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 348.43,
+      "seconds": 18.49000000000524,
+      "all_complete": true,
+      "strict_direct_route_coverage": true,
+      "new_owned_outer_by_exit": {
+        "wan": 12,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 705847652,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "all_three_present_in_same_snapshot": false,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 22.2,
+          "softirq_percent": 4.8
+        },
+        "cpu0": {
+          "busy_percent": 23.3,
+          "softirq_percent": 0.7
+        },
+        "cpu1": {
+          "busy_percent": 17.6,
+          "softirq_percent": 1.0
+        },
+        "cpu2": {
+          "busy_percent": 27.6,
+          "softirq_percent": 16.4
+        },
+        "cpu3": {
+          "busy_percent": 20.1,
+          "softirq_percent": 0.7
+        }
+      },
+      "max_core_busy_percent": 31.9,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 18
+    }
+  ],
+  "other_endpoint_direct_cases": [
+    {
+      "label": "direct_route_preflight",
+      "path": "router_bound_direct",
+      "assignments": [
+        "wan",
+        "wan2",
+        "wan3"
+      ],
+      "total_connections": 3,
+      "bytes_per_connection": 8388608,
+      "payload_bytes": 25165824,
+      "payload_mbps": 24.95,
+      "seconds": 8.069999999992433,
+      "all_complete": true,
+      "strict_direct_route_coverage": true,
+      "new_owned_outer_by_exit": {
+        "wan": 1,
+        "wan2": 1,
+        "wan3": 1
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 7093026,
+        "wan2": 6347616,
+        "wan3": 7444262
+      },
+      "all_three_present_in_same_snapshot": true,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 13.9,
+          "softirq_percent": 2.6
+        },
+        "cpu0": {
+          "busy_percent": 13.7,
+          "softirq_percent": 0.4
+        },
+        "cpu1": {
+          "busy_percent": 11.2,
+          "softirq_percent": 1.0
+        },
+        "cpu2": {
+          "busy_percent": 18.3,
+          "softirq_percent": 8.5
+        },
+        "cpu3": {
+          "busy_percent": 12.7,
+          "softirq_percent": 0.5
+        }
+      },
+      "max_core_busy_percent": 36.7,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 9
+    },
+    {
+      "label": "raw_triple_actual_pc_endpoint",
+      "path": "router_bound_direct",
+      "assignments": [
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan2",
+        "wan2",
+        "wan2",
+        "wan2",
+        "wan3",
+        "wan3",
+        "wan3",
+        "wan3"
+      ],
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 146.25,
+      "seconds": 44.05000000000291,
+      "all_complete": true,
+      "strict_direct_route_coverage": true,
+      "new_owned_outer_by_exit": {
+        "wan": 4,
+        "wan2": 4,
+        "wan3": 4
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 262869553,
+        "wan2": 260765323,
+        "wan3": 259763503
+      },
+      "all_three_present_in_same_snapshot": true,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 18.2,
+          "softirq_percent": 3.7
+        },
+        "cpu0": {
+          "busy_percent": 19.0,
+          "softirq_percent": 0.4
+        },
+        "cpu1": {
+          "busy_percent": 14.7,
+          "softirq_percent": 0.7
+        },
+        "cpu2": {
+          "busy_percent": 23.4,
+          "softirq_percent": 13.1
+        },
+        "cpu3": {
+          "busy_percent": 15.3,
+          "softirq_percent": 0.5
+        }
+      },
+      "max_core_busy_percent": 38.2,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 40
+    }
+  ],
+  "pc_complete_batches": [
+    {
+      "label": "pc_cake_650_a1",
+      "path": "pc_current_path",
+      "assignments": null,
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 162.44,
+      "seconds": 39.661178700014716,
+      "all_complete": true,
+      "strict_direct_route_coverage": null,
+      "new_owned_outer_by_exit": {
+        "wan": 0,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 0,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "all_three_present_in_same_snapshot": false,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 50.8,
+          "softirq_percent": 16.6
+        },
+        "cpu0": {
+          "busy_percent": 49.8,
+          "softirq_percent": 5.0
+        },
+        "cpu1": {
+          "busy_percent": 47.1,
+          "softirq_percent": 12.8
+        },
+        "cpu2": {
+          "busy_percent": 55.0,
+          "softirq_percent": 38.9
+        },
+        "cpu3": {
+          "busy_percent": 51.1,
+          "softirq_percent": 9.3
+        }
+      },
+      "max_core_busy_percent": 98.1,
+      "intervals_any_core_90_percent": 5,
+      "sample_intervals": 34
+    },
+    {
+      "label": "pc_cake_off_b",
+      "path": "pc_current_path",
+      "assignments": null,
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 169.6,
+      "seconds": 37.986758900020504,
+      "all_complete": true,
+      "strict_direct_route_coverage": null,
+      "new_owned_outer_by_exit": {
+        "wan": 0,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 0,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "all_three_present_in_same_snapshot": false,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 53.9,
+          "softirq_percent": 15.2
+        },
+        "cpu0": {
+          "busy_percent": 54.5,
+          "softirq_percent": 4.6
+        },
+        "cpu1": {
+          "busy_percent": 51.3,
+          "softirq_percent": 12.4
+        },
+        "cpu2": {
+          "busy_percent": 54.9,
+          "softirq_percent": 32.8
+        },
+        "cpu3": {
+          "busy_percent": 55.0,
+          "softirq_percent": 11.0
+        }
+      },
+      "max_core_busy_percent": 82.2,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 30
+    },
+    {
+      "label": "pc_cake_650_a1",
+      "path": "pc_current_path",
+      "assignments": null,
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 352.73,
+      "seconds": 18.264686000009533,
+      "all_complete": true,
+      "strict_direct_route_coverage": null,
+      "new_owned_outer_by_exit": {
+        "wan": 0,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 0,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "all_three_present_in_same_snapshot": false,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 83.7,
+          "softirq_percent": 34.1
+        },
+        "cpu0": {
+          "busy_percent": 79.9,
+          "softirq_percent": 10.0
+        },
+        "cpu1": {
+          "busy_percent": 80.0,
+          "softirq_percent": 23.2
+        },
+        "cpu2": {
+          "busy_percent": 96.4,
+          "softirq_percent": 89.9
+        },
+        "cpu3": {
+          "busy_percent": 78.6,
+          "softirq_percent": 12.8
+        }
+      },
+      "max_core_busy_percent": 100.0,
+      "intervals_any_core_90_percent": 12,
+      "sample_intervals": 14
+    },
+    {
+      "label": "pc_cake_off_b",
+      "path": "pc_current_path",
+      "assignments": null,
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 254.92,
+      "seconds": 25.272770099982154,
+      "all_complete": true,
+      "strict_direct_route_coverage": null,
+      "new_owned_outer_by_exit": {
+        "wan": 0,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 0,
+        "wan2": 0,
+        "wan3": 0
+      },
+      "all_three_present_in_same_snapshot": false,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 61.2,
+          "softirq_percent": 19.5
+        },
+        "cpu0": {
+          "busy_percent": 62.7,
+          "softirq_percent": 5.2
+        },
+        "cpu1": {
+          "busy_percent": 57.5,
+          "softirq_percent": 16.4
+        },
+        "cpu2": {
+          "busy_percent": 63.2,
+          "softirq_percent": 43.4
+        },
+        "cpu3": {
+          "busy_percent": 61.3,
+          "softirq_percent": 12.5
+        }
+      },
+      "max_core_busy_percent": 85.9,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 20
+    },
+    {
+      "label": "pc_current_cake_650_actual_outer",
+      "path": "pc_current_path",
+      "assignments": null,
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 213.5,
+      "seconds": 30.175384800008032,
+      "all_complete": true,
+      "strict_direct_route_coverage": null,
+      "new_owned_outer_by_exit": {
+        "wan": 3,
+        "wan2": 3,
+        "wan3": 1
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 193543441,
+        "wan2": 151444298,
+        "wan3": 65417436
+      },
+      "all_three_present_in_same_snapshot": true,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 67.6,
+          "softirq_percent": 24.8
+        },
+        "cpu0": {
+          "busy_percent": 63.0,
+          "softirq_percent": 6.1
+        },
+        "cpu1": {
+          "busy_percent": 63.4,
+          "softirq_percent": 15.9
+        },
+        "cpu2": {
+          "busy_percent": 78.6,
+          "softirq_percent": 64.8
+        },
+        "cpu3": {
+          "busy_percent": 65.0,
+          "softirq_percent": 11.4
+        }
+      },
+      "max_core_busy_percent": 98.7,
+      "intervals_any_core_90_percent": 10,
+      "sample_intervals": 21,
+      "actual_owned_outer_servers": [
+        "120.226.112.10"
+      ]
+    }
+  ],
+  "pc_observed_payload_range_mbps": [
+    162.44,
+    352.73
+  ],
+  "latest_pc_process_cpu": {
+    "unit": "percent of one logical CPU; AT_CLKTCK 100",
+    "max_interval_percent": {
+      "ua3f": 66.86,
+      "clash": 63.02
+    },
+    "intervals": [
+      {
+        "ua3f": 41.85,
+        "clash": 41.85
+      },
+      {
+        "ua3f": 54.83,
+        "clash": 49.42
+      },
+      {
+        "ua3f": 58.0,
+        "clash": 54.55
+      },
+      {
+        "ua3f": 66.86,
+        "clash": 52.82
+      },
+      {
+        "ua3f": 50.35,
+        "clash": 43.81
+      },
+      {
+        "ua3f": 45.31,
+        "clash": 40.64
+      },
+      {
+        "ua3f": 58.06,
+        "clash": 47.74
+      },
+      {
+        "ua3f": 39.54,
+        "clash": 61.98
+      },
+      {
+        "ua3f": 58.01,
+        "clash": 63.02
+      },
+      {
+        "ua3f": 53.71,
+        "clash": 57.95
+      },
+      {
+        "ua3f": 58.79,
+        "clash": 58.09
+      },
+      {
+        "ua3f": 53.73,
+        "clash": 56.52
+      },
+      {
+        "ua3f": 54.01,
+        "clash": 55.38
+      },
+      {
+        "ua3f": 54.15,
+        "clash": 50.49
+      },
+      {
+        "ua3f": 47.55,
+        "clash": 45.91
+      },
+      {
+        "ua3f": 34.78,
+        "clash": 44.72
+      },
+      {
+        "ua3f": 31.4,
+        "clash": 29.79
+      },
+      {
+        "ua3f": 23.25,
+        "clash": 30.47
+      },
+      {
+        "ua3f": 4.23,
+        "clash": 5.93
+      },
+      {
+        "ua3f": 6.22,
+        "clash": 15.99
+      },
+      {
+        "ua3f": 4.53,
+        "clash": 6.34
+      }
+    ]
+  },
+  "ua3f_layer_cases": [
+    {
+      "label": "router_ua3f_12_fixed_endpoint",
+      "path": "router_ua3f_socks",
+      "assignments": [
+        "socks",
+        "socks",
+        "socks",
+        "socks",
+        "socks",
+        "socks",
+        "socks",
+        "socks",
+        "socks",
+        "socks",
+        "socks",
+        "socks"
+      ],
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 902.3,
+      "seconds": 7.139999999999418,
+      "all_complete": true,
+      "strict_direct_route_coverage": null,
+      "new_owned_outer_by_exit": {
+        "wan": 4,
+        "wan2": 4,
+        "wan3": 4
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 175544512,
+        "wan2": 191847008,
+        "wan3": 176536000
+      },
+      "all_three_present_in_same_snapshot": true,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 57.5,
+          "softirq_percent": 13.4
+        },
+        "cpu0": {
+          "busy_percent": 62.8,
+          "softirq_percent": 5.5
+        },
+        "cpu1": {
+          "busy_percent": 53.4,
+          "softirq_percent": 6.9
+        },
+        "cpu2": {
+          "busy_percent": 60.9,
+          "softirq_percent": 35.0
+        },
+        "cpu3": {
+          "busy_percent": 53.3,
+          "softirq_percent": 6.6
+        }
+      },
+      "max_core_busy_percent": 77.0,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 7,
+      "socks_outer_coverage": {
+        "ua3f_pid": "4940",
+        "fixed_outer_server": "171.108.211.12",
+        "observed_target_outer": 12,
+        "request_count": 12,
+        "all_target_requests_observed": true,
+        "all_matching_outer_have_exit": true,
+        "positive_receive_growth": true,
+        "all_new_outer_have_received_payload": false,
+        "individual_inner_to_outer_mapping": false
+      },
+      "actual_owned_outer_servers": [
+        "171.108.211.12"
+      ]
+    },
+    {
+      "label": "raw_triple_repeat_after_ua3f",
+      "path": "router_bound_direct",
+      "assignments": [
+        "wan",
+        "wan",
+        "wan",
+        "wan",
+        "wan2",
+        "wan2",
+        "wan2",
+        "wan2",
+        "wan3",
+        "wan3",
+        "wan3",
+        "wan3"
+      ],
+      "total_connections": 12,
+      "bytes_per_connection": 67108864,
+      "payload_bytes": 805306368,
+      "payload_mbps": 908.67,
+      "seconds": 7.0900000000110595,
+      "all_complete": true,
+      "strict_direct_route_coverage": true,
+      "new_owned_outer_by_exit": {
+        "wan": 4,
+        "wan2": 4,
+        "wan3": 4
+      },
+      "reply_byte_growth_by_exit": {
+        "wan": 207646888,
+        "wan2": 214953408,
+        "wan3": 223638144
+      },
+      "all_three_present_in_same_snapshot": true,
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 33.7,
+          "softirq_percent": 6.8
+        },
+        "cpu0": {
+          "busy_percent": 43.4,
+          "softirq_percent": 0.8
+        },
+        "cpu1": {
+          "busy_percent": 25.4,
+          "softirq_percent": 0.7
+        },
+        "cpu2": {
+          "busy_percent": 40.2,
+          "softirq_percent": 25.5
+        },
+        "cpu3": {
+          "busy_percent": 26.0,
+          "softirq_percent": 0.5
+        }
+      },
+      "max_core_busy_percent": 52.5,
+      "intervals_any_core_90_percent": 0,
+      "sample_intervals": 8,
+      "socks_outer_coverage": null,
+      "actual_owned_outer_servers": [
+        "171.108.211.12"
+      ]
+    }
+  ],
+  "ua3f_layer_error": null,
+  "restoration": {
+    "direct": {
+      "queue_restored": true,
+      "pids_unchanged": true,
+      "cleanup_complete": true,
+      "error": null
+    },
+    "endpoint": {
+      "queue_restored": true,
+      "pids_unchanged": true,
+      "cleanup_complete": true,
+      "error": null
+    },
+    "ua3f_layer": {
+      "queue_restored": true,
+      "pids_unchanged": true,
+      "cleanup_complete": true,
+      "error": null
+    }
+  },
+  "lan_current_cases": [
+    {
+      "parallel": 1,
+      "seconds": 7.574153000008664,
+      "payload_mbps": 567.0557877554213,
+      "all_complete": true
+    },
+    {
+      "parallel": 2,
+      "seconds": 7.149785900008283,
+      "payload_mbps": 600.7127144877197,
+      "all_complete": true
+    },
+    {
+      "parallel": 2,
+      "seconds": 7.095273500002804,
+      "payload_mbps": 605.3279406351711,
+      "all_complete": true
+    }
+  ],
+  "limits": [
+    "The 921.67 Mbps result is a 6.99-second complete router download, not PC or stable 900 acceptance.",
+    "PC inner --resolve did not fix the Internet outer address; different hostname-resolution peers were observed.",
+    "PC latest sample proves same-window new owned UA3F outer flows and positive receive-byte growth on all three exits, but not per-curl mapping or an exact 4/4/4 split.",
+    "PC CAKE-on/off pairs did not hold the outer CDN fixed; do not infer a causal CAKE speed or CPU effect.",
+    "Current daily download CAKE is restored to 650 Mbit; estimated ideal IPv4 TCP application ceiling is roughly 612-617 Mbps.",
+    "The raw different-CDN triple 146.25 Mbps shows source/path sensitivity; it does not isolate a server or campus per-account quota.",
+    "Current RAM-to-PC WLAN samples include local HTTP-server cost and do not uniquely locate a Wi-Fi bottleneck.",
+    "No new account, network/auth/proxy restart, conntrack flush, firmware flash or persistent traffic-policy change was performed.",
+    "No three repeated 30-second PC windows above 900 Mbps were recorded; significant under-target PC results did not justify high-volume stability tests."
+  ]
+}

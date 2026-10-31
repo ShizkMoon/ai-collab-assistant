@@ -1,0 +1,38 @@
+{
+  "original_dns_strategy": true,
+  "isolated_cache": true,
+  "records": [
+    {
+      "name": "www.gdpu.edu.cn",
+      "port": 17874,
+      "type": 1,
+      "rcode": 2,
+      "answers": 0,
+      "a": [],
+      "rr_types": [],
+      "truncated": false,
+      "passed": false,
+      "ms": 5239.6
+    },
+    {
+      "name": "www.189.cn",
+      "port": 17874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 3,
+      "a": [
+        "14.22.20.209",
+        "27.159.75.27"
+      ],
+      "rr_types": [
+        5,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 230.7
+    }
+  ],
+  "scope": "Original strategy on isolated core; comparison of unchanged campus policy, not a historic pre-change packet sample."
+}

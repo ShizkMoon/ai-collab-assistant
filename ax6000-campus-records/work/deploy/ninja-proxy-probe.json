@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "proxy_http=204 connect=0.000560 tls=0.074412 total=0.089496\ndirect_http=200\n",
+  "stderr": ""
+}

@@ -1,0 +1,72 @@
+{
+  "samples": [
+    {
+      "tcp_mib": 1.32,
+      "available_mib": 211.33
+    },
+    {
+      "tcp_mib": 49.93,
+      "available_mib": 125.23
+    },
+    {
+      "tcp_mib": 41.45,
+      "available_mib": 139.4
+    },
+    {
+      "tcp_mib": 31.25,
+      "available_mib": 145.94
+    },
+    {
+      "tcp_mib": 48.91,
+      "available_mib": 122.75
+    },
+    {
+      "tcp_mib": 49.09,
+      "available_mib": 126.91
+    },
+    {
+      "tcp_mib": 29.49,
+      "available_mib": 159.38
+    },
+    {
+      "tcp_mib": 49.48,
+      "available_mib": 123.54
+    },
+    {
+      "tcp_mib": 49.38,
+      "available_mib": 132.61
+    },
+    {
+      "tcp_mib": 18.12,
+      "available_mib": 176.99
+    },
+    {
+      "tcp_mib": 14.21,
+      "available_mib": 178.7
+    },
+    {
+      "tcp_mib": 9.58,
+      "available_mib": 182.41
+    },
+    {
+      "tcp_mib": 8.8,
+      "available_mib": 182.78
+    },
+    {
+      "tcp_mib": 12.9,
+      "available_mib": 180.23
+    },
+    {
+      "tcp_mib": 6.86,
+      "available_mib": 187.79
+    },
+    {
+      "tcp_mib": 1.69,
+      "available_mib": 192.12
+    }
+  ],
+  "peak_tcp_mib": 49.93,
+  "min_available_mib": 122.75,
+  "observed_mbps": 470.74,
+  "all_complete": true
+}

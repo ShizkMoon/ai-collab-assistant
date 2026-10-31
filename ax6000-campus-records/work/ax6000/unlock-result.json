@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "root_shell": true,
+  "cpu_arch": "aarch64",
+  "ssh_only": true,
+  "telnet_fallback_used": false,
+  "bootloader_written": false,
+  "pre_unlock_files_exist": true,
+  "payload_cleaned": true,
+  "time_restored": true,
+  "diag_restored": true
+}

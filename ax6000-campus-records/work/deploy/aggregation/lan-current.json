@@ -1,0 +1,304 @@
+{
+  "path": "current router RAM HTTP to PC WLAN; 8 x 64MiB per batch",
+  "network_changes": false,
+  "cases": [
+    {
+      "parallel": 1,
+      "streams": [
+        {
+          "id": 0,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 0.794962,
+          "local_ip": "192.168.31.171",
+          "started": 131004.7580976,
+          "ended": 131005.603276,
+          "complete": true
+        },
+        {
+          "id": 1,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.138567,
+          "local_ip": "192.168.31.171",
+          "started": 131005.6032986,
+          "ended": 131006.7723692,
+          "complete": true
+        },
+        {
+          "id": 2,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.015363,
+          "local_ip": "192.168.31.171",
+          "started": 131006.7724054,
+          "ended": 131007.818608,
+          "complete": true
+        },
+        {
+          "id": 3,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 0.674331,
+          "local_ip": "192.168.31.171",
+          "started": 131007.818626,
+          "ended": 131008.5237472,
+          "complete": true
+        },
+        {
+          "id": 4,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 0.931574,
+          "local_ip": "192.168.31.171",
+          "started": 131008.523765,
+          "ended": 131009.4852998,
+          "complete": true
+        },
+        {
+          "id": 5,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 0.827341,
+          "local_ip": "192.168.31.171",
+          "started": 131009.4853177,
+          "ended": 131010.3457246,
+          "complete": true
+        },
+        {
+          "id": 6,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 0.85902,
+          "local_ip": "192.168.31.171",
+          "started": 131010.3457434,
+          "ended": 131011.2366723,
+          "complete": true
+        },
+        {
+          "id": 7,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.029603,
+          "local_ip": "192.168.31.171",
+          "started": 131011.2366897,
+          "ended": 131012.3056238,
+          "complete": true
+        }
+      ],
+      "all_complete": true,
+      "bytes": 536870912,
+      "seconds": 7.574153000008664,
+      "payload_mbps": 567.0557877554213,
+      "before": "cpu  370769 0 594861 39398073 120 74273 199960 0 0 0\ncpu0 100753 0 137205 9888183 19 27455 25301 0 0 0\ncpu1 103481 0 113954 9896435 33 13974 54344 0 0 0\ncpu2 99970 0 111958 9875757 30 13158 87769 0 0 0\ncpu3 66563 0 231743 9737696 37 19686 32545 0 0 0\nintr 286910665 0 2990006 136883394 0 0 0 0 0 0 0 0 77457113 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 549011 1540753 0 0 9869407 13488712 0 0 0 0 1 0 0 0 0 44132255\nctxt 402884689\nbtime 1791803652\nprocesses 949803\nprocs_running 1\nprocs_blocked 0\nsoftirq 183615152 0 11033224 692244 26908562 0 0 91519184 31670631 387829 21403478\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t11474300236\n\trx packets:\t15091209\n\ttx bytes:\t39670246298\n\ttx packets:\t31300230\n\ttx retries:\t147682\n\ttx failed:\t147738\n\trx drop misc:\t3\n\tsignal:  \t-38 [-47, -46, -44, -41] dBm\n\tsignal avg:\t-38 [-46, -46, -44, -40] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t969106324 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t479399675 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-39 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t102038 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745488 ms\n\tcurrent time:\t1791905783888 ms\n\nStation 3a:b9:9d:bd:d7:b5 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t83358744\n\trx packets:\t748658\n\ttx bytes:\t3443535720\n\ttx packets:\t3973815\n\ttx retries:\t33852\n\ttx failed:\t33864\n\trx drop misc:\t3\n\tsignal:  \t-40 [-45, -44, -50, -44] dBm\n\tsignal avg:\t-40 [-43, -49, -50, -44] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t334676462 us\n\trx bitrate:\t960.7 MBit/s 80MHz HE-MCS 9 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t59136115 us\n\tlast ack signal:-37 dBm\n\tavg ack signal:\t-37 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t23054 seconds\n\tassociated at [boottime]:\t79077.588s\n\tassociated at:\t1791882729592 ms\n\tcurrent time:\t1791905783888 ms\n\nStation 56:6b:90:bc:c9:87 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t8960 ms\n\trx bytes:\t3918383\n\trx packets:\t22950\n\ttx bytes:\t59614887\n\ttx packets:\t48118\n\ttx retries:\t2323\n\ttx failed:\t2327\n\trx drop misc:\t3\n\tsignal:  \t-60 [-67, -66, -64, -65] dBm\n\tsignal avg:\t-53 [-60, -58, -58, -58] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t2315954 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t1430726 us\n\tlast ack signal:-58 dBm\n\tavg ack signal:\t-53 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t688 seconds\n\tassociated at [boottime]:\t101443.555s\n\tassociated at:\t1791905095559 ms\n\tcurrent time:\t1791905783888 ms\n\nMemAvailable:     112152 kB\n",
+      "after": "cpu  370785 0 595240 39400601 120 74285 200158 0 0 0\ncpu0 100761 0 137340 9888784 19 27459 25351 0 0 0\ncpu1 103482 0 113958 9897158 33 13976 54390 0 0 0\ncpu2 99976 0 111967 9876517 30 13159 87774 0 0 0\ncpu3 66563 0 231973 9738140 37 19690 32641 0 0 0\nintr 286943733 0 2990329 136894968 0 0 0 0 0 0 0 0 77469177 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 549011 1540861 0 0 9869657 13488913 0 0 0 0 1 0 0 0 0 44140803\nctxt 402920781\nbtime 1791803652\nprocesses 949819\nprocs_running 1\nprocs_blocked 0\nsoftirq 183651832 0 11034400 692529 26910873 0 0 91540597 31671716 396094 21405623\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t0 ms\n\trx bytes:\t11475894253\n\trx packets:\t15102580\n\ttx bytes:\t40227019236\n\ttx packets:\t31668356\n\ttx retries:\t148610\n\ttx failed:\t148666\n\trx drop misc:\t3\n\tsignal:  \t-38 [-47, -46, -44, -41] dBm\n\tsignal avg:\t-38 [-47, -46, -44, -40] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t972024028 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t479638855 us\n\tlast ack signal:-40 dBm\n\tavg ack signal:\t-39 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t102046 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745487 ms\n\tcurrent time:\t1791905791708 ms\n\nStation 3a:b9:9d:bd:d7:b5 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t20 ms\n\trx bytes:\t83387135\n\trx packets:\t749016\n\ttx bytes:\t3444569486\n\ttx packets:\t3974926\n\ttx retries:\t33871\n\ttx failed:\t33883\n\trx drop misc:\t3\n\tsignal:  \t-41 [-43, -52, -51, -45] dBm\n\tsignal avg:\t-40 [-43, -50, -49, -43] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t334752652 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t59166923 us\n\tlast ack signal:-37 dBm\n\tavg ack signal:\t-37 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t23062 seconds\n\tassociated at [boottime]:\t79077.588s\n\tassociated at:\t1791882729592 ms\n\tcurrent time:\t1791905791708 ms\n\nStation 56:6b:90:bc:c9:87 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t16780 ms\n\trx bytes:\t3918383\n\trx packets:\t22950\n\ttx bytes:\t59614887\n\ttx packets:\t48118\n\ttx retries:\t2323\n\ttx failed:\t2327\n\trx drop misc:\t3\n\tsignal:  \t-60 [-67, -66, -64, -65] dBm\n\tsignal avg:\t-53 [-60, -58, -58, -58] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t2315954 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t1430726 us\n\tlast ack signal:-58 dBm\n\tavg ack signal:\t-53 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t696 seconds\n\tassociated at [boottime]:\t101443.555s\n\tassociated at:\t1791905095558 ms\n\tcurrent time:\t1791905791708 ms\n\nMemAvailable:     120104 kB\n"
+    },
+    {
+      "parallel": 2,
+      "streams": [
+        {
+          "id": 0,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.907051,
+          "local_ip": "192.168.31.171",
+          "started": 131012.8134178,
+          "ended": 131014.7526954,
+          "complete": true
+        },
+        {
+          "id": 1,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.614291,
+          "local_ip": "192.168.31.171",
+          "started": 131012.8136489,
+          "ended": 131014.4601082,
+          "complete": true
+        },
+        {
+          "id": 2,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.296103,
+          "local_ip": "192.168.31.171",
+          "started": 131014.4601211,
+          "ended": 131015.7874607,
+          "complete": true
+        },
+        {
+          "id": 3,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.912526,
+          "local_ip": "192.168.31.171",
+          "started": 131014.7527113,
+          "ended": 131016.6963722,
+          "complete": true
+        },
+        {
+          "id": 4,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 2.088394,
+          "local_ip": "192.168.31.171",
+          "started": 131015.7875167,
+          "ended": 131017.9069407,
+          "complete": true
+        },
+        {
+          "id": 5,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.906413,
+          "local_ip": "192.168.31.171",
+          "started": 131016.6963894,
+          "ended": 131018.6338461,
+          "complete": true
+        },
+        {
+          "id": 6,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.273813,
+          "local_ip": "192.168.31.171",
+          "started": 131017.9069578,
+          "ended": 131019.2136833,
+          "complete": true
+        },
+        {
+          "id": 7,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.297128,
+          "local_ip": "192.168.31.171",
+          "started": 131018.634014,
+          "ended": 131019.9612142,
+          "complete": true
+        }
+      ],
+      "all_complete": true,
+      "bytes": 536870912,
+      "seconds": 7.149785900008283,
+      "payload_mbps": 600.7127144877197,
+      "before": "cpu  370788 0 595244 39400698 120 74285 200158 0 0 0\ncpu0 100761 0 137341 9888810 19 27459 25351 0 0 0\ncpu1 103483 0 113959 9897183 33 13976 54391 0 0 0\ncpu2 99979 0 111968 9876539 30 13159 87774 0 0 0\ncpu3 66563 0 231974 9738165 37 19690 32641 0 0 0\nintr 286944267 0 2990336 136895216 0 0 0 0 0 0 0 0 77469307 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 549011 1540864 0 0 9869668 13488921 0 0 0 0 1 0 0 0 0 44140930\nctxt 402921408\nbtime 1791803652\nprocesses 949823\nprocs_running 1\nprocs_blocked 0\nsoftirq 183652268 0 11034428 692539 26910903 0 0 91540865 31671747 396094 21405692\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t11475920521\n\trx packets:\t15102623\n\ttx bytes:\t40227026016\n\ttx packets:\t31668384\n\ttx retries:\t148612\n\ttx failed:\t148668\n\trx drop misc:\t3\n\tsignal:  \t-38 [-47, -47, -45, -40] dBm\n\tsignal avg:\t-38 [-46, -46, -44, -40] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t972028308 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t479641085 us\n\tlast ack signal:-40 dBm\n\tavg ack signal:\t-39 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t102046 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745488 ms\n\tcurrent time:\t1791905791972 ms\n\nStation 3a:b9:9d:bd:d7:b5 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t30 ms\n\trx bytes:\t83388035\n\trx packets:\t749029\n\ttx bytes:\t3444592465\n\ttx packets:\t3974951\n\ttx retries:\t33871\n\ttx failed:\t33883\n\trx drop misc:\t3\n\tsignal:  \t-42 [-44, -52, -51, -45] dBm\n\tsignal avg:\t-40 [-42, -51, -49, -43] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t334754415 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t59168169 us\n\tlast ack signal:-37 dBm\n\tavg ack signal:\t-37 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t23062 seconds\n\tassociated at [boottime]:\t79077.588s\n\tassociated at:\t1791882729592 ms\n\tcurrent time:\t1791905791972 ms\n\nStation 56:6b:90:bc:c9:87 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t17040 ms\n\trx bytes:\t3918383\n\trx packets:\t22950\n\ttx bytes:\t59614887\n\ttx packets:\t48118\n\ttx retries:\t2323\n\ttx failed:\t2327\n\trx drop misc:\t3\n\tsignal:  \t-60 [-67, -66, -64, -65] dBm\n\tsignal avg:\t-53 [-60, -58, -58, -58] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t2315954 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t1430726 us\n\tlast ack signal:-58 dBm\n\tavg ack signal:\t-53 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t696 seconds\n\tassociated at [boottime]:\t101443.555s\n\tassociated at:\t1791905095559 ms\n\tcurrent time:\t1791905791972 ms\n\nMemAvailable:     120016 kB\n",
+      "after": "cpu  370849 0 595648 39403016 120 74298 200375 0 0 0\ncpu0 100781 0 137411 9889458 19 27463 25366 0 0 0\ncpu1 103500 0 114000 9897809 33 13978 54454 0 0 0\ncpu2 99997 0 111997 9877219 30 13160 87785 0 0 0\ncpu3 66569 0 232238 9738528 37 19695 32769 0 0 0\nintr 286975801 0 2990743 136905084 0 0 0 0 0 0 0 0 77483259 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 549011 1540983 0 0 9870312 13489458 0 0 0 0 1 0 0 0 0 44146937\nctxt 402956291\nbtime 1791803652\nprocesses 949845\nprocs_running 1\nprocs_blocked 0\nsoftirq 183683585 0 11035606 693006 26913487 0 0 91556936 31672783 403908 21407859\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t0 ms\n\trx bytes:\t11478401206\n\trx packets:\t15119720\n\ttx bytes:\t40784027651\n\ttx packets:\t32036747\n\ttx retries:\t149394\n\ttx failed:\t149450\n\trx drop misc:\t3\n\tsignal:  \t-39 [-47, -46, -44, -42] dBm\n\tsignal avg:\t-38 [-46, -46, -43, -41] dBm\n\ttx bitrate:\t6.0 MBit/s\n\ttx duration:\t974637059 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t479866405 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t5.242Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t102054 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745487 ms\n\tcurrent time:\t1791905799401 ms\n\nStation 3a:b9:9d:bd:d7:b5 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t83412854\n\trx packets:\t749317\n\ttx bytes:\t3445739198\n\ttx packets:\t3976185\n\ttx retries:\t33907\n\ttx failed:\t33919\n\trx drop misc:\t3\n\tsignal:  \t-43 [-44, -52, -51, -47] dBm\n\tsignal avg:\t-42 [-43, -52, -50, -46] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t334840073 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t59192217 us\n\tlast ack signal:-38 dBm\n\tavg ack signal:\t-37 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t23070 seconds\n\tassociated at [boottime]:\t79077.588s\n\tassociated at:\t1791882729592 ms\n\tcurrent time:\t1791905799401 ms\n\nStation 56:6b:90:bc:c9:87 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t70 ms\n\trx bytes:\t3961012\n\trx packets:\t23159\n\ttx bytes:\t59680854\n\ttx packets:\t48258\n\ttx retries:\t2346\n\ttx failed:\t2350\n\trx drop misc:\t3\n\tsignal:  \t-37 [-53, -41, -39, -50] dBm\n\tsignal avg:\t-39 [-55, -43, -42, -48] dBm\n\ttx bitrate:\t2161.3 MBit/s 160MHz HE-MCS 10 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t2327491 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t1438085 us\n\tlast ack signal:-38 dBm\n\tavg ack signal:\t-39 dBm\n\tairtime weight: 256\n\texpected throughput:\t1639.343Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t704 seconds\n\tassociated at [boottime]:\t101443.555s\n\tassociated at:\t1791905095558 ms\n\tcurrent time:\t1791905799401 ms\n\nMemAvailable:     116704 kB\n"
+    },
+    {
+      "parallel": 2,
+      "streams": [
+        {
+          "id": 0,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.665187,
+          "local_ip": "192.168.31.171",
+          "started": 131020.4935807,
+          "ended": 131022.1901472,
+          "complete": true
+        },
+        {
+          "id": 1,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.796635,
+          "local_ip": "192.168.31.171",
+          "started": 131020.4936708,
+          "ended": 131022.3213272,
+          "complete": true
+        },
+        {
+          "id": 2,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.811648,
+          "local_ip": "192.168.31.171",
+          "started": 131022.1901745,
+          "ended": 131024.0307356,
+          "complete": true
+        },
+        {
+          "id": 3,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 2.105998,
+          "local_ip": "192.168.31.171",
+          "started": 131022.3213437,
+          "ended": 131024.4595088,
+          "complete": true
+        },
+        {
+          "id": 4,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.569354,
+          "local_ip": "192.168.31.171",
+          "started": 131024.030753,
+          "ended": 131025.628697,
+          "complete": true
+        },
+        {
+          "id": 5,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 2.034774,
+          "local_ip": "192.168.31.171",
+          "started": 131024.4595248,
+          "ended": 131026.5262184,
+          "complete": true
+        },
+        {
+          "id": 6,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.243318,
+          "local_ip": "192.168.31.171",
+          "started": 131025.6287123,
+          "ended": 131026.9056903,
+          "complete": true
+        },
+        {
+          "id": 7,
+          "exit": 0,
+          "bytes": 67108864,
+          "http": 200,
+          "seconds": 1.031787,
+          "local_ip": "192.168.31.171",
+          "started": 131026.5262359,
+          "ended": 131027.5881175,
+          "complete": true
+        }
+      ],
+      "all_complete": true,
+      "bytes": 536870912,
+      "seconds": 7.095273500002804,
+      "payload_mbps": 605.3279406351711,
+      "before": "cpu  370853 0 595651 39403108 120 74298 200375 0 0 0\ncpu0 100781 0 137413 9889481 19 27463 25366 0 0 0\ncpu1 103504 0 114001 9897829 33 13978 54454 0 0 0\ncpu2 99997 0 111997 9877243 30 13160 87786 0 0 0\ncpu3 66569 0 232238 9738552 37 19695 32769 0 0 0\nintr 286976387 0 2990755 136905354 0 0 0 0 0 0 0 0 77483394 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 549011 1540987 0 0 9870317 13489465 0 0 0 0 1 0 0 0 0 44147090\nctxt 402957024\nbtime 1791803652\nprocesses 949849\nprocs_running 1\nprocs_blocked 0\nsoftirq 183684093 0 11035635 693016 26913521 0 0 91557265 31672826 403908 21407922\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t0 ms\n\trx bytes:\t11478439865\n\trx packets:\t15119779\n\ttx bytes:\t40784034890\n\ttx packets:\t32036777\n\ttx retries:\t149398\n\ttx failed:\t149454\n\trx drop misc:\t3\n\tsignal:  \t-39 [-46, -46, -44, -42] dBm\n\tsignal avg:\t-38 [-46, -46, -43, -41] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t974641849 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t479868946 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t102054 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745488 ms\n\tcurrent time:\t1791905799652 ms\n\nStation 3a:b9:9d:bd:d7:b5 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t0 ms\n\trx bytes:\t83413703\n\trx packets:\t749326\n\ttx bytes:\t3445774793\n\ttx packets:\t3976226\n\ttx retries:\t33907\n\ttx failed:\t33919\n\trx drop misc:\t3\n\tsignal:  \t-42 [-43, -52, -51, -46] dBm\n\tsignal avg:\t-42 [-43, -52, -50, -46] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t334843121 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t59193034 us\n\tlast ack signal:-38 dBm\n\tavg ack signal:\t-37 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t23070 seconds\n\tassociated at [boottime]:\t79077.588s\n\tassociated at:\t1791882729592 ms\n\tcurrent time:\t1791905799652 ms\n\nStation 56:6b:90:bc:c9:87 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t20 ms\n\trx bytes:\t3961258\n\trx packets:\t23166\n\ttx bytes:\t59680854\n\ttx packets:\t48258\n\ttx retries:\t2346\n\ttx failed:\t2350\n\trx drop misc:\t3\n\tsignal:  \t-38 [-63, -43, -39, -51] dBm\n\tsignal avg:\t-38 [-58, -43, -40, -49] dBm\n\ttx bitrate:\t2161.3 MBit/s 160MHz HE-MCS 10 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t2327491 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t1438788 us\n\tlast ack signal:-38 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1639.343Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t704 seconds\n\tassociated at [boottime]:\t101443.555s\n\tassociated at:\t1791905095559 ms\n\tcurrent time:\t1791905799652 ms\n\nMemAvailable:     116484 kB\n",
+      "after": "cpu  370920 0 596133 39405296 120 74314 200599 0 0 0\ncpu0 100805 0 137527 9890063 19 27468 25387 0 0 0\ncpu1 103525 0 114042 9898453 33 13981 54512 0 0 0\ncpu2 100014 0 112087 9877854 30 13164 87798 0 0 0\ncpu3 66573 0 232477 9738925 37 19700 32900 0 0 0\nintr 287017270 0 2992210 136922709 0 0 0 0 0 0 0 0 77497880 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 549011 1541107 0 0 9870974 13490039 0 0 0 0 1 0 0 0 0 44153326\nctxt 403006209\nbtime 1791803652\nprocesses 950377\nprocs_running 2\nprocs_blocked 0\nsoftirq 183717528 0 11036837 693537 26916162 0 0 91573911 31674812 411906 21410363\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t11480861300\n\trx packets:\t15136347\n\ttx bytes:\t41341054647\n\ttx packets:\t32405060\n\ttx retries:\t150447\n\ttx failed:\t150508\n\trx drop misc:\t3\n\tsignal:  \t-40 [-49, -47, -47, -43] dBm\n\tsignal avg:\t-41 [-49, -47, -46, -44] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t977294563 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t480088063 us\n\tlast ack signal:-41 dBm\n\tavg ack signal:\t-41 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t102061 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745487 ms\n\tcurrent time:\t1791905807008 ms\n\nStation 3a:b9:9d:bd:d7:b5 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t83444279\n\trx packets:\t749575\n\ttx bytes:\t3446902988\n\ttx packets:\t3977459\n\ttx retries:\t33938\n\ttx failed:\t33950\n\trx drop misc:\t3\n\tsignal:  \t-40 [-42, -53, -50, -44] dBm\n\tsignal avg:\t-40 [-42, -53, -49, -44] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t334925531 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t59214029 us\n\tlast ack signal:-37 dBm\n\tavg ack signal:\t-36 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t23077 seconds\n\tassociated at [boottime]:\t79077.588s\n\tassociated at:\t1791882729593 ms\n\tcurrent time:\t1791905807008 ms\n\nStation 56:6b:90:bc:c9:87 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tlong\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t50 ms\n\trx bytes:\t4027724\n\trx packets:\t23648\n\ttx bytes:\t60026214\n\ttx packets:\t48655\n\ttx retries:\t2538\n\ttx failed:\t2548\n\trx drop misc:\t3\n\tsignal:  \t-47 [-53, -59, -51, -50] dBm\n\tsignal avg:\t-47 [-53, -57, -51, -50] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t2366742 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t1462794 us\n\tlast ack signal:-40 dBm\n\tavg ack signal:\t-41 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t711 seconds\n\tassociated at [boottime]:\t101443.555s\n\tassociated at:\t1791905095559 ms\n\tcurrent time:\t1791905807009 ms\n\nMemAvailable:     102100 kB\n"
+    }
+  ],
+  "temporary_server_cleanup_complete": true
+}

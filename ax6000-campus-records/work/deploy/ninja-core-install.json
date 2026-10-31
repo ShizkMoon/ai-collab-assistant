@@ -1,0 +1,11 @@
+{
+  "config_test_exit": 0,
+  "test_success_marker": true,
+  "core_sha256": "3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b",
+  "disk": {
+    "exit": 0,
+    "stdout": "Filesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     40300     19516  67% /overlay\ntmpfs                   247000     34812    212188  14% /tmp\n",
+    "stderr": ""
+  },
+  "still_disabled": true
+}

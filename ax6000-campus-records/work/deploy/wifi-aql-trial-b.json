@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "AC\tAQL limit low\tAQL limit high\nVO\t5000\t\t12000\nVI\t5000\t\t12000\nBE\t2500\t\t6000\nBK\t5000\t\t12000\nBC/MC\t50000\nQ depth: VO: 0 us VI: 0 us BE: 0 us BK: 0 us\nQ limit[low/high]: VO: 5000/12000 VI: 5000/12000 BE: 2500/6000 BK: 5000/12000\nQ depth: VO: 0 us VI: 0 us BE: 0 us BK: 0 us\nQ limit[low/high]: VO: 5000/12000 VI: 5000/12000 BE: 2500/6000 BK: 5000/12000\n",
+  "stderr": ""
+}

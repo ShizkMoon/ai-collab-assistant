@@ -1,0 +1,21 @@
+{
+  "download_rules": [
+    "DOMAIN-SUFFIX,steamcontent.com,DIRECT",
+    "DOMAIN,steampipe.akamaized.net,DIRECT",
+    "DOMAIN,dl.steam.clngaa.com,DIRECT",
+    "DOMAIN,dl.steam.ksyna.com,DIRECT",
+    "DOMAIN,st.dl.eccdnx.com,DIRECT",
+    "DOMAIN,xz.pphimalayanrt.com,DIRECT",
+    "DOMAIN,steampipe.steamcontent.tnkjmec.com,DIRECT",
+    "DOMAIN,steampowered.com.8686c.com,DIRECT",
+    "DOMAIN,steamstatic.com.8686c.com,DIRECT",
+    "DOMAIN,wmsjsteam.com,DIRECT",
+    "DOMAIN,dl.delivery.mp.microsoft.com,DIRECT"
+  ],
+  "exact_domain_scope_restored": true,
+  "ua3f_tcp_wrapper_count_for_downloads": 11,
+  "core_validation_exit": 0,
+  "wireless_steering_helper_installed": true,
+  "wireless_steering_hook_installed": true,
+  "geosite_not_redownloaded": true
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "/etc/openclash/Ninja.yaml\n",
+  "stderr": "/tmp/codex-router-stage/udp-connections.rb:2:in 'Kernel#require': cannot load such file -- json (LoadError)\n\tfrom /tmp/codex-router-stage/udp-connections.rb:2:in '<main>'\n"
+}

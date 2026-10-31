@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "wan2_http=000 local=\n/var/log/esurfing/logs/logs\n",
+  "stderr": "curl: (28) Connection timed out after 8001 milliseconds\n"
+}

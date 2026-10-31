@@ -1,0 +1,117 @@
+{
+  "method": "Router-origin HTTPS, two USTC streams per WAN, max 64 MiB per stream, 18 seconds per stream, no proxy",
+  "cases": {
+    "main_only": {
+      "duration_seconds": 5.17,
+      "streams": [
+        {
+          "interface": "wan",
+          "mirror": "ustc",
+          "stream_id": "ustc",
+          "curl_exit": 0,
+          "http": "206",
+          "bytes": 67108864,
+          "curl_bytes_per_second": 16704268.0,
+          "curl_seconds": 4.017489,
+          "complete": true
+        },
+        {
+          "interface": "wan",
+          "mirror": "ustc",
+          "stream_id": "tuna",
+          "curl_exit": 0,
+          "http": "429",
+          "bytes": 670,
+          "curl_bytes_per_second": 130.0,
+          "curl_seconds": 5.148752,
+          "complete": false
+        }
+      ],
+      "total_bytes": 67109534,
+      "all_complete": false,
+      "observed_Mbps": 103.84
+    },
+    "second_only": {
+      "duration_seconds": 5.17,
+      "streams": [
+        {
+          "interface": "wan2",
+          "mirror": "ustc",
+          "stream_id": "ustc",
+          "curl_exit": 0,
+          "http": "429",
+          "bytes": 670,
+          "curl_bytes_per_second": 130.0,
+          "curl_seconds": 5.152951,
+          "complete": false
+        },
+        {
+          "interface": "wan2",
+          "mirror": "ustc",
+          "stream_id": "tuna",
+          "curl_exit": 0,
+          "http": "206",
+          "bytes": 67108864,
+          "curl_bytes_per_second": 32958282.0,
+          "curl_seconds": 2.036196,
+          "complete": true
+        }
+      ],
+      "total_bytes": 67109534,
+      "all_complete": false,
+      "observed_Mbps": 103.84
+    },
+    "both": {
+      "duration_seconds": 5.19,
+      "streams": [
+        {
+          "interface": "wan",
+          "mirror": "ustc",
+          "stream_id": "ustc",
+          "curl_exit": 0,
+          "http": "429",
+          "bytes": 670,
+          "curl_bytes_per_second": 129.0,
+          "curl_seconds": 5.162146,
+          "complete": false
+        },
+        {
+          "interface": "wan",
+          "mirror": "ustc",
+          "stream_id": "tuna",
+          "curl_exit": 0,
+          "http": "206",
+          "bytes": 67108864,
+          "curl_bytes_per_second": 32240068.0,
+          "curl_seconds": 2.081556,
+          "complete": true
+        },
+        {
+          "interface": "wan2",
+          "mirror": "ustc",
+          "stream_id": "ustc",
+          "curl_exit": 0,
+          "http": "429",
+          "bytes": 670,
+          "curl_bytes_per_second": 129.0,
+          "curl_seconds": 5.159676,
+          "complete": false
+        },
+        {
+          "interface": "wan2",
+          "mirror": "ustc",
+          "stream_id": "tuna",
+          "curl_exit": 0,
+          "http": "206",
+          "bytes": 67108864,
+          "curl_bytes_per_second": 21379821.0,
+          "curl_seconds": 3.138909,
+          "complete": true
+        }
+      ],
+      "total_bytes": 134219068,
+      "all_complete": false,
+      "observed_Mbps": 206.89
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "Ninja overwrite: TCP wrappers=934; proxies=50; groups=14; rules=4466\nOpenClash Already Start!\n",
+  "stderr": "tail: can't open '/etc/crontabs/root': No such file or directory\ntail: no files\nsh: out of range\nsh: out of range\nsh: out of range\ncrontab: can't open '/etc/crontabs/root': No such file or directory\n"
+}

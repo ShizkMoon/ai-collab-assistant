@@ -1,0 +1,262 @@
+{
+  "body": "确认以下内容再填写问题\n[x]代表确认\n- [x] 据提交本 issue 之前为止没有 issue 提问过相同问题\n\n### 要提问的问题\n我用的是xxmod的版本，不过它已经archived了，只好问问还在这边还在维护的佬了",
+  "comments": [
+    {
+      "id": "IC_kwDOQBozes8AAAABRE-SwA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "用的是安卓的通道吗，今晚似乎是换过了，我稍后会去看看",
+      "createdAt": "2026-08-27T15:01:45Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5441032896",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRE_ZAg",
+      "author": {
+        "login": "ljy87263621"
+      },
+      "authorAssociation": "NONE",
+      "body": "> 用的是安卓的通道吗，今晚似乎是换过了，我稍后会去看看\n\n是的，我抓包后发现似乎换成了CCTP/WinSVR5/1068",
+      "createdAt": "2026-08-27T15:03:08Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5441050882",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRFOiCQ",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "可以先暂时用我这个的pc，也就是linux通道，目前还是可以用的",
+      "createdAt": "2026-08-27T15:21:12Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5441298953",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRK2jIQ",
+      "author": {
+        "login": "ljy87263621"
+      },
+      "authorAssociation": "NONE",
+      "body": "> 可以先暂时用我这个的pc，也就是linux通道，目前还是可以用的\n\n我抓到的算法ID是08BDB042-5D25-4397-875F-357E9F7700C8，但是解密模块GPT不乐意干活，我昨天也没解得出来orz，应该是不止这一个。",
+      "createdAt": "2026-08-28T01:21:17Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5447197473",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRK2qHg",
+      "author": {
+        "login": "ljy87263621"
+      },
+      "authorAssociation": "NONE",
+      "body": "Linux协议确实可用",
+      "createdAt": "2026-08-28T01:21:31Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5447199262",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRLQKTw",
+      "author": {
+        "login": "weiqi-chen"
+      },
+      "authorAssociation": "NONE",
+      "body": "昨晚开始我这边就不行了。用的是`ESurfingDialer-1.9.5-all.jar`。今天我切换到`ESurfingClient-CVersion`试了也是不行。\n```\n[2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:651] -------------------------------------------------------------------\n[2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:652]  - 程序版本: 2.0.4-r6\n[2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:653]  - 本程序由 BadGhost (鬼鬼) 制作, 遵循 Apache-2.0 开源协议\n[2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:654]  - 项目地址: https://github.com/BadGhost520/ESurfingClient-CVersion\n[2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:655]  - 制作不易, 赞助鬼鬼, 让鬼鬼更好地去维护更新这个项目罢~\n[2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:656] -------------------------------------------------------------------\n[2026-08-28 10:17:15] [TID 18336] [T-WebServer] [INFO] [WebServer.c:169] Web 服务器已启动 (Web 前端尚未完工), 后台访问地址: http://127.0.0.1:8888/\n[2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:778] 非 OpenWRT 环境, 仅会尝试加载第一个有效配置\n[2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:846] 配置 1 可用, 将会尝试使用\n[2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:110] School Id: 1090\n[2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:134] Domain: GZZJXY.GZ\n[2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:158] Area: 020\n[2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:522] 获取到校园网标志: 172.17\n[2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n[2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n[2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n[2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n[2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n[2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n[2026-08-28 10:17:17] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n[2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 1 次, 最多 5 次, 下一次重试时间: 60000 毫秒 ( 60 秒) 后\n[2026-08-28 10:17:22] [TID 18000] [T-Main] [INFO] [DialerClient.c:726] 线程守护开启\n[2026-08-28 10:18:21] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n[2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n[2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n[2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n[2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n[2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n[2026-08-28 10:18:22] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n[2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 2 次, 最多 5 次, 下一次重试时间: 300000 毫秒 ( 300 秒) 后\n[2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:20] 主程序正在关闭\n[2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:25] 关闭 Web 服务器\n[2026-08-28 10:18:27] [TID 18336] [T-WebServer] [INFO] [WebServer.c:172] Web 服务器已停止\n[2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:32] 关闭线程守护\n[2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:35] 清理资源中\n[2026-08-28 10:18:27] [TID 18000] [T-Main] [INFO] [DialerClient.c:803] 线程守护已关闭\n[2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:44] 退出程序, 退出码: 0\n\n````",
+      "createdAt": "2026-08-28T02:24:26Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5447617103",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRLRgLQ",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "> > 可以先暂时用我这个的pc，也就是linux通道，目前还是可以用的\n> \n> 我抓到的算法ID是08BDB042-5D25-4397-875F-357E9F7700C8，但是解密模块GPT不乐意干活，我昨天也没解得出来orz，应该是不止这一个。\n\n算法ID不止一个的，我得抓一下，先用着linux的那个通道先",
+      "createdAt": "2026-08-28T02:27:57Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5447639085",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRLRtPw",
+      "author": {
+        "login": "ljy87263621"
+      },
+      "authorAssociation": "NONE",
+      "body": "> 昨晚开始我这边就不行了。用的是`ESurfingDialer-1.9.5-all.jar`。今天我切换到`ESurfingClient-CVersion`试了也是不行。\n> \n> ```\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:651] -------------------------------------------------------------------\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:652]  - 程序版本: 2.0.4-r6\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:653]  - 本程序由 BadGhost (鬼鬼) 制作, 遵循 Apache-2.0 开源协议\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:654]  - 项目地址: https://github.com/BadGhost520/ESurfingClient-CVersion\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:655]  - 制作不易, 赞助鬼鬼, 让鬼鬼更好地去维护更新这个项目罢~\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:656] -------------------------------------------------------------------\n> [2026-08-28 10:17:15] [TID 18336] [T-WebServer] [INFO] [WebServer.c:169] Web 服务器已启动 (Web 前端尚未完工), 后台访问地址: http://127.0.0.1:8888/\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:778] 非 OpenWRT 环境, 仅会尝试加载第一个有效配置\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:846] 配置 1 可用, 将会尝试使用\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:110] School Id: 1090\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:134] Domain: GZZJXY.GZ\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:158] Area: 020\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:522] 获取到校园网标志: 172.17\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 1 次, 最多 5 次, 下一次重试时间: 60000 毫秒 ( 60 秒) 后\n> [2026-08-28 10:17:22] [TID 18000] [T-Main] [INFO] [DialerClient.c:726] 线程守护开启\n> [2026-08-28 10:18:21] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 2 次, 最多 5 次, 下一次重试时间: 300000 毫秒 ( 300 秒) 后\n> [2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:20] 主程序正在关闭\n> [2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:25] 关闭 Web 服务器\n> [2026-08-28 10:18:27] [TID 18336] [T-WebServer] [INFO] [WebServer.c:172] Web 服务器已停止\n> [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:32] 关闭线程守护\n> [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:35] 清理资源中\n> [2026-08-28 10:18:27] [TID 18000] [T-Main] [INFO] [DialerClient.c:803] 线程守护已关闭\n> [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:44] 退出程序, 退出码: 0\n> ```\n\n换新的加密和协议了，等佬写解密了，算法ID我目前就抓了一个，现在电脑上工具没装齐加上没啥时间，不好搞",
+      "createdAt": "2026-08-28T02:28:29Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5447642431",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRLRzCg",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "> 昨晚开始我这边就不行了。用的是`ESurfingDialer-1.9.5-all.jar`。今天我切换到`ESurfingClient-CVersion`试了也是不行。\n> \n> ```\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:651] -------------------------------------------------------------------\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:652]  - 程序版本: 2.0.4-r6\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:653]  - 本程序由 BadGhost (鬼鬼) 制作, 遵循 Apache-2.0 开源协议\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:654]  - 项目地址: https://github.com/BadGhost520/ESurfingClient-CVersion\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:655]  - 制作不易, 赞助鬼鬼, 让鬼鬼更好地去维护更新这个项目罢~\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:656] -------------------------------------------------------------------\n> [2026-08-28 10:17:15] [TID 18336] [T-WebServer] [INFO] [WebServer.c:169] Web 服务器已启动 (Web 前端尚未完工), 后台访问地址: http://127.0.0.1:8888/\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:778] 非 OpenWRT 环境, 仅会尝试加载第一个有效配置\n> [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:846] 配置 1 可用, 将会尝试使用\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:110] School Id: 1090\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:134] Domain: GZZJXY.GZ\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:158] Area: 020\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:522] 获取到校园网标志: 172.17\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> [2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 1 次, 最多 5 次, 下一次重试时间: 60000 毫秒 ( 60 秒) 后\n> [2026-08-28 10:17:22] [TID 18000] [T-Main] [INFO] [DialerClient.c:726] 线程守护开启\n> [2026-08-28 10:18:21] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> [2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 2 次, 最多 5 次, 下一次重试时间: 300000 毫秒 ( 300 秒) 后\n> [2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:20] 主程序正在关闭\n> [2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:25] 关闭 Web 服务器\n> [2026-08-28 10:18:27] [TID 18336] [T-WebServer] [INFO] [WebServer.c:172] Web 服务器已停止\n> [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:32] 关闭线程守护\n> [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:35] 清理资源中\n> [2026-08-28 10:18:27] [TID 18000] [T-Main] [INFO] [DialerClient.c:803] 线程守护已关闭\n> [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:44] 退出程序, 退出码: 0\n> ```\n\nlinux的通道也不行吗，名称为pc的那个通道",
+      "createdAt": "2026-08-28T02:28:43Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5447643914",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRLSdlg",
+      "author": {
+        "login": "ljy87263621"
+      },
+      "authorAssociation": "NONE",
+      "body": "\n\n我测试是可用的\n\n> > 昨晚开始我这边就不行了。用的是`ESurfingDialer-1.9.5-all.jar`。今天我切换到`ESurfingClient-CVersion`试了也是不行。\n> > ```\n> > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:651] -------------------------------------------------------------------\n> > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:652]  - 程序版本: 2.0.4-r6\n> > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:653]  - 本程序由 BadGhost (鬼鬼) 制作, 遵循 Apache-2.0 开源协议\n> > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:654]  - 项目地址: https://github.com/BadGhost520/ESurfingClient-CVersion\n> > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:655]  - 制作不易, 赞助鬼鬼, 让鬼鬼更好地去维护更新这个项目罢~\n> > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:656] -------------------------------------------------------------------\n> > [2026-08-28 10:17:15] [TID 18336] [T-WebServer] [INFO] [WebServer.c:169] Web 服务器已启动 (Web 前端尚未完工), 后台访问地址: http://127.0.0.1:8888/\n> > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:778] 非 OpenWRT 环境, 仅会尝试加载第一个有效配置\n> > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:846] 配置 1 可用, 将会尝试使用\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:110] School Id: 1090\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:134] Domain: GZZJXY.GZ\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:158] Area: 020\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:522] 获取到校园网标志: 172.17\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> > [2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 1 次, 最多 5 次, 下一次重试时间: 60000 毫秒 ( 60 秒) 后\n> > [2026-08-28 10:17:22] [TID 18000] [T-Main] [INFO] [DialerClient.c:726] 线程守护开启\n> > [2026-08-28 10:18:21] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> > [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> > [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> > [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n> > [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> > [2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> > [2026-08-28 10:18:22] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> > [2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 2 次, 最多 5 次, 下一次重试时间: 300000 毫秒 ( 300 秒) 后\n> > [2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:20] 主程序正在关闭\n> > [2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:25] 关闭 Web 服务器\n> > [2026-08-28 10:18:27] [TID 18336] [T-WebServer] [INFO] [WebServer.c:172] Web 服务器已停止\n> > [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:32] 关闭线程守护\n> > [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:35] 清理资源中\n> > [2026-08-28 10:18:27] [TID 18000] [T-Main] [INFO] [DialerClient.c:803] 线程守护已关闭\n> > [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:44] 退出程序, 退出码: 0\n> > ```\n> \n> linux的通道也不行吗，名称为pc的那个通道\n\n我测试是可用的，可能是Linux的加密算法也增加了？",
+      "createdAt": "2026-08-28T02:30:24Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5447654806",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRLU3kg",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "> 我测试是可用的\n> \n> > > 昨晚开始我这边就不行了。用的是`ESurfingDialer-1.9.5-all.jar`。今天我切换到`ESurfingClient-CVersion`试了也是不行。\n> > > ```\n> > > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:651] -------------------------------------------------------------------\n> > > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:652]  - 程序版本: 2.0.4-r6\n> > > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:653]  - 本程序由 BadGhost (鬼鬼) 制作, 遵循 Apache-2.0 开源协议\n> > > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:654]  - 项目地址: https://github.com/BadGhost520/ESurfingClient-CVersion\n> > > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:655]  - 制作不易, 赞助鬼鬼, 让鬼鬼更好地去维护更新这个项目罢~\n> > > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [DialerClient.c:656] -------------------------------------------------------------------\n> > > [2026-08-28 10:17:15] [TID 18336] [T-WebServer] [INFO] [WebServer.c:169] Web 服务器已启动 (Web 前端尚未完工), 后台访问地址: http://127.0.0.1:8888/\n> > > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:778] 非 OpenWRT 环境, 仅会尝试加载第一个有效配置\n> > > [2026-08-28 10:17:15] [TID 18000] [T-Main] [INFO] [PlatformUtils.c:846] 配置 1 可用, 将会尝试使用\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:110] School Id: 1090\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:134] Domain: GZZJXY.GZ\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:158] Area: 020\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [NetClient.c:522] 获取到校园网标志: 172.17\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> > > [2026-08-28 10:17:17] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 1 次, 最多 5 次, 下一次重试时间: 60000 毫秒 ( 60 秒) 后\n> > > [2026-08-28 10:17:22] [TID 18000] [T-Main] [INFO] [DialerClient.c:726] 线程守护开启\n> > > [2026-08-28 10:18:21] [TID 16472] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> > > [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> > > [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.166&clientip=172.17.153.166&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> > > [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.166\n> > > [2026-08-28 10:18:22] [TID 16472] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> > > [2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> > > [2026-08-28 10:18:22] [TID 16472] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> > > [2026-08-28 10:18:22] [TID 16472] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 2 次, 最多 5 次, 下一次重试时间: 300000 毫秒 ( 300 秒) 后\n> > > [2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:20] 主程序正在关闭\n> > > [2026-08-28 10:18:26] [TID 12348] [T-Main] [INFO] [Shutdown.c:25] 关闭 Web 服务器\n> > > [2026-08-28 10:18:27] [TID 18336] [T-WebServer] [INFO] [WebServer.c:172] Web 服务器已停止\n> > > [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:32] 关闭线程守护\n> > > [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:35] 清理资源中\n> > > [2026-08-28 10:18:27] [TID 18000] [T-Main] [INFO] [DialerClient.c:803] 线程守护已关闭\n> > > [2026-08-28 10:18:27] [TID 12348] [T-Main] [INFO] [Shutdown.c:44] 退出程序, 退出码: 0\n> > > ```\n> > \n> > \n> > linux的通道也不行吗，名称为pc的那个通道\n> \n> 我测试是可用的，可能是Linux的加密算法也增加了？\n\n可以先暂时用着，这个问题是昨天下午才出现的",
+      "createdAt": "2026-08-28T02:36:19Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5447694226",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRMGiiw",
+      "author": {
+        "login": "weiqi-chen"
+      },
+      "authorAssociation": "NONE",
+      "body": "> > 我测试是可用的\n> > \n> > \n> > 我测试是可用的，可能是Linux的加密算法也增加了？\n> \n> 可以先暂时用着，这个问题是昨天下午才出现的\n\n我在Linux中试了还是一样的效果。\n\n```\nroot@debian-pc:~/ESurfingClient# ./ESurfingClient-2.0.4-r6-linux-x86_64\n[2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:651] -------------------------------------------------------------------\n[2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:652]  - 程序版本: 2.0.4-r6\n[2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:653]  - 本程序由 BadGhost (鬼鬼) 制作, 遵循 Apache-2.0 开源协议\n[2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:654]  - 项目地址: https://github.com/BadGhost520/ESurfingClient-CVersion\n[2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:655]  - 制作不易, 赞助鬼鬼, 让鬼鬼更好地去维护更新这个项目罢~\n[2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:656] -------------------------------------------------------------------\n[2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [PlatformUtils.c:778] 非 OpenWRT 环境, 仅会尝试加载第一个有效配置\n[2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [PlatformUtils.c:846] 配置 1 可用, 将会尝试使用\n[2026-08-28 21:42:59] [TID 140263448114880] [T-WebServer] [INFO] [WebServer.c:169] Web 服务器已启动 (Web 前端尚未完工), 后台访问地址: http://127.0.0.1:8888/\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [NetClient.c:110] School Id: 1090\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [NetClient.c:134] Domain: GZZJXY.GZ\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [NetClient.c:158] Area: 020\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [NetClient.c:522] 获取到校园网标志: 172.17\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:557] 需要认证\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.154&clientip=172.17.153.154&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.154\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n[2026-08-28 21:43:00] [TID 140263364228800] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 1 次, 最多 5 次, 下一次重试时间: 60000 毫秒 (60 秒) 后\n[2026-08-28 21:43:05] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:726] 线程守护开启\n[2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:557] 需要认证\n[2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n[2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.154&clientip=172.17.153.154&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n[2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.154\n[2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n[2026-08-28 21:44:00] [TID 140263364228800] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n[2026-08-28 21:44:00] [TID 140263364228800] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n[2026-08-28 21:44:00] [TID 140263364228800] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 2 次, 最多 5 次, 下一次重试时间: 300000 毫秒 (300 秒) 后\n\n````",
+      "createdAt": "2026-08-28T04:39:01Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5448508043",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRMJ2cA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "> > > 我测试是可用的\n> > > 我测试是可用的，可能是Linux的加密算法也增加了？\n> > \n> > \n> > 可以先暂时用着，这个问题是昨天下午才出现的\n> \n> 我在Linux中试了还是一样的效果。\n> \n> ```\n> root@debian-pc:~/ESurfingClient# ./ESurfingClient-2.0.4-r6-linux-x86_64\n> [2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:651] -------------------------------------------------------------------\n> [2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:652]  - 程序版本: 2.0.4-r6\n> [2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:653]  - 本程序由 BadGhost (鬼鬼) 制作, 遵循 Apache-2.0 开源协议\n> [2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:654]  - 项目地址: https://github.com/BadGhost520/ESurfingClient-CVersion\n> [2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:655]  - 制作不易, 赞助鬼鬼, 让鬼鬼更好地去维护更新这个项目罢~\n> [2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:656] -------------------------------------------------------------------\n> [2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [PlatformUtils.c:778] 非 OpenWRT 环境, 仅会尝试加载第一个有效配置\n> [2026-08-28 21:42:59] [TID 140263453824832] [T-Main] [INFO] [PlatformUtils.c:846] 配置 1 可用, 将会尝试使用\n> [2026-08-28 21:42:59] [TID 140263448114880] [T-WebServer] [INFO] [WebServer.c:169] Web 服务器已启动 (Web 前端尚未完工), 后台访问地址: http://127.0.0.1:8888/\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [NetClient.c:110] School Id: 1090\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [NetClient.c:134] Domain: GZZJXY.GZ\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [NetClient.c:158] Area: 020\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [NetClient.c:522] 获取到校园网标志: 172.17\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.154&clientip=172.17.153.154&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.154\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> [2026-08-28 21:43:00] [TID 140263364228800] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 1 次, 最多 5 次, 下一次重试时间: 60000 毫秒 (60 秒) 后\n> [2026-08-28 21:43:05] [TID 140263453824832] [T-Main] [INFO] [DialerClient.c:726] 线程守护开启\n> [2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:557] 需要认证\n> [2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:394] Auth URL: http://14.146.227.141:7001/auth.cgi\n> [2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:413] Ticket URL: http://14.146.227.141:7001/ticket.cgi?wlanacip=183.56.17.80&wlanuserip=172.17.153.154&clientip=172.17.153.154&wlanacname=gzzjxy-c&clientmac=70:81:85:ae:0e:01&paip=172.168.0.200&vlan=9.0&iarmdst=connect.rom.miui.com/generate_204&portal_node=http://125.88.59.131:10002\n> [2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:422] Client IP: 172.17.153.154\n> [2026-08-28 21:44:00] [TID 140263364228800] [T-0] [INFO] [DialerClient.c:433] AC IP: 183.56.17.80\n> [2026-08-28 21:44:00] [TID 140263364228800] [T-0] [ERROR] [DialerClient.c:330] 初始化会话失败\n> [2026-08-28 21:44:00] [TID 140263364228800] [T-0] [FATAL] [DialerClient.c:442] 初始化会话失败\n> [2026-08-28 21:44:00] [TID 140263364228800] [T-0] [ERROR] [DialerClient.c:575] 配置 1 认证失败, 下标 0, 重试: 第 2 次, 最多 5 次, 下一次重试时间: 300000 毫秒 (300 秒) 后\n> ```\n\n不是在linux系统中用，而是切换到linux(pc)认证通道，在使用教程里可以看到的",
+      "createdAt": "2026-08-28T04:47:46Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [
+        {
+          "content": "THUMBS_UP",
+          "users": {
+            "totalCount": 1
+          }
+        }
+      ],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5448562288",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRSGv3g",
+      "author": {
+        "login": "weiqi-chen"
+      },
+      "authorAssociation": "NONE",
+      "body": "> 不是在linux系统中用，而是切换到linux(pc)认证通道，在使用教程里可以看到的\n\n哦，你指的是使用v1旧版的ESurfingClient那个是吧？",
+      "createdAt": "2026-08-28T16:05:16Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5454802910",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRSPbow",
+      "author": {
+        "login": "weiqi-chen"
+      },
+      "authorAssociation": "NONE",
+      "body": "v1版本运行情况\n\n```\nroot@debian-pc:~# ./ESurfingClient-x86_64-linux -u ***** -p ***** -cpc\n[2026-08-29 09:24:17] [信息] [DialerApp.c:86] 程序启动中\n[2026-08-29 09:24:22] [信息] [Client.c:192] 需要认证\n[2026-08-29 09:24:22] [信息] [Session.c:85] Algo ID: 4BA5496A-2123-46A7-85F2-35956EA7BE39\n[2026-08-29 09:24:22] [信息] [Session.c:86] Key: 95D18F3CCC6AAF9411D1853F518B1FFDB1B2578AB3E41BFB657C50EAFD7A59A3\n[2026-08-29 09:24:22] [信息] [Client.c:147] Client IP: 172.17.153.154\n[2026-08-29 09:24:22] [信息] [Client.c:148] AC IP: 183.56.17.80\n[2026-08-29 09:24:22] [错误] [Client.c:115] 获取 ticket 响应内容分析失败\n[2026-08-29 09:24:22] [信息] [Client.c:150] Ticket: (null)\n[2026-08-29 09:24:22] [错误] [Client.c:65] 解密登录内容失败\n[2026-08-29 09:24:22] [致命] [Client.c:154] Keep Url 为空\n[2026-08-29 09:24:23] [信息] [Shutdown.c:27] 正在关闭程序\nroot@debian-pc:~# ./ESurfingClient-x86_64-linux -u ***** -p ***** -cphone\n[2026-08-29 09:24:34] [信息] [DialerApp.c:86] 程序启动中\n[2026-08-29 09:24:39] [信息] [Client.c:192] 需要认证\n[2026-08-29 09:24:39] [错误] [Session.c:23] 无效的 zsm 数据\n[2026-08-29 09:24:39] [致命] [Client.c:142] 会话初始化失败, 请重启程序, 重启你的设备或者重新从 Release 下载程序\n[2026-08-29 09:24:39] [致命] [Client.c:143] Release 网址: https://github.com/BadGhost520/ESurfingClient-CVersion/releases/latest\n[2026-08-29 09:24:40] [信息] [Shutdown.c:27] 正在关闭程序\n```",
+      "createdAt": "2026-08-28T16:18:53Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5454945187",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRSUVSA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "> v1版本运行情况\n> \n> ```\n> root@debian-pc:~# ./ESurfingClient-x86_64-linux -u ***** -p ***** -cpc\n> [2026-08-29 09:24:17] [信息] [DialerApp.c:86] 程序启动中\n> [2026-08-29 09:24:22] [信息] [Client.c:192] 需要认证\n> [2026-08-29 09:24:22] [信息] [Session.c:85] Algo ID: 4BA5496A-2123-46A7-85F2-35956EA7BE39\n> [2026-08-29 09:24:22] [信息] [Session.c:86] Key: 95D18F3CCC6AAF9411D1853F518B1FFDB1B2578AB3E41BFB657C50EAFD7A59A3\n> [2026-08-29 09:24:22] [信息] [Client.c:147] Client IP: 172.17.153.154\n> [2026-08-29 09:24:22] [信息] [Client.c:148] AC IP: 183.56.17.80\n> [2026-08-29 09:24:22] [错误] [Client.c:115] 获取 ticket 响应内容分析失败\n> [2026-08-29 09:24:22] [信息] [Client.c:150] Ticket: (null)\n> [2026-08-29 09:24:22] [错误] [Client.c:65] 解密登录内容失败\n> [2026-08-29 09:24:22] [致命] [Client.c:154] Keep Url 为空\n> [2026-08-29 09:24:23] [信息] [Shutdown.c:27] 正在关闭程序\n> root@debian-pc:~# ./ESurfingClient-x86_64-linux -u ***** -p ***** -cphone\n> [2026-08-29 09:24:34] [信息] [DialerApp.c:86] 程序启动中\n> [2026-08-29 09:24:39] [信息] [Client.c:192] 需要认证\n> [2026-08-29 09:24:39] [错误] [Session.c:23] 无效的 zsm 数据\n> [2026-08-29 09:24:39] [致命] [Client.c:142] 会话初始化失败, 请重启程序, 重启你的设备或者重新从 Release 下载程序\n> [2026-08-29 09:24:39] [致命] [Client.c:143] Release 网址: https://github.com/BadGhost520/ESurfingClient-CVersion/releases/latest\n> [2026-08-29 09:24:40] [信息] [Shutdown.c:27] 正在关闭程序\n> ```\n\n<img width=\"659\" height=\"807\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b780b43b-eb23-46d0-9251-0931ba614d70\" />\n\n用pc通道，将图中指定的参数改成pc",
+      "createdAt": "2026-08-28T16:26:43Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [
+        {
+          "content": "THUMBS_UP",
+          "users": {
+            "totalCount": 1
+          }
+        }
+      ],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31#issuecomment-5455025480",
+      "viewerDidAuthor": false
+    }
+  ],
+  "number": 31,
+  "title": "[提问]: 协议是不是更新了",
+  "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/31"
+}

@@ -1,0 +1,139 @@
+#!/bin/sh
+# Candidate /usr/libexec/ua3f-ttl-reconcile. It does not edit routes or UCI.
+# Call only after the routing owner commits the intended main defaults.
+# An optional hotplug hook requests a debounced rescan of current topology.
+set -eu
+umask 077
+root=/var/run/ua3f-ttl-reconcile
+lock=$root.lock
+request=$root.request
+state=$root.state
+reason=${1:-manual}
+case "$reason" in *[!A-Za-z0-9_.:-]*) exit 2 ;; esac
+
+service_requested() {
+    pidof ua3f >/dev/null 2>&1 && return 0
+    # At boot, BPF may have failed before the authenticated WAN defaults exist.
+    # A retained procd instance means the service is still requested; an explicit
+    # stop removes the instance, so this helper does not revive a stopped service.
+    cmd=$(ubus call service list '{"name":"ua3f"}' 2>/dev/null |
+        jsonfilter -e '@.ua3f.instances.*.command[0]' 2>/dev/null || true)
+    printf '%s\n' "$cmd" | grep -qx /usr/bin/ua3f
+}
+
+enabled() {
+    [ "$(uci -q get ua3f.enabled.enabled || true)" = 1 ] &&
+    [ "$(uci -q get ua3f.main.l3_rewrite_ttl || true)" = 1 ] &&
+    [ "$(uci -q get ua3f.main.l3_rewrite_bpf_offload || true)" = 1 ] &&
+    service_requested
+}
+
+fingerprint() {
+    # Same route scope as upstream netlink.RouteList(nil, AF_INET): main only.
+    # Including metric/gateway may cause a harmless extra restart, and prevents
+    # silently missing a new/default route or a replaced device with a new index.
+    ip -4 route show table main default | sort
+    for dev in $(ip -4 route show table main default | awk '{for(i=1;i<=NF;i++) if($i=="dev") print $(i+1)}' | sort -u); do
+        case "$dev" in lo|br-lan|*[!A-Za-z0-9_.:-]*) continue ;; esac
+        [ -r "/sys/class/net/$dev/ifindex" ] || continue
+        type=$(cat "/sys/class/net/$dev/type")
+        case "$type" in 1|512) ;; *) continue ;; esac
+        addr=$(ip -o -4 addr show dev "$dev" | awk '{print $2,$3,$4}' | sort)
+        [ -n "$addr" ] || continue
+        printf 'dev %s ifindex %s\n' "$dev" "$(cat "/sys/class/net/$dev/ifindex")"
+        printf '%s\n' "$addr"
+    done
+}
+
+attachments_ready() {
+    pids=$(pidof ua3f 2>/dev/null || true)
+    [ -n "$pids" ] || return 1
+    for dev in $(awk '$1=="dev" {print $2}' "$lock/current"); do
+        idx=$(cat "/sys/class/net/$dev/ifindex" 2>/dev/null || true)
+        found=0
+        for pid in $pids; do
+            for fd in /proc/"$pid"/fdinfo/*; do
+                [ -r "$fd" ] || continue
+                if awk -v idx="$idx" '
+                    $1=="link_type:" && $2=="tcx" {tcx=1}
+                    $1=="ifindex:" && $2==idx {dev=1}
+                    $1=="attach_type:" && $0 ~ /egress/ {egress=1}
+                    END {exit !(tcx && dev && egress)}
+                  ' "$fd"; then found=1; break; fi
+            done
+            [ "$found" -eq 1 ] && break
+        done
+        if [ "$found" -eq 0 ]; then
+            # Upstream classic fallback names the filter DEV:set_ip_ttl.
+            tc filter show dev "$dev" egress 2>/dev/null | grep -q 'set_ip_ttl' || return 1
+        fi
+    done
+    return 0
+}
+
+enabled || exit 0
+# Each caller records demand before attempting the single-worker lock.
+printf '%s %s %s\n' "$(date +%s)" "$$" "$reason" > "$request"
+mkdir "$lock" 2>/dev/null || exit 0
+printf '%s\n' "$$" > "$lock/pid"
+last_seen=''
+cleanup() {
+    rm -f "$lock/pid" "$lock/current" "$lock/previous"
+    rmdir "$lock" 2>/dev/null || true
+    # Cover demand that arrived during the final unlock window.
+    if [ -r "$request" ] && [ "$(cat "$request")" != "$last_seen" ]; then
+        "$0" followup >/dev/null 2>&1 &
+    fi
+}
+trap cleanup EXIT
+trap 'exit 130' HUP INT TERM
+
+round=0
+while [ "$round" -lt 4 ]; do
+    round=$((round + 1))
+    enabled || break
+    last_seen=$(cat "$request")
+    sleep 5
+    stable=0
+    attempt=0
+    : > "$lock/previous"
+    while [ "$attempt" -lt 12 ]; do
+        attempt=$((attempt + 1))
+        fingerprint > "$lock/current"
+        if cmp -s "$lock/current" "$lock/previous"; then stable=$((stable + 1)); else stable=0; fi
+        cp "$lock/current" "$lock/previous"
+        [ "$stable" -ge 2 ] && break
+        sleep 2
+    done
+    if [ "$stable" -lt 2 ]; then
+        logger -t ua3f-ttl 'Routes did not settle within 24 seconds; keep current service and reconcile after the routing owner finishes'
+        break
+    fi
+    enabled || break
+    if ! grep -q '^dev ' "$lock/current"; then
+        logger -t ua3f-ttl 'No eligible IPv4 main-default WAN; keep current process and wait for a later route commit'
+        break
+    fi
+    if [ ! -r "$state" ] || ! cmp -s "$lock/current" "$state" || ! attachments_ready; then
+        logger -t ua3f-ttl "Main route/device topology changed ($reason); restarting UA3F to enumerate TC interfaces"
+        if /etc/init.d/ua3f restart; then
+            attach_attempt=0
+            while [ "$attach_attempt" -lt 5 ]; do
+                attach_attempt=$((attach_attempt + 1))
+                sleep 2
+                attachments_ready && break
+            done
+            if attachments_ready; then
+                cp "$lock/current" "$state"
+                logger -t ua3f-ttl 'TCX/classic attachment read back on eligible WANs; packet TTL must still be verified'
+            else
+                logger -t ua3f-ttl 'UA3F attachment readback failed after restart; state was not committed'
+                break
+            fi
+        else
+            logger -t ua3f-ttl 'UA3F restart returned failure; state was not committed'
+            break
+        fi
+    fi
+    [ "$(cat "$request")" = "$last_seen" ] && break
+done

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "wan_http204=204\nwan2_http204=204\n\t/lib/ld-musl-aarch64.so.1 (0x7fa9df0000)\n\tlibcurl.so.4 => /usr/lib/libcurl.so.4 (0x7fa9d67000)\n\tlibnghttp2.so.14 => /usr/lib/libnghttp2.so.14 (0x7fa9d3f000)\n\tlibmbedtls.so.21 => /usr/lib/libmbedtls.so.21 (0x7fa9d12000)\n\tlibmbedx509.so.7 => /usr/lib/libmbedx509.so.7 (0x7fa9cfe000)\n\tlibmbedcrypto.so.16 => /usr/lib/libmbedcrypto.so.16 (0x7fa9c8a000)\n\tlibz.so.1 => /usr/lib/libz.so.1 (0x7fa9c6e000)\n\tlibgcc_s.so.1 => /lib/libgcc_s.so.1 (0x7fa9c3d000)\ncommon.sh\nlibwrap_mwan3_sockopt.so.1.0\nmwan3-create-iface-route.uc\nmwan3-get-addr.uc\nmwan3-list-routes.uc\nmwan3-manage-rules.uc\nmwan3-skeleton.nft\nmwan3.sh\n",
+  "stderr": ""
+}

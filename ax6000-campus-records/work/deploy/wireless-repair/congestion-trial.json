@@ -1,0 +1,12 @@
+{
+  "original": "bbr",
+  "candidate": "cubic",
+  "available": [
+    "reno",
+    "cubic",
+    "bbr"
+  ],
+  "only_new_sockets": true,
+  "persistent_sysctl_unchanged": true,
+  "independent_rollback_seconds": 300
+}

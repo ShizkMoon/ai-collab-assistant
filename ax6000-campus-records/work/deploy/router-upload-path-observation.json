@@ -1,0 +1,664 @@
+{
+  "upload_script_exit": 0,
+  "before": {
+    "monotonic": 49816.531,
+    "sink_connections": [],
+    "device_cpu_qdisc": "wan 922981395\neswan2 488863497\ncpu  84407 0 119667 8066590 101 15042 48516 0 0 0\ncpu0 23129 0 28899 2024568 16 5700 4449 0 0 0\ncpu1 24293 0 21474 2025932 25 2691 13703 0 0 0\ncpu2 22982 0 21206 2021249 25 2706 21662 0 0 0\ncpu3 14002 0 48086 1994839 33 3944 8701 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+  },
+  "after": {
+    "monotonic": 49857.281,
+    "sink_connections": [],
+    "device_cpu_qdisc": "wan 1060346205\neswan2 489577410\ncpu  85171 0 120371 8080946 101 15108 48789 0 0 0\ncpu0 23343 0 29066 2028176 16 5728 4485 0 0 0\ncpu1 24521 0 21633 2029530 25 2702 13765 0 0 0\ncpu2 23180 0 21348 2024784 25 2718 21821 0 0 0\ncpu3 14126 0 48322 1998455 33 3958 8717 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+  },
+  "samples": [
+    {
+      "monotonic": 49817.046,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 922985663\neswan2 488865299\ncpu  84416 0 119673 8066758 101 15043 48517 0 0 0\ncpu0 23129 0 28901 2024611 16 5700 4449 0 0 0\ncpu1 24300 0 21476 2025969 25 2691 13703 0 0 0\ncpu2 22984 0 21207 2021293 25 2706 21662 0 0 0\ncpu3 14002 0 48088 1994883 33 3944 8701 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49818.296,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 922998933\neswan2 488869695\ncpu  84428 0 119682 8067223 101 15043 48519 0 0 0\ncpu0 23133 0 28904 2024725 16 5700 4450 0 0 0\ncpu1 24302 0 21477 2026088 25 2691 13704 0 0 0\ncpu2 22985 0 21208 2021413 25 2706 21662 0 0 0\ncpu3 14007 0 48092 1994996 33 3944 8701 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49819.515,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923013875\neswan2 488873424\ncpu  84439 0 119693 8067697 101 15044 48520 0 0 0\ncpu0 23136 0 28908 2024842 16 5700 4450 0 0 0\ncpu1 24306 0 21480 2026205 25 2692 13704 0 0 0\ncpu2 22986 0 21210 2021533 25 2706 21663 0 0 0\ncpu3 14010 0 48094 1995115 33 3944 8701 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49820.765,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923105455\neswan2 488919280\ncpu  84464 0 119716 8068169 101 15046 48528 0 0 0\ncpu0 23141 0 28913 2024964 16 5701 4451 0 0 0\ncpu1 24313 0 21487 2026321 25 2692 13707 0 0 0\ncpu2 22991 0 21214 2021650 25 2707 21667 0 0 0\ncpu3 14017 0 48100 1995233 33 3945 8702 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49822.093,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923133624\neswan2 488930175\ncpu  84474 0 119729 8068649 101 15047 48530 0 0 0\ncpu0 23144 0 28918 2025083 16 5702 4451 0 0 0\ncpu1 24317 0 21490 2026439 25 2692 13708 0 0 0\ncpu2 22994 0 21216 2021771 25 2707 21668 0 0 0\ncpu3 14017 0 48103 1995354 33 3945 8703 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49823.359,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923140744\neswan2 488933470\ncpu  84483 0 119734 8069120 101 15048 48531 0 0 0\ncpu0 23148 0 28921 2025199 16 5702 4451 0 0 0\ncpu1 24318 0 21490 2026561 25 2692 13708 0 0 0\ncpu2 22998 0 21217 2021887 25 2707 21668 0 0 0\ncpu3 14017 0 48105 1995472 33 3945 8703 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49824.593,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923151780\neswan2 488939380\ncpu  84492 0 119745 8069592 101 15049 48533 0 0 0\ncpu0 23148 0 28922 2025320 16 5702 4451 0 0 0\ncpu1 24325 0 21492 2026673 25 2692 13709 0 0 0\ncpu2 23000 0 21222 2022006 25 2707 21668 0 0 0\ncpu3 14017 0 48108 1995591 33 3946 8703 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49825.843,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923484198\neswan2 488955957\ncpu  84522 0 119774 8070143 101 15050 48537 0 0 0\ncpu0 23156 0 28932 2025459 16 5703 4452 0 0 0\ncpu1 24334 0 21493 2026811 25 2693 13710 0 0 0\ncpu2 23006 0 21232 2022143 25 2707 21670 0 0 0\ncpu3 14024 0 48114 1995728 33 3946 8703 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49827.359,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923495394\neswan2 488962152\ncpu  84556 0 119814 8070564 101 15051 48539 0 0 0\ncpu0 23166 0 28941 2025562 16 5703 4453 0 0 0\ncpu1 24343 0 21502 2026920 25 2693 13711 0 0 0\ncpu2 23014 0 21238 2022254 25 2708 21671 0 0 0\ncpu3 14032 0 48131 1995828 33 3946 8704 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49828.609,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923534464\neswan2 488976310\ncpu  84563 0 119824 8071036 101 15053 48542 0 0 0\ncpu0 23167 0 28942 2025681 16 5703 4453 0 0 0\ncpu1 24346 0 21505 2027036 25 2693 13712 0 0 0\ncpu2 23016 0 21241 2022371 25 2708 21672 0 0 0\ncpu3 14033 0 48134 1995946 33 3947 8704 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49829.875,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923611339\neswan2 489020186\ncpu  84579 0 119847 8071510 101 15055 48549 0 0 0\ncpu0 23169 0 28949 2025801 16 5704 4454 0 0 0\ncpu1 24349 0 21508 2027158 25 2693 13714 0 0 0\ncpu2 23019 0 21244 2022488 25 2708 21675 0 0 0\ncpu3 14041 0 48144 1996061 33 3947 8705 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49831.187,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 923630117\neswan2 489029095\ncpu  84594 0 119859 8071982 101 15056 48551 0 0 0\ncpu0 23173 0 28949 2025920 16 5705 4454 0 0 0\ncpu1 24353 0 21515 2027276 25 2694 13714 0 0 0\ncpu2 23026 0 21246 2022603 25 2708 21676 0 0 0\ncpu3 14041 0 48148 1996180 33 3947 8706 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49832.421,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 927096418\neswan2 489034809\ncpu  84610 0 119874 8072422 101 15057 48557 0 0 0\ncpu0 23177 0 28951 2026032 16 5705 4455 0 0 0\ncpu1 24356 0 21520 2027385 25 2694 13716 0 0 0\ncpu2 23033 0 21251 2022712 25 2709 21678 0 0 0\ncpu3 14042 0 48151 1996291 33 3948 8706 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49833.64,
+      "sink_connections": [
+        {
+          "source_port": "62210",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 15428915
+        }
+      ],
+      "device_cpu_qdisc": "wan 941770040\neswan2 489038804\ncpu  84652 0 119923 8072808 101 15062 48573 0 0 0\ncpu0 23185 0 28963 2026133 16 5707 4458 0 0 0\ncpu1 24374 0 21533 2027473 25 2695 13721 0 0 0\ncpu2 23046 0 21258 2022809 25 2710 21686 0 0 0\ncpu3 14046 0 48168 1996391 33 3949 8707 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49834.89,
+      "sink_connections": [
+        {
+          "source_port": "62210",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 21032243
+        }
+      ],
+      "device_cpu_qdisc": "wan 948059490\neswan2 489056710\ncpu  84681 0 119940 8073235 101 15064 48583 0 0 0\ncpu0 23192 0 28967 2026243 16 5708 4460 0 0 0\ncpu1 24383 0 21535 2027581 25 2695 13724 0 0 0\ncpu2 23057 0 21260 2022910 25 2710 21691 0 0 0\ncpu3 14048 0 48177 1996499 33 3949 8707 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49836.125,
+      "sink_connections": [
+        {
+          "source_port": "62210",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 30595991
+        }
+      ],
+      "device_cpu_qdisc": "wan 959217425\neswan2 489405784\ncpu  84722 0 119967 8073757 101 15068 48600 0 0 0\ncpu0 23201 0 28972 2026378 16 5710 4462 0 0 0\ncpu1 24397 0 21542 2027713 25 2696 13727 0 0 0\ncpu2 23072 0 21263 2023035 25 2711 21701 0 0 0\ncpu3 14051 0 48188 1996630 33 3950 8709 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49837.671,
+      "sink_connections": [
+        {
+          "source_port": "62237",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 1821613
+        },
+        {
+          "source_port": "62238",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 1477087
+        },
+        {
+          "source_port": "62240",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 1821613
+        },
+        {
+          "source_port": "62239",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 1838019
+        }
+      ],
+      "device_cpu_qdisc": "wan 976585541\neswan2 489428774\ncpu  84781 0 120018 8074169 101 15073 48620 0 0 0\ncpu0 23214 0 28985 2026483 16 5712 4464 0 0 0\ncpu1 24414 0 21554 2027818 25 2696 13733 0 0 0\ncpu2 23087 0 21271 2023132 25 2712 21712 0 0 0\ncpu3 14064 0 48206 1996734 33 3951 8710 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49839.062,
+      "sink_connections": [
+        {
+          "source_port": "62237",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 4946641
+        },
+        {
+          "source_port": "62238",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 4133143
+        },
+        {
+          "source_port": "62240",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 7710587
+        },
+        {
+          "source_port": "62239",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 6299087
+        }
+      ],
+      "device_cpu_qdisc": "wan 987994739\neswan2 489448851\ncpu  84827 0 120067 8074574 101 15077 48645 0 0 0\ncpu0 23227 0 28995 2026589 16 5714 4467 0 0 0\ncpu1 24426 0 21562 2027922 25 2697 13739 0 0 0\ncpu2 23098 0 21281 2023228 25 2712 21727 0 0 0\ncpu3 14074 0 48227 1996833 33 3952 8711 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49840.375,
+      "sink_connections": [
+        {
+          "source_port": "62237",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 7338705
+        },
+        {
+          "source_port": "62238",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 5968151
+        },
+        {
+          "source_port": "62240",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 10135419
+        },
+        {
+          "source_port": "62239",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 8265167
+        }
+      ],
+      "device_cpu_qdisc": "wan 998201324\neswan2 489450837\ncpu  84852 0 120097 8075000 101 15080 48665 0 0 0\ncpu0 23233 0 29000 2026699 16 5716 4469 0 0 0\ncpu1 24437 0 21570 2028025 25 2697 13744 0 0 0\ncpu2 23105 0 21285 2023329 25 2713 21739 0 0 0\ncpu3 14076 0 48240 1996945 33 3952 8711 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49841.656,
+      "sink_connections": [
+        {
+          "source_port": "62237",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 9927377
+        },
+        {
+          "source_port": "62238",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 8163607
+        },
+        {
+          "source_port": "62240",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 12527483
+        },
+        {
+          "source_port": "62239",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 10231247
+        }
+      ],
+      "device_cpu_qdisc": "wan 1008207400\neswan2 489456748\ncpu  84878 0 120126 8075411 101 15083 48682 0 0 0\ncpu0 23242 0 29007 2026802 16 5717 4472 0 0 0\ncpu1 24444 0 21578 2028131 25 2698 13746 0 0 0\ncpu2 23110 0 21292 2023427 25 2714 21751 0 0 0\ncpu3 14081 0 48247 1997050 33 3953 8712 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49842.89,
+      "sink_connections": [
+        {
+          "source_port": "62237",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 11565777
+        },
+        {
+          "source_port": "62238",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 10195223
+        },
+        {
+          "source_port": "62240",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 14952315
+        },
+        {
+          "source_port": "62239",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 12656079
+        }
+      ],
+      "device_cpu_qdisc": "wan 1018449776\neswan2 489460489\ncpu  84900 0 120160 8075835 101 15086 48699 0 0 0\ncpu0 23245 0 29017 2026912 16 5719 4473 0 0 0\ncpu1 24450 0 21584 2028237 25 2698 13749 0 0 0\ncpu2 23115 0 21300 2023525 25 2714 21763 0 0 0\ncpu3 14087 0 48258 1997159 33 3954 8712 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49844.156,
+      "sink_connections": [
+        {
+          "source_port": "62237",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 14875345
+        },
+        {
+          "source_port": "62238",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 12030231
+        },
+        {
+          "source_port": "62240",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 18327419
+        },
+        {
+          "source_port": "62239",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 13147599
+        }
+      ],
+      "device_cpu_qdisc": "wan 1028640422\neswan2 489464643\ncpu  84929 0 120189 8076259 101 15089 48717 0 0 0\ncpu0 23251 0 29027 2027019 16 5720 4476 0 0 0\ncpu1 24464 0 21590 2028341 25 2699 13751 0 0 0\ncpu2 23121 0 21303 2023628 25 2715 21774 0 0 0\ncpu3 14091 0 48266 1997270 33 3954 8713 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49845.421,
+      "sink_connections": [
+        {
+          "source_port": "62237",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 17431249
+        },
+        {
+          "source_port": "62238",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 14225687
+        },
+        {
+          "source_port": "62240",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 20785019
+        },
+        {
+          "source_port": "62239",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 15179215
+        }
+      ],
+      "device_cpu_qdisc": "wan 1038557340\neswan2 489482777\ncpu  84957 0 120211 8076667 101 15092 48734 0 0 0\ncpu0 23262 0 29036 2027118 16 5722 4479 0 0 0\ncpu1 24472 0 21593 2028448 25 2699 13754 0 0 0\ncpu2 23126 0 21309 2023725 25 2715 21787 0 0 0\ncpu3 14095 0 48272 1997375 33 3955 8714 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49846.656,
+      "sink_connections": [
+        {
+          "source_port": "62237",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 20380369
+        },
+        {
+          "source_port": "62238",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 16257303
+        },
+        {
+          "source_port": "62240",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 21000438
+        },
+        {
+          "source_port": "62239",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 16653775
+        }
+      ],
+      "device_cpu_qdisc": "wan 1049074467\neswan2 489493164\ncpu  84986 0 120238 8077110 101 15096 48752 0 0 0\ncpu0 23267 0 29038 2027233 16 5723 4480 0 0 0\ncpu1 24481 0 21602 2028560 25 2700 13756 0 0 0\ncpu2 23138 0 21317 2023826 25 2716 21800 0 0 0\ncpu3 14098 0 48280 1997489 33 3955 8714 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49847.953,
+      "sink_connections": [
+        {
+          "source_port": "62238",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 20353303
+        },
+        {
+          "source_port": "62239",
+          "destination_port": "443",
+          "network": "tcp",
+          "type": "Redir",
+          "chains": [
+            "香港 02（专线；智能）",
+            "🚀 节点选择",
+            "🐟 漏网之鱼"
+          ],
+          "rule": "Match",
+          "upload": 21000438
+        }
+      ],
+      "device_cpu_qdisc": "wan 1060176501\neswan2 489500109\ncpu  85014 0 120263 8077617 101 15099 48768 0 0 0\ncpu0 23275 0 29047 2027362 16 5725 4482 0 0 0\ncpu1 24489 0 21607 2028689 25 2700 13758 0 0 0\ncpu2 23149 0 21321 2023944 25 2716 21811 0 0 0\ncpu3 14100 0 48287 1997621 33 3956 8715 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49849.421,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 1060230293\neswan2 489518656\ncpu  85029 0 120283 8078199 101 15101 48773 0 0 0\ncpu0 23277 0 29052 2027511 16 5726 4483 0 0 0\ncpu1 24495 0 21609 2028832 25 2700 13759 0 0 0\ncpu2 23154 0 21324 2024088 25 2717 21814 0 0 0\ncpu3 14102 0 48296 1997766 33 3956 8715 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49850.968,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 1060248076\neswan2 489528053\ncpu  85042 0 120297 8078682 101 15102 48775 0 0 0\ncpu0 23285 0 29054 2027627 16 5726 4483 0 0 0\ncpu1 24499 0 21611 2028955 25 2701 13760 0 0 0\ncpu2 23155 0 21330 2024211 25 2717 21815 0 0 0\ncpu3 14102 0 48300 1997887 33 3957 8716 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49852.281,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 1060279567\neswan2 489543707\ncpu  85052 0 120310 8079157 101 15103 48778 0 0 0\ncpu0 23286 0 29055 2027749 16 5726 4483 0 0 0\ncpu1 24500 0 21616 2029074 25 2701 13761 0 0 0\ncpu2 23163 0 21335 2024324 25 2717 21816 0 0 0\ncpu3 14102 0 48302 1998008 33 3957 8716 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49853.531,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 1060294222\neswan2 489551020\ncpu  85064 0 120318 8079629 101 15104 48780 0 0 0\ncpu0 23295 0 29056 2027862 16 5727 4484 0 0 0\ncpu1 24501 0 21620 2029193 25 2701 13762 0 0 0\ncpu2 23164 0 21336 2024445 25 2717 21817 0 0 0\ncpu3 14102 0 48304 1998128 33 3957 8716 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49854.781,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 1060318296\neswan2 489564964\ncpu  85077 0 120329 8080094 101 15105 48783 0 0 0\ncpu0 23304 0 29058 2027975 16 5727 4484 0 0 0\ncpu1 24504 0 21622 2029312 25 2701 13763 0 0 0\ncpu2 23164 0 21339 2024562 25 2718 21819 0 0 0\ncpu3 14104 0 48308 1998244 33 3958 8716 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    },
+    {
+      "monotonic": 49856.015,
+      "sink_connections": [],
+      "device_cpu_qdisc": "wan 1060332444\neswan2 489570258\ncpu  85094 0 120346 8080552 101 15106 48785 0 0 0\ncpu0 23309 0 29061 2028089 16 5727 4484 0 0 0\ncpu1 24508 0 21628 2029426 25 2701 13764 0 0 0\ncpu2 23172 0 21342 2024674 25 2718 21819 0 0 0\ncpu3 14104 0 48313 1998362 33 3958 8717 0 0 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n"
+    }
+  ],
+  "scope": "Second sequential 112MiB+100KiB random body batch. Existing transparent policy unchanged. wan TX includes macvlan underlying traffic and cannot be added to eswan2."
+}

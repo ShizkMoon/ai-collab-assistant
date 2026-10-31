@@ -1,0 +1,8 @@
+#!/bin/sh
+# Candidate /etc/hotplug.d/iface/99-ua3f-ttl.
+# Review these logical interface names against the actual /etc/config/network.
+case "${ACTION:-}" in ifup|ifupdate|ifdown) ;; *) exit 0 ;; esac
+case "${INTERFACE:-}" in wan|wan2|wan3) ;; *) exit 0 ;; esac
+[ -x /usr/libexec/ua3f-ttl-reconcile ] || exit 0
+/usr/libexec/ua3f-ttl-reconcile "hotplug-${ACTION}-${INTERFACE}" >/dev/null 2>&1 &
+exit 0

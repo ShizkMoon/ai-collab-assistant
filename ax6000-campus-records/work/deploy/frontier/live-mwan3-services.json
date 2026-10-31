@@ -1,0 +1,66 @@
+{
+  "mwan3": {
+    "instances": {
+      "rtmon_ipv4": {
+        "running": true,
+        "pid": 2746,
+        "incarnation": 12,
+        "command": [
+          "/usr/sbin/mwan3rtmon",
+          "ipv4"
+        ],
+        "term_timeout": 5,
+        "respawn": {
+          "threshold": 3600,
+          "timeout": 5,
+          "retry": 5
+        }
+      },
+      "rtmon_ipv6": {
+        "running": true,
+        "pid": 2747,
+        "incarnation": 13,
+        "command": [
+          "/usr/sbin/mwan3rtmon",
+          "ipv6"
+        ],
+        "term_timeout": 5,
+        "respawn": {
+          "threshold": 3600,
+          "timeout": 5,
+          "retry": 5
+        }
+      },
+      "track_wan": {
+        "running": true,
+        "pid": 2744,
+        "incarnation": 10,
+        "command": [
+          "/usr/sbin/mwan3track",
+          "wan"
+        ],
+        "term_timeout": 5,
+        "respawn": {
+          "threshold": 3600,
+          "timeout": 5,
+          "retry": 5
+        }
+      },
+      "track_wan2": {
+        "running": true,
+        "pid": 2745,
+        "incarnation": 11,
+        "command": [
+          "/usr/sbin/mwan3track",
+          "wan2"
+        ],
+        "term_timeout": 5,
+        "respawn": {
+          "threshold": 3600,
+          "timeout": 5,
+          "retry": 5
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "#!/bin/sh\n# WAN 在启动等待结束后才上线时，补启动已启用的校园网认证服务。\n[ \"$ACTION\" = \"ifup\" ] || exit 0\n[ \"$INTERFACE\" = \"wan\" ] || exit 0\n/etc/init.d/esurfingclient enabled || exit 0\n[ -n \"$(/usr/bin/esurfingclient --list-accounts 2>/dev/null)\" ] || exit 0\n/etc/init.d/esurfingclient running && exit 0\nip -4 route show default | grep -q '^default ' || exit 0\nmkdir /var/run/esurfing-wan-start.lock 2>/dev/null || exit 0\n(\n    trap 'rmdir /var/run/esurfing-wan-start.lock' EXIT\n    /etc/init.d/esurfingclient running || /etc/init.d/esurfingclient start\n) </dev/null >/dev/null 2>&1 &\nexit 0\n(1/2) Installing libpcap1 (1.10.7-r1)\n  Executing libpcap1-1.10.7-r1.post-install\n(2/2) Installing tcpdump-mini (4.99.7-r1)\n  Executing tcpdump-mini-4.99.7-r1.post-install\nOK: 86.9 MiB in 239 packages\nServer:\t\t127.0.0.1\nAddress:\t127.0.0.1:53\n\n** server can't find accounts.doubleclick.net: NXDOMAIN\n\n",
+  "stderr": ""
+}

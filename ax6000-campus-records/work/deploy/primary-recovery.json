@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "Ruleset passes nftables check.\nPRIMARY_ACCOUNT_LIST\n1\nAUTH_BOOT_ENABLED\nWAN_CARRIER\n0\nROUTING_RULES\n0:\tfrom all lookup local\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\nDNS_LISTENERS\nudp        0      0 127.0.0.1:53            0.0.0.0:*                           4856/dnsmasq\nudp        0      0 192.168.31.1:53         0.0.0.0:*                           4856/dnsmasq\nudp        0      0 ::1:53                  :::*                                4856/dnsmasq\nudp        0      0 fe80::4ec6:4cff:febd:8660:53 :::*                                4856/dnsmasq\nudp        0      0 fd3c:162d:9e76::1:53    :::*                                4856/dnsmasq\nudp        0      0 fe80::4ec6:4cff:febd:8660:53 :::*                                4856/dnsmasq\nDNS_UPSTREAMS\n202.96.128.86 223.5.5.5\nDISABLED_FEATURES\nopenclash disabled\nua3f disabled\nmwan3 disabled\nsmartdns-local disabled\n",
+  "stderr": "[!] Section esurfing_route is disabled, ignoring section\n[!] Section openclash specifies unreachable path '/var/etc/openclash.include', ignoring section\n"
+}

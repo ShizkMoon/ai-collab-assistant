@@ -1,0 +1,10 @@
+{
+  "DryRunExit": 0,
+  "ConfigUnchanged": true,
+  "PauseUnchanged": true,
+  "BackupUnchanged": true,
+  "ProcessesUnchanged": true,
+  "ParseErrors": 0,
+  "RealCutoverTested": false,
+  "RealRollbackTested": false
+}

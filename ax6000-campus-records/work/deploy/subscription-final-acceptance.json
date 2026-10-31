@@ -1,0 +1,106 @@
+{
+  "time": "2026-10-12T22:26:26+08:00",
+  "update_status": "OK:UPDATED_VERIFIED",
+  "source_sha256": "f65cacd5ed68a3f6d6caec60b788744022cf7707b92b0300f6ec1b3c5b598434",
+  "source_changed": true,
+  "old_source_backup_sha_matches": true,
+  "core_sha256": "3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b",
+  "core_pid": "6005",
+  "esurfing_pids": "7679 7620",
+  "fixed_node": "香港 02（专线；智能）",
+  "fixed_group_members": [
+    "香港 02（专线；智能）"
+  ],
+  "source_proxies": 49,
+  "generated_proxies": 50,
+  "group_count": 14,
+  "rule_count": 4415,
+  "ua3f_wrappers": 919,
+  "license_headers_match": true,
+  "dns_nameserver": [
+    "223.5.5.5",
+    "119.29.29.29"
+  ],
+  "dns_fallback_count": 1,
+  "domestic_and_campus_policies_preserved": true,
+  "dns_probes": [
+    {
+      "name": "www.baidu.com",
+      "port": 53,
+      "id_matches": true,
+      "rcode": 0,
+      "answers": 2,
+      "source_matches": true,
+      "passed": true
+    },
+    {
+      "name": "www.google.com",
+      "port": 53,
+      "id_matches": true,
+      "rcode": 0,
+      "answers": 8,
+      "source_matches": true,
+      "passed": true
+    },
+    {
+      "name": "ax6000-home31.lan",
+      "port": 53,
+      "id_matches": true,
+      "rcode": 0,
+      "answers": 1,
+      "source_matches": true,
+      "passed": true
+    },
+    {
+      "name": "accounts.doubleclick.net",
+      "port": 53,
+      "id_matches": true,
+      "rcode": 3,
+      "answers": 0,
+      "source_matches": true,
+      "passed": true
+    },
+    {
+      "name": "www.baidu.com",
+      "port": 7874,
+      "id_matches": true,
+      "rcode": 0,
+      "answers": 2,
+      "source_matches": true,
+      "passed": true
+    },
+    {
+      "name": "www.google.com",
+      "port": 7874,
+      "id_matches": true,
+      "rcode": 0,
+      "answers": 8,
+      "source_matches": true,
+      "passed": true
+    }
+  ],
+  "lan_https": [
+    {
+      "role": "domestic",
+      "exit": 0,
+      "http": "200",
+      "passed": true
+    },
+    {
+      "role": "proxy",
+      "exit": 0,
+      "http": "204",
+      "passed": true
+    }
+  ],
+  "lan_http_ua_is_fff": false,
+  "lan_http_detector_preserves_test_ua": true,
+  "lan_http_detector_scope": "The detector is not an existing guaranteed domestic UA3F rule target; its ordinary LAN route must not be used to assert all TCP goes through UA3F.",
+  "explicit_ua3f_probe_fff": true,
+  "authentication_processes_unchanged": true,
+  "core_reloaded": true,
+  "helper_sha256": "d9122b8b06e995a20b24d87c4b0855bc604d31e5b738ce2632a8d182f9075b34",
+  "cron_added": false,
+  "auto_update": "0",
+  "passed": true
+}

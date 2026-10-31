@@ -1,0 +1,20 @@
+{
+  "使用说明.md": {
+    "bytes": 38083,
+    "lines": 222,
+    "sha256": "52c5e1a417580cb7def237f7c98d4e92db0420ebd40ae87bcc56934a1f503ac3"
+  },
+  "路由器调优与校园网方案调研.md": {
+    "bytes": 81880,
+    "lines": 373,
+    "sha256": "341c3d1a2873651d391067c8f6a342990b3b8c6841a7ac7f66dbea7b177b7123"
+  },
+  "router-tuned-final-config.tar.gz": {
+    "sha256_matches": true,
+    "archive_files": 95
+  },
+  "router-tuned-final-runtime.tar.gz": {
+    "sha256_matches": true,
+    "archive_files": 98
+  }
+}

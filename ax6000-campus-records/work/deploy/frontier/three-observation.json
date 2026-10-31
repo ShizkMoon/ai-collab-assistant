@@ -1,0 +1,286 @@
+[
+  {
+    "time": "2026-10-13T21:19:48+08:00",
+    "first_two_pids_unchanged": true,
+    "instances": {
+      "account1": {
+        "running": true,
+        "pid": 7620
+      },
+      "account2": {
+        "running": true,
+        "pid": 7679
+      },
+      "account3": {
+        "running": true,
+        "pid": 9375
+      }
+    },
+    "probes": [
+      {
+        "iface": "wan",
+        "source": "10.207.123.111",
+        "device": "wan",
+        "mark": "0x3f000000",
+        "http": "204",
+        "seconds": 0.089802,
+        "exit": 0,
+        "passed": true
+      },
+      {
+        "iface": "wan2",
+        "source": "10.207.112.254",
+        "device": "eswan2",
+        "mark": "0x02000000",
+        "http": "204",
+        "seconds": 0.089302,
+        "exit": 0,
+        "passed": true
+      },
+      {
+        "iface": "wan3",
+        "source": "10.207.117.66",
+        "device": "eswan3",
+        "mark": "0x03000000",
+        "http": "204",
+        "seconds": 0.092111,
+        "exit": 0,
+        "passed": true
+      }
+    ],
+    "events": {
+      "1": {
+        "auth_success": 0,
+        "keepalive_success": 0,
+        "keepalive_failed": 0,
+        "last_event_time": null
+      },
+      "2": {
+        "auth_success": 0,
+        "keepalive_success": 0,
+        "keepalive_failed": 0,
+        "last_event_time": null
+      },
+      "3": {
+        "auth_success": 0,
+        "keepalive_success": 0,
+        "keepalive_failed": 0,
+        "last_event_time": null
+      }
+    },
+    "passed": true
+  },
+  {
+    "time": "2026-10-13T21:20:25+08:00",
+    "first_two_pids_unchanged": true,
+    "instances": {
+      "account1": {
+        "running": true,
+        "pid": 7620
+      },
+      "account2": {
+        "running": true,
+        "pid": 7679
+      },
+      "account3": {
+        "running": true,
+        "pid": 9375
+      }
+    },
+    "probes": [
+      {
+        "iface": "wan",
+        "source": "10.207.123.111",
+        "device": "wan",
+        "mark": "0x3f000000",
+        "http": "204",
+        "seconds": 0.084862,
+        "exit": 0,
+        "passed": true
+      },
+      {
+        "iface": "wan2",
+        "source": "10.207.112.254",
+        "device": "eswan2",
+        "mark": "0x02000000",
+        "http": "204",
+        "seconds": 0.084082,
+        "exit": 0,
+        "passed": true
+      },
+      {
+        "iface": "wan3",
+        "source": "10.207.117.66",
+        "device": "eswan3",
+        "mark": "0x03000000",
+        "http": "204",
+        "seconds": 0.089421,
+        "exit": 0,
+        "passed": true
+      }
+    ],
+    "events": {
+      "1": {
+        "auth_success": 0,
+        "keepalive_success": 0,
+        "keepalive_failed": 0,
+        "last_event_time": null
+      },
+      "2": {
+        "auth_success": 0,
+        "keepalive_success": 0,
+        "keepalive_failed": 0,
+        "last_event_time": null
+      },
+      "3": {
+        "auth_success": 0,
+        "keepalive_success": 0,
+        "keepalive_failed": 0,
+        "last_event_time": null
+      }
+    },
+    "passed": true
+  },
+  {
+    "time": "2026-10-13T21:21:44+08:00",
+    "first_two_pids_unchanged": true,
+    "instances": {
+      "account1": {
+        "running": true,
+        "pid": 7620
+      },
+      "account2": {
+        "running": true,
+        "pid": 7679
+      },
+      "account3": {
+        "running": true,
+        "pid": 9375
+      }
+    },
+    "probes": [
+      {
+        "iface": "wan",
+        "source": "10.207.123.111",
+        "device": "wan",
+        "mark": "0x3f000000",
+        "http": "204",
+        "seconds": 0.09185,
+        "exit": 0,
+        "passed": true
+      },
+      {
+        "iface": "wan2",
+        "source": "10.207.112.254",
+        "device": "eswan2",
+        "mark": "0x02000000",
+        "http": "204",
+        "seconds": 0.093175,
+        "exit": 0,
+        "passed": true
+      },
+      {
+        "iface": "wan3",
+        "source": "10.207.117.66",
+        "device": "eswan3",
+        "mark": "0x03000000",
+        "http": "204",
+        "seconds": 0.088792,
+        "exit": 0,
+        "passed": true
+      }
+    ],
+    "events": {
+      "1": {
+        "auth_success": 0,
+        "keepalive_success": 10,
+        "keepalive_failed": 0,
+        "safe_events": "[2026-10-13 19:07:55] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 19:10:43] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 19:10:43] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 19:10:43] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 19:10:43] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 19:10:43] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 19:10:43] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:22:05] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:22:05] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 19:25:29] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 19:25:29] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 19:25:29] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 19:25:29] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 19:25:29] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 19:25:29] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:36:11] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 19:36:11] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 19:36:11] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 19:36:11] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 19:36:11] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 19:36:11] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:36:15] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:36:15] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 19:50:26] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:50:26] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:04:37] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:04:37] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:12:29] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:12:29] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:12:29] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 20:12:29] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:12:29] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:12:29] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:18:48] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:18:58] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:18:58] account=1 event=CURL_CONNECT_SECONDS value=0.008\n[2026-10-13 20:18:58] account=1 event=CURL_TOTAL_SECONDS value=10.002\n[2026-10-13 20:18:58] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:18:58] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:18:58] account=1 event=HEARTBEAT_HTTP_OR_BODY_FAILED\n[2026-10-13 20:18:58] account=1 event=HEARTBEAT_RETRY\n[2026-10-13 20:18:59] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:23:39] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:23:39] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:23:39] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 20:23:39] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:23:39] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:23:39] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:33:09] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:33:09] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:36:00] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:36:00] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:36:00] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 20:36:00] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:36:00] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:36:00] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:47:20] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:47:20] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:01:37] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:01:37] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:01:37] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 21:01:37] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:01:37] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:01:37] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:01:37] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:01:37] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:02:17] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:02:17] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:02:17] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 21:02:17] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:02:17] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:02:17] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:10:40] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:10:40] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:10:40] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 21:10:40] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:10:40] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:10:40] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:15:48] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:15:49] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n"
+      },
+      "2": {
+        "auth_success": 0,
+        "keepalive_success": 28,
+        "keepalive_failed": 0,
+        "safe_events": "[2026-10-13 19:25:38] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:25:38] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:29:55] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 19:29:55] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 19:29:55] account=2 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 19:29:55] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 19:29:55] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 19:29:55] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:29:55] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:29:55] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:34:06] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:34:06] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:38:17] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:38:17] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:42:27] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:42:27] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:46:38] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:46:38] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:50:43] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 19:50:43] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 19:50:43] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 19:50:43] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 19:50:43] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 19:50:43] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:50:48] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:50:48] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:54:59] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:54:59] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:59:09] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:59:09] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:03:20] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:03:20] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:07:31] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:07:31] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:08:27] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:08:27] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:08:27] account=2 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 20:08:27] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:08:27] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:08:27] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:11:41] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:11:41] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:15:52] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:15:52] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:20:03] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:20:03] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:24:13] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:24:13] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:28:24] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:28:24] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:28:43] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:28:43] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:28:43] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 20:28:43] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:28:43] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:28:43] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:32:35] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:32:35] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:36:46] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:36:46] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:40:56] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:40:56] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:45:07] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:45:07] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:49:18] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:49:18] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:53:29] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:53:29] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:57:40] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:57:40] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:01:50] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:01:50] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:06:01] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:06:01] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:10:12] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:10:12] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:14:22] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:14:23] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:18:33] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:18:33] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n"
+      },
+      "3": {
+        "auth_success": 1,
+        "keepalive_success": 1,
+        "keepalive_failed": 0,
+        "safe_events": "[2026-10-13 21:19:35] account=3 event=AUTH_REQUIRED_HTTP302\n[2026-10-13 21:19:36] account=3 event=LOGIN_KEEP_SECONDS value=8\n[2026-10-13 21:19:36] account=3 event=AUTH_SUCCESS\n[2026-10-13 21:19:44] account=3 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:19:44] account=3 event=HEARTBEAT_NEXT_SECONDS value=850\n"
+      }
+    },
+    "passed": true
+  },
+  {
+    "time": "2026-10-13T21:34:01+08:00",
+    "first_two_pids_unchanged": true,
+    "instances": {
+      "account1": {
+        "running": true,
+        "pid": 7620
+      },
+      "account2": {
+        "running": true,
+        "pid": 7679
+      },
+      "account3": {
+        "running": true,
+        "pid": 9375
+      }
+    },
+    "probes": [
+      {
+        "iface": "wan",
+        "source": "10.207.123.111",
+        "device": "wan",
+        "mark": "0x3f000000",
+        "http": "204",
+        "seconds": 0.087047,
+        "exit": 0,
+        "passed": true
+      },
+      {
+        "iface": "wan2",
+        "source": "10.207.112.254",
+        "device": "eswan2",
+        "mark": "0x02000000",
+        "http": "204",
+        "seconds": 0.087152,
+        "exit": 0,
+        "passed": true
+      },
+      {
+        "iface": "wan3",
+        "source": "10.207.117.66",
+        "device": "eswan3",
+        "mark": "0x03000000",
+        "http": "204",
+        "seconds": 0.085573,
+        "exit": 0,
+        "passed": true
+      }
+    ],
+    "events": {
+      "1": {
+        "auth_success": 0,
+        "keepalive_success": 9,
+        "keepalive_failed": 0,
+        "safe_events": "[2026-10-13 19:25:29] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:36:11] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 19:36:11] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 19:36:11] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 19:36:11] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 19:36:11] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 19:36:11] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:36:15] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:36:15] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 19:50:26] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:50:26] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:04:37] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:04:37] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:12:29] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:12:29] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:12:29] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 20:12:29] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:12:29] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:12:29] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:18:48] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:18:58] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:18:58] account=1 event=CURL_CONNECT_SECONDS value=0.008\n[2026-10-13 20:18:58] account=1 event=CURL_TOTAL_SECONDS value=10.002\n[2026-10-13 20:18:58] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:18:58] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:18:58] account=1 event=HEARTBEAT_HTTP_OR_BODY_FAILED\n[2026-10-13 20:18:58] account=1 event=HEARTBEAT_RETRY\n[2026-10-13 20:18:59] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:23:39] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:23:39] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:23:39] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 20:23:39] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:23:39] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:23:39] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:33:09] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:33:09] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:36:00] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:36:00] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:36:00] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 20:36:00] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:36:00] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:36:00] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:47:20] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:47:20] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:01:37] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:01:37] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:01:37] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 21:01:37] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:01:37] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:01:37] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:01:37] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:01:37] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:02:17] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:02:17] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:02:17] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 21:02:17] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:02:17] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:02:17] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:10:40] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:10:40] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:10:40] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 21:10:40] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:10:40] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:10:40] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:15:48] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:15:49] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:22:20] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:22:20] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:22:20] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 21:22:20] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:22:20] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:22:20] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:24:30] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:24:30] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:24:30] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 21:24:30] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:24:30] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:24:30] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:29:59] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:29:59] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n"
+      },
+      "2": {
+        "auth_success": 0,
+        "keepalive_success": 28,
+        "keepalive_failed": 0,
+        "safe_events": "[2026-10-13 19:38:17] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:38:17] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:42:27] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:42:27] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:46:38] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:46:38] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:50:43] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 19:50:43] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 19:50:43] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 19:50:43] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 19:50:43] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 19:50:43] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:50:48] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:50:48] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:54:59] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:54:59] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:59:09] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:59:09] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:03:20] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:03:20] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:07:31] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:07:31] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:08:27] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:08:27] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:08:27] account=2 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 20:08:27] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:08:27] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:08:27] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:11:41] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:11:41] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:15:52] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:15:52] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:20:03] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:20:03] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:24:13] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:24:13] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:28:24] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:28:24] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:28:43] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:28:43] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:28:43] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 20:28:43] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:28:43] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:28:43] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:32:35] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:32:35] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:36:46] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:36:46] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:40:56] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:40:56] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:45:07] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:45:07] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:49:18] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:49:18] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:53:29] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:53:29] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:57:40] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:57:40] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:01:50] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:01:50] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:06:01] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:06:01] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:10:12] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:10:12] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:14:22] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:14:23] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:18:33] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:18:33] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:22:44] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:22:44] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:26:25] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:26:25] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:26:25] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 21:26:25] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:26:25] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:26:25] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:26:54] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:26:54] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:31:05] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:31:05] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n"
+      },
+      "3": {
+        "auth_success": 1,
+        "keepalive_success": 2,
+        "keepalive_failed": 0,
+        "safe_events": "[2026-10-13 21:19:35] account=3 event=AUTH_REQUIRED_HTTP302\n[2026-10-13 21:19:36] account=3 event=LOGIN_KEEP_SECONDS value=8\n[2026-10-13 21:19:36] account=3 event=AUTH_SUCCESS\n[2026-10-13 21:19:44] account=3 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:19:44] account=3 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:33:55] account=3 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:33:55] account=3 event=HEARTBEAT_NEXT_SECONDS value=850\n"
+      }
+    },
+    "passed": true
+  }
+]

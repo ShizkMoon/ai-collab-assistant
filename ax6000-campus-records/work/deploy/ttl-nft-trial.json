@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "dev=wan packets=3 ttl=64 count=3\ndev=eswan2 packets=3 ttl=64 count=3\nProbe saved: /tmp/ua3f-ttl/nft-active; inspect packet values and capture errors.\nNo automatic PASS is claimed. Baseline should show 37; the scoped nft TTL64 probe should show 64 with the original Ethernet source MAC.\nDo not enable the retired UA3F v3.7.0 TC TTL implementation for this test.\nProbe installed for 20 seconds: IPv4 ICMP echo to 223.5.5.5 only.\nRun ttl-ebpf-verify.sh probe in a second command; inspect TTL64 and original source MAC with tcpdump -e.\ntable ip UA3F_TTL_PROBE {\n\tchain TTL {\n\t\ttype filter hook postrouting priority mangle; policy accept;\n\t\toifname \"wan\" ip daddr 223.5.5.5 icmp type echo-request counter packets 3 bytes 252 ip ttl set 64 comment \"bounded WAN TTL probe\"\n\t\toifname \"eswan2\" ip daddr 223.5.5.5 icmp type echo-request counter packets 3 bytes 252 ip ttl set 64 comment \"bounded WAN TTL probe\"\n\t}\n}\n",
+  "stderr": ""
+}

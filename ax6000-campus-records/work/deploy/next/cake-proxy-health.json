@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "proxy_http=000\nfilter parent ffff: protocol all pref 49152 matchall chain 0 \nfilter parent ffff: protocol all pref 49152 matchall chain 0 handle 0x1 \n  not_in_hw\n\taction order 1: mirred (Egress Redirect to device ifb-cake) stolen\n\tindex 1 ref 1 bind 1\n\n",
+  "stderr": "curl: (22) The requested URL returned error: 407\n"
+}

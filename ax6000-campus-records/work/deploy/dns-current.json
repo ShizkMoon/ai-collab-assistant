@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "1\n-rw-r--r--    1 root     root      411.1K Oct 12 16:35 adblock-fast.dnsmasq.servers.gz\n-rw-------    1 root     root        1.1M Oct 12 16:05 hagezi-light.txt\n/var/run/adblock-fast/dnsmasq.servers\n-rw-r--r--    1 root     root           771 Oct 12 17:13 /var/etc/dnsmasq.conf.cfg01411c\n0\nsmartdns_boot_enabled\n",
+  "stderr": "[STAT] adblock-fast 1.2.4-r4 is blocking 55349 domains (with dnsmasq.servers)\n\u001b[0;33m[WARN]\u001b[0m Recommended packages are missing: gawk, grep, sed, coreutils-sort!\n"
+}

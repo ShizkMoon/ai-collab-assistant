@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "(1/2) Installing ucode-mod-socket (2026.07.09~b885dd0f-r1)\n  Executing ucode-mod-socket-2026.07.09~b885dd0f-r1.post-install\n(2/2) Installing mwan3 (3.6.12-r1)\n  Executing mwan3-3.6.12-r1.pre-install\n  Executing mwan3-3.6.12-r1.post-install\nOK: 86.3 MiB in 237 packages\n0:\tfrom all lookup local\n1802:\tfrom all fwmark 0x2000000 lookup 25202\n1803:\tfrom all fwmark 0x3000000 lookup 25203\n1812:\tfrom 10.207.114.16 lookup 25202\n1813:\tfrom 10.207.116.121 lookup 25203\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\nFilesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     48540     11272  81% /overlay\n",
+  "stderr": "  * uci: Parse error (invalid command) at line 0, byte 0\n"
+}

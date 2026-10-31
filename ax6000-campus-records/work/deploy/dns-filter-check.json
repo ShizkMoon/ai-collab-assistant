@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "Server:\t\t127.0.0.1\nAddress:\t127.0.0.1:53\n\nName:\tdoubleclick.net\nAddress: 142.250.198.174\n\n-rw-rw----    1 root     dnsmasq    1653706 Oct 12 16:01 /var/run/adblock-fast/dnsmasq.servers\n\n/etc/adblock-fast:\n-rw-------    1 root     root       1156273 Oct 12 16:05 hagezi-light.txt\nserver=127.0.0.1#7874\nservers-file=/var/run/adblock-fast/dnsmasq.servers\nconf-dir=/tmp/dnsmasq.cfg01411c.d\n3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b  /etc/openclash/core/clash_meta\n",
+  "stderr": ""
+}

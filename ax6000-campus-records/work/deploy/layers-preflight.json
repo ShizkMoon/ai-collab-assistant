@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "ua3f.enabled=ua3f\nua3f.enabled.enabled='0'\nua3f.main=ua3f\nua3f.main.server_mode='SOCKS5'\nua3f.main.port='1080'\nua3f.main.bind='127.0.0.1'\nua3f.main.rewrite_mode='GLOBAL'\nua3f.main.ua='FFF'\nua3f.main.partial_replace='0'\nua3f.main.log_level='INFO'\nua3f.main.log_lines='300'\nua3f.main.header_rewrite='[]'\nua3f.main.body_rewrite='[]'\nua3f.main.url_redirect='[]'\nua3f.main.l3_rewrite_ttl='0'\nua3f.main.l3_rewrite_ttl_value='64'\nua3f.main.l3_rewrite_ipid='0'\nua3f.main.l3_rewrite_tcpts='0'\nua3f.main.l3_rewrite_tcpwin='0'\nua3f.main.l3_rewrite_block_quic='0'\nua3f.main.l3_rewrite_bpf_offload='0'\nua3f.main.desync_reorder='0'\nua3f.main.desync_reorder_bytes='1500'\nua3f.main.desync_reorder_packets='8'\nua3f.main.desync_inject='0'\nua3f.main.desync_inject_ttl='3'\nua3f.main.mitm_enabled='0'\nua3f.main.mitm_skip_verify='0'\n0:\tfrom all lookup local\n1802:\tfrom all fwmark 0x2000000 lookup 25202\n1812:\tfrom 10.207.127.186 lookup 25202\n1822:\tfrom all oif eswan2 lookup 25202\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\ntable inet fw4\ntable ip esurfing_candidate\n",
+  "stderr": ""
+}

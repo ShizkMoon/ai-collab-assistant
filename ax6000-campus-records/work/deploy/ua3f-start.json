@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "UA3F version v3.7.0\nFilesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     48400     11412  81% /overlay\ntmpfs                   247000     49744    197256  20% /tmp\n              total        used        free      shared  buff/cache   available\nMem:         494004      160384      145044       70496      188576      212768\nSwap:             0           0           0\n",
+  "stderr": ""
+}

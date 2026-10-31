@@ -1,0 +1,12 @@
+{
+  "curl_exit": 0,
+  "headers": [
+    "HTTP/1.1 200 OK",
+    "Content-Length: 6326574815",
+    "Accept-Ranges: bytes",
+    "Last-Modified: Fri, 18 Sep 2026 17:51:50 GMT",
+    "ETag: \"eFrY7oyqGh6FQZlKJlvWWTQWgHY=\""
+  ],
+  "is_head": true,
+  "browser_runtime_not_observed": true
+}

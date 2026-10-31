@@ -1,0 +1,149 @@
+{
+  "router_time": "2026-10-12T22:00:31+08:00",
+  "core_sha256": "3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b",
+  "local_asset_sha256": "3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b",
+  "hk_candidates": [
+    {
+      "name": "香港 01（公网；智能）",
+      "type": "ninja"
+    },
+    {
+      "name": "香港 02（专线；智能）",
+      "type": "ninja"
+    },
+    {
+      "name": "香港 03（专线；联通）",
+      "type": "ninja"
+    },
+    {
+      "name": "香港 04（专线；移动）",
+      "type": "ninja"
+    },
+    {
+      "name": "香港 05（专线；电信）",
+      "type": "ninja"
+    },
+    {
+      "name": "香港 06（专线；原生）",
+      "type": "ninja"
+    }
+  ],
+  "groups": [
+    {
+      "name": "🚀 节点选择",
+      "type": "select",
+      "now": "♻️ 自动选择",
+      "members": 54,
+      "direct_member": true
+    },
+    {
+      "name": "♻️ 自动选择",
+      "type": "url-test",
+      "now": "香港 02（专线；智能）",
+      "members": 49,
+      "direct_member": false
+    },
+    {
+      "name": "🟦 专线节点",
+      "type": "url-test",
+      "now": "香港 02（专线；智能）",
+      "members": 23,
+      "direct_member": false
+    },
+    {
+      "name": "🟩 公网节点",
+      "type": "url-test",
+      "now": "香港 01（公网；智能）",
+      "members": 28,
+      "direct_member": false
+    },
+    {
+      "name": "🟨 直连节点",
+      "type": "url-test",
+      "now": "DIRECT",
+      "members": 1,
+      "direct_member": true
+    },
+    {
+      "name": "🌍 国外媒体",
+      "type": "select",
+      "now": "🚀 节点选择",
+      "members": 55,
+      "direct_member": false
+    },
+    {
+      "name": "📲 电报信息",
+      "type": "select",
+      "now": "🚀 节点选择",
+      "members": 55,
+      "direct_member": false
+    },
+    {
+      "name": "Ⓜ️ 微软服务",
+      "type": "select",
+      "now": "🎯 全球直连",
+      "members": 55,
+      "direct_member": false
+    },
+    {
+      "name": "🍎 苹果服务",
+      "type": "select",
+      "now": "🚀 节点选择",
+      "members": 55,
+      "direct_member": false
+    },
+    {
+      "name": "📢 谷歌FCM",
+      "type": "select",
+      "now": "🚀 节点选择",
+      "members": 55,
+      "direct_member": false
+    },
+    {
+      "name": "🎯 全球直连",
+      "type": "select",
+      "now": "DIRECT",
+      "members": 6,
+      "direct_member": true
+    },
+    {
+      "name": "🛑 全球拦截",
+      "type": "select",
+      "now": "REJECT",
+      "members": 2,
+      "direct_member": true
+    },
+    {
+      "name": "🍃 应用净化",
+      "type": "select",
+      "now": "REJECT",
+      "members": 2,
+      "direct_member": true
+    },
+    {
+      "name": "🐟 漏网之鱼",
+      "type": "select",
+      "now": "🚀 节点选择",
+      "members": 55,
+      "direct_member": false
+    }
+  ],
+  "options_keys": [
+    "direct_cidrs",
+    "direct_domain_suffixes",
+    "direct_domains",
+    "dns_nameserver_policy",
+    "dns_overrides",
+    "dns_proxy_server_nameserver",
+    "download_direct_rules",
+    "enable_ua3f_tcp",
+    "tcp_targets",
+    "ua3f_name",
+    "ua3f_port",
+    "ua3f_server"
+  ],
+  "main_match_rules": [
+    "MATCH,🐟 漏网之鱼"
+  ],
+  "paths": "/etc/openclash/config/Ninja.yaml\n1\nNinja\n/usr/bin/flock\n-rwxr-xr-x    1 root     root           640 Oct 12 15:26 ninja_kernel.sh\n-rwxr-xr-x    1 root     root         10648 Oct 12 15:26 ninja_kernel.vendor.sh\n-rwxr-xr-x    1 root     root          4720 Apr 19  2024 ninja_sub.sh\nFilesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     45144     14672  75% /overlay\n6234\n7679 7620\n"
+}

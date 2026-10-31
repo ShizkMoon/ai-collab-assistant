@@ -1,0 +1,30 @@
+{
+  "documents": [
+    {
+      "path": "outputs\\ax6000-mainline\\使用说明.md",
+      "bytes": 42354,
+      "sha256": "5dc197ad4a011046cd6573ff7aff7d0aa737835c0fb0f34a981bfd9d058290c9",
+      "missing_local_links": []
+    },
+    {
+      "path": "outputs\\ax6000-mainline\\路由器调优与校园网方案调研.md",
+      "bytes": 85805,
+      "sha256": "c9696cbc946fb5cb3e7dfc1499ed2078a52c50fb580289206320d30929b36c42",
+      "missing_local_links": []
+    },
+    {
+      "path": "work\\deploy\\next\\adoption-results.md",
+      "bytes": 17443,
+      "sha256": "bdc34415f766965db6a143e2e69ae4d15b5bfc16dfd4edda946e09185e8346d1",
+      "missing_local_links": []
+    }
+  ],
+  "utf8_readback_passed": true,
+  "current_evidence_consistent": true,
+  "current_backup_hashes_match": true,
+  "all_document_local_links_exist": true,
+  "functional_changes_accepted": true,
+  "overall_passed": false,
+  "known_campus_failure_preserved": true,
+  "actual_restore_performed": false
+}

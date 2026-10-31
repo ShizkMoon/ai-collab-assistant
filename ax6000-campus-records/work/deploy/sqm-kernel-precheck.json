@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "sch_htb\nsch_ingress\ncls_u32\nact_mirred\nqdisc noqueue 0: root refcnt 2 \n",
+  "stderr": ""
+}

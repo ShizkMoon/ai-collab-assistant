@@ -1,0 +1,22 @@
+{
+  "/usr/libexec/esurfing-netifd-guard": {
+    "before": "172714d056067ae7c477e9c1af4a9f83b042d5173805cd2b49c4d793096886b8",
+    "after": "8735743a080ffa113fe2765351164185c40cd0ab227c6a8afb10d38029414a87",
+    "candidate": "three-esurfing-netifd-guard.sh"
+  },
+  "/etc/init.d/esurfingclient": {
+    "before": "9a906c58c98c40b0f71870989a27c963166b4b2aa592d2cea44fcfca97c954b6",
+    "after": "edd5c7939f0bdd77e6161fae8dd8935ce547a63e97829d129b42363777d4142b",
+    "candidate": "three-esurfingclient.sh"
+  },
+  "/etc/esurfing-deploy/netifd-route.nft": {
+    "before": "6d803ff7006d523a5fb26b002ffd293269950c00ed2fc0ba83edd211615eb03c",
+    "after": "f95416399bfbbabbe375ddbead38a7f4ad9b86b5ab8157e414c3045714a6972b",
+    "candidate": "three-netifd-route.nft"
+  },
+  "/etc/nftables.d/90-ua3f-wan-ttl.nft": {
+    "before": "f55b5838b87fe3c44e57448c60fdeacd7109844c78c6b34e1ae6e80855af5d7f",
+    "after": "43bb5e4bd629dec40b94501db72a657381c5778a90b0eca1e46688cb1dfa4430",
+    "candidate": "three-90-ua3f-wan-ttl.nft"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "installed": {
+    "/etc/openclash/custom/ninja-subscription-update.rb": "818c56f692ddba88c008a58f18b40d2938eeac94378e5236e59a7e2b89e16320",
+    "/etc/openclash/custom/ninja-capacity.rb": "ab29db606c1ef4c04ad5a65661da840200b6e618b64245620765e4b0e71f9f42"
+  },
+  "services_unchanged_on_install": true,
+  "source_and_generated_unchanged_on_install": true,
+  "real_update_exit": 0,
+  "real_update_status": "OK:UPDATED_VERIFIED",
+  "temporary_directory_count": 0,
+  "auth_pids_unchanged": true,
+  "real_update_helper_sha256": "3b06a22a1a4cad1349957f6b0c4d8f4e02cd4f17bdc92f8cf5e3dc67ba03f4cf",
+  "post_acceptance_change": "Only outer capacity-policy error classification; 26+12+13 target fixtures passed again. No additional network update."
+}

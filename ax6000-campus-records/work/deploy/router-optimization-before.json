@@ -1,0 +1,24 @@
+{
+  "time": "2026-10-13T00:40:49+08:00",
+  "pids": {
+    "esurfingclient": "7679 7620",
+    "clash_meta": "6005",
+    "ua3f": "4940",
+    "dnsmasq": "6480 6439"
+  },
+  "core_sha256": "3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b",
+  "wireless_sha256": "647aa6ceb2071915227879117809efb824b4e1e3b20e860aca9deccd76f471cd",
+  "core_hosts_count": 5,
+  "core_hosts_localhost": null,
+  "capabilities": "BusyBox v1.38.0 (2026-05-13 02:19:59 UTC) multi-call binary.\n\nUsage: nslookup [-type=QUERY_TYPE] [-debug] HOST [DNS_SERVER]\n\nQuery DNS about HOST\n\nQUERY_TYPE: soa,ns,a,aaaa,cname,mx,txt,ptr,srv,any\nBusyBox v1.38.0 (2026-05-13 02:19:59 UTC) multi-call binary.\n\nUsage: nc [IPADDR PORT]\n\nOpen a pipe to IP:PORT\nsocket\tfalse\tmodule 'socket' not found:\n\tno field package.preload['socket']\n\tno file './socket.lua'\n\tno file '/usr/share/lua/socket.lua'\n\tno file '/usr/share/lua/socket/init.lua'\n\tno file '/usr/lib/lua/socket.lua'\n\tno file '/usr/lib/lua/socket/init.lua'\n\tno file './socket.so'\n\tno file '/usr/lib/lua/socket.so'\n\tno file '/usr/lib/lua/loadall.so'\nnixio\ttrue\tavailable\nluci.sys\ttrue\tavailable\nruby_socket=no\n",
+  "core_dns_fields": {
+    "enable": true,
+    "listen": "0.0.0.0:7874",
+    "use-hosts": true,
+    "use-system-hosts": null
+  },
+  "qdiscs": "qdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n",
+  "log_options": "system.@system[0].log_size='128'\nopenclash.config.log_level='0'\nopenclash.config.log_size='512'\n364\t/tmp/openclash.log\n32\t/etc/openclash/history\nFilesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     45608     14204  76% /overlay\ntmpfs                   247000      6952    240048   3% /tmp\n",
+  "openclash_locks": "-rw-------    1 root     root             0 Oct 12 22:21 /tmp/lock/openclash_subs.lock\n-rw-r--r--    1 root     root             0 Oct 12 22:32 /tmp/lock/procd_openclash.lock\n",
+  "wifi_interfaces": "phy#1\n\tInterface phy1-ap0\n\t\tifindex 10\n\t\twdev 0x100000001\n\t\taddr 4c:c6:4c:bd:86:62\n\t\tssid Discorsvesper_5G\n\t\ttype AP\n\t\tchannel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz\n\t\ttxpower 23.00 dBm\n\t\tmulticast TXQ:\n\t\t\tqsz-byt\tqsz-pkt\tflows\tdrops\tmarks\toverlmt\thashcol\ttx-bytes\ttx-packets\n\t\t\t0\t0\t44488\t0\t0\t0\t4\t13649630\t\t57127\nphy#0\n\tInterface phy0-ap0\n\t\tifindex 9\n\t\twdev 0x1\n\t\taddr 4c:c6:4c:bd:86:61\n\t\tssid Discorsvesper\n\t\ttype AP\n\t\tchannel 1 (2412 MHz), width: 20 MHz, center1: 2412 MHz\n\t\ttxpower 20.00 dBm\n\t\tmulticast TXQ:\n\t\t\tqsz-byt\tqsz-pkt\tflows\tdrops\tmarks\toverlmt\thashcol\ttx-bytes\ttx-packets\n\t\t\t0\t0\t26360\t0\t0\t0\t3\t6504146\t\t26885\n9\n10\n2\n2\n"
+}

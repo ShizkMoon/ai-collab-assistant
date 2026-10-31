@@ -1,0 +1,15 @@
+{
+  "page_size": 4096,
+  "before_pages": [
+    5727,
+    7638,
+    11454
+  ],
+  "candidate_pages": [
+    8192,
+    16384,
+    24576
+  ],
+  "rollback_seconds": 150,
+  "persistent": false
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "",
+  "stderr": "\u001b[0;33m[WARN]\u001b[0m Recommended packages are missing: gawk, grep, sed, coreutils-sort; install them by running:!\napk update; apk add gawk grep sed coreutils-sort;[STAT] adblock-fast 1.2.4-r4 is blocking 55349 domains (with dnsmasq.servers)\n\u001b[0;33m[WARN]\u001b[0m Recommended packages are missing: gawk, grep, sed, coreutils-sort!\n"
+}

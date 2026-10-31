@@ -1,0 +1,5 @@
+{
+  "success": false,
+  "mode": "initramfs",
+  "error_type": "RuntimeError"
+}

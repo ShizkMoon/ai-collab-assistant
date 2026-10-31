@@ -1,0 +1,9 @@
+{
+  "modified_field": "pac_file_content",
+  "home_ip_subnet": "192.168.31.0/24",
+  "dns_marker": "ax6000-home31.lan",
+  "marker_address": "192.168.31.1",
+  "away_branch_preserved": true,
+  "other_verge_settings_unchanged": true,
+  "user_proxy_environment_unchanged": true
+}

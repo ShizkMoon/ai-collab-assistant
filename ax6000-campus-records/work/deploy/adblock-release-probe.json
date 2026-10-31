@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "10574 root      1776 S    {adblock-fast} /bin/sh /etc/rc.common /etc/init.d/adblock-fast restart\n10615 root      2076 S    ucode -S -L /lib/adblock-fast /lib/adblock-fast/cli.uc -- start on_start\n10727 root      1348 S    ash -c kill -TERM 10621; ps w | grep adblock | cut -c1-100\n10729 root      1340 S    grep adblock\n",
+  "stderr": ""
+}

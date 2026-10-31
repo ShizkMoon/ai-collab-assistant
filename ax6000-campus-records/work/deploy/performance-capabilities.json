@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "cubic\nphy#1\n\tInterface phy1-ap0\n\t\tifindex 9\n\t\twdev 0x100000001\n\t\taddr 4c:c6:4c:bd:86:62\n\t\tssid Discorsvesper_5G\n\t\ttype AP\n\t\tchannel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz\n\t\ttxpower 23.00 dBm\n\t\tmulticast TXQ:\n\t\t\tqsz-byt\tqsz-pkt\tflows\tdrops\tmarks\toverlmt\thashcol\ttx-bytes\ttx-packets\n\t\t\t0\t0\t1958\t0\t0\t0\t0\t343732\t\t2515\nphy#0\n\tInterface phy0-ap0\n\t\tifindex 8\n\t\twdev 0x1\n\t\taddr 4c:c6:4c:bd:86:61\n\t\tssid Discorsvesper\n\t\ttype AP\n\t\tchannel 1 (2412 MHz), width: 20 MHz, center1: 2412 MHz\n\t\ttxpower 20.00 dBm\n\t\tmulticast TXQ:\n\t\t\tqsz-byt\tqsz-pkt\tflows\tdrops\tmarks\toverlmt\thashcol\ttx-bytes\ttx-packets\n\t\t\t0\t0\t0\t0\t0\t0\t0\t0\t\t0\n5839 4661 3789\n",
+  "stderr": "busybox: applet not found\n"
+}

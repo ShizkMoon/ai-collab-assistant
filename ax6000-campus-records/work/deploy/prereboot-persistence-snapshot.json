@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "## This file contains files and directories that should\n## be preserved during an upgrade.\n\n# /etc/example.conf\n# /etc/openvpn/\n/etc/hotplug.d/iface/95-esurfingclient-wan\nFilesystem                Size      Used Available Use% Mounted on\n/dev/ubi0_1              61.6M     49.1M      9.3M  84% /overlay\n              total        used        free      shared  buff/cache   available\nMem:         494004      186948      214816       24100       92240      233036\nSwap:             0           0           0\n/etc/rc.d/S20adblock-fast\n/etc/rc.d/S20mwan3\n/etc/rc.d/S95esurfingclient\n/etc/rc.d/S96ua3f\n/etc/rc.d/S99openclash\n2026-10-12T17:46:03+08:00\n",
+  "stderr": ""
+}

@@ -1,0 +1,14 @@
+{
+  "restored": true,
+  "system_modified": false,
+  "home": {
+    "HTTPS_PROXY": false,
+    "ALL_PROXY": false,
+    "HTTP_PROXY": false
+  },
+  "away": {
+    "HTTP_PROXY": true,
+    "ALL_PROXY": false,
+    "HTTPS_PROXY": true
+  }
+}

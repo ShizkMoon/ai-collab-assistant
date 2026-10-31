@@ -1,0 +1,44 @@
+# 本地私有材料与认证文件
+**/private/
+**/private-configuration/
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+*.yaml
+*.yml
+*.ovpn
+*.p12
+*.pfx
+*.kdbx
+
+# 固件、设备备份及构建产物
+*.bin
+*.img
+*.itb
+*.ubi
+*.ubifs
+*.ipk
+*.apk
+*.exe
+*.dll
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.bak
+*.db
+*.sqlite*
+
+# 缓存与编辑器临时文件
+*.log
+__pycache__/
+node_modules/
+*.pyc
+.DS_Store
+Thumbs.db
+*.swp

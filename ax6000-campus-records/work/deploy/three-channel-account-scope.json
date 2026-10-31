@@ -1,0 +1,14 @@
+{
+  "configured_accounts": 3,
+  "all_accounts_share_username": true,
+  "channels": [
+    3,
+    2,
+    1
+  ],
+  "marks": [
+    "",
+    "0x02000000",
+    "0x03000000"
+  ]
+}

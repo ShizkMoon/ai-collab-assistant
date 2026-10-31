@@ -1,0 +1,22 @@
+{
+  "candidate_valid": true,
+  "only_added_dns_policies": true,
+  "hook_idempotent": true,
+  "added_suffixes": [
+    "baidu.com",
+    "bilibili.com",
+    "jd.com",
+    "qq.com",
+    "taobao.com",
+    "tmall.com",
+    "alipay.com",
+    "weibo.com",
+    "163.com"
+  ],
+  "endpoints": [
+    "https://dns.alidns.com/dns-query",
+    "https://doh.pub/dns-query"
+  ],
+  "source_unchanged": true,
+  "option_sha256": "401becdedbef2eaaba94de0da9d0cc0f68d5e23424ec621906d883f1e12be0cb"
+}

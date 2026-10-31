@@ -1,0 +1,3 @@
+{
+  "events": "[2026-10-12 16:49:16] account=2 event=AUTH_REQUIRED_HTTP302\n[2026-10-12 16:49:20] account=2 event=LOGIN_KEEP_SECONDS value=6\n[2026-10-12 16:49:20] account=2 event=AUTH_SUCCESS\n[2026-10-12 16:49:26] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 16:49:26] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 16:53:37] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 16:53:37] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n"
+}

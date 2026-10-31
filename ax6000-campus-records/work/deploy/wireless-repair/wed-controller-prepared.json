@@ -1,0 +1,12 @@
+{
+  "temporary_base": "/tmp/codex-wed-wireless-trial",
+  "original_module_parameters": {
+    "coredump_memdump": "N",
+    "enable_6ghz": "N",
+    "sr_scene_detect": "Y",
+    "wed_enable": "N"
+  },
+  "radio_config_unchanged": true,
+  "independent_restore_seconds": 240,
+  "no_flow_offload": true
+}

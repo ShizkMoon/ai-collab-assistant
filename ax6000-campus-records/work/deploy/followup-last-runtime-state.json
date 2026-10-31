@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "5727\t7638\t11454\nInterface status:\n interface wan is online and tracking is active (online 00h:17m:31s, uptime 00h:18m:17s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan2 is online and tracking is active (online 00h:10m:15s, uptime 00h:18m:17s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan3 is unknown and tracking is disabled (31)\n\nCurrent policies:\nbalanced:\n wan (50%)\n wan2 (50%)\nua3f_bal:\n wan (50%)\n wan2 (50%)\n\nDirectly connected ipv4 networks:\n1113.59 4140.99\n",
+  "stderr": ""
+}

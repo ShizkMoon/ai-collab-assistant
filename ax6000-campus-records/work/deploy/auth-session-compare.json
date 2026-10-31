@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "account=1 session_file_valid=true client_id_nonempty=true mac_nonempty=true ip_nonempty=true\naccount=2 session_file_valid=true client_id_nonempty=true mac_nonempty=true ip_nonempty=true\naccount=3 session_file_valid=true client_id_nonempty=true mac_nonempty=true ip_nonempty=true\nlinux2_linux3_client_id_equal=false\nlinux2_linux3_mac_addr_equal=false\nlinux2_linux3_host_name_equal=false\nlinux2_linux3_client_ip_equal=false\n",
+  "stderr": ""
+}

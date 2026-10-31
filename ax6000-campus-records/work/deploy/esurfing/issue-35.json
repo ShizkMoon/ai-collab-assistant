@@ -1,0 +1,75 @@
+{
+  "body": "## 关于手机端新算法（ZUC）与认证协议的一些观察，供参考\n\n各位好，最近在排查广东天翼校园网客户端认证问题时，从手机端 APK（`GDCV4.0.2104.25102201`，版本号 25102201）里提取并分析了一些信息，觉得可能对本项目（尤其是 phone 通道恢复）有帮助，整理如下供参考。如有不准确之处还请指正。\n\n### 1. phone 通道新算法确认为 ZUC（祖冲之）\n\n从 APK 解包得到 `lib/arm64-v8a/libdaproxy.so`（约 1.4MB），与旧版本（约 272KB）对比：\n\n- **新旧 so 的 JNI 导出接口完全一致**（`DaMod` 类）：`load / dec / enc / aid / key / free / inspect / prev` + `JNI_OnLoad`\n- **算法已换代**：新 so 内含 ZUC 实现，符号有 `ZUC_Init / ZUC_Encrypt / ZUC_Clean / zucf` 以及 `zuc.c` 路径引用\n- **依赖简单**：DT_NEEDED 仅 `libc / libdl / liblog / libm`，不依赖其他业务 so\n\n也就是说 phone 通道算法从旧版换成了 **ZUC（祖冲之，国密 GB/T 33133 系列）**，且 Java 侧调用接口没有变化——这可能是 `phone 通道关闭` 的根因（算法换代，旧实现失效），如果 C 版能移植 ZUC（ZUC 是公开国密标准，有开源实现可参考），phone 通道或许可以恢复。\n\n### 2. 认证协议抓包细节（手机端实测）\n\n通过代理抓取了手机端（上述 APK，账号正常登录）的完整认证流量，关键请求如下：\n\n**ticket.cgi（两次请求）**\n- URL 参数（9 个，顺序如下）：\n  ```\n  wlanacip / wlanuserip / clientip / wlanacname / clientmac / paip / vlan / iarmdst / portal_node\n  ```\n  例：`http://14.146.227.141:7001/ticket.cgi?wlanacip=183.3.151.148&wlanuserip=172.20.x.x&clientip=172.20.x.x&wlanacname=SISE&clientmac=xx:xx:xx:xx:xx:xx&paip=10.88.88.88&vlan=100.0&iarmdst=www.189.cn/&portal_node=http://125.88.59.131:10002`\n- 请求头：`User-Agent: CCTP/android11_64/2104`、`Accept: text/html,text/xml,application/xhtml+xml,application/x-javascript,*/*`、`CDC-SchoolId / CDC-Domain / CDC-Area`、`Client-ID`、`Algo-ID`、`CDC-Checksum`、`Content-Type: text/plain; charset=utf-8`\n- 一个非标准头 **`ews2a3nl`**，值 = 请求体本身（加密 payload）——即 payload 同时放在 body 和该 header 中\n- **两次调用流程**：\n  1. 第一次 `Algo-ID: 00000000-0000-0000-0000-000000000000`，body 为全 0 algoId → 响应 17.3KB（zsm 种子）\n  2. 第二次用真实 `Algo-ID`（如 `D755A536-B551-468C-BD87-322182B223D4`，来自 zsm 初始化后的 `aid()`），body 为 ZUC 加密的 XML → 响应 184B（ticket）\n\n**auth.cgi / keep.cgi / term.cgi**\n- 同样带上述头 + `ews2a3nl`（值=加密 body），`Content-Type: text/plain; charset=utf-8`\n- `keep.cgi` 主机为 `14.146.227.142:7001`（与 ticket/auth 的 `.141` 不同）\n- 响应含 `Set-Cookie`（如 `U9QcDIaFZqBHS=...`），后续请求未见必须携带\n\n### 3. 检测逻辑的一个观察（供参考，非 PR）\n\n当前主分支把连通性检测 URL 换成了 `http://223.5.5.5`（PR #33）。在部分环境下实测发现：\n\n- 校园网\"黑洞\"状态（未认证但网关吞流量）时，`223.5.5.5` 仍返回 404（被放行），而 `connect.rom.miui.com` / `www.189.cn` / 认证服务器全超时——此时按 404=已连接 会**误判为在线**，导致客户端不触发认证\n- 建议可考虑：多 URL 检测 + 用非放行域名（如 `www.189.cn`）做黑洞判别，或组合 `miui/gstatic/223.5.5.5` 与认证服务器可达性\n\n### 附：环境信息\n\n- 广东天翼校园网（SISE，SchoolId 1099，AC 183.3.151.148）\n- 手机端 APK：`GDCV4.0.2104.25102201`（2025-10 构建，360 加固，libdaproxy.so 未加固）\n- 抓包工具：mitmproxy\n\n以上信息均为个人实测整理，希望对项目有帮助。如需更多细节（如完整请求样例、新旧 so 导出对比）可以继续补充。",
+  "comments": [
+    {
+      "id": "IC_kwDOQBozes8AAAABRs4ZvQ",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "安卓端通道算法已经赶工出来 [(release 链接)](https://github.com/BadGhost520/ESurfingClient-CVersion/releases/tag/v2.0.6-r1)，九个算法如下，也可以参考对应的源文件\n<img width=\"244\" height=\"247\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/dc331686-17bc-4393-8576-1ca4c50825ee\" />\n\n检测逻辑的话一直都是个问题，用网址的话，一些地区可能会触发DNS解析错误，甚至导致没网，用ip不准确，后面我再思考一下怎么把这两者结合一下之类的吧",
+      "createdAt": "2026-08-31T18:44:51Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [
+        {
+          "content": "ROCKET",
+          "users": {
+            "totalCount": 1
+          }
+        }
+      ],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/35#issuecomment-5482879421",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABRyuJtA",
+      "author": {
+        "login": "Knight-ask-art"
+      },
+      "authorAssociation": "NONE",
+      "body": "关于你提到的检测逻辑（网址 vs IP 的取舍），分享一个我这边已经在用的方案，供参考：\n\n**多 URL 顺序探测 + 黑洞判别**\n\n1. **探测顺序**：`connect.rom.miui.com` → `http://223.5.5.5` → `connectivitycheck.gstatic.com`，依次尝试，任一成功即认为\"可能在线\"，全部失败才判定离线\n   - 正常环境走 miui（域名，快）\n   - 部分地区 DNS 被污染/解析失败时，自动落到 223.5.5.5 纯 IP（绕开 DNS 问题，就是你担心的那类场景）\n   - 响应 404 也视为\"网络可达\"（网关放行特征，PR #33 的思路保留）\n\n2. **黑洞判别**：探测列表里加一个校园网关联域名（如 `www.189.cn`）——黑洞状态下它和认证服务器一样会超时/EOF，而 223.5.5.5 反而 404 放行。若\"miui/223.5.5.5 可达但 189 不可达\"→ 判定为黑洞，主动触发认证（此时用本机网卡 IP 构造重定向参数，不走 DNS 重定向）\n\n3. **离线判定**：拿不到校园网网卡 IP→ 直接判离线，不触发认证，避免无意义重试\n\n4. **短超时**：每个探测 3~5 秒，避免任一探测挂起拖死心跳\n\n实测下来这个组合能同时覆盖：正常在线 / 黑洞 / 完全离线 / DNS 异常四类场景。你那边后续要改的话可以参考这个思路（URL 顺序和超时按地区调优）。",
+      "createdAt": "2026-09-01T04:43:19Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/35#issuecomment-5489002932",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABT-sYIA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "校园网网卡ip说实话不好判定的说，还是不要好了，现在是用miui+1.1.1.1判定是否连到互联网，两个电信的认证服务器判断是否连到认证服务器，访问http://1.1.1.1 正常联网的话会返回301，miui的则是204，需要认证的时候必定是302，另外curl超时调到了连接超时3秒，总超时时间5秒",
+      "createdAt": "2026-09-11T14:15:40Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/35#issuecomment-5635774496",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABa1MpVw",
+      "author": {
+        "login": "miwu04"
+      },
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "> 校园网网卡ip说实话不好判定的说，还是不要好了，现在是用miui+1.1.1.1判定是否连到互联网，两个电信的认证服务器判断是否连到认证服务器，访问http://1.1.1.1 正常联网的话会返回301，miui的则是204，需要认证的时候必定是302，另外curl超时调到了连接超时3秒，总超时时间5秒\n\n1.1.1.1是墙的，如果我们这时开了个代理，规则就走代理了，此时因为开着代理，节点断了一次的情况下，同时刚好卡在检测的时间点，1.1.1.1也不通了，之后就一直死循环了，我建议保留223.5.5.5的相关逻辑",
+      "createdAt": "2026-10-10T08:14:45Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/35#issuecomment-6095579479",
+      "viewerDidAuthor": false
+    }
+  ],
+  "number": 35,
+  "title": "关于手机端新算法（ZUC）与认证协议的一些观察，供参考",
+  "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/35"
+}

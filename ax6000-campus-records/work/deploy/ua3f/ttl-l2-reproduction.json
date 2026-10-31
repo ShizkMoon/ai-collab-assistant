@@ -1,0 +1,107 @@
+{
+  "kind": "host replay of unchanged C bodies with helper shims; no kernel/ARM64 execution",
+  "source_path": "C:\\Users\\Shizuku\\Documents\\Codex\\2026-10-12\\za\\work\\research\\phase2\\ua3f-source\\internal__bpf__tc__tc.c",
+  "source_sha256": "96f58cb9c4c0160f7efbbcd6c749cb0c661a73be7abb061aeec8e87a9e7c65c3",
+  "cases": [
+    {
+      "case": "reported gateway MAC; synthetic source",
+      "destination_mac": "48:46:fb:f7:c4:c9",
+      "source_mac_before": "02:11:aa:bb:cc:dd",
+      "source_mac_after": "02:11:40:bb:36:de",
+      "parsed_l3_offset": 0,
+      "checksum_helper_offset": 10,
+      "store_helper_offset": 8,
+      "actual_ipv4_ttl_before": 37,
+      "actual_ipv4_ttl_after": 37,
+      "actual_ipv4_header_checksum_valid_after": true,
+      "return_value": -1,
+      "changed_frame_offsets": [
+        8,
+        10,
+        11
+      ]
+    },
+    {
+      "case": "reported gateway and actual WAN source",
+      "destination_mac": "48:46:fb:f7:c4:c9",
+      "source_mac_before": "4c:c6:4c:2c:2e:65",
+      "source_mac_after": "4c:c6:40:2c:3a:65",
+      "parsed_l3_offset": 0,
+      "checksum_helper_offset": 10,
+      "store_helper_offset": 8,
+      "actual_ipv4_ttl_before": 37,
+      "actual_ipv4_ttl_after": 37,
+      "actual_ipv4_header_checksum_valid_after": true,
+      "return_value": -1,
+      "changed_frame_offsets": [
+        8,
+        10
+      ]
+    },
+    {
+      "case": "reported gateway and actual eswan2 source",
+      "destination_mac": "48:46:fb:f7:c4:c9",
+      "source_mac_before": "02:66:60:00:00:02",
+      "source_mac_after": "02:66:40:00:20:02",
+      "parsed_l3_offset": 0,
+      "checksum_helper_offset": 10,
+      "store_helper_offset": 8,
+      "actual_ipv4_ttl_before": 37,
+      "actual_ipv4_ttl_after": 37,
+      "actual_ipv4_header_checksum_valid_after": true,
+      "return_value": -1,
+      "changed_frame_offsets": [
+        8,
+        10
+      ]
+    },
+    {
+      "case": "reported gateway and actual eswan3 source",
+      "destination_mac": "48:46:fb:f7:c4:c9",
+      "source_mac_before": "02:66:60:00:00:03",
+      "source_mac_after": "02:66:40:00:20:03",
+      "parsed_l3_offset": 0,
+      "checksum_helper_offset": 10,
+      "store_helper_offset": 8,
+      "actual_ipv4_ttl_before": 37,
+      "actual_ipv4_ttl_after": 37,
+      "actual_ipv4_header_checksum_valid_after": true,
+      "return_value": -1,
+      "changed_frame_offsets": [
+        8,
+        10
+      ]
+    },
+    {
+      "case": "ordinary Ethernet control",
+      "destination_mac": "28:46:fb:f7:c4:c9",
+      "source_mac_before": "02:11:aa:bb:cc:dd",
+      "source_mac_after": "02:11:aa:bb:cc:dd",
+      "parsed_l3_offset": 14,
+      "checksum_helper_offset": 24,
+      "store_helper_offset": 22,
+      "actual_ipv4_ttl_before": 37,
+      "actual_ipv4_ttl_after": 64,
+      "actual_ipv4_header_checksum_valid_after": true,
+      "return_value": -1,
+      "changed_frame_offsets": [
+        22,
+        24
+      ]
+    },
+    {
+      "case": "reported gateway with source byte below TTL_MIN",
+      "destination_mac": "48:46:fb:f7:c4:c9",
+      "source_mac_before": "02:11:08:bb:cc:dd",
+      "source_mac_after": "02:11:08:bb:cc:dd",
+      "parsed_l3_offset": 0,
+      "checksum_helper_offset": -1,
+      "store_helper_offset": -1,
+      "actual_ipv4_ttl_before": 37,
+      "actual_ipv4_ttl_after": 37,
+      "actual_ipv4_header_checksum_valid_after": true,
+      "return_value": -1,
+      "changed_frame_offsets": []
+    }
+  ]
+}

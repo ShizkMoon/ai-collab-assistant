@@ -1,0 +1,63 @@
+2026-10-27T21:21:51+08:00
+=== DF ===
+Filesystem                Size      Used Available Use% Mounted on
+/dev/ubi0_1              61.6M      8.9M     49.5M  15% /overlay
+=== SERVICES ===
+dnsmasq        running
+firewall       active with no instances
+mwan3          running
+esurfingclient running
+adblock-fast   [STAT] adblock-fast 1.2.4-r4 is blocking 55349 domains (with dnsmasq.servers)
+=== TTL ===
+		oifname "wan" ip ttl >= 10 counter packets 1435 bytes 828505 ip ttl set 64 comment "WAN IPv4 TTL64"
+		oifname "eswan2" ip ttl >= 10 counter packets 2727 bytes 1571334 ip ttl set 64 comment "WAN2 IPv4 TTL64"
+		oifname "eswan3" ip ttl >= 10 counter packets 2058 bytes 7681909 ip ttl set 64 comment "WAN3 IPv4 TTL64"
+		oifname "eswan4" ip ttl >= 10 counter packets 1058 bytes 1260228 ip ttl set 64 comment "WAN4 IPv4 TTL64"
+=== MWAN ===
+ interface wan is online and tracking is active (online 00h:42m:11s, uptime 00h:48m:55s)
+ interface wan2 is online and tracking is active (online 00h:42m:02s, uptime 00h:48m:55s)
+ interface wan3 is online and tracking is active (online 00h:42m:02s, uptime 00h:48m:55s)
+ interface wan4 is online and tracking is active (online 00h:42m:03s, uptime 00h:48m:55s)
+=== AUTH ===
+12275 root       744 S    /usr/bin/esurfingclient --role auth --account 1
+12276 root       744 S    /usr/bin/esurfingclient --role auth --account 2
+12277 root       744 S    /usr/bin/esurfingclient --role auth --account 3
+12278 root       744 S    /usr/bin/esurfingclient --role auth --account 4
+=== DNS ===
+Name:	www.a.shifen.com
+Address: 240e:ff:e020:99b:0:ff:b099:cff1
+
+=== LUCI ===
+200
+=== LOG ===
+Tue Oct 27 21:21:37 2026 authpriv.info dropbear[28700]: Exit (root) from <192.168.31.171:46690>: Disconnect received
+Tue Oct 27 21:21:38 2026 daemon.info esurfingclient[12275]: [2026-10-27 21:21:38] [auth#1 pid=12275] [main] [INFO] [DialerClient.c:74] 发送心跳包
+Tue Oct 27 21:21:38 2026 daemon.info esurfingclient[12275]: [2026-10-27 21:21:38] [auth#1 pid=12275] [main] [INFO] [DialerClient.c:90] 下一次重试: 850 秒后
+Tue Oct 27 21:21:46 2026 daemon.info esurfingclient[12277]: [2026-10-27 21:21:46] [auth#3 pid=12277] [main] [INFO] [DialerClient.c:74] 发送心跳包
+Tue Oct 27 21:21:46 2026 daemon.info esurfingclient[12277]: [2026-10-27 21:21:46] [auth#3 pid=12277] [main] [INFO] [DialerClient.c:90] 下一次重试: 850 秒后
+Tue Oct 27 21:21:51 2026 authpriv.info dropbear[28748]: Child connection from 192.168.31.171:34054
+Tue Oct 27 21:21:51 2026 authpriv.notice dropbear[28748]: Password auth succeeded for 'root' from 192.168.31.171:34054
+Tue Oct 27 21:21:52 2026 user.notice adblock-fast: [STAT] adblock-fast 1.2.4-r4 is blocking 55349 domains (with dnsmasq.servers)
+Tue Oct 27 21:21:52 2026 user.notice adblock-fast: [WARN] Recommended packages are missing: gawk, grep, sed, coreutils-sort!
+=== PACKAGES AFTER ===
+194
+libxtables12-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+=== LISTENERS AFTER ===
+none
+=== BASE LIBS ===
+libpthread-1.2.6-r5 aarch64_cortex-a53 {feeds/base/libs/toolchain} (GPL-3.0-with-GCC-exception) [installed]
+librt-1.2.6-r5 aarch64_cortex-a53 {feeds/base/libs/toolchain} (GPL-3.0-with-GCC-exception) [installed]
+=== FILES AFTER ===
+=== AUTH4 RECOVERY ===
+Tue Oct 27 21:16:51 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:16:51] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:74] 发送心跳包
+Tue Oct 27 21:16:51 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:16:51] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:90] 下一次重试: 250 秒后
+Tue Oct 27 21:21:01 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:21:01] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:74] 发送心跳包
+Tue Oct 27 21:21:02 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:21:02] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:90] 下一次重试: 250 秒后
+Tue Oct 27 21:25:12 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:25:12] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:74] 发送心跳包
+Tue Oct 27 21:25:12 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:25:12] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:90] 下一次重试: 250 秒后
+Tue Oct 27 21:29:23 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:29:23] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:74] 发送心跳包
+Tue Oct 27 21:29:23 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:29:23] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:90] 下一次重试: 250 秒后
+Tue Oct 27 21:33:33 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:33:33] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:74] 发送心跳包
+Tue Oct 27 21:33:33 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:33:33] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:90] 下一次重试: 250 秒后
+Tue Oct 27 21:37:44 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:37:44] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:74] 发送心跳包
+Tue Oct 27 21:37:44 2026 daemon.info esurfingclient[12278]: [2026-10-27 21:37:44] [auth#4 pid=12278] [main] [INFO] [DialerClient.c:90] 下一次重试: 250 秒后

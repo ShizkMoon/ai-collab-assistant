@@ -1,0 +1,16 @@
+{
+  "probes": [
+    {
+      "exit": 0,
+      "http": "204",
+      "elapsed": 44.7
+    }
+  ],
+  "offline_seconds": 44.3,
+  "policy": "table inet mwan3 {\n\tchain mwan3_policy_ua3f_bal {\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xc1ffffff | 0x01000000\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\ntable inet mwan3 {\n\tchain mwan3_policy_balanced {\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xc1ffffff | 0x01000000\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\n",
+  "recovered_seconds": 59.0,
+  "after_recovery": {
+    "exit": 0,
+    "http": "204"
+  }
+}

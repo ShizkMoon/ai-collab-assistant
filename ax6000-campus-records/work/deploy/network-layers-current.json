@@ -1,0 +1,196 @@
+{
+  "router_time": "2026-10-12T21:32:20+08:00",
+  "dns": {
+    "enable": true,
+    "nameserver": [
+      "223.5.5.5",
+      "119.29.29.29"
+    ],
+    "fallback": [
+      "https://1.1.1.1/dns-query#[policy-or-options]"
+    ],
+    "ipv6": false,
+    "enhanced-mode": "redir-host",
+    "listen": "0.0.0.0:7874",
+    "respect-rules": false,
+    "use-hosts": true,
+    "nameserver-policy": {
+      "+.189.cn": [
+        "202.96.128.86"
+      ],
+      "+.gdpu.edu.cn": [
+        "10.50.11.15",
+        "202.96.128.86"
+      ]
+    },
+    "default-nameserver": [
+      "223.5.5.5",
+      "119.29.29.29"
+    ],
+    "fallback-filter": {
+      "domain": [
+        "+.google.com",
+        "+.googleapis.com",
+        "+.gstatic.com",
+        "+.youtube.com",
+        "+.github.com",
+        "+.githubusercontent.com",
+        "+.openai.com",
+        "+.chatgpt.com"
+      ],
+      "geoip": true,
+      "geoip-code": "CN",
+      "ipcidr": [
+        "240.0.0.0/4"
+      ]
+    },
+    "proxy-server-nameserver": [
+      "223.5.5.5",
+      "119.29.29.29"
+    ]
+  },
+  "core": {
+    "mode": "rule",
+    "ipv6": false,
+    "mixed-port": 7893,
+    "redir-port": 7892,
+    "tproxy-port": 7895,
+    "allow-lan": true,
+    "bind-address": "*",
+    "external-controller": "0.0.0.0:9090",
+    "secret_configured": true,
+    "proxy_auth_configured": true,
+    "proxy_count": 50,
+    "group_count": 14,
+    "rule_count": 4415,
+    "ua3f_tcp_rules": 919
+  },
+  "services": {
+    "adblock-fast": {},
+    "dnsmasq": {
+      "cfg01411c": {
+        "running": true,
+        "pid": 6831
+      }
+    },
+    "esurfingclient": {
+      "account1": {
+        "running": true,
+        "pid": 7620
+      },
+      "account2": {
+        "running": true,
+        "pid": 7679
+      }
+    },
+    "openclash": {
+      "openclash": {
+        "running": true,
+        "pid": 6234
+      }
+    },
+    "ua3f": {
+      "ua3f": {
+        "running": true,
+        "pid": 4940
+      }
+    }
+  },
+  "interfaces": [
+    {
+      "interface": "lan",
+      "up": true,
+      "l3_device": "br-lan",
+      "ipv4-address": [
+        {
+          "address": "192.168.31.1",
+          "mask": 24
+        }
+      ],
+      "ipv6-address": [],
+      "ipv6-prefix": [],
+      "dns-server": [],
+      "route": []
+    },
+    {
+      "interface": "wan",
+      "up": true,
+      "l3_device": "wan",
+      "ipv4-address": [
+        {
+          "address": "10.207.123.111",
+          "mask": 20
+        }
+      ],
+      "ipv6-address": [],
+      "ipv6-prefix": [],
+      "dns-server": [
+        "10.50.11.15",
+        "202.96.128.86"
+      ],
+      "route": [
+        {
+          "target": "0.0.0.0",
+          "mask": 0,
+          "nexthop": "10.207.112.1",
+          "source": "10.207.123.111/32"
+        }
+      ]
+    },
+    {
+      "interface": "wan2",
+      "up": true,
+      "l3_device": "eswan2",
+      "ipv4-address": [
+        {
+          "address": "10.207.112.254",
+          "mask": 20
+        }
+      ],
+      "ipv6-address": [],
+      "ipv6-prefix": [],
+      "dns-server": [],
+      "route": [
+        {
+          "target": "0.0.0.0",
+          "mask": 0,
+          "nexthop": "10.207.112.1",
+          "source": "10.207.112.254/32"
+        }
+      ]
+    },
+    {
+      "interface": "wan3",
+      "up": false,
+      "l3_device": null,
+      "ipv4-address": null,
+      "ipv6-address": null,
+      "ipv6-prefix": null,
+      "dns-server": null,
+      "route": null
+    },
+    {
+      "interface": "wan6",
+      "up": false,
+      "l3_device": null,
+      "ipv4-address": null,
+      "ipv6-address": null,
+      "ipv6-prefix": null,
+      "dns-server": null,
+      "route": null
+    }
+  ],
+  "dnsmasq": "127.0.0.1#7874\n1\n0",
+  "ipv6_default": "",
+  "mtu": "6: wan@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000\\    link/ether 4c:c6:4c:2c:2e:65 brd ff:ff:ff:ff:ff:ff permaddr 4c:c6:4c:bd:86:60\n8: eswan2@wan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000\\    link/ether 02:66:60:00:00:02 brd ff:ff:ff:ff:ff:ff\n7: br-lan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000\\    link/ether 4c:c6:4c:bd:86:60 brd ff:ff:ff:ff:ff:ff",
+  "listeners": "Active Internet connections (only servers)\nProto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    \ntcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      3117/uhttpd\ntcp        0      0 10.207.123.111:53       0.0.0.0:*               LISTEN      6875/dnsmasq\ntcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1715/dropbear\ntcp        0      0 127.0.0.1:53            0.0.0.0:*               LISTEN      6875/dnsmasq\ntcp        0      0 127.0.0.1:1080          0.0.0.0:*               LISTEN      4940/ua3f\ntcp        0      0 10.207.112.254:53       0.0.0.0:*               LISTEN      6875/dnsmasq\ntcp        0      0 192.168.31.1:53         0.0.0.0:*               LISTEN      6875/dnsmasq\ntcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN      3117/uhttpd\ntcp        0      0 :::80                   :::*                    LISTEN      3117/uhttpd\ntcp        0      0 fe80::4ec6:4cff:febd:8660:53 :::*                    LISTEN      6875/dnsmasq\ntcp        0      0 fe80::4ec6:4cff:febd:8660:53 :::*                    LISTEN      6875/dnsmasq\ntcp        0      0 ::1:53                  :::*                    LISTEN      6875/dnsmasq\ntcp        0      0 :::22                   :::*                    LISTEN      1715/dropbear\ntcp        0      0 :::7892                 :::*                    LISTEN      6234/clash\ntcp        0      0 :::7893                 :::*                    LISTEN      6234/clash\ntcp        0      0 :::7895                 :::*                    LISTEN      6234/clash\ntcp        0      0 :::7890                 :::*                    LISTEN      6234/clash\ntcp        0      0 :::7891                 :::*                    LISTEN      6234/clash\ntcp        0      0 fe80::4ec6:4cff:fe2c:2e65:53 :::*                    LISTEN      6875/dnsmasq\ntcp        0      0 :::7874                 :::*                    LISTEN      6234/clash\ntcp        0      0 fd3c:162d:9e76::1:53    :::*                    LISTEN      6875/dnsmasq\ntcp        0      0 :::9090                 :::*                    LISTEN      6234/clash\ntcp        0      0 :::443                  :::*                    LISTEN      3117/uhttpd\nudp        0      0 127.0.0.1:53            0.0.0.0:*                           6875/dnsmasq\nudp        0      0 10.207.123.111:53       0.0.0.0:*                           6875/dnsmasq\nudp        0      0 192.168.31.1:53         0.0.0.0:*                           6875/dnsmasq\nudp        0      0 10.207.112.254:53       0.0.0.0:*                           6875/dnsmasq\nudp        0      0 0.0.0.0:67              0.0.0.0:*                           6875/dnsmasq\nudp        0      0 :::48722                :::*                                6234/clash\nudp        0      0 :::55909                :::*                                6234/clash\nudp        0      0 :::33935                :::*                                6234/clash\nudp        0      0 :::38558                :::*                                6234/clash\nudp        0      0 :::57258                :::*                                6234/clash\nudp        0      0 :::33728                :::*                                6234/clash\nudp        0      0 :::7874                 :::*                                6234/clash\nudp        0      0 :::56773                :::*                                6234/clash\nudp        0      0 :::7891                 :::*                                6234/clash\nudp        0      0 :::7892                 :::*                                6234/clash\nudp        0      0 :::36309                :::*                                6234/clash\nudp        0      0 :::7893                 :::*                                6234/clash\nudp        0      0 :::7895                 :::*                                6234/clash\nudp        0      0 :::58073                :::*                                6234/clash\nudp        0      0 :::37101                :::*                                6234/clash\nudp        0      0 :::43761                :::*                                6234/clash\nudp        0      0 :::60925                :::*                                6234/clash\nudp        0      0 :::32788                :::*                                6234/clash\nudp        0      0 :::49428                :::*                                6234/clash\nudp        0      0 :::546                  :::*                                3574/odhcp6c\nudp        0      0 :::547                  :::*                                2995/odhcpd\nudp        0      0 ::1:53                  :::*                                6875/dnsmasq\nudp        0      0 fe80::4ec6:4cff:febd:8660:53 :::*                                6875/dnsmasq\nudp        0      0 fe80::4ec6:4cff:fe2c:2e65:53 :::*                                6875/dnsmasq\nudp        0      0 fd3c:162d:9e76::1:53    :::*                                6875/dnsmasq\nudp        0      0 fe80::4ec6:4cff:febd:8660:53 :::*                                6875/dnsmasq\nudp        0      0 :::39995                :::*                                6234/clash\nudp        0      0 :::57409                :::*                                6234/clash\nudp        0      0 :::48967                :::*                                6234/clash\nudp        0      0 :::60743                :::*                                6234/clash",
+  "wan_input": "table inet fw4 {\n\tchain input_wan {\n\t\tmeta nfproto ipv4 udp dport 68 counter packets 0 bytes 0 accept comment \"!fw4: Allow-DHCP-Renew\"\n\t\ticmp type echo-request counter packets 2 bytes 128 accept comment \"!fw4: Allow-Ping\"\n\t\tmeta nfproto ipv4 meta l4proto igmp counter packets 0 bytes 0 accept comment \"!fw4: Allow-IGMP\"\n\t\tmeta nfproto ipv6 udp dport 546 counter packets 0 bytes 0 accept comment \"!fw4: Allow-DHCPv6\"\n\t\tip6 saddr fe80::/10 icmpv6 type . icmpv6 code { mld-listener-query . 0, mld-listener-report . 0, mld-listener-done . 0, mld2-listener-report . 0 } counter packets 0 bytes 0 accept comment \"!fw4: Allow-MLD\"\n\t\ticmpv6 type { destination-unreachable, time-exceeded, echo-request, echo-reply, nd-router-solicit, nd-router-advert } limit rate 1000/second burst 5 packets counter packets 9 bytes 528 accept comment \"!fw4: Allow-ICMPv6-Input\"\n\t\ticmpv6 type . icmpv6 code { packet-too-big . 0, parameter-problem . 0, nd-neighbor-solicit . 0, nd-neighbor-advert . 0, parameter-problem . 1 } limit rate 1000/second burst 5 packets counter packets 7 bytes 488 accept comment \"!fw4: Allow-ICMPv6-Input\"\n\t\tjump reject_from_wan\n\t}\n}",
+  "input": "table inet fw4 {\n\tchain input {\n\t\ttype filter hook input priority filter; policy drop;\n\t\tmeta mark 0x00000162 accept comment \"OpenClash TPROXY Accept\"\n\t\tct status dnat accept comment \"OpenClash Redirect Accept\"\n\t\tiifname \"eswan3\" ip saddr != @localnetwork counter packets 0 bytes 0 jump openclash_wan_input\n\t\tiifname \"eswan2\" ip saddr != @localnetwork counter packets 1674192 bytes 7195074636 jump openclash_wan_input\n\t\tiifname \"wan\" ip saddr != @localnetwork counter packets 1491624 bytes 7836597896 jump openclash_wan_input\n\t\tiif \"lo\" accept comment \"!fw4: Accept traffic from loopback\"\n\t\tct state vmap { established : accept, related : accept } comment \"!fw4: Handle inbound flows\"\n\t\ttcp flags & (fin | syn | rst | ack) == syn jump syn_flood comment \"!fw4: Rate limit TCP syn packets\"\n\t\tiifname \"br-lan\" jump input_lan comment \"!fw4: Handle lan IPv4/IPv6 input traffic\"\n\t\tiifname { \"wan\", \"eswan2\", \"eswan3\" } jump input_wan comment \"!fw4: Handle wan IPv4/IPv6 input traffic\"\n\t\tjump handle_reject\n\t}\n}",
+  "ttl": "table inet fw4 {\n\tchain ua3f_wan_ttl {\n\t\ttype filter hook postrouting priority mangle; policy accept;\n\t\toifname \"wan\" ip ttl >= 10 counter packets 965666 bytes 197012442 ip ttl set 64 comment \"WAN IPv4 TTL64\"\n\t\toifname \"eswan2\" ip ttl >= 10 counter packets 898034 bytes 177047548 ip ttl set 64 comment \"WAN2 IPv4 TTL64\"\n\t}\n}",
+  "mss": "oifname { \"wan\", \"eswan2\", \"eswan3\" } tcp flags & (fin | syn | rst) == syn tcp option maxseg size set rt mtu comment \"!fw4: Zone wan IPv4/IPv6 egress MTU fixing\"\n\t\tiifname { \"wan\", \"eswan2\", \"eswan3\" } tcp flags & (fin | syn | rst) == syn tcp option maxseg size set rt mtu comment \"!fw4: Zone wan IPv4/IPv6 ingress MTU fixing\"",
+  "resources": "Filesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     45144     14672  75% /overlay\n              total        used        free      shared  buff/cache   available\nMem:         494004      202124      195932       25148       95948      215936\nSwap:             0           0           0",
+  "adblock": "",
+  "wireless": "channel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz\n\ttxpower 23.00 dBm\n2",
+  "openclash_options": "1\n0\n0",
+  "ua3f_options": "l3_rewrite_ttl=0\nl3_rewrite_bpf_offload=0\nl3_rewrite_ipid=0\nl3_rewrite_tcpts=0\nl3_rewrite_tcpwin=0\nl3_rewrite_block_quic=0\nmitm_enabled=0\ndesync_reorder=0\ndesync_inject=0"
+}

@@ -1,0 +1,164 @@
+{
+  "file": "microsoft-throughput-pc-he160-rr-16x64m",
+  "observed_mbps": 557.61,
+  "new_flow_candidates": [
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57094,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 77244644
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57188,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 74502491
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57174,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 69825494
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57106,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 72971832
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57178,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 73417968
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57066,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 74335539
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57142,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 70578578
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57204,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 76210864
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57078,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 72909734
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57156,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 73121520
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57126,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 75080227
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57144,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 75931144
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57050,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 72690454
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57172,
+      "mark": "0x1000000",
+      "wan_id": 1,
+      "bytes": 72313459
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57118,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 73351538
+    },
+    {
+      "source": "10.207.122.24",
+      "destination": "171.108.209.190",
+      "source_port": 57182,
+      "mark": "0x2000000",
+      "wan_id": 2,
+      "bytes": 73407128
+    }
+  ],
+  "wan_flow_counts": {
+    "2": 8,
+    "1": 8
+  },
+  "wan_download_bytes": {
+    "1": 589817309,
+    "2": 588075305
+  },
+  "cpu_peak_busy_percent": {
+    "cpu": 71.9,
+    "cpu0": 70.7,
+    "cpu1": 69.4,
+    "cpu2": 69.2,
+    "cpu3": 79.5
+  },
+  "physical_wan_interval_mbps": [
+    685.22,
+    652.88,
+    747.84,
+    705.68,
+    673.1,
+    785.36,
+    734.7,
+    722.89,
+    733.78,
+    602.81,
+    751.3,
+    99.18,
+    77.93
+  ]
+}

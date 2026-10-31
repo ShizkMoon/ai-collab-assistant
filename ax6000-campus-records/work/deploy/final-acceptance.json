@@ -1,0 +1,88 @@
+{
+  "time": "2026-10-12T17:59:25+08:00",
+  "boot_id": "cd3ebbff-dd75-4375-bd7e-cb888955199c",
+  "interfaces": {
+    "wan": {
+      "up": true,
+      "l3_device": "wan",
+      "ipv4-address": [
+        {
+          "address": "10.207.122.24",
+          "mask": 20
+        }
+      ]
+    },
+    "wan2": {
+      "up": true,
+      "l3_device": "eswan2",
+      "ipv4-address": [
+        {
+          "address": "10.207.127.62",
+          "mask": 20
+        }
+      ]
+    }
+  },
+  "authentication": {
+    "account1": {
+      "running": true,
+      "pid": 4743,
+      "gid": 65201,
+      "events": "[2026-10-12 17:48:46] account=1 event=CURL_ERROR_CODE value=6\n[2026-10-12 17:48:46] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 17:48:46] account=1 event=CURL_TOTAL_SECONDS value=5.006\n[2026-10-12 17:48:46] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 17:48:46] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 17:48:46] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-12 17:48:46] account=1 event=AUTH_REQUIRED_HTTP302\n[2026-10-12 17:48:47] account=1 event=LOGIN_KEEP_SECONDS value=8\n[2026-10-12 17:48:47] account=1 event=AUTH_SUCCESS\n[2026-10-12 17:48:55] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-12 17:48:55] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n"
+    },
+    "account2": {
+      "running": true,
+      "pid": 4744,
+      "gid": 65202,
+      "events": "[2026-10-12 17:48:46] account=2 event=CURL_ERROR_CODE value=6\n[2026-10-12 17:48:46] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-12 17:48:46] account=2 event=CURL_TOTAL_SECONDS value=5.004\n[2026-10-12 17:48:46] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-12 17:48:46] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-12 17:48:46] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-12 17:48:46] account=2 event=AUTH_REQUIRED_HTTP302\n[2026-10-12 17:48:47] account=2 event=LOGIN_KEEP_SECONDS value=6\n[2026-10-12 17:48:47] account=2 event=AUTH_SUCCESS\n[2026-10-12 17:48:53] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 17:48:53] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 17:53:04] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 17:53:04] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-12 17:57:15] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-12 17:57:15] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n"
+    }
+  },
+  "ua3f": {
+    "disabled_options": {
+      "l3_rewrite_ttl": "0",
+      "l3_rewrite_bpf_offload": "0",
+      "l3_rewrite_ipid": "0",
+      "l3_rewrite_tcpts": "0",
+      "l3_rewrite_tcpwin": "0",
+      "l3_rewrite_block_quic": "0",
+      "mitm_enabled": "0",
+      "desync_reorder": "0",
+      "desync_inject": "0"
+    },
+    "http_ua_is_fff": true
+  },
+  "openclash": {
+    "running": true,
+    "dns_mode": "redir-host",
+    "udp_enabled": true,
+    "router_self_proxy": "0",
+    "ua3f_tcp_wrappers": 934,
+    "source_proxy_count": 49,
+    "source_group_count": 14,
+    "ninja_license_comments_retained": true,
+    "rotated_proxy_credential_matches_runtime": true
+  },
+  "mwan_status": "Interface status:\n interface wan is online and tracking is active (online 00h:09m:57s, uptime 00h:10m:29s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan2 is online and tracking is active (online 00h:05m:38s, uptime 00h:10m:29s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan3 is unknown and tracking is disabled (31)\n\nCurrent policies:\nbalanced:\n wan (50%)\n wan2 (50%)\n\nDirectly connected ipv4 networks:\n10.207.112.0/20\n192.168.31.0/24\n224.0.0.0/3\n\nDirectly connected ipv6 networks:\nfd3c:162d:9e76::/48\n\nActive user rules:\n udp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n tcp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n ip daddr 0.0.0.0/0 meta mark & 0x3f000000 == 0x00000000 - balanced\n\n",
+  "routing": "0:\tfrom all lookup local\n99:\tfrom all fwmark 0x162 lookup 354\n100:\tfrom all fwmark 0x162/0xffff lookup 354\n1001:\tfrom all iif wan lookup 1\n1002:\tfrom all iif eswan2 lookup 2\n1802:\tfrom all fwmark 0x2000000 lookup 25202\n2001:\tfrom all fwmark 0x1000000/0x3f000000 lookup 1\n2002:\tfrom all fwmark 0x2000000/0x3f000000 lookup 2\n2061:\tfrom all fwmark 0x3d000000/0x3f000000 blackhole\n2062:\tfrom all fwmark 0x3e000000/0x3f000000 unreachable\n3062:\tfrom 10.207.122.24 lookup 1\n3063:\tfrom 10.207.127.62 lookup 2\n10000:\tfrom 10.207.127.62 lookup 25202\n20000:\tfrom all to 10.207.127.62/20 lookup 25202\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\n90008:\tfrom all iif lo lookup 25202\ndefault via 10.207.112.1 dev wan proto unspec src 10.207.122.24 metric 10 \n10.207.112.0/20 dev wan proto unspec scope link metric 10 \n192.168.31.0/24 dev br-lan proto unspec scope link src 192.168.31.1 \ndefault via 10.207.112.1 dev eswan2 proto unspec src 10.207.127.62 metric 20 \n10.207.112.0/20 dev eswan2 proto unspec scope link metric 20 \n192.168.31.0/24 dev br-lan proto unspec scope link src 192.168.31.1 \ndefault via 10.207.112.1 dev eswan2 proto static src 10.207.127.62 metric 20 \nunreachable default metric 32760 \n10.207.112.0/20 dev eswan2 proto static scope link metric 20 \n",
+  "policy": "table inet mwan3 {\n\tchain mwan3_policy_balanced {\n\t\tmeta mark & 0x3f000000 == 0x00000000 numgen random mod 2 vmap { 0 : jump mwan3_or_meta_0x1000000, 1 : jump mwan3_or_meta_0x2000000 }\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\ntable inet mwan3 {\n\tchain mwan3_rules {\n\t\tudp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n\t\ttcp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n\t\tip daddr 0.0.0.0/0 meta mark & 0x3f000000 == 0x00000000 jump mwan3_policy_balanced\n\t}\n}\ntable inet fw4 {\n\tchain ua3f_wan_ttl {\n\t\ttype filter hook postrouting priority mangle; policy accept;\n\t\toifname \"wan\" ip ttl >= 10 counter packets 44353 bytes 15657512 ip ttl set 64 comment \"WAN IPv4 TTL64\"\n\t\toifname \"eswan2\" ip ttl >= 10 counter packets 46248 bytes 13153703 ip ttl set 64 comment \"WAN2 IPv4 TTL64\"\n\t}\n}\ntable ip esurfing_route {\n\tchain output {\n\t\ttype route hook output priority mangle - 10; policy accept;\n\t\tmeta skgid 65201 counter packets 2883 bytes 258307 meta mark set meta mark | 0x3f000000 comment \"esurfing account1 main bypass\"\n\t\tmeta skgid 65202 counter packets 2890 bytes 258194 meta mark set 0x02000000 comment \"esurfing account2 wan2\"\n\t}\n}\n",
+  "adblock_status": "[STAT] adblock-fast 1.2.4-r4 is blocking 55349 domains (with dnsmasq.servers)\n\u001b[0;33m[WARN]\u001b[0m Recommended packages are missing: gawk, grep, sed, coreutils-sort!\n",
+  "ad_domain_lookup": "Server:\t\t127.0.0.1\nAddress:\t127.0.0.1:53\n\n** server can't find accounts.doubleclick.net: NXDOMAIN\n\n** server can't find accounts.doubleclick.net: NXDOMAIN\n\n",
+  "resources": "Filesystem                Size      Used Available Use% Mounted on\n/dev/ubi0_1              61.6M     49.0M      9.4M  84% /overlay\n              total        used        free      shared  buff/cache   available\nMem:         494004      203508      199836       23228       90660      216732\nSwap:             0           0           0\n\tsignal:  \t-41 [-52, -47, -42, -48] dBm\n\ttx bitrate:\t1200.9 MBit/s 80MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx bitrate:\t1200.9 MBit/s 80MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\tlast ack signal:-42 dBm\n\tavg ack signal:\t-42 dBm\n\tsignal:  \t-37 [-47, -47, -41, -40] dBm\n\ttx bitrate:\t1200.9 MBit/s 80MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx bitrate:\t1200.9 MBit/s 80MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\tlast ack signal:-37 dBm\n\tavg ack signal:\t-37 dBm\n",
+  "disabled_third_wan": true,
+  "smartdns_disabled": true,
+  "flow_offload": [
+    "0",
+    "0"
+  ],
+  "firewall_check": true,
+  "lan_http": {
+    "domestic": {
+      "exit": 0,
+      "http": "200"
+    },
+    "ninja": {
+      "exit": 0,
+      "http": "204"
+    }
+  }
+}

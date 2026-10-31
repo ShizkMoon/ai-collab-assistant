@@ -1,0 +1,387 @@
+{
+  "created_utc": "2026-10-13T17:18:40.663966+00:00",
+  "label": "steering",
+  "path": "authenticated router RAM sendfile TCP to current Wi-Fi Windows, no Internet traffic",
+  "temporary_server": true,
+  "persistent_changes": false,
+  "cases": [
+    {
+      "parallel": 12,
+      "payload_bytes": 805306368,
+      "seconds": 7.439110900013475,
+      "payload_mbps": 866.02,
+      "all_complete": true,
+      "streams": [
+        {
+          "id": 0,
+          "bytes": 67108864,
+          "seconds": 7.172756799991475,
+          "started_monotonic": 137143.8824109,
+          "ended_monotonic": 137151.0551677,
+          "complete": true
+        },
+        {
+          "id": 1,
+          "bytes": 67108864,
+          "seconds": 7.388797999999952,
+          "started_monotonic": 137143.882855,
+          "ended_monotonic": 137151.271653,
+          "complete": true
+        },
+        {
+          "id": 2,
+          "bytes": 67108864,
+          "seconds": 7.337050599977374,
+          "started_monotonic": 137143.8831847,
+          "ended_monotonic": 137151.2202353,
+          "complete": true
+        },
+        {
+          "id": 3,
+          "bytes": 67108864,
+          "seconds": 7.380420300003607,
+          "started_monotonic": 137143.8833958,
+          "ended_monotonic": 137151.2638161,
+          "complete": true
+        },
+        {
+          "id": 4,
+          "bytes": 67108864,
+          "seconds": 7.431778800004395,
+          "started_monotonic": 137143.8836573,
+          "ended_monotonic": 137151.3154361,
+          "complete": true
+        },
+        {
+          "id": 5,
+          "bytes": 67108864,
+          "seconds": 7.313043199974345,
+          "started_monotonic": 137143.8838616,
+          "ended_monotonic": 137151.1969048,
+          "complete": true
+        },
+        {
+          "id": 6,
+          "bytes": 67108864,
+          "seconds": 7.333852600015234,
+          "started_monotonic": 137143.8840384,
+          "ended_monotonic": 137151.217891,
+          "complete": true
+        },
+        {
+          "id": 7,
+          "bytes": 67108864,
+          "seconds": 7.352081899996847,
+          "started_monotonic": 137143.8842506,
+          "ended_monotonic": 137151.2363325,
+          "complete": true
+        },
+        {
+          "id": 8,
+          "bytes": 67108864,
+          "seconds": 7.345845799980452,
+          "started_monotonic": 137143.8844532,
+          "ended_monotonic": 137151.230299,
+          "complete": true
+        },
+        {
+          "id": 9,
+          "bytes": 67108864,
+          "seconds": 7.286821499990765,
+          "started_monotonic": 137143.8848496,
+          "ended_monotonic": 137151.1716711,
+          "complete": true
+        },
+        {
+          "id": 10,
+          "bytes": 67108864,
+          "seconds": 7.349107100017136,
+          "started_monotonic": 137143.8850628,
+          "ended_monotonic": 137151.2341699,
+          "complete": true
+        },
+        {
+          "id": 11,
+          "bytes": 67108864,
+          "seconds": 7.326486900012242,
+          "started_monotonic": 137143.8852348,
+          "ended_monotonic": 137151.2117217,
+          "complete": true
+        }
+      ],
+      "cpu_average": {
+        "cpu": {
+          "busy_percent": 36.3,
+          "softirq_percent": 14.7
+        },
+        "cpu0": {
+          "busy_percent": 24.5,
+          "softirq_percent": 11.7
+        },
+        "cpu1": {
+          "busy_percent": 16.5,
+          "softirq_percent": 3.6
+        },
+        "cpu2": {
+          "busy_percent": 74.0,
+          "softirq_percent": 26.5
+        },
+        "cpu3": {
+          "busy_percent": 29.0,
+          "softirq_percent": 16.8
+        }
+      },
+      "cpu_intervals": [
+        {
+          "cpu": {
+            "busy_percent": 31.2,
+            "softirq_percent": 11.9
+          },
+          "cpu0": {
+            "busy_percent": 19.2,
+            "softirq_percent": 7.8
+          },
+          "cpu1": {
+            "busy_percent": 11.0,
+            "softirq_percent": 3.7
+          },
+          "cpu2": {
+            "busy_percent": 58.9,
+            "softirq_percent": 24.6
+          },
+          "cpu3": {
+            "busy_percent": 34.2,
+            "softirq_percent": 11.2
+          }
+        },
+        {
+          "cpu": {
+            "busy_percent": 34.9,
+            "softirq_percent": 14.3
+          },
+          "cpu0": {
+            "busy_percent": 23.1,
+            "softirq_percent": 11.6
+          },
+          "cpu1": {
+            "busy_percent": 13.3,
+            "softirq_percent": 4.2
+          },
+          "cpu2": {
+            "busy_percent": 72.5,
+            "softirq_percent": 24.7
+          },
+          "cpu3": {
+            "busy_percent": 28.4,
+            "softirq_percent": 15.3
+          }
+        },
+        {
+          "cpu": {
+            "busy_percent": 39.9,
+            "softirq_percent": 17.3
+          },
+          "cpu0": {
+            "busy_percent": 22.2,
+            "softirq_percent": 15.2
+          },
+          "cpu1": {
+            "busy_percent": 22.5,
+            "softirq_percent": 3.0
+          },
+          "cpu2": {
+            "busy_percent": 86.3,
+            "softirq_percent": 30.3
+          },
+          "cpu3": {
+            "busy_percent": 28.3,
+            "softirq_percent": 20.8
+          }
+        },
+        {
+          "cpu": {
+            "busy_percent": 38.4,
+            "softirq_percent": 15.7
+          },
+          "cpu0": {
+            "busy_percent": 28.7,
+            "softirq_percent": 12.6
+          },
+          "cpu1": {
+            "busy_percent": 18.0,
+            "softirq_percent": 3.0
+          },
+          "cpu2": {
+            "busy_percent": 80.6,
+            "softirq_percent": 27.6
+          },
+          "cpu3": {
+            "busy_percent": 26.2,
+            "softirq_percent": 19.6
+          }
+        },
+        {
+          "cpu": {
+            "busy_percent": 37.5,
+            "softirq_percent": 14.3
+          },
+          "cpu0": {
+            "busy_percent": 31.2,
+            "softirq_percent": 10.7
+          },
+          "cpu1": {
+            "busy_percent": 18.1,
+            "softirq_percent": 4.8
+          },
+          "cpu2": {
+            "busy_percent": 70.9,
+            "softirq_percent": 24.5
+          },
+          "cpu3": {
+            "busy_percent": 27.5,
+            "softirq_percent": 16.5
+          }
+        }
+      ],
+      "windows_cpu_busy_percent": 19.71,
+      "samples": [
+        {
+          "monotonic": 137143.64610355,
+          "snapshot_seconds": 0.4616170999943279,
+          "raw": "cpu  407221 0 667994 41690488 122 80912 234025 0 0 0\ncpu0 111137 0 156594 10464193 20 30161 28260 0 0 0\ncpu1 113755 0 129044 10474530 34 15118 61394 0 0 0\ncpu2 108266 0 123327 10448800 30 14409 106796 0 0 0\ncpu3 74062 0 259027 10302963 37 21224 37573 0 0 0\nintr 311249400 0 3462728 146847838 0 0 0 0 0 0 0 0 84672684 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 568924 1644529 0 0 11348216 15217218 0 0 0 0 1 0 0 0 0 47487249\nctxt 436135585\nbtime 1791803651\nprocesses 1039836\nprocs_running 2\nprocs_blocked 0\nsoftirq 201021482 0 11766837 1660572 30496187 0 0 99632992 33668018 900877 22895999\n__RADIO__\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t0 ms\n\trx bytes:\t12180987546\n\trx packets:\t16817126\n\ttx bytes:\t51149498903\n\ttx packets:\t39327385\n\ttx retries:\t166729\n\ttx failed:\t166798\n\trx drop misc:\t3\n\tsignal:  \t-39 [-48, -47, -46, -41] dBm\n\tsignal avg:\t-38 [-47, -46, -45, -40] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t1112632520 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t530601883 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t108177 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745360 ms\n\tcurrent time:\t1791911922766 ms\n\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5180 MHz [in use]\n\tnoise:\t\t\t\t-92 dBm\n\tchannel active time:\t\t108253371 ms\n\tchannel busy time:\t\t46970295 ms\n\tchannel receive time:\t\t34580704 ms\n\tchannel BSS receive time:\t1091619 ms\n\tchannel transmit time:\t\t11233672 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5200 MHz\n\tnoise:\t\t\t\t-91 dBm\n\tchannel active time:\t\t193 ms\n\tchannel busy time:\t\t144 ms\n\tchannel receive time:\t\t143 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5220 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5240 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5260 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5280 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5300 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5320 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5745 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5765 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5785 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5805 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5825 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\n__TASKS__\n1112 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 18956 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1113 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 3 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1114 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 2868 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1115 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 75265 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1116 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1117 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 39210 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1141 (mt76-tx phy0) S 2 0 0 0 -1 2129984 0 0 0 0 0 42524 0 0 -2 0 1 0 986 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 3 1 1 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0-3\n623 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 10997 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n624 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 24564 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n__NET__\n                    CPU0       CPU1       CPU2       CPU3       \n          HI:          0          0          0          0\n       TIMER:    2326602    2366876    2607396    4465999\n      NET_TX:      61738      74489    1493138      31208\n      NET_RX:    4821653    8552003   15100761    2021794\n       BLOCK:          0          0          0          0\n    IRQ_POLL:          0          0          0          0\n     TASKLET:   49895490        492    1898433   47838866\n       SCHED:    8422258    7874152    7323536   10048150\n     HRTIMER:      68279     124706     546475     161417\n         RCU:    5520985    5325911    5187756    6861497\n002d699f 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 000000c9 00000000 00000000 00000000 00000000 00000000\n019ab080 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00548cfe 00000000 00000000 00000001 00000000 00000000\n05c5ea0a 000002d9 00000318 00000000 00000000 00000000 00000000 00000000 00000000 00d339f1 00000000 00000000 00000002 00000000 00000000\n00227091 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 000002ad 00000000 00000000 00000003 00000000 00000000\nIp: Forwarding DefaultTTL InReceives InHdrErrors InAddrErrors ForwDatagrams InUnknownProtos InDiscards InDelivers OutRequests OutDiscards OutNoRoutes ReasmTimeout ReasmReqds ReasmOKs ReasmFails FragOKs FragFails FragCreates OutTransmits\nIp: 1 64 46779487 4 0 419379 0 0 46271777 40328964 423 1 2 534 266 2 0 0 0 40730911\nIcmp: InMsgs InErrors InCsumErrors InDestUnreachs InTimeExcds InParmProbs InSrcQuenchs InRedirects InEchos InEchoReps InTimestamps InTimestampReps InAddrMasks InAddrMaskReps OutMsgs OutErrors OutRateLimitGlobal OutRateLimitHost OutDestUnreachs OutTimeExcds OutParmProbs OutSrcQuenchs OutRedirects OutEchos OutEchoReps OutTimestamps OutTimestampReps OutAddrMasks OutAddrMaskReps\nIcmp: 28961 46 0 15621 3 0 0 0 13329 8 0 0 0 0 71089 0 4 18528 57735 6 0 0 0 19 13329 0 0 0 0\nIcmpMsg: InType0 InType3 InType8 InType11 OutType0 OutType3 OutType8 OutType11\nIcmpMsg: 8 15621 13329 3 13329 57735 19 6\nTcp: RtoAlgorithm RtoMin RtoMax MaxConn ActiveOpens PassiveOpens AttemptFails EstabResets CurrEstab InSegs OutSegs RetransSegs InErrs OutRsts InCsumErrors\nTcp: 1 200 120000 -1 382574 153186 2606 20711 140 39993438 72910083 167580 441 90487 0\nUdp: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdp: 8518141 37137 98395 8535373 98395 418 0 575 0\nUdpLite: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdpLite: 0 0 0 0 0 0 0 0 0\n__MEM__\nMemAvailable:      99924 kB\n",
+          "windows_cpu": [
+            38839981875000,
+            41757559062500,
+            2128198593750
+          ]
+        },
+        {
+          "monotonic": 137145.28415535,
+          "snapshot_seconds": 0.812912099994719,
+          "raw": "cpu  407236 0 668104 41690946 122 80916 234104 0 0 0\ncpu0 111144 0 156605 10464328 20 30162 28273 0 0 0\ncpu1 113757 0 129054 10474676 34 15118 61400 0 0 0\ncpu2 108270 0 123383 10448872 30 14409 106839 0 0 0\ncpu3 74064 0 259061 10303069 37 21225 37591 0 0 0\nintr 311260113 0 3463309 146854121 0 0 0 0 0 0 0 0 84675718 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 568924 1644554 0 0 11348263 15217253 0 0 0 0 1 0 0 0 0 47487957\nctxt 436149874\nbtime 1791803651\nprocesses 1040011\nprocs_running 5\nprocs_blocked 0\nsoftirq 201027383 0 11767083 1660603 30497210 0 0 99634819 33668384 902626 22896658\n__RADIO__\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t0 ms\n\trx bytes:\t12181640187\n\trx packets:\t16829105\n\ttx bytes:\t51322837330\n\ttx packets:\t39442080\n\ttx retries:\t166997\n\ttx failed:\t167066\n\trx drop misc:\t3\n\tsignal:  \t-39 [-48, -47, -45, -41] dBm\n\tsignal avg:\t-38 [-48, -47, -45, -40] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t1113326551 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t530668622 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t108179 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745360 ms\n\tcurrent time:\t1791911924444 ms\n\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5180 MHz [in use]\n\tnoise:\t\t\t\t-92 dBm\n\tchannel active time:\t\t108255051 ms\n\tchannel busy time:\t\t46971437 ms\n\tchannel receive time:\t\t34581127 ms\n\tchannel BSS receive time:\t1091708 ms\n\tchannel transmit time:\t\t11234377 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5200 MHz\n\tnoise:\t\t\t\t-91 dBm\n\tchannel active time:\t\t193 ms\n\tchannel busy time:\t\t144 ms\n\tchannel receive time:\t\t143 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5220 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5240 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5260 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5280 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5300 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5320 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5745 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5765 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5785 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5805 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5825 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\n__TASKS__\n1112 (napi/phy0-0) R 2 0 0 0 -1 2129984 0 0 0 0 0 18958 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 0 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1113 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 3 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1114 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 2869 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1115 (napi/phy0-0) R 2 0 0 0 -1 2129984 0 0 0 0 0 75275 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 0 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1116 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1117 (napi/phy0-0) R 2 0 0 0 -1 2129984 0 0 0 0 0 39243 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 0 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1141 (mt76-tx phy0) R 2 0 0 0 -1 2129984 0 0 0 0 0 42556 0 0 -2 0 1 0 986 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 0 0 0 17 2 1 1 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0-3\n623 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 10997 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n624 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 24564 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n__NET__\n                    CPU0       CPU1       CPU2       CPU3       \n          HI:          0          0          0          0\n       TIMER:    2326659    2366954    2607482    4466050\n      NET_TX:      61746      74504    1493145      31215\n      NET_RX:    4822024    8552327   15101141    2022098\n       BLOCK:          0          0          0          0\n    IRQ_POLL:          0          0          0          0\n     TASKLET:   49896144        503    1899622   47838878\n       SCHED:    8422350    7874241    7323663   10048255\n     HRTIMER:      68682     124917     547574     161862\n         RCU:    5521139    5326045    5188002    6861681\n002d8b18 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000215 00000000 00000000 00000000 00000000 00000000\n019abc15 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00548e3c 00000000 00000000 00000001 00000000 00000000\n05c60bbd 000002d9 00000318 00000000 00000000 00000000 00000000 00000000 00000000 00d33a02 00000000 00000000 00000002 00000000 00000000\n0022a46d 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 000003d3 00000000 00000000 00000003 00000000 00000000\nIp: Forwarding DefaultTTL InReceives InHdrErrors InAddrErrors ForwDatagrams InUnknownProtos InDiscards InDelivers OutRequests OutDiscards OutNoRoutes ReasmTimeout ReasmReqds ReasmOKs ReasmFails FragOKs FragFails FragCreates OutTransmits\nIp: 1 64 46796173 4 0 419381 0 0 46288460 40332676 423 1 2 534 266 2 0 0 0 40734625\nIcmp: InMsgs InErrors InCsumErrors InDestUnreachs InTimeExcds InParmProbs InSrcQuenchs InRedirects InEchos InEchoReps InTimestamps InTimestampReps InAddrMasks InAddrMaskReps OutMsgs OutErrors OutRateLimitGlobal OutRateLimitHost OutDestUnreachs OutTimeExcds OutParmProbs OutSrcQuenchs OutRedirects OutEchos OutEchoReps OutTimestamps OutTimestampReps OutAddrMasks OutAddrMaskReps\nIcmp: 28961 46 0 15621 3 0 0 0 13329 8 0 0 0 0 71089 0 4 18528 57735 6 0 0 0 19 13329 0 0 0 0\nIcmpMsg: InType0 InType3 InType8 InType11 OutType0 OutType3 OutType8 OutType11\nIcmpMsg: 8 15621 13329 3 13329 57735 19 6\nTcp: RtoAlgorithm RtoMin RtoMax MaxConn ActiveOpens PassiveOpens AttemptFails EstabResets CurrEstab InSegs OutSegs RetransSegs InErrs OutRsts InCsumErrors\nTcp: 1 200 120000 -1 382581 153199 2606 20713 152 40010112 73051328 167583 441 90488 0\nUdp: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdp: 8518150 37137 98395 8535381 98395 418 0 575 0\nUdpLite: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdpLite: 0 0 0 0 0 0 0 0 0\n__MEM__\nMemAvailable:     102204 kB\n",
+          "windows_cpu": [
+            38840460156250,
+            41758090468750,
+            2128244218750
+          ]
+        },
+        {
+          "monotonic": 137147.0463349,
+          "snapshot_seconds": 0.7112740000011399,
+          "raw": "cpu  407246 0 668234 41691400 122 80919 234204 0 0 0\ncpu0 111145 0 156623 10464461 20 30163 28293 0 0 0\ncpu1 113761 0 129064 10474820 34 15119 61407 0 0 0\ncpu2 108270 0 123467 10448921 30 14410 106883 0 0 0\ncpu3 74068 0 259079 10303195 37 21226 37618 0 0 0\nintr 311267395 0 3463958 146856950 0 0 0 0 0 0 0 0 84678803 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 568924 1644581 0 0 11348305 15217295 0 0 0 0 1 0 0 0 0 47488565\nctxt 436156948\nbtime 1791803651\nprocesses 1040173\nprocs_running 4\nprocs_blocked 0\nsoftirq 201033790 0 11767341 1660637 30498992 0 0 99636404 33668798 904305 22897313\n__RADIO__\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t12182972175\n\trx packets:\t16853713\n\ttx bytes:\t51493748441\n\ttx packets:\t39555007\n\ttx retries:\t167092\n\ttx failed:\t167161\n\trx drop misc:\t3\n\tsignal:  \t-39 [-47, -47, -46, -41] dBm\n\tsignal avg:\t-39 [-47, -46, -46, -41] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t1113995746 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t530781860 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t108181 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745360 ms\n\tcurrent time:\t1791911926167 ms\n\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5180 MHz [in use]\n\tnoise:\t\t\t\t-92 dBm\n\tchannel active time:\t\t108256777 ms\n\tchannel busy time:\t\t46972669 ms\n\tchannel receive time:\t\t34581668 ms\n\tchannel BSS receive time:\t1091851 ms\n\tchannel transmit time:\t\t11235055 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5200 MHz\n\tnoise:\t\t\t\t-91 dBm\n\tchannel active time:\t\t193 ms\n\tchannel busy time:\t\t144 ms\n\tchannel receive time:\t\t143 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5220 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5240 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5260 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5280 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5300 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5320 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5745 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5765 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5785 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5805 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5825 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\n__TASKS__\n1112 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 18959 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1113 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 3 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1114 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 2869 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1115 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 75291 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1116 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1117 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 39275 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1141 (mt76-tx phy0) R 2 0 0 0 -1 2129984 0 0 0 0 0 42581 0 0 -2 0 1 0 986 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 0 0 0 17 2 1 1 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0-3\n623 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 10997 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n624 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 24564 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n__NET__\n                    CPU0       CPU1       CPU2       CPU3       \n          HI:          0          0          0          0\n       TIMER:    2326720    2367020    2607565    4466096\n      NET_TX:      61752      74513    1493156      31218\n      NET_RX:    4822539    8552697   15101638    2022535\n       BLOCK:          0          0          0          0\n    IRQ_POLL:          0          0          0          0\n     TASKLET:   49896745        510    1900619   47838888\n       SCHED:    8422406    7874390    7323786   10048273\n     HRTIMER:      69055     124985     548270     162394\n         RCU:    5521271    5326197    5188241    6861819\n002dc0a0 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 000003f0 00000000 00000000 00000000 00000000 00000000\n019ac91d 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00548faf 00000000 00000000 00000001 00000000 00000000\n05c640a1 000002d9 00000318 00000000 00000000 00000000 00000000 00000000 00000000 00d33a12 00000000 00000000 00000002 00000000 00000000\n0022f81a 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 0000057c 00000000 0000000a 00000003 00000000 0000000a\nIp: Forwarding DefaultTTL InReceives InHdrErrors InAddrErrors ForwDatagrams InUnknownProtos InDiscards InDelivers OutRequests OutDiscards OutNoRoutes ReasmTimeout ReasmReqds ReasmOKs ReasmFails FragOKs FragFails FragCreates OutTransmits\nIp: 1 64 46822155 4 0 419381 0 0 46314434 40335355 423 1 2 534 266 2 0 0 0 40737304\nIcmp: InMsgs InErrors InCsumErrors InDestUnreachs InTimeExcds InParmProbs InSrcQuenchs InRedirects InEchos InEchoReps InTimestamps InTimestampReps InAddrMasks InAddrMaskReps OutMsgs OutErrors OutRateLimitGlobal OutRateLimitHost OutDestUnreachs OutTimeExcds OutParmProbs OutSrcQuenchs OutRedirects OutEchos OutEchoReps OutTimestamps OutTimestampReps OutAddrMasks OutAddrMaskReps\nIcmp: 28961 46 0 15621 3 0 0 0 13329 8 0 0 0 0 71089 0 4 18528 57735 6 0 0 0 19 13329 0 0 0 0\nIcmpMsg: InType0 InType3 InType8 InType11 OutType0 OutType3 OutType8 OutType11\nIcmpMsg: 8 15621 13329 3 13329 57735 19 6\nTcp: RtoAlgorithm RtoMin RtoMax MaxConn ActiveOpens PassiveOpens AttemptFails EstabResets CurrEstab InSegs OutSegs RetransSegs InErrs OutRsts InCsumErrors\nTcp: 1 200 120000 -1 382586 153200 2606 20714 151 40036082 73165027 167586 441 90488 0\nUdp: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdp: 8518154 37137 98395 8535384 98395 418 0 575 0\nUdpLite: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdpLite: 0 0 0 0 0 0 0 0 0\n__MEM__\nMemAvailable:     101448 kB\n",
+          "windows_cpu": [
+            38840919531250,
+            41758593125000,
+            2128289531250
+          ]
+        },
+        {
+          "monotonic": 137148.7573466,
+          "snapshot_seconds": 0.7098091999941971,
+          "raw": "cpu  407258 0 668373 41691811 122 80923 234322 0 0 0\ncpu0 111147 0 156632 10464594 20 30164 28319 0 0 0\ncpu1 113770 0 129087 10474951 34 15120 61412 0 0 0\ncpu2 108270 0 123564 10448945 30 14411 106936 0 0 0\ncpu3 74070 0 259089 10303319 37 21227 37654 0 0 0\nintr 311275614 0 3464802 146859847 0 0 0 0 0 0 0 0 84682468 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 568924 1644610 0 0 11348371 15217347 0 0 0 0 1 0 0 0 0 47489231\nctxt 436164739\nbtime 1791803651\nprocesses 1040335\nprocs_running 3\nprocs_blocked 0\nsoftirq 201040948 0 11767603 1660685 30501066 0 0 99638168 33669097 906271 22898058\n__RADIO__\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t0 ms\n\trx bytes:\t12184598716\n\trx packets:\t16883679\n\ttx bytes:\t51697849673\n\ttx packets:\t39689861\n\ttx retries:\t167323\n\ttx failed:\t167392\n\trx drop misc:\t3\n\tsignal:  \t-39 [-48, -47, -45, -41] dBm\n\tsignal avg:\t-38 [-48, -47, -45, -40] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t1114805784 us\n\trx bitrate:\t2268.5 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 1 HE-DCM 0\n\trx duration:\t530926915 us\n\tlast ack signal:-38 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t108182 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745360 ms\n\tcurrent time:\t1791911927883 ms\n\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5180 MHz [in use]\n\tnoise:\t\t\t\t-92 dBm\n\tchannel active time:\t\t108258497 ms\n\tchannel busy time:\t\t46973933 ms\n\tchannel receive time:\t\t34582098 ms\n\tchannel BSS receive time:\t1092037 ms\n\tchannel transmit time:\t\t11235873 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5200 MHz\n\tnoise:\t\t\t\t-91 dBm\n\tchannel active time:\t\t193 ms\n\tchannel busy time:\t\t144 ms\n\tchannel receive time:\t\t143 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5220 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5240 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5260 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5280 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5300 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5320 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5745 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5765 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5785 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5805 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5825 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\n__TASKS__\n1112 (napi/phy0-0) R 2 0 0 0 -1 2129984 0 0 0 0 0 18961 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 0 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1113 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 3 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1114 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 2869 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1115 (napi/phy0-0) R 2 0 0 0 -1 2129984 0 0 0 0 0 75309 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 0 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1116 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1117 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 39315 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1141 (mt76-tx phy0) S 2 0 0 0 -1 2129984 0 0 0 0 0 42610 0 0 -2 0 1 0 986 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 1 1 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0-3\n623 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 10997 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n624 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 24564 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n__NET__\n                    CPU0       CPU1       CPU2       CPU3       \n          HI:          0          0          0          0\n       TIMER:    2326770    2367096    2607648    4466147\n      NET_TX:      61765      74543    1493159      31225\n      NET_RX:    4823129    8553086   15102187    2023050\n       BLOCK:          0          0          0          0\n    IRQ_POLL:          0          0          0          0\n     TASKLET:   49897369        547    1901678   47838901\n       SCHED:    8422472    7874530    7323888   10048281\n     HRTIMER:      69453     125066     549073     163046\n         RCU:    5521447    5326346    5188516    6861974\n002dfdf1 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 0000060c 00000000 00000000 00000000 00000000 00000000\n019ad58a 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 0054912f 00000000 00000000 00000001 00000000 00000000\n05c67c37 000002d9 00000318 00000000 00000000 00000000 00000000 00000000 00000000 00d33a16 00000000 00000000 00000002 00000000 00000000\n00235abd 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 0000077b 00000000 00000000 00000003 00000000 00000000\nIp: Forwarding DefaultTTL InReceives InHdrErrors InAddrErrors ForwDatagrams InUnknownProtos InDiscards InDelivers OutRequests OutDiscards OutNoRoutes ReasmTimeout ReasmReqds ReasmOKs ReasmFails FragOKs FragFails FragCreates OutTransmits\nIp: 1 64 46851775 4 0 419394 0 0 46344037 40338510 423 1 2 534 266 2 0 0 0 40740472\nIcmp: InMsgs InErrors InCsumErrors InDestUnreachs InTimeExcds InParmProbs InSrcQuenchs InRedirects InEchos InEchoReps InTimestamps InTimestampReps InAddrMasks InAddrMaskReps OutMsgs OutErrors OutRateLimitGlobal OutRateLimitHost OutDestUnreachs OutTimeExcds OutParmProbs OutSrcQuenchs OutRedirects OutEchos OutEchoReps OutTimestamps OutTimestampReps OutAddrMasks OutAddrMaskReps\nIcmp: 28961 46 0 15621 3 0 0 0 13329 8 0 0 0 0 71091 0 4 18528 57737 6 0 0 0 19 13329 0 0 0 0\nIcmpMsg: InType0 InType3 InType8 InType11 OutType0 OutType3 OutType8 OutType11\nIcmpMsg: 8 15621 13329 3 13329 57737 19 6\nTcp: RtoAlgorithm RtoMin RtoMax MaxConn ActiveOpens PassiveOpens AttemptFails EstabResets CurrEstab InSegs OutSegs RetransSegs InErrs OutRsts InCsumErrors\nTcp: 1 200 120000 -1 382592 153201 2606 20715 152 40065676 73297374 167590 441 90488 0\nUdp: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdp: 8518161 37139 98395 8535392 98395 418 0 575 0\nUdpLite: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdpLite: 0 0 0 0 0 0 0 0 0\n__MEM__\nMemAvailable:     100836 kB\n",
+          "windows_cpu": [
+            38841350312500,
+            41759105625000,
+            2128327031250
+          ]
+        },
+        {
+          "monotonic": 137150.46055675,
+          "snapshot_seconds": 0.6956440999929328,
+          "raw": "cpu  407275 0 668507 41692230 122 80926 234429 0 0 0\ncpu0 111157 0 156649 10464718 20 30165 28341 0 0 0\ncpu1 113776 0 129106 10475088 34 15120 61417 0 0 0\ncpu2 108270 0 123653 10448978 30 14412 106983 0 0 0\ncpu3 74072 0 259097 10303443 37 21228 37687 0 0 0\nintr 311282812 0 3465384 146862522 0 0 0 0 0 0 0 0 84685659 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 568924 1644636 0 0 11348432 15217394 0 0 0 0 1 0 0 0 0 47489848\nctxt 436171243\nbtime 1791803651\nprocesses 1040513\nprocs_running 5\nprocs_blocked 0\nsoftirq 201047596 0 11767863 1660711 30502935 0 0 99639802 33669426 908069 22898790\n__RADIO__\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t0 ms\n\trx bytes:\t12186087954\n\trx packets:\t16911180\n\ttx bytes:\t51883070736\n\ttx packets:\t39812237\n\ttx retries:\t167412\n\ttx failed:\t167481\n\trx drop misc:\t3\n\tsignal:  \t-39 [-48, -47, -45, -41] dBm\n\tsignal avg:\t-38 [-48, -46, -45, -40] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t1115533999 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t531060107 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t108184 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745360 ms\n\tcurrent time:\t1791911929579 ms\n\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5180 MHz [in use]\n\tnoise:\t\t\t\t-91 dBm\n\tchannel active time:\t\t108260188 ms\n\tchannel busy time:\t\t46975109 ms\n\tchannel receive time:\t\t34582523 ms\n\tchannel BSS receive time:\t1092205 ms\n\tchannel transmit time:\t\t11236609 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5200 MHz\n\tnoise:\t\t\t\t-91 dBm\n\tchannel active time:\t\t193 ms\n\tchannel busy time:\t\t144 ms\n\tchannel receive time:\t\t143 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5220 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5240 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5260 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5280 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5300 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5320 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5745 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5765 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5785 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5805 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5825 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\n__TASKS__\n1112 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 18962 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1113 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 3 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1114 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 2869 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1115 (napi/phy0-0) R 2 0 0 0 -1 2129984 0 0 0 0 0 75326 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 0 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1116 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1117 (napi/phy0-0) R 2 0 0 0 -1 2129984 0 0 0 0 0 39351 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 0 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1141 (mt76-tx phy0) S 2 0 0 0 -1 2129984 0 0 0 0 0 42637 0 0 -2 0 1 0 986 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 1 1 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0-3\n623 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 10997 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n624 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 24565 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n__NET__\n                    CPU0       CPU1       CPU2       CPU3       \n          HI:          0          0          0          0\n       TIMER:    2326838    2367163    2607725    4466203\n      NET_TX:      61774      74565    1493167      31229\n      NET_RX:    4823671    8553487   15102711    2023526\n       BLOCK:          0          0          0          0\n    IRQ_POLL:          0          0          0          0\n     TASKLET:   49897960        637    1902680   47838914\n       SCHED:    8422564    7874659    7323999   10048300\n     HRTIMER:      69840     125152     549844     163654\n         RCU:    5521592    5326495    5188800    6862125\n002e36bb 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000807 00000000 0000000c 00000000 00000000 0000000c\n019ae1ee 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 005492c4 00000000 00000000 00000001 00000000 00000000\n05c6b42f 000002d9 00000318 00000000 00000000 00000000 00000000 00000000 00000000 00d33a1e 00000000 0000000d 00000002 00000000 0000000d\n0023b689 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000956 00000000 00000018 00000003 00000000 00000018\nIp: Forwarding DefaultTTL InReceives InHdrErrors InAddrErrors ForwDatagrams InUnknownProtos InDiscards InDelivers OutRequests OutDiscards OutNoRoutes ReasmTimeout ReasmReqds ReasmOKs ReasmFails FragOKs FragFails FragCreates OutTransmits\nIp: 1 64 46879445 4 0 419398 0 0 46371700 40341507 423 1 2 534 266 2 0 0 0 40743473\nIcmp: InMsgs InErrors InCsumErrors InDestUnreachs InTimeExcds InParmProbs InSrcQuenchs InRedirects InEchos InEchoReps InTimestamps InTimestampReps InAddrMasks InAddrMaskReps OutMsgs OutErrors OutRateLimitGlobal OutRateLimitHost OutDestUnreachs OutTimeExcds OutParmProbs OutSrcQuenchs OutRedirects OutEchos OutEchoReps OutTimestamps OutTimestampReps OutAddrMasks OutAddrMaskReps\nIcmp: 28961 46 0 15621 3 0 0 0 13329 8 0 0 0 0 71091 0 4 18528 57737 6 0 0 0 19 13329 0 0 0 0\nIcmpMsg: InType0 InType3 InType8 InType11 OutType0 OutType3 OutType8 OutType11\nIcmpMsg: 8 15621 13329 3 13329 57737 19 6\nTcp: RtoAlgorithm RtoMin RtoMax MaxConn ActiveOpens PassiveOpens AttemptFails EstabResets CurrEstab InSegs OutSegs RetransSegs InErrs OutRsts InCsumErrors\nTcp: 1 200 120000 -1 382599 153203 2606 20716 153 40093332 73419610 167594 441 90488 0\nUdp: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdp: 8518168 37139 98395 8535398 98395 418 0 575 0\nUdpLite: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdpLite: 0 0 0 0 0 0 0 0 0\n__MEM__\nMemAvailable:     100624 kB\n",
+          "windows_cpu": [
+            38841757968750,
+            41759598593750,
+            2128374062500
+          ]
+        },
+        {
+          "monotonic": 137151.6287937,
+          "snapshot_seconds": 0.6242583999992348,
+          "raw": "cpu  407289 0 668591 41692502 122 80929 234491 0 0 0\ncpu0 111167 0 156661 10464795 20 30166 28353 0 0 0\ncpu1 113777 0 129118 10475174 34 15121 61422 0 0 0\ncpu2 108270 0 123704 10449010 30 14412 107010 0 0 0\ncpu3 74074 0 259107 10303522 37 21228 37705 0 0 0\nintr 311288450 0 3465883 146864623 0 0 0 0 0 0 0 0 84687816 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 12 568924 1644654 0 0 11348532 15217498 0 0 0 0 1 0 0 0 0 47490506\nctxt 436177086\nbtime 1791803651\nprocesses 1040675\nprocs_running 1\nprocs_blocked 0\nsoftirq 201052515 0 11768036 1660736 30504085 0 0 99641490 33669689 909206 22899273\n__RADIO__\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t12187385239\n\trx packets:\t16925787\n\ttx bytes:\t51984701771\n\ttx packets:\t39879441\n\ttx retries:\t167460\n\ttx failed:\t167529\n\trx drop misc:\t3\n\tsignal:  \t-39 [-47, -47, -45, -41] dBm\n\tsignal avg:\t-38 [-48, -46, -45, -41] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t1115965250 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t531137815 us\n\tlast ack signal:-38 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort slot time:yes\n\tconnected time:\t108185 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803745360 ms\n\tcurrent time:\t1791911930664 ms\n\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5180 MHz [in use]\n\tnoise:\t\t\t\t-91 dBm\n\tchannel active time:\t\t108261270 ms\n\tchannel busy time:\t\t46975793 ms\n\tchannel receive time:\t\t34582764 ms\n\tchannel BSS receive time:\t1092306 ms\n\tchannel transmit time:\t\t11237043 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5200 MHz\n\tnoise:\t\t\t\t-91 dBm\n\tchannel active time:\t\t193 ms\n\tchannel busy time:\t\t144 ms\n\tchannel receive time:\t\t143 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5220 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5240 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5260 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5280 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5300 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5320 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5745 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5765 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5785 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5805 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\nSurvey data from phy1-ap0\n\tfrequency:\t\t\t5825 MHz\n\tchannel active time:\t\t0 ms\n\tchannel busy time:\t\t0 ms\n\tchannel receive time:\t\t0 ms\n\tchannel BSS receive time:\t0 ms\n\tchannel transmit time:\t\t0 ms\n__TASKS__\n1112 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 18963 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1113 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 3 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1114 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 2869 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1115 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 75335 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1116 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 0 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1117 (napi/phy0-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 39369 0 0 20 0 1 0 945 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t2\n1141 (mt76-tx phy0) S 2 0 0 0 -1 2129984 0 0 0 0 0 42650 0 0 -2 0 1 0 986 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 2 1 1 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0-3\n623 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 10997 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n624 (napi/mtk_eth-0) S 2 0 0 0 -1 2129984 0 0 0 0 0 24565 0 0 20 0 1 0 144 0 0 18446744073709551615 0 0 0 0 0 0 0 2147483647 0 1 0 0 17 0 0 0 0 0 0 0 0 0 0 0 0 0 0\nCpus_allowed_list:\t0\n__NET__\n                    CPU0       CPU1       CPU2       CPU3       \n          HI:          0          0          0          0\n       TIMER:    2326864    2367203    2607765    4466235\n      NET_TX:      61774      74565    1493168      31229\n      NET_RX:    4823844    8553659   15102885    2023720\n       BLOCK:          0          0          0          0\n    IRQ_POLL:          0          0          0          0\n     TASKLET:   49898600        638    1903548   47838914\n       SCHED:    8422640    7874726    7324078   10048316\n     HRTIMER:      69943     125224     550178     163861\n         RCU:    5521666    5326584    5188937    6862216\n002e468b 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 000008a0 00000000 00000000 00000000 00000000 00000000\n019ae794 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 0054936d 00000000 00000000 00000001 00000000 00000000\n05c6c588 000002d9 00000318 00000000 00000000 00000000 00000000 00000000 00000000 00d33a28 00000000 00000000 00000002 00000000 00000000\n0023d4d7 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000a13 00000000 00000000 00000003 00000000 00000000\nIp: Forwarding DefaultTTL InReceives InHdrErrors InAddrErrors ForwDatagrams InUnknownProtos InDiscards InDelivers OutRequests OutDiscards OutNoRoutes ReasmTimeout ReasmReqds ReasmOKs ReasmFails FragOKs FragFails FragCreates OutTransmits\nIp: 1 64 46888220 4 0 419398 0 0 46380475 40342572 423 1 2 534 266 2 0 0 0 40744538\nIcmp: InMsgs InErrors InCsumErrors InDestUnreachs InTimeExcds InParmProbs InSrcQuenchs InRedirects InEchos InEchoReps InTimestamps InTimestampReps InAddrMasks InAddrMaskReps OutMsgs OutErrors OutRateLimitGlobal OutRateLimitHost OutDestUnreachs OutTimeExcds OutParmProbs OutSrcQuenchs OutRedirects OutEchos OutEchoReps OutTimestamps OutTimestampReps OutAddrMasks OutAddrMaskReps\nIcmp: 28961 46 0 15621 3 0 0 0 13329 8 0 0 0 0 71091 0 4 18528 57737 6 0 0 0 19 13329 0 0 0 0\nIcmpMsg: InType0 InType3 InType8 InType11 OutType0 OutType3 OutType8 OutType11\nIcmpMsg: 8 15621 13329 3 13329 57737 19 6\nTcp: RtoAlgorithm RtoMin RtoMax MaxConn ActiveOpens PassiveOpens AttemptFails EstabResets CurrEstab InSegs OutSegs RetransSegs InErrs OutRsts InCsumErrors\nTcp: 1 200 120000 -1 382601 153204 2606 20717 140 40102107 73462800 167594 441 90488 0\nUdp: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdp: 8518168 37139 98395 8535398 98395 418 0 575 0\nUdpLite: InDatagrams NoPorts InErrors OutDatagrams RcvbufErrors SndbufErrors InCsumErrors IgnoredMulti MemErrors\nUdpLite: 0 0 0 0 0 0 0 0 0\n__MEM__\nMemAvailable:      96192 kB\n",
+          "windows_cpu": [
+            38842052187500,
+            41759934531250,
+            2128401718750
+          ]
+        }
+      ]
+    }
+  ],
+  "server_pid": 4038,
+  "server_records": [
+    {
+      "bytes": 67108864,
+      "seconds": 7.020211141,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.03894838,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.050113654,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.050280452,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.062189539,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.076858256,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.076946737,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.112454605,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.112616705,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.197014674,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.216749156,
+      "send_buffer": 130560,
+      "complete": true
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 7.378916393,
+      "send_buffer": 130560,
+      "complete": true
+    }
+  ],
+  "cleanup_complete": true
+}

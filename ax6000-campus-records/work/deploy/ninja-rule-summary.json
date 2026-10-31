@@ -1,0 +1,68 @@
+{
+  "pass_comment": true,
+  "direct_rule_types": {},
+  "dns_keys": [
+    "enable",
+    "nameserver",
+    "fallback"
+  ],
+  "geosite_rules": 0,
+  "groups_with_direct": [
+    {
+      "index": 0,
+      "name": "🚀 节点选择",
+      "type": "select",
+      "direct_first": false,
+      "rule_types": {
+        "DOMAIN-SUFFIX": 309,
+        "DOMAIN-KEYWORD": 26,
+        "IP-CIDR": 81,
+        "DOMAIN": 9,
+        "IP-CIDR6": 3
+      }
+    },
+    {
+      "index": 4,
+      "name": "🟨 直连节点",
+      "type": "url-test",
+      "direct_first": true,
+      "rule_types": {}
+    },
+    {
+      "index": 10,
+      "name": "🎯 全球直连",
+      "type": "select",
+      "direct_first": true,
+      "rule_types": {
+        "DOMAIN-SUFFIX": 654,
+        "IP-CIDR": 221,
+        "IP-CIDR6": 8,
+        "DOMAIN": 51,
+        "DOMAIN-KEYWORD": 16,
+        "GEOIP": 1
+      }
+    },
+    {
+      "index": 11,
+      "name": "🛑 全球拦截",
+      "type": "select",
+      "direct_first": false,
+      "rule_types": {
+        "DOMAIN-KEYWORD": 24,
+        "DOMAIN-SUFFIX": 565
+      }
+    },
+    {
+      "index": 12,
+      "name": "🍃 应用净化",
+      "type": "select",
+      "direct_first": false,
+      "rule_types": {
+        "DOMAIN-SUFFIX": 992,
+        "DOMAIN-KEYWORD": 1,
+        "DOMAIN": 10,
+        "IP-CIDR": 19
+      }
+    }
+  ]
+}

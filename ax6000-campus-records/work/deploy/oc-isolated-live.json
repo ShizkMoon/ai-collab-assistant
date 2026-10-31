@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "redir-host\n0\n0\ntable inet fw4 {\n\tchain openclash {\n\t\tip daddr @localnetwork counter packets 2 bytes 104 return\n\t\tct direction reply counter packets 0 bytes 0 return\n\t\tip protocol tcp ip daddr 198.18.0.0/16 counter packets 0 bytes 0 redirect to :7892\n\t\tip protocol tcp counter packets 18 bytes 936 redirect to :7892\n\t}\n}\nudp        0      0 :::7874                 :::*                                6619/clash\n",
+  "stderr": ""
+}

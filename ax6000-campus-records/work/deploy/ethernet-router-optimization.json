@@ -1,0 +1,17 @@
+{
+  "Action": "Apply",
+  "Time": "2026-10-13T00:45:21.0830570+08:00",
+  "Passed": true,
+  "Dhcp": "Enabled",
+  "ManualAddressCount": 0,
+  "DnsAutomatic": true,
+  "WifiConnectedAndDhcp": true,
+  "LinkConnected": false,
+  "OriginalVerificationResult": {
+    "Action": "Apply",
+    "Time": "2026-10-13T00:44:07.9522546+08:00",
+    "Passed": false,
+    "Error": "No matching MSFT_NetIPAddress objects found by CIM query for instances of the ROOT/StandardCimv2/MSFT_NetIPAddress class on the  CIM server: SELECT * FROM MSFT_NetIPAddress  WHERE ((InterfaceIndex = 4)) AND ((AddressFamily = 2)). Verify query parameters and retry."
+  },
+  "Note": "原脚本在断开网卡短暂没有IPv4地址时读回报错；独立读回确认DHCP与自动DNS已应用。脚本现允许没有地址，未重复修改。未接线取得租约或验证有线流量。"
+}

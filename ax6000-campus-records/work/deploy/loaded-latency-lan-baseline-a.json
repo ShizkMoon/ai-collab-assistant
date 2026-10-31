@@ -1,0 +1,3702 @@
+{
+  "label": "lan-baseline-a",
+  "all_complete": true,
+  "parallel_streams": 16,
+  "total_bytes": 1073741824,
+  "seconds": 10.583,
+  "cpu": {
+    "cpu": {
+      "busy_percent": 37.9,
+      "softirq_percent": 14.5
+    },
+    "cpu0": {
+      "busy_percent": 19.1,
+      "softirq_percent": 0.5
+    },
+    "cpu1": {
+      "busy_percent": 41.7,
+      "softirq_percent": 28.3
+    },
+    "cpu2": {
+      "busy_percent": 25.8,
+      "softirq_percent": 9.9
+    },
+    "cpu3": {
+      "busy_percent": 63.2,
+      "softirq_percent": 18.7
+    }
+  },
+  "wan_rx_delta": {
+    "wan": 25875549,
+    "eswan2": 13891602
+  },
+  "latency": {
+    "192.168.31.1": {
+      "idle": {
+        "samples": 42,
+        "received": 42,
+        "loss_percent": 0.0,
+        "median_ms": 2,
+        "p95_ms": 22,
+        "max_ms": 36
+      },
+      "load": {
+        "samples": 52,
+        "received": 52,
+        "loss_percent": 0.0,
+        "median_ms": 22,
+        "p95_ms": 44,
+        "max_ms": 75
+      },
+      "recovery": {
+        "samples": 27,
+        "received": 27,
+        "loss_percent": 0.0,
+        "median_ms": 2,
+        "p95_ms": 7,
+        "max_ms": 27
+      }
+    },
+    "223.5.5.5": {
+      "idle": {
+        "samples": 42,
+        "received": 42,
+        "loss_percent": 0.0,
+        "median_ms": 9,
+        "p95_ms": 26,
+        "max_ms": 37
+      },
+      "load": {
+        "samples": 52,
+        "received": 52,
+        "loss_percent": 0.0,
+        "median_ms": 21,
+        "p95_ms": 40,
+        "max_ms": 76
+      },
+      "recovery": {
+        "samples": 27,
+        "received": 27,
+        "loss_percent": 0.0,
+        "median_ms": 9,
+        "p95_ms": 14,
+        "max_ms": 33
+      }
+    },
+    "119.29.29.29": {
+      "idle": {
+        "samples": 42,
+        "received": 42,
+        "loss_percent": 0.0,
+        "median_ms": 12,
+        "p95_ms": 26,
+        "max_ms": 37
+      },
+      "load": {
+        "samples": 52,
+        "received": 52,
+        "loss_percent": 0.0,
+        "median_ms": 22,
+        "p95_ms": 41,
+        "max_ms": 80
+      },
+      "recovery": {
+        "samples": 27,
+        "received": 27,
+        "loss_percent": 0.0,
+        "median_ms": 11,
+        "p95_ms": 14,
+        "max_ms": 32
+      }
+    },
+    "180.76.76.76": {
+      "idle": {
+        "samples": 42,
+        "received": 42,
+        "loss_percent": 0.0,
+        "median_ms": 12,
+        "p95_ms": 25,
+        "max_ms": 38
+      },
+      "load": {
+        "samples": 52,
+        "received": 52,
+        "loss_percent": 0.0,
+        "median_ms": 22,
+        "p95_ms": 41,
+        "max_ms": 78
+      },
+      "recovery": {
+        "samples": 27,
+        "received": 27,
+        "loss_percent": 0.0,
+        "median_ms": 12,
+        "p95_ms": 17,
+        "max_ms": 36
+      }
+    }
+  },
+  "streams": [
+    {
+      "id": 0,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 8.041731,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56431,
+      "complete": true
+    },
+    {
+      "id": 1,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 10.473135,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56424,
+      "complete": true
+    },
+    {
+      "id": 2,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 9.354153,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56432,
+      "complete": true
+    },
+    {
+      "id": 3,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 10.52959,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56425,
+      "complete": true
+    },
+    {
+      "id": 4,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 10.520546,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56423,
+      "complete": true
+    },
+    {
+      "id": 5,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 9.401451,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56434,
+      "complete": true
+    },
+    {
+      "id": 6,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 10.514634,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56426,
+      "complete": true
+    },
+    {
+      "id": 7,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 10.524393,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56428,
+      "complete": true
+    },
+    {
+      "id": 8,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 10.036581,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56437,
+      "complete": true
+    },
+    {
+      "id": 9,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 9.514757,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56433,
+      "complete": true
+    },
+    {
+      "id": 10,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 9.244922,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56430,
+      "complete": true
+    },
+    {
+      "id": 11,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 8.418023,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56422,
+      "complete": true
+    },
+    {
+      "id": 12,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 10.465944,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56427,
+      "complete": true
+    },
+    {
+      "id": 13,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 9.835654,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56436,
+      "complete": true
+    },
+    {
+      "id": 14,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 9.028924,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56429,
+      "complete": true
+    },
+    {
+      "id": 15,
+      "exit": 0,
+      "http_code": 200,
+      "size_download": 67108864,
+      "time_total": 9.595875,
+      "remote_ip": "192.168.31.1",
+      "local_port": 56435,
+      "complete": true
+    }
+  ],
+  "before": "cpu  19404 0 31186 1334961 100 3757 13732 0 0 0\ncpu0 5659 0 8169 334803 15 1462 1018 0 0 0\ncpu1 5295 0 5525 335680 25 687 4169 0 0 0\ncpu2 5230 0 5350 334533 25 679 6111 0 0 0\ncpu3 3220 0 12140 329943 33 927 2432 0 0 0\nwan 7358897571\neswan2 3371139370\nsockets: used 519\nTCP: inuse 234 orphan 1 tw 232 alloc 394 mem 692\nUDP: inuse 16 mem 87\nUDPLITE: inuse 0\nRAW: inuse 0\nFRAG: inuse 0 memory 0\nMemAvailable:     151256 kB\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t0 ms\n\trx bytes:\t133805407\n\trx packets:\t888603\n\ttx bytes:\t6058067540\n\ttx packets:\t4492267\n\ttx retries:\t13354\n\ttx failed:\t13356\n\trx drop misc:\t1\n\tsignal:  \t-37 [-46, -47, -44, -38] dBm\n\tsignal avg:\t-36 [-46, -47, -44, -37] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t84887628 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t24478339 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort preamble:\tyes\n\tshort slot time:yes\n\tconnected time:\t3435 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803746958 ms\n\tcurrent time:\t1791807182239 ms\n\nStation 70:21:7f:be:0c:7b (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t7830 ms\n\trx bytes:\t39003332\n\trx packets:\t89362\n\ttx bytes:\t716779807\n\ttx packets:\t504963\n\ttx retries:\t18184\n\ttx failed:\t18214\n\trx drop misc:\t13\n\tsignal:  \t-37 [-44, -44, -43, -40] dBm\n\tsignal avg:\t-38 [-46, -45, -44, -41] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t9249066 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t3276714 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-39 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort preamble:\tyes\n\tshort slot time:yes\n\tconnected time:\t2360 seconds\n\tassociated at [boottime]:\t1168.892s\n\tassociated at:\t1791804822366 ms\n\tcurrent time:\t1791807182239 ms\n\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n",
+  "after": "cpu  19488 0 32084 1337673 100 3795 14364 0 0 0\ncpu0 5696 0 8311 335660 15 1480 1023 0 0 0\ncpu1 5304 0 5657 336315 25 692 4477 0 0 0\ncpu2 5262 0 5480 335333 25 688 6218 0 0 0\ncpu3 3225 0 12636 330363 33 933 2645 0 0 0\nwan 7384773120\neswan2 3385030972\nsockets: used 519\nTCP: inuse 231 orphan 1 tw 234 alloc 391 mem 222\nUDP: inuse 18 mem 343\nUDPLITE: inuse 0\nRAW: inuse 0\nFRAG: inuse 0 memory 0\nMemAvailable:     145536 kB\nStation e8:62:be:67:f5:07 (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t10 ms\n\trx bytes:\t141811088\n\trx packets:\t1023001\n\ttx bytes:\t7195610841\n\ttx packets:\t5245886\n\ttx retries:\t14327\n\ttx failed:\t14329\n\trx drop misc:\t1\n\tsignal:  \t-37 [-47, -47, -44, -38] dBm\n\tsignal avg:\t-37 [-46, -47, -44, -38] dBm\n\ttx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t89100724 us\n\trx bitrate:\t2268.5 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 1 HE-DCM 0\n\trx duration:\t24987905 us\n\tlast ack signal:-38 dBm\n\tavg ack signal:\t-38 dBm\n\tairtime weight: 256\n\texpected throughput:\t1793.312Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort preamble:\tyes\n\tshort slot time:yes\n\tconnected time:\t3446 seconds\n\tassociated at [boottime]:\t93.484s\n\tassociated at:\t1791803746958 ms\n\tcurrent time:\t1791807193101 ms\n\nStation 70:21:7f:be:0c:7b (on phy1-ap0)\n\tauthorized:\tyes\n\tauthenticated:\tyes\n\tassociated:\tyes\n\tpreamble:\tshort\n\tWMM/WME:\tyes\n\tMFP:\t\tyes\n\tTDLS peer:\tno\n\tinactive time:\t20 ms\n\trx bytes:\t39006122\n\trx packets:\t89386\n\ttx bytes:\t716793962\n\ttx packets:\t504979\n\ttx retries:\t18200\n\ttx failed:\t18230\n\trx drop misc:\t13\n\tsignal:  \t-41 [-45, -44, -49, -45] dBm\n\tsignal avg:\t-42 [-50, -48, -48, -44] dBm\n\ttx bitrate:\t2161.3 MBit/s 160MHz HE-MCS 10 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx duration:\t9250776 us\n\trx bitrate:\t2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\trx duration:\t3277618 us\n\tlast ack signal:-39 dBm\n\tavg ack signal:\t-39 dBm\n\tairtime weight: 256\n\texpected throughput:\t1639.343Mbps\n\tDTIM period:\t2\n\tbeacon interval:100\n\tshort preamble:\tyes\n\tshort slot time:yes\n\tconnected time:\t2371 seconds\n\tassociated at [boottime]:\t1168.892s\n\tassociated at:\t1791804822366 ms\n\tcurrent time:\t1791807193101 ms\n\nqdisc noqueue 0: root refcnt 2 \n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0\n",
+  "icmp_samples": {
+    "192.168.31.1": [
+      {
+        "phase": "idle",
+        "seconds": 0.596,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 0.797,
+        "ok": true,
+        "status": 0,
+        "ms": 5
+      },
+      {
+        "phase": "idle",
+        "seconds": 0.998,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.198,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.399,
+        "ok": true,
+        "status": 0,
+        "ms": 3
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.599,
+        "ok": true,
+        "status": 0,
+        "ms": 3
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.8,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.001,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.2,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.401,
+        "ok": true,
+        "status": 0,
+        "ms": 36
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.601,
+        "ok": true,
+        "status": 0,
+        "ms": 4
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.8,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.001,
+        "ok": true,
+        "status": 0,
+        "ms": 4
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.201,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.402,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.602,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.802,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.003,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.203,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.404,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.605,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.806,
+        "ok": true,
+        "status": 0,
+        "ms": 3
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.007,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.207,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.407,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.609,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.809,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.01,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.21,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.411,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.612,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.813,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.014,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.215,
+        "ok": true,
+        "status": 0,
+        "ms": 4
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.416,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.618,
+        "ok": true,
+        "status": 0,
+        "ms": 3
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.818,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.019,
+        "ok": true,
+        "status": 0,
+        "ms": 5
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.22,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.42,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.622,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.823,
+        "ok": true,
+        "status": 0,
+        "ms": 7
+      },
+      {
+        "phase": "load",
+        "seconds": 9.023,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 9.223,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 9.423,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 9.624,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "load",
+        "seconds": 9.825,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 10.025,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 10.226,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 10.427,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 10.627,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "load",
+        "seconds": 10.828,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 11.029,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "load",
+        "seconds": 11.231,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "load",
+        "seconds": 11.43,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "load",
+        "seconds": 11.631,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "load",
+        "seconds": 11.832,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 12.032,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 12.232,
+        "ok": true,
+        "status": 0,
+        "ms": 42
+      },
+      {
+        "phase": "load",
+        "seconds": 12.432,
+        "ok": true,
+        "status": 0,
+        "ms": 33
+      },
+      {
+        "phase": "load",
+        "seconds": 12.632,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 12.833,
+        "ok": true,
+        "status": 0,
+        "ms": 44
+      },
+      {
+        "phase": "load",
+        "seconds": 13.034,
+        "ok": true,
+        "status": 0,
+        "ms": 24
+      },
+      {
+        "phase": "load",
+        "seconds": 13.234,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "load",
+        "seconds": 13.435,
+        "ok": true,
+        "status": 0,
+        "ms": 75
+      },
+      {
+        "phase": "load",
+        "seconds": 13.637,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 13.838,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "load",
+        "seconds": 14.039,
+        "ok": true,
+        "status": 0,
+        "ms": 24
+      },
+      {
+        "phase": "load",
+        "seconds": 14.24,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 14.44,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 14.64,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 14.841,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 15.042,
+        "ok": true,
+        "status": 0,
+        "ms": 30
+      },
+      {
+        "phase": "load",
+        "seconds": 15.243,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "load",
+        "seconds": 15.443,
+        "ok": true,
+        "status": 0,
+        "ms": 34
+      },
+      {
+        "phase": "load",
+        "seconds": 15.643,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 15.844,
+        "ok": true,
+        "status": 0,
+        "ms": 28
+      },
+      {
+        "phase": "load",
+        "seconds": 16.045,
+        "ok": true,
+        "status": 0,
+        "ms": 46
+      },
+      {
+        "phase": "load",
+        "seconds": 16.245,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 16.445,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 16.646,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "load",
+        "seconds": 16.847,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 17.048,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "load",
+        "seconds": 17.248,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 17.449,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 17.65,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "load",
+        "seconds": 17.851,
+        "ok": true,
+        "status": 0,
+        "ms": 35
+      },
+      {
+        "phase": "load",
+        "seconds": 18.051,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 18.252,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "load",
+        "seconds": 18.453,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "load",
+        "seconds": 18.653,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "load",
+        "seconds": 18.854,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 19.055,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 19.255,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.456,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.658,
+        "ok": true,
+        "status": 0,
+        "ms": 3
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.859,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.059,
+        "ok": true,
+        "status": 0,
+        "ms": 3
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.26,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.461,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.661,
+        "ok": true,
+        "status": 0,
+        "ms": 7
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.861,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.062,
+        "ok": true,
+        "status": 0,
+        "ms": 6
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.263,
+        "ok": true,
+        "status": 0,
+        "ms": 4
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.463,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.663,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.864,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.065,
+        "ok": true,
+        "status": 0,
+        "ms": 7
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.266,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.467,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.667,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.867,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.068,
+        "ok": true,
+        "status": 0,
+        "ms": 7
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.268,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.468,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.669,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.87,
+        "ok": true,
+        "status": 0,
+        "ms": 4
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.071,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.272,
+        "ok": true,
+        "status": 0,
+        "ms": 1
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.472,
+        "ok": true,
+        "status": 0,
+        "ms": 2
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.671,
+        "ok": true,
+        "status": 0,
+        "ms": 3
+      }
+    ],
+    "223.5.5.5": [
+      {
+        "phase": "idle",
+        "seconds": 0.596,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 0.797,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "idle",
+        "seconds": 0.997,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.198,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.399,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.599,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.8,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.001,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.201,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.402,
+        "ok": true,
+        "status": 0,
+        "ms": 33
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.602,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.801,
+        "ok": true,
+        "status": 0,
+        "ms": 37
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.002,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.203,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.403,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.603,
+        "ok": true,
+        "status": 0,
+        "ms": 7
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.803,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.004,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.205,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.406,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.606,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.807,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.009,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.21,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.411,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.612,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.813,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.013,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.214,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.415,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.616,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.817,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.017,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.218,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.417,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.619,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.818,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.019,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.22,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.42,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.621,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.822,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "load",
+        "seconds": 9.023,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "load",
+        "seconds": 9.224,
+        "ok": true,
+        "status": 0,
+        "ms": 20
+      },
+      {
+        "phase": "load",
+        "seconds": 9.424,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 9.624,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "load",
+        "seconds": 9.825,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "load",
+        "seconds": 10.026,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 10.227,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "load",
+        "seconds": 10.428,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 10.629,
+        "ok": true,
+        "status": 0,
+        "ms": 20
+      },
+      {
+        "phase": "load",
+        "seconds": 10.829,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 11.029,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "load",
+        "seconds": 11.23,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "load",
+        "seconds": 11.429,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 11.631,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 11.832,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "load",
+        "seconds": 12.033,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 12.234,
+        "ok": true,
+        "status": 0,
+        "ms": 20
+      },
+      {
+        "phase": "load",
+        "seconds": 12.436,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "load",
+        "seconds": 12.636,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 12.837,
+        "ok": true,
+        "status": 0,
+        "ms": 45
+      },
+      {
+        "phase": "load",
+        "seconds": 13.037,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "load",
+        "seconds": 13.237,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "load",
+        "seconds": 13.438,
+        "ok": true,
+        "status": 0,
+        "ms": 76
+      },
+      {
+        "phase": "load",
+        "seconds": 13.638,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 13.839,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 14.039,
+        "ok": true,
+        "status": 0,
+        "ms": 24
+      },
+      {
+        "phase": "load",
+        "seconds": 14.24,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 14.44,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "load",
+        "seconds": 14.64,
+        "ok": true,
+        "status": 0,
+        "ms": 31
+      },
+      {
+        "phase": "load",
+        "seconds": 14.841,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 15.042,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "load",
+        "seconds": 15.242,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 15.443,
+        "ok": true,
+        "status": 0,
+        "ms": 28
+      },
+      {
+        "phase": "load",
+        "seconds": 15.643,
+        "ok": true,
+        "status": 0,
+        "ms": 33
+      },
+      {
+        "phase": "load",
+        "seconds": 15.843,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 16.043,
+        "ok": true,
+        "status": 0,
+        "ms": 39
+      },
+      {
+        "phase": "load",
+        "seconds": 16.243,
+        "ok": true,
+        "status": 0,
+        "ms": 28
+      },
+      {
+        "phase": "load",
+        "seconds": 16.444,
+        "ok": true,
+        "status": 0,
+        "ms": 24
+      },
+      {
+        "phase": "load",
+        "seconds": 16.644,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 16.845,
+        "ok": true,
+        "status": 0,
+        "ms": 38
+      },
+      {
+        "phase": "load",
+        "seconds": 17.045,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "load",
+        "seconds": 17.245,
+        "ok": true,
+        "status": 0,
+        "ms": 24
+      },
+      {
+        "phase": "load",
+        "seconds": 17.446,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 17.647,
+        "ok": true,
+        "status": 0,
+        "ms": 20
+      },
+      {
+        "phase": "load",
+        "seconds": 17.847,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "load",
+        "seconds": 18.048,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 18.25,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 18.45,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "load",
+        "seconds": 18.65,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "load",
+        "seconds": 18.851,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 19.052,
+        "ok": true,
+        "status": 0,
+        "ms": 40
+      },
+      {
+        "phase": "load",
+        "seconds": 19.253,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.454,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.653,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.853,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.053,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.253,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.454,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.654,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.855,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.055,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.256,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.456,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.656,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.858,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.057,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.258,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.458,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.66,
+        "ok": true,
+        "status": 0,
+        "ms": 33
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.86,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.06,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.261,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.461,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.661,
+        "ok": true,
+        "status": 0,
+        "ms": 9
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.862,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.061,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.262,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.463,
+        "ok": true,
+        "status": 0,
+        "ms": 8
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.664,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      }
+    ],
+    "119.29.29.29": [
+      {
+        "phase": "idle",
+        "seconds": 0.596,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 0.797,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "idle",
+        "seconds": 0.997,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.198,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.399,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.599,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.8,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.001,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.201,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.402,
+        "ok": true,
+        "status": 0,
+        "ms": 33
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.602,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.801,
+        "ok": true,
+        "status": 0,
+        "ms": 37
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.002,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.202,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.403,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.602,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.804,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.004,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.204,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.405,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.606,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.808,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.009,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.21,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.41,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.611,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.812,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.012,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.213,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.412,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.613,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.814,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.014,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.215,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.416,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.617,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.817,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.018,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.218,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.419,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.62,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.821,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 9.022,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "load",
+        "seconds": 9.222,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 9.421,
+        "ok": true,
+        "status": 0,
+        "ms": 31
+      },
+      {
+        "phase": "load",
+        "seconds": 9.623,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 9.824,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 10.024,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 10.225,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 10.426,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 10.627,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 10.827,
+        "ok": true,
+        "status": 0,
+        "ms": 31
+      },
+      {
+        "phase": "load",
+        "seconds": 11.027,
+        "ok": true,
+        "status": 0,
+        "ms": 20
+      },
+      {
+        "phase": "load",
+        "seconds": 11.228,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "load",
+        "seconds": 11.427,
+        "ok": true,
+        "status": 0,
+        "ms": 31
+      },
+      {
+        "phase": "load",
+        "seconds": 11.627,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 11.829,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 12.029,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "load",
+        "seconds": 12.229,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "load",
+        "seconds": 12.431,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "load",
+        "seconds": 12.631,
+        "ok": true,
+        "status": 0,
+        "ms": 27
+      },
+      {
+        "phase": "load",
+        "seconds": 12.832,
+        "ok": true,
+        "status": 0,
+        "ms": 35
+      },
+      {
+        "phase": "load",
+        "seconds": 13.033,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 13.233,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "load",
+        "seconds": 13.433,
+        "ok": true,
+        "status": 0,
+        "ms": 80
+      },
+      {
+        "phase": "load",
+        "seconds": 13.633,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 13.833,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 14.033,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 14.234,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "load",
+        "seconds": 14.435,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 14.635,
+        "ok": true,
+        "status": 0,
+        "ms": 36
+      },
+      {
+        "phase": "load",
+        "seconds": 14.836,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "load",
+        "seconds": 15.037,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "load",
+        "seconds": 15.237,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 15.437,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 15.637,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 15.837,
+        "ok": true,
+        "status": 0,
+        "ms": 24
+      },
+      {
+        "phase": "load",
+        "seconds": 16.039,
+        "ok": true,
+        "status": 0,
+        "ms": 44
+      },
+      {
+        "phase": "load",
+        "seconds": 16.239,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 16.44,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 16.641,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 16.842,
+        "ok": true,
+        "status": 0,
+        "ms": 41
+      },
+      {
+        "phase": "load",
+        "seconds": 17.043,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 17.243,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 17.443,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "load",
+        "seconds": 17.644,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 17.845,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 18.046,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 18.248,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 18.448,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 18.648,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "load",
+        "seconds": 18.848,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 19.048,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 19.248,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.448,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.649,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.851,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.051,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.252,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.453,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.654,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.855,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.055,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.256,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.456,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.657,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.858,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.059,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.259,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.459,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.661,
+        "ok": true,
+        "status": 0,
+        "ms": 32
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.861,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.062,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.263,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.463,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.664,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.865,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.065,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.265,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.466,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.667,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      }
+    ],
+    "180.76.76.76": [
+      {
+        "phase": "idle",
+        "seconds": 0.596,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 0.797,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "idle",
+        "seconds": 0.997,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.198,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.399,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.598,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.798,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 1.998,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.199,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.4,
+        "ok": true,
+        "status": 0,
+        "ms": 35
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.6,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "idle",
+        "seconds": 2.8,
+        "ok": true,
+        "status": 0,
+        "ms": 38
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.001,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.201,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.403,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.602,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "idle",
+        "seconds": 3.804,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.004,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.204,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.405,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.606,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 4.808,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.009,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.21,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.41,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.611,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 5.812,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.012,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.211,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.412,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.613,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 6.814,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.015,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.216,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.416,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.618,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "idle",
+        "seconds": 7.819,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.019,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.219,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.42,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.621,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "idle",
+        "seconds": 8.821,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "load",
+        "seconds": 9.023,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "load",
+        "seconds": 9.223,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 9.422,
+        "ok": true,
+        "status": 0,
+        "ms": 30
+      },
+      {
+        "phase": "load",
+        "seconds": 9.624,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "load",
+        "seconds": 9.825,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "load",
+        "seconds": 10.026,
+        "ok": true,
+        "status": 0,
+        "ms": 37
+      },
+      {
+        "phase": "load",
+        "seconds": 10.227,
+        "ok": true,
+        "status": 0,
+        "ms": 25
+      },
+      {
+        "phase": "load",
+        "seconds": 10.428,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 10.629,
+        "ok": true,
+        "status": 0,
+        "ms": 20
+      },
+      {
+        "phase": "load",
+        "seconds": 10.829,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 11.029,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 11.23,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 11.429,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 11.631,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 11.832,
+        "ok": true,
+        "status": 0,
+        "ms": 24
+      },
+      {
+        "phase": "load",
+        "seconds": 12.032,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 12.232,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 12.434,
+        "ok": true,
+        "status": 0,
+        "ms": 14
+      },
+      {
+        "phase": "load",
+        "seconds": 12.634,
+        "ok": true,
+        "status": 0,
+        "ms": 24
+      },
+      {
+        "phase": "load",
+        "seconds": 12.835,
+        "ok": true,
+        "status": 0,
+        "ms": 46
+      },
+      {
+        "phase": "load",
+        "seconds": 13.035,
+        "ok": true,
+        "status": 0,
+        "ms": 28
+      },
+      {
+        "phase": "load",
+        "seconds": 13.235,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "load",
+        "seconds": 13.435,
+        "ok": true,
+        "status": 0,
+        "ms": 78
+      },
+      {
+        "phase": "load",
+        "seconds": 13.635,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 13.836,
+        "ok": true,
+        "status": 0,
+        "ms": 30
+      },
+      {
+        "phase": "load",
+        "seconds": 14.037,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "load",
+        "seconds": 14.238,
+        "ok": true,
+        "status": 0,
+        "ms": 29
+      },
+      {
+        "phase": "load",
+        "seconds": 14.437,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 14.637,
+        "ok": true,
+        "status": 0,
+        "ms": 34
+      },
+      {
+        "phase": "load",
+        "seconds": 14.838,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 15.039,
+        "ok": true,
+        "status": 0,
+        "ms": 28
+      },
+      {
+        "phase": "load",
+        "seconds": 15.24,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 15.44,
+        "ok": true,
+        "status": 0,
+        "ms": 31
+      },
+      {
+        "phase": "load",
+        "seconds": 15.64,
+        "ok": true,
+        "status": 0,
+        "ms": 21
+      },
+      {
+        "phase": "load",
+        "seconds": 15.841,
+        "ok": true,
+        "status": 0,
+        "ms": 31
+      },
+      {
+        "phase": "load",
+        "seconds": 16.041,
+        "ok": true,
+        "status": 0,
+        "ms": 41
+      },
+      {
+        "phase": "load",
+        "seconds": 16.241,
+        "ok": true,
+        "status": 0,
+        "ms": 30
+      },
+      {
+        "phase": "load",
+        "seconds": 16.441,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "load",
+        "seconds": 16.642,
+        "ok": true,
+        "status": 0,
+        "ms": 20
+      },
+      {
+        "phase": "load",
+        "seconds": 16.842,
+        "ok": true,
+        "status": 0,
+        "ms": 41
+      },
+      {
+        "phase": "load",
+        "seconds": 17.043,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 17.243,
+        "ok": true,
+        "status": 0,
+        "ms": 22
+      },
+      {
+        "phase": "load",
+        "seconds": 17.443,
+        "ok": true,
+        "status": 0,
+        "ms": 26
+      },
+      {
+        "phase": "load",
+        "seconds": 17.644,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 17.845,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 18.046,
+        "ok": true,
+        "status": 0,
+        "ms": 23
+      },
+      {
+        "phase": "load",
+        "seconds": 18.248,
+        "ok": true,
+        "status": 0,
+        "ms": 18
+      },
+      {
+        "phase": "load",
+        "seconds": 18.448,
+        "ok": true,
+        "status": 0,
+        "ms": 16
+      },
+      {
+        "phase": "load",
+        "seconds": 18.648,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "load",
+        "seconds": 18.848,
+        "ok": true,
+        "status": 0,
+        "ms": 19
+      },
+      {
+        "phase": "load",
+        "seconds": 19.049,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "load",
+        "seconds": 19.249,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.45,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.65,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 19.851,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.051,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.252,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.451,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.652,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "recovery",
+        "seconds": 20.852,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.052,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.253,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.454,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.654,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "recovery",
+        "seconds": 21.855,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.056,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.257,
+        "ok": true,
+        "status": 0,
+        "ms": 13
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.457,
+        "ok": true,
+        "status": 0,
+        "ms": 10
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.658,
+        "ok": true,
+        "status": 0,
+        "ms": 36
+      },
+      {
+        "phase": "recovery",
+        "seconds": 22.857,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.058,
+        "ok": true,
+        "status": 0,
+        "ms": 17
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.259,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.459,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.66,
+        "ok": true,
+        "status": 0,
+        "ms": 12
+      },
+      {
+        "phase": "recovery",
+        "seconds": 23.861,
+        "ok": true,
+        "status": 0,
+        "ms": 15
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.061,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.262,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.464,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      },
+      {
+        "phase": "recovery",
+        "seconds": 24.664,
+        "ok": true,
+        "status": 0,
+        "ms": 11
+      }
+    ]
+  },
+  "mbps": 811.71
+}

@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "password_login_verified": true,
+  "pages": {
+    "status": {
+      "http_status": 200,
+      "bytes": 4220
+    },
+    "wireless": {
+      "http_status": 200,
+      "bytes": 3209
+    },
+    "esurfing_page": {
+      "http_status": 200,
+      "bytes": 3205
+    },
+    "esurfing_javascript": {
+      "http_status": 200,
+      "bytes": 36632
+    }
+  },
+  "ui_interaction_tested": false,
+  "browser_rendering_tested": false
+}

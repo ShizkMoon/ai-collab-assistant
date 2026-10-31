@@ -1,0 +1,632 @@
+{
+  "package": "ua3f",
+  "version": "3.7.0-r1",
+  "description": "Advanced HTTP Rewriting Proxy",
+  "arch": "aarch64_cortex-a53",
+  "installed_size": 16507405,
+  "digest": "6ba0e152895212cad25085c8834513c2962df4c415f5599e1eab9900478b2089",
+  "depends": [
+    {
+      "name": "ipset",
+      "version": "",
+      "match": 0
+    },
+    {
+      "name": "iptables",
+      "version": "",
+      "match": 0
+    },
+    {
+      "name": "iptables-mod-conntrack-extra",
+      "version": "",
+      "match": 0
+    },
+    {
+      "name": "iptables-mod-extra",
+      "version": "",
+      "match": 0
+    },
+    {
+      "name": "iptables-mod-ipopt",
+      "version": "",
+      "match": 0
+    },
+    {
+      "name": "iptables-mod-nfqueue",
+      "version": "",
+      "match": 0
+    },
+    {
+      "name": "iptables-mod-tproxy",
+      "version": "",
+      "match": 0
+    },
+    {
+      "name": "kmod-nf-conntrack-netlink",
+      "version": "",
+      "match": 0
+    },
+    {
+      "name": "libc",
+      "version": "",
+      "match": 0
+    },
+    {
+      "name": "luci-compat",
+      "version": "",
+      "match": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": 0,
+      "off": 8,
+      "size": 4180
+    },
+    {
+      "type": 2,
+      "off": 4192,
+      "size": 1519
+    },
+    {
+      "type": 2,
+      "off": 5712,
+      "size": 5074
+    },
+    {
+      "type": 2,
+      "off": 10792,
+      "size": 249
+    },
+    {
+      "type": 2,
+      "off": 11048,
+      "size": 29
+    },
+    {
+      "type": 2,
+      "off": 11080,
+      "size": 94
+    },
+    {
+      "type": 2,
+      "off": 11176,
+      "size": 838
+    },
+    {
+      "type": 2,
+      "off": 12016,
+      "size": 16378228
+    },
+    {
+      "type": 2,
+      "off": 16390248,
+      "size": 10985
+    },
+    {
+      "type": 2,
+      "off": 16401240,
+      "size": 6552
+    },
+    {
+      "type": 2,
+      "off": 16407792,
+      "size": 2185
+    },
+    {
+      "type": 2,
+      "off": 16409984,
+      "size": 4167
+    },
+    {
+      "type": 2,
+      "off": 16414152,
+      "size": 4278
+    },
+    {
+      "type": 2,
+      "off": 16418432,
+      "size": 3247
+    },
+    {
+      "type": 2,
+      "off": 16421680,
+      "size": 5597
+    },
+    {
+      "type": 2,
+      "off": 16427280,
+      "size": 6768
+    },
+    {
+      "type": 2,
+      "off": 16434048,
+      "size": 239
+    },
+    {
+      "type": 2,
+      "off": 16434288,
+      "size": 2279
+    },
+    {
+      "type": 2,
+      "off": 16436568,
+      "size": 460
+    },
+    {
+      "type": 2,
+      "off": 16437032,
+      "size": 1314
+    },
+    {
+      "type": 2,
+      "off": 16438352,
+      "size": 23569
+    },
+    {
+      "type": 2,
+      "off": 16461928,
+      "size": 14503
+    },
+    {
+      "type": 2,
+      "off": 16476432,
+      "size": 2550
+    },
+    {
+      "type": 2,
+      "off": 16478984,
+      "size": 2358
+    },
+    {
+      "type": 2,
+      "off": 16481344,
+      "size": 2520
+    },
+    {
+      "type": 2,
+      "off": 16483864,
+      "size": 28103
+    }
+  ],
+  "dirs": [
+    {
+      "index": 1,
+      "name": "",
+      "files": []
+    },
+    {
+      "index": 2,
+      "name": "etc",
+      "files": []
+    },
+    {
+      "index": 3,
+      "name": "etc/config",
+      "files": [
+        {
+          "index": 1,
+          "name": "ua3f",
+          "size": 1507,
+          "hash": "c13ec630128b9920abf03ca14a3c2d9bfe25263828d537fd155ea410045cd7dc"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "name": "etc/init.d",
+      "files": [
+        {
+          "index": 1,
+          "name": "ua3f",
+          "size": 5062,
+          "hash": "dad2d22960d4704a96d33932340b00ea77e220ebc6c2a60be9eeda0bab98da99"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "name": "etc/uci-defaults",
+      "files": [
+        {
+          "index": 1,
+          "name": "luci-ua3f",
+          "size": 237,
+          "hash": "02449dfb2ab7a700bc95dc1cd1a093fe81c6be05221b7bb71ab52664026419c1"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "name": "lib",
+      "files": []
+    },
+    {
+      "index": 7,
+      "name": "lib/apk",
+      "files": []
+    },
+    {
+      "index": 8,
+      "name": "lib/apk/packages",
+      "files": [
+        {
+          "index": 1,
+          "name": "ua3f.conffiles",
+          "size": 17,
+          "hash": "662ebb893eef77b1ee237545ed8b0160c23bad61196ab4a790354429a2f23d02"
+        },
+        {
+          "index": 2,
+          "name": "ua3f.conffiles_static",
+          "size": 82,
+          "hash": "fbef4367006631229c1e01278e4f465e3c65018ef3ec5065eeb4dde7a087d4f6"
+        },
+        {
+          "index": 3,
+          "name": "ua3f.list",
+          "size": 826,
+          "hash": "407902a32a4d591b10062c4c56c12c60e35349ae0b8b993c26d97590def3da8a"
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "name": "usr",
+      "files": []
+    },
+    {
+      "index": 10,
+      "name": "usr/bin",
+      "files": [
+        {
+          "index": 1,
+          "name": "ua3f",
+          "size": 16378216,
+          "hash": "97f77e919215b6522e5e5fa4813cc2602ab1d33c3f625b806486a37cdc70dbb4"
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "name": "usr/lib",
+      "files": []
+    },
+    {
+      "index": 12,
+      "name": "usr/lib/lua",
+      "files": []
+    },
+    {
+      "index": 13,
+      "name": "usr/lib/lua/luci",
+      "files": []
+    },
+    {
+      "index": 14,
+      "name": "usr/lib/lua/luci/controller",
+      "files": [
+        {
+          "index": 1,
+          "name": "ua3f.lua",
+          "size": 10973,
+          "hash": "09dc3c43124808d514bf6c82db6ef4f10b5a90bd957df434e591ac197e9212d1"
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "name": "usr/lib/lua/luci/i18n",
+      "files": [
+        {
+          "index": 1,
+          "name": "ua3f.zh-cn.lmo",
+          "size": 6540,
+          "hash": "99517d7286c567ccc507cae0ca2a762610a4ff4e147f61d06c533c70483f1cad"
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "name": "usr/lib/lua/luci/model",
+      "files": []
+    },
+    {
+      "index": 17,
+      "name": "usr/lib/lua/luci/model/cbi",
+      "files": [
+        {
+          "index": 1,
+          "name": "ua3f.lua",
+          "size": 2173,
+          "hash": "7d77f4608b3bd01fbb2e25dcff49bdfa4464897eec06160785ac0ef2d6510129"
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "name": "usr/lib/lua/luci/model/cbi/ua3f",
+      "files": [
+        {
+          "index": 1,
+          "name": "desync.lua",
+          "size": 4155,
+          "hash": "5f8c7b34f9b938499a4707eba2ec5b18c1004ee51d40ed95ac8208dcfb65f71e"
+        },
+        {
+          "index": 2,
+          "name": "general.lua",
+          "size": 4266,
+          "hash": "b9706f7f9720c233774a7bf3313d039a9293dba88014d78892318150039136bd"
+        },
+        {
+          "index": 3,
+          "name": "l3rewrite.lua",
+          "size": 3235,
+          "hash": "818d3bb1fb55d6bc398d51b15696260f7f5333e0af7f0cc19967892ac50adc36"
+        },
+        {
+          "index": 4,
+          "name": "log.lua",
+          "size": 5585,
+          "hash": "2138170c61cbae6b1a62c5aaf7e9b10634f582f1a56b7fb6af86db5efe176a0d"
+        },
+        {
+          "index": 5,
+          "name": "mitm.lua",
+          "size": 6756,
+          "hash": "25a6fe8998888c812372153bf566fdc5fdec8100ce399e1764fac505fa3d2cc8"
+        },
+        {
+          "index": 6,
+          "name": "rule.lua",
+          "size": 227,
+          "hash": "1d5e88807d84c546d4cb4c80cd6a0b92bf32ebd447c2837a0364e46c79395584"
+        },
+        {
+          "index": 7,
+          "name": "statistics.lua",
+          "size": 2267,
+          "hash": "551bf1080df04e6f475f0a009da224874072f4662788c61622a58326f680200a"
+        },
+        {
+          "index": 8,
+          "name": "status.lua",
+          "size": 448,
+          "hash": "71169a8182272b61b4540b6643a21b89b6adf94416054bee3b064cba13bab1ef"
+        },
+        {
+          "index": 9,
+          "name": "utils.lua",
+          "size": 1302,
+          "hash": "635788ffede3c11b9e39944f197d71238b32133077d71b11c1d3c3bbe4dfd1bf"
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "name": "usr/lib/lua/luci/view",
+      "files": []
+    },
+    {
+      "index": 20,
+      "name": "usr/lib/lua/luci/view/ua3f",
+      "files": [
+        {
+          "index": 1,
+          "name": "rules.htm",
+          "size": 23557,
+          "hash": "042d5e459183f3e84091fc5a6d009dc14d8e607ae879acd833da028125587c30"
+        },
+        {
+          "index": 2,
+          "name": "statistics.htm",
+          "size": 14491,
+          "hash": "4e989962ae2407a3892c87f3c700aa21aff129fa80d73f15f2bb0fa7542594fc"
+        },
+        {
+          "index": 3,
+          "name": "status.htm",
+          "size": 2538,
+          "hash": "92e20f5f9b456bb41fcee6cacd52112b47beca46674ea1fc2089c90ef9ef3bf1"
+        },
+        {
+          "index": 4,
+          "name": "version.htm",
+          "size": 2346,
+          "hash": "36b1103b72e4a21af62cc1bf6ce0fe018feb44764f18527cc3dc24bc2b23f824"
+        }
+      ]
+    },
+    {
+      "index": 21,
+      "name": "www",
+      "files": []
+    },
+    {
+      "index": 22,
+      "name": "www/luci-static",
+      "files": []
+    },
+    {
+      "index": 23,
+      "name": "www/luci-static/resources",
+      "files": []
+    },
+    {
+      "index": 24,
+      "name": "www/luci-static/resources/ua3f",
+      "files": [
+        {
+          "index": 1,
+          "name": "rule.css",
+          "size": 2508,
+          "hash": "3bb11c41cd2ae7f5408653259bc29c1aad4f6f7714cbce7861768f83d2abd771"
+        },
+        {
+          "index": 2,
+          "name": "rule.js",
+          "size": 28091,
+          "hash": "032d1cd1a1580de5d15a8b5989ced4c80d3397a4fb00ad55d03822aa4eebefab"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "filename": "etc/config/ua3f",
+      "size": 1507,
+      "sha256": "c13ec630128b9920abf03ca14a3c2d9bfe25263828d537fd155ea410045cd7dc"
+    },
+    {
+      "filename": "etc/init.d/ua3f",
+      "size": 5062,
+      "sha256": "dad2d22960d4704a96d33932340b00ea77e220ebc6c2a60be9eeda0bab98da99"
+    },
+    {
+      "filename": "etc/uci-defaults/luci-ua3f",
+      "size": 237,
+      "sha256": "02449dfb2ab7a700bc95dc1cd1a093fe81c6be05221b7bb71ab52664026419c1"
+    },
+    {
+      "filename": "lib/apk/packages/ua3f.conffiles",
+      "size": 17,
+      "sha256": "662ebb893eef77b1ee237545ed8b0160c23bad61196ab4a790354429a2f23d02"
+    },
+    {
+      "filename": "lib/apk/packages/ua3f.conffiles_static",
+      "size": 82,
+      "sha256": "fbef4367006631229c1e01278e4f465e3c65018ef3ec5065eeb4dde7a087d4f6"
+    },
+    {
+      "filename": "lib/apk/packages/ua3f.list",
+      "size": 826,
+      "sha256": "407902a32a4d591b10062c4c56c12c60e35349ae0b8b993c26d97590def3da8a"
+    },
+    {
+      "filename": "usr/bin/ua3f",
+      "size": 16378216,
+      "sha256": "97f77e919215b6522e5e5fa4813cc2602ab1d33c3f625b806486a37cdc70dbb4"
+    },
+    {
+      "filename": "usr/lib/lua/luci/controller/ua3f.lua",
+      "size": 10973,
+      "sha256": "09dc3c43124808d514bf6c82db6ef4f10b5a90bd957df434e591ac197e9212d1"
+    },
+    {
+      "filename": "usr/lib/lua/luci/i18n/ua3f.zh-cn.lmo",
+      "size": 6540,
+      "sha256": "99517d7286c567ccc507cae0ca2a762610a4ff4e147f61d06c533c70483f1cad"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f.lua",
+      "size": 2173,
+      "sha256": "7d77f4608b3bd01fbb2e25dcff49bdfa4464897eec06160785ac0ef2d6510129"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f/desync.lua",
+      "size": 4155,
+      "sha256": "5f8c7b34f9b938499a4707eba2ec5b18c1004ee51d40ed95ac8208dcfb65f71e"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f/general.lua",
+      "size": 4266,
+      "sha256": "b9706f7f9720c233774a7bf3313d039a9293dba88014d78892318150039136bd"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f/l3rewrite.lua",
+      "size": 3235,
+      "sha256": "818d3bb1fb55d6bc398d51b15696260f7f5333e0af7f0cc19967892ac50adc36"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f/log.lua",
+      "size": 5585,
+      "sha256": "2138170c61cbae6b1a62c5aaf7e9b10634f582f1a56b7fb6af86db5efe176a0d"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f/mitm.lua",
+      "size": 6756,
+      "sha256": "25a6fe8998888c812372153bf566fdc5fdec8100ce399e1764fac505fa3d2cc8"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f/rule.lua",
+      "size": 227,
+      "sha256": "1d5e88807d84c546d4cb4c80cd6a0b92bf32ebd447c2837a0364e46c79395584"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f/statistics.lua",
+      "size": 2267,
+      "sha256": "551bf1080df04e6f475f0a009da224874072f4662788c61622a58326f680200a"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f/status.lua",
+      "size": 448,
+      "sha256": "71169a8182272b61b4540b6643a21b89b6adf94416054bee3b064cba13bab1ef"
+    },
+    {
+      "filename": "usr/lib/lua/luci/model/cbi/ua3f/utils.lua",
+      "size": 1302,
+      "sha256": "635788ffede3c11b9e39944f197d71238b32133077d71b11c1d3c3bbe4dfd1bf"
+    },
+    {
+      "filename": "usr/lib/lua/luci/view/ua3f/rules.htm",
+      "size": 23557,
+      "sha256": "042d5e459183f3e84091fc5a6d009dc14d8e607ae879acd833da028125587c30"
+    },
+    {
+      "filename": "usr/lib/lua/luci/view/ua3f/statistics.htm",
+      "size": 14491,
+      "sha256": "4e989962ae2407a3892c87f3c700aa21aff129fa80d73f15f2bb0fa7542594fc"
+    },
+    {
+      "filename": "usr/lib/lua/luci/view/ua3f/status.htm",
+      "size": 2538,
+      "sha256": "92e20f5f9b456bb41fcee6cacd52112b47beca46674ea1fc2089c90ef9ef3bf1"
+    },
+    {
+      "filename": "usr/lib/lua/luci/view/ua3f/version.htm",
+      "size": 2346,
+      "sha256": "36b1103b72e4a21af62cc1bf6ce0fe018feb44764f18527cc3dc24bc2b23f824"
+    },
+    {
+      "filename": "www/luci-static/resources/ua3f/rule.css",
+      "size": 2508,
+      "sha256": "3bb11c41cd2ae7f5408653259bc29c1aad4f6f7714cbce7861768f83d2abd771"
+    },
+    {
+      "filename": "www/luci-static/resources/ua3f/rule.js",
+      "size": 28091,
+      "sha256": "032d1cd1a1580de5d15a8b5989ced4c80d3397a4fb00ad55d03822aa4eebefab"
+    }
+  ],
+  "scripts": [
+    {
+      "index": 1,
+      "content": ""
+    },
+    {
+      "index": 2,
+      "content": ""
+    },
+    {
+      "index": 3,
+      "content": "#!/bin/sh\n[ \"${IPKG_NO_SCRIPT}\" = \"1\" ] && exit 0\n[ -s ${IPKG_INSTROOT}/lib/functions.sh ] || exit 0\n. ${IPKG_INSTROOT}/lib/functions.sh\nexport root=\"${IPKG_INSTROOT}\"\nexport pkgname=\"ua3f\"\nadd_group_and_user\ndefault_postinst\n"
+    },
+    {
+      "index": 4,
+      "content": "#!/bin/sh\n[ -s ${IPKG_INSTROOT}/lib/functions.sh ] || exit 0\n. ${IPKG_INSTROOT}/lib/functions.sh\nexport root=\"${IPKG_INSTROOT}\"\nexport pkgname=\"ua3f\"\ndefault_prerm\n"
+    },
+    {
+      "index": 5,
+      "content": "#!/bin/sh\nuci -q set ua3f.enabled.enabled=0\nuci -q commit ua3f\n[ -f \"/etc/config/ucitrack\" ] && {\n\tuci -q delete ucitrack.ua3f\n\tuci -q commit ucitrack\n}\n"
+    },
+    {
+      "index": 6,
+      "content": ""
+    },
+    {
+      "index": 7,
+      "content": "#!/bin/sh\nexport PKG_UPGRADE=1\n[ \"${IPKG_NO_SCRIPT}\" = \"1\" ] && exit 0\n[ -s ${IPKG_INSTROOT}/lib/functions.sh ] || exit 0\n. ${IPKG_INSTROOT}/lib/functions.sh\nexport root=\"${IPKG_INSTROOT}\"\nexport pkgname=\"ua3f\"\nadd_group_and_user\ndefault_postinst\n"
+    }
+  ]
+}

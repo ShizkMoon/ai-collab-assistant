@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "[2026-10-12 15:45:42] [auth#2 pid=7810] [main] [INFO] [Config.c:632] 仅加载配置 2, 标记值: 0x2000000\ndefault via 10.207.112.1 dev eswan2 src 10.207.114.16 metric 10 \nunreachable default metric 32760 \n10.207.112.0/20 dev eswan2 scope link src 10.207.114.16 \n",
+  "stderr": ""
+}

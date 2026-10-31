@@ -1,0 +1,7 @@
+{
+  "action": "wifi down radio1; wifi up radio1",
+  "old_ifindex": 11,
+  "new_ifindex": 12,
+  "steering_automatic": true,
+  "actual": "Interface phy1-ap0\n\tifindex 12\n\twdev 0x100000003\n\taddr 4c:c6:4c:bd:86:62\n\tssid Discorsvesper_5G\n\ttype AP\n\twiphy 1\n\tchannel 36 (5180 MHz), width: 160 MHz, center1: 5250 MHz\n\ttxpower 23.00 dBm\n\tmulticast TXQ:\n\t\tqsz-byt\tqsz-pkt\tflows\tdrops\tmarks\toverlmt\thashcol\ttx-bytes\ttx-packets\n\t\t0\t0\t770\t0\t0\t0\t2\t240842\t\t1070\n2\nMon Oct 12 19:11:34 2026 user.notice wireless-steering: reapplied system steering after wireless netdev creation\nSTEERING_IDLE\n"
+}

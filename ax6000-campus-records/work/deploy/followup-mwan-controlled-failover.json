@@ -1,0 +1,87 @@
+[
+  {
+    "phase": "blocked",
+    "elapsed": 0.4,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 5.8,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 11.2,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 16.6,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 22.1,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 27.5,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 32.9,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 38.3,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 43.7,
+    "wan_online": true,
+    "wan2_offline": true,
+    "status": "Interface status:\n interface wan is online and tracking is active (online 00h:03m:15s, uptime 00h:04m:01s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan2 is offline and tracking is active (4)\n   track connect.rom.miui.com: down\n   track connectivitycheck.platform.hicloud.com: down\n interface wan3 is unknown and tracking is disabled (31)\n\nCurrent policies:\nbalanced:\n wan (100%)\n wan2 (0%)\nua3f_bal:\n wan (100%)\n wan2 (0%)\n\nDirectly connected ipv4 networks:\n10.207.112.0/20\n192.168.31.0/24\n224.0.0.0/3\n\nDirectly connected ipv6 networks:\nfd3c:162d:9e76::/48\n\nActive user rules:\n udp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n tcp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n ip daddr 0.0.0.0/0 meta mark & 0x3f000000 == 0x00000000 - balanced\n\n",
+    "ua3f_policy": "table inet mwan3 {\n\tchain mwan3_policy_ua3f_bal {\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xc1ffffff | 0x01000000\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\n",
+    "domestic": {
+      "exit": 0,
+      "http": "200"
+    },
+    "ninja": {
+      "exit": 28,
+      "http": "000"
+    },
+    "drop_counter": "table inet codex_health_trial {\n\tchain output {\n\t\ttype filter hook output priority -200; policy accept;\n\t\toifname \"eswan2\" meta mark 0x3f000000 tcp dport 80 counter packets 131 bytes 7860 drop comment \"temporary WAN2 HTTP health failure\"\n\t}\n}\n"
+  },
+  {
+    "phase": "recovered",
+    "elapsed": 49.0,
+    "wan_online": true,
+    "wan2_online": false
+  },
+  {
+    "phase": "recovered",
+    "elapsed": 54.5,
+    "wan_online": true,
+    "wan2_online": false
+  },
+  {
+    "phase": "recovered",
+    "elapsed": 59.9,
+    "wan_online": true,
+    "wan2_online": true,
+    "status": "Interface status:\n interface wan is online and tracking is active (online 00h:03m:31s, uptime 00h:04m:17s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan2 is online and tracking is active (online 00h:00m:01s, uptime 00h:04m:17s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan3 is unknown and tracking is disabled (31)\n\nCurrent policies:\nbalanced:\n wan (50%)\n wan2 (50%)\nua3f_bal:\n wan (50%)\n wan2 (50%)\n\nDirectly connected ipv4 networks:\n10.207.112.0/20\n192.168.31.0/24\n224.0.0.0/3\n\nDirectly connected ipv6 networks:\nfd3c:162d:9e76::/48\n\nActive user rules:\n udp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n tcp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n ip daddr 0.0.0.0/0 meta mark & 0x3f000000 == 0x00000000 - balanced\n\n",
+    "ua3f_policy": "table inet mwan3 {\n\tchain mwan3_policy_ua3f_bal {\n\t\tmeta mark & 0x3f000000 == 0x00000000 numgen inc mod 2 vmap { 0 : jump mwan3_or_meta_0x1000000, 1 : jump mwan3_or_meta_0x2000000 }\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\n"
+  }
+]

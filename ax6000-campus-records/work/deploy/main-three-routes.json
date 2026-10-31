@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "default via 10.207.112.1 dev wan proto static src 10.207.127.206 metric 10 \ndefault via 10.207.112.1 dev eswan2 proto static src 10.207.114.16 metric 20 \ndefault via 10.207.112.1 dev eswan3 proto static src 10.207.116.121 metric 30 \n",
+  "stderr": ""
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "http=000 connect=0.000000 tls=0.000000 total=0.000449\ndirect=200\nFilesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076     38048     21764  64% /overlay\ntmpfs                   247000     34836    212164  14% /tmp\n",
+  "stderr": "curl: (7) Failed to connect to www.gstatic.com:443 over proxy 127.0.0.1 after 0 ms: Error\n"
+}

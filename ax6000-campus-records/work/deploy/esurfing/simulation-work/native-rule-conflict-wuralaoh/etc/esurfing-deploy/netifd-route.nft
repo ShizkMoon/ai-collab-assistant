@@ -1,0 +1,6 @@
+# 主 wan/account1 沿原 main 表；仅候选 2/3 有独立 GID 规则。
+add table ip esurfing_route
+flush table ip esurfing_route
+add chain ip esurfing_route output { type route hook output priority -160; policy accept; }
+add rule ip esurfing_route output meta skgid 65202 counter meta mark set 0x02000000 comment "esurfing account2 wan2"
+# 账号 3 不启用；未来通过独立验收后，再同时扩展允许名单与此规则。

@@ -1,0 +1,146 @@
+{
+  "statuses": [
+    {
+      "up": true,
+      "l3_device": "eswan2",
+      "ipv4-address": [
+        {
+          "address": "10.207.114.16",
+          "mask": 20
+        }
+      ],
+      "route": [
+        {
+          "target": "0.0.0.0",
+          "nexthop": "10.207.112.1"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    "1802: from all fwmark 0x2000000 lookup 25202"
+  ],
+  "kernel_default": true,
+  "uci": {
+    "network.wan2.ip4table": "25202",
+    "network.wan2.defaultroute": "1"
+  },
+  "services": {
+    "esurfingclient": {
+      "instances": {
+        "account1": {
+          "running": true,
+          "pid": 100,
+          "command": [
+            "/c/Users/Shizuku/Documents/Codex/2026-10-12/za/work/deploy/esurfing/simulation-work/native-init-hch1vyyv/usr/bin/esurfingclient",
+            "--role",
+            "auth",
+            "--account",
+            "1"
+          ]
+        },
+        "account2": {
+          "running": true,
+          "pid": 200,
+          "command": [
+            "/c/Users/Shizuku/Documents/Codex/2026-10-12/za/work/deploy/esurfing/simulation-work/native-init-hch1vyyv/usr/bin/esurfingclient",
+            "--role",
+            "auth",
+            "--account",
+            "2"
+          ]
+        }
+      }
+    }
+  },
+  "calls": [
+    [
+      "esurfingclient",
+      "--list-accounts"
+    ],
+    [
+      "uci",
+      "-q",
+      "get",
+      "network.wan2.ip4table"
+    ],
+    [
+      "uci",
+      "-q",
+      "get",
+      "network.wan2.defaultroute"
+    ],
+    [
+      "ip",
+      "-4",
+      "rule",
+      "show"
+    ],
+    [
+      "ip",
+      "-4",
+      "route",
+      "replace",
+      "unreachable",
+      "default",
+      "metric",
+      "32760",
+      "table",
+      "25202"
+    ],
+    [
+      "ip",
+      "-4",
+      "rule",
+      "add",
+      "priority",
+      "1802",
+      "fwmark",
+      "0x02000000/0xffffffff",
+      "lookup",
+      "25202"
+    ],
+    [
+      "nft",
+      "-c",
+      "-f",
+      "C:/Users/Shizuku/Documents/Codex/2026-10-12/za/work/deploy/esurfing/simulation-work/native-init-hch1vyyv/etc/esurfing-deploy/netifd-route.nft"
+    ],
+    [
+      "nft",
+      "-f",
+      "C:/Users/Shizuku/Documents/Codex/2026-10-12/za/work/deploy/esurfing/simulation-work/native-init-hch1vyyv/etc/esurfing-deploy/netifd-route.nft"
+    ],
+    [
+      "ubus",
+      "call",
+      "network.interface.wan2",
+      "status"
+    ],
+    [
+      "jsonfilter",
+      "-e",
+      "@[\"ipv4-address\"][0].address"
+    ]
+  ],
+  "guards": {
+    "25202": true
+  },
+  "current": {
+    "up": true,
+    "l3_device": "eswan2",
+    "ipv4-address": [
+      {
+        "address": "10.207.114.16",
+        "mask": 20
+      }
+    ],
+    "route": [
+      {
+        "target": "0.0.0.0",
+        "nexthop": "10.207.112.1"
+      }
+    ]
+  },
+  "status_index": 1
+}

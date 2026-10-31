@@ -1,0 +1,26 @@
+{
+  "exit": 0,
+  "output": "PASS:DNS_WIRE_10\nPASS:WATCHER_27 mock_flock=0\n",
+  "stderr": "",
+  "candidate_hashes": {
+    "local-health-recovery.candidate.sh": "fad62fc3868db2b0a271445a486495ff0cb601516241cf737b6e93db9b24fdaa",
+    "local-health-probe.candidate.lua": "80f9d350bcc9961b7efea0ce0c8bb1c0225ff4e84c0cdccef3bdca5ef244b73c",
+    "local-health-recovery.fixture.sh": "5b795b920430c1b6551144c33e747d2bce6d76f6a5a15ad3a688aabfc1324089",
+    "local-health-recovery.init.candidate.sh": "d3383abe3df848edb76125901db0c7b3e2187acb3fe2ee82097fa1b10e8bd635"
+  },
+  "live_probes": {
+    "dns 53": {
+      "exit": 0,
+      "stderr_present": false
+    },
+    "dns 7874": {
+      "exit": 0,
+      "stderr_present": false
+    },
+    "socks 1080": {
+      "exit": 0,
+      "stderr_present": false
+    }
+  },
+  "guard_options": "openclash.config.enable=1\nopenclash.config.config_path=/etc/openclash/config/Ninja.yaml\nopenclash.config.enable_redirect_dns=1\nopenclash.config.dns_port=7874\nua3f.enabled.enabled=1\nua3f.main.bind=127.0.0.1\nua3f.main.port=1080\n"
+}

@@ -1,0 +1,612 @@
+{
+  "schema": "ninja-update-public/1",
+  "retrieved_utc": "2026-10-13T14:19:27.5064235Z",
+  "scope": "Public publisher release metadata only; router ARM64 UPX core target. No SSH, package download, install, private configuration read or production mutation.",
+  "client_release": {
+    "repository": "kachetong1314/ninja",
+    "tag": "1.0.6",
+    "name": "NinjaV2",
+    "published_at": "2026-10-12T11:50:09Z",
+    "html_url": "https://github.com/kachetong1314/ninja/releases/tag/1.0.6",
+    "api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/tags/1.0.6",
+    "expanded_assets_url": "https://github.com/kachetong1314/ninja/releases/expanded_assets/1.0.6",
+    "uploaded_asset_count": 22,
+    "automatic_archive_count": 2,
+    "rendered_count": 24,
+    "body": "",
+    "uploaded_assets": [
+      {
+        "name": "NinjaClient-3.1.4.apk",
+        "size_bytes": 92248471,
+        "digest": "sha256:415ce18efe2cf3bd8ab3fc8c9c074100a9c789eb9f4494cc4a2cb11d8f3ecc3e",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaClient-3.1.4.apk",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633645208",
+        "created_at": "2026-10-12T11:50:40Z",
+        "updated_at": "2026-10-12T11:50:58Z"
+      },
+      {
+        "name": "NinjaClientTV-3.1.4-arm64-v8a.apk",
+        "size_bytes": 86956088,
+        "digest": "sha256:e731819def81f51c0d24df4f4279c5e532781d9e8f3b438a001a106a0f44556d",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaClientTV-3.1.4-arm64-v8a.apk",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633646039",
+        "created_at": "2026-10-12T11:50:58Z",
+        "updated_at": "2026-10-12T11:51:32Z"
+      },
+      {
+        "name": "NinjaClientTV-3.1.4-armeabi-v7a.apk",
+        "size_bytes": 81964322,
+        "digest": "sha256:c500367a7d0d886575f64b18a1eb3c5ae22014d27a5cd895cd684ce1a5c37003",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaClientTV-3.1.4-armeabi-v7a.apk",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633647343",
+        "created_at": "2026-10-12T11:51:32Z",
+        "updated_at": "2026-10-12T11:52:02Z"
+      },
+      {
+        "name": "NinjaDesktop-1.0.6-linux-amd64.deb",
+        "size_bytes": 132822396,
+        "digest": "sha256:3e2455d93166e7b77b817ee2bbdfba8d631dc6685315ec2f0d0b81359afbb3d1",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-1.0.6-linux-amd64.deb",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633646005",
+        "created_at": "2026-10-12T11:50:57Z",
+        "updated_at": "2026-10-12T11:51:45Z"
+      },
+      {
+        "name": "NinjaDesktop-1.0.6-linux-arm64.deb",
+        "size_bytes": 123620676,
+        "digest": "sha256:78c14645a4bc5b93bff5626fa6de940d2b31925caba2c938d0bd6224a352e79b",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-1.0.6-linux-arm64.deb",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633647865",
+        "created_at": "2026-10-12T11:51:45Z",
+        "updated_at": "2026-10-12T11:52:18Z"
+      },
+      {
+        "name": "NinjaDesktop-1.0.6-mac-arm64.dmg",
+        "size_bytes": 157833236,
+        "digest": "sha256:29d2b863ff0e5db9b9d3c209aac0c4667d4e1c77a6144f33fe85b4fd3967daed",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-1.0.6-mac-arm64.dmg",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633649226",
+        "created_at": "2026-10-12T11:52:18Z",
+        "updated_at": "2026-10-12T11:52:48Z"
+      },
+      {
+        "name": "NinjaDesktop-1.0.6-mac-x64.dmg",
+        "size_bytes": 169640606,
+        "digest": "sha256:4a0484dc2e814595fb6f7726085df8a3570111ea5edc383cf0c5bba58c776a8c",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-1.0.6-mac-x64.dmg",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633650519",
+        "created_at": "2026-10-12T11:52:48Z",
+        "updated_at": "2026-10-12T11:53:26Z"
+      },
+      {
+        "name": "NinjaDesktop-1.0.6-win-arm64.exe",
+        "size_bytes": 140059720,
+        "digest": "sha256:60118efb28b395d856779f0dfd7948e1625b33976655172c77375d30107e2cb8",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-1.0.6-win-arm64.exe",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633643963",
+        "created_at": "2026-10-12T11:49:59Z",
+        "updated_at": "2026-10-12T11:50:03Z"
+      },
+      {
+        "name": "NinjaDesktop-1.0.6-win-x64.exe",
+        "size_bytes": 150220768,
+        "digest": "sha256:4a57f51a94e161a79ed3ecd4a62e39941dac57be8cdfcd00f67b599459610808",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-1.0.6-win-x64.exe",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633644126",
+        "created_at": "2026-10-12T11:50:03Z",
+        "updated_at": "2026-10-12T11:50:08Z"
+      },
+      {
+        "name": "ninjadesktop-lite-1.0.6-all-aarch64.apk",
+        "size_bytes": 39124973,
+        "digest": "sha256:77c9ab996779228811ec87b8ababaaafe50cc48b77c89d9d172dbe680041d465",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/ninjadesktop-lite-1.0.6-all-aarch64.apk",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633652932",
+        "created_at": "2026-10-12T11:54:01Z",
+        "updated_at": "2026-10-12T11:54:08Z"
+      },
+      {
+        "name": "ninjadesktop-lite-1.0.6-all-armv7.apk",
+        "size_bytes": 39660388,
+        "digest": "sha256:fe56ac765930f0048567eeb6f071c395879a032ebe3fcd7a91455118767fb509",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/ninjadesktop-lite-1.0.6-all-armv7.apk",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633653210",
+        "created_at": "2026-10-12T11:54:08Z",
+        "updated_at": "2026-10-12T11:54:16Z"
+      },
+      {
+        "name": "NinjaDesktop-Lite-1.0.6-darwin-arm64.dmg",
+        "size_bytes": 99198157,
+        "digest": "sha256:bd8a959944931cfed3d11586fa2764cffe14a5f9e1abb80dd2faf74618985d34",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-Lite-1.0.6-darwin-arm64.dmg",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633653504",
+        "created_at": "2026-10-12T11:54:16Z",
+        "updated_at": "2026-10-12T11:54:38Z"
+      },
+      {
+        "name": "NinjaDesktop-Lite-1.0.6-darwin-x64.dmg",
+        "size_bytes": 107878099,
+        "digest": "sha256:9ccb25ef89bd7070ad56f3a173828b03f6a903c9c033f684a6f22c5b169bf1a0",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-Lite-1.0.6-darwin-x64.dmg",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633654176",
+        "created_at": "2026-10-12T11:54:38Z",
+        "updated_at": "2026-10-12T11:55:08Z"
+      },
+      {
+        "name": "NinjaDesktop-Lite-1.0.6-win7-x64-setup.exe",
+        "size_bytes": 56538841,
+        "digest": "sha256:74d2e42f4978f7a256137996a6758d60c76787213eba6ccda2f54853da0ddb0b",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-Lite-1.0.6-win7-x64-setup.exe",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633655138",
+        "created_at": "2026-10-12T11:55:08Z",
+        "updated_at": "2026-10-12T11:55:18Z"
+      },
+      {
+        "name": "NinjaDesktop-Lite-1.0.6-windows-arm64-setup.exe",
+        "size_bytes": 48681946,
+        "digest": "sha256:6b8bd69db30ad244d81edd7dfb9dbc7c7bc9482fcf42039771496ce3fe7218ad",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-Lite-1.0.6-windows-arm64-setup.exe",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633655459",
+        "created_at": "2026-10-12T11:55:18Z",
+        "updated_at": "2026-10-12T11:55:28Z"
+      },
+      {
+        "name": "NinjaDesktop-Lite-1.0.6-windows-x64-setup.exe",
+        "size_bytes": 52491745,
+        "digest": "sha256:d40aee3ae6be6707e9d5015c72c59432ff08c04f154dff1c8d45ee06dcb2c426",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/NinjaDesktop-Lite-1.0.6-windows-x64-setup.exe",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633655834",
+        "created_at": "2026-10-12T11:55:28Z",
+        "updated_at": "2026-10-12T11:55:38Z"
+      },
+      {
+        "name": "ninjadesktop-lite-1.0.6-x86_64.apk",
+        "size_bytes": 41743281,
+        "digest": "sha256:4f38a3ab5feb07d177aa4bf72b50c6351b1507f68bc81bffc82e5d3a54a55c10",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/ninjadesktop-lite-1.0.6-x86_64.apk",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633656205",
+        "created_at": "2026-10-12T11:55:38Z",
+        "updated_at": "2026-10-12T11:55:46Z"
+      },
+      {
+        "name": "ninjadesktop-lite_1.0.6_all-aarch64.ipk",
+        "size_bytes": 38331999,
+        "digest": "sha256:4631dd0bab3f5c60e574cf5ccb18e1a5a0d9cff77a1fb5ccc7fde3b1e27165f4",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/ninjadesktop-lite_1.0.6_all-aarch64.ipk",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633651777",
+        "created_at": "2026-10-12T11:53:26Z",
+        "updated_at": "2026-10-12T11:53:33Z"
+      },
+      {
+        "name": "ninjadesktop-lite_1.0.6_all-armv7.ipk",
+        "size_bytes": 38900573,
+        "digest": "sha256:64a03e1472f2f082e49876b9d053c5363b3552aaf35bb5b08fdc37b9903e9858",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/ninjadesktop-lite_1.0.6_all-armv7.ipk",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633652011",
+        "created_at": "2026-10-12T11:53:33Z",
+        "updated_at": "2026-10-12T11:53:40Z"
+      },
+      {
+        "name": "ninjadesktop-lite_1.0.6_amd64.deb",
+        "size_bytes": 37649296,
+        "digest": "sha256:f7ba3b3d63c72106ff5bd1dad83c54b9e12e3d7752adf286c369a3bd887244c8",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/ninjadesktop-lite_1.0.6_amd64.deb",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633652236",
+        "created_at": "2026-10-12T11:53:40Z",
+        "updated_at": "2026-10-12T11:53:47Z"
+      },
+      {
+        "name": "ninjadesktop-lite_1.0.6_arm64.deb",
+        "size_bytes": 33935436,
+        "digest": "sha256:f6f85a2b79ca214014f7539c82c731284b652ec514b431b5323e8f20b99b7d0f",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/ninjadesktop-lite_1.0.6_arm64.deb",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633652480",
+        "created_at": "2026-10-12T11:53:47Z",
+        "updated_at": "2026-10-12T11:53:53Z"
+      },
+      {
+        "name": "ninjadesktop-lite_1.0.6_x86_64.ipk",
+        "size_bytes": 40940750,
+        "digest": "sha256:b87fef957fb609a02ae3018c18bfcba20251240ccbdcd9ae6755aa2fd530a314",
+        "download_url": "https://github.com/kachetong1314/ninja/releases/download/1.0.6/ninjadesktop-lite_1.0.6_x86_64.ipk",
+        "asset_api_url": "https://api.github.com/repos/kachetong1314/ninja/releases/assets/633652705",
+        "created_at": "2026-10-12T11:53:53Z",
+        "updated_at": "2026-10-12T11:54:01Z"
+      }
+    ],
+    "automatic_archives": [
+      {
+        "name": "Source code (zip)",
+        "download_url": "https://api.github.com/repos/kachetong1314/ninja/zipball/1.0.6",
+        "digest": null,
+        "size_bytes": null,
+        "automatic_repository_archive": true
+      },
+      {
+        "name": "Source code (tar.gz)",
+        "download_url": "https://api.github.com/repos/kachetong1314/ninja/tarball/1.0.6",
+        "digest": null,
+        "size_bytes": null,
+        "automatic_repository_archive": true
+      }
+    ],
+    "bare_arm64_upx_present": false,
+    "embedded_core_version_manifest_found": false,
+    "tag_tree_files": [
+      "README.md"
+    ]
+  },
+  "core_release": {
+    "repository": "kachetong1314/mihomo-ninja",
+    "tag": "ab32ad2d",
+    "published_at": "2026-09-26T17:33:07Z",
+    "html_url": "https://github.com/kachetong1314/mihomo-ninja/releases/tag/ab32ad2d",
+    "api_url": "https://api.github.com/repos/kachetong1314/mihomo-ninja/releases/latest",
+    "uploaded_asset_count": 40,
+    "body": "同步到5019cc09上游\r\nNinja的TLS握手进一步优化",
+    "uploaded_assets": [
+      {
+        "name": "ninja-android-arm64",
+        "size_bytes": 63701252,
+        "digest": "sha256:2e9efec4eef7d0ce3abacf85b7dc5863b7a037447d19f6723131b01c562c8c7c",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-android-arm64",
+        "updated_at": "2026-09-26T17:25:31Z"
+      },
+      {
+        "name": "ninja-arm64-upx",
+        "size_bytes": 18749664,
+        "digest": "sha256:3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-arm64-upx",
+        "updated_at": "2026-09-26T17:25:33Z"
+      },
+      {
+        "name": "ninja-darwin-amd64",
+        "size_bytes": 60569280,
+        "digest": "sha256:50f828bf5c957f7a86ac811d9b7a0ee4b9ba7180b45f895d47086a74a64b3d97",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-darwin-amd64",
+        "updated_at": "2026-09-26T17:25:45Z"
+      },
+      {
+        "name": "ninja-darwin-amd64-compatible",
+        "size_bytes": 60626624,
+        "digest": "sha256:74a1f2f2a1a3f64fb9cc1cd228d14ef5d8df50534c742d9070585ccdca96a4ff",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-darwin-amd64-compatible",
+        "updated_at": "2026-09-26T17:25:57Z"
+      },
+      {
+        "name": "ninja-darwin-amd64-v1",
+        "size_bytes": 60626624,
+        "digest": "sha256:55e358d8b3cedc7a46f4a4339e76cfc81c9a0599649f90c4a2ddb064340c7cc8",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-darwin-amd64-v1",
+        "updated_at": "2026-09-26T17:26:08Z"
+      },
+      {
+        "name": "ninja-darwin-amd64-v2",
+        "size_bytes": 60593856,
+        "digest": "sha256:94950047d6e7aa3e0c3be9432b096edc31ce94c9b21f30ebcd959092720f19bd",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-darwin-amd64-v2",
+        "updated_at": "2026-09-26T17:26:19Z"
+      },
+      {
+        "name": "ninja-darwin-amd64-v3",
+        "size_bytes": 60569280,
+        "digest": "sha256:2b159ca1aab09b95930bbc01c5dc2b2e09d3681174ff49761a19783c395c810e",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-darwin-amd64-v3",
+        "updated_at": "2026-09-26T17:26:31Z"
+      },
+      {
+        "name": "ninja-darwin-arm64",
+        "size_bytes": 56508850,
+        "digest": "sha256:fd0b9b74e29333f2944c40280a6a0ddbe7e4af4648e0254f1f460ab2f27a8f1b",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-darwin-arm64",
+        "updated_at": "2026-09-26T17:26:41Z"
+      },
+      {
+        "name": "ninja-freebsd-386",
+        "size_bytes": 53497992,
+        "digest": "sha256:fa4813c480cdd8b1e4f310f500c36030064a7da13598bf9f919692b943073d10",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-freebsd-386",
+        "updated_at": "2026-09-26T17:26:51Z"
+      },
+      {
+        "name": "ninja-freebsd-amd64",
+        "size_bytes": 58736776,
+        "digest": "sha256:b60f5631da6f90d768789c22d488c7bb2279ef6ec3dca2a447c4071b635843f1",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-freebsd-amd64",
+        "updated_at": "2026-09-26T17:27:02Z"
+      },
+      {
+        "name": "ninja-freebsd-arm64",
+        "size_bytes": 54263944,
+        "digest": "sha256:873762f4999fc8466cc757e989231806541a2b9b9624ae43d79d085ba47d2f9c",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-freebsd-arm64",
+        "updated_at": "2026-09-26T17:27:12Z"
+      },
+      {
+        "name": "ninja-linux-386",
+        "size_bytes": 56615038,
+        "digest": "sha256:796c10012c97bd8697e8ff01048bbdcae1ddf5653d89e5a1b1ec5a6e69cfb6f9",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-386",
+        "updated_at": "2026-09-26T17:27:23Z"
+      },
+      {
+        "name": "ninja-linux-amd64",
+        "size_bytes": 61726846,
+        "digest": "sha256:f767427311e99498b40190e57bde77a370e8b559a01b7e43bc3d1406219fc18f",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-amd64",
+        "updated_at": "2026-09-26T17:27:34Z"
+      },
+      {
+        "name": "ninja-linux-amd64-compatible",
+        "size_bytes": 61788286,
+        "digest": "sha256:badf797fa35ae81812607ce08957b53b34e5c95c76dc573f2588d8de795c5b8b",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-amd64-compatible",
+        "updated_at": "2026-09-26T17:27:46Z"
+      },
+      {
+        "name": "ninja-linux-amd64-v1",
+        "size_bytes": 61788286,
+        "digest": "sha256:eab7a209ec5ce06ff600de91e48c2634fc1d1706c57505cf622a26c6f465b001",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-amd64-v1",
+        "updated_at": "2026-09-26T17:27:57Z"
+      },
+      {
+        "name": "ninja-linux-amd64-v2",
+        "size_bytes": 61759614,
+        "digest": "sha256:44266541d5ad03e634cc5e7e45bff47738719f2283cf84a7f24fa4a6098276f6",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-amd64-v2",
+        "updated_at": "2026-09-26T17:28:09Z"
+      },
+      {
+        "name": "ninja-linux-amd64-v3",
+        "size_bytes": 61726846,
+        "digest": "sha256:2593985645871981e11ceac41f0bc321c6fa5cad0c953fa5d0636f477977a487",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-amd64-v3",
+        "updated_at": "2026-09-26T17:28:20Z"
+      },
+      {
+        "name": "ninja-linux-arm64",
+        "size_bytes": 57213054,
+        "digest": "sha256:eec88127d0925ea3880f78e36f92b6d88dfe16d1fe8fc0679b2d1abe46dc3a34",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-arm64",
+        "updated_at": "2026-09-26T17:28:32Z"
+      },
+      {
+        "name": "ninja-linux-armv5",
+        "size_bytes": 56033406,
+        "digest": "sha256:532f8d6bd934b70f039e885700923f0b0f8a9acc70e1fe727e98e3155ef5c7e4",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-armv5",
+        "updated_at": "2026-09-26T17:28:42Z"
+      },
+      {
+        "name": "ninja-linux-armv6",
+        "size_bytes": 55967870,
+        "digest": "sha256:25990eaa0e4bfa1c7886ac528be922061f0c7e6780be57650246326c260d2fe2",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-armv6",
+        "updated_at": "2026-09-26T17:28:52Z"
+      },
+      {
+        "name": "ninja-linux-armv7",
+        "size_bytes": 55902334,
+        "digest": "sha256:0f0bab8a6778a24539313f31479370e63e0b56c957857221197a2c35ad404cd4",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-armv7",
+        "updated_at": "2026-09-26T17:29:02Z"
+      },
+      {
+        "name": "ninja-linux-loong64",
+        "size_bytes": 58851454,
+        "digest": "sha256:4896cb8aa425949e211bcf8b8f1bd4cd1462822dca591b7f0521d8976786c4ef",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-loong64",
+        "updated_at": "2026-09-26T17:29:13Z"
+      },
+      {
+        "name": "ninja-linux-mips-hardfloat",
+        "size_bytes": 63242397,
+        "digest": "sha256:c64577ffbb2c78753321ef3d29cd6c5f6e79bf199e78eabda1d4f368dcfb55d6",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-mips-hardfloat",
+        "updated_at": "2026-09-26T17:29:25Z"
+      },
+      {
+        "name": "ninja-linux-mips-softfloat",
+        "size_bytes": 63307933,
+        "digest": "sha256:8f0060889f8d1a4b30c713770bce04f7a02e2489e4179a653caf9a1a76bc8645",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-mips-softfloat",
+        "updated_at": "2026-09-26T17:29:37Z"
+      },
+      {
+        "name": "ninja-linux-mips64",
+        "size_bytes": 64094334,
+        "digest": "sha256:796729ed3ae7a0b91ac47b54de2b42c05b7f16050432c3ce5cae739c182d1fde",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-mips64",
+        "updated_at": "2026-09-26T17:29:49Z"
+      },
+      {
+        "name": "ninja-linux-mips64le",
+        "size_bytes": 64094334,
+        "digest": "sha256:3d3d69c5fccd15922e05a059129488778c0d50f70e048d72cb2d6ff969ee5417",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-mips64le",
+        "updated_at": "2026-09-26T17:30:01Z"
+      },
+      {
+        "name": "ninja-linux-mipsle-hardfloat",
+        "size_bytes": 63242397,
+        "digest": "sha256:58a45c807b19fbb0a1508d0c9a3639efc22a1f1e1b552e6f63b986a0baed02f6",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-mipsle-hardfloat",
+        "updated_at": "2026-09-26T17:30:13Z"
+      },
+      {
+        "name": "ninja-linux-mipsle-softfloat",
+        "size_bytes": 63307933,
+        "digest": "sha256:2ba74e349191d2280947a7cf8c5fb1d9cedcc706d2af5c8d2949c22a3279f4a0",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-mipsle-softfloat",
+        "updated_at": "2026-09-26T17:30:25Z"
+      },
+      {
+        "name": "ninja-linux-riscv64",
+        "size_bytes": 54460542,
+        "digest": "sha256:bca5bd5df8785c7d9f3fa915624cd4f34fa0e9fb52f5709f80aeaab9b3b6225d",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-linux-riscv64",
+        "updated_at": "2026-09-26T17:30:35Z"
+      },
+      {
+        "name": "ninja-windows-386-go120.exe",
+        "size_bytes": 64138752,
+        "digest": "sha256:76dbc8504993665fd616808de9db527f8cb33d9f3ceb811650b0ccce9fa73dfb",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-386-go120.exe",
+        "updated_at": "2026-09-26T17:30:47Z"
+      },
+      {
+        "name": "ninja-windows-386.exe",
+        "size_bytes": 56114688,
+        "digest": "sha256:537bcc3ab16be33061c704732f7e8fbaf2bdf55ba1a6f11b043d31970be7adab",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-386.exe",
+        "updated_at": "2026-09-26T17:30:58Z"
+      },
+      {
+        "name": "ninja-windows-amd64-compatible.exe",
+        "size_bytes": 61025792,
+        "digest": "sha256:54058d109cca113edc021b9b3788219e8a5edc9c2864b1546a11fa8c936e1a80",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-amd64-compatible.exe",
+        "updated_at": "2026-09-26T17:31:09Z"
+      },
+      {
+        "name": "ninja-windows-amd64-v1-go120.exe",
+        "size_bytes": 69234176,
+        "digest": "sha256:5e38b1ca15d6c10ac2885ebcf5636aa9f0889a19b4211db487c950ebec909b81",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-amd64-v1-go120.exe",
+        "updated_at": "2026-09-26T17:31:22Z"
+      },
+      {
+        "name": "ninja-windows-amd64-v1.exe",
+        "size_bytes": 61025792,
+        "digest": "sha256:b5b99a62c6f315fba68d49dc8d301af07ffd6b04d6ab6d3f7759fe8d96a49d85",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-amd64-v1.exe",
+        "updated_at": "2026-09-26T17:31:34Z"
+      },
+      {
+        "name": "ninja-windows-amd64-v2-go120.exe",
+        "size_bytes": 69156864,
+        "digest": "sha256:0c936e5a03de758dfae4e8fe4f46a9c1bdd560d8aaecf5fa08af922bdbd72481",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-amd64-v2-go120.exe",
+        "updated_at": "2026-09-26T17:31:47Z"
+      },
+      {
+        "name": "ninja-windows-amd64-v2.exe",
+        "size_bytes": 60993024,
+        "digest": "sha256:dbabd7829b827da3df7af44ba5f7f6f284f55f38d88abafe608b5d7de70cb841",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-amd64-v2.exe",
+        "updated_at": "2026-09-26T17:31:58Z"
+      },
+      {
+        "name": "ninja-windows-amd64-v3-go120.exe",
+        "size_bytes": 69134848,
+        "digest": "sha256:b0bdae0a97e6b2aed911d69061dff413090816d2cd963131b798acaf50286815",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-amd64-v3-go120.exe",
+        "updated_at": "2026-09-26T17:32:30Z"
+      },
+      {
+        "name": "ninja-windows-amd64-v3.exe",
+        "size_bytes": 60968448,
+        "digest": "sha256:4b69ad47e3d39a75d9f89ec9e043703ad3fb0734dd7a9a2fb200a1096258e47c",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-amd64-v3.exe",
+        "updated_at": "2026-09-26T17:32:41Z"
+      },
+      {
+        "name": "ninja-windows-amd64.exe",
+        "size_bytes": 60968448,
+        "digest": "sha256:8379920b873b8d5c72a425f363ef0ea01158f2c72154d9f1e44f349cff7ecebc",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-amd64.exe",
+        "updated_at": "2026-09-26T17:32:52Z"
+      },
+      {
+        "name": "ninja-windows-arm64.exe",
+        "size_bytes": 55651328,
+        "digest": "sha256:a8f7f45488a66a947590433cb01ccd3297386fc79634690060e76c4db16ab517",
+        "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-windows-arm64.exe",
+        "updated_at": "2026-09-26T17:33:03Z"
+      }
+    ],
+    "publisher_pin_compatibility_claim": true,
+    "public_schema_or_protocol_source_found": false,
+    "github_license_metadata": null,
+    "tag_tree_files": [
+      "README.md"
+    ]
+  },
+  "release_history": [
+    {
+      "tag": "ab32ad2d",
+      "published_at": "2026-09-26T17:33:07Z",
+      "prerelease": false,
+      "uploaded_asset_count": 40,
+      "html_url": "https://github.com/kachetong1314/mihomo-ninja/releases/tag/ab32ad2d"
+    },
+    {
+      "tag": "577f3c50",
+      "published_at": "2026-09-21T14:28:19Z",
+      "prerelease": false,
+      "uploaded_asset_count": 43,
+      "html_url": "https://github.com/kachetong1314/mihomo-ninja/releases/tag/577f3c50"
+    },
+    {
+      "tag": "verge2.5.3",
+      "published_at": "2026-09-27T08:45:40Z",
+      "prerelease": true,
+      "uploaded_asset_count": 3,
+      "html_url": "https://github.com/kachetong1314/mihomo-ninja/releases/tag/verge2.5.3"
+    },
+    {
+      "tag": "9a5dd535",
+      "published_at": "2026-07-19T18:33:36Z",
+      "prerelease": false,
+      "uploaded_asset_count": 38,
+      "html_url": "https://github.com/kachetong1314/mihomo-ninja/releases/tag/9a5dd535"
+    },
+    {
+      "tag": "verge2.5.2",
+      "published_at": "2026-07-19T18:37:14Z",
+      "prerelease": true,
+      "uploaded_asset_count": 7,
+      "html_url": "https://github.com/kachetong1314/mihomo-ninja/releases/tag/verge2.5.2"
+    }
+  ],
+  "upstream_mihomo": {
+    "repository": "MetaCubeX/mihomo",
+    "latest_tag": "v1.19.32",
+    "published_at": "2026-09-30T17:09:36Z",
+    "html_url": "https://github.com/MetaCubeX/mihomo/releases/tag/v1.19.32",
+    "ninja_release_declared_upstream": "5019cc09",
+    "declared_commit_full_sha": "5019cc090ed7cafb76643f964a76b1e97aee2985",
+    "declared_commit_url": "https://github.com/MetaCubeX/mihomo/commit/5019cc090ed7cafb76643f964a76b1e97aee2985",
+    "upstream_not_a_ninja_core_substitute": true
+  },
+  "router_target": {
+    "tag": "ab32ad2d",
+    "asset": "ninja-arm64-upx",
+    "size_bytes": 18749664,
+    "digest": "sha256:3398a44cca5db17710491ec3bb474c3c1cd4a30a3f849eb063dcfd2abd35375b",
+    "download_url": "https://github.com/kachetong1314/mihomo-ninja/releases/download/ab32ad2d/ninja-arm64-upx",
+    "public_asset_api_url": "https://api.github.com/repos/kachetong1314/mihomo-ninja/releases/assets/591101479",
+    "current_tag_supplied_by_parent": "ab32ad2d",
+    "newer_bare_core_found": false,
+    "recommendation": "Read back runtime version and installed SHA256; keep the installed core if both match this asset. No newer ARM64 UPX core was found.",
+    "device_readback_performed_by_this_agent": false,
+    "replacement_performed": false
+  },
+  "limits": [
+    "Release metadata proves publisher artifact identity, not runtime protocol success, schema compatibility or licensing validity.",
+    "NinjaV2 1.0.6 client packages were not unpacked; their embedded engine build was not identified.",
+    "The tag repository archives contain README only; they are not the unpublished Ninja core implementation.",
+    "Windows, Android, Desktop and Lite clients are outside the confirmed update target."
+  ],
+  "sources": [
+    "https://github.com/kachetong1314/ninja/releases/tag/1.0.6",
+    "https://github.com/kachetong1314/ninja/releases/expanded_assets/1.0.6",
+    "https://github.com/kachetong1314/ninja/blob/main/README.md",
+    "https://github.com/kachetong1314/mihomo-ninja/releases/tag/ab32ad2d",
+    "https://github.com/kachetong1314/mihomo-ninja/blob/main/README.md",
+    "https://api.github.com/repos/kachetong1314/ninja/git/trees/1.0.6?recursive=1",
+    "https://api.github.com/repos/kachetong1314/mihomo-ninja/git/trees/ab32ad2d?recursive=1",
+    "https://github.com/MetaCubeX/mihomo/releases/latest"
+  ]
+}

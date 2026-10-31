@@ -1,0 +1,19 @@
+{
+  "index_verification": {
+    "exit": 0,
+    "stdout": "/tmp/codex-next/packages.adb: OK\n",
+    "stderr": ""
+  },
+  "temporary_repository": "https://downloads.openwrt.org/snapshots/targets/mediatek/filogic/kmods/6.18.55-1-b218d80d146ac6c85db4989df73b5de9/",
+  "existing_repositories_modified": false,
+  "update": {
+    "exit": 0,
+    "stdout": " [https://downloads.openwrt.org/snapshots/targets/mediatek/filogic/kmods/6.18.55-1-b218d80d146ac6c85db4989df73b5de9/packages.adb]\nOK: 1408 distinct packages available\n",
+    "stderr": ""
+  },
+  "simulation": {
+    "exit": 0,
+    "stdout": "(1/3) Installing kmod-ifb (6.18.55-r1)\n(2/3) Installing kmod-sched-cake (6.18.55-r1)\n(3/3) Installing kmod-tcp-bbr (6.18.55-r1)\nOK: 87.0 MiB in 242 packages\n",
+    "stderr": ""
+  }
+}

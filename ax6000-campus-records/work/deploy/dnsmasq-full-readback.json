@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "Dnsmasq version 2.93  Copyright (c) 2000-2026 Simon Kelley\nCompile time options: IPv6 GNU-getopt no-DBus UBus no-i18n no-IDN DHCP DHCPv6 no-Lua TFTP conntrack no-ipset nftset auth DNSSEC no-ID loop-detect inotify dumpfile\n\nThis software comes with ABSOLUTELY NO WARRANTY.\nDnsmasq is free software, and you are welcome to redistribute it\nunder the terms of the GNU General Public License, version 2 or 3.\nlan\n100\n5192 5154\nServer:\t\t127.0.0.1\nAddress:\t127.0.0.1:53\n\nNon-authoritative answer:\nwww.baidu.com\tcanonical name = www.a.shifen.com\nName:\twww.a.shifen.com\nAddress: 183.2.172.177\n\nNon-authoritative answer:\nwww.baidu.com\tcanonical name = www.a.shifen.com\nName:\twww.a.shifen.com\nAddress: 240e:ff:e020:98c:0:ff:b061:c306\nName:\twww.a.shifen.com\nAddress: 240e:ff:e020:99b:0:ff:b099:cff1\n\n204\nFilesystem           1K-blocks      Used Available Use% Mounted on\n/dev/ubi0_1              63076      6796     53020  11% /overlay\ntmpfs                   247000      5792    241208   2% /tmp\n",
+  "stderr": "dnsmasq: syntax check OK.\n"
+}

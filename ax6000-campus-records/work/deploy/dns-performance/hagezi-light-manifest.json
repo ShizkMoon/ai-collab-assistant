@@ -1,0 +1,32 @@
+{
+  "source": "https://raw.githubusercontent.com/hagezi/dns-blocklists/a4ed692a06f6a7144e245d965e48ecb02c120fc1/wildcard/light-onlydomains.txt",
+  "commit": "a4ed692a06f6a7144e245d965e48ecb02c120fc1",
+  "bytes": 1156273,
+  "sha256": "d040f81000a874cadc1071b5727b097bc92f3859224f334831cb96e8ef6d66e1",
+  "git_blob_sha1": "7a2832b5f855ae9a55cc1e05113cbc910672b95e",
+  "expected_git_blob_sha1": "7a2832b5f855ae9a55cc1e05113cbc910672b95e",
+  "git_blob_matches": true,
+  "entries": 55349,
+  "unique_entries": 55349,
+  "declared_entries": 55349,
+  "invalid_entries": [],
+  "ascii": true,
+  "ends_with_newline": true,
+  "critical_hosts_suffix_matches": {
+    "connect.rom.miui.com": [],
+    "www.msftconnecttest.com": [],
+    "www.huaweicloud.com": [],
+    "www.qq.com": [],
+    "www.bilibili.com": [],
+    "www.taobao.com": [],
+    "github.com": [],
+    "raw.githubusercontent.com": [],
+    "cdn.jsdelivr.net": [],
+    "world.crisp.help": [],
+    "heartbeat.mossdef.org": []
+  },
+  "positive_block_samples_present": {
+    "telemetry.001-studio.com": true,
+    "telemetry.adobe.io": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "passed": 10,
+  "results": [
+    "native guard preserves DHCP routes and main, does not add account3",
+    "down/up window never deletes DHCP default or leaves manual unreachable-only state",
+    "DHCP address change signals only account2, keeps Android account1",
+    "stopped registered account2 merges independently with string respawn",
+    "explicitly stopped service stays stopped",
+    "inactive account3 does not recreate table/rule or start a process",
+    "JSON lists 1/2/3 but init starts only 1/2 with stock account1 group",
+    "unreviewed allow entry3 rejects startup before procd mutation",
+    "foreign priority occupant rejects guard before route mutation",
+    "legacy retry repairs down/up and derives subnet from DHCP mask"
+  ],
+  "scope": "actual shell files with fake system commands; no kernel/procd/netifd/device validation"
+}

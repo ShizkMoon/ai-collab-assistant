@@ -1,0 +1,10 @@
+{
+  "exit": 0,
+  "output": "Syntax OK\nSyntax OK\nOK:SELF_TEST:12\nOK:TRANSACTION_FIXTURES:11\n",
+  "candidate_hashes": {
+    "ninja-subscription-update.sh": "960061112bca10b70119a1ee78dfb5e87fb7eee651f4adab48deeabeb5199df5",
+    "ninja-subscription-update.rb": "d9122b8b06e995a20b24d87c4b0855bc604d31e5b738ce2632a8d182f9075b34",
+    "ninja-subscription-update-fixtures.rb": "2ec634729d56cb73b821f234316d314e84223b6d975e020735932a16a10c33f0"
+  },
+  "stderr_present": false
+}

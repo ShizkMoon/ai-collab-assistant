@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "  sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode                                                     \n   0: 00000000:0050 00000000:0000 0A 00000000:00000000 00:00000000 00000000     0        0 6396 1 00000000b7f27a1a 100 0 0 10 5                      \n   1: 4275CF0A:0035 00000000:0000 0A 00000000:00000000 00:00000000 00000000   453        0 2793992 1 00000000bc51b3dd 100 0 0 10 5                   \n   2: 6F7BCF0A:0035 00000000:0000 0A 00000000:00000000 00:00000000 00000000     0        0 2760031 1 00000000ad8c89e3 100 0 0 10 5                   \nucode /tmp/codex-next/bbr-socket-probe.uc \nucode /usr/sbin/mwan3rtmon ipv6 \nucode /usr/sbin/mwan3rtmon ipv4 \n",
+  "stderr": ""
+}

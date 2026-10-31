@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "OpenClash Already Stop!\nesurfingclient: 等待网络服务超时\n",
+  "stderr": "Command failed: ubus call service delete { \"name\": \"ua3f\" } (Not found)\nCommand failed: ubus call service delete { \"name\": \"smartdns-local\" } (Not found)\nudhcpc: started, v1.38.0\nudhcpc: broadcasting discover\nudhcpc: no lease, failing\n"
+}

@@ -1,0 +1,162 @@
+{
+  "time": "2026-10-13T21:51:04+08:00",
+  "ua3f_pid": "4940",
+  "ua3f_pid_unchanged": true,
+  "request_count": 3,
+  "max_payload_bytes": 3145728,
+  "per_request_rate_limit_bytes_per_second": 131072,
+  "network_changes": false,
+  "same_source_url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/79f6dea5-67d3-4861-94ab-0aaa9d006847/26300.9457.260913-1737.26h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_x64FRE_zh-cn.esd",
+  "network": {
+    "wan": {
+      "device": "wan",
+      "source": "10.207.123.111"
+    },
+    "wan2": {
+      "device": "eswan2",
+      "source": "10.207.112.254"
+    },
+    "wan3": {
+      "device": "eswan3",
+      "source": "10.207.117.66"
+    }
+  },
+  "matched_ua3f_established_outer_routes": [
+    {
+      "ua3f_socket": {
+        "local_address": "10.207.123.111",
+        "local_port": 59876,
+        "remote_address": "122.9.13.79",
+        "remote_port": 80,
+        "state": "ESTABLISHED",
+        "inode": "2877261"
+      },
+      "original": {
+        "src": "10.207.123.111",
+        "dst": "122.9.13.79",
+        "sport": "59876",
+        "dport": "80"
+      },
+      "reply": {
+        "src": "122.9.13.79",
+        "dst": "10.207.123.111",
+        "sport": "80",
+        "dport": "59876"
+      },
+      "mark_decimal": 16777216,
+      "conntrack_line": "ipv4     2 tcp      6 7434 ESTABLISHED src=10.207.123.111 dst=122.9.13.79 sport=59876 dport=80 packets=7 bytes=474 src=122.9.13.79 dst=10.207.123.111 sport=80 dport=59876 packets=6 bytes=1041 [ASSURED] mark=16777216 zone=0 use=2",
+      "exit": "wan"
+    },
+    {
+      "ua3f_socket": {
+        "local_address": "10.207.123.111",
+        "local_port": 39118,
+        "remote_address": "183.232.239.4",
+        "remote_port": 80,
+        "state": "ESTABLISHED",
+        "inode": "2878273"
+      },
+      "original": {
+        "src": "10.207.123.111",
+        "dst": "183.232.239.4",
+        "sport": "39118",
+        "dport": "80"
+      },
+      "reply": {
+        "src": "183.232.239.4",
+        "dst": "10.207.123.111",
+        "sport": "80",
+        "dport": "39118"
+      },
+      "mark_decimal": 16777216,
+      "conntrack_line": "ipv4     2 tcp      6 300 ESTABLISHED src=10.207.123.111 dst=183.232.239.4 sport=39118 dport=80 packets=330 bytes=28730 src=183.232.239.4 dst=10.207.123.111 sport=80 dport=39118 packets=371 bytes=589647 [ASSURED] mark=16777216 zone=0 use=2",
+      "exit": "wan"
+    },
+    {
+      "ua3f_socket": {
+        "local_address": "10.207.123.111",
+        "local_port": 43730,
+        "remote_address": "58.63.233.34",
+        "remote_port": 80,
+        "state": "ESTABLISHED",
+        "inode": "2880124"
+      },
+      "original": {
+        "src": "10.207.123.111",
+        "dst": "58.63.233.34",
+        "sport": "43730",
+        "dport": "80"
+      },
+      "reply": {
+        "src": "58.63.233.34",
+        "dst": "10.207.123.111",
+        "sport": "80",
+        "dport": "43730"
+      },
+      "mark_decimal": 16777216,
+      "conntrack_line": "ipv4     2 tcp      6 7435 ESTABLISHED src=10.207.123.111 dst=58.63.233.34 sport=43730 dport=80 packets=7 bytes=553 src=58.63.233.34 dst=10.207.123.111 sport=80 dport=43730 packets=6 bytes=543 [ASSURED] mark=16777216 zone=0 use=2",
+      "exit": "wan"
+    },
+    {
+      "ua3f_socket": {
+        "local_address": "10.207.123.111",
+        "local_port": 39134,
+        "remote_address": "183.232.239.4",
+        "remote_port": 80,
+        "state": "ESTABLISHED",
+        "inode": "2880759"
+      },
+      "original": {
+        "src": "10.207.123.111",
+        "dst": "183.232.239.4",
+        "sport": "39134",
+        "dport": "80"
+      },
+      "reply": {
+        "src": "183.232.239.4",
+        "dst": "10.207.117.66",
+        "sport": "80",
+        "dport": "39134"
+      },
+      "mark_decimal": 50331648,
+      "conntrack_line": "ipv4     2 tcp      6 299 ESTABLISHED src=10.207.123.111 dst=183.232.239.4 sport=39134 dport=80 packets=199 bytes=18892 src=183.232.239.4 dst=10.207.117.66 sport=80 dport=39134 packets=295 bytes=444085 [ASSURED] mark=50331648 zone=0 use=2",
+      "exit": "wan3"
+    }
+  ],
+  "transfers": [
+    {
+      "exit": 0,
+      "http": 206,
+      "bytes": 1048576,
+      "seconds": 8.04534,
+      "local_port": 63979,
+      "complete": true,
+      "error_type": null
+    },
+    {
+      "exit": 0,
+      "http": 206,
+      "bytes": 1048576,
+      "seconds": 8.031035,
+      "local_port": 63980,
+      "complete": true,
+      "error_type": null
+    },
+    {
+      "exit": 0,
+      "http": 206,
+      "bytes": 1048576,
+      "seconds": 8.020697,
+      "local_port": 63981,
+      "complete": true,
+      "error_type": null
+    }
+  ],
+  "raw_observation_sha256": "92897bfe2f62c1e1fd81f18c22ef7dbad9320cdc0435f6350c6faf4fb2a3beae",
+  "all_three_exits_observed": false,
+  "all_transfers_complete": true,
+  "limits": [
+    "This bounded short-flow sample is not a throughput, speedup, queue or cold-boot test.",
+    "Process inode and TCP tuple establish ownership of the observed outer connections; each individual curl is not mapped through the transparent proxy."
+  ]
+}

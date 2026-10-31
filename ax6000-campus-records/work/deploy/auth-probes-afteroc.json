@@ -1,0 +1,5 @@
+{
+  "exit": 7,
+  "stdout": "SOURCE=10.207.127.206\nHTTP=200 bytes=2443 remote=183.2.172.177 connect=0.024786 total=0.074472\nHTTP=204 bytes=0 remote=183.61.228.74 connect=0.021530 total=0.027346\nHTTP=200 bytes=22 remote=23.32.91.41 connect=0.326161 total=0.644970\nSOURCE=10.207.114.16\nHTTP=000 bytes=0 remote= connect=0.000000 total=0.008087\nHTTP=000 bytes=0 remote= connect=0.000000 total=0.062855\nHTTP=000 bytes=0 remote= connect=0.000000 total=0.013756\n",
+  "stderr": "curl: (7) Failed to connect to www.baidu.com:443 after 8 ms: Error\ncurl: (7) Failed to connect to connectivitycheck.platform.hicloud.com:80 after 62 ms: Error\ncurl: (7) Failed to connect to www.msftconnecttest.com:80 after 13 ms: Error\n"
+}

@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "wan2 已新增 DHCP 候选。原 WAN、DNS 与认证进程未修改；需单独读回租约。\n",
+  "stderr": "[!] Section openclash specifies unreachable path '/var/etc/openclash.include', ignoring section\n"
+}

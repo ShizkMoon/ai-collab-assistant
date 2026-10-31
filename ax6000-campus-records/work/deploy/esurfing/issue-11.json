@@ -1,0 +1,929 @@
+{
+  "body": "我在openwrt中部署完，能运行，但是时不时就会弹错误28然后断网半分钟，运气好一天都没事，运气不好几分钟就一次\n以下是日志文件\n\nSun Mar 29 23:24:10 2026 daemon.info ESurfingClient[13740]: [2026-03-29 23:24:10] [错误] [NetClient.c:230] HTTP 请求错误: Error (错误码: 28)\nSun Mar 29 23:24:10 2026 daemon.info ESurfingClient[13740]: [2026-03-29 23:24:10] [错误] [Client.c:197] 网络错误\nSun Mar 29 23:24:25 2026 daemon.info ESurfingClient[13740]: [2026-03-29 23:24:25] [错误] [NetClient.c:230] HTTP 请求错误: Error (错误码: 28)\nSun Mar 29 23:24:25 2026 daemon.info ESurfingClient[13740]: [2026-03-29 23:24:25] [错误] [Client.c:197] 网络错误\nSun Mar 29 23:25:00 2026 cron.err crond[18088]: USER root pid 17765 cmd /usr/bin/wget --spider -q http://www.baidu.com\nSun Mar 29 23:25:39 2026 daemon.info ESurfingClient[13740]: [2026-03-29 23:25:39] [信息] [Client.c:178] 发送心跳包\nSun Mar 29 23:25:39 2026 daemon.info ESurfingClient[13740]: [2026-03-29 23:25:39] [信息] [Client.c:180] 下一次重试: 480 秒后\n",
+  "comments": [
+    {
+      "id": "IC_kwDOQBozes73Y_o1",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "<img width=\"2070\" height=\"1199\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/a44f26cc-8bf4-4859-abdc-4d71a6dd27ec\" />这是我的路由配置",
+      "createdAt": "2026-03-29T16:42:35Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4150524469",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes78idX4",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "我豆，现在才看到，前两周太忙了，这个是请求超时的意思，可以检查一下网络连接和物理连接之类的有没有什么问题，或者在防火墙放行一下认证的那个端口",
+      "createdAt": "2026-04-13T13:51:51Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4236891640",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes797GKZ",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "最近很少出现这种情况了，设备我都没动过，感觉会不会是学校那边的问题，虽然我同学的官方客户端好像没这种情况",
+      "createdAt": "2026-04-16T12:41:42Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4260127385",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes797KB0",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "作者大大有没有计划做个多拨的功能【偷笑】",
+      "createdAt": "2026-04-16T12:44:19Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [
+        {
+          "content": "LAUGH",
+          "users": {
+            "totalCount": 1
+          }
+        }
+      ],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4260143220",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes797k5q",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "多播在做了，可以看这个 issue #8 ，现在还在改方案",
+      "createdAt": "2026-04-16T13:02:03Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4260253290",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-DAXj",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "<img width=\"674\" height=\"401\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/8e60bbba-d323-4335-a05a-1aa72c5bb87e\" />就是这样突然间断网几秒钟，还是不会弄【捂脸】",
+      "createdAt": "2026-04-16T17:40:44Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4262200803",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-DBbJ",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "网线换了也没改善\n",
+      "createdAt": "2026-04-16T17:41:26Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [
+        {
+          "content": "HEART",
+          "users": {
+            "totalCount": 1
+          }
+        }
+      ],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4262205129",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-KxuH",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "试一下在他出现断网的时候ping一下或者curl一下认证服务器和校园网的网关呢，看看有没有超时，另外一直报网络已连接可能需要重新获取一个新的ip然后重启一下程序，因为我这边没出现这种情况，所以比较难定位问题是出在学校服务器还是我的程序上",
+      "createdAt": "2026-04-17T00:00:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4264237959",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-Qdzi",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "怎么获取认证服务器和校园网的网关呢【捂脸】",
+      "createdAt": "2026-04-17T05:43:35Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4265729250",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-Qmnb",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "路由器wan口能看到网关，认证服务器在日志里找一下ac ip就是了，断网的时候ping一下，curl可以试试下官方天翼校园网的那个地方，没有返回或者超时就是服务器的问题",
+      "createdAt": "2026-04-17T05:52:59Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4265765339",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-Qr6B",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "也有可能就是跟这个issue #8 说的这样，有限制活动连接数，导致检查网络状态的包被丢弃了，然后就是超时",
+      "createdAt": "2026-04-17T05:58:30Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4265787009",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-QuB6",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "https://qps.itzmx.com/ 可以用这个网站看看你们校园网最多支持多少活动连接数，在openwrt概况下面就能看到当前活动连接数，如果不会测的话可以请教ai",
+      "createdAt": "2026-04-17T06:00:54Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4265795706",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-ey69",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "<img width=\"1263\" height=\"425\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/83db2dc0-7980-4010-93ab-0b460cacc7b4\" />似乎并没有问题",
+      "createdAt": "2026-04-17T15:55:44Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4269485757",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-fhV-",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "那就不清楚原因了，可以尝试在电脑上直接运行，也可以用一下别人的第三方认证程序",
+      "createdAt": "2026-04-17T16:28:21Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4269675902",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-rYdB",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "<img width=\"479\" height=\"145\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b8e7663b-a4ff-47de-b8ce-57e4dda84caa\" />报错的时候ping不通网关的",
+      "createdAt": "2026-04-18T05:04:20Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4272785217",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-rmg2",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "那应该就是服务器那边的问题了，也有可能是防火墙的问题",
+      "createdAt": "2026-04-18T05:23:38Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4272842806",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-rxEz",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "防火墙问题能解决吗\n",
+      "createdAt": "2026-04-18T05:36:05Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4272886067",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-r387",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "可以在日志查看keepurl之类的端口，在防火墙放行，不过现在这个情况还是建议用别家的认证客户端会好些，比如隔壁的esurfing-go，因为我现在还在重写逻辑，以前的代码有点石山了，指不定有什么奇怪的bug",
+      "createdAt": "2026-04-18T05:46:34Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4272914235",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-sak7",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "那我试试\n",
+      "createdAt": "2026-04-18T06:47:51Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [
+        {
+          "content": "LAUGH",
+          "users": {
+            "totalCount": 1
+          }
+        }
+      ],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4273056059",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABABi0Bw",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "试了，确实没那么频繁，但是还是存在，可能真是某些不知名的bug了",
+      "createdAt": "2026-04-22T13:27:16Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4296586247",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABAxkwbg",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "如果没什么问题了的话就请关一下 issue 谢谢喵，也可以试试咱最新的 v2 版本喔",
+      "createdAt": "2026-04-29T19:40:24Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4346949742",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBAxBJQ",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "等我上学再试试新版的v2，主要是go那边也开始掉线了\n",
+      "createdAt": "2026-05-02T04:05:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4362879269",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBA3pkw",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "记得看新教程即可",
+      "createdAt": "2026-05-02T04:52:34Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4362987923",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBRzHkA",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "![mmexport1777995049988.jpg](https://github.com/user-attachments/assets/9b64535f-0803-42d7-a7ef-10d4058658b0)\n\n更看不懂了哎",
+      "createdAt": "2026-05-05T15:32:04Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4380739472",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBR5V0A",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "超时基本可以不用管，然后检查一下mwan配置有没有调对，策略->balanced配置->备用成员->一定要是\"默认(使用主路由表)\"，不然mwan ping不通的时候会不让任何流量通过，按理说调对是不会有这些问题的\n\n<img width=\"830\" height=\"406\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/8c0901a0-e930-4ab1-bbfa-555b7fcfeaec\" />",
+      "createdAt": "2026-05-05T15:46:11Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4380841424",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBR9WzA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "最好是单口没问题了再折腾多播",
+      "createdAt": "2026-05-05T15:55:56Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4380907212",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBZKLsg",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "现在能用，能叠加了，但是像某些学校官网，向日葵官网这样的网站就进不去了",
+      "createdAt": "2026-05-06T13:22:15Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4388457394",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBZM-Mg",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "不好说，因为我这边是可以进的",
+      "createdAt": "2026-05-06T13:26:38Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4388503090",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBZOhng",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "这个东西很奇怪，ai说是dns的问题，我试过某些域名转发到阿里的dns是能解决的，但是总不能一个个输进去感觉也不实际，有没有好用的插件推荐一下",
+      "createdAt": "2026-05-06T13:29:00Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4388528542",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBZTxrQ",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "这里可以调下发给客户端的dns服务器，试试可不可以\n<img width=\"1428\" height=\"943\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/d026635d-bdf4-4fc0-893d-f9fa81de475a\" />",
+      "createdAt": "2026-05-06T13:37:16Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4388614573",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBZbjtQ",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "似乎没啥用\n",
+      "createdAt": "2026-05-06T13:51:01Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4388742069",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBZh5gg",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "下游的设备要重新连一下才会接收下发的dns的，如果还不行的话就没招了，我也没用过这类插件，可以去网上找找有没有",
+      "createdAt": "2026-05-06T14:02:52Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4388845954",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBZsosg",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "全局这样改会让校园网插件那里一直报错",
+      "createdAt": "2026-05-06T14:20:59Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4389021874",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBaE47Q",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "那没招了",
+      "createdAt": "2026-05-06T15:07:21Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4389419245",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBgtvgg",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "作者大大用的是哪家的路由固件，我看看能不能换成一样的，我感觉是固件的问题",
+      "createdAt": "2026-05-07T10:39:23Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4396380034",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBgwaww",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "用的是官方的固件，装了argon的主题插件，不过按理说固件再怎么不同，底层都是openwrt官方主线的嘞",
+      "createdAt": "2026-05-07T10:46:33Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4396423875",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABBv9_LA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "没什么问题了的话烦请关一下 issue 喔",
+      "createdAt": "2026-05-09T11:07:14Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4412374828",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABB3jcUw",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "现在我的环境是官方的固件，单校园网插件，主要问题就是有人用着用着就报dns错误，然后软件就直接挂掉了，需要手动重启插件，其他的使用正常\n\n\n<img width=\"775\" height=\"327\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/0d5a3ce1-99e9-48aa-9308-1b3d690aea10\" />",
+      "createdAt": "2026-05-11T11:38:55Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4420328531",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABB3kcpQ",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "> 现在我的环境是官方的固件，单校园网插件，主要问题就是有人用着用着就报dns错误，然后软件就直接挂掉了，需要手动重启插件，其他的使用正常\n> \n> <img alt=\"Image\" width=\"775\" height=\"327\" src=\"https://private-user-images.githubusercontent.com/272002014/590411976-0d5a3ce1-99e9-48aa-9308-1b3d690aea10.png?jwt=[REDACTED]\">\n\n单账号拨号，其他所有设置保持默认\n",
+      "createdAt": "2026-05-11T11:41:30Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4420344997",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABB3v34w",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "难说，我得先想一下怎么解决这个，路由器的dns没改成其它的吧，说不定必须要用学校下发的dns才能正常解析",
+      "createdAt": "2026-05-11T12:08:53Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4420532195",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABB32v6Q",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "说实话那个有可能是网络已连接的说，因为我是非重定向都是这么提示，我去改改逻辑",
+      "createdAt": "2026-05-11T12:24:39Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4420644841",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABB4t8PA",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "1.我只在这里加了个对学校官网的dns转发，只对学校的官网域名生效，不然校园网开不开\n2.另外是试过win系统下直插网线，然后用最新的插件直接认证，是能打开学校里面的官网的，但是op系统下认证了就是默认打不开。![Screenshot_2026-05-11-22-14-35-150_com.android.browser-edit.jpg](https://github.com/user-attachments/assets/b8151cab-2067-4feb-a031-4e208592d0f6)\n\n",
+      "createdAt": "2026-05-11T14:18:45Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4421549116",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABB4xhiw",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "怪奇怪的，你那边的网络环境",
+      "createdAt": "2026-05-11T14:26:24Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4421607819",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCAqWQQ",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "[链接](https://openlist.xylg.com:20001/d/esurfingclient_2.0.0-13_ramips_mt7621.ipk?sign=mk1Ei0YPeE0y1IKJ4k2-h-lVsqOEEREcxFkv8e_OeGw=:0) 用这个试一下吧，使用方式有点变化，原来的json配置文件放到/etc/config/esurfingclient了，因为提这个问题的时候刚好已经是改了配置文件之后了",
+      "createdAt": "2026-05-12T11:06:59Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4429878849",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCGM-xg",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "晚上已经更新上去了，用两天看看",
+      "createdAt": "2026-05-12T23:36:25Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4435689158",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCHy-fQ",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "确实没有关闭软件了，会自动重启![mmexport1778647220834.jpg](https://github.com/user-attachments/assets/9bb99bd7-c81a-4eae-9d84-0883761324c8)\n\n",
+      "createdAt": "2026-05-13T04:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4437360253",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCH1-IA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "就是不知道那个dns解析错误是什么原因造成的，其它用户也没有说出这个问题的，只能说网络环境很特别",
+      "createdAt": "2026-05-13T04:50:35Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4437409312",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCH5zVA",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "这个错误是出现在有人在联网使用的时候的，如果没人用网，基本上路由器挂着就是一直正常的，以下是我今天的全部日志，你可以看看\n\n[log.txt](https://github.com/user-attachments/files/27691688/log.txt)",
+      "createdAt": "2026-05-13T05:01:59Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4437472084",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCH74tw",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "也许，会不会是你那边学校有检测多设备的手段，如果检测是有多设备用的话，就直接给路封了，只能往这边猜测了，因为我这边实际上复现不出来这个问题",
+      "createdAt": "2026-05-13T05:08:03Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4437506231",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCNuy_Q",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "在github上看到一个类似的校园网拨号软件，在win下运行的，https://github.com/6DDUU6/ESurfingDialer-onekey，实测我在使用的时候不会出现dns报错等问题，打游戏掉包情况也没了，作者大大有需要可以参考看看",
+      "createdAt": "2026-05-13T17:21:13Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4443583229",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCNz4AQ",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "这个，说实话好像就是原版 kotlin 那个jar包，我最开始就是按照他的逻辑来改的，只不过现在可能改得太多，造成了一些奇怪的bug，特别是多线程这个东西，我也不好说",
+      "createdAt": "2026-05-13T17:29:43Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4443666433",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCN0mjg",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "jar包的作者是另一个，仓库已经搜不到了，甚至连用户都搜不到了，因为结构简单，所以大抵是不会出一些奇怪的问题的",
+      "createdAt": "2026-05-13T17:31:11Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4443678350",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABCkrBZA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "[链接](https://openlist.xylg.com:20001/d/esurfingclient_2.0.1-2_ramips_mt7621.ipk?sign=hpUoTDYS7g-7FNrDimSan4fg1dF-70M01PZmxpQJqFI=:0) 试试这个怎么样，在 dns 解析错误的时候会切换成不用解析 dns 的方案去检测，不知道能不能行",
+      "createdAt": "2026-05-16T17:39:42Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4467638628",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABC0zMvg",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "用几天先试试\n\n",
+      "createdAt": "2026-05-19T04:58:34Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4484549822",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABC5liuA",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "现在esurfingclient_2.0.2-4_ramips_mt7621版本有把这个加进去吗，我用的是这个，目前没有大量用网，没有很大的问题\n\n> [链接](https://openlist.xylg.com:20001/d/esurfingclient_2.0.1-2_ramips_mt7621.ipk?sign=hpUoTDYS7g-7FNrDimSan4fg1dF-70M01PZmxpQJqFI=:0) 试试这个怎么样，在 dns 解析错误的时候会切换成不用解析 dns 的方案去检测，不知道能不能行\n\n",
+      "createdAt": "2026-05-19T15:54:24Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4489568952",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABC5nCoQ",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "> 现在esurfingclient_2.0.2-4_ramips_mt7621版本有把这个加进去吗，我用的是这个，目前没有大量用网，没有很大的问题\n> \n> > [链接](https://openlist.xylg.com:20001/d/esurfingclient_2.0.1-2_ramips_mt7621.ipk?sign=hpUoTDYS7g-7FNrDimSan4fg1dF-70M01PZmxpQJqFI=:0) 试试这个怎么样，在 dns 解析错误的时候会切换成不用解析 dns 的方案去检测，不知道能不能行\n\n有的，实际上是r3就整合进去了",
+      "createdAt": "2026-05-19T15:57:25Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4489593505",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABDSiC9A",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "怎么样了现在",
+      "createdAt": "2026-05-22T06:21:06Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4515726068",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABDeY48w",
+      "author": {
+        "login": "15314072944"
+      },
+      "authorAssociation": "NONE",
+      "body": "还是有bug，不过多了个一直尝试dns啥的，以及有点放弃了哎\n",
+      "createdAt": "2026-05-24T10:38:59Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4528158963",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABDealbg",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "那就不清楚是什么问题了，因为我这边也一直没有出现过这个问题，所以定位不到是什么地方有问题，实在不行就用java那个吧",
+      "createdAt": "2026-05-24T10:44:46Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4528186734",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABDebAVA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "也许是c的代码在你那边水土不服之类的",
+      "createdAt": "2026-05-24T10:46:16Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11#issuecomment-4528193620",
+      "viewerDidAuthor": false
+    }
+  ],
+  "number": 11,
+  "title": "错误码28是什么",
+  "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/11"
+}

@@ -1,0 +1,375 @@
+{
+  "body": "希望可以适配多网卡  现在大多学校都限制了连接数 ",
+  "comments": [
+    {
+      "id": "IC_kwDOQBozes7bnfdV",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "用路由器就行，openwrt可以设置一些防检测功能，这个在b站上可以找到，我的项目本质上只是一个认证器，并没有防检测的功能",
+      "createdAt": "2025-12-22T23:46:20Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3684562773",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7btwpR",
+      "author": {
+        "login": "stardust2026"
+      },
+      "authorAssociation": "NONE",
+      "body": "不是设备的连接数 是会话数 openwrt叫活动连接   现在大部分学校都限制在1024  超出的包都会被drop掉",
+      "createdAt": "2025-12-23T11:05:44Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3686206033",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7btzgi",
+      "author": {
+        "login": "stardust2026"
+      },
+      "authorAssociation": "NONE",
+      "body": "有了多网卡认证可以做到叠加网速和连接数    ",
+      "createdAt": "2025-12-23T11:07:39Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3686217762",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7bt2ze",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "> 有了多网卡认证可以做到叠加网速和连接数\n\n你现在是有两张网卡，想分开认证是么",
+      "createdAt": "2025-12-23T11:10:41Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3686231262",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7bt5kw",
+      "author": {
+        "login": "stardust2026"
+      },
+      "authorAssociation": "NONE",
+      "body": "是的 ",
+      "createdAt": "2025-12-23T11:13:25Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3686242608",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7buE_y",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "我尝试一下吧，需要改动挺多，预计可能会在下个大版本跟着web管理一起出来，方便提供一下你们学校校园网的ip格式吗，例如我这边是172.19开头是校园网ip，因为我可能需要正则一下ip地址",
+      "createdAt": "2025-12-23T11:22:07Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3686289394",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7buI5_",
+      "author": {
+        "login": "stardust2026"
+      },
+      "authorAssociation": "NONE",
+      "body": "10.190/18",
+      "createdAt": "2025-12-23T11:25:53Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3686305407",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehFW1",
+      "author": {
+        "login": "MiaM1ku"
+      },
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "mark 同需要",
+      "createdAt": "2026-01-10T16:51:22Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [
+        {
+          "content": "EYES",
+          "users": {
+            "totalCount": 1
+          }
+        }
+      ],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733214645",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehlOP",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "@stardust2026 @ours1505 应该需要你们自己调配好wan口融合之类的，我在windows上面测试，要指定其中一个网口认证了才有网，应该是windows对这个多wan调教不好，openwrt应该能调",
+      "createdAt": "2026-01-10T18:27:10Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733345167",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehlf-",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "windows其实就是不能很好地检测哪个wan口有网并且自动切过去，又或者说是默认不支持wan口融合",
+      "createdAt": "2026-01-10T18:28:38Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733346302",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehmAY",
+      "author": {
+        "login": "MiaM1ku"
+      },
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "windows的话 哔哩哔哩看到有多网卡叠加的软件 也可以自己改跃点\nopenwrt的话 我是用macvlan将一个wan口虚拟多个mac分别拨号的 然后用mwan3聚合\n需要的就是程序识别网卡 并且用指定网卡请求\n\n现在我用的隔壁go 玄学拨不上+断线 https://github.com/DreamwareN/Esurfing-go",
+      "createdAt": "2026-01-10T18:31:08Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733348376",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehmzS",
+      "author": {
+        "login": "stardust2026"
+      },
+      "authorAssociation": "NONE",
+      "body": "我是直接新增的虚拟接口 绑定在一个网口上  然后用mwan3聚合  跟你差不多   但是我开了四五个接口用的隔壁go的   go好像用arm架构没有问题   但是我是mipsle的会掉口",
+      "createdAt": "2026-01-10T18:35:24Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733351634",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehnU_",
+      "author": {
+        "login": "MiaM1ku"
+      },
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "> 我是直接新增的虚拟接口 绑定在一个网口上 然后用mwan3聚合 跟你差不多 但是我开了四五个接口用的隔壁go的 go好像用arm架构没有问题 但是我是mipsle的会掉口\n\n那我和你是一个方式\n我armv7也掉口",
+      "createdAt": "2026-01-10T18:38:32Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733353791",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehnpY",
+      "author": {
+        "login": "stardust2026"
+      },
+      "authorAssociation": "NONE",
+      "body": "> [@stardust2026](https://github.com/stardust2026) [@ours1505](https://github.com/ours1505) 应该需要你们自己调配好wan口融合之类的，我在windows上面测试，要指定其中一个网口认证了才有网，应该是windows对这个多wan调教不好，openwrt应该能调\n只要能分网口验证  聚合mwan3直接搞定",
+      "createdAt": "2026-01-10T18:39:25Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733355096",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehnv9",
+      "author": {
+        "login": "stardust2026"
+      },
+      "authorAssociation": "NONE",
+      "body": "> > 我是直接新增的虚拟接口 绑定在一个网口上 然后用mwan3聚合 跟你差不多 但是我开了四五个接口用的隔壁go的 go好像用arm架构没有问题 但是我是mipsle的会掉口\n> \n> 那我和你是一个方式 我armv7也掉口\n\n不知道是什么问题老是空返回",
+      "createdAt": "2026-01-10T18:40:02Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733355517",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehxIu",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "我现在改成的逻辑是，get拿到校园网ip特征，然后比对看有多少个校园网ip，现在最多拿两个去用，赋给线程拿去当userip用来认证，现在有个问题就是，登出之后必须要重启软件才能登入了，不知道哪个数据没清干净，还在排查，原本用的是Rsplwe的检测逻辑，单网口认证很简单，现在要改成多网口比较难，不知道今天能不能做出来，做不出来只能等下个学期回学校再做了",
+      "createdAt": "2026-01-10T19:03:28Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733393966",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehxiw",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "也有可能我太想做成那种傻瓜式的了，应该留个配置文件直接让会的人配置就好",
+      "createdAt": "2026-01-10T19:05:16Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733395632",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ehyJ5",
+      "author": {
+        "login": "stardust2026"
+      },
+      "authorAssociation": "NONE",
+      "body": "不是要写面板吗 识别网卡在里面填账号绑定也可以吧\n只看有多少个校园网ip可以吗   没走对应网卡验证也拨号不了吧\n还有校园网其实是可以拨号上网的，只是占用的是电脑端（\n",
+      "createdAt": "2026-01-10T19:07:53Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733398137",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7eh1MC",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "要写的东西太多力，我只有一个人在没日没夜地写。\n账号绑定会有，只是应该还要再换逻辑。\n我们这边是以ticket url里面的wlanuserip为准的，c的curl是可以使用指定ip（或者说指定网卡）去进行get和post操作的，只要使用指定ip去post对应的tickurl就可以拿到认证要用的东西，实测在我的windows笔记本下，两个ip都可以正常认证。\n这个能直接拨号吗，不清楚诶",
+      "createdAt": "2026-01-10T19:23:05Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733410562",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7eh4Dg",
+      "author": {
+        "login": "stardust2026"
+      },
+      "authorAssociation": "NONE",
+      "body": "辛苦了，现在已经放假了也没办法提供别的，可惜了今年反向升级 不然也用不到聚合，报给电信也不改",
+      "createdAt": "2026-01-10T19:31:16Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3733422304",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7ekU_S",
+      "author": {
+        "login": "MiaM1ku"
+      },
+      "authorAssociation": "CONTRIBUTOR",
+      "body": "建议是直接填写网卡 然后指定网卡请求\n佬辛苦了",
+      "createdAt": "2026-01-11T05:56:04Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3734065106",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7elXQm",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "> 建议是直接填写网卡 然后指定网卡请求 佬辛苦了\n\n那我到时候改成只在程序启动时获取一遍适配器，或者自动列出来可用的有校园网IP的适配器，自行选择指定的去认证\n现在要复习概率论去了/(ㄒoㄒ)/~~",
+      "createdAt": "2026-01-11T09:55:36Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-3734336550",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes7-O-iV",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "说实话，我学校似乎没有限制这个活动连接数，我打到一万多都没有出现ping丢包的情况",
+      "createdAt": "2026-04-17T04:32:36Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-4265339029",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOQBozes8AAAABAxmKmA",
+      "author": {
+        "login": "BadGhost520"
+      },
+      "authorAssociation": "OWNER",
+      "body": "@MiaM1ku @stardust2026 你好，现在 [v2](https://github.com/BadGhost520/ESurfingClient-CVersion/releases/tag/v2.0.0-r6) 版本可以支持多播了，使用 mwan3 控制流量，具体可以查看 README 的使用教程链接，目前我现在就在使用双 WAN 的多播，三 WAN 及以上的没有测试过",
+      "createdAt": "2026-04-29T19:44:17Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8#issuecomment-4346972824",
+      "viewerDidAuthor": false
+    }
+  ],
+  "number": 8,
+  "title": "适配多网卡",
+  "url": "https://github.com/BadGhost520/ESurfingClient-CVersion/issues/8"
+}

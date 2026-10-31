@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "state": {
+    "identity": {
+      "exit": 0,
+      "output": "0\naarch64\nDISTRIB_ID='OpenWrt'\nDISTRIB_RELEASE='18.06-SNAPSHOT'\nDISTRIB_REVISION='unknown'\nDISTRIB_TARGET='mediatek/mt7986'\nDISTRIB_ARCH='aarch64_cortex-a53'\nDISTRIB_DESCRIPTION='OpenWrt 18.06-SNAPSHOT unknown'\nDISTRIB_TAINTS='no-all busybox'\n"
+    },
+    "mtd": {
+      "exit": 0,
+      "output": "dev:    size   erasesize  name\nmtd0: 08000000 00020000 \"spi0.1\"\nmtd1: 00100000 00020000 \"BL2\"\nmtd2: 00040000 00020000 \"Nvram\"\nmtd3: 00040000 00020000 \"Bdata\"\nmtd4: 00200000 00020000 \"Factory\"\nmtd5: 00200000 00020000 \"FIP\"\nmtd6: 00040000 00020000 \"crash\"\nmtd7: 00040000 00020000 \"crash_log\"\nmtd8: 01e00000 00020000 \"ubi\"\nmtd9: 01e00000 00020000 \"ubi1\"\nmtd10: 03200000 00020000 \"overlay\"\n"
+    },
+    "space": {
+      "exit": 0,
+      "output": "Filesystem           1K-blocks      Used Available Use% Mounted on\ntmpfs                   245748      2720    243028   1% /tmp\n             total       used       free     shared    buffers     cached\nMem:        491500     242492     249008       2752      11900      58776\n-/+ buffers/cache:     171816     319684\nSwap:            0          0          0\n"
+    },
+    "tools": {
+      "exit": 0,
+      "output": "/bin/dd\n/usr/bin/md5sum\n/usr/sbin/ubiformat\n/usr/sbin/ubidetach\n/usr/sbin/ubiattach\n/usr/sbin/ubinfo\n/usr/sbin/nanddump\n"
+    },
+    "pre_unlock_metadata": {
+      "exit": 0,
+      "output": "-rwxr-xr-x    1 0        0             5189 Jan 30 17:23 /tmp/dropbear.before-codex\n-rw-------    1 0        0             2733 Jan 30 19:32 /tmp/nvram.before-codex\n-rw-rw-r--    1 0        0              178 Jan 30 18:40 /tmp/shadow.before-codex\n"
+    },
+    "boot_config": {
+      "exit": 0,
+      "output": ""
+    },
+    "boot_flags": "telnet_en=0\nboot_wait=off\nbootdelay=2\nflag_boot_rootfs=0\nflag_last_success=0\nflag_boot_success=1\nflag_try_sys1_failed=0\nflag_try_sys2_failed=0\nssh_en=1"
+  }
+}

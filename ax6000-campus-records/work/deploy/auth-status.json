@@ -1,0 +1,166 @@
+{
+  "enabled": true,
+  "accounts": [
+    {
+      "index": 1,
+      "channel": 3,
+      "mark": ""
+    },
+    {
+      "index": 2,
+      "channel": 2,
+      "mark": "0x02000000"
+    },
+    {
+      "index": 3,
+      "channel": 1,
+      "mark": "0x03000000"
+    }
+  ],
+  "settings": {
+    "log_lv": 4,
+    "log_dir": "/var/log/esurfing",
+    "conn_timeout": 7,
+    "op_timeout": 10
+  },
+  "events": [
+    {
+      "source": "Mon Oct 12 19:14:14 2026 daemon.info esurfingclient[4818]",
+      "status": [
+        "需要认证"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:14:14 2026 daemon.info esurfingclient[4819]",
+      "status": [
+        "需要认证"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:14:31 2026 daemon.info esurfingclient[4819]",
+      "status": [
+        "登录失败"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:14:31 2026 daemon.info esurfingclient[4819]",
+      "status": [
+        "认证失败"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:14:31 2026 daemon.info esurfingclient[4818]",
+      "status": [
+        "已认证登录"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:14:39 2026 daemon.info esurfingclient[4818]",
+      "status": [
+        "发送心跳包"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:15:31 2026 daemon.info esurfingclient[7620]",
+      "status": [
+        "需要认证"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:15:31 2026 daemon.info esurfingclient[7620]",
+      "status": [
+        "已认证登录"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:15:40 2026 daemon.info esurfingclient[7620]",
+      "status": [
+        "发送心跳包"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:15:41 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:15:44 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:15:47 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:15:50 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:15:53 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:15:57 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:16:00 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:16:03 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:16:06 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:16:09 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:16:12 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:16:15 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:16:18 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    },
+    {
+      "source": "Mon Oct 12 19:16:21 2026 daemon.info esurfingclient[7679]",
+      "status": [
+        "已连接至互联网"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,320 @@
+{
+  "time": "2026-10-13T21:48:29+08:00",
+  "router_reboot_performed": false,
+  "network_restart_performed": false,
+  "cold_boot_not_tested": true,
+  "failure_injection_not_performed": true,
+  "only_nine_domestic_options_policies_added": true,
+  "all_other_dns_fields_preserved": true,
+  "source_unchanged": true,
+  "core_unchanged": true,
+  "license_preserved": true,
+  "first_two_accounts_unchanged": true,
+  "third_distinct_account_mobile_channel": true,
+  "allowed_accounts": [
+    "# 已授权的当前账号；逐路保活和实际外网验证后保留。",
+    "1",
+    "2",
+    "3"
+  ],
+  "network_wan3_auto": "1",
+  "auth_instances": {
+    "account1": {
+      "running": true,
+      "pid": 7620
+    },
+    "account2": {
+      "running": true,
+      "pid": 7679
+    },
+    "account3": {
+      "running": true,
+      "pid": 9375
+    }
+  },
+  "first_two_pids_unchanged": true,
+  "ua3f_pid_unchanged": true,
+  "local_health": "HEALTHY",
+  "core_pid": "31352",
+  "uptime": "95660.13 369325.17",
+  "files": {
+    "/etc/openclash/custom/ninja-production-options.yaml": {
+      "sha256": "401becdedbef2eaaba94de0da9d0cc0f68d5e23424ec621906d883f1e12be0cb",
+      "bytes": 1769
+    },
+    "/etc/openclash/Ninja.yaml": {
+      "sha256": "9ede6327fa09bbb9fc15720bb4ded50f91d3edc4f63f19ba4f6014b487aef831",
+      "bytes": 289292
+    },
+    "/etc/openclash/config/Ninja.yaml": {
+      "sha256": "d0de3f4779853622ee10d5b253919270c93569009f5cce538f924faa26766ebc",
+      "bytes": 217052
+    },
+    "/etc/config/esurfingclient": {
+      "sha256": "dd111973e316cbbf55b8f8e81326c392b394f618029d6a58f702725966530c0e",
+      "bytes": 617
+    },
+    "/etc/esurfing-deploy/netifd-accounts.allow": {
+      "sha256": "74643665c15d9d616d58e1c64ba8ff226a2782f18129ad79d93413f6803b38dc",
+      "bytes": 81
+    },
+    "/etc/esurfing-deploy/netifd-route.nft": {
+      "sha256": "f95416399bfbbabbe375ddbead38a7f4ad9b86b5ab8157e414c3045714a6972b",
+      "bytes": 616
+    },
+    "/etc/init.d/esurfingclient": {
+      "sha256": "edd5c7939f0bdd77e6161fae8dd8935ce547a63e97829d129b42363777d4142b",
+      "bytes": 4347
+    },
+    "/usr/libexec/esurfing-netifd-guard": {
+      "sha256": "8735743a080ffa113fe2765351164185c40cd0ab227c6a8afb10d38029414a87",
+      "bytes": 3822
+    },
+    "/etc/hotplug.d/iface/25-mwan3": {
+      "sha256": "0ef4ebe0dddebdb690ef17964ad9e5d8f2a5fd8460f4b69965422bcc9c55479d",
+      "bytes": 5339
+    },
+    "/etc/config/mwan3": {
+      "sha256": "0a2613d28fc7bd25f2c352c9fda2d7f405d17f59b40d4efadb329f22510912ae",
+      "bytes": 2603
+    },
+    "/etc/config/network": {
+      "sha256": "10cdd03527e3c18d8d4886e2fadd4f68fd708bedd462d217f979d6fc9dd50fda",
+      "bytes": 1491
+    },
+    "/etc/nftables.d/90-ua3f-wan-ttl.nft": {
+      "sha256": "43bb5e4bd629dec40b94501db72a657381c5778a90b0eca1e46688cb1dfa4430",
+      "bytes": 452
+    }
+  },
+  "fixed_node": {
+    "current": "香港 02（专线；智能）",
+    "members": [
+      "香港 02（专线；智能）"
+    ],
+    "only_hk02": true
+  },
+  "events": {
+    "1": {
+      "auth_success": 0,
+      "heartbeat_success": 10,
+      "safe_events": "[2026-10-13 19:36:11] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 19:36:11] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 19:36:11] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 19:36:11] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 19:36:11] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:36:15] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:36:15] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 19:50:26] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:50:26] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:04:37] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:04:37] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:12:29] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:12:29] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:12:29] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 20:12:29] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:12:29] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:12:29] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:18:48] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:18:58] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:18:58] account=1 event=CURL_CONNECT_SECONDS value=0.008\n[2026-10-13 20:18:58] account=1 event=CURL_TOTAL_SECONDS value=10.002\n[2026-10-13 20:18:58] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:18:58] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:18:58] account=1 event=HEARTBEAT_HTTP_OR_BODY_FAILED\n[2026-10-13 20:18:58] account=1 event=HEARTBEAT_RETRY\n[2026-10-13 20:18:59] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:23:39] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:23:39] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:23:39] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 20:23:39] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:23:39] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:23:39] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:33:09] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:33:09] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 20:36:00] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:36:00] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:36:00] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 20:36:00] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:36:00] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:36:00] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:47:20] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:47:20] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:01:37] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:01:37] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:01:37] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 21:01:37] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:01:37] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:01:37] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:01:37] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:01:37] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:02:17] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:02:17] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:02:17] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 21:02:17] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:02:17] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:02:17] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:10:40] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:10:40] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:10:40] account=1 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 21:10:40] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:10:40] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:10:40] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:15:48] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:15:49] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:22:20] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:22:20] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:22:20] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 21:22:20] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:22:20] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:22:20] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:24:30] account=1 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:24:30] account=1 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:24:30] account=1 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 21:24:30] account=1 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:24:30] account=1 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:24:30] account=1 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:29:59] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:29:59] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:44:10] account=1 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:44:10] account=1 event=HEARTBEAT_NEXT_SECONDS value=850\n"
+    },
+    "2": {
+      "auth_success": 0,
+      "heartbeat_success": 29,
+      "safe_events": "[2026-10-13 19:50:43] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 19:50:43] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 19:50:43] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 19:50:43] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 19:50:48] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:50:48] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:54:59] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:54:59] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 19:59:09] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 19:59:09] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:03:20] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:03:20] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:07:31] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:07:31] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:08:27] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:08:27] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:08:27] account=2 event=CURL_TOTAL_SECONDS value=7.002\n[2026-10-13 20:08:27] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:08:27] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:08:27] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:11:41] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:11:41] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:15:52] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:15:52] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:20:03] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:20:03] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:24:13] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:24:13] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:28:24] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:28:24] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:28:43] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 20:28:43] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 20:28:43] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 20:28:43] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 20:28:43] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 20:28:43] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 20:32:35] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:32:35] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:36:46] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:36:46] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:40:56] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:40:56] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:45:07] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:45:07] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:49:18] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:49:18] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:53:29] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:53:29] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 20:57:40] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 20:57:40] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:01:50] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:01:50] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:06:01] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:06:01] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:10:12] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:10:12] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:14:22] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:14:23] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:18:33] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:18:33] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:22:44] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:22:44] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:26:25] account=2 event=CURL_ERROR_CODE value=28\n[2026-10-13 21:26:25] account=2 event=CURL_CONNECT_SECONDS value=0.000\n[2026-10-13 21:26:25] account=2 event=CURL_TOTAL_SECONDS value=7.003\n[2026-10-13 21:26:25] account=2 event=CONNECT_TIMEOUT_SECONDS value=7\n[2026-10-13 21:26:25] account=2 event=OP_TIMEOUT_SECONDS value=10\n[2026-10-13 21:26:25] account=2 event=CHECK_PRIMARY_FAILED\n[2026-10-13 21:26:54] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:26:54] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:31:05] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:31:05] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:35:15] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:35:15] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:39:26] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:39:26] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:43:37] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:43:37] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n[2026-10-13 21:47:48] account=2 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:47:48] account=2 event=HEARTBEAT_NEXT_SECONDS value=250\n"
+    },
+    "3": {
+      "auth_success": 1,
+      "heartbeat_success": 3,
+      "safe_events": "[2026-10-13 21:19:35] account=3 event=AUTH_REQUIRED_HTTP302\n[2026-10-13 21:19:36] account=3 event=LOGIN_KEEP_SECONDS value=8\n[2026-10-13 21:19:36] account=3 event=AUTH_SUCCESS\n[2026-10-13 21:19:44] account=3 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:19:44] account=3 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:33:55] account=3 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:33:55] account=3 event=HEARTBEAT_NEXT_SECONDS value=850\n[2026-10-13 21:48:05] account=3 event=HEARTBEAT_ATTEMPT\n[2026-10-13 21:48:05] account=3 event=HEARTBEAT_NEXT_SECONDS value=850\n"
+    }
+  },
+  "route_probes": [
+    {
+      "iface": "wan",
+      "source": "10.207.123.111",
+      "device": "wan",
+      "mark": "0x3f000000",
+      "http": "204",
+      "seconds": 0.088089,
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "iface": "wan2",
+      "source": "10.207.112.254",
+      "device": "eswan2",
+      "mark": "0x02000000",
+      "http": "204",
+      "seconds": 0.085954,
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "iface": "wan3",
+      "source": "10.207.117.66",
+      "device": "eswan3",
+      "mark": "0x03000000",
+      "http": "204",
+      "seconds": 0.0889,
+      "exit": 0,
+      "passed": true
+    }
+  ],
+  "mwan_status": "Interface status:\n interface wan is online and tracking is active (online 26h:33m:22s, uptime 26h:34m:08s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan2 is online and tracking is active (online 26h:26m:06s, uptime 26h:34m:08s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan3 is online and tracking is active (online 00h:12m:39s, uptime 00h:29m:54s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n\nCurrent policies:\nbalanced:\n wan (33%)\n wan2 (33%)\n wan3 (33%)\nua3f_bal:\n wan (33%)\n wan2 (33%)\n wan3 (33%)\n\nDirectly connected ipv4 networks:\n10.207.112.0/20\n192.168.31.0/24\n224.0.0.0/3\n\nDirectly connected ipv6 networks:\nfd3c:162d:9e76::/48\n\nActive user rules:\n udp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n tcp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n ip daddr 0.0.0.0/0 meta mark & 0x3f000000 == 0x00000000 - balanced\n\n",
+  "all_three_mwan_online": true,
+  "balanced_policy": "table inet mwan3 {\n\tchain mwan3_policy_balanced {\n\t\tmeta mark & 0x3f000000 == 0x00000000 numgen random mod 3 vmap { 0 : jump mwan3_or_meta_0x1000000, 1 : jump mwan3_or_meta_0x2000000, 2 : jump mwan3_or_meta_0x3000000 }\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\n",
+  "ua3f_policy": "table inet mwan3 {\n\tchain mwan3_policy_ua3f_bal {\n\t\tmeta mark & 0x3f000000 == 0x00000000 numgen inc mod 3 vmap { 0 : jump mwan3_or_meta_0x1000000, 1 : jump mwan3_or_meta_0x2000000, 2 : jump mwan3_or_meta_0x3000000 }\n\t\tmeta mark & 0x3f000000 == 0x00000000 meta mark set meta mark & 0xfeffffff | 0x3e000000\n\t}\n}\n",
+  "three_member_policy": true,
+  "routing_rules": "0:\tfrom all lookup local\n99:\tfrom all fwmark 0x162 lookup 354\n100:\tfrom all fwmark 0x162/0xffff lookup 354\n1001:\tfrom all iif wan lookup 1\n1002:\tfrom all iif eswan2 lookup 2\n1003:\tfrom all iif eswan3 lookup 3\n1802:\tfrom all fwmark 0x2000000 lookup 25202\n1803:\tfrom all fwmark 0x3000000 lookup 25203\n2001:\tfrom all fwmark 0x1000000/0x3f000000 lookup 1\n2002:\tfrom all fwmark 0x2000000/0x3f000000 lookup 2\n2003:\tfrom all fwmark 0x3000000/0x3f000000 lookup 3\n2061:\tfrom all fwmark 0x3d000000/0x3f000000 blackhole\n2062:\tfrom all fwmark 0x3e000000/0x3f000000 unreachable\n3003:\tfrom all fwmark 0x3000000/0x3f000000 unreachable\n3062:\tfrom 10.207.123.111 lookup 1\n3063:\tfrom 10.207.112.254 lookup 2\n3064:\tfrom 10.207.117.66 lookup 3\n10000:\tfrom 10.207.112.254 lookup 25202\n10000:\tfrom 10.207.117.66 lookup 25203\n20000:\tfrom all to 10.207.112.254/20 lookup 25202\n20000:\tfrom all to 10.207.117.66/20 lookup 25203\n32766:\tfrom all lookup main\n32767:\tfrom all lookup default\n90008:\tfrom all iif lo lookup 25202\n90012:\tfrom all iif lo lookup 25203\n",
+  "third_route_tables": "default via 10.207.112.1 dev eswan3 proto unspec src 10.207.117.66 metric 30 \n10.207.112.0/20 dev eswan3 proto unspec scope link metric 30 \n192.168.31.0/24 dev br-lan proto unspec scope link src 192.168.31.1 \ndefault via 10.207.112.1 dev eswan3 proto static src 10.207.117.66 metric 30 \nunreachable default metric 32760 \n10.207.112.0/20 dev eswan3 proto static scope link metric 30 \n223.5.5.5 via 10.207.112.1 dev eswan3 table 3 src 10.207.117.66 mark 0x30000c9 uid 0 \n    cache \n",
+  "third_compound_mark_route_correct": true,
+  "ttl": "table inet fw4 {\n\tchain ua3f_wan_ttl {\n\t\ttype filter hook postrouting priority -150; policy accept;\n\t\toifname \"wan\" ip ttl >= 10 counter packets 140488 bytes 40684642 ip ttl set 64 comment \"WAN IPv4 TTL64\"\n\t\toifname \"eswan2\" ip ttl >= 10 counter packets 207340 bytes 46008349 ip ttl set 64 comment \"WAN2 IPv4 TTL64\"\n\t\toifname \"eswan3\" ip ttl >= 10 counter packets 38668 bytes 7270847 ip ttl set 64 comment \"WAN3 IPv4 TTL64\"\n\t}\n}\n",
+  "dns": [
+    {
+      "name": "www.baidu.com",
+      "port": 53,
+      "type": 1,
+      "rcode": 0,
+      "answers": 2,
+      "a": [
+        "183.2.172.177"
+      ],
+      "rr_types": [
+        5,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 14.9
+    },
+    {
+      "name": "www.bilibili.com",
+      "port": 7874,
+      "type": 1,
+      "rcode": 0,
+      "answers": 11,
+      "a": [
+        "14.17.92.70",
+        "14.17.92.71",
+        "14.17.92.72",
+        "14.17.92.73",
+        "14.17.92.74",
+        "58.63.237.115",
+        "58.63.237.162",
+        "58.63.237.169",
+        "58.63.237.245",
+        "58.63.237.26"
+      ],
+      "rr_types": [
+        5,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 10.0
+    },
+    {
+      "name": "www.google.com",
+      "port": 53,
+      "type": 1,
+      "rcode": 0,
+      "answers": 8,
+      "a": [
+        "142.251.150.119",
+        "142.251.151.119",
+        "142.251.152.119",
+        "142.251.153.119",
+        "142.251.154.119",
+        "142.251.155.119",
+        "142.251.156.119",
+        "142.251.157.119"
+      ],
+      "rr_types": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 3.1
+    },
+    {
+      "name": "crypto.cloudflare.com",
+      "port": 7874,
+      "type": 65,
+      "rcode": 0,
+      "answers": 1,
+      "a": [],
+      "rr_types": [
+        65
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 3.0
+    },
+    {
+      "name": "ax6000-home31.lan",
+      "port": 53,
+      "type": 1,
+      "rcode": 0,
+      "answers": 1,
+      "a": [
+        "192.168.31.1"
+      ],
+      "rr_types": [
+        1
+      ],
+      "truncated": false,
+      "passed": true,
+      "ms": 4.9
+    },
+    {
+      "name": "accounts.doubleclick.net",
+      "port": 53,
+      "type": 1,
+      "rcode": 3,
+      "answers": 0,
+      "a": [],
+      "rr_types": [],
+      "truncated": false,
+      "passed": true,
+      "ms": 1.7
+    },
+    {
+      "name": "www.gdpu.edu.cn",
+      "port": 7874,
+      "type": 1,
+      "rcode": 2,
+      "answers": 0,
+      "a": [],
+      "rr_types": [],
+      "truncated": false,
+      "passed": false,
+      "ms": 5005.3
+    }
+  ],
+  "http": [
+    {
+      "role": "domestic",
+      "origin": "Windows LAN through router",
+      "exit": 0,
+      "http": "200",
+      "passed": true
+    },
+    {
+      "role": "foreign",
+      "origin": "Windows LAN through router",
+      "exit": 0,
+      "http": "204",
+      "passed": true
+    }
+  ],
+  "known_campus_sample_failed": true,
+  "campus_failure_reproduced_on_original_strategy": true,
+  "accepted_changed_scope": true,
+  "all_dns_samples_passed": false,
+  "passed": false,
+  "limits": [
+    "Campus www.gdpu.edu.cn remains a failing sample also reproduced under the original DNS policy; the complete DNS acceptance is not a pass.",
+    "No cold boot, hard power cycle, failover or existing-flow migration test was performed.",
+    "Simultaneous three-route reachability and ordinary multi-flow forwarding do not prove an independent third bandwidth allocation or single-flow aggregation.",
+    "The queue A1 is inconclusive; no CAKE or new shaper was installed."
+  ]
+}

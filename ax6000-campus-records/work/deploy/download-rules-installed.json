@@ -1,0 +1,19 @@
+{
+  "rules": [
+    "DOMAIN-SUFFIX,steamcontent.com,DIRECT",
+    "DOMAIN-SUFFIX,steampipe.akamaized.net,DIRECT",
+    "DOMAIN-SUFFIX,dl.steam.clngaa.com,DIRECT",
+    "DOMAIN-SUFFIX,dl.steam.ksyna.com,DIRECT",
+    "DOMAIN-SUFFIX,st.dl.eccdnx.com,DIRECT",
+    "DOMAIN-SUFFIX,xz.pphimalayanrt.com,DIRECT",
+    "DOMAIN-SUFFIX,steampipe.steamcontent.tnkjmec.com,DIRECT",
+    "DOMAIN-SUFFIX,steampowered.com.8686c.com,DIRECT",
+    "DOMAIN-SUFFIX,steamstatic.com.8686c.com,DIRECT",
+    "DOMAIN-SUFFIX,wmsjsteam.com,DIRECT",
+    "DOMAIN,dl.delivery.mp.microsoft.com,DIRECT"
+  ],
+  "wrapped_tcp_count": 11,
+  "idempotence_verified": true,
+  "core_validation_exit": 0,
+  "home_dns_marker": "ax6000-home31.lan,192.168.31.1"
+}

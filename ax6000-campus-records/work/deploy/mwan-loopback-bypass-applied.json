@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "table inet mwan3 {\n\tset mwan3_dynamic_v4 {\n\t\ttype ipv4_addr\n\t\tflags interval\n\t\tauto-merge\n\t\telements = { 127.0.0.0/8 }\n\t}\n}\ntable inet fw4 {\n\tchain ua3f_wan_ttl {\n\t\ttype filter hook postrouting priority mangle; policy accept;\n\t\toifname \"wan\" ip ttl >= 10 counter packets 55993 bytes 32219229 ip ttl set 64 comment \"WAN IPv4 TTL64\"\n\t\toifname \"eswan2\" ip ttl >= 10 counter packets 12603 bytes 3373862 ip ttl set 64 comment \"WAN2 IPv4 TTL64\"\n\t}\n}\n",
+  "stderr": ""
+}

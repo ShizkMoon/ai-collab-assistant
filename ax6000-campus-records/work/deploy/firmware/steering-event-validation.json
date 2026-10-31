@@ -1,0 +1,10 @@
+{
+  "scope": "offline fake sysfs and mock init only; no device acceptance",
+  "initial_three_events_coalesced": true,
+  "event_during_reload_preserved": true,
+  "delayed_rx_queue_accepted": true,
+  "invalid_device_ignored": true,
+  "mock_reload_calls": 3,
+  "pending_empty": true,
+  "lock_released": true
+}

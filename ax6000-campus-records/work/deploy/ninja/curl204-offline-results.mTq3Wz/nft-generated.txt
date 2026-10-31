@@ -1,0 +1,35 @@
+flush chain inet mwan3 mwan3_connected
+add rule inet mwan3 mwan3_connected ip daddr @mwan3_connected_v4 meta mark set meta mark & 0xc0ffffff | 0x3f000000 return
+flush chain inet mwan3 mwan3_custom
+add rule inet mwan3 mwan3_custom ip daddr @mwan3_custom_v4 meta mark set meta mark & 0xc0ffffff | 0x3f000000 return
+flush chain inet mwan3 mwan3_dynamic
+add rule inet mwan3 mwan3_dynamic ip daddr @mwan3_dynamic_v4 meta mark set meta mark & 0xc0ffffff | 0x3f000000 return
+flush chain inet mwan3 mwan3_prerouting
+add rule inet mwan3 mwan3_prerouting icmpv6 type { nd-router-solicit, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, nd-redirect } accept
+add rule inet mwan3 mwan3_prerouting meta nfproto ipv4 meta l4proto udp meta mark & 0xffff == 0x162 counter return comment "OpenClash UDP already TPROXY"
+add rule inet mwan3 mwan3_prerouting meta mark set meta mark & 0xc0ffffff
+add rule inet mwan3 mwan3_prerouting ip6 daddr { fe80::/10, ff01::/16, ff02::/16 } accept
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 == 0 ct mark & 0x3f000000 vmap { fixture }
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 == 0 jump mwan3_ifaces_in
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 == 0 fib daddr type local return
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 == 0 jump mwan3_custom
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 == 0 jump mwan3_connected
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 == 0 jump mwan3_dynamic
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 == 0 jump mwan3_rules
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 vmap { fixture }
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 != 0x3f000000 jump mwan3_custom
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 != 0x3f000000 jump mwan3_connected
+add rule inet mwan3 mwan3_prerouting meta mark & 0x3f000000 != 0x3f000000 jump mwan3_dynamic
+flush chain inet mwan3 mwan3_output
+add rule inet mwan3 mwan3_output icmpv6 type { nd-router-solicit, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, nd-redirect } accept
+add rule inet mwan3 mwan3_output ip6 daddr { fe80::/10, ff01::/16, ff02::/16 } accept
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 == 0 ct mark & 0x3f000000 vmap { fixture }
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 == 0 jump mwan3_ifaces_in
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 == 0 jump mwan3_custom
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 == 0 jump mwan3_connected
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 == 0 jump mwan3_dynamic
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 == 0 jump mwan3_rules
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 vmap { fixture }
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 != 0x3f000000 jump mwan3_custom
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 != 0x3f000000 jump mwan3_connected
+add rule inet mwan3 mwan3_output meta mark & 0x3f000000 != 0x3f000000 jump mwan3_dynamic

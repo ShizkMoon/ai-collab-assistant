@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "boot_slot_changed": false,
+  "bootloader_written": false,
+  "inactive_partition_written": true,
+  "written_kernel_md5": "8f8058ad22161ee411812411198feba5",
+  "target": "mtd9/ubi1",
+  "target_detached_after_verification": true
+}

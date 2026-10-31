@@ -1,0 +1,247 @@
+[
+  {
+    "case": "wireless_pc_fixed_a1",
+    "payload_mbps": 761.62,
+    "valid": true,
+    "snapshot_seconds_median": 1.1173753500042949,
+    "diag_ms_median": 86.1397815,
+    "cpu_average": {
+      "cpu": {
+        "busy_percent": 80.3,
+        "softirq_percent": 29.8
+      },
+      "cpu0": {
+        "busy_percent": 79.6,
+        "softirq_percent": 7.1
+      },
+      "cpu1": {
+        "busy_percent": 77.4,
+        "softirq_percent": 46.9
+      },
+      "cpu2": {
+        "busy_percent": 78.9,
+        "softirq_percent": 41.4
+      },
+      "cpu3": {
+        "busy_percent": 85.3,
+        "softirq_percent": 23.4
+      }
+    },
+    "segments": {
+      "pc": {
+        "count": 12,
+        "algorithms": [
+          "bbr"
+        ],
+        "total_acked": 601937727,
+        "total_received": 4200,
+        "retransmitted_bytes": 3611082,
+        "retrans_segments": 2549,
+        "rwnd_busy_fraction": 0.008817766165904637,
+        "sndbuf_busy_fraction": 0.0017962116263879817,
+        "rtt_us_median": 10469.0,
+        "rtt_us_max": 12852,
+        "sndwnd_bytes_min": 261888,
+        "sndwnd_bytes_max": 1048320,
+        "rto_events": 4,
+        "rcvbuf_bytes_max": 131072,
+        "sndbuf_bytes_max": 3910688
+      },
+      "ua3f_loopback_send": {
+        "count": 12,
+        "algorithms": [
+          "bbr"
+        ],
+        "total_acked": 595424743,
+        "total_received": 3696,
+        "retransmitted_bytes": 2724384,
+        "retrans_segments": 141,
+        "rwnd_busy_fraction": 0.17501148369315572,
+        "sndbuf_busy_fraction": 0.05098759761139182,
+        "rtt_us_median": 1990.0,
+        "rtt_us_max": 10304,
+        "sndwnd_bytes_min": 640,
+        "sndwnd_bytes_max": 3757952,
+        "rto_events": 1,
+        "rcvbuf_bytes_max": 131072,
+        "sndbuf_bytes_max": 3910688
+      },
+      "cdn_receive": {
+        "count": 12,
+        "algorithms": [
+          "bbr"
+        ],
+        "total_acked": 3456,
+        "total_received": 628495575,
+        "retransmitted_bytes": 0,
+        "retrans_segments": 0,
+        "rwnd_busy_fraction": 0.0,
+        "sndbuf_busy_fraction": 0.0,
+        "rtt_us_median": 16657.0,
+        "rtt_us_max": 19949,
+        "sndwnd_bytes_min": 523648,
+        "sndwnd_bytes_max": 524288,
+        "rto_events": 0,
+        "rcvbuf_bytes_max": 3910688,
+        "sndbuf_bytes_max": 130560
+      }
+    }
+  },
+  {
+    "case": "router_ua3f_fixed_middle",
+    "payload_mbps": 911.24,
+    "valid": true,
+    "snapshot_seconds_median": 0.7680428999883588,
+    "diag_ms_median": 47.934106,
+    "cpu_average": {
+      "cpu": {
+        "busy_percent": 66.2,
+        "softirq_percent": 14.8
+      },
+      "cpu0": {
+        "busy_percent": 69.1,
+        "softirq_percent": 6.0
+      },
+      "cpu1": {
+        "busy_percent": 63.9,
+        "softirq_percent": 9.1
+      },
+      "cpu2": {
+        "busy_percent": 68.0,
+        "softirq_percent": 38.3
+      },
+      "cpu3": {
+        "busy_percent": 63.9,
+        "softirq_percent": 5.9
+      }
+    },
+    "segments": {
+      "ua3f_loopback_send": {
+        "count": 15,
+        "algorithms": [
+          "bbr"
+        ],
+        "total_acked": 614595142,
+        "total_received": 31415,
+        "retransmitted_bytes": 114696,
+        "retrans_segments": 5,
+        "rwnd_busy_fraction": 0.0006045949214026602,
+        "sndbuf_busy_fraction": 0.0,
+        "rtt_us_median": 759,
+        "rtt_us_max": 3445,
+        "sndwnd_bytes_min": 65536,
+        "sndwnd_bytes_max": 3757952,
+        "rto_events": 0,
+        "rcvbuf_bytes_max": 131072,
+        "sndbuf_bytes_max": 3910688
+      },
+      "cdn_receive": {
+        "count": 12,
+        "algorithms": [
+          "bbr"
+        ],
+        "total_acked": 3456,
+        "total_received": 613011038,
+        "retransmitted_bytes": 0,
+        "retrans_segments": 0,
+        "rwnd_busy_fraction": 0.0,
+        "sndbuf_busy_fraction": 0.0,
+        "rtt_us_median": 15670.0,
+        "rtt_us_max": 20050,
+        "sndwnd_bytes_min": 523648,
+        "sndwnd_bytes_max": 524288,
+        "rto_events": 0,
+        "rcvbuf_bytes_max": 3910688,
+        "sndbuf_bytes_max": 130560
+      }
+    }
+  },
+  {
+    "case": "wireless_pc_fixed_a2",
+    "payload_mbps": 802.15,
+    "valid": true,
+    "snapshot_seconds_median": 1.1327359999995679,
+    "diag_ms_median": 56.019741499999995,
+    "cpu_average": {
+      "cpu": {
+        "busy_percent": 80.5,
+        "softirq_percent": 29.5
+      },
+      "cpu0": {
+        "busy_percent": 80.8,
+        "softirq_percent": 7.3
+      },
+      "cpu1": {
+        "busy_percent": 77.3,
+        "softirq_percent": 44.3
+      },
+      "cpu2": {
+        "busy_percent": 78.2,
+        "softirq_percent": 40.3
+      },
+      "cpu3": {
+        "busy_percent": 85.8,
+        "softirq_percent": 25.3
+      }
+    },
+    "segments": {
+      "pc": {
+        "count": 12,
+        "algorithms": [
+          "bbr"
+        ],
+        "total_acked": 574483041,
+        "total_received": 4200,
+        "retransmitted_bytes": 0,
+        "retrans_segments": 0,
+        "rwnd_busy_fraction": 0.0003683919690550746,
+        "sndbuf_busy_fraction": 0.001841959845275373,
+        "rtt_us_median": 11723.5,
+        "rtt_us_max": 15602,
+        "sndwnd_bytes_min": 1047808,
+        "sndwnd_bytes_max": 2096896,
+        "rto_events": 0,
+        "rcvbuf_bytes_max": 131072,
+        "sndbuf_bytes_max": 3910688
+      },
+      "ua3f_loopback_send": {
+        "count": 15,
+        "algorithms": [
+          "bbr"
+        ],
+        "total_acked": 587511226,
+        "total_received": 8591,
+        "retransmitted_bytes": 893496,
+        "retrans_segments": 49,
+        "rwnd_busy_fraction": 0.055865921787709494,
+        "sndbuf_busy_fraction": 0.0670391061452514,
+        "rtt_us_median": 1027,
+        "rtt_us_max": 9133,
+        "sndwnd_bytes_min": 65536,
+        "sndwnd_bytes_max": 3773312,
+        "rto_events": 0,
+        "rcvbuf_bytes_max": 131072,
+        "sndbuf_bytes_max": 3910688
+      },
+      "cdn_receive": {
+        "count": 12,
+        "algorithms": [
+          "bbr"
+        ],
+        "total_acked": 3456,
+        "total_received": 587095501,
+        "retransmitted_bytes": 0,
+        "retrans_segments": 0,
+        "rwnd_busy_fraction": 0.0,
+        "sndbuf_busy_fraction": 0.0,
+        "rtt_us_median": 16749.0,
+        "rtt_us_max": 22022,
+        "sndwnd_bytes_min": 524288,
+        "sndwnd_bytes_max": 524288,
+        "rto_events": 0,
+        "rcvbuf_bytes_max": 3910688,
+        "sndbuf_bytes_max": 130560
+      }
+    }
+  }
+]

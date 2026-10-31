@@ -1,0 +1,85 @@
+[
+  {
+    "phase": "blocked",
+    "elapsed": 0.5,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 6.1,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 11.5,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 16.9,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 22.4,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 28.2,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 33.7,
+    "wan_online": true,
+    "wan2_offline": false
+  },
+  {
+    "phase": "blocked",
+    "elapsed": 39.1,
+    "wan_online": true,
+    "wan2_offline": true,
+    "status": "Interface status:\n interface wan is online and tracking is active (online 00h:04m:07s, uptime 00h:04m:39s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan2 is offline and tracking is active (4)\n   track connect.rom.miui.com: down\n   track connectivitycheck.platform.hicloud.com: down\n interface wan3 is unknown and tracking is disabled (31)\n\nCurrent policies:\nbalanced:\n wan (100%)\n wan2 (0%)\n\nDirectly connected ipv4 networks:\n10.207.112.0/20\n192.168.31.0/24\n224.0.0.0/3\n\nDirectly connected ipv6 networks:\nfd3c:162d:9e76::/48\n\nActive user rules:\n udp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n tcp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n ip daddr 0.0.0.0/0 meta mark & 0x3f000000 == 0x00000000 - balanced\n\n",
+    "domestic": {
+      "exit": 0,
+      "http": "200"
+    },
+    "ninja": {
+      "exit": 0,
+      "http": "204"
+    },
+    "drop_counter": "table inet codex_health_trial {\n\tchain output {\n\t\ttype filter hook output priority -200; policy accept;\n\t\toifname \"eswan2\" meta mark 0x3f000000 tcp dport 80 counter packets 105 bytes 6300 drop comment \"temporary WAN2 HTTP health failure\"\n\t}\n}\n"
+  },
+  {
+    "phase": "recovered",
+    "elapsed": 40.4,
+    "wan_online": true,
+    "wan2_online": false
+  },
+  {
+    "phase": "recovered",
+    "elapsed": 45.8,
+    "wan_online": true,
+    "wan2_online": false
+  },
+  {
+    "phase": "recovered",
+    "elapsed": 51.2,
+    "wan_online": true,
+    "wan2_online": false
+  },
+  {
+    "phase": "recovered",
+    "elapsed": 56.6,
+    "wan_online": true,
+    "wan2_online": true,
+    "status": "Interface status:\n interface wan is online and tracking is active (online 00h:04m:24s, uptime 00h:04m:56s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan2 is online and tracking is active (online 00h:00m:05s, uptime 00h:04m:56s)\n   track connect.rom.miui.com: ignored\n   track connectivitycheck.platform.hicloud.com: up\n interface wan3 is unknown and tracking is disabled (31)\n\nCurrent policies:\nbalanced:\n wan (50%)\n wan2 (50%)\n\nDirectly connected ipv4 networks:\n10.207.112.0/20\n192.168.31.0/24\n224.0.0.0/3\n\nDirectly connected ipv6 networks:\nfd3c:162d:9e76::/48\n\nActive user rules:\n udp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n tcp dport 53 meta nfproto ipv4 meta mark & 0x3f000000 == 0x00000000 meta mark set meta mark | 0x3f000000\n ip daddr 0.0.0.0/0 meta mark & 0x3f000000 == 0x00000000 - balanced\n\n"
+  }
+]

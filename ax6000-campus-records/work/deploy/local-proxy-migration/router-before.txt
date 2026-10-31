@@ -1,0 +1,38 @@
+2026-10-27T21:19:52+08:00
+Filesystem                Size      Used Available Use% Mounted on
+/dev/ubi0_1              61.6M     48.3M     10.1M  83% /overlay
+ipset-7.24-r1 aarch64_cortex-a53 {feeds/base/network/utils/ipset} (GPL-2.0) [installed]
+iptables-mod-conntrack-extra-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+iptables-mod-extra-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+iptables-mod-ipopt-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+iptables-mod-nfqueue-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+iptables-mod-tproxy-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+iptables-nft-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+kmod-ipt-ipset-6.18.55-r1 aarch64_cortex-a53 {feeds/base/kernel/linux} (GPL-2.0-only) [installed]
+kmod-iptables-6.18.55-r1 aarch64_cortex-a53 {feeds/base/kernel/linux} (GPL-2.0-only) [installed]
+kmod-tun-6.18.55-r1 aarch64_cortex-a53 {feeds/base/kernel/linux} (GPL-2.0-only) [installed]
+libipset13-7.24-r1 aarch64_cortex-a53 {feeds/base/network/utils/ipset} (GPL-2.0) [installed]
+libiptext-nft0-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+libiptext0-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+libiptext6-0-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+libruby4.0-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+libxtables12-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+luci-app-ninjaconnector2-1.1.0-r4 noarch {package/luci-app-ninjaconnector2} (GPL-3.0-only) [installed]
+luci-app-openclash-0.48.002 noarch {feeds/base/luci-app-openclash} () [installed]
+ruby-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+ruby-bigdecimal-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+ruby-date-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+ruby-digest-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+ruby-enc-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+ruby-pstore-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+ruby-psych-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+ruby-stringio-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+ruby-yaml-4.0.2-r2 aarch64_cortex-a53 {feeds/packages/feeds/packages/lang/ruby} (BSD-2-Clause) [installed]
+smartdns-46.1-r1 aarch64_cortex-a53 {feeds/packages/feeds/packages/net/smartdns} (GPL-3.0-or-later) [installed]
+ua3f-3.7.0-r1 aarch64_cortex-a53 {/feed/openwrt} (GPL-3.0-only) [installed]
+unzip-6.0-r9 aarch64_cortex-a53 {feeds/packages/feeds/packages/utils/unzip} (BSD-4-Clause) [installed]
+xtables-nft-1.8.10-r3 aarch64_cortex-a53 {feeds/base/network/utils/iptables} (GPL-2.0) [installed]
+21.5M	/etc/openclash
+14.6M	/usr/share/openclash
+15.6M	/usr/bin/ua3f
+20.0K	/usr/share/ninjaconnector2

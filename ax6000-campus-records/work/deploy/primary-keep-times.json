@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "[2026-10-12 15:56:21] [auth#1 pid=10165] [main] [INFO] [DialerNet.c:212] 下一次重试: 8 秒后\n[2026-10-12 15:56:21] [auth#1 pid=10165] [main] [INFO] [DialerAuth.c:138] 已认证登录\n[2026-10-12 15:56:30] [auth#1 pid=10165] [main] [INFO] [DialerClient.c:90] 下一次重试: 850 秒后\n",
+  "stderr": ""
+}

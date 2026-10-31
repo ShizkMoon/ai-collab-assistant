@@ -1,0 +1,21 @@
+{
+  "documents": [
+    {
+      "path": "outputs/ax6000-mainline/使用说明.md",
+      "bytes": 48463,
+      "sha256": "9c5e2f9908a7427ec41e70c099a8caf698cd1eb5d3a373093f45560e78f70f77"
+    },
+    {
+      "path": "outputs/ax6000-mainline/路由器调优与校园网方案调研.md",
+      "bytes": 91606,
+      "sha256": "8c1deb37639b37c2c5159fff3d170f99b3f55d841dfedec70ec285f5e8b409d8"
+    },
+    {
+      "path": "work/deploy/aggregation/results.md",
+      "bytes": 8361,
+      "sha256": "1be048f57474f19205482c5cd607773f2f793203e1a890b516bbf44912f01349"
+    }
+  ],
+  "current_stage": "wireless_diagnosis",
+  "current_config_backup_pair_unchanged": true
+}

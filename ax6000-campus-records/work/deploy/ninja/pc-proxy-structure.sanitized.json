@@ -1,0 +1,381 @@
+{
+  "runtime": {
+    "mode": "rule",
+    "mixed-port": 7897,
+    "allow-lan": false,
+    "ipv6": true,
+    "external-controller": "",
+    "tun": {
+      "enable": false,
+      "stack": "gvisor",
+      "auto-route": true,
+      "strict-route": false,
+      "auto-detect-interface": true
+    },
+    "dns": {
+      "enable": true
+    }
+  },
+  "verge": {
+    "enable_system_proxy": true,
+    "enable_auto_launch": true,
+    "enable_tun_mode": false,
+    "enable_proxy_guard": false,
+    "clash_core": "verge-mihomo-alpha"
+  },
+  "active_profile_type": "remote",
+  "groups": [
+    {
+      "name": "🚀 节点选择",
+      "type": "select"
+    },
+    {
+      "name": "♻️ 自动选择",
+      "type": "url-test"
+    },
+    {
+      "name": "🟦 专线节点",
+      "type": "url-test"
+    },
+    {
+      "name": "🟩 公网节点",
+      "type": "url-test"
+    },
+    {
+      "name": "🟨 直连节点",
+      "type": "url-test"
+    },
+    {
+      "name": "🌍 国外媒体",
+      "type": "select"
+    },
+    {
+      "name": "📲 电报信息",
+      "type": "select"
+    },
+    {
+      "name": "Ⓜ️ 微软服务",
+      "type": "select"
+    },
+    {
+      "name": "🍎 苹果服务",
+      "type": "select"
+    },
+    {
+      "name": "📢 谷歌FCM",
+      "type": "select"
+    },
+    {
+      "name": "🎯 全球直连",
+      "type": "select"
+    },
+    {
+      "name": "🛑 全球拦截",
+      "type": "select"
+    },
+    {
+      "name": "🍃 应用净化",
+      "type": "select"
+    },
+    {
+      "name": "🐟 漏网之鱼",
+      "type": "select"
+    }
+  ],
+  "rule_count": 3528,
+  "rule_type_counts": {
+    "IP-CIDR": 380,
+    "DOMAIN-SUFFIX": 2871,
+    "DOMAIN": 160,
+    "DOMAIN-KEYWORD": 97,
+    "PROCESS-NAME": 4,
+    "IP-CIDR6": 14,
+    "GEOIP": 1,
+    "MATCH": 1
+  },
+  "prepend": [],
+  "config": {
+    "mode": "rule",
+    "rule_count": 0,
+    "prepend": []
+  },
+  "active": {
+    "mode": "rule",
+    "rule_count": 3510,
+    "prepend": []
+  },
+  "steam_direct_rules": {
+    "steamcontent.com": true,
+    "steampipe.akamaized.net": true,
+    "dl.steam.clngaa.com": true,
+    "dl.steam.ksyna.com": true,
+    "st.dl.eccdnx.com": true,
+    "xz.pphimalayanrt.com": true,
+    "steampipe.steamcontent.tnkjmec.com": true,
+    "steampowered.com.8686c.com": true,
+    "steamstatic.com.8686c.com": true,
+    "wmsjsteam.com": true
+  },
+  "microsoft_relevant_rules": [
+    "DOMAIN-SUFFIX,msftconnecttest.com,DIRECT",
+    "DOMAIN-KEYWORD,microsoft,Ⓜ️ 微软服务",
+    "DOMAIN-SUFFIX,msft.net,Ⓜ️ 微软服务",
+    "DOMAIN-SUFFIX,msftauth.net,Ⓜ️ 微软服务",
+    "DOMAIN-SUFFIX,msftauthimages.net,Ⓜ️ 微软服务",
+    "DOMAIN-SUFFIX,msftidentity.com,Ⓜ️ 微软服务",
+    "DOMAIN-SUFFIX,windowsupdate.com,Ⓜ️ 微软服务",
+    "DOMAIN-SUFFIX,copilot.cloud.microsoft,🌍 国外媒体",
+    "DOMAIN-SUFFIX,copilot.microsoft.com,🌍 国外媒体",
+    "DOMAIN-SUFFIX,msftconnecttest.com,🎯 全球直连",
+    "DOMAIN-SUFFIX,msftncsi.com,🎯 全球直连"
+  ],
+  "env": {
+    "process": {
+      "HTTP_PROXY": {
+        "configured": true,
+        "loopback": true,
+        "port": 7897
+      },
+      "HTTPS_PROXY": {
+        "configured": true,
+        "loopback": true,
+        "port": 7897
+      },
+      "ALL_PROXY": {
+        "configured": false,
+        "loopback": false,
+        "port": null
+      },
+      "http_proxy": {
+        "configured": true,
+        "loopback": true,
+        "port": 7897
+      },
+      "https_proxy": {
+        "configured": true,
+        "loopback": true,
+        "port": 7897
+      },
+      "all_proxy": {
+        "configured": false,
+        "loopback": false,
+        "port": null
+      },
+      "NO_PROXY": {
+        "configured": true,
+        "includes_loopback": true
+      }
+    },
+    "user": {
+      "HTTP_PROXY": {
+        "configured": true,
+        "loopback": true,
+        "port": 7897
+      },
+      "HTTPS_PROXY": {
+        "configured": true,
+        "loopback": true,
+        "port": 7897
+      },
+      "ALL_PROXY": {
+        "configured": false,
+        "loopback": false,
+        "port": null
+      },
+      "http_proxy": {
+        "configured": true,
+        "loopback": true,
+        "port": 7897
+      },
+      "https_proxy": {
+        "configured": true,
+        "loopback": true,
+        "port": 7897
+      },
+      "all_proxy": {
+        "configured": false,
+        "loopback": false,
+        "port": null
+      },
+      "NO_PROXY": {
+        "configured": true,
+        "includes_loopback": true
+      }
+    }
+  },
+  "wininet": {
+    "ProxyEnable": 0,
+    "ProxyServer": {
+      "configured": true,
+      "loopback": true,
+      "port": 7897
+    },
+    "AutoConfigURL": {
+      "configured": true,
+      "loopback": true,
+      "port": 33331
+    },
+    "ProxyOverride_configured": true
+  },
+  "pac": {
+    "fixture_local_ip": "192.168.1.2",
+    "contains_steam_direct": true,
+    "fixture_evaluation": [
+      {
+        "host": "dl.delivery.mp.microsoft.com",
+        "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+      },
+      {
+        "host": "download.windowsupdate.com",
+        "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+      },
+      {
+        "host": "steamcontent.com",
+        "decision": "DIRECT"
+      },
+      {
+        "host": "steampipe.akamaized.net",
+        "decision": "DIRECT"
+      },
+      {
+        "host": "store.steampowered.com",
+        "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+      },
+      {
+        "host": "steamcommunity.com",
+        "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+      },
+      {
+        "host": "www.baidu.com",
+        "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+      },
+      {
+        "host": "www.github.com",
+        "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+      },
+      {
+        "host": "www.google.com",
+        "decision": "PROXY 127.0.0.1:7897; SOCKS5 127.0.0.1:7897; DIRECT;"
+      }
+    ]
+  },
+  "controller": {
+    "target_connections": [
+      {
+        "download": 14520,
+        "chains": [
+          "DIRECT",
+          "🎯 全球直连",
+          "Ⓜ️ 微软服务"
+        ],
+        "host": "nav-edge.smartscreen.microsoft.com",
+        "rule": "DomainKeyword",
+        "rulePayload": "microsoft",
+        "network": "tcp",
+        "upload": 13810
+      },
+      {
+        "download": 10691,
+        "chains": [
+          "DIRECT",
+          "🎯 全球直连",
+          "Ⓜ️ 微软服务"
+        ],
+        "host": "edge.microsoft.com",
+        "rule": "DomainKeyword",
+        "rulePayload": "microsoft",
+        "network": "tcp",
+        "upload": 2545
+      },
+      {
+        "download": 9000,
+        "chains": [
+          "DIRECT",
+          "🎯 全球直连",
+          "Ⓜ️ 微软服务"
+        ],
+        "host": "aks-prod-southeastasia.access-point.cloudmessaging.edge.microsoft.com",
+        "rule": "DomainKeyword",
+        "rulePayload": "microsoft",
+        "network": "tcp",
+        "upload": 5561
+      },
+      {
+        "download": 15515,
+        "chains": [
+          "DIRECT",
+          "🎯 全球直连",
+          "Ⓜ️ 微软服务"
+        ],
+        "host": "edge.microsoft.com",
+        "rule": "DomainKeyword",
+        "rulePayload": "microsoft",
+        "network": "tcp",
+        "upload": 2731
+      }
+    ],
+    "connection_count": 108,
+    "version": {
+      "version": "ab32ad2d",
+      "meta": true
+    },
+    "groups": {
+      "🎯 全球直连": {
+        "now": "DIRECT",
+        "type": "Selector"
+      },
+      "🐟 漏网之鱼": {
+        "now": "🚀 节点选择",
+        "type": "Selector"
+      },
+      "🍃 应用净化": {
+        "now": "REJECT",
+        "type": "Selector"
+      },
+      "📲 电报信息": {
+        "now": "🚀 节点选择",
+        "type": "Selector"
+      },
+      "Ⓜ️ 微软服务": {
+        "now": "🎯 全球直连",
+        "type": "Selector"
+      },
+      "♻️ 自动选择": {
+        "now": "香港 05（专线；电信）",
+        "type": "URLTest"
+      },
+      "🛑 全球拦截": {
+        "now": "REJECT",
+        "type": "Selector"
+      },
+      "🚀 节点选择": {
+        "now": "香港 05（专线；电信）",
+        "type": "Selector"
+      },
+      "🟦 专线节点": {
+        "now": "台湾 02（专线；智能）",
+        "type": "URLTest"
+      },
+      "🟨 直连节点": {
+        "now": "DIRECT",
+        "type": "URLTest"
+      },
+      "🌍 国外媒体": {
+        "now": "🚀 节点选择",
+        "type": "Selector"
+      },
+      "📢 谷歌FCM": {
+        "now": "🚀 节点选择",
+        "type": "Selector"
+      },
+      "🍎 苹果服务": {
+        "now": "🚀 节点选择",
+        "type": "Selector"
+      },
+      "🟩 公网节点": {
+        "now": "台湾 01（公网；智能）",
+        "type": "URLTest"
+      }
+    }
+  }
+}

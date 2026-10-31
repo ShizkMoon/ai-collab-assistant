@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": ";; connection timed out; no servers could be reached\n\n",
+  "stderr": "udhcpc: started, v1.38.0\nudhcpc: broadcasting discover\nudhcpc: no lease, failing\nnslookup: write to '127.0.0.1': Connection refused\n"
+}

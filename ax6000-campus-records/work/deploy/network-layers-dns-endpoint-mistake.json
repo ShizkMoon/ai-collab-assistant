@@ -1,0 +1,331 @@
+{
+  "scope": "16 router DoH requests and 4 Windows LAN DoT requests; fresh connections; different origins; no production DNS change; no ranking claim",
+  "records": [
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "alidns",
+      "domain": "www.baidu.com",
+      "round": 1,
+      "exit": 0,
+      "http": 200,
+      "connect_ms": 10.64,
+      "tls_cumulative_ms": 70.51,
+      "total_ms": 92.39,
+      "verify": 0,
+      "rcode": 0,
+      "answer_count": 2,
+      "a": [
+        "183.2.172.177"
+      ]
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "dnspod",
+      "domain": "www.baidu.com",
+      "round": 1,
+      "exit": 28,
+      "http": 0,
+      "connect_ms": 0.0,
+      "tls_cumulative_ms": 0.0,
+      "total_ms": 3001.59,
+      "verify": 0
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "alidns",
+      "domain": "www.bilibili.com",
+      "round": 1,
+      "exit": 0,
+      "http": 200,
+      "connect_ms": 10.24,
+      "tls_cumulative_ms": 68.69,
+      "total_ms": 79.06,
+      "verify": 0,
+      "rcode": 0,
+      "answer_count": 11,
+      "a": [
+        "14.17.92.70",
+        "14.17.92.71",
+        "14.17.92.72",
+        "14.17.92.73",
+        "14.17.92.74",
+        "58.63.237.115",
+        "58.63.237.162",
+        "58.63.237.169",
+        "58.63.237.245",
+        "58.63.237.26"
+      ]
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "dnspod",
+      "domain": "www.bilibili.com",
+      "round": 1,
+      "exit": 28,
+      "http": 0,
+      "connect_ms": 0.0,
+      "tls_cumulative_ms": 0.0,
+      "total_ms": 3001.59,
+      "verify": 0
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "alidns",
+      "domain": "www.jd.com",
+      "round": 1,
+      "exit": 0,
+      "http": 200,
+      "connect_ms": 8.03,
+      "tls_cumulative_ms": 64.62,
+      "total_ms": 73.23,
+      "verify": 0,
+      "rcode": 0,
+      "answer_count": 4,
+      "a": [
+        "119.147.159.135"
+      ]
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "dnspod",
+      "domain": "www.jd.com",
+      "round": 1,
+      "exit": 28,
+      "http": 0,
+      "connect_ms": 0.0,
+      "tls_cumulative_ms": 0.0,
+      "total_ms": 3001.6,
+      "verify": 0
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "alidns",
+      "domain": "dl.delivery.mp.microsoft.com",
+      "round": 1,
+      "exit": 0,
+      "http": 200,
+      "connect_ms": 7.52,
+      "tls_cumulative_ms": 63.51,
+      "total_ms": 71.04,
+      "verify": 0,
+      "rcode": 0,
+      "answer_count": 6,
+      "a": [
+        "113.59.44.199",
+        "113.59.44.201",
+        "113.59.44.202"
+      ]
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "dnspod",
+      "domain": "dl.delivery.mp.microsoft.com",
+      "round": 1,
+      "exit": 28,
+      "http": 0,
+      "connect_ms": 0.0,
+      "tls_cumulative_ms": 0.0,
+      "total_ms": 3001.91,
+      "verify": 0
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "dnspod",
+      "domain": "www.baidu.com",
+      "round": 2,
+      "exit": 28,
+      "http": 0,
+      "connect_ms": 0.0,
+      "tls_cumulative_ms": 0.0,
+      "total_ms": 3001.61,
+      "verify": 0
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "alidns",
+      "domain": "www.baidu.com",
+      "round": 2,
+      "exit": 0,
+      "http": 200,
+      "connect_ms": 9.36,
+      "tls_cumulative_ms": 67.04,
+      "total_ms": 76.64,
+      "verify": 0,
+      "rcode": 0,
+      "answer_count": 2,
+      "a": [
+        "183.2.172.177"
+      ]
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "dnspod",
+      "domain": "www.bilibili.com",
+      "round": 2,
+      "exit": 28,
+      "http": 0,
+      "connect_ms": 0.0,
+      "tls_cumulative_ms": 0.0,
+      "total_ms": 3001.62,
+      "verify": 0
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "alidns",
+      "domain": "www.bilibili.com",
+      "round": 2,
+      "exit": 0,
+      "http": 200,
+      "connect_ms": 8.24,
+      "tls_cumulative_ms": 64.49,
+      "total_ms": 72.98,
+      "verify": 0,
+      "rcode": 0,
+      "answer_count": 11,
+      "a": [
+        "14.17.92.70",
+        "14.17.92.71",
+        "14.17.92.72",
+        "14.17.92.73",
+        "14.17.92.74",
+        "58.63.237.115",
+        "58.63.237.162",
+        "58.63.237.169",
+        "58.63.237.245",
+        "58.63.237.26"
+      ]
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "dnspod",
+      "domain": "www.jd.com",
+      "round": 2,
+      "exit": 28,
+      "http": 0,
+      "connect_ms": 0.0,
+      "tls_cumulative_ms": 0.0,
+      "total_ms": 3001.61,
+      "verify": 0
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "alidns",
+      "domain": "www.jd.com",
+      "round": 2,
+      "exit": 0,
+      "http": 200,
+      "connect_ms": 6.63,
+      "tls_cumulative_ms": 60.98,
+      "total_ms": 68.0,
+      "verify": 0,
+      "rcode": 0,
+      "answer_count": 4,
+      "a": [
+        "119.147.159.135"
+      ]
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "dnspod",
+      "domain": "dl.delivery.mp.microsoft.com",
+      "round": 2,
+      "exit": 28,
+      "http": 0,
+      "connect_ms": 0.0,
+      "tls_cumulative_ms": 0.0,
+      "total_ms": 3001.64,
+      "verify": 0
+    },
+    {
+      "transport": "DoH",
+      "origin": "router-bound-main-WAN",
+      "provider": "alidns",
+      "domain": "dl.delivery.mp.microsoft.com",
+      "round": 2,
+      "exit": 0,
+      "http": 200,
+      "connect_ms": 7.47,
+      "tls_cumulative_ms": 63.18,
+      "total_ms": 70.78,
+      "verify": 0,
+      "rcode": 0,
+      "answer_count": 13,
+      "a": [
+        "117.31.116.56",
+        "119.147.142.189",
+        "121.12.67.12",
+        "121.14.7.13",
+        "125.88.64.72",
+        "14.152.51.147",
+        "14.152.51.148",
+        "14.29.101.160",
+        "58.63.255.231"
+      ]
+    },
+    {
+      "transport": "DoT",
+      "origin": "Windows-LAN-current-rules",
+      "provider": "alidns",
+      "domain": "www.baidu.com",
+      "round": 1,
+      "tls_verified": true,
+      "rcode": 0,
+      "answer_count": 2,
+      "a": [
+        "183.2.172.177"
+      ],
+      "exit": 0,
+      "total_ms": 181.65
+    },
+    {
+      "transport": "DoT",
+      "origin": "Windows-LAN-current-rules",
+      "provider": "alidns",
+      "domain": "www.baidu.com",
+      "round": 2,
+      "tls_verified": true,
+      "rcode": 0,
+      "answer_count": 2,
+      "a": [
+        "183.2.172.177"
+      ],
+      "exit": 0,
+      "total_ms": 101.71
+    },
+    {
+      "transport": "DoT",
+      "origin": "Windows-LAN-current-rules",
+      "provider": "dnspod",
+      "domain": "www.baidu.com",
+      "round": 1,
+      "exit": 1,
+      "error_type": "TimeoutError",
+      "total_ms": 4019.54
+    },
+    {
+      "transport": "DoT",
+      "origin": "Windows-LAN-current-rules",
+      "provider": "dnspod",
+      "domain": "www.baidu.com",
+      "round": 2,
+      "exit": 1,
+      "error_type": "TimeoutError",
+      "total_ms": 4006.33
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "packages": [
+    {
+      "name": "kmod-ifb",
+      "file": "kmod-ifb-6.18.55-r1.apk",
+      "bytes": 4399,
+      "sha256": "9208237e9449800a2f9d0734101f81eef0995f2fb9991df954a69804ed69dd1b",
+      "url": "https://downloads.openwrt.org/snapshots/targets/mediatek/filogic/kmods/6.18.55-1-b218d80d146ac6c85db4989df73b5de9/kmod-ifb-6.18.55-r1.apk"
+    },
+    {
+      "name": "kmod-sched-cake",
+      "file": "kmod-sched-cake-6.18.55-r1.apk",
+      "bytes": 18528,
+      "sha256": "e3c033179df761248b6a2a86f88d845651017a8cb247d6879cc1958e18ab4da2",
+      "url": "https://downloads.openwrt.org/snapshots/targets/mediatek/filogic/kmods/6.18.55-1-b218d80d146ac6c85db4989df73b5de9/kmod-sched-cake-6.18.55-r1.apk"
+    },
+    {
+      "name": "kmod-tcp-bbr",
+      "file": "kmod-tcp-bbr-6.18.55-r1.apk",
+      "bytes": 5915,
+      "sha256": "e486eb1558f21b4b04312dbeffcc0141c0554e2f5be400ddb3f118c26461dedb",
+      "url": "https://downloads.openwrt.org/snapshots/targets/mediatek/filogic/kmods/6.18.55-1-b218d80d146ac6c85db4989df73b5de9/kmod-tcp-bbr-6.18.55-r1.apk"
+    }
+  ],
+  "signature_verification": {
+    "exit": 3,
+    "stdout": "/tmp/codex-next/kmod-ifb-6.18.55-r1.apk: UNTRUSTED signature\n/tmp/codex-next/kmod-sched-cake-6.18.55-r1.apk: UNTRUSTED signature\n/tmp/codex-next/kmod-tcp-bbr-6.18.55-r1.apk: UNTRUSTED signature\n",
+    "stderr": ""
+  },
+  "simulation": {
+    "exit": 99,
+    "stdout": "",
+    "stderr": "ERROR: /tmp/codex-next/kmod-ifb-6.18.55-r1.apk: UNTRUSTED signature\n"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "permanent_boot_verified": true,
+  "board": {
+    "kernel": "6.18.55",
+    "hostname": "OpenWrt",
+    "system": "ARMv8 Processor rev 4",
+    "model": "Xiaomi Redmi Router AX6000 (stock layout)",
+    "board_name": "xiaomi,redmi-router-ax6000-stock",
+    "rootfs_type": "squashfs",
+    "release": {
+      "distribution": "OpenWrt",
+      "version": "SNAPSHOT",
+      "firmware_url": "https://downloads.openwrt.org/",
+      "revision": "r37185-f29dfe25ba",
+      "target": "mediatek/filogic",
+      "description": "OpenWrt SNAPSHOT r37185-f29dfe25ba",
+      "builddate": "1791746961"
+    }
+  },
+  "root_password_set": true,
+  "management_password_same_as_oem": true,
+  "luci_language": "zh_cn",
+  "radios": {
+    "radio0": {
+      "up": true,
+      "pending": false,
+      "disabled": false,
+      "band": "2g",
+      "channel": "1",
+      "htmode": "HE20",
+      "country": "CN",
+      "interfaces": [
+        {
+          "ifname": "phy0-ap0",
+          "ssid": "rb06_minet_2e65",
+          "encryption": "sae-mixed"
+        }
+      ]
+    },
+    "radio1": {
+      "up": true,
+      "pending": false,
+      "disabled": false,
+      "band": "5g",
+      "channel": "36",
+      "htmode": "HE80",
+      "country": "CN",
+      "interfaces": [
+        {
+          "ifname": "phy1-ap0",
+          "ssid": "rb06_minet_2e65",
+          "encryption": "sae-mixed"
+        }
+      ]
+    }
+  },
+  "lan_address": "192.168.1.1"
+}
