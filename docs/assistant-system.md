@@ -2,9 +2,9 @@
 
 ## 组成
 
-- 交互层：各 CLI / 桌面 agent，统一规则入口（见[多 agent 协作](agent-collaboration.md)）。
+- 交互层：DS-Bot Web/Desktop（见 [DS-Bot 入口层选型](ds-bot-entry.md)）与各 CLI / 桌面 agent，统一规则入口（见[多 agent 协作](agent-collaboration.md)）。
 - 常驻层：需要持续在线的服务用用户级 systemd 单元管理，开机自启、静默运行。
-- 入口层：`~/.local/bin/` 的薄包装脚本，只做环境修正与转发，不承载逻辑。
+- 命令入口层：`~/.local/bin/` 的薄包装脚本，只做环境修正与转发，不承载逻辑。
 - 记录层：每次维护/部署留下任务记录，完成后归档，配置源与历史分离。
 
 ## 凭证与状态

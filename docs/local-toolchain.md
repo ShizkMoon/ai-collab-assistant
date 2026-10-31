@@ -64,6 +64,26 @@ agent 驱动优先的软件选择:能写脚本的不开 GUI,能开 GUI 的不靠
 
 ArtCraft 各应用与领域需求的对应:PhotoCraft(位图)、VectorCraft(矢量)、FigCraft(UI 设计)、LightCraft(图库+RAW 冲印)、FilmCraft(视频剪辑)、EffectCraft(动效/VFX)、SoundCraft(DAW)、DesignCraft(排版)、WordCraft/GridCraft/DeckCraft/PdfCraft/CADCraft(办公与制图)。多数还在 early alpha / in development,装 Launcher 后逐个验证 CLI 控制通道再升档。
 
+| 应用 | 领域 | 版本 | Stars | CLI | 本机 |
+| --- | --- | --- | --- | --- | --- |
+| PhotoCraft | 位图/PSD 编辑 | 0.16.0 | 73.6k | ✅ | ✅ 已装 |
+| VectorCraft | 矢量插画 | 0.17.0 | 10.8k | ✅ | — |
+| FilmCraft | 非线性剪辑 | 0.13.0 | 16.5k | ✅ | — |
+| LightCraft | 图库+RAW 冲印 | 0.14.0 | 14.8k | ✅ | — |
+| PdfCraft | PDF 阅读/编辑 | 0.14.0 | 18.1k | ✅ | — |
+| EffectCraft | 动效/VFX 合成 | 0.17.0 | 8.0k | ✅ | — |
+| DesignCraft | 版面排版 | 0.13.0 | 4.8k | ✅ | — |
+| FigCraft | UI 设计/原型 | 0.11.2 | 3.6k | ✅ | — |
+| WordCraft | 文字处理 | 0.11.0 | 16.3k | ✅ | — |
+| SoundCraft | DAW | 0.13.1 | 3.8k | ✅ | — |
+| DeckCraft | 演示文稿 | 0.11.1 | 4.3k | ✅ | — |
+| CADCraft | CAD 制图 | 0.13.0 | 6.9k | ✅ | — |
+| GridCraft | 电子表格 | 0.12.1 | 6.6k | ✅ | — |
+
+13 个应用统一发版节奏(2026-10-25 同一批),每个都带 `linux-x86_64.tar.gz` + `*-cli` 无头包,
+官方口径是"agent-ready"。`AniCraft`(2D 动画)在 GitHub 上有仓库但还没发版、也没进官网 lineup。
+ArtCraft 主仓(artcraft, v0.41.0)是引擎/生成式那套,不提供 Linux 原生包。
+
 ## 办公与文档
 
 ArtCraft 已覆盖大半;补两个开源件:LibreOffice(headless `--convert-to` 批量转换,有 harness)和 PdfCraft 之外的 PDF 处理可用 `qpdf`/`pdftk`。
@@ -96,6 +116,7 @@ ArtCraft 已覆盖大半;补两个开源件:LibreOffice(headless `--convert-to` 
 - CLI-Anything:`cli-hub` 本体 + `cli-hub-meta-skill`(universal+devin);已配 harness:calibre
 - Calibre 9.16.0(`speechSupport=false` 绕过 piper-tts 上游测试失败;要 TTS 时再开)
 - ArtCraft Launcher 0.5.1 tarball 实测:二进制在 NixOS 直接可跑;Launcher 本身是 GUI(无 headless),各应用的 CLI/JSON 通道要逐个装出来验证
+- **PhotoCraft 0.16.0 已装**(2026-10-27,已从 0.7.0 升级):官方 Linux tarball 装到 `~/.local/opt/photocraft-0.16.0`,`photocraft`/`photocraft-cli` 已进 `~/.local/bin` 并写好 desktop 条目。GUI 需 wrapper 补 `LD_LIBRARY_PATH` 才能找到 `libwayland-client.so.0`(见 `~/.agents/notes/gotchas.md`);`photocraft-cli` 无头直跑,`mcp`/`serve` 即 agent 通道,convert/info/run/batch 已验证
 
 ## 维护约定
 

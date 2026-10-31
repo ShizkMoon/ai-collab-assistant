@@ -8,7 +8,7 @@
 
 | 入口 | 动作 |
 | --- | --- |
-| **云端 Hermes** | 用户在手机/IM 发书(EPUB/TXT/MOBI/AZW3/PDF/CBZ…),Hermes 解析附件 → 生成任务简报下发本机 |
+| **云端 DS-Bot** | 用户在手机浏览器/桌面把书交给 DS-Bot(EPUB/TXT/MOBI/AZW3/PDF/CBZ…),DS-Bot 生成任务简报下发本机 |
 | **本地 Calibre** | 书库新增书籍(calibre 本身无 hook,由本地 watcher/inotify 或 `cli-anything-calibre` 轮询检测新书)→ 触发同一工作流 |
 
 下发即监督:整段流程走 Orca `orchestration`(Run → worker → `worker_done` → 回报),每阶段产出证据,不留"静默完成"。
@@ -67,14 +67,14 @@
 
 ## 与现有系统的衔接
 
-- **编排**:就是 `orchestration run-create` + worker;Calibre watcher 是"事件源",Hermes 是"入口"。
+- **编排**:就是 `orchestration run-create` + worker;Calibre watcher 是"事件源",DS-Bot 是"入口"。
 - **执行工具**:`calibredb`/`ebook-convert`/`ebook-meta`/`epubcheck`/`pandoc`/`weasyprint`(或 typst)+ worker 的 LLM 能力做语义清洗。
-- **呈现**:IM 渠道给"清洗报告"文本图;App/Web 渠道给书籍卡片(封面+清洗 diff 摘要+成品下载/推送按钮)。
+- **呈现**:DS-Bot Web/Desktop 给书籍卡片(封面+清洗 diff 摘要+成品下载/推送按钮);IM 渠道需另装 DSH IM 插件(如 `@xmanrui/dsh-im`),不在 DS-Bot 自带范围。
 - **固化的细节**(以原生文件为准):书库 `/home/shizuku/EBook/Calibre`,Kindle 侧 `/mnt/us/Books/` 是 KOReader 的 `home_dir`,字体思源宋体/Literata/苹方已在 `/mnt/us/fonts/`。
-- **尚缺**:云端服务器(书成品托管)+ KOSync 账号——这两件等云端 Hermes 就绪一起上,现在不部署。
+- **尚缺**:云端服务器(书成品托管)+ KOSync 账号——这两件等 DS-Bot 常驻部署就绪一起上,现在不部署。
 
 ## 未决项
 
 - 元数据抓取的来源站(起点/番茄/独阅读等网文站各有反爬,要不要上 OpenCLI 走浏览器)
 - "顶级质量"的更细验收(要不要自动跑文字密度/排版指标的客观评分)
-- 推送端的云端选型(对象存储/CDN vs 简易 HTTP,取决于 Hermes 部署形态)
+- 推送端的云端选型(对象存储/CDN vs 简易 HTTP,取决于 DS-Bot 部署形态)

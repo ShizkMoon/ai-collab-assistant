@@ -7,9 +7,11 @@
 - [设计原则](docs/principles.md)：约束先行、单一来源、作用域分层、可回退
 - [多 agent 协作](docs/agent-collaboration.md)：全局规则统一、入口与上下文的分层加载、任务边界
 - [助理系统架构](docs/assistant-system.md)：常驻服务、入口包装、状态与凭证的归属、自动化边界
-- [系统拓扑](docs/system-topology.md)：云端 Hermes 入口、本地 Orca 编排、worker 执行的分层与下发链路
+- [系统拓扑](docs/system-topology.md)：DS-Bot 入口、本地 Orca 编排、worker 执行的分层与下发链路
+- [DS-Bot 入口层选型](docs/ds-bot-entry.md)：为什么用它接替 Hermes、DSH 插件边界、Linux/Wayland、服务器规格、Docker/SSH 接入契约与迁移风险
+- [AX6000 校园网路由](docs/ax6000-router.md)：路由不搬到 N100 的理由、目标拓扑、N100 只做入口宿主的规格与三条硬约束
 - [本机工具链选型](docs/local-toolchain.md)：CLI/脚本优先的软件清单——游戏开发、视频摄影、游戏、音乐、美术
-- [书籍精修流水线](docs/book-polish-pipeline.md)：云端/Calibre 双触发，清洗/重排/元数据/成品/推送全自动的设计
+- [书籍精修流水线](docs/book-polish-pipeline.md)：DS-Bot/Calibre 双触发，清洗/重排/元数据/成品/推送全自动的设计
 - [电子墨水改造两条路线](docs/eink-devkit-plan.md)：KPW5 拆件自研 vs 现成套件——先买套件保体验，屏改造当并行工程
 - [墨水屏显示模块产品线](docs/eink-display-modules.md)：标签/桌面卡/看板/大标牌四梯队，全部国内现货+高性价比——拆机 ESL 价签(OEPL 开源固件) + LilyGo T5 + 微雪/佳显模组，模块作哑渲染终端，KPW5 逆向当选型范例
 - [墨水屏模块体验设计](docs/eink-modules-ux.md)：环境智能体验原则(2秒可读/零打扰/永远在线/一屏一事/无输入)+ 点位地图 + 筛过的 OEPL 兼容型号采购清单 + ¥300-500 最小落地路径
@@ -28,6 +30,12 @@
 - [智能家居落地技术档案](docs/home-automation-stack.md)：NixOS HA 部署形态对比、mosquitto/zigbee2mqtt/esphome 真实选项名与 systemd 细节、ZBDongle-E/P 与 LYWSD03MMC/LD2410 实操、自动化三层兜底、Zigbee 密钥与 Tailscale 安全面、断电断网恢复矩阵
 - [ESL 价签实操档案](docs/esl-tag-ops.md)：ZBS243/TLSR8359/MSP430 等芯片族刷机路径与救砖、OTA 真实边界(未刷标签/锁区/可配网)、不开壳辨 SoC、电池与天线细节、闲鱼问卖家 5 问+收货 10 分钟检查、2021-2026 成交价锚点、灰屏/虚电/改版焊盘等坑实录
 
+## 归档子树
+
+> 从独立仓库并入的设备记录。用 `git subtree` 保留完整提交历史；设备细节与实验原始证据以子树内文档为准。
+
+- [ax6000-campus-records/](ax6000-campus-records/README.md)：Redmi AX6000 校园网部署与性能记录——四路 ESurfing 自动认证、mwan3 分流、TTL64、OpenClash 回滚、WED/AQL/CAKE 实验批次与恢复验证。设计结论见 [AX6000 校园网路由](docs/ax6000-router.md)。
+
 ## 工具层（可执行工具不属本仓库）
 
 - **Shared RE Toolkit**：通用固件/设备/软件逆向 MCP 服务（15 工具）——已迁至
@@ -39,5 +47,6 @@
 
 - 本仓库只放设计文档；**可执行工具归 `/data/Agent/nixpkgs-shizuku`**（标准 nix 包），
   agent 契约归 `~/.config/devin/skills/`，MCP 注册归 `~/.config/devin/mcp_config.json`。
+- 设备实验原始记录放在归档子树（`ax6000-campus-records/`），用 `git subtree` 同步，不在本仓库重复其内容。
 - 文档用中文撰写；文件名、目录用稳定的英文 slug。
 - 涉及本机实际配置时，以对应系统的原生文件为准，本仓库记录设计意图与决策，不复制运行中的配置。
