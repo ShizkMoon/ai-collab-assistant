@@ -1,119 +1,95 @@
-# DS-Bot 入口
+# DS-Bot 入口部署与接入
 
-> 状态：选型已定，未部署 · 角色：入口和出口（见 [架构总览 §2](architecture.md)）
+> 状态：选型已定，待部署 · 角色：常驻对话入口与结果通知出口（见 [架构总览 §2](architecture.md#2-意图分类与结构化路由)）
 >
-> 结论：入口从 Hermes 换成 DS-Bot。DS-Bot 负责**听懂你的话**（从 [能力目录](capabilities.md) 里选出 `kind` 并入账）和**把结果说清楚**；任务执行仍由 Orca 管理。需要接入更多 IM 平台（特别是群聊）时，加上 AstrBot。
+> 选型结论：采用 DS-Bot 替代早期规划的 Hermes 作为常驻入口。DS-Bot 负责**解析自然语言意图**（从 [能力目录](capabilities.md) 匹配 `kind` 并录入任务库）以及**向用户反馈执行结果与交互卡片**；底层重度任务仍由工作站上的 Orca 编排执行。需要接入更多即时通讯平台（尤其是群聊）时，配合部署 AstrBot。
 >
-> 核对基线：2026-10-28，DS-Bot `main` 提交 `4a7b550`，`ds-bot` 包版本 `0.2.3`；插件文档验证的是 DSH `0.2.1-rc.2`，Dockerfile 默认用 DSH `0.2.0-rc.2`。目前是早期预览版。
+> 版本核对基线（2026-10-28）：DS-Bot `main` 分支提交 `4a7b550`，`ds-bot` 包版本 `0.2.3`，配套 DeepSeek Harness（DSH）版本 `0.2.0-rc.2` / `0.2.1-rc.2`。
 
-## 1. 它是什么
+## 1. 组件功能定位
 
-DS-Bot 是 [DeepSeek Harness（DSH）](https://github.com/deepseek-ai/deepseek-harness) 的 Bot 团队插件，运行在 DSH Web / Desktop 里，也有 Docker 版。它是 Apache-2.0 许可的社区项目，不是 DeepSeek 官方产品。
+DS-Bot 是运行在 [DeepSeek Harness（DSH）](https://github.com/deepseek-ai/deepseek-harness) Web / Desktop 及容器环境中的多角色插件（Apache-2.0 开源许可，社区维护项目）。
 
-| 入口需要 | DS-Bot 提供 |
+| 入口需求 | DS-Bot 对应能力 |
 | --- | --- |
-| 任何设备都能用 | Web UI（手机用浏览器）、Docker 常驻、桌面应用 |
-| 人格化交互 | 每个 Bot 有名字、角色、instructions、模型；主 Bot 叫 Chief |
-| 长期记忆 | Bot 私有记忆、群聊记忆、团队共享记忆（Markdown） |
-| 理解和分派 | Main Bot、群聊、`@` 成员、`message_bot`、handoff、定时任务 |
-| 扩展 | DSH 插件，以及 MCP server、skill、pack、GitHub connector |
-| 卡片交互 | 卡片、表格、进度、选项、确认、短表单、widget |
+| 多端随时访问 | 提供响应式 Web UI（手机浏览器可直接访问）、Docker 容器化常驻与 Linux 桌面客户端 |
+| 角色与提示词配置 | 支持配置多个独立角色（主入口角色为 Chief），各自绑定提示词与模型 |
+| 会话记忆 | 内置私有记忆、群组记忆与共享 Markdown 记忆文件 |
+| 意图路由与协作 | 支持主 Bot 分发、`@` 提及调用、`message_bot` 转发、Handoff 交接与定时任务 |
+| 能力扩展 | 支持挂载 DSH 插件、MCP Server、Skill 与 GitHub Connector |
+| 结构化交互卡片 | 原生支持确认按钮、选项列表、进度条、表格与短表单卡片 |
 
-现有的 Hermes 插件不能直接搬过来，要改写成 DSH 插件、MCP 或 skill。
+## 2. 功能缺口与配套补充方案
 
-## 2. 它缺的部分，以及用什么补
-
-| 缺口 | 补法（复用优先） |
+| 存在缺口 | 补充方案（优先复用现成组件） |
 | --- | --- |
-| 没有自带 IM 通道 | 私聊用 `@xmanrui/dsh-im`；群聊和更多平台用 **AstrBot**（QQ、企业微信、飞书、钉钉、公众号、Telegram） |
-| 没有手机系统推送 | ntfy / KDE Connect / HA companion |
-| Docker 版里没有 Bot 浏览器 | 需要浏览器的任务派给本机 worker |
-| 容器里没有 SSH 客户端 | 自建镜像层补上 `openssh-client` |
-| 版本早期，绑定 DSH | DS-Bot 和 DSH 一起锁定版本，升级前先跑一遍入口链路 |
+| 原生仅提供 Web / Desktop 界面，无内置 IM 通道 | 私聊接入 `@xmanrui/dsh-im` 插件；群聊与更多平台（QQ、飞书、企业微信、Telegram 等）配合部署 **AstrBot** |
+| 无原生移动端系统级推送 | 接入自托管 **ntfy**、KDE Connect 与 Home Assistant Companion |
+| Docker 容器版不含本地桌面浏览器 | 需要操控桌面浏览器的任务直接派发给工作站本地 Worker 执行 |
+| 官方基础镜像未预装 SSH 客户端 | 在自定义容器镜像层中安装 `openssh-client` |
+| 处于早期迭代期，与 DSH 版本强耦合 | 在 NixOS 配置中同时锁定 DS-Bot 与 DSH 镜像标签，升级前先在测试环境验证入口链路 |
 
-## 3. IM 接入
+## 3. 即时通讯（IM）接入路径
 
-- DS-Bot 原生只有 Web / Desktop。`POST /api/bot` 是内部通道，不是公开 API。
-- `@xmanrui/dsh-im` 5.7.0 的"绑定bot"页可以把 IM 私聊绑到 DS-Bot 的 Bot 上，覆盖微信、飞书、钉钉、企业微信、QQ、Slack 等。但它只支持私聊，而且和 DS-Bot 版本强绑定，属于实验能力，需要实测。
-- 其他 DSH IM 网关（`dsh-im-gateway`、`dsh-telegram-channel`、`@addozhang/dsh-discord`）只能绑 DSH Session，不理解 DS-Bot 的 Bot 语义。
-- **建议**：私聊先试 `@xmanrui/dsh-im`；需要群聊或更多平台时，在 N100 上加一个 AstrBot，让它直接调用 `ev add` 和 Orca 薄入口，不必自己写桥接。
+- DS-Bot 原生提供 Web 与 Desktop 界面，内部接口 `POST /api/bot` 并非面向外部平台的通用 Webhook。
+- `@xmanrui/dsh-im`（v5.7.0）支持将微信、飞书、钉钉、企业微信、QQ、Slack 等平台的**私聊会话**绑定至 DS-Bot 的指定角色上，但不支持群聊，且与 DS-Bot 版本绑定较紧，部署时需实测验证。
+- 其他通用 DSH IM 网关（如 `dsh-im-gateway`、`dsh-telegram-channel`、`@addozhang/dsh-discord`）仅能绑定普通 DSH Session，无法直接映射 DS-Bot 的多角色语义。
+- **实施方案**：私聊优先测试 `@xmanrui/dsh-im`；需要群聊或更稳定的多平台接入时，在 N100 上并行部署 AstrBot，让 AstrBot 直接调用 `ev add` 与工作站受限入口脚本。
 
-## 4. 桌面端
+## 4. Linux 桌面端实测（Wayland）
 
-### Linux / Wayland（以 Hyprland 实测；Plasma 6 同样是 Wayland 会话）
+DS-Bot Desktop 提供 Linux `x86_64` AppImage 与 `.deb` 软件包，内置 Electron 版本为 `44.7.0`。自 Electron 38 起，Linux 下默认启用 `--ozone-platform=auto`，在 `XDG_SESSION_TYPE=wayland` 会话（Hyprland 或 KDE Plasma 6 Wayland）中默认使用原生 Wayland 渲染。
 
-DS-Bot Desktop 的 Linux 包是 x64 AppImage 和 deb，Electron 版本为 `44.7.0`。从 Electron 38 起，Linux 默认使用 `--ozone-platform=auto`：在 `XDG_SESSION_TYPE=wayland` 的会话里直接走原生 Wayland；DS-Bot 没有强制 X11 的参数。
+2026-10-29 本机 Wayland（1.5x 分数缩放）实测 DS-Bot `0.2.3` AppImage：窗口正常启动，Chromium 日志确认运行于 `ui/ozone/platform/wayland` 原生模式。
 
-2026-10-29 在 Hyprland/Wayland、1.5x 分数缩放下实测 DS-Bot `0.2.3` AppImage：窗口正常启动，Chromium 日志明确出现 `ui/ozone/platform/wayland` 和 `wayland_screen.cc`，不是 XWayland。
+NixOS 环境使用注意事项：
 
-实际使用注意：
+- NixOS 下直接运行 AppImage 可能缺少 `libfuse.so.2`，可通过 `--appimage-extract-and-run` 启动、配置 `programs.appimage.enable = true` 或直接解包 `.deb` 运行；日常使用不要长期添加 `--no-sandbox` 参数。
+- 系统托盘：KDE Plasma 6 原生支持 StatusNotifierItem 托盘图标；在无托盘扩展的窗口管理器下，关闭窗口会自动退化为弹窗询问是否退出进程。
+- 若遇到特定显卡驱动下的 Wayland 渲染异常，可添加 `--ozone-platform=x11` 临时回退至 XWayland。
 
-- NixOS 上 AppImage 可能缺 `libfuse.so.2`，用 `--appimage-extract-and-run` 或改装 deb；这是 FUSE 运行时问题，不是 Wayland 兼容问题。
-- 我的测试命令带有 `--appimage-extract-and-run --no-sandbox`，仅用于临时目录验证；日常优先用 deb，或给 AppImage 配好 FUSE 2，不要长期关闭 sandbox。
-- 托盘依赖桌面环境。GNOME/KDE 需要托盘扩展；没有托盘时，DS-Bot 会把关闭窗口改成询问是否退出，这是应用自己的回退路径。
-- 如果遇到某显卡/合成器兼容问题，可以临时用 `--ozone-platform=x11` 退回 XWayland；这条回退路径本次未实测。
+## 5. N100 容器化常驻部署
 
-- 在 Plasma 下，托盘由系统自带支持。
+常驻入口部署在 AX6000 局域网下的 **N100 迷你主机**（16GB 内存）上。DSH Web + DS-Bot + IM 网关 + `agent-reach` + 无头 Chromium 合计常驻内存约 2–4GB，16GB 内存留有充足余量。
 
-## 5. 部署
+- 在 N100 的 NixOS 配置中通过 `virtualisation.oci-containers` 运行 DS-Bot 容器（官方提供 `linux/amd64` 镜像），并将主机接入 Tailscale。
+- 持久化挂载 `/data`、`/workspace` 与浏览器 Profile 目录；通过 `tailscale serve` 提供 HTTPS 访问并配置 `DSH_TRUSTED_HOST`，不向局域网或公网裸露 `13080` 端口。
+- `agent-reach` 共用容器内的 Chromium 实例（配置 `--shm-size=1g`）并持久化 Cookie；首次扫码登录或触发验证码时通过局域网 noVNC 手动完成。
+- 在工作站桌面使用 DS-Bot Desktop 时，避免与 N100 容器同时读写同一份 `~/.dsh` 目录。
 
-常驻宿主定为接在 AX6000 后面的 **N100**（16GB），只承担入口，不做路由。DS-Bot 本身没有公布系统要求；按 DSH Web + DS-Bot + IM 网关 + AgentReach + 一个浏览器估算，**4C8G 能跑，16GB 比较舒服**。不需要买云主机。
+## 6. 跨机调用工作站边界
 
-- 在 N100 的 NixOS 上用 `virtualisation.oci-containers` 运行 DS-Bot 容器（只发布了 `linux/amd64` 镜像），并加入 Tailscale。
-- 持久化 `/data`、`/workspace` 和浏览器 profile；HTTPS 通过 Tailscale 提供，配置 `DSH_TRUSTED_HOST`，不要把 13080 端口直接暴露出去。
-- AgentReach 共用一个 Chromium（`shm-size=1g`），登录态要持久化。遇到平台登录或验证码时，用 noVNC 由你本人完成。
-- 日常在电脑前也可以直接用 DS-Bot Desktop，它能直接操作本机 shell、文件和 Bot 浏览器。Desktop 和 Docker 不要同时写同一份 `~/.dsh`。
+DS-Bot 容器仅能直接操作容器自身环境。当任务需要工作站算力或本地文件时，容器通过 Tailscale SSH 调用工作站 `~/.local/bin/` 下的受限入口脚本（仅开放创建任务、查询状态、读取输出、发送跟进四项子命令），由该脚本调用工作站本机 `orca` CLI 派发 Worker。
 
-## 6. 它能操控哪台电脑
+## 7. 与任务库和知识库的对接
 
-**Bot 只能操作自己进程所在的那台机器或那个容器。** 要跨机器，走已经定好的路线：容器通过 SSH 调用本机的薄入口脚本（创建任务、查状态、读输出、发跟进四个动作），由它调用 `orca` CLI，真正的执行落在本机 worker 上。
-
-## 7. 和账的接法
-
-| 动作 | 做法 |
+| 交互环节 | 对接方式 |
 | --- | --- |
-| 入账 | 你说的话 → Chief 从能力目录里选出 `kind` → `ev add`（置信度中等时先问你一句） |
-| 派发 | 由规则表决定；`agent:orca` 类走 SSH 薄入口 |
-| 回报 | Orca 完成后调用 `ev done`，DS-Bot 读到后用一句话回报，配卡片 `[做] [晚点] [不要]` |
-| 记忆 | DS-Bot 只存偏好、称呼、常用项目和最近摘要，任务进度以账和 Orca 为准 |
+| 任务录入 | 用户发送消息 → Chief 角色从能力目录匹配 `kind` → 调用 `ev add`（置信度中等时先发卡片追问） |
+| 任务派发 | 由工作站派发器 `evd` 按规则表路由；`agent:orca` 类任务通过受限入口脚本建 Run 派发 |
+| 结果通知 | Orca Worker 完成后调用 `ev done`，DS-Bot 读取一句话执行摘要并推送交互卡片 `[执行] [延后] [忽略]` |
+| 记忆协同 | DS-Bot 本地仅保留称呼、活跃项目与近期会话摘要；跨周期的偏好与历史做法统一通过 `kn recall` 检索工作站上的 `~/knowledge/kb.sqlite`（见 [知识库与记忆分层 §7](knowledge-memory.md#7-记忆分层与生命周期)），避免维护两套独立的长期记忆源 |
 
-## 8. 迁移步骤
+## 8. 部署与切换步骤
 
-1. 在 DS-Bot 链路跑通之前保留 Hermes。
-2. 在 N100 上启动 DS-Bot 容器，配置数据卷、trusted host 和 HTTPS。
-3. 配置 Chief：模型（经 LiteLLM）、角色和能力目录提示词。先只做问答和入账。
-4. 接上薄入口：先跑只读命令（`orca orchestration check`、`worker-list`），再跑建 Run 和派发。
-5. 需要时再加 IM（`@xmanrui/dsh-im` 或 AstrBot）。
-6. 出问题就停掉容器，退回 Hermes 或直接在本机用 Orca。
+1. 在 N100 上启动 DS-Bot 容器，完成持久化卷挂载、`DSH_TRUSTED_HOST` 与 Tailscale HTTPS 配置。
+2. 配置主入口角色 Chief：接入 LiteLLM 网关，加载能力目录提示词，先验证纯问答与 `ev add` 任务录入。
+3. 配置容器至工作站的受限 SSH 密钥与入口脚本：先验证只读查询（`orca orchestration check`、`worker-list`），再验证创建 Run 与派发 Worker。
+4. 按需接入 IM 插件（`@xmanrui/dsh-im` 或 AstrBot）。
+5. 若容器或插件升级出现兼容问题，可随时停止容器并回退至工作站本地直接调用 Orca CLI。
 
-## 9. 还没验证的
+## 9. 待实测验证项
 
-- 手机浏览器上的长会话、附件上传和 widget 体验。
-- 从容器通过 SSH 调用 Orca 的完整链路。
-- IM 插件与 DS-Bot 0.2.3 的实际兼容性；AstrBot 与 DS-Bot 并用时由谁回复。
-- DS-Bot 和 DSH 升级的兼容窗口。
+- 手机浏览器访问 DS-Bot Web 时的长连接稳定性、附件上传与交互卡片体验。
+- N100 容器经 Tailscale SSH 调用工作站 Orca CLI 的端到端延迟与断线重连表现。
+- `@xmanrui/dsh-im` 与 DS-Bot `0.2.3` 的实际兼容性，以及 AstrBot 与 DS-Bot 并行时的消息路由分工。
 
-## 来源
+## 参考资料
 
-- [DS-Bot 项目说明](https://github.com/Fei2411/DS-Bot/blob/4a7b550/README.md)
-- [DS-Bot 插件文档](https://github.com/Fei2411/DS-Bot/blob/4a7b550/ds-bot/README.md)
-- [DS-Bot 设计愿景](https://github.com/Fei2411/DS-Bot/blob/4a7b550/docs/vision.md)
-- [DS-Bot Docker 部署](https://github.com/Fei2411/DS-Bot/blob/4a7b550/docker/README.md)
-- [DS-Bot 安全模型](https://github.com/Fei2411/DS-Bot/blob/4a7b550/SECURITY_MODEL.md)
-- [DS-Bot package.json](https://github.com/Fei2411/DS-Bot/blob/4a7b550/ds-bot/package.json)
-- [DS-Bot Linux 桌面说明](https://github.com/Fei2411/DS-Bot/blob/4a7b550/app/README.md)
-- [DS-Bot Linux 打包配置](https://github.com/Fei2411/DS-Bot/blob/4a7b550/app/electron-builder.yml)
-- [DS-Bot v0.2.3 release](https://github.com/Fei2411/DS-Bot/releases/tag/v0.2.3)
-- [AgentReach](https://github.com/Panniantong/Agent-Reach)
-- [Electron 44.7.0 breaking changes](https://github.com/electron/electron/blob/v44.7.0/docs/breaking-changes.md)
-- [Electron command-line switches](https://github.com/electron/electron/blob/v44.7.0/docs/api/command-line-switches.md)
-- [Muse 官方产品页](https://muse.ai/)
-- [Grok Bot 官方产品页](https://x.ai/bot)
-- [`@xmanrui/dsh-im` 项目说明](https://github.com/xmanrui/dsh-im/blob/e278ac7/README.md)
-- [`@xmanrui/dsh-im` package.json](https://github.com/xmanrui/dsh-im/blob/e278ac7/package.json)
-- [`@xmanrui/dsh-im` 邮箱协议](https://github.com/xmanrui/dsh-im/blob/e278ac7/docs/agent-mail-protocol.md)
-- [`@xmanrui/dsh-im` 的 DS-Bot 绑定方案](https://github.com/xmanrui/dsh-im/blob/e278ac7/docs/%E6%96%B9%E6%A1%88/DSBot%E7%A7%81%E8%81%8A%E7%BB%91%E5%AE%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88.md)
-- [DSH webhook 扩展点](https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96/docs/architecture.md)
-- [DSH GitHub webhook 实验包](https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96/docs/user/guide/github-review.md)
-- [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
-- [AstrBot](https://github.com/AstrBotDevs/AstrBot)
+- [DS-Bot 仓库 README](https://github.com/Fei2411/DS-Bot/blob/4a7b550/README.md) · [插件说明](https://github.com/Fei2411/DS-Bot/blob/4a7b550/ds-bot/README.md) · [设计文档](https://github.com/Fei2411/DS-Bot/blob/4a7b550/docs/vision.md)
+- [DS-Bot Docker 部署指南](https://github.com/Fei2411/DS-Bot/blob/4a7b550/docker/README.md) · [安全模型说明](https://github.com/Fei2411/DS-Bot/blob/4a7b550/SECURITY_MODEL.md)
+- [DS-Bot Linux 桌面端说明](https://github.com/Fei2411/DS-Bot/blob/4a7b550/app/README.md) · [v0.2.3 Release](https://github.com/Fei2411/DS-Bot/releases/tag/v0.2.3)
+- [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) · [DSH 架构文档](https://github.com/deepseek-ai/deepseek-harness/blob/f3803c96/docs/architecture.md)
+- [`@xmanrui/dsh-im` 仓库](https://github.com/xmanrui/dsh-im/blob/e278ac7/README.md) · [DS-Bot 私聊绑定方案](https://github.com/xmanrui/dsh-im/blob/e278ac7/docs/%E6%96%B9%E6%A1%88/DSBot%E7%A7%81%E8%81%8A%E7%BB%91%E5%AE%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88.md)
+- [AstrBot](https://github.com/AstrBotDevs/AstrBot) · [Agent-Reach](https://github.com/Panniantong/Agent-Reach)
+- [Electron 44.7.0 命令行参数文档](https://github.com/electron/electron/blob/v44.7.0/docs/api/command-line-switches.md)

@@ -1,86 +1,69 @@
-# 书籍精修流水线（设计，未部署)
+# 电子书精修流水线（`work.book.polish`）
 
-> "全自动、顶级质量"是目标形态;本文件只做设计定稿,不做实际部署承诺。设计约束见 `system-topology.md`(下发即监督、任务总结反哺、单一事实源)。
+> 状态：设计定稿，待部署 · 上位文档：[内容创作流水线](creative-studio.md)、[系统拓扑](system-topology.md)
+>
+> 本文细化 `work.book.polish` 能力的实现方案：将杂乱格式的原始电子书（EPUB / TXT / MOBI / AZW3 / PDF）自动化处理为排版规范、字体统一、元数据齐全并经过 `epubcheck` 校验的标准 EPUB 3 与 6 英寸阅读版 PDF，随后归档至本地 Calibre 书库并推送到 Kindle Paperwhite 5（KOReader）。
 
-**在事件模型里的位置**：这是"一条完整域"的样板——`sched`/`person` 事件（交书、发现新书）→ `rules/books.toml` 判定 → `agent` handler 派 Orca → 每个阶段结束写一条回执（一句话结论 + 可选引用）。文中"watcher 是事件源""卡点超时挂起"两条，在共同语言里分别对应 **spool 入账** 与 **`handling → deferred`，逾期强制升级**——不另立机制，见 [架构总览 §6、§10](architecture.md)。
+## 1. 触发入口与管线阶段映射
 
-## 触发与入口
+电子书精修复用 [内容创作流水线 §2](creative-studio.md#2-七段式文件管线规范) 的七段式目录与四件套文件规范（`artifact`、`metrics.json`、`critique.md`、`decision.md`）：
 
-两条触发路径,落到同一个工作流:
-
-| 入口 | 动作 |
+| 触发入口 | 接入链路 |
 | --- | --- |
-| **云端 DS-Bot** | 用户在手机浏览器/桌面把书交给 DS-Bot(EPUB/TXT/MOBI/AZW3/PDF/CBZ…),DS-Bot 生成任务简报下发本机 |
-| **本地 Calibre** | 书库新增书籍(calibre 本身无 hook,由本地 watcher/inotify 或 `cli-anything-calibre` 轮询检测新书)→ 触发同一工作流 |
+| **DS-Bot 对话上传** | 用户在手机或桌面将电子书文件发送给 DS-Bot → 入口创建 `work.book.polish` 任务 → 派发器启动 Orca Run |
+| **本地目录自动监听** | 本地待处理目录新增文件 → `systemd.path`（`inotify`）触发 `ev add --kind work.book.polish` → 进入同一条派发链路 |
 
-下发即监督:整段流程走 Orca `orchestration`(Run → worker → `worker_done` → 回报),每阶段留下回执,不留"静默完成"。
+整条流水线由协调 Worker 按阶段推进，每个阶段完成时向任务库写入一句话执行摘要，不在后台静默吞掉异常。
 
-## 流水线阶段(worker 编排,非单脚本)
+## 2. 六个核心处理阶段
 
 ```
-摄入 → 解析 → 清洗 → 重排 → 元数据 → 成品导出 → 推送 → 任务记录
+1. 格式摄入 (Ingest) → 2. 文本清洗 (Clean) → 3. 样式重排 (Reformat) → 4. 元数据补齐 (Metadata) → 5. 成品校验导出 (Export) → 6. 归档与推送 (Deliver)
 ```
 
-### 1. 摄入(Ingest)
+### 2.1 格式摄入与归一化（`01-ingest`）
 
-- 格式归一:任何输入先转"工作中间格式"(EPUB unzip / TXT→EPUB / PDF→解析层)。
-- 工具:`ebook-convert`(格式转换底座)、`pandoc`(md/txt/docx)、`calibre-meta`。
-- TXT 特判:GBK/BIG5 编码检测(chardet)、章节正则切分("第N章"模式),生成结构化 EPUB。
+- **统一中间格式**：使用 Calibre 的 `ebook-convert` 与 `pandoc` 将不同输入格式（MOBI / AZW3 / DOCX / Markdown）统一解包转换为标准结构化 EPUB 工作目录。
+- **纯文本（TXT）专门处理**：使用 `chardet` 检测字符编码（自动将 `GBK` / `GB18030` / `Big5` 转为 `UTF-8`），通过正则表达式识别章节标题（如 `第[零一二三四五六七八九十百千万0-9]+[章节回卷]`），切分生成独立章节 HTML 与目录索引。
 
-### 2. 清洗(Clean)— LLM 介入第一层
+### 2.2 双层文本清洗（`03-draft/clean`）
 
-- **机械层(无 LLM)**:正则/脚本去掉书源站广告行("请记住本书域名""无弹窗")、多余空行、乱码符、HTML 实体残留、页眉页脚水印、`sdr`/`calibre` 垃圾目录。
-- **LLM 层(agent)**:对可疑段落做语义级清洗——缺字错字校对、断章续接、繁简/异体字归一、机翻痕迹修整。逐章 diff,产出"清洗报告"(删了哪几行、改了哪几个字)。
-- **停点**:清洗报告进任务记录;删改幅度超阈值(如章节字数掉 >5%)升级为人工确认,不静默吞。
+- **确定性规则清洗（脚本层，不调大模型）**：使用正则脚本批量剔除来源站植入广告行、多余连续空行、未转义的 HTML 实体残留、扫描页眉页脚水印以及无用的 `.sdr` 附属目录。
+- **语义级校对（LLM 层）**：针对 OCR 识别错误、缺字断句、繁简转换误用（如"后/後""发/髮"）或明显机翻病句的段落，调用大模型逐章审校并生成章节级 Diff 与 `clean-report.md`（明确列出修改位置与删减字数）。
+- **字数异常熔断检查**：若单章清洗后的字数较原文减少超过 **5%**，立即中止自动覆盖并将任务转为 `escalated`（`+me`）交由人工审阅 Diff，防止模型截断正文。
 
-### 3. 重排(Reformat)— 目标是"阅读友好"
+### 2.3 样式重排与字体嵌入（`03-draft/reformat`）
 
-- **EPUB 侧**:标准语义化 HTML5 + 统一 CSS(思源宋体正文/苹方标题层级);目录/页码 toc.ncx 重建;插图就地嵌入(<img> + 正确 mime),无插图书目可生成章节分隔装饰。
-- **PDF 侧**:走 `weasyprint` 或 `pandoc+typst`/`xelatex`(中文字体完整嵌入);排版参数按"电子书 PDF"调(6 寸近似版面、行距、首行缩进),不是打印排版。
-- **停点**:产出交"样张验证"——worker 抽前/中/后三页渲染图,与输入对比目检,不合格回退重排参数。
+- **EPUB 3 侧**：转换为语义化 HTML5 标签并挂载统一的阅读 CSS 样式表（中文正文默认绑定思源宋体，标题层级绑定苹方，西文与数字搭配 Literata，与 Kindle KPW5 本地 `/mnt/us/fonts/` 字体配置保持一致）；重建完整的 `nav.xhtml` 与 `toc.ncx` 嵌套目录；校正内嵌插图的 MIME 类型与自适应宽高。
+- **6 英寸阅读版 PDF 侧**：通过 `typst` 或 `weasyprint` 编译生成针对 6–7 英寸墨水屏优化的小版面 PDF（紧凑页边距、适中行距、完整内嵌中文字体子集与 PDF 书签树）。
+- **抽样渲染目检**：导出初稿后，自动抽取前、中、后各 3 页渲染为位图，检查是否存在缺字方框（Tofu）、标题孤行或插图溢出；发现问题则调整排版参数重跑。
 
-### 4. 元数据(Metadata)
+### 2.4 元数据补齐（`04-review/metadata`）
 
-- `ebook-meta` 补齐:title/author/series/publisher/language/isbn/tags/description。
-- 网文特判:从来源站(或 calibre 插件/来源 URL 记忆)抓作者、完结状态、最新章节号、简介。
-- **停点**:title/author 缺失或置信度低时升级问用户("这本书叫什么、谁写的")——不是猜。
+- 调用 `ebook-meta` 补齐标准字段：`title`、`author`、`series`、`publisher`、`language`、`isbn`、`tags`、`description` 及高清封面图。
+- **缺失确认**：若书名或作者无法从原文件或公开书目源中可靠提取，任务转入 `escalated`（`+me`）询问用户，禁止编造 ISBN 或作者信息。
 
-### 5. 成品导出(Output)
+### 2.5 成品导出与规范校验（`06-export`）
 
-- **EPUB**:符合 EPUB 3 规范,过 `epubcheck`;嵌入字体(思源宋体+Literata,和 Kindle 那边字体族一致,观感统一);封面规范尺寸。
-- **PDF**:内嵌字体、目录书签、可检索文本层;和 EPUB 同内容同排版基线。
-- **产出定义**:"顶级质量"的验收锚点 = `epubcheck` 零错误 + 样张过审 + 元数据齐全 + 正文清洗报告无遗留 TODO。
+- **自动化验收条件**：生成的 EPUB 必须通过 **`epubcheck` 零错误（0 Errors）校验**，样张渲染无版面破损，元数据完整，且清洗报告无异常截断告警。
 
-### 6. 推送(Deliver)
+### 2.6 书库归档与设备推送（`07-publish`）
 
-- **私有渠道**:上传到云服务器(静态/目录服务)→ Kindle KOReader 经 OPDS/KOSync 拉取;或 Send-to-Kindle 邮箱。
-- **Calibre 归库**:成品进 `/home/shizuku/EBook/Calibre`,和原文件并存(版本标记如 `_polished`)。
-- **任务记录**:每本书产出一条任务记录(清洗报告+转换参数+每步结论+耗时),反哺提示模板和规则候选——不自动改写 AGENTS.md,候选变更显式确认。
+- **本地 Calibre 归档**：调用 `calibredb add <成品.epub> --with-library <书库路径>` 归档入库（保留原文件备份，精修版添加 `_polished` 标记；书库路径以本机实际创建位置为准）。
+- **无线同步至 Kindle KPW5**：由于属于个人私有设备传输，**不触发对外发布确认点**。直接通过 KOReader 配置的 OPDS 目录服务、Tailscale SSH（目标目录 `/mnt/us/Books/`）或 Send-to-Kindle 邮件完成推送。
+- **完成回写**：调用 `ev done <id> "《<书名>》精修完成，epubcheck 0 error，已入 Calibre 库并同步至 KPW5"`。
 
-## 质量与兜底
+## 3. 异常分支与挂起处理
 
-这里的"停点"指的是**流水线自己在哪一步停下来等人或等条件**，不是系统在验收产出。落定时写一句话结论，引用能附就附（[事件规格 §6](event-spec.md)），不附也不阻塞：
-
-| 情况 | 停在哪 | 行为 |
+| 异常情况 | 停止位置 | 系统处理行为 |
 | --- | --- | --- |
-| 清洗后章节字数异常 | 人 | 回退原文，转 `escalated` 等人确认；结论里写明掉了多少字、哪几处 |
-| 元数据置信度低 | 人 | 问，不猜；找不到来源即 `deferred` 而不是编一个 |
-| EPUB 校验不过 | 自动重试 | 修复参数重跑，最多 3 次后 `escalated`；引用附 `epubcheck` 退出码与报告路径 |
-| 渲染样张不合格 | 自动重试 | 调参数重跑；样张路径留在回执里便于回看 |
-| 任何步骤超时 | 检查点 | 转 `deferred` 并写 `wake_at`，逾期由外部检查点升级；**不静默标记完成** |
+| 清洗后单章字数缩减 > 5% | 人工确认（`escalated`） | 保留原文备份，推送清洗 Diff 卡片等待人工确认 |
+| 书名或作者元数据缺失 | 人工确认（`escalated`） | 向用户发送卡片询问准确书名与作者 |
+| `epubcheck` 校验报错 | 自动重试 | 根据报错行号自动修复 HTML/OPF 结构并重跑，连续 3 次未通过则转人工处理 |
+| 样张渲染版面异常 | 自动重试 | 回退 CSS 样式参数重新编译，并将样张截图附在任务注解中备查 |
+| 外部网络超时 | 延迟等待（`waiting`） | 设置 `wait` 唤醒时间稍后重试，不将超时任务静默标为完成 |
 
-成品这一条处置的结论固定为一句话（"《X》已转换，epubcheck 0 error，入 Calibre 库"），引用里放成品路径、报告路径、提交或消息 id 这类东西。**没有它们仍然算落定**——三个月后回看价值低，这个代价由周报统计出来给人看，不由系统拦。
+## 4. 关联工具链与本机状态
 
-## 与现有系统的衔接
-
-- **编排**：`orchestration run-create` + worker。两条入口都先转成事件——`person.book.submitted` 或 `platform.calibre.book_added`——再由 `rules/books.toml` 决定派发，watcher 不直接调 Orca。
-- **执行工具**:`calibredb`/`ebook-convert`/`ebook-meta`/`epubcheck`/`pandoc`/`weasyprint`(或 typst)+ worker 的 LLM 能力做语义清洗。
-- **呈现**:DS-Bot Web/Desktop 给书籍卡片(封面+清洗 diff 摘要+成品下载/推送按钮);IM 渠道需另装 DSH IM 插件(如 `@xmanrui/dsh-im`),不在 DS-Bot 自带范围。
-- **固化的细节**(以原生文件为准):书库 `/home/shizuku/EBook/Calibre`,Kindle 侧 `/mnt/us/Books/` 是 KOReader 的 `home_dir`,字体思源宋体/Literata/苹方已在 `/mnt/us/fonts/`。
-- **尚缺**:云端服务器(书成品托管)+ KOSync 账号——这两件等 DS-Bot 常驻部署就绪一起上,现在不部署。
-
-## 未决项
-
-- 元数据抓取的来源站(起点/番茄/独阅读等网文站各有反爬,要不要上 OpenCLI 走浏览器)
-- "顶级质量"的更细验收(要不要自动跑文字密度/排版指标的客观评分)
-- 推送端的云端选型(对象存储/CDN vs 简易 HTTP,取决于 DS-Bot 部署形态)
+- **本机已就绪工具**：Calibre `9.16.0`（含 `calibredb`、`ebook-convert`、`ebook-meta`）、`cli-anything-calibre`、Kindle KPW5（已越狱安装 KOReader，`/mnt/us/fonts/` 已预置思源宋体、Literata 与苹方字体）。
+- **待按需补装工具**：`epubcheck`、`pandoc`、`typst` / `weasyprint`（统一通过 NixOS Flake 或 `upctl` 安装）。

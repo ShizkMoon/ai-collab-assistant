@@ -1,65 +1,53 @@
 # E-Ink 技术术语对照表
 
-速查表：面板型号命名、波形/驱动词汇、协议缩写。详见 `oepl-internals.md` /
-`epdiy-internals.md`。
+> 角色：电子墨水屏（EPD）面板型号、驱动波形与无线电子价签（ESL）协议术语速查表。底层机制详见 [OpenEPaperLink 内部机制](oepl-internals.md) 与 [epdiy 内部机制](epdiy-internals.md)。
 
-## 面板型号命名
+## 1. 面板与电子价签型号命名规则
 
-| 前缀/命名 | 含义 | 例子 |
+| 命名或前缀 | 厂商与含义 | 典型型号示例 |
 |---|---|---|
-| `GDEW` / `GDEY` / `GDEH` | **Good Display** 电子纸模组编号：W=white 黑白、Y=yellow 三色(BWY)、H=高清/变体；后接尺寸+代号 | GDEW0213T5（2.13"黑白）、GDEY029T94（2.9"三色） |
-| `DEPG` | **DKE/东方科脉** 模组编号，常与 GDE 系列同面板竞争供货 | DEPG0290BNS800（2.9"） |
-| `ED` + 6 位 | **E Ink** 原厂面板编号：`ED` + 尺寸（两位/三位）+ 代号 + 尾缀（C=Carta膜、T=温度档等）；KPW5 `ED068KC1U1` 即 6.8" KC1 膜 U1 版 | ED060SCT、ED097TC2、ED133UT2 |
-| `OTP` 前缀 | One-Time-Programmable——波形直接烧在面板 FPC 的 OTP ROM 里，无 `.wbf` 文件；多见于小尺寸 ESL 屏 | OTP 2.13" 屏 |
-| `HINKE` / `HINK` | Hinak Vision 模组编号，常在 4.2"+ ESL 屏见到 | HINK-E042A03 |
-| `ST-` / `EL` / `HS` | **Solum**(`ST-GR/S-GM`)、**Newton/Silicon Labs**(`EL0xx`)、**汉朔 Hanshow**(`HS`) 三大 ESL 厂牌前缀 | ST-GR29000、EL029H3WRA、HS BW 2.13" |
-| `BW`/`BWR`/`BWY`/`BWRY` | 屏色：黑白 / 黑白红 / 黑白黄 / 黑白红黄 | HS BWRY 7.5" |
-| `M2`/`M3` | Solum 标签系列代号：M2=ZBS243 平台、M3=nRF52/SiLabs 平台 | M2 2.9"、M3 11.6" |
-| 尾缀 `@…@` | 标签标签贴纸上的附加信息（固件版本/加密型等），兼容表常省略 | `EL029H3WRA@CC` |
+| `GDEW` / `GDEY` / `GDEH` | **大连佳显（Good Display）** 模组编号：`W`=黑白、`Y`=黑白黄三色、`H`=高分或改进版，后接尺寸与代号 | `GDEW0213T5`（2.13" 黑白）、`GDEY029T94`（2.9" 三色） |
+| `DEPG` | **东方科脉（DKE）** 电子纸模组编号，常与佳显同规格模组互为替代 | `DEPG0290BNS800`（2.9"） |
+| `ED` + 6 位字符 | **元太科技（E Ink）** 原厂面板编号：`ED` + 尺寸（两或三位数字）+ 系列代号 + 膜系后缀（如 `C`=Carta 膜）；KPW5 使用的 `ED068KC1U1` 即 6.8" Carta 1200 面板 | `ED060SCT`、`ED097TC2`、`ED047TC1` |
+| `OTP` | One-Time Programmable：波形表已在出厂时烧录进面板 FPC 排线上的 OTP ROM 中，无需外部 MCU 加载 `.wbf` 文件（常见于小尺寸 SPI 价签屏） | OTP 2.13" 面板 |
+| `HINKE` / `HINK` | 合力泰（Holitech / Hink Vision）电子纸模组编号，常见于 4.2" 及以上拆机价签 | `HINK-E042A03` |
+| `ST-` / `EL` / `HS` | 三大主流电子价签厂商前缀：**Solum**（`ST-GR` / `ST-GM`）、**Solum Newton**（`EL0xx`）、**汉朔 Hanshow**（`HS` / `Stellar` / `Nebular`） | `ST-GR29000`、`EL029H3WRA`、`HS BW 2.13"` |
+| `BW` / `BWR` / `BWY` / `BWRY` | 面板显色能力：黑白双色 / 黑白红三色 / 黑白黄三色 / 黑白红黄四色 | `HS BWRY 7.5"` |
+| `M2` / `M3` | Solum 价签硬件代号：`M2` 采用三星 ZBS243（8051 核）平台，`M3` 采用 Nordic nRF52811 或 SiLabs EFR32xG22（ARM 核）平台 | Solum M2 2.9"、M3 11.6" |
 
-## 波形/驱动词汇
+## 2. 驱动电路与波形（Waveform）术语
 
-| 词 | 含义 |
+| 术语 | 技术含义 |
 |---|---|
-| **LUT**（Look-Up Table） | 波形查找表：源灰度×目标灰度 → 每相位的 2bit 驱动码；epdiy `luts[phase][16][4]`、Kindle `wf_lut` 同款结构 |
-| **phase / frame** | 波形相位/帧：一次灰度过渡跑 N 帧，每帧对全屏每个像素发一次 2bit 驱动脉冲 |
-| **波形模式** | DU（直驱黑白）/ GC16（16 灰全刷）/ GL16（16 灰局刷）/ A2（大字黑白快刷）/ DU4/GL4（4 灰变体） |
-| **温度档** | 波形按温度分档存（`min`/`max` 上下界）；选档取"第一个 min≥t 的区间" |
-| **Regal** | E Ink 改良波形/膜系代号（白色保护膜 + 温和灰阶过渡）；`epd_regal`、`wf_regal`、epdiy `epdiy_regal` |
-| **VCOM** | 面板公共电极参考电压（−1.5…−2.5V），出厂每块屏单独标定（丝印 VCOM 值），PMIC 按此调输出 |
-| **FPL** | Front-Plane Laminate——前平板（膜+电极+颗粒）层压件，E Ink 产线工艺术语 |
-| **高压驱动轨** | VPOS(+15V)/VNEG(−15V)/VGH(+22V)/VGL(−20V)：source/gate driver 供电，TPS65185 这类 EPD PMIC 生成 |
-| **源/栅驱动** | source driver=列数据移位锁存（XCL/XLE 等）；gate driver=行选（CKV/STV/SPV） |
-| **并行 TTL** | epdiy 式直接驱动：8/16bit 总线 + CKV/STV/LE/OE，无 TCON 芯片 |
-| **OTP 屏** | 波形内置面板 OTP ROM 的屏：ESP32 只需发命令，不用外挂 `.wbf` |
-| **`.wbf` / `.wrf` / `.epw`** | 波形二进制文件：`wbf`=面板 FPC 烧录；`wrf`=Kindle 设备波形固件；`epw`=epdiy 导出的 C 数组（非运行时文件） |
-| **鬼影/残影清除** | `MODE_INIT`/`epd_fullclear`：多帧黑白翻转把滞留粒子复位；部分刷新攒残影后要定期全刷 |
+| **LUT（Look-Up Table，波形查找表）** | 定义像素从"源灰度"过渡到"目标灰度"在每个相位（Phase）应施加的 2-bit 电压操作码矩阵（`00`=保持、`01`=驱黑、`10`=驱白）；`epdiy` 的 `luts[phase][16][4]` 与 Kindle 的 `wf_lut` 均为此结构 |
+| **Phase / Frame（波形相位/帧）** | 完成一次灰阶图像更新所需连续施加的脉冲步数（通常一次 `GC16` 全刷包含数十个 Phase），每个 Phase 对全屏像素输出一轮驱动脉冲 |
+| **刷新模式（Waveform Modes）** | `MODE_INIT`（多帧黑白翻转清屏）/ `DU`（Direct Update，单色快刷）/ `GC16`（Grayscale Clear 16，16 级灰带闪烁全刷）/ `GL16`（Grayscale Local 16，无闪烁灰阶局刷）/ `A2`（单色极速刷字） |
+| **温度分档（Temperature Bands）** | 电泳粒子迁移速率受温度影响显著，厂商波形表按温度区间（`min`–`max` °C）存储多套 LUT；驱动端读取屏端 NTC 温度后查表选择对应档位 |
+| **Regal 波形** | E Ink 针对 Carta 膜系推出的无闪烁灰阶刷新算法（如 `GLR16` / `GLD16` 及 `epdiy_regal`），通过局部脉冲序列在不触发全屏黑闪的前提下抑制灰阶残影 |
+| **VCOM（公共电极参考电压）** | 面板前电极参考偏置电压（通常在 −1.5V 至 −2.5V 之间），每批次面板出厂实测标定并印在 FPC 排线上，由 PMIC 精确输出 |
+| **FPL（Front-Plane Laminate）** | 前基板层压膜（包含微胶囊/微杯电泳介质层与 ITO 透明导电膜），即电子纸的核心显示薄膜材料 |
+| **高压驱动轨（Power Rails）** | 驱动电泳粒子所需的四路高压电源：`VPOS`（+15V）、`VNEG`（−15V）、`VGH`（+22V）、`VGL`（−20V），通常由 TPS65185 或 FITI9930 等专用 EPD PMIC 按严格时序生成 |
+| **Source / Gate Driver（源极/栅极驱动器）** | 绑定在玻璃基板边缘的行列驱动芯片：Source Driver 负责锁存每行像素的列电平，Gate Driver 负责按行扫描选通（控制信号包括 `CKV`、`STV`、`LE`、`OE`） |
+| **并行 TTL 直驱 vs SPI TCON** | SPI 模组由屏端内置 TCON 芯片管理波形与刷新；并行 TTL 直驱（如 `epdiy`）则由外部 ESP32-S3 通过 8/16 位数据总线加时序控制线直接驱动玻璃基板上的行列驱动器 |
+| **`.wbf` / `.wrf` / `.epw`** | 波形文件扩展名：`.wbf` 为 E Ink 原厂烧录二进制格式；`.wrf` 为 Kindle 专用波形固件格式；`.epw` / `.h` 为 `epdiy` 通过 `inkwave` 工具转换出的结构化波形数据 |
+| **鬼影（Ghosting）** | 多次局部刷新后部分电泳粒子滞留导致的旧画面残影，需定期插入一次 `GC16` 全屏刷新清除 |
 
-## 协议/硬件缩写
+## 3. 硬件接口与 OpenEPaperLink 协议缩写
 
-| 缩写 | 全称/含义 |
+| 缩写 | 全称与技术说明 |
 |---|---|
-| EPD | Electrophoretic Display，电泳式电子纸 |
-| ESL | Electronic Shelf Label，电子货架标签 |
-| TCON | Timing Controller，屏端时序控制芯片 |
-| FPC | Flexible Printed Circuit，面板排线 |
-| PMIC | Power Management IC（TPS65185/FITI9930 类，EPD 专用高压电源） |
-| NTC | 屏端热敏电阻，经 PMIC `TMST` 寄存器读温度 |
-| SPI/并行 | 两种屏接口：SPI（商用模组常用）vs 并行 TTL（epdiy 裸屏） |
-| MAC / PAN ID | 802.15.4 链路层地址/PAN 标识；OEPL PAN 固定 `0x4447` |
-| GFSK | Gaussian FSK，sub-GHz 调制方式（CC1101 用） |
-| SWS | Single-Wire Slave，Telink 单线调试/烧录口 |
-| cJTAG | 压缩 JTAG，CC131x 调试口 |
-| SWD | Serial Wire Debug，ARM 两线调试（nRF52/EFR32 刷机口） |
-| infopage/UICR | 芯片出厂信息区/用户配置区：固件按此识别屏型 |
-| AP | Access Point：OEPL 语境里指 ESP32 主控板（AP 固件），不是 WiFi AP |
-| tag | OEPL 语境里的 ESL 标签 |
-| check-in / ADR | 标签主动找 AP 报到（Avail Data Request）的协议步 |
-| MAC vs hwType | 标签链路层地址 vs OEPL 屏型编号（`tagtypes/*.json` 键值） |
-| HW type 高位 | `0x00xx` 射频类、`0x01xx` OpenDisplay BLE、`0xF8/0xF9` TLSR AP、`0xC6` ESP32-C6 |
-| `1bpp`/`2bpp`/`4bpp` | 每像素位深：黑白/三色/16 灰；选 bpp 决定内存与传输量 |
-| dither | 抖动：把连续灰度/彩色量化到屏端色表时的误差扩散算法 |
-| RGB vs 4:4:4 vs 4:2:0 | JPEG 色度子采样比；4:4:4 保锐利的红/白跳变（OEPL 推图建议） |
-| baseline JPEG | 基线（非渐进）JPEG，ESP32 端解码兼容性需求 |
-| COBS | Consistent Overhead Byte Stuffing，0x00 分帧的字节填塞编码（OEPL radio v2 用） |
-| OTA | Over-The-Air，无线固件升级 |
+| **EPD** | Electrophoretic Display，电泳式电子纸显示屏 |
+| **ESL** | Electronic Shelf Label，商超电子货架标签（电子价签） |
+| **TCON** | Timing Controller，时序控制器 |
+| **FPC** | Flexible Printed Circuit，柔性印制电路排线 |
+| **PMIC** | Power Management IC，电源管理芯片（如 TI TPS65185） |
+| **NTC** | Negative Temperature Coefficient，负温度系数热敏电阻（贴装于面板背面测量环境温度） |
+| **PAN ID** | IEEE 802.15.4 个人局域网标识符；OpenEPaperLink 协议固定使用 `0x4447` |
+| **GFSK** | Gaussian Frequency-Shift Keying，高斯频移键控（Sub-GHz 频段 CC1101 射频模块采用的调制方式） |
+| **SWS** | Single-Wire Slave，泰凌微（Telink TLSR825x/8359）芯片专用的单线调试与烧录协议（可通过普通 UART TX 引脚模拟） |
+| **SWD / cJTAG** | ARM Cortex-M 系列芯片的两线调试烧录接口（nRF52811 与 EFR32 使用 SWD，TI CC1310 使用 cJTAG） |
+| **Infopage / UICR / User Data** | 芯片内部独立于主程序 Flash 的非易失性出厂配置扇区，记录原厂 MAC 地址、校准参数与屏幕硬件型号；刷机前必须先备份该区域 |
+| **OEPL AP** | OpenEPaperLink 语境下的主控网关板（运行于 ESP32-S3），负责管理标签数据库与下发待显示图像 |
+| **Check-in / ADR** | 标签定时从深度睡眠唤醒并向 AP 发送 `PKT_AVAIL_DATA_REQ`（`0xE5`）询问是否有新图像数据的过程 |
+| **`hwType`** | OEPL 中标识标签具体屏幕尺寸、分辨率与颜色的表索引号（对应 `resources/tagtypes/NN.json`） |
+| **COBS** | Consistent Overhead Byte Stuffing，一致性开销字节填充编码（用于 OEPL AP 主控与射频协处理器之间的 2Mbaud 串口 v2 成帧协议） |

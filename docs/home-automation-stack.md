@@ -1,330 +1,195 @@
-# 智能家居落地技术档案(NixOS + Zigbee2MQTT + ESPHome 栈)
+# 智能家居技术栈（NixOS + Zigbee2MQTT + ESPHome）
 
-技术档案:把 `dorm-smart.md` 已定的拓扑(HA 本地兜底 + MQTT 主干 + Zigbee/BLE 传感)
-落到 NixOS 工作站上的实施级细节——部署形态取舍、三个 systemd 服务的真实选项名、
-硬件刷机/接线实操、自动化兜底分层、安全面、断电断网行为矩阵。
-选型结论不在此重复;本文档只回答"怎么落地、坑在哪、出处是什么"。
+> 状态：设计定稿 · 上位文档：[宿舍智能家居方案](dorm-smart.md)、[网络与设备组网](network-fabric.md)
+>
+> 本文记录将 Home Assistant + Mosquitto + Zigbee2MQTT + ESPHome 部署在 NixOS（N100 常驻主机）上的实施细节，包括 NixOS 模块配置项、传感器刷机与接线方法、本地自动化分层兜底、密钥管理以及断电断网恢复行为。
+>
+> **参考资料来源**：NixOS 官方 Wiki 与 `nixpkgs` 模块源码（`nixos-unstable`）、Zigbee2MQTT 官方文档、ESPHome 官方文档、`atc1441` / `pvvx` 开源固件仓库、Tailscale 官方文档。
 
-**信息源**:NixOS 官方 wiki 与 nixpkgs 模块源码(2026-10,nixos-unstable)、Zigbee2MQTT
-官方文档、ESPHome 官方文档、atc1441/pvvx 固件仓、Tailscale 官方文档。出处在文末汇总。
+## 0. 核心选型汇总
 
-## 0. 决策速查
-
-| 问题 | 结论 |
+| 决策项 | 确定方案 |
 |---|---|
-| HA 部署形态 | **工作站 `services.*` 原生三件套**(HA + Mosquitto + Z2M),声明式最强、Zigbee 直通零配置;容器/独立盒子是降级与迁移路线,不作首选 |
-| Zigbee 协调器 | **ZBDongle-E(EFR32MG21,`ember` 驱动)或 ZBDongle-P(CC2652P,`zstack`)都在 Z2M 官方推荐列**;价差大时谁便宜买谁,略偏向 E(SiLabs 生态固件维护最活跃) |
-| LYWSD03MMC | TelinkFlasher 网页 OTA 刷 ATC/pvvx 固件,**可逆**(stock 固件可刷回) |
-| LD2410 | UART 256000 8N1 + ESPHome 原生 `ld2410` 组件;买 **C 版**(2.54mm 排针免焊),5V 供电 |
-| 自动化兜底 | 手动开关→执行器下沉 **Z2M binding**(断网断服务都活);板上逻辑留 **ESPHome**;跨协议/定时/通知必须放 **HA** |
-| Zigbee 密钥 | `network_key` 必换;**NixOS 下不能在 `settings` 里写 `GENERATE`**(每次服务启动重生成 → 启动失败) |
-| MQTT 认证 | mosquitto 密码用 `passwordFile`/`hashedPasswordFile`(systemd credentials,不落 nix store);匿名监听只配演示 |
-| 断电恢复 | Zigbee 不依赖路由器,工作站带电时全自动照常;Wi-Fi 设备靠 ESPHome 板上逻辑自持,恢复时间分钟级 |
+| 服务部署形态 | 在 N100 的 NixOS 上直接启用原生 `services.*` 模块（`home-assistant` + `mosquitto` + `zigbee2mqtt`），无需配置容器 USB 串口直通 |
+| Zigbee 协调器 | **SONOFF ZBDongle-E**（EFR32MG21，`ember` 驱动）或 **ZBDongle-P**（CC2652P，`zstack` 驱动），两者均在 Z2M 官方推荐列表中 |
+| 温湿度计（LYWSD03MMC） | 通过 TelinkFlasher 网页蓝牙 OTA 刷入 `pvvx` / `ATC` 开源固件，切换为 BTHome 广播格式（支持随时刷回原厂固件） |
+| 人体存在传感器（LD2410） | 选用 **LD2410C**（2.54mm 标准排针免焊接），5V 供电，通过硬件 UART（256000 8N1）接入 ESP32 运行 ESPHome 原生 `ld2410` 组件 |
+| 自动化兜底分层 | 物理开关控制灯具/插座优先配置 **Zigbee Direct Binding**；单板闭环逻辑写入 **ESPHome**；跨设备与通知逻辑放入 **Home Assistant** |
+| Zigbee 网络密钥 | 自定义 16 字节 `network_key` 并保存在 `secret.yaml` 中；**禁止在 NixOS `settings` 中直接写 `"GENERATE"`**（否则每次重启服务都会覆盖并重生成密钥导致全网失联） |
+| MQTT 认证管理 | Mosquitto 账号密码使用 `hashedPasswordFile`（通过 `systemd` Credentials 注入，避免密码哈希落入全局可读的 `/nix/store`） |
 
-## 1. HA 部署形态对比
+## 1. Home Assistant 部署方式对比
 
-| 维度 | `services.home-assistant`(原生) | OCI 容器(HA Container) | 独立小盒子(HAOS) |
+| 评估维度 | NixOS 原生模块（`services.home-assistant`） | OCI 容器（HA Container） | 独立 HAOS 镜像 |
 |---|---|---|---|
-| 声明式程度 | **最高**:`config` attrset 即 configuration.yaml;`lovelaceConfig`/`themes`/`customComponents` 全部入 nix | 仅容器参数声明式;`/config` 卷内 YAML 是黑盒,HA 自己管 | 零:完整 HAOS 用户体验,全靠 UI |
-| 升级路径 | 随 `nixos-rebuild` 滚动;nixpkgs 跟 HA 月度版本紧;回滚=选旧 generation(注意 recorder DB 跨版本迁移不可逆,回滚前备份 `/var/lib/hass`) | pin image tag;**`oci-containers` 不会因 rebuild 自动 pull**,改 tag 才更新 | HAOS 内置更新;addons 随上游 |
-| Zigbee USB 直通 | 无需直通——Z2M 原生跑,模块内建 `SupplementaryGroups=dialout` + `DeviceAllow` 按 `serial.port` 放行 | `--device=/dev/serial/by-id/...` + 挂 `/dev/serial/by-id` 卷;**已知坑:rootless docker 下容器内 ttyUSB 权限拒绝**,禁用 rootless 需整机重启生效(nixpkgs issue #416817) | USB 直接插盒子,零配置 |
-| 上游支持 | NixOS 社区(nixpkgs issue / #homeautomation:nixos.org);**不支持 addons**(改用 `services.*` 原生模块等价物) | 上游支持 | 上游一等公民,addons 全可用 |
-| 失效面 | 工作站关机即失明 | 同上 | 独立电源域,工作站开关无感 |
-| 适用 | **本站首选**:单机房、工作站即服务器 | 从既有 HA 配置迁移、或想要"UI 可配置"体验 | 断电时段长/工作站常关时迁过去 |
+| 声明式管理程度 | **高**：`config` 属性集直接生成 `configuration.yaml`，仪表盘与组件依赖全部纳入 Flake | 仅容器启动参数声明式，`/config` 卷内配置需在 UI 中手动维护 | 完全依赖 Web UI 手动配置与备份 |
+| 升级与回滚 | 随 `nixos-rebuild` 升级，支持 generation 回滚（回滚跨大版本前需注意备份 `/var/lib/hass` 数据库） | 需手动更新镜像 Tag | 使用 HAOS 内置更新器 |
+| Zigbee 串口权限 | **零额外配置**：`zigbee2mqtt` 模块自动配置 `dialout` 组与 `DeviceAllow` | 需映射 `/dev/serial/by-id/...`，Rootless 容器下易遇到 `ttyUSB` 权限问题（`nixpkgs` #416817） | 直接插拔使用 |
+| 结论 | **采用**（部署于 N100 NixOS 主机） | 不采用 | 不采用（N100 同时还需运行 DS-Bot、LiteLLM 等 NixOS 服务） |
 
-**本站建议**:先按 dorm-smart.md 未决项落地工作站原生栈;若实测"工作站关机 → 宿舍失明"
-不可接受,再迁到旧手机/盒子跑 HAOS 或同款 NixOS——迁移成本就是 HA 备份恢复 +
-把 zigbee2mqtt/mosquitto 的 dataDir 搬过去,Zigbee 网络凭 `coordinator_backup.json` 可平移。
-OCI 容器形态在本站收益最低(丢声明式还踩 USB 权限坑),除非要保留一份既有 `/config` 配置。
+### 1.1 `services.home-assistant` 常用配置项
 
-### 1.1 原生模块关键选项(`services.home-assistant.*`)
-
-| 选项 | 作用 | 备注 |
+| 配置选项 | 功能说明 | 注意事项 |
 |---|---|---|
-| `config` | configuration.yaml 的 attrset 形式 | 模块解析 root/platform 级自动装依赖;`config = null` + `configDir` 走 imperative 迁移模式(官方明确"不大可能继续支持",别新用) |
-| `extraComponents` | 手动追加组件依赖 | onboarding 需要 `"analytics" "google_translate" "met" "radio_browser" "shopping_list" "isal"` |
-| `extraPackages` / `customComponents` / `customLovelaceModules` | Python 包 / HACS 组件 / Lovelace 卡 | 2026.5.1 起内置集成 100% 覆盖(1450/1450) |
-| `configWritable` | configuration.yaml 可写 | UI 改配置想持久化就开;代价是与 nix 配置漂移 |
-| `openFirewallForComponents` | 按启用组件自动开端口 | 8123 仍默认不对外开放,自行 `networking.firewall.allowedTCPPorts` 或走反代 |
-| `lovelaceConfig` / `themes` / `blueprints` | 仪表盘/主题/蓝图 | 全部声明式 |
+| `config` | 对应 `configuration.yaml` 的 Nix 属性集 | 模块会自动解析并安装启用集成所需的 Python 依赖 |
+| `extraComponents` | 显式追加内置集成组件 | 首次初始化建议包含 `"isal"`、`"met"`、`"radio_browser"`、`"shopping_list"`、`"analytics"` |
+| `extraPackages` / `customComponents` / `customLovelaceModules` | 追加 Python 依赖包、自定义集成与前端卡片 | `nixpkgs` 已打包主流 HACS 组件与前端卡片 |
+| `configWritable` | 允许 Web UI 修改配置文件 | 建议保持默认只读，将 UI 编辑的自动化分离至 `!include automations.yaml` |
 
 ```nix
-# 最小骨架(融合 Mosquitto + Z2M,真实选项名)
+# hosts/n100/home-assistant.nix
 services.home-assistant = {
   enable = true;
-  extraComponents = [ "isal" "met" "radio_browser" "google_translate" "shopping_list" "analytics" ];
+  extraComponents = [ "isal" "met" "radio_browser" "google_translate" "shopping_list" "analytics" "esphome" "mqtt" ];
   config = {
     default_config = {};
-    # UI 管理的自动化/场景仍走 automations.yaml(放 configDir)
     "automation" = "!include automations.yaml";
-    # 或全声明式:config.automation = [ { alias = "..."; triggers = [...]; actions = [...]; } ];
-    http.use_x_forwarded_for = true;      # 反代/Tailscale serve 时
-    http.trusted_proxies = [ "127.0.0.1" ];
+    http = {
+      use_x_forwarded_for = true;      # 配合 tailscale serve 本地反代
+      trusted_proxies = [ "127.0.0.1" "::1" ];
+    };
   };
 };
 ```
 
-**secrets 注意**:`config` attrset 渲染进 `/nix/store`(全员可读),凭据类字段别写进去;
-要密码的集成(MQTT broker、Tailscale 相关)留给 UI 配置流,secret 落在
-`/var/lib/hass/.storage` 而非 store。HA 的 `!secret` 语法在 nix 生成的文件里不可用。
+**凭据安全注意事项**：`services.home-assistant.config` 渲染生成的配置文件存放在 `/nix/store` 中且对本机所有用户可读，因此**不要在 Nix 属性集内直接写入明文密码或 Token**。需要认证的集成（如 MQTT、ESPHome 加密密钥）统一通过 Web UI 的配置向导（Config Flow）录入，使密钥保存在权限受控的 `/var/lib/hass/.storage/` 目录下。
 
-## 2. 三件套 NixOS 模块
+## 2. Mosquitto、Zigbee2MQTT 与 ESPHome 模块配置
 
-### 2.1 Mosquitto(`services.mosquitto.*`)
+### 2.1 Mosquitto（`services.mosquitto.*`）
 
-模块是"listener 列表 + 全局 settings"两层:
-
-| 选项 | 类型 | 要点 |
-|---|---|---|
-| `listeners` | list | 每项:`port`(默认 1883)/`address`(绑 IP)/`users`/`acl`/`omitPasswordAuth`/`settings`(per-listener freeform,如 `allow_anonymous`、`protocol = "websockets"`、`mount_point`) |
-| `users.<name>` | attrset | `password` / `passwordFile` / `hashedPassword` / `hashedPasswordFile`(四选一,assert 强制) + `acl`(topic 级读写) |
-| `settings` | freeform | 全局 mosquitto.conf 键值(`persistence`、`log_type` 等);`persistence` 另有专用 bool 选项 |
-| `bridges.<name>` | attrset | 桥接到别的 broker(AWS IoT 等),topics 双向映射,宿舍用不到 |
-
-**凭证落盘机制**:四种密码选项里,`*File` 变体经 **systemd credentials** 注入——
-秘密文件不进 nix store;而 `password`/`hashedPassword` 内联值会出现在
-systemd unit 的 LoadCredential 字面量里=**落 store 全员可读**。
-所以:密码一律 `hashedPasswordFile`/`passwordFile` 指到 `/etc/`、`/var/lib/` 或 sops 路径;
-hash 用 `nix shell nixpkgs#mosquitto -c mosquitto_passwd -c /tmp/pw <user>` 生成。
+由于 Home Assistant、Zigbee2MQTT 与本地桥接脚本均运行在同一台主机上，Mosquitto 默认仅监听本地回环地址 `127.0.0.1`，并为每个服务分配独立账号与 Topic ACL。密码文件通过 `hashedPasswordFile` 引用（使用 `nix shell nixpkgs#mosquitto -c mosquitto_passwd -c /tmp/pw <user>` 生成），由 `systemd` `LoadCredential` 安全加载，避免哈希值写入 `/nix/store`：
 
 ```nix
 services.mosquitto = {
   enable = true;
   listeners = [{
-    address = "127.0.0.1";               # 全栈同机:只绑回环,LAN 面零暴露
+    address = "127.0.0.1";
     users.zigbee2mqtt = {
       hashedPasswordFile = "/var/lib/mosquitto-secrets/z2m.pwhash";
-      acl = [ "readwrite zigbee2mqtt/#" ];
+      acl = [ "readwrite zigbee2mqtt/#" "readwrite homeassistant/#" ];
     };
     users.ha = {
       hashedPasswordFile = "/var/lib/mosquitto-secrets/ha.pwhash";
-      acl = [ "read homeassistant/#" "readwrite zigbee2mqtt/#" ];
+      acl = [ "readwrite homeassistant/#" "readwrite zigbee2mqtt/#" ];
     };
   }];
 };
 ```
 
-### 2.2 Zigbee2MQTT(`services.zigbee2mqtt.*`)
+### 2.2 Zigbee2MQTT（`services.zigbee2mqtt.*`）
 
-**模块机制**(nixpkgs `zigbee2mqtt.nix` 源码):
+`nixpkgs` 的 `zigbee2mqtt` 模块会在每次服务启动前（`ExecStartPre`）将 `settings` 渲染出的 YAML 复制覆盖到 `${dataDir}/configuration.yaml`，并自动根据 `settings.serial.port` 配置 `systemd` 的 `DeviceAllow` 权限。
 
-- `settings` attrset → 渲染成 yaml → **每次 `ExecStartPre` 拷到 `${dataDir}/configuration.yaml`**
-  (`cp --no-preserve=mode`),即 z2m/前端对该文件的一切运行时改写会在下次启动被覆盖。
-- 服务用户 `zigbee2mqtt`,`SupplementaryGroups = ["dialout"]`,
-  `DeviceAllow` 按 `settings.serial.port` 自动放行——**串口直通零配置**,
-  但 `serial.port` 须是绝对路径才进 DeviceAllow。
-- 预设(mkDefault):`mqtt.server = mqtt://localhost:1883`、`base_topic = zigbee2mqtt`、
-  `serial.port = /dev/ttyACM0`、`permit_join = false`、
-  `homeassistant.enabled = config.services.home-assistant.enable`、
-  `devices`/`groups` 分离到 `devices.yaml`/`groups.yaml`。
-- hardening 全家桶:`PrivateUsers`/`ProtectSystem=strict`/`ReadWritePaths=dataDir` 等。
-
-**`settings` 关键键**(z2m configuration.yaml schema):
-
-| 键 | 值 | 备注 |
+| 配置键 | 设定值 | 说明 |
 |---|---|---|
-| `serial.port` | `/dev/serial/by-id/usb-...` | **必须用 by-id**,换口不重配;也是 DeviceAllow 依据 |
-| `serial.adapter` | `ember` / `zstack` | E=ember,P=zstack;`ezsp` 已废弃 |
-| `serial.baudrate` / `serial.rtscts` | 数/bool | 仅硬流控适配器(ZBT-1/2、SLZB-07)开 `rtscts`;ZBDongle-E/P 都不开 |
-| `mqtt.server` / `user` / `password` | — | 密码用 `'!secret.yaml mqtt_password'` 引用,不落 store(见下) |
-| `frontend` | `{enabled, port=8080, host, auth_token}` | z2m 2.x 默认启用;`auth_token` 必填或绑 127.0.0.1 |
-| `advanced.network_key` | 16B 数组 或 `GENERATE` | **NixOS 陷阱,见下** |
-| `advanced.channel` / `pan_id` / `ext_pan_id` | — | 信道建议 15/20/25,改动部分设备需重配对 |
-| `permit_join` | bool | 模块默认 false;临时入网走前端或 `zigbee2mqtt/bridge/request/permit_join` |
-| `availability.enabled` | bool | 设备在线探测,建议开 |
-| `homeassistant.enabled` | bool | HA MQTT discovery;模块默认跟随 HA 开关 |
-| `devices`/`groups` | 路径 | 指向 dataDir 内文件——**设备/组定义在 dataDir 不在 nix**,前端可改 |
+| `serial.port` | `"/dev/serial/by-id/usb-..."` | **必须填写 `/dev/serial/by-id/` 下的持久路径**，防止更换 USB 接口或重启后设备号漂移 |
+| `serial.adapter` | `"ember"`（ZBDongle-E）或 `"zstack"`（ZBDongle-P） | ZBDongle-E 使用新版 `ember` 驱动（旧名 `ezsp` 已废弃） |
+| `serial.rtscts` | `false` | ZBDongle-E / P 均不使用硬件流控，保持关闭 |
+| `mqtt.password` | `"!secret.yaml mqtt_password"` | 从 `${dataDir}/secret.yaml` 读取密码 |
+| `advanced.network_key` | `"!secret.yaml network_key"` | **切勿在 Nix 配置中写 `"GENERATE"`**（见下方说明） |
+| `advanced.channel` | `15` / `20` / `25` | 避开宿舍 2.4GHz Wi-Fi 主信道（见 §3.4） |
+| `permit_join` | `false` | 日常保持关闭，仅在添加新设备时通过 Web 前端临时开启 |
 
-**两个 NixOS 特有陷阱**:
+**NixOS 下配置 `zigbee2mqtt` 的两项关键注意事项**：
 
-1. **`network_key: GENERATE` 会每次服务启动重生成**。z2m 的机制是启动时把 `GENERATE`
-   回写进 configuration.yaml;NixOS 模块每次 start 又从 store 覆盖回 `GENERATE`,
-   于是每次重启都生成新 key → 与协调器 NVRAM 不一致 →
-   `startup failed - configuration-adapter mismatch` → 需删 `coordinator_backup.json`
-   并重配全网。**正确姿势**:先让 z2m 裸跑一次生成,或 `openssl rand 16` 手搓,
-   然后固定写进 `secret.yaml`(放 dataDir,不进 git/store):
-   `settings.advanced.network_key = "!secret.yaml network_key";`
-   (`pan_id`/`ext_pan_id` 的 `GENERATE` 同坑同治)。
-2. **`settings` 整体落 store**,凡是秘密(MQTT 密码、network_key)一律
-   `'!secret.yaml key'` 引用,dataDir 里的 `secret.yaml` 才是运行时真值。
+1. **禁止在 Nix 配置中写 `network_key = "GENERATE"`**：Z2M 原生机制是在首次启动生成随机密钥后回写 `configuration.yaml`；但 NixOS 模块每次启动服务都会用 `/nix/store` 里的模板覆盖 `configuration.yaml`。若写成 `"GENERATE"`，每次重启都会生成新密钥并与协调器 NVRAM 中保存的网络状态冲突（报错 `configuration-adapter mismatch`）。正确做法是预先生成 16 字节随机密钥写入 `/var/lib/zigbee2mqtt/secret.yaml`，并在 Nix 中配置 `settings.advanced.network_key = "!secret.yaml network_key";`。
+2. **设备别名与分组保存在数据目录**：将 `devices = "devices.yaml"` 与 `groups = "groups.yaml"` 指向 `dataDir` 内部文件，即可在 Z2M Web 前端直接重命名设备而不会被 `nixos-rebuild` 覆盖。
 
-### 2.3 ESPHome(`services.esphome.*`)
+### 2.3 ESPHome（`services.esphome.*`）
 
-nixpkgs 现在打的是 **esphome-device-builder**(新版 dashboard):
+ESPHome 仅在编译与 OTA 更新固件时需要开启 Dashboard 服务（默认端口 `6052`）；日常运行时，已刷好固件的 ESP32 节点直接通过 ESPHome Native API（加密 TCP 长连接）与 Home Assistant 通信，不依赖 `esphome.service` 常驻。
 
-| 选项 | 默认 | 要点 |
+## 3. 硬件选购、刷机与接线指南
+
+### 3.1 Zigbee 协调器：ZBDongle-P 与 ZBDongle-E 对比
+
+| 参数项 | SONOFF ZBDongle-P | SONOFF ZBDongle-E |
 |---|---|---|
-| `address`/`port` | `0.0.0.0`/`6052` | dashboard 监听面;`enableUnixSocket` 可改走 `/run/esphome/esphome.sock` |
-| `allowedDevices` | `["char-ttyS" "char-ttyUSB"]` | DeviceAllow 清单;按绝对路径列的设备**需在服务启动时已插好** |
-| `environmentFile` | null | dashboard 密码/secret 走这里 |
-| `remoteBuildOnly`/`remoteBuildAddress`/`remoteBuildPort` | — | 无头远程编译服务器模式 |
-| `openFirewall` / `usePing` | false / **已移除** | usePing 对新 dashboard 无效已被模块删除 |
+| 主控芯片 | TI **CC2652P**（内置 +20dBm 功放） | SiLabs **EFR32MG21** |
+| Z2M 驱动名 | `zstack` | `ember`（需配合 NCP 7.4.x+ 固件） |
+| 硬件流控 | 关闭 | 关闭（仅软件流控，开启 `rtscts` 会导致无法通信） |
+| 固件刷写工具 | 按住 Boot 键插电进 BSL，使用 Web Flasher 或 `cc2538-bsl` | 免拆壳，直接使用 SONOFF 官方网页刷机工具或 `universal-silabs-flasher` |
 
-- 状态目录 `/var/lib/esphome`(设备 YAML、PlatformIO 缓存在这,**非声明式**,备份/迁移别漏)。
-- dashboard 认证薄弱——宿舍共享网络下绑回环或走反代/Tailscale,别裸开 LAN。
+**抗干扰安装要求**：协调器必须通过 **0.5 米以上的屏蔽 USB 2.0 延长线**引出，远离迷你主机的 USB 3.0 接口、金属机箱与 Wi-Fi 路由器天线，以减少 2.4GHz 底噪干扰。
 
-## 3. 硬件落地细节
+### 3.2 小米温湿度计 2（LYWSD03MMC）刷入开源固件
 
-### 3.1 ZBDongle-E vs ZBDongle-P
+1. 使用桌面或安卓端 Chrome / Edge 浏览器打开 [`atc1441.github.io/TelinkFlasher.html`](https://atc1441.github.io/TelinkFlasher.html)，下载 `pvvx` 分支的最新固件 `.bin` 文件。
+2. 点击 `Connect` 配对温湿度计，点击 `Do Activation` 获取原始密钥，随后选择固件文件点击 `Start Flashing`（全程约 30 秒，无线完成无需拆壳）。
+3. 刷入后在同一网页将广播格式设为 **BTHome v2**，广播间隔设为 30–60 秒。
+4. 宿舍内任一运行 ESPHome `bluetooth_proxy` 的 ESP32 节点收到广播后，Home Assistant 会通过内置 BTHome 集成自动发现并添加设备。
 
-| 项 | ZBDongle-P | ZBDongle-E("Plus V2") |
-|---|---|---|
-| 芯片 | TI **CC2652P**(+20dBm PA) | SiLabs **EFR32MG21**(外置天线) |
-| Z2M `serial.adapter` | `zstack` | `ember`(固件 7.4.x–9.1.x;`ezsp` 已 deprecated) |
-| 流控 | — | **仅软件流控,不可开 `rtscts`** |
-| 刷机 | BSL 模式(按住 boot 插 USB)→ web flasher / XZG Multi-Tool | web:SONOFF Dongle Flasher / Silabs Firmware Flasher;CLI:NabuCasa `universal-silabs-flasher`;固件取 darkxst/Nerivec 构建的 **NCP 7.4.4+**(厂商固件多年未更) |
-| 现状 | 老牌稳定,2023 前 Koenkk 唯一推荐 | ember 已转正进 Z2M 官方"推荐"列表;与 HA Connect ZBT-1/2 同门,SiLabs 生态固件更新最勤 |
+### 3.3 LD2410C 毫米波人体存在传感器 + ESP32 接线与配置
 
-**通用要点**(z2m 官方建议):
-- `serial.port` 用 `/dev/serial/by-id/...` 持久路径;换适配器时 z2m 备份/恢复可免重配对(部分情形仍需重配)。
-- 协调器**插 ≥50cm 屏蔽 USB 延长线**,远离 USB3 口/SSD/Wi-Fi 路由器——干扰比换棒子更影响体验。
-- 宿舍单房间直连子设备足够;信号差时加 Zigbee 插座当 router(市电设备天然是中继)。
-
-### 3.2 LYWSD03MMC 刷 ATC 固件
-
-- 硬件版本 B1.4/B1.5/B1.6/B1.9 全兼容(atc1441 README 明示;更早批次看 pvvx 仓支持表)。
-- **流程**(全程只需 Chrome/Edge,靠 Web Bluetooth):
-  1. 下载 `ATC_Thermometer.bin`(atc1441 release;**pvvx 分支功能更多**——NV 存储/更省电/BTHome 广播,社区推荐)
-  2. 开 `atc1441.github.io/TelinkFlasher.html` → Connect(广播稀疏需等)
-  3. **Do Activation** 授权连接 → 选 bin → Start Flashing
-  4. 刷完自动重启;屏不亮就拔电池重上
-- **可逆性**:README 底链 stock 固件 zip(`LYWSD03MMC_0130_...zip`)同流程刷回;
-  activation 后若要回米家 App 需重新激活。
-- **刷后形态**:广播格式可选 ATC 自定义/BTHome/Mi-like;广告间隔 10s–10min 可调;
-  屏显 smiley/温湿度;CR2032 续航官方宣称优于原厂固件。
-- **接收链路**:BTHome 广播 → ESP32 刷 ESPHome `bluetooth_proxy` → HA 原生 BTHome 集成;
-  或 OEPL AP 的 BLE 扫描顺带收(广播格式 ATC_BLE_OEPL 是价签线,温湿度走前一条路更正)。
-
-### 3.3 LD2410 存在传感器 + ESP32
-
-| 项 | 细节 |
+| 项目 | 规范说明 |
 |---|---|
-| 变体 | LD2410/B/C:协议近似,B 带 BLE(手机 App 调参);**C 是 2.54mm 排针**免焊,A/B 是 1.25mm 小座——买 1.25→2.54 转接线,别硬焊 |
-| 供电 | **5V**(VCC/GND 共地),非 3.3V |
-| 接线 | 传感器 TX→ESP32 RX、RX→TX(交叉);可选 OUT 脚→GPIO 当直接存在电平 |
-| UART | **256000 baud,8N1(parity NONE/stop 1)**;强烈建议硬件 UART——WROOM 用 GPIO16/17(UART2),WROVER 上 16/17 被 PSRAM 占用改选别的 UART 脚 |
-| 固件 | ESPHome 原生 `ld2410` 组件:`ld2410:` hub + `binary_sensor`/`sensor`(运动/静止目标距离/能量)/`number`(各门控阈值)/`select`(距离分辨率 0.75m/0.2m、baud_rate)/`switch`(工程模式) |
-| 调试 | 工程模式(engineering mode)看 per-gate 能量调阈值,调完关掉;版本号 sensor 为空=线接反/波特率错 |
-| 替代 | LD2410B 的 BLE 也可直连 HA bluetooth_proxy,社区报告不稳,**UART 是正道** |
+| 型号选择 | 选择 **HLK-LD2410C**（标准 2.54mm 排针，可直接插杜邦线，免去焊接 1.25mm 小间距端子） |
+| 供电要求 | **必须接 ESP32 的 5V（VIN）引脚**与 GND（LD2410 内部稳压要求 5V 输入，接 3.3V 无法稳定工作） |
+| 串口接线 | 传感器 `TX` 接 ESP32 `GPIO16 (RX2)`，传感器 `RX` 接 ESP32 `GPIO17 (TX2)`（交叉连接，使用硬件 UART2） |
+| 串口参数 | 波特率 **256000**，数据位 8，校验位 NONE，停止位 1 |
+
+ESPHome 节点配置片段：
 
 ```yaml
-uart: { id: ld_uart, tx_pin: GPIO17, rx_pin: GPIO16, baud_rate: 256000, parity: NONE, stop_bits: 1 }
-ld2410: { uart_id: ld_uart }
+uart:
+  id: ld_uart
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 256000
+  parity: NONE
+  stop_bits: 1
+
+ld2410:
+  uart_id: ld_uart
+
 binary_sensor:
   - platform: ld2410
-    has_target: { name: "Presence" }
-    has_still_target: { name: "Presence still" }
+    has_target:
+      name: "Dorm Presence"
+    has_still_target:
+      name: "Dorm Still Presence"
 ```
 
-### 3.4 Zigbee/Wi-Fi 信道规划
+首次安装后可在 Home Assistant 中临时开启传感器的"工程模式（Engineering Mode）"开关，观察无人状态下各距离门的底噪能量值，将各门静止灵敏度阈值设在底噪上方 10–15% 处，以过滤风扇或窗帘摆动引起的误报；调校完毕后关闭工程模式以减少串口与无线报文流量。
 
-Zigbee 与 2.4G Wi-Fi 同频段,信道按 ZLL 集合选(11/15/20/25,兼容性最好;26 非 ZLL 部分老设备不支持):
+### 3.4 Zigbee 与 2.4GHz Wi-Fi 信道避让
 
-| 宿舍 Wi-Fi 信道 | 避让的 Zigbee 信道 | 推荐 |
+Zigbee 与 2.4GHz Wi-Fi 共用频段，建网时按宿舍主 Wi-Fi 信道选择不重叠的 Zigbee 信道（优先在 11、15、20、25 四个 ZLL 标准信道中选择）：
+
+| 宿舍 2.4GHz Wi-Fi 信道 | 重叠的 Zigbee 信道 | 推荐选择的 Zigbee 信道 |
 |---|---|---|
-| ch1 | ZB 11–14 | ZB **20/25** |
-| ch6 | ZB 16–19 | ZB **11/25** |
-| ch11 | ZB 21–24 | ZB **11/15** |
+| Wi-Fi 信道 1 | Zigbee 11–14 | **20 或 25** |
+| Wi-Fi 信道 6 | Zigbee 16–19 | **11 或 25** |
+| Wi-Fi 信道 11 | Zigbee 21–24 | **11 或 15** |
 
-改已有网信道:z2m 会广播网络更新,**睡眠中的电池设备下次唤醒才换**,个别设备需重配对;
-仅 `zstack`/`ember` 支持在线换信道。建网时一次选对省得折腾。
+## 4. 自动化四层兜底设计
 
-## 4. 自动化兜底分层
+为保证系统在网络中断、服务重启或工作站关机时仍具备基础可用性，自动化逻辑按依赖范围从底向上分为四层：
 
-| 层 | 范围 | 存活条件 | 失效边界 | 该放什么 |
-|---|---|---|---|---|
-| **Z2M binding** | Zigbee 设备→设备/组直连 | 仅两端设备在线 | 仅限 Zigbee 原生 cluster:`genOnOff`/`genLevelCtrl`/`genScenes`/`lightingColorCtrl`/`closuresWindowCovering`;源端多是遥控器/开关类 | **遥控器/门磁直连灯、插座**——z2m、HA、工作站全挂也活 |
-| **ESPHome on-device** | 单板内 GPIO/传感器→板上输出 | 板子有电(连 Wi-Fi 都不需要) | 只看得见本板;调外部设备要 `homeassistant.*` 动作=又回到依赖 HA | 板上按钮→继电器、传感器阈值→板上输出、IR 发射的本地定时 |
-| **Z2M groups** | Zigbee 组播控制 | 协调器+z2m 活 | z2m/协调器挂即失效 | 一键控多灯(效率用途>兜底用途) |
-| **HA automation** | 跨协议/跨设备/时间/sun/通知/webhook | HA+MQTT+对应链路全活 | 重启丢 delay/wait;错过期间的触发不补发;unavailable 实体的动作被跳过 | 场景编排(回宿/入睡/离宿)、跨协议联动、推送、→agent webhook |
+| 层级 | 作用范围 | 正常运行前提 | 适用场景 |
+|---|---|---|---|
+| **1. Zigbee Direct Binding** | Zigbee 无线开关/遥控器直连控制 Zigbee 灯具或插座 | 仅需开关与受控灯具/插座带电（Z2M 与 HA 全部停机仍可工作） | 床头与门口无线开关控制主照明 |
+| **2. ESPHome 板载自动化** | 单个 ESP32 开发板内部的传感器输入与 GPIO / 红外输出 | 仅需开发板带电（无需 Wi-Fi 与 HA） | 板载物理按键切换继电器、过温保护断电 |
+| **3. Home Assistant 本地自动化** | 跨协议设备联动（Zigbee + BLE + Wi-Fi）、定时控制、高危安全告警 | N100 主机、Mosquitto、Z2M 与 HA 正常运行（无需外网与工作站） | 回宿亮灯、离宿断电、入睡关灯、水浸告警 |
+| **4. 派发器与 Agent 场景** | 结合日历、外部信息、墨水屏渲染与自然语言摘要的跨领域编排 | N100 与工作站 `evd` 正常运行 | 晨间早报推送、出门携物清单渲染、异常用电判断 |
 
-**分配原则**:保命/高频手动的下沉 binding 或板上;**凡是要看"别的设备状态"的必须放 HA**;
-agent 只接 HA webhook 做增强判断,不当开关(dorm-smart.md 已定)。
+Zigbee 设备直连绑定（Direct Binding）可在 Z2M Web 前端的"绑定（Bind）"标签页配置，或向 `zigbee2mqtt/bridge/request/device/bind` 发布 JSON：
 
-binding 配置(`zigbee2mqtt/bridge/request/device/bind`,或前端 Bind 页):
 ```json
-{"from": "my_remote", "to": "my_bulb"}
-# 限定 cluster:{"from": "...", "to": "...", "clusters": ["genOnOff"]}
+{"from": "bedside_switch", "to": "desk_light_strip", "clusters": ["genOnOff", "genLevelCtrl"]}
 ```
 
-## 5. 安全与权限
+## 5. 断电与断网场景下的恢复行为
 
-### 5.1 Zigbee 网络密钥
-
-- `network_key` **默认值是公知常量**(`[1,3,5,...,13]`),官方明确"strongly suggested you change it";改 key = 全网重配对。
-- 密钥本体三处存:`configuration.yaml`/`secret.yaml`(运行配置)、`coordinator_backup.json`
-  (协调器状态备份,含 key)、前端 onboarding 生成。
-- **备份对象**:`dataDir` 整目录(configuration.yaml、secret.yaml、coordinator_backup.json、
-  devices.yaml、database.db)——迁移协调器/换机器全靠它;**secret.yaml 不进 git**。
-- Trust Center link key 是协议公知的 `ZigBeeAlliance09`(入网分发用,Zigbee 安全模型如此);
-  实际防护靠 network_key + `permit_join` 常态关闭。
-
-### 5.2 MQTT 认证与暴露面
-
-| 面 | 措施 |
-|---|---|
-| 监听面 | 全栈同机 → listener 只绑 `127.0.0.1`(LAN 零暴露);确有外部客户端再绑 LAN IP + ACL |
-| 账号 | 每服务独立账号(z2m/ha/工具脚本),**不要共享**;匿名(`allow_anonymous`)只用于首次联通验证 |
-| ACL | 按 base_topic 收窄:`readwrite zigbee2mqtt/#`、`read homeassistant/#`;ESPHome 走 native API 不需要 MQTT 账号 |
-| 密码 | `hashedPasswordFile`/`passwordFile`(systemd credentials);生成用 `mosquitto_passwd` |
-| 防火墙 | `networking.firewall` 不开 1883;远程订阅走 Tailscale 内网 |
-
-### 5.3 面板暴露面
-
-- Z2M frontend(默认 8080):绑 `127.0.0.1` 或设 `frontend.auth_token`;反代出域名时 `frontend.url` 填对外 URL。
-- ESPHome dashboard(6052):弱认证,绑回环/Tailscale。
-- HA(8123):`ip_ban` 默认开;`http` 配 `use_x_forwarded_for` + `trusted_proxies` 才认反代。
-
-### 5.4 Tailscale 远程访问 HA(推荐姿势)
-
-- NixOS:`services.tailscale.enable = true`;节点在 tailnet 内直接 `http://<host>.<tailnet>.ts.net:8123`。
-- 要 HTTPS/干净域名:`tailscale serve --bg 8123`(tailnet 内代理,需 tailnet 开 HTTPS certificates);
-  serve 走回环代理 → HA 端 `trusted_proxies = [ "127.0.0.1" ]` + `use_x_forwarded_for = true`。
-- **Funnel(公网暴露)宿舍场景不需要**,别开;ACL 把 8123 收窄到个人设备 tag;节点 `Disable key expiry`。
-- 断电语义:远程入口随宿舍路由器一起死,Tailscale 只是"网在时怎么安全地进",不解决断网。
-
-## 6. 断电/断网行为矩阵
-
-| 故障场景 | Wi-Fi 设备(ESPHome/S31/红外) | Zigbee 设备 | BLE(LYWSD03MMC) | 本地自动化存活 |
+| 故障场景 | Wi-Fi 设备（ESPHome / 红外） | Zigbee 设备网络 | BLE 温湿度计 | 自动化可用范围 |
 |---|---|---|---|---|
-| **路由器断电**(工作站带电) | 全离线;板上自动化继续;`wifi.ap` 90s 起 fallback 热点;`wifi.reboot_timeout` 15min 重启重连 | **不受影响**(链路不经过路由器):协调器→z2m→mosquitto→HA 全在本机 | 不受影响(广播→ESP32 若同网断则数据滞留板内) | Z2M/binding/HA 全活 |
-| **工作站断电**(路由器带电) | 设备在线但无人消费;ESPHome 本地逻辑继续 | mesh 仍在;**binding 直连仍工作**;传感器上报无人收 | 广播继续无人收 | 仅 binding + ESPHome 板上 |
-| **全宿舍断电** | 全灭 | 协调器/市电路由灭;电池传感器休眠攒事件 | 广播继续(电池) | 仅设备端逻辑 |
-| **恢复供电** | ESP 秒级启动;`wifi` 重连 AP(秒-分钟);`api` 自动重连 HA | z2m systemd 拉起;市电 router 数十秒归网;**电池端设备下个唤醒周期归队(分钟级)** | 恢复上报 | HA/mosquitto/z2m 自启 |
+| **仅路由器断电 / 外网中断**（N100 带电） | 暂时离线（ESPHome 板载逻辑继续运行） | **完全正常**（USB 协调器、Z2M、Mosquitto、HA 均在 N100 本地闭环） | ESP32 代理随 Wi-Fi 离线暂停转发 | Zigbee 传感器、开关与 HA 本地自动化全部正常 |
+| **N100 关机或重启** | 在线但无 HA 接收 | **Zigbee Direct Binding 直连开关仍可正常控灯** | 持续广播 | 物理开关直连控灯与 ESPHome 板载逻辑可用 |
+| **全宿舍拉闸停电后恢复供电** | ESP32 秒级启动并自动重连 Wi-Fi 与 HA | N100 开机自启 Z2M 恢复网络；市电插座数十秒内归队，电池传感器在下个唤醒周期归队 | 持续广播，零恢复时间 | 供电恢复后约 1–2 分钟全栈自动恢复 |
 
-**恢复语义细节**:
+**断电恢复配置细节**：
 
-- **HA automation**:启动恢复各 automation 上次 on/off(`initial_state` 可强制);
-  **变化触发不补发**——HA 停机期间开过的门不会重触发"门磁开";
-  运行中的 `delay`/`wait`/`for` 重启即丢,长等待改用 time trigger +
-  `homeassistant.start` 触发补偿(HA 官方 troubleshooting 建议)。
-- **Zigbee 执行器上电态**:`power_on_behavior`(on/off/toggle/previous)逐设备可配;
-  不支持该属性的设备(Hue 用 `hue_power_on_behavior`,部分杂牌没有)断电恢复可能全亮——
-  宿舍断电频繁的话,插座/灯选型时把"支持 power_on_behavior"列为硬指标。
-- **ESPHome**:`switch.restore_mode`(`ALWAYS_OFF` 默认/`RESTORE_DEFAULT_*` 记忆态/
-  `ALWAYS_ON`)决定上电输出;`api.reboot_timeout` 15min 无客户端会重启
-  (宿舍常态断网环境可设 `0s` 牺牲 watchdog 换不折腾,或保持默认拿它当自愈);
-  `wifi.ap` fallback 热点让断网期仍可救砖。
-- **z2m**:启动即恢复 mesh(协调器 NVRAM 有全网态);`availability` 标记
-  未及时归队的设备为 offline,方便排查"哪只没醒"。
-
-**对宿舍断电时段的对策**(回 dorm-smart.md 未决项):
-若断电时段覆盖夜间(拉闸限电)——关键传感器选电池 Zigbee(断电不影响感知),
-执行器接受"来电后按 power_on_behavior 复位"而非记忆态;
-若工作站也会断电,HA 迁移到带电池/常电小盒子(§1)的优先级上调。
-
-## 出处汇总
-
-- NixOS 官方 wiki Home Assistant:https://wiki.nixos.org/wiki/Home-assistant
-- NixOS 官方 wiki Mosquitto:https://wiki.nixos.org/wiki/Mosquitto
-- nixpkgs 模块源码:`nixos/modules/services/home-automation/{home-assistant,zigbee2mqtt,esphome}.nix`、`services/networking/mosquitto.nix`(nixos-unstable)
-- MyNixOS 选项索引:https://mynixos.com/nixpkgs/options/services.{home-assistant,mosquitto,zigbee2mqtt,esphome}
-- nixpkgs issue #416817(rootless docker ttyUSB 权限):https://github.com/NixOS/nixpkgs/issues/416817
-- nixpkgs issue #439276(z2m settings.homeassistant.enabled):https://github.com/NixOS/nixpkgs/issues/439276
-- Zigbee2MQTT 文档:adapters README / emberznet / zstack、binding、groups、zigbee-network(密钥/信道)、securing、improve range、mqtt topics:https://www.zigbee2mqtt.io/
-- darkxst silabs-firmware-builder(ZBDongle-E NCP 固件):https://github.com/darkxst/silabs-firmware-builder
-- ATC_MiThermometer(atc1441 及 pvvx 分支):https://github.com/atc1441/ATC_MiThermometer、https://github.com/pvvx/ATC_MiThermometer、TelinkFlasher:https://atc1441.github.io/TelinkFlasher.html
-- ESPHome 文档:ld2410、api(reboot_timeout)、wifi(reboot_timeout/ap_timeout)、switch restore_mode:https://esphome.io/components/
-- Home Assistant 文档:http 集成(trusted_proxies)、automation yaml/modes/troubleshooting、zha:https://www.home-assistant.io/docs/
-- Tailscale 文档:serve/funnel CLI:https://tailscale.com/docs/features/tailscale-serve
-- Zigbee/Wi-Fi 共存:NXP AN 与 Signify Interact 共存指南(zigbeefordomoticz wiki 转引)
+- **灯具与插座上电状态（`power_on_behavior`）**：在 Z2M 中将宿舍灯具的 `power_on_behavior` 统一设为 `off`（或 `previous`），防止夜间宿舍恢复供电时所有灯光突然全亮；将路由器、N100 与充电器所在插座设为 `on`（来电自动导通）。
+- **Home Assistant 重启补偿**：HA 重启期间错过的边沿事件不会自动重放，且正在执行中的长时间 `delay` 或 `wait_template` 会被中断。因此，超过 5 分钟的延迟操作统一改为基于时间戳的定时触发，或在 `homeassistant.start` 事件触发时检查当前传感器状态进行补偿。
+- **Z2M 数据目录备份**：将 `/var/lib/zigbee2mqtt`（包含 `configuration.yaml`、`secret.yaml`、`coordinator_backup.json`、`devices.yaml`、`database.db`）纳入每日 Restic 备份，更换协调器硬件或重装系统时可直接恢复全网配对状态。

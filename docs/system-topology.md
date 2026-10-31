@@ -1,71 +1,73 @@
 # 系统拓扑：常驻入口与本地编排
 
-> 状态：部分已部署 · 角色：执行层中 `agent:orca` 这一路的实现（见 [架构总览 §5](architecture.md)）
+> 状态：部分已部署 · 角色：执行层中 `agent:orca` 链路的部署拓扑（见 [架构总览 §5](architecture.md#5-执行器列表)）
 
-整体分三段：**入口常驻在 N100，编排在工作站本地，执行下沉到 worker**。手机等任何设备都能发起和跟踪任务，而需要用到本机文件、GPU 或桌面的执行只发生在工作站上。
+系统整体按职责分为三层：**常驻入口部署在 N100，任务编排运行在工作站本地，具体执行下沉至各 Worker 与 Provider**。用户可通过手机或任意终端随时发起和跟进任务，而依赖本地文件、GPU 或桌面环境的任务均在工作站本地完成。
 
-## 1. 角色
+## 1. 三层职责划分
 
-| 角色 | 组件 | 职责 |
+| 层级 | 核心组件 | 职责范围 |
 |---|---|---|
-| 入口（常驻） | DS-Bot（必要时加 AstrBot），跑在 N100 | 听懂你的话，从能力目录里选出 `kind`，入账，说人话回报，保存人格记忆 |
-| 编排（本地） | Orca，跑在工作站 | worktree、终端、Run/Task/Dispatch、消息队列，是本机工作的事实源 |
-| 执行（本地） | Devin / Codex / Claude Code worker，以及各能力的 provider | 只做派发下来的具体任务 |
+| 常驻入口 | DS-Bot（按需配合 AstrBot），运行于 N100 | 解析自然语言输入，从能力目录中匹配 `kind` 并录入任务；向用户发送执行摘要与交互卡片；维护轻量交互设定 |
+| 本地编排 | Orca，运行于工作站 | 管理 Git Worktree、终端会话、Run / Task / Dispatch 生命周期与消息队列，作为代码与多步任务执行的权威状态源 |
+| 任务执行 | Devin / Codex / Claude Code Worker，以及各能力 Provider | 在隔离的 Worktree 或运行目录内完成具体派发的子任务 |
 
-参考 [Super-agent](super-agent-architecture.md) 里的 Router / Worker 两层结构，本仓的做法正好相反：**Loop 和账都在本机，入口宿主只做转发**。单用户没有多租户需求，而本机的文件、GPU 和凭据在执行时都离不开。
+对比 [Super-agent 参考架构](super-agent-architecture.md) 的云端 Router / 端侧轻量守护进程模式，本系统采用了相反的部署方向（[ADR 0003](adr/0003-loop-local-entry-remote.md)）：**将任务库与编排核心留在工作站本地，远端入口仅负责意图解析与消息转发**，避免为访问本地文件、GPU 与原生凭据而引入复杂的跨机 RPC。
 
-## 2. 什么交给入口，什么下发本机
+## 2. 入口直办与下发工作站的分界
 
-判断标准只有一个：**是否要用到本机设备**（文件系统、GPU、桌面应用、音视频和外设）。
+任务在 N100 入口直接处理还是派发至工作站，取决于**是否依赖工作站本地资源**（本地文件系统、独立显卡、桌面 GUI 应用与外设）：
 
-- **入口自己办**：调研、写短文、规划、翻译、日程、只读抓取。
-- **下发本机**：视频、音乐、游戏开发、深度代码、本机运维，也就是所有要读本机文件、开本机窗口或改本机状态的任务。
-- 工作站离线时，入口回复"已排队"，然后通过 Wake-on-LAN 唤醒工作站。
+- **N100 入口直接处理**：信息检索、短文起草、日程管理、文本翻译、公开网页只读抓取。
+- **派发至工作站执行**：视频渲染、音乐生成、游戏构建、代码仓库开发、逆向分析及本机系统维护。
+- 当工作站处于休眠或关机状态时，N100 入口将任务加入等待队列并回复"已排队"，同时通过有线局域网发送 Wake-on-LAN（WoL）魔术包唤醒工作站。
 
-## 3. 通道
+## 3. 跨机通信通道
 
-- **网络**：节点之间用 Tailscale 组网。已入网的有工作站（systemd 常驻）和 KPW5（userspace 模式，只能出站）；N100 待加入。AX6000 仍是唯一网关，负责校园网认证、多出口和代理；N100 断电只影响入口能不能连上。见 [AX6000](ax6000-router.md)。
-- **命令面**：DS-Bot 通过 SSH 调用本机 `orca` CLI（当前 shim 为 `~/.config/orca/linux-orca-cli-shim/orca`，以原生安装为准）。不另造 RPC。
-- **薄入口**：在 `~/.local/bin/` 放一个脚本，只提供四个动作：创建任务、查询状态、读取输出、发送跟进。
+- **虚拟局域网**：各节点通过 Tailscale 互联。目前工作站（`systemd` 常驻服务）与 Kindle KPW5（Userspace 网络模式，仅支持出站连接）已接入；N100 接入后同时配置为 **Tailscale 子网路由（Subnet Router）与出口节点（Exit Node）**，通过 `tailscale0 → eth0` 的 SNAT 将局域网 `192.168.31.0/24` 暴露给 Tailnet。AX6000 仍作为局域网唯一默认网关，负责校园网多账号认证、分流与透明代理。详见 [网络与设备组网 §3](network-fabric.md#3-子网路由与-exit-node-选型) 与 [AX6000 校园网路由](ax6000-router.md)。
+- **命令调用通道**：N100 上的 DS-Bot 通过 Tailscale SSH 调用工作站上的受限入口脚本，底层转发至本机 `orca` CLI（当前路径为 `~/.config/orca/linux-orca-cli-shim/orca`，以原生安装为准），不额外开发自定义 RPC 协议。
+- **受限入口脚本**：在工作站 `~/.local/bin/` 下放置封装脚本，仅向远端暴露四项受控操作：创建任务、查询状态、读取输出、发送跟进回复。
 
-## 4. 下发与跟进
+## 4. 任务派发与闭环跟进
 
-- DS-Bot 用 `orchestration run-create` 建 Run，用 `worker-start --spec` 派发 worker，再用 `check --wait` 收回 `worker_done` / `escalation` / `question`，翻译成人话发给你。你的回复通过 `orchestration reply` 交回 worker。
-- 每个 Dispatch 都要跟到真正结束；超时只是检查点，不是结束。
-- 产物（成片、构建、分支）留在本机，只回传摘要和路径；你明确要文件时才搬运。
-- 做完之后调用 `ev done <id> "<一句话>"` 写回账。可复用的做法顺手更新到 skill 或 AGENTS.md。
+- DS-Bot 通过 `orca orchestration run-create` 创建 Run，调用 `worker-start --spec` 派发 Worker，并通过 `check --wait` 等待 `worker_done`、`escalation` 或 `question` 事件，将结果整理为简明通知发给用户；用户的确认或补充回复再经 `orca orchestration reply` 传回 Worker。
+- 每次派发均持续跟踪至任务进入终态；单次轮询超时仅作为进度检查点，不将超时静默标记为完成。
+- 渲染成片、构建包、代码分支等大体积产物保留在工作站本地，仅向入口回传执行摘要与本地文件路径；仅在用户明确索取文件时才跨机传输。
+- 任务执行完毕后调用 `ev done <id> "<执行摘要>"` 写回任务库；执行过程中总结出的通用做法同步沉淀至对应 Skill 或 `AGENTS.md`。
 
-## 5. 呈现
+## 5. 状态展示与交互界面
 
-- **DS-Bot Web / Desktop**：任务卡片，带进度、跟进和挑选产物。
-- **IM**：通过 `@xmanrui/dsh-im` 插件接入私聊；群聊用 DS-Bot Web 或 AstrBot。卡片和进度渲染成图片发出。
-- 卡片读取的是 Orca 和 Taskwarrior 里的状态，不另存一份。
+- **DS-Bot Web / Desktop**：展示任务进度卡片、中间输出与多候选比选结果。
+- **即时通讯（IM）**：私聊通过 `@xmanrui/dsh-im` 插件接入；群聊或更多平台通过 AstrBot 接入，将交互卡片渲染为图片发送。
+- 前端界面展示的任务状态直接读取自 Orca 与 Taskwarrior，不在前端维护独立的状态副本。
 
-## 6. 连续性
+## 6. 会话连续性
 
-- 执行状态只保存在 Orca。DS-Bot 只缓存 Run、Dispatch、worktree 的 ID 和最近一次摘要，断线后按 ID 恢复。
-- 回到电脑前，同一批 worktree 和 Run 在 Orca UI 里都能看到，直接接着做。DS-Bot 相当于 Orca 的手机外壳。
+- 任务的完整执行状态保存在工作站 Orca 中。DS-Bot 仅缓存 `Run`、`Dispatch`、`Worktree` 的 ID 与最新摘要，网络重连后按 ID 即可恢复跟踪。
+- 用户回到工作站桌面后，可在 Orca GUI 中直接查看并接管同一批 Worktree 与 Run。
 
-## 7. GUI 自动化：结构化优先，像素循环用 Jev
+## 7. GUI 自动化分级策略
 
-1. **结构化**（默认）：浏览器走 `orca-cli` 的 DOM 控制，原生应用走 `orca computer` 的 AT-SPI 无障碍树。有现成 CLI 或 CLI-Anything harness 时优先用它们。
-2. **像素循环**（结构化够不到的情况，如画布、游戏画面、自绘 UI）：每一步决策交给 Jev 类决策模型做类型化选择（点哪个、跳过、是否完成），截图和输入注入用 Spectacle / KWin DBus + ydotool（见 [工作站 §4.2](workstation-nixos.md)）。
-3. **规划**：只在多次失败或任务需要重新拆分时，才调用大模型。
+对于必须操作图形界面的软件，按以下优先级依次降级：
 
-Jev 不进入调度链路，而是写进 worker 自己的 skill / 规则："走像素路径时默认通过 Jev 薄封装"。不要修改 Orca 捆绑的 skill，因为 `orca skills update` 会覆盖它们。
+1. **结构化接口优先（默认）**：具备原生 CLI 或 `CLI-Anything` 封装的工具直接走命令行；浏览器网页通过 `orca-cli` 的 DOM 接口控制；原生桌面应用通过 `orca computer` 读取 AT-SPI 无障碍树进行操控。
+2. **像素级视觉操作（兜底）**：面对自绘画布、游戏窗口或无障碍树缺失的界面，使用 KWin DBus / `spectacle` 截图并配合视觉决策模型（如本地 VL 模型或 Jev）输出坐标动作，通过 `ydotool` 注入键鼠事件（见 [工作站配置 §4.2](workstation-nixos.md#42-桌面自动化命令行接口)）。
+3. **重规划升级**：仅在连续多次操作失败或任务需要重新拆解时，才升级调用大参数模型重新规划步骤。
 
-## 8. 本机运维
+视觉操作逻辑封装在 Worker 自身的 Skill 中，不直接修改 Orca 内置 Skill（避免被 `orca skills update` 覆盖）。
 
-| 类型 | 做法 | 回退 |
+## 8. 本机系统维护规范
+
+| 操作类别 | 执行方式 | 回滚手段 |
 |---|---|---|
-| 诊断（查磁盘、看日志） | 问一句，入口或 worker 直接回答 | 不需要 |
-| 变更（装包、改配置） | 改 flake → `nixos-rebuild switch` → 冒烟检查 | 回滚 NixOS generation |
-| 系统更新 | `work.nixos.update`：先构建，再用 nvd 看差异、切换、检查，失败就自动回滚 | 同上 |
+| 状态诊断（查磁盘、看日志） | 入口或 Worker 直接执行只读命令并返回结论 | 无需回滚 |
+| 配置与软件包变更 | 修改 NixOS Flake → `nixos-rebuild switch` → 执行冒烟检查 | 回滚 NixOS generation |
+| 系统例行升级 | `work.nixos.update`：先构建、用 `nvd` 对比包差异、切换配置并检查服务，失败自动回滚 | 回滚 NixOS generation |
 
-不把密码交给 agent。删除数据、对外发布属于确认点。
+系统不向 Agent 暴露 `sudo` 明文密码（本机 `wheel` 组已配置免密 `nixos-rebuild`）。涉及删除用户数据或对外发布的操作严格受确认点约束。
 
-## 9. 当前状态
+## 9. 部署进度
 
-- 已就绪：Orca 1.4.237（NixOS 本机），`orca-cli` / `computer-use` / `orchestration` 三个 skill 已全局安装。
-- 未就绪：DS-Bot 常驻部署和加入 Tailscale、薄入口脚本。
-- 顺序：先在本机手动扮演入口，把建 Run → 派 worker → 收回结果 → 回报这条链路跑通，再部署 DS-Bot。
+- **已就绪**：工作站已安装 Orca 1.4.237，全局已配置 `orca-cli`、`computer-use`、`orchestration` 三个 Skill。
+- **待部署**：N100 上的 DS-Bot 容器化常驻部署、Tailscale 子网路由配置、工作站受限入口脚本。
+- **推进顺序**：先在工作站本地跑通"创建 Run → 派发 Worker → 回收结果 → 写回任务库"的完整闭环，再将入口迁移至 N100 常驻。

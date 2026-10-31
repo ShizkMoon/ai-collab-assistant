@@ -1,21 +1,45 @@
-# 路线图
+# 路线图（历史版本）
 
-> 每一步做完都能马上用上；不设验收条款，自己用一周觉得有用就进下一步。
+> **注：本文早期 P0–P4 阶段划分已被 [总体架构设计 §13 实施阶段](architecture-north-star.md#13-实施阶段)（S0–S6）取代。**
+> 本文仅保留 P0 阶段的具体启动配置步骤供实施参考。
 
-| 阶段 | 内容 | 主要复用 | 能用上的标志 |
+## 1. 阶段重排原因
+
+1. **提前积累历史样本**：早期路线图将规则挖掘与能力提议（`meta.capability.propose`）放在最后的 P4 阶段，但序列模式挖掘与分类器校准依赖一定规模的历史任务记录。调整后的 S0–S6 路线要求在 **S1 阶段即开启每晚任务库快照导出**，为后续 S4 演进闭环积累数据。
+2. **提前接入监控与备份**：日常稳定使用的前提是故障可感知、数据可恢复，因此将健康检查（`hc check`）与任务库自动备份提前至 S1 与 S5 阶段落地。
+
+## 2. 新旧阶段对照表
+
+| 原阶段 | 包含内容 | 对应新阶段（总体架构设计 §13） | 调整说明 |
 |---|---|---|---|
-| **P0** | Taskwarrior + `ev` 封装 + 每日 digest + KRunner 入口 + Plasma 小组件 | Taskwarrior、plasma-manager | 自己每天在用 |
-| **P1** | 入口 Agent 做选择题 + 卡片交互 + KDE Connect + ntfy + 状态灯 + 早报 / 晚报 | DS-Bot / AstrBot、LiteLLM、ollama、WLED | 手机上说一句话就能派活 |
-| **P2** | 第一批能力：视频、作曲、长文写作、订阅早报、`info.recall`、`work.nixos.update`、记账 | Remotion、ACE-Step、RSSHub、double-entry-generator | 写作工作室和视频工作室跑通 |
-| **P3** | 硬件：Wake-on-LAN、UPS、NFC、毫米波、墨水屏分工、热敏打印 | HA、ESPHome、NUT、OpenEPaperLink | 场景能自动触发 |
-| **P4** | 周报 / 年度回顾、`meta.capability.propose`、场景录制、偏好学习、N100 兜底分类器 | SetFit、Khoj | 系统开始提出新能力的建议 |
+| **P0** | Taskwarrior + `ev` CLI + 每日早晚报 + KRunner + Plasma 桌面组件 | **S0 主干骨架** | 具体启动步骤见下方 §3 |
+| **P1** | 意图分类 + 交互卡片 + KDE Connect + ntfy + 状态灯 | **S1 日常交互** | 同步增加 `hc check` 与每晚任务快照导出 |
+| **P2** | 首批领域能力：视频、配乐、长文、订阅早报、知识检索、`nixos.update`、财务记账 | **S3 首条领域流水线** + **S6 领域扩展** | S3 先跑通单条创作流水线，其余能力在 S6 按需扩展 |
+| **P3** | 硬件接入：WoL、UPS、NFC、毫米波雷达、墨水屏、热敏打印 | **S2 显示终端闭环** + **S5 故障演练与备份** | 显示仲裁器需在至少两块物理屏幕就绪后再启用 |
+| **P4** | 周报/年报、能力提案、场景录制、偏好提炼、N100 兜底分类 | **S4 演进闭环** | 所需训练样本自 S1 起持续积累 |
 
-## P0 怎么开始
+## 3. S0 / P0 启动实施步骤
 
-1. 在 flake 里加上 `taskwarrior3`，配置 UDA：`kind`、`source`、`thread`、`parent`、`payload`。
-2. 写 `ev` 封装（[事件规格 §3](event-spec.md)）。
-3. 先登记 5 类事项：`work.code.task`、`life.maintain.*`、`life.schedule.*`、`info.feed.digest`、`meta.review.weekly`。
-4. 用 systemd timer 每天生成 digest，推送到手机。
-5. 做一个 KRunner 插件和一个 Plasma 小组件，显示待处理数量。
+1. 在 NixOS Flake 中启用 `taskwarrior3`，并在 `.taskrc` 中配置 UDA 字段：`kind`、`source`、`thread`、`parent`、`payload`、`severity`、`lifetime`、`reversible`、`attempts`、`lane`（见 [事件与任务规格 §1](event-spec.md#1-任务字段定义)）。
+2. 编写 `ev` CLI 封装、只写 Spool 队列的 `on-add` / `on-modify` Hook 以及常驻派发器 `evd` 骨架（见 [事件运行时与派发器 §3](event-runtime.md#3-派发器守护进程evd)）。
+3. 首批注册 5 类基础 `kind`：`work.code.task`、`life.maintain.home`、`life.schedule.*`、`info.feed.digest`、`meta.review.weekly`。
+4. 配置 `systemd.timer` 每日定时生成早晚报摘要并推送至手机。
+5. 配置 KDE Plasma KRunner 快捷录入插件与桌面待办计数小组件。
+6. 配置每晚定时导出任务快照至 `~/.local/state/aica/evo/observe/`，并启用前两项基础健康检查（任务库 SQLite 完整性检查、LiteLLM 网关探活）。
 
-用一周后再看：如果觉得记账麻烦，就减少事项类别；如果觉得有用，就进入 P1。
+## 4. 首批零硬件依赖的实用能力
+
+按落地性价比排序（详见 [日常事务管理 §5](life-operations.md#5-分步实施计划)）：
+
+1. `life.study.plan`（学习通作业自动录入任务库）、`life.doc.renew`（证件到期提醒）、`life.sub.audit`（订阅扣费对账）。
+2. `life.social.keep`（CardDAV 生日提醒）、`life.sleep.winddown`（晚间睡前清单）。
+3. 晨间唤醒、出门通勤、周度复盘三个基础自动化场景。
+
+## 5. 暂缓实施的模块
+
+| 模块 | 暂缓原因 |
+|---|---|
+| 多端显示仲裁器 | 在至少两块物理墨水屏硬件到位前，静态绑定即可满足需求 |
+| 语义相似缓存与温度缩放校准 | 需等待日常调用积累足够样本（每类 ≥ 30 条）后再启用 |
+| OpenTelemetry → Tempo 链路追踪 | 本地任务通过 `uuid` 与日志即可排查，排在最后阶段按需引入 |
+| 影子测试对比器 | 待核心 `kind` 的日常调用稳定后再开启旁路对比 |

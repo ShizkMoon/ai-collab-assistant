@@ -1,70 +1,55 @@
 # 统一渲染管线规格
 
-> 状态：设计中 · 角色：**呈现面**的渲染实现（见 [架构总览 §9](architecture.md)）
+> 状态：设计中 · 角色：墨水屏与信息看板的服务端渲染实现（见 [架构总览 §6](architecture.md#6-显示端分配)）
 
-墨水屏显示模块的服务端：一个把"数据"变成"屏上的图"的常驻管线。
-模块全是哑终端——内容、版式、刷新策略全在服务端定。本文是实施规格，兼具设计与技术细节。
+所有墨水屏标签与桌面信息卡均作为**无状态显示终端**运行：内容查询、版面排版、抖动量化与刷新模式决策全部集中在工作站的渲染服务（`renderd`）中完成，硬件终端仅负责接收并显示最终的 PNG 位图。
 
-**在事件模型里的位置**：渲染服务是账的**只读派生视图**，不是独立事实源。它从账（与 HA 只读状态）取数，不直接轮询传感器；触发的源头是事件落定或定时重渲，不是设备自己问"现在该显示什么"。这条与 system-topology 的"前端不产生第二事实源"是同一条约束。
+渲染服务是 Taskwarrior 任务库与 Home Assistant 状态的**只读派生视图**，不在自身内部维护独立的业务状态源。
 
-## 管线形态
+## 1. 管线数据流
 
 ```
-数据源(HA/日历/cron/agent/API)──┐
-                              ├─→ 渲染服务 → 版面缓存 → 分发器 ─→ 终端
-外部触发(webhook/MQTT event)──┘    (PNG+meta)         (OEPL/HTTP/MQTT)
+数据源（Taskwarrior 任务库 / HA 状态 / 日历） ──┐
+                                              ├─► 显示仲裁器 ──► HTML/CSS 模板渲染 ──► 灰度/调色板抖动量化 ──► 下发通道（OEPL / HTTP / MQTT）
+触发源（任务状态变更 Hook / 定时巡检） ─────────┘                                    （输出 PNG + 刷新元数据）
 ```
 
-**一次渲染 = 一份版面描述 + 一份数据快照 → 一帧 PNG + 刷新元数据**。
-终端不存逻辑，只存最后一帧 + 时间戳（断线显 stale，见 eink-modules-ux 体验原则）。
+**单次渲染输出 = 1 帧目标位深 PNG 图像 + 刷新控制元数据（`full` / `partial`、`temp_band`、`event_ids`）**。当网络中断或渲染服务停机时，墨水屏终端物理保持最后一帧画面及底部的数据时间戳。
 
-## 版面系统
+## 2. 模板与光栅化规范
 
-- **模板**:HTML+CSS(或 SVG)，按终端型号绑定——每个设备注册一条 `{width, height, bpp, 色域, 刷新档}` 能力描述
-- **渲染**:headless Chromium(playwright）截图 → 降到目标 bpp → 灰度/抖动算法固定一套(Floyd-Steinberg + 锐化），三色屏走调色板量化
-- **版面约定**:24px 内边距、底部时间戳行、`--ink-fg/--ink-bg/--ink-accent` 三个色板变量、灰度阶梯固定 4 级(0/85/170/255)
+- **版面模板**：使用标准 HTML + CSS（或 SVG）编写，每个显示端在 `surfaces/*.toml` 中声明 `{resolution, color, bpp}` 参数。
+- **光栅化与量化**：由无头 Chromium（Playwright）按目标像素尺寸精确截图，再经 Pillow / `pngquant` 降位深并执行 **Floyd-Steinberg 误差扩散抖动（配合预锐化）**；黑白红（BWR）与黑白红黄（BWRY）多色价签则量化至对应硬件调色板。
+- **版面视觉规范**：统一留出 `24px` 外边距，底部固定保留一行数据快照时间戳；CSS 颜色统一使用 `--ink-fg`、`--ink-bg`、`--ink-accent` 变量，4 级灰度固定映射到 `0 / 85 / 170 / 255` 四个色阶，确保不同批次渲染结果逐字节确定一致。
 
-## 输出规格（按终端档）
+## 3. 各类终端输出格式
 
-| 终端 | 输出 | 位深 | 通道 |
+| 硬件终端类别 | 输出格式与下发接口 | 像素位深 | 通信通道 |
 |---|---|---|---|
-| OEPL ESL 价签 | PNG → `POST /imgupload` | 1bpp(BW) / 调色板（BWR/Y) | AP 中转，BLE 下发 |
-| LilyGo T5 / ESP32 看板 | PNG | 4bpp/8bpp 灰度 | HTTP pull(`GET /frame/{id}`）或 MQTT 通知拉取 |
-| KPW5（路线 B，未来） | raw/PNG 帧 | 8bpp | USB-ECM → einkd → fb0 |
+| **OpenEPaperLink ESL 电子价签** | Baseline JPEG / PNG → `POST /imgupload` | 1bpp（黑白）/ 2bpp（黑白红/黄调色板） | 工作站推至 OEPL AP，由 AP 在标签唤醒时经 802.15.4 或 BLE 下发 |
+| **LilyGo T5 4.7" / ESP32 桌面看板** | PNG 位图 | 4bpp（16 级灰度，实际按 4 灰阶排版） | 终端定时唤醒发起 HTTP `GET /frame/{id}`（带 `ETag` / `If-None-Match`） |
+| **ThinkSmart View 主控台** | 实时 HTML 页面 | 24bit 全彩 | Fully Kiosk Browser 直接加载模板 URL，不经过 PNG 光栅化 |
+| **Kindle KPW5（可选看板模式）** | 8bpp 灰度 PNG | 8bpp | KPW5 经 Tailscale 定时 `wget` 拉取并通过 `fbink` / KOReader 刷屏 |
 
-帧缓存：`/var/lib/renderd/frames/{device}/{ts}.png` + `meta.json`（版面版本/数据快照哈希/渲染时间），终端拉取带 ETag/If-None-Match。
+帧缓存目录结构：`/var/lib/renderd/frames/{surface_id}/{frame_hash}.png` 及配套 `meta.json`（记录模板版本、数据快照哈希与关联任务 UUID）。
 
-## 刷新策略（KPW5 逆向的三条原则移植）
+## 4. 墨水屏刷新策略（移植自 KPW5 固件逆向结论）
 
-1. **温度自适应**：版面元数据带 `temp_band`，服务端按终端回传温度选波形档——
-   纯服务端逻辑，终端不用懂(KPW5 的 13 bank 证明这必须做，不然低温拖影)
-2. **局部/全量分级**：版面标 `dirty-region` 提示，终端固件决定能否 partial;
-   服务端按"距上次 full refresh ≥N 次或 ≥T 小时"插一次 GC16 全刷——防鬼影是服务端职责
-3. **VCOM/时序归硬件**:成品板已调好，服务端永不碰电源参数(见 panel-power-rails 教训)
+基于前期对 Kindle Paperwhite 5（KPW5）EPDC 驱动与波形表的逆向分析结论，在服务端渲染管线中落实三条刷新控制规则：
 
-## 触发与路由
+1. **温度自适应波形提示**：支持回传环境温度的终端在拉取图像时附带当前温度，服务端按温度区间（`temp_band`）标记建议波形档位，防止低温环境下灰阶响应不足产生拖影。
+2. **局部刷新与周期全刷清除残影**：对支持局部刷新（Partial Refresh）的桌面并口屏（如 LilyGo T5），每连续执行 20 次局部刷新后强制插入 1 次 `GC16` 全屏刷新，清除电泳粒子累积残影；拆机 ESL 价签每次均为全刷（`full_every = 0`）。
+3. **不改动硬件 PMIC 电压参数**：成品开发板与电子价签的 VCOM 及高压轨（±15V / +22V / −20V）已在出厂时匹配好，固件侧直接使用默认电源时序，避免损坏玻璃基板。
 
-- **定时**：systemd timer 按版面声明的 `refresh_interval` 重渲。这是兜底，不是主路径——定时重渲只能保证"不空白"，不能保证"显示的是新的"。
-- **事件**：Taskwarrior 里指定 kind 的事项完成或打上 `+me` 标签时触发重渲（由分派 hook 发 `POST /render/{layout}`）。**屏上的内容变化必须能追溯到一条事件**，否则它是装饰。
-- **聚合版面**：日卡读的是账的派生视图（今日待处置 / 逾期 / 昨日落定数），由 `ev` 查询生成，渲染服务不自己扫设备。
-- **路由表**：`devices.toml` 声明每块屏绑哪个版面、刷新间隔、唤醒窗口（价签睡眠省电）。
+## 5. 触发机制与容错约束
 
-两条纪律：
+- **事件驱动为主，定时巡检为辅**：当 Taskwarrior 中关联 `kind` 的任务完成或新增 `+me` 待确认项时，由派发器触发 [显示仲裁器](surface-arbiter.md) 重算；`systemd.timer` 仅作为低频保底检查。
+- **所有展示数据必须可追溯**：画面上的每个信息区块必须对应明确的 `event_id` 列表或 Home Assistant 实体 ID。
+- **渲染异常不阻塞任务主链路**：若 Chromium 截图或 AP 网络推送失败，仅记录一条 `system.render.failed` 事件，墨水屏继续保留上一帧画面与旧时间戳，绝不阻塞派发器 `evd` 的正常任务流转。
 
-- **不显示无法追溯来源的数字**。屏上每个区块对应一个 `event_id` 列表或一个聚合查询；查不到来源的区块是 bug。
-- **不因为渲染失败而阻塞账**。渲染失败记 `system.render.failed`，屏停在旧帧并显示 stale 时间戳——这与"断网留最后帧"是同一条原则。
+## 6. 最小闭环验收标准
 
-首屏契约（[架构总览 §9](architecture.md)）：日卡第一屏只放不能不管的事，最多一屏；其余靠翻查。
-
-## 技术选型（草案，待实现时再定）
-
-- 渲染:playwright + PIL(`pngquant`/`Pillow.Image.convert` 降 bpp)
-- 服务：单进程 python(FastAPI)+ SQLite 版面/设备表；不要 broker 先，MQTT 直连 Mosquitto
-- 部署：工作站 systemd user service；端口仅 Tailscale/局域网
-
-## 验收（最小环）
-
-1. `POST /render` 出一张 296×128 1bpp PNG，带时间戳角标
-2. OEPL `/imgupload` 推上一张 ESL，屏显正确、dither 无脏边
-3. 断 AP 电 10 分钟再通电，屏仍显示旧帧+时间戳(stale 原则）
-4. 连续 partial 50 次后自动插一次全刷，屏面无残影
+1. 调用渲染接口生成一张 `296×128` 1bpp PNG 图像，字体边缘清晰、底部带数据快照时间戳且连续两次相同输入生成的 PNG `sha256` 完全一致。
+2. 通过 `POST /imgupload` 将图像推送至 OEPL AP，电子价签在下个 Check-in 周期正确刷新显示。
+3. 断开 OEPL AP 电源 10 分钟后重新上电，标签恢复连接且断连期间屏幕正常保持上一帧内容。
+4. 在 LilyGo T5 上连续触发 20 次局部更新后，第 21 次自动切换为全屏刷新并清除残影。

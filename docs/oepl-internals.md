@@ -1,285 +1,163 @@
-# OpenEPaperLink 内部机制
+# OpenEPaperLink 内部机制解析
 
-技术档案：OEPL（OpenEPaperLink）体系的底层构造——AP 固件架构、三条射频路线的协议差异、
-标签芯片族、推图/OTA 流程、功耗模型、刷机解锁机制与已知限制。
-配套选型文档：`eink-display-modules.md` / `eink-modules-ux.md`；术语表：`eink-tech-glossary.md`。
+> 状态：技术参考档案 · 关联文档：[墨水屏硬件选型](eink-display-modules.md)、[墨水屏交互设计](eink-modules-ux.md)、[电子价签刷机与验收](esl-tag-ops.md)
+>
+> 本文梳理 OpenEPaperLink（OEPL）开源电子价签系统的底层架构，涵盖 AP 固件设计、三条无线射频通道的协议细节、各标签主控芯片家族、推图与 OTA 传输流程、低功耗睡眠模型及已知硬件限制。
+>
+> **资料来源**：OpenEPaperLink GitHub 主仓库源码（`oepl-proto.h`、`oepl-radio-v2.h`、`tag_types.h`、`ble_writer.cpp`、`od_session.cpp`、`powermgt.h` 等）、官方 Wiki 及各 `Tag_FW_*` 子仓库。
 
-**信息源**：OpenEPaperLink GitHub 主仓源码（2026-10 拉取，`oepl-proto.h`/`oepl-radio-v2.h`/
-`tag_types.h`/`ble_writer.cpp`/`od_session.cpp`/`powermgt.h` 等）、官方 wiki、
-Tag_FW_* 各固件仓。出处在文末汇总，文中以行内链接标注。
-
-## 1. 系统拓扑：三个平面
+## 1. 系统三平面拓扑
 
 ```
-内容源(HTTP API / HA / 内容卡)
+上层内容源（渲染服务 HTTP API / Home Assistant 集成 / 内置模板）
     │
-    ▼  ESP32-S3 主控(AP firmware, WiFi+存储+渲染+WebUI)
-    │    │ UART 115200→2Mbaud (协议 v1 ASCII / v2 COBS 帧)
-    │    ├──► 射频协处理器(任选/可并存):
-    │    │     ESP32-C6/H2  → 802.15.4 @2.4GHz(自定义 MAC,非 Zigbee)
-    │    │     TLSR825x     → 802.15.4 或 GFSK(hwType 0xF8/0xF9)
-    │    │     CC1101 模块  → GFSK @868/915MHz sub-GHz
-    │    └──► ESP32-S3 自身 BLE 射频 → BLE 标签(与 WiFi 分时复用)
+    ▼  ESP32-S3 主控板（运行 AP 固件：Wi-Fi 接入 + LittleFS 存储 + 图像量化 + WebUI）
+    │    │
+    │    ├──► 串口协处理器通道（UART 115200 bps v1 ASCII / 2 Mbaud v2 COBS 帧）：
+    │    │     · ESP32-C6 / H2  → IEEE 802.15.4 @ 2.4GHz（自定义裸 MAC 协议，非 Zigbee）
+    │    │     · TLSR825x       → IEEE 802.15.4 或 2.4GHz GFSK（hwType 0xF8/0xF9）
+    │    │     · CC1101 模块    → Sub-GHz GFSK @ 868 / 915 MHz
+    │    │
+    │    └──► ESP32-S3 内置 BLE 射频（与 Wi-Fi 分时复用）→ BLE 电子价签
     ▼
-tag(休眠唤醒,checkin 拉取)──── 电池供电,全年续航设计
+电子价签终端（Tag：深度休眠 → 定时唤醒发起 Check-in → 按块拉取图像并刷屏）
 ```
 
-- **AP 不负责推**——所有数据通路都是 tag 发起 check-in，AP 只应答。这是功耗模型的根基
-  （[Tag protocol timing](https://github.com/OpenEPaperLink/OpenEPaperLink/wiki/Tag-protocol-timing)）。
-- 802.15.4 与 BLE 两条路线可在同一 AP 并存（S3 跑 BLE 写任务 + C6 跑 802.15.4）；
-  sub-GHz 需要 AP 上加 CC1101 模块，独立信道与 2.4G 互不影响。
-- 多 AP：同网段 AP 经 **UDP 组播**自动互发现并同步 tagDB；每个 tag 选定一个"内容 AP"，
-  但可在任意 AP 射频上取数据（[Multiple Access Points](https://github.com/OpenEPaperLink/OpenEPaperLink/wiki/Multiple-Access-Points)）。
+核心通信原则：
 
-## 2. AP 固件架构（ESP32_AP-Flasher）
+- **标签永远主动发起通信（Pull 模型）**：为实现单颗纽扣电池数年续航，价签在绝大多数时间内关闭射频处于 1–2µA 深度睡眠，仅按设定周期唤醒并发送查询帧（Check-in），AP 收到后立即在 5ms 窗口内应答（见 [Tag protocol timing](https://github.com/OpenEPaperLink/OpenEPaperLink/wiki/Tag-protocol-timing)）。
+- **多射频并存**：单台 ESP32-S3 AP 可同时运行内置 BLE 扫描与外挂 ESP32-C6 的 802.15.4 射频，同时管理汉朔 BLE 标签与 Solum M2/M3 标签。
+- **多 AP 协同**：同一局域网内的多个 OEPL AP 通过 UDP 组播自动发现并同步 `tagDB.json`（见 [Multiple Access Points](https://github.com/OpenEPaperLink/OpenEPaperLink/wiki/Multiple-Access-Points)）。
 
-Arduino/PlatformIO 工程，ESP32-S3 N16R8 为主力目标（16MB flash + 8MB PSRAM；
-2.75 是最后支持 S2/<16MB 板的版本，[wiki Home](https://github.com/OpenEPaperLink/OpenEPaperLink/wiki)）。
+## 2. AP 固件架构（`ESP32_AP-Flasher`）
 
-| 部件 | 实现 | 依据 |
+AP 固件基于 Arduino / PlatformIO 构建，主力硬件目标为 **ESP32-S3 N16R8**（16MB Flash + 8MB PSRAM；其中 PSRAM 为处理 4.2" 及以上多色位图缓冲的硬性要求）。
+
+| 模块 | 实现机制 | 对应源码文件 |
 |---|---|---|
-| RTOS | FreeRTOS；`ledTask`/`APTask`/`BLETask`/`usbFlasherTask`/`webFlasherTask` 常驻 | `main.cpp` setup() |
-| Web | AsyncWebServer + WebSocket；`/imgupload`、`/jsonupload`、`/get_db`、`/tag_cmd`、`/led_flash`、`/flash_tlsr`、`/update_c6` 等约 40 个端点 | `web.cpp` |
-| 存储 | LittleFS：`tagDB.json`（标签库）+ `/tagtypes/*.json`（屏型定义）+ 内容卡/字体/待发图 | `storage.cpp` |
-| 内容管线 | `contentmanager.cpp` 按 contentMode 渲染（内置内容卡 ~28 种：日期/天气/RSS/日历/QR/HA/json template…），或收外部上传图 | `contentmanager.cpp`, tagtype-notes.md |
-| 图像 | JPEG 解码(基线)→ 缩到屏分辨率 → 量化到 tagtype colortable → 1/2bpp 位图 → 可选 G5/zlib 压缩 | `makeimage.cpp` |
-| 射频后端 | `zbs_interface.cpp`(C6/H2 串口)、`cc_interface.cpp`(CC1101)、`ble_writer.cpp`(BLE)、`legacytransport.cpp`/`v2transport.cpp`/`newproto.cpp`(串口协议 v1/v2) | src/ |
-| OTA | `ota.cpp`：GitHub releases 拉包自更新；C6 固件内嵌随主固件下发 | web.cpp `/update_c6` |
+| 任务调度 | 基于 FreeRTOS 多任务：`ledTask`、`APTask`、`BLETask`、`usbFlasherTask`、`webFlasherTask` | `main.cpp` |
+| HTTP 与 WebSocket 接口 | 基于 `AsyncWebServer`，提供 `/imgupload`、`/jsonupload`、`/get_db`、`/tag_cmd`、`/led_flash`、`/flash_tlsr`、`/update_c6` 等约 40 个端点 | `web.cpp` |
+| 文件系统存储 | LittleFS：保存 `tagDB.json`、`/tagtypes/*.json`（屏幕硬件参数定义）及待下发图像缓存 | `storage.cpp` |
+| 内容生成与模板 | `contentmanager.cpp` 支持约 28 种内置卡片模式，或直接接收外部渲染服务上传的图像 | `contentmanager.cpp` |
+| 图像量化与压缩 | 解码 Baseline JPEG → 缩放至目标分辨率 → 量化至 `colortable` → 打包为 1bpp/2bpp 位图 → 可选 G5 或 zlib 压缩 | `makeimage.cpp` |
+| 射频接口层 | `zbs_interface.cpp`（串口协处理器）、`cc_interface.cpp`（CC1101）、`ble_writer.cpp`（BLE）、`v2transport.cpp`（串口 v2 协议） | `src/` |
 
-**容量上限**：ESP32/ESP32-S2 ≈ 30 个 tag；S3-16MB 更多；官方建议高 tag 数用 C6 方案
-（[FAQ](https://github.com/OpenEPaperLink/OpenEPaperLink/wiki/FAQ)）。PSRAM 是硬需求——
-4.2" BWR 图需要整幅 2bpp 缓冲（400×300×2bit），无 PSRAM 只能出 1bpp。
+### 2.1 `tagtypes` 屏幕参数定义结构
 
-### tagtypes 兼容表结构
+`resources/tagtypes/NN.json`（`NN` 为十六进制 `hwType` 编号）定义了每款价签的物理规格：
 
-`resources/tagtypes/NN.json`（NN=hwType 十六进制），每型字段：
-
-| 字段 | 含义 | 例(01.json = M2 2.9") |
+| 字段名 | 含义 | 示例（`01.json`：Solum M2 2.9"） |
 |---|---|---|
-| `width/height` | 分辨率 | 296×128 |
-| `bpp` | 屏每像素位深 | 2（4色） |
-| `colortable`/`perceptual` | 逻辑色→RGB 映射（渲染输出端参考） | white/black/red(/yellow) |
-| `rotatebuffer` | 帧缓冲预旋转 0-3 | 1 (90°) |
-| `g5_compression`/`zlib_compression` | 该型首次支持对应压缩的固件版本号 | `"29"` / `"27"` |
-| `shortlut` | 短 LUT（快速刷）支持 | 2 |
-| `options` | `button`/`led` 可选硬件 | `["button"]` |
-| `contentids`/`template`/`usetemplate` | 可用内容卡 + 布局参数；usetemplate 十进制借用另一型的模板 | `[22,23,1,…]` |
+| `width` / `height` | 屏幕物理像素分辨率 | `296` × `128` |
+| `bpp` | 每像素位深 | `2`（支持黑白红三色） |
+| `colortable` | 逻辑色名到 RGB 的映射表 | `white` / `black` / `red` |
+| `rotatebuffer` | 帧缓冲预旋转角度（0–3 对应 0°–270°） | `1`（旋转 90°） |
+| `g5_compression` / `zlib_compression` | 该型号首次支持对应压缩算法的标签固件版本号 | `"29"` / `"27"` |
+| `shortlut` | 是否支持快速刷新短波形表（Short LUT） | `2` |
+| `options` | 附加外设列表（如按键、LED、NFC） | `["button"]` |
 
-hwType 高字节区分：`0x00xx` 射频类标签，`0x01xx` OpenDisplay BLE 标签（AP 从 tag 配置读出后自建），
-`0xF8/0xF9` TLSR 射频协处理器，`0xC6` ESP32-C6（`tag_types.h` 注释）。
+## 3. 射频通道一：IEEE 802.15.4 @ 2.4GHz（Solum M2 / M3 主力协议）
 
-## 3. 射频路一：802.15.4 @2.4GHz（M2/M3 主线）
+该通道直接使用 **IEEE 802.15.4 裸 MAC 帧（非 Zigbee 协议栈）**，固定 PAN ID 为 `0x4447`，采用 8 字节扩展 MAC 地址，单帧最大载荷 ≤ 125 字节（定义于 `oepl-proto.h`）。
 
-**裸 802.15.4 MAC，非 Zigbee**——官方 FAQ 明说是"intentionally basic"的自定义协议，
-因 tag CPU/电量都极简。PAN ID 固定 `0x4447`，8 字节扩展地址，包长 ≤125B
-（`oepl-proto.h`）。
+### 3.1 无线数据包交互流程
 
-### 会话模型（tag 永远主动）
-
-| 包 ID | 值 | 方向 | 作用 |
+| 数据包宏名 | 标识值 | 传输方向 | 协议作用 |
 |---|---|---|---|
-| `PKT_PING`/`PONG` | 0xED/0xEE | tag→AP→tag | 入网发现（tag 扫 11-26 频道选最强 AP） |
-| `PKT_AVAIL_DATA_REQ` | 0xE5 | tag→AP | **check-in**：带 batteryMv/温度/RSSI/LQI/hwType/唤醒原因/固件版本/能力位 |
-| `PKT_AVAIL_DATA_INFO` | 0xE6 | AP→tag | 应答：`dataVer`(待发数据 MD5 低 8B)、`dataSize`、`dataType`、`dataTypeArgument`、`nextCheckIn` |
-| `PKT_BLOCK_REQUEST` | 0xE4 | tag→AP | 按 4KB block 请求数据，可带 partial-request 位图 |
-| `PKT_BLOCK_PART` | 0xE8 | AP→tag | block 分片（99B/片 ×42 片=4KB） |
-| `PKT_XFER_COMPLETE`/`_ACK` | 0xEA/0xEB | tag→AP | 收齐，落 EPD |
-| `PKT_TAG_RETURN_DATA` | 0xE1/0xE2 | tag→AP | tag 回传数据(如按钮/NFC/调试) |
+| `PKT_PING` / `PKT_PONG` | `0xED` / `0xEE` | Tag ↔ AP | 标签首次入网时扫描 11–26 信道，选择信号最强的 AP |
+| `PKT_AVAIL_DATA_REQ`（ADR） | `0xE5` | Tag → AP | **周期唤醒报到（Check-in）**：上报电池电压（mV）、温度、RSSI、LQI、`hwType`、唤醒原因与当前固件版本 |
+| `PKT_AVAIL_DATA_INFO` | `0xE6` | AP → Tag | **AP 应答**：返回待下发数据的 `dataVer`（MD5 低 8 字节）、`dataSize`、`dataType`、`dataTypeArgument` 与下次睡眠时长 `nextCheckIn` |
+| `PKT_BLOCK_REQUEST`（RQB） | `0xE4` | Tag → AP | 标签按 4KB 块（Block）请求数据，附带 42 片的请求位图（Bitmap） |
+| `PKT_BLOCK_PART` | `0xE8` | AP → Tag | 下发数据分片（每片有效载荷 99 字节，42 片组成 1 个 4KB Block） |
+| `PKT_XFER_COMPLETE` / `_ACK` | `0xEA` / `0xEB` | Tag ↔ AP | 标签确认所有分块接收完毕并校验通过，开始驱动墨水屏刷新 |
+| `PKT_TAG_RETURN_DATA` | `0xE1` / `0xE2` | Tag → AP | 标签向 AP 回传自定义上行数据（如按键触发、NFC 读取结果） |
 
-要点（[RF protocol](https://github.com/OpenEPaperLink/OpenEPaperLink/wiki/RF-protocol) +
-`oepl-proto.h`）：
-- check-in 后 tag 只留 **5ms 接收窗**（`DATA_REQ_RX_WINDOW_SIZE`）；无数据就回去睡。
-- `nextCheckIn` 由 AP 下发：bit15=0 按分钟，=1 按秒——AP 可在应答里命令"5 秒后再来"
-  以快速续传（`newproto.cpp` 里外推数据用 `5|0x8000`）。
-- 数据类型 `dataType`：`IMG_RAW_1BPP/2BPP/4BPP`(0x20/0x21/0x22)、`IMG_DIFF`(0x10)、
-  `IMG_ZLIB`/`IMG_G5`（压缩）、`FW_UPDATE`(0x03)、`NFC_*`、`TAG_CONFIG_DATA`、
-  `COMMAND_DATA`、`CUSTOM_LUT_OTA`、`UK/EU_SEGMENTED`（段码屏）——见 `oepl-definitions.h`。
-- 分块窗口机制：tag 报自己要的 blockId+part 位图，AP 逐片发；丢片 tag 重请，
-  14 次(`DATA_REQ_MAX_ATTEMPTS`)拿不到就 XTO 超时放弃，保电优先。
+关键时序机制：
 
-### S3 ↔ 射频协处理器串口（协议 v1→v2）
+- **5ms 极短接收窗**：标签发出 `ADR` 后仅开启接收机 **5ms**（`DATA_REQ_RX_WINDOW_SIZE`）；若无数据更新则立即关断射频继续休眠。
+- **动态睡眠时长控制**：`nextCheckIn` 最高位 `bit15 = 0` 时表示按分钟休眠，`bit15 = 1` 时表示按秒休眠（用于多块连续传输时命令标签 5 秒后立即重连）。
+- **分片重传与保电放弃**：若某个 4KB 块中丢失个别分片，标签仅在位图中置位缺失的分片请求重传；连续 14 次（`DATA_REQ_MAX_ATTEMPTS`）请求失败则触发 `XTO` 超时放弃，退避休眠以保护纽扣电池。
 
-AP 主控与射频芯片（ESP32-C6/H2 或 TLSR）之间是 UART：
+### 3.2 主控 ESP32-S3 与射频协处理器之间的串口协议（v1 与 v2）
 
-| 代 | 形态 | 依据 |
+| 协议版本 | 串口速率与成帧方式 | 核心特性 |
 |---|---|---|
-| v1 | 115200 ASCII 短命令：`RDY?`/`NFO?`/`ADR>`/`RQB>`/`XFC>`/`SDA>`…定长数据+简单校验 | `legacytransport.cpp`, RF-protocol wiki |
-| v2 | **2 Mbaud**，COBS(header‖payload‖CRC16)+0x00 成帧，seq+ACK/NAK，30ms 超时×3 重传；数据按 240B chunk、4 块窗口 | `oepl-radio-v2.h` |
+| **v1（传统版）** | `115200` baud，ASCII 短命令（`ADR>` / `RQB>` / `SDA>`） | 每次标签请求数据块时需实时经串口向 S3 索取，串口传输耗时直接计入标签射频开启时间 |
+| **v2（高速缓存版）** | **2 Mbaud**，COBS 字节填充 + CRC16 + 滑动窗口重传 | S3 预先将待下发图像通过 `DATA_CHUNK` 灌入 ESP32-C6 协处理器的 **256KB 内存块缓存（Block Cache）**；标签唤醒请求时由 C6 直接从本地内存毫秒级应答，大幅缩短标签唤醒耗电时间 |
 
-v2 协议升级点（releases 3.00 说明 + `oepl-radio-v2.h` 注释）：
-- 启动先用 ASCII，射频回 `CAP>xxxx` 声明能力后 S3 发 `FRM1`，双方 20ms 后切 2Mbaud。
-- **射频侧 block cache**（≤256KB）：S3 把待发图先灌给 C6，tag 醒来的 RQB 直接命中缓存，
-  省去"tag 等着 AP 现取数据"的窗口——直接缩短 tag 清醒时间=省电池。
-- **tag 库存锁定**（`V2_CFG_LOCK_*`）：射频按 allow-list 只答应认识的 tag；
-  learning 模式只收新 boot 的全量 check-in。解决两个 AP 同信道抢 tag 的问题。
-- 消息集：HELLO/HEARTBEAT/SET_CONFIG/SET_PENDING/DATA_CHUNK/GET_STATS/ALLOW_* 
-  → CHECKIN/DATA_NEEDED/BLOCK_SERVED/XFER_COMPLETE/TAG_RETURN_DATA/LOG/STATUS。
+## 4. 射频通道二：BLE 蓝牙（汉朔 TLSR / Gicisky / OpenDisplay）
 
-## 4. 射频路二：BLE（汉朔 TLSR / Gicisky / OpenDisplay）
+AP 利用 **ESP32-S3 自身内置的 BLE 射频**进行被动扫描（与 Wi-Fi 分时复用，扫描参数为 `interval = 320ms`、`window = 30ms`）。BLE 价签日常通过周期性**广播包（Advertising）**上报状态（默认约 60 秒一次），平时不维持蓝牙连接；仅当 AP 存在待下发的新图像时，才在收到广播后主动向标签发起临时 GATT 连接并写入图像分片。
 
-AP 用 **S3 自带 BLE 射频扫描**——与 WiFi 分时复用所以是低占空比
-（`ble_writer.cpp`：interval 320ms / window 30ms；BLE 连接期间扫描暂停）。
-BLE 标签的 "check-in" = **广播包**，AP 不靠连接保活；要推图时才临时 GATT 连接。
-标签上报间隔 ≤1/min（`BLE_CHECKIN_INTERVAL_MS 60000`）。
+AP 的 `ble_filter.cpp` 原生识别以下三种 BLE 广播与传输协议：
 
-三种广播格式已被 AP 识别（`ble_filter.cpp`）：
-
-| 族 | 识别特征 | 会话/加密 | 固件来源 |
+| 固件协议族 | 广播厂商标识（Manufacturer ID） | GATT 传输与安全机制 | 适用标签硬件 |
 |---|---|---|---|
-| **Gicisky/Picksmart** | manu `0x53 0x50`("SP")，7B：型码+电压+固件 | GATT `0xFEF0/0xFEF1/0xFEF2`，明文 | Gicisky 自家/社区固件 |
-| **ATC_BLE_OEPL**(atc1441 系) | manu `0x37 0x13`(0x1337 LE)，V1/V2 广播结构：hwType+固件+电量+温度 | GATT service `0x1337`，命令式 Ctrl characteristic，明文 | [ATC_TLSR_Paper](https://github.com/atc1441/ATC_TLSR_Paper) / OEPL TLSR 固件 |
-| **OpenDisplay** | company id `0x2446`，v1(14B)/旧(11B)广播 | **AES-128-CMAC 握手 + AES-CCM 加密会话**（master key→session key KDF："OpenDisplay session"），AP 端 `od_session.cpp` 完整实现，key 存 NVS | OpenDisplay 固件（Gicisky 新固件方向） |
+| **`ATC_BLE_OEPL` / `OpenEPaperLink_TLSR`** | `0x1337`（小端字节序 `0x37 0x13`） | 连接 GATT 服务 `0x1337`，通过控制特征发送命令字与 240B 图像分片（明文传输） | 刷入开源固件的**汉朔 Stellar / Nebular（TLSR8359/8258）**系列 |
+| **Gicisky / Picksmart 原厂协议** | `0x5053`（ASCII `"SP"`） | 连接 GATT `0xFEF0 / 0xFEF1 / 0xFEF2` 传输图像 | 电商在售的 Gicisky 蓝牙价签（无需拆机，原厂即支持） |
+| **OpenDisplay 协议** | `0x2446` | 支持 **AES-128-CMAC 握手与 AES-CCM 加密会话**（密钥保存在 AP NVS 中，实现于 `od_session.cpp`） | 刷入新一代 OpenDisplay 开源固件的 BLE 标签 |
 
-BLE 图像上传走 GATT 写：ATC 系是 `0x1337` ctrl 特征上发命令字+240B 分片；
-OpenDisplay 走加密会话内的块传输（`BLE_CMD_*` 命令族，`ble_writer.cpp`）。
+**BLE 通道限制**：ESP32-S3 同一时刻只能与 1 个 BLE 标签建立 GATT 连接传输图像（传输期间暂停被动广播扫描），适合房间内十余个标签的低频更新场景。
 
-**限制**：广播只带状态不带图像；推图需连接，S3 同时只能和一个 BLE 标签传图
-（状态机 `BLE_MAIN_STATE_*`）。官方明确 2.13" **TFT** 类标签不走 BLE-AP 路线
-（BLE-only AP wiki 页警告）。
+## 5. 射频通道三：Sub-GHz @ 868 / 915MHz（Chroma 系列）
 
-## 5. 射频路三：sub-GHz（Chroma 系，CC1101）
+针对采用 TI `CC1110` 或 `CC1310` 芯片的 DisplayData Chroma 系列价签，AP 通过外挂 **CC1101 射频模块**（官方推荐选用晶振稳定的 **亿佰特 Ebyte E07-900M10S** 模块，避开廉价绿色公版模块）在 868MHz 或 915MHz 频段以 GFSK 调制通信，具备更强的穿墙能力且完全避开 2.4GHz 频段干扰。
 
-| 项 | 值 | 出处 |
-|---|---|---|
-| 物理层 | **GFSK**，802.15.4-like 帧头；868MHz(欧)/915MHz(美/澳) 各 5 信道 | SubGhz-AP-Configuration wiki |
-| AP 侧 | CC1101 模块（推荐 **Ebyte E07-900M10**；通用 CC1101 模块缺陷率高，wiki 原话"avoid like the plague"），接在 ESP-C6 射频板上 | Chroma-Series-SubGhz-Tags wiki |
-| tag 侧 | DisplayData Chroma 系：**CC1110**(8051, 26MHz, 32KB flash/4KB RAM) 老款；新款 **CC1310F64/CC1311R3**(Cortex-M3) | 同上 |
-| 入网 | tag 首次开机扫两个 band 全部信道，记下 AP 所在 band+channel；之后只扫本 band——**换 band 要清 tag 设置** | 同上 |
-| 优势 | sub-GHz 穿墙更好、避开 2.4G WiFi/BLE/Zigbee 拥塞 | 同上 |
+## 6. 标签端主控芯片家族汇总
 
-MAC 从序列号推导：8B 扩展地址高 2B 固定 `0x44 0x67`，低 6B=SN 数字部分。
+| 芯片家族 | CPU 内核与存储规格 | 射频通道 | 对应开源固件仓库 | 代表价签型号 |
+|---|---|---|---|---|
+| **ZBS243 / SEM9110** | 三星定制 8051 @ 16MHz，64KB Flash / 8KB XRAM，休眠电流 ~1µA | 802.15.4 (2.4GHz) | [`Tag_FW_ZBS243`](https://github.com/OpenEPaperLink/Tag_FW_ZBS243)（SDCC 编译） | Solum M2 全系（`ST-GR16000` / `29000` / `42000` / `750BN`） |
+| **nRF52811** | ARM Cortex-M4，192KB Flash / 24KB RAM | 802.15.4 (2.4GHz) | [`Tag_FW_nRF52811`](https://github.com/OpenEPaperLink/Tag_FW_nRF52811)（含独立 Bootloader） | Solum M3 Newton（`EL022H3WRA` / `EL029H3WRA`） |
+| **EFR32xG22** | ARM Cortex-M33 | 802.15.4 (2.4GHz) | [`Tag_FW_EFR32xG22`](https://github.com/OpenEPaperLink/Tag_FW_EFR32xG22) | Solum M3 SiLabs 版（`EL0xxF5` / `F6`，序列号末尾印有 `"Silabs"`） |
+| **TLSR8359 / 8258** | Telink 32-bit RISC / 类 ARM 核，512KB Flash / 64KB RAM | **BLE**（或 802.15.4） | 主仓 `ARM_Tag_FW/OpenEPaperLink_TLSR` 及 [`ATC_TLSR_Paper`](https://github.com/atc1441/ATC_TLSR_Paper) | **汉朔 Stellar-M / L / XL、Nebular 全系**（白框 4.9V 批次） |
+| **CC1110** | TI 8051 @ 26MHz，32KB Flash / 4KB RAM | Sub-GHz | [`Tag_FW_Chroma`](https://github.com/OpenEPaperLink/Tag_FW_Chroma) | DisplayData Chroma 29 / 42 / 60 / 74 |
+| **CC1310 / 1311** | ARM Cortex-M3 | Sub-GHz | [`skiphansen/Tag_FW_CC13xx`](https://github.com/skiphansen/Tag_FW_CC13xx) | 新款 Chroma 74H+ / Aeon |
+| **88MZ100** | Marvell Cortex-M3 | 802.15.4 (2.4GHz) | [`Tag_FW_88MZ100`](https://github.com/OpenEPaperLink/Tag_FW_88MZ100) | 部分批次 Solum 1.54" / 7.5" |
+| **CC2533** | TI 8051 | 802.15.4 (2.4GHz) | [`Tag_FW_Opticon`](https://github.com/OpenEPaperLink/Tag_FW_Opticon) | Opticon EE-21x / 29x / 42x |
+| **Pricer HD150（替换主控板）** | 原机为红外接收且固件驻留 RAM，不可直接刷机 | 802.15.4 (2.4GHz) | 焊接 **EFR32BG22 替换主控小板（Modchip）** 直接驱动面板 | Pricer HD150 5.83" |
 
-## 6. 标签固件芯片族
-
-OEPL 把全世界拆机 ESL 收编进一张大表，**芯片族决定固件仓、刷机接口、协议路线**：
-
-| 族 | SoC | 核 | 射频路线 | 固件仓 | 标签代表 |
-|---|---|---|---|---|---|
-| **ZBS243/SEM9110** | 三星电机定制 8051 | 8051 @16MHz，64KB flash，8KB XRAM，256B IRAM，~1µA 睡 | 802.15.4 2.4G | [Tag_FW_ZBS243](https://github.com/OpenEPaperLink/Tag_FW_ZBS243) (SDCC) | Solum M2：ST-GR16000/29000、ST-GM29 系 |
-| **nRF52811** | Nordic BLE SoC | Cortex-M4 | 802.15.4 2.4G | [Tag_FW_nRF52811](https://github.com/OpenEPaperLink/Tag_FW_nRF52811)（含独立 bootloader） | M3 Newton：EL022/029H3WRA |
-| **EFR32xG22** | SiLabs MG22/FG22/BG22 | Cortex-M33 | 802.15.4 2.4G | [Tag_FW_EFR32xG22](https://github.com/OpenEPaperLink/Tag_FW_EFR32xG22)（GSDK 4.4.1 + bootloader；CC BY-NC-SA） | M3 SiLabs 版：EL0xxF5/F6 系（SN 后印 "Silabs"） |
-| **CC1110** | TI | 8051 @26MHz，32KB/4KB | sub-GHz | [Tag_FW_Chroma](https://github.com/OpenEPaperLink/Tag_FW_Chroma) (SDCC) | Chroma 29/42/60/74 |
-| **CC1310/1311** | TI | Cortex-M3 | sub-GHz | [skiphansen/Tag_FW_CC13xx](https://github.com/skiphansen/Tag_FW_CC13xx)（移植中） | Chroma 74H+、Aeon-74 |
-| **88MZ100** | Marvell | Cortex-M3 | 802.15.4 2.4G | [Tag_FW_88MZ100](https://github.com/OpenEPaperLink/Tag_FW_88MZ100) | 部分 Solum |
-| **TLSR825x/8359** | Telink | ARM(8258)/类ARM 核 | **BLE**(也可 802.15.4/GFSK) | 主仓 `ARM_Tag_FW/OpenEPaperLink_TLSR` + atc1441 系 | 汉朔 Stellar/Nebular：HS BW/BWR/BWY 系 |
-| **CC2533** | TI | 8051 | 802.15.4 | [Tag_FW_Opticon](https://github.com/OpenEPaperLink/Tag_FW_Opticon) | Opticon EE-21x/29x/42x/750R |
-| **Modchip** | EFR32BG22 模块（Ebyte E104-BT53A1）| Cortex-M33 | 802.15.4 | 复用 EFR32 固件 | **Pricer HD150**：原厂红外通信不可刷，"脑移植"小板直接驱动屏（[Modchip by stevew817](https://github.com/OpenEPaperLink/Hardware/tree/main/Modchip%20by%20stevew817)） |
-
-> 注：任务线索里的 "MSP430+CC1101" 是老 Pricer SmartTAG 架构的印象；OEPL 实际收录的
-> Pricer HD150 走的是**红外**协议，不可刷固件，社区方案是 modchip 换脑——
-> 兼容表里没有现成 MSP430 固件族。
-
-**固件形态两派**：
-- **8051 系**（ZBS243/CC1110/CC2533）：SDCC 工具链，单 bin；ZBS 固件把 64KB flash 抠到极致
-  （v0026 记录"8KB idata 省出 210B 栈 + 7KB flash"，M2 changelog）。
-- **ARM 系**（nRF52811/EFR32/CC1310/88MZ100）：**bootloader + app 分离**，`full` 与 `ota` 两种 bin；
-  M3 通用固件（`SOL_M3_Uni_*`）靠出厂 UICR/userdata（EFR32 在 `0x0FE00000`，nRF 在 UICR 客户区）
-  识别屏型——**刷前必须先 dump user data**，丢了就没法按屏配驱动
-  （Flashing-SiLabs-based-M3-Newton-Displays wiki）。
-
-## 7. 推图与 OTA 流程
-
-### 推一张图的完整链路
+## 7. 图像下发、压缩与无线 OTA 机制
 
 ```
-POST /imgupload (jpeg+baseline) 或 内容卡渲染
-  → makeimage: 解码→缩放判定→抖动→量化到 colortable→1/2bpp 位图(+压缩)
-  → taginfo(md5/size/dataType) 记入 tagDB，pendingData 入队 (newproto.cpp)
-  → v2: S3 直接把数据 DATA_CHUNK 灌给 C6 射频缓存
-tag 醒(≤40s) → ADR → AP 回 availDataInfo(dataVer=MD5)
-  → tag 比对 dataVer 发现新版本 → RQB 逐 4KB block 拉
-  → block 收齐 → XFER_COMPLETE → tag 刷 EPD(按 dataTypeArgument 指定 LUT)
-  → tag 按 AP 给的 nextCheckIn 回去睡
+上层调用 POST /imgupload 上传图像
+  → AP makeimage.cpp：解码 → 缩放 → 抖动量化为 1bpp/2bpp → 压缩（G5 或 zlib）
+  → 计算 MD5 低 8 字节作为 dataVer 存入 tagDB，并将数据块推入 C6 射频缓存
+  → 标签定时唤醒（40–60s）发送 ADR（或发出 BLE 广播）
+  → AP 比对发现 dataVer 变化，下发新图像分块
+  → 标签校验收齐后根据 dataTypeArgument 选择 LUT（全刷/快刷）驱动 EPD 面板
 ```
 
-- **AP 推送延迟 = tag check-in 周期**，典型 40-60s；内容卡可声明 nextCheckIn
-  让 tag 睡更久（如日期卡睡到天亮前），"Maximum sleep"/per-tag TTL/"no updates between"
-  三个设置层叠（Tag-protocol-timing wiki）。
-- 压缩：G5（Larry Bank 的 Group5，黑白图效果好，M2 v29+）与 zlib（M3 v27+）；
-  tagtype JSON 的 `g5_compression`/`zlib_compression` 字段声明该型从哪个固件版起支持，
-  AP 按 tag 固件版本自动选格式。
-- `IMG_DIFF`(0x10)：AP 算新旧图差分只传变化区——大屏标签的关键省带宽机制。
-- `preloadImage` 位（imageDataTypeArg）：可先写 EEPROM 不刷屏（缓存预热/幻灯片模式）。
+- **无损压缩算法**：黑白双色图优先采用 Larry Bank 的 **Group 5（G5）** 游程编码压缩，多色或复杂位图采用 **zlib** 压缩，可减少 50%–80% 的空中传输分片数。
+- **差分块更新（`IMG_DIFF` `0x10`）**：针对大尺寸标签，AP 支持对比新旧图像仅传输发生变化的区域。
+- **无线固件升级（OTA）**：标签首次通过有线刷入 OEPL 固件后，后续固件升级全部通过无线通道完成（数据包类型 `dataType = 0x03 FW_UPDATE`）。ARM 内核标签（nRF52 / EFR32 / TLSR）采用双分区（Dual-bank）安全切换；8051 内核标签（ZBS243）受限于 64KB Flash 采用单区覆盖，建议电量充足时逐台升级。
 
-### 标签 OTA
+## 8. 标签端功耗模型与电池寿命测算（基于 `powermgt.h`）
 
-- 走同一条块传输链，`dataType=0x03(FW_UPDATE)`；tag 端校验 magic+MD5，
-  失败回显"update failed"并上报 AP（M2 v0026 changelog）。
-- AP 端 `binaries/Tag/tagotaversions.json` 按 `hwType` 映射该推哪个 bin；
-  `full` bin 用于治具直刷，`ota` bin 用于无线（Binary-file-nomenclature wiki）。
-- ARM 系双区 OTA：bootloader 收新固件验签后切换；8051 系单区，OTA 写坏有变砖风险
-  （社区建议一次只升一台，M3 v0026 changelog 原话）。
-- AP/射频固件 OTA：AP WebUI 一键拉 GitHub release；C6 射频固件随 AP 包内嵌，
-  v2 协议下 12s 更完不重启 AP（release 3.00 notes）。
-
-## 8. 标签端功耗模型（ZBS/M2 为基准，`powermgt.h`）
-
-| 参数 | 值 | 语义 |
+| 电源管理参数 | 设定值 | 机制说明 |
 |---|---|---|
-| `INTERVAL_BASE` | **40s** | 正常 check-in 周期；目标平均电流 **7.2µA** |
-| `DATA_REQ_RX_WINDOW_SIZE` | 5ms | 每次 check-in 只开窗 5ms 听 AP |
-| `DATA_REQ_MAX_ATTEMPTS` | 14 | 弱信号重试上限 |
-| `INTERVAL_AT_MAX_ATTEMPTS` | 600s | 信号差时退避到的最长 check-in 间隔 |
-| `POWER_SAVING_SMOOTHING` | 8 样本 | 用近 8 次 check-in 的尝试数平滑出下次睡眠 |
-| `MINIMUM_INTERVAL` | 45s | 可配置 check-in 下限（决定寿命） |
-| 失联退避 | 1h×24次 → 2h×12次 → **24h 一次** | AP 消失后逐级省电（`INTERVAL_1/2/3`） |
-| `LONG_DATAREQ_INTERVAL` | 300s | 每 5min 一次带温度的长 check-in |
-| `VOLTAGE_CHECK_INTERVAL` | 288×300s ≈ 24h | 每天一次射频带载测电池电压 |
-| 深度睡眠 | **~1µA** | ZBS243 SoC 规格（SoC-ZBS243 wiki） |
-| RF-wake 附加 | +0.9µA | 2.4G 突波唤醒（几厘米距离，见 §9） |
+| `INTERVAL_BASE` | **40s**（BLE 为 60s） | 正常在线状态下的唤醒报到周期，纯待机平均电流约 **7.2µA** |
+| `DATA_REQ_RX_WINDOW_SIZE` | **5ms** | 每次唤醒开启接收机监听的窗口宽度 |
+| `INTERVAL_AT_MAX_ATTEMPTS` | **600s** | 信号微弱连续重传失败时，自动拉长唤醒间隔以防止耗尽电池 |
+| 失联阶梯退避（AP 断电） | 1h × 24 次 → 2h × 12 次 → **24h 一次** | 当 AP 关机失联后，标签自动进入长周期休眠退避；AP 恢复后标签在下次唤醒时自动归队 |
+| 深度睡眠底电流 | **~1.0–2.0µA** | ZBS243 / TLSR8359 睡眠态电流 |
 
-**电池测算（CR2450 ≈ 620mAh 标称）**：
-- 纯 check-in（40s/5ms）：7.2µA 均值 → 理论 620mAh/7.2µA ≈ **9.8 年**；
-  计上自放电/屏幕刷新/低温衰减，社区经验值 **3-5 年**量级。
-- 刷屏耗电是大头：幻灯片实测——15s 间隔 400-850µA、60s 100-250µA、
-  300s 30-50µA、1800s ~10µA（M2 changelog）。**5min 级状态刷新对标签寿命无伤，
-  分钟级以下刷新就别指望用电池标签**。
-- 弱信号环境 = 更多重试 = 更短 check-in 间隔仍更费电（退避拉高间隔补偿）；
-  RSSI 差的标签群建议 AP 前移或多 AP。
+**CR2450 纽扣电池（标称 620mAh）续航估算**：
 
-## 9. 刷机/解锁机制
+- 纯待机保持连接（40s Check-in，不刷屏）：理论续航可达 3–5 年（计入电池自放电）。
+- 日常刷屏耗电：每次全屏刷新开启升压泵与驱动约耗时 2–3 秒、电流约 5–15mA。按每天刷新 **6–40 次**（即 [多端显示仲裁](surface-arbiter.md) 设定的预算上限）计算，双颗 CR2450 电池实际续航可达 **1–2 年**；但若将刷新频率设为每 15–60 秒狂刷一次，电池将在数周内耗尽。
 
-| 族 | 接口 | 工具 | 解锁机制 |
-|---|---|---|---|
-| ZBS243 | 自定义 4 线（CLK/CS/MOSI/MISO，类 SPI 调试口） | Tag_Flasher（Wemos S2-Mini）/`OEPL-Flasher.py`、web flasher | 无锁，直刷；infopage 可读原配置 |
-| nRF52811 | **SWD**(SWDCLK/SWDIO) | Tag-Flasher / J-Link / pyOCD | 读保护位需 mass-erase，原固件保不住 |
-| EFR32xG22 | SWD | pyOCD(荐)/J-Link/DAPLink/OpenOCD/Pico2 | 出厂 debug-lock；**unauthenticated debug unlock 会整片擦除**——先想好再刷 |
-| CC1110 | TI debug（DC/DD/Reset） | CC-Debugger/ESP_CC_Flasher/Tag-Flasher | 无锁 |
-| CC131x | **cJTAG** | XDS110 | 无锁 |
-| TLSR8359 | **SWS**（单线）或 UART 烧录 | [ATC UART Flasher](https://atc1441.github.io/ATC_TLSR_Paper_UART_Flasher.html)、`telink_flasher`、AP 上 `/flash_tlsr` | 首刷需 **flash unlock**（atc1441 工具一键）；SWS 也可做 AP 射频固件烧录 |
-| 88MZ100 | SWD | Tag-Flasher | — |
-| Pricer HD150 | 不可刷（IR 协议） | **Modchip 换脑**：EFR32BG22 小板直驱屏 | — |
+## 9. 已知协议与硬件限制
 
-**共用物理接口**：M2/M3 各代标签的测试点布局统一（GND/RST/RXD/Test/CLK(SWDCLK)/
-MISO(SWDIO)/VCC/MOSI/CS/TXD），3D 打印通用治具（`OpenEPaperLink/Hardware` 仓多个 jig）。
+| 限制项 | 具体说明 |
+|---|---|
+| **802.15.4 与 ATC BLE 默认明文传输** | 标准 802.15.4 链路与 AP 间 UDP 组播未加密（面向家庭局域网自用设计）；若需空中加密可选用支持 AES-CCM 的 **OpenDisplay BLE 协议** |
+| **响应延迟下限为 40–60 秒** | 受限于标签被动的睡眠唤醒周期，推图后需等待标签下一次唤醒才能上屏，不适用于秒级实时交互 |
+| **上行通道仅限短状态包** | 标签到 AP 的上行载荷限制在 90 字节以内（用于上报电量、温度、按键事件与 NFC 卡号） |
 
-**入网即刷机**：BLE/TLSR 标签一次都不必拆——atc1441 的 WebSerial/UART 工具先解锁+刷
-OEPL TLSR 固件，之后全部 OTA；AP 发现新 tag 后也可一键推送固件（FIRMWARE_UPDATE 内容卡）。
+## 参考资料
 
-**闲鱼锁区风险提示**（ux 文档已记，机制在此）：拆机 tag 固件里存着原商户的 AP 配置
-（信道/PAN/密钥种子），上电只会找原 AP；表现为"AP 发现不了"。清法：重刷固件或
-断电进首刷流程清 settings——**能进 AP 管理台的才是好件**。
-
-## 10. 已知限制清单
-
-| 限制 | 细节 | 出处 |
-|---|---|---|
-| **无加密** | 802.15.4 链路明文；AP 间 UDP 组播明文；WebUI 无密码——官方定位 hobbyist/家用 | FAQ |
-| **延迟下限** | 标签最快 ~40s 级响应（`MINIMUM_INTERVAL 45s`）；实时刷新不可能 | powermgt.h |
-| **容量** | S2 ~30 tag；4.2"+ 需 PSRAM；大屏标签群建议 S3+C6 分体 AP | FAQ |
-| **BLE 占空比** | BLE 与 WiFi 共享射频，扫描开窗 30/320ms；固件注释自比 ESPHome BLE proxy | ble_writer.cpp |
-| **单向为主** | tag→AP 回传仅限 90B `TAG_RETURN_DATA`（按钮/NFC/调试）；非通用双向信道 | oepl-proto.h |
-| **sub-GHz 换 band** | tag 记死初始 band，换区需清设置 | Chroma wiki |
-| **厂商波形依赖** | tag 屏驱动 LUT 来自逆向/原厂参数拼凑，个别屏有色差/鬼影残留报告（固件 2.60 粉底问题=tagtype 定义过期） | FAQ, issues |
-| **WiFi 兼容性** | UniFi 系 AP 需关 BSS Transition/Multicast Enhancement 等（ESP32 老毛病） | FAQ |
-| **TLSR 屏族覆盖** | 汉朔 TLSR 固件按具体屏型手工配 EPD pinout/分辨率（5.83" 屏在 v3.x 仍需自配编译，issue #488） | issue tracker |
-| **维护节奏** | tag 固件各仓进度不一；CC131x/部分 Chroma/13.3" EL133 仍在 in-process | wiki tag 表 |
-
-## 出处汇总
-
-- 主仓源码：https://github.com/OpenEPaperLink/OpenEPaperLink（`oepl-proto.h`、`oepl-radio-v2.h`、`oepl-esp-ap-proto.h`、`oepl-definitions.h`、`tag_types.h`、`ESP32_AP-Flasher/src/*`、`resources/tagtypes/*`、`binaries/Tag/*`、`ARM_Tag_FW/*`）
-- wiki：https://github.com/OpenEPaperLink/OpenEPaperLink/wiki（RF-protocol、Tag-protocol-timing、SubGhz-AP-Configuration、Chroma-Series-SubGhz-Tags、Flashing-SiLabs-based-M3-Newton-Displays、Binary-file-nomenclature、ZBS243-(SEM9110)-SoC、FAQ、BLE-only-AP、Multiple-Access-Points、M2-Tag-Firmware-changelog、tagtype-notes）
-- 标签固件仓：Tag_FW_ZBS243、Tag_FW_nRF52811、Tag_FW_EFR32xG22、Tag_FW_Chroma、Tag_FW_88MZ100、Tag_FW_Opticon、skiphansen/Tag_FW_CC13xx、ARM_Tag_FW/OpenEPaperLink_TLSR
-- BLE 上游：https://github.com/atc1441/ATC_TLSR_Paper、atc1441.github.io 各 web 工具
-- HA 集成：https://github.com/OpenEPaperLink/Home_Assistant_Integration
-- ZBS243 逆向源头：https://dmitry.gr/?r=05.Projects&proj=30（Dmitry Grinberg 的 SoC 逆向）
+- [OpenEPaperLink 主仓库](https://github.com/OpenEPaperLink/OpenEPaperLink) · [官方 Wiki](https://github.com/OpenEPaperLink/OpenEPaperLink/wiki)
+- [atc1441/ATC_TLSR_Paper（汉朔 TLSR 蓝牙开源固件）](https://github.com/atc1441/ATC_TLSR_Paper)
+- [OpenEPaperLink Home Assistant 集成](https://github.com/OpenEPaperLink/Home_Assistant_Integration)
+- [Dmitry Grinberg: Reverse Engineering the ZBS243 SoC](https://dmitry.gr/?r=05.Projects&proj=30)

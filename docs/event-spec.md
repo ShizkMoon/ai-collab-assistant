@@ -1,76 +1,91 @@
-# 事件规格
+# 事件与任务规格：字段、状态与 CLI
 
-> 状态：设计中（P0 未实现）· 上位文档：[架构总览](architecture.md)
+> 状态：设计中 · 上位文档：[架构总览](architecture.md)、[事件运行时与派发器](event-runtime.md)、[ADR 0001](adr/0001-taskwarrior-as-event-store.md)
+>
+> 本文规定任务的数据结构、状态映射与 `ev` 命令行工具接口。规则匹配、派发器守护进程、并发与幂等机制见 [事件运行时与派发器](event-runtime.md)。
 
-账用 **Taskwarrior 3**，不自建存储。本文只规定字段、状态和分派约定。
+任务库底层直接复用 **Taskwarrior 3**（`taskchampion.sqlite3`），作为全系统任务状态的唯一数据源，所有显示端与报表均从该库派生。
 
-## 1. 字段
+## 1. 任务字段定义
 
-| 字段 | Taskwarrior 对应 | 含义 |
+| 字段名 | Taskwarrior 对应项 | 含义说明 |
 |---|---|---|
-| `id` | `uuid` | 事项 id |
+| `id` | `uuid` | 任务唯一标识 |
 | `ts` | `entry` | 创建时间 |
-| `source` | UDA `source` | 来源：`me` / `ha` / `cron` / `github` / `phone` / `email` / `rss` … |
-| `kind` | UDA `kind` | `<域>.<对象>.<动作>`，如 `work.video.make`，取值见 [能力目录](capabilities.md) |
-| `subject` | `description` | 这件事是关于什么 |
-| `state` | `status` + `start` | 见 §2 |
-| `summary` | 结束时的注解 | 一句话结论 |
-| `payload` | UDA `payload` | 原始内容的路径，可以为空 |
-| `thread`（可选） | UDA `thread` | 把同一件事的多条事项串起来 |
-| `parent`（可选） | `depends` / UDA `parent` | 由哪条事项派生出来 |
+| `source` | UDA `source` | 触发来源：`me` / `ha` / `cron` / `github` / `phone` / `email` / `rss` / `net` / `nut` / `orca` |
+| `kind` | UDA `kind` | `<域>.<对象>.<动作>`（如 `work.video.make`），全集定义见 [能力目录](capabilities.md) |
+| `subject` | `description` | 任务标题或简述 |
+| `state` | `status` + `start` + tags | 九种状态之一，见 §2 |
+| `summary` | 完成时的注解（annotation） | 一句话执行摘要 |
+| `payload` | UDA `payload` | 原始输入文件路径或结构化 JSON 参数（可为空） |
+| `parent`（可选） | `depends` | 派生该子任务的父任务 UUID（带阻塞依赖语义） |
+| `thread`（可选） | UDA `thread` | 串联同一主题下多条任务的线索 ID（同 `thread` 内默认串行） |
+| `severity`（可选） | UDA `severity` | `info` / `warn` / `critical`，控制推送渠道与免打扰穿透 |
+| `lifetime`（可选） | UDA `lifetime` | `ephemeral` / `durable`，决定草稿是否设置过期清理时间（TTL） |
+| `reversible`（可选） | UDA `reversible` | 标识操作是否可逆，决定是否提供 5 分钟撤销窗口 |
+| `attempts` | UDA `attempts` | 失败重试次数，由派发器维护，执行器只读 |
+| `lane`（可选） | UDA `lane` | `interactive`（交互） / `batch`（夜间批处理），决定调度队列 |
 
-域：`work` / `life` / `home` / `info` / `media` / `meta`。
+顶级域名包括：`work`、`life`、`home`、`info`、`media`、`meta`、`net`、`system`。其中 `system.*` 由看门狗、UPS（NUT）、路由器热插拔脚本等系统自检机制产生，不进入日常早晚报，仅在持续异常时升级推送。
 
-## 2. 状态
+## 2. 任务状态
 
-| 状态 | Taskwarrior | 说明 |
+| 状态名 | Taskwarrior 内部表示 | 写入方 | 状态说明 |
+|---|---|---|---|
+| `new` | `pending`（无 `start`） | 任务录入入口 | 新创建的任务，等待派发器认领 |
+| `doing` | `pending` + `start` | 派发器 | 执行器正在处理中 |
+| `waiting` | `waiting`（`wait:<时间>`） | 执行器 / 人工 | 到期后自动转回 `new`，用于定时提醒、延后处理、间隔重复与聚合窗口 |
+| `blocked` | `pending` + 未完成的 `depends` | 派发器 | 等待前置子任务或依赖任务完成 |
+| `escalated` | `pending` + `+me`（及可选 `severity:critical`） | 派发器 / 执行器 | 需要人工确认或亲自处理，已发送交互卡片 |
+| `failed` | `pending` + `+failed` + `attempts:N` | 派发器 | 执行失败，等待重试或超限后升级给人工 |
+| `stalled` | `pending` + `start` + `+stalled` | 看门狗 | 执行时长超过 `2 × lease` 且无续租信号 |
+| `spec` | `pending` + `+spec` + `wait:<ttl>` | 执行器 | 预生成的草稿或待补充规格说明，采纳则完成，过期自动清理 |
+| `parked` | `waiting` + `+parked` | 派发器 / 执行器 | 前置环境条件未满足（如 `net.github` 不可达或处于静音时段），等待条件恢复 |
+
+任务的终态为 `completed`（对应 `done`）与 `deleted`（对应 `dropped`）。完整状态流转图见 [事件运行时与派发器 §2](event-runtime.md#2-状态机)。
+
+## 3. `ev` CLI 接口
+
+`ev` 是对 `task` 命令的轻量级封装，负责填充 UDA 字段并格式化输出：
+
+```
+ev add "<任务描述>" [--kind ...] [--wake 明早9点] [--source ...] [--thread ...]
+ev ls                                            # 调用 task next，按 lane 与 severity 排序
+ev next [--after <时间>] [--limit N]             # 供显示端查询待办
+ev done <id> "<执行摘要>"
+ev wait <id> <时间>
+ev reopen <id>                                   # 标记返工（供置信度校准与规则优化使用）
+ev block <id> --on <uuid>
+ev park <id> --needs net.github
+ev status                                        # 输出 8 行运行状态概览
+ev digest [today|week]
+ev hook on-add|on-modify                         # 仅追加写入 Spool 队列，异常直接放行
+```
+
+Taskwarrior 原生的报表、过滤条件与同步子命令均可直接混用。
+
+## 4. 派发器接口规范
+
+派发器与任务库、执行器之间遵循三条基础约定（实现细节见 [事件运行时与派发器 §3](event-runtime.md#3-派发器守护进程evd)）：
+
+1. **Hook 仅写队列，异步匹配规则**：`on-add` 与 `on-modify` Hook 在 5ms 内将变更写入本地 Spool 目录并立即返回（Fail-open），规则匹配与执行器调用均由常驻守护进程 `evd` 异步完成。
+2. **执行器统一输出七种状态**：`done`、`waiting`、`me`、`blocked`、`failed`、`split`、`spec`，由派发器转换为任务库中的九种状态。
+3. **确定性幂等键**：`ev_id = uuid5(task.uuid, rule.name, attempt)`，确保同一任务的同一次规则触发不会产生重复副作用。
+
+## 5. 触发源接入方式
+
+| 触发源 | 接入链路 | `source` 字段取值 |
 |---|---|---|
-| `new` | `pending` | 刚入账 |
-| `doing` | `pending` + `start` | 有人或 Agent 正在处理 |
-| `waiting` | `waiting`（`wait:<时间>`） | 到点自动回到 `new`。提醒、延后处理、间隔重复、周期维护都用它 |
-| `done` | `completed` + 注解 | 用一句话结束 |
-| `dropped` | `deleted` | 放弃 |
+| 自然语言输入 | DS-Bot / AstrBot → 入口意图分类选出 `kind` → `ev add` | `me` |
+| 智能家居设备 | Home Assistant Automation → 仅在需要跟进时调用 `ev add` | `ha` |
+| 定时调度 | `systemd.timer` 或 Taskwarrior `recur` | `cron` |
+| GitHub / 飞书 / Webhook | N100 上的 n8n 接收后调用 `ev add` | `github` / `webhook` |
+| 邮件 / RSS | n8n（IMAP、RSS 节点）提取摘要后调用 `ev add` | `email` / `rss` |
+| 手机端分享 | KDE Connect 分享 / HA Companion → `ev add` | `phone` |
+| 网络出口变化 | AX6000 `hotplug` 脚本触发 `ev add --kind system.net.egress` | `net` |
+| UPS 电源事件 | NUT 触发 `ev add --kind system.power.*` | `nut` |
+| Agent 任务回调 | Orca Run 完成后调用 `ev done` | `orca` |
 
-周期性事项（滤芯、续费）直接用 Taskwarrior 的 `recur`。
+## 6. 任务库备份
 
-## 3. CLI
-
-`ev` 是 `task` 的一层薄封装，只负责填好 UDA：
-
-```
-ev add "<一句话>" [--kind ...] [--wake 明早9点]   # task add ... kind:... wait:...
-ev ls                                            # task next
-ev done <id> "<一句话>"                          # task <id> annotate ... && task <id> done
-ev wait <id> <时间>                              # task <id> modify wait:...
-ev digest [today|week]                           # task completed end.after:...
-```
-
-Taskwarrior 自带的报表、过滤和同步都可以直接用。
-
-## 4. 分派器（唯一自建）
-
-- 在 `on-add` / `on-modify` hook 里读取 `kind`，按 [规则表](architecture.md#4-规则一张顺序匹配的表) 找到执行者，然后调用它。
-- 执行者约定：
-
-```text
-输入 : 事项 JSON（Taskwarrior export 格式）
-输出 : { "status": "done|waiting|me", "summary": "一句话", "wake": "<仅 waiting>" }
-```
-
-- 由分派器把输出写回 Taskwarrior：完成就 annotate + done，等待就 modify wait，需要你本人处理就打上 `+me` 标签并推送卡片。
-- 长任务交给 Orca，分派器不阻塞等待；Orca 完成后调用 `ev done` 回写。
-
-## 5. 来源接入
-
-| 来源 | 接入方式 |
-|---|---|
-| 你说的话 | DS-Bot / AstrBot → 入口 Agent 选出 `kind` → `ev add` |
-| 设备 | HA automation → 调用 `ev add`（只在需要处理时） |
-| 定时 | systemd timer 或 Taskwarrior `recur` |
-| GitHub / 飞书 / webhook | N100 上的 n8n → `ev add` |
-| 邮件 / RSS | n8n（IMAP、RSS 节点）→ 摘要 → `ev add` |
-| 手机 | KDE Connect 分享 / HA companion → `ev add` |
-
-## 6. 备份
-
-`taskchampion.sqlite3` 用 Litestream 持续复制到 N100，或者每天复制一份。这是唯一的可靠性要求。
+`taskchampion.sqlite3` 通过 Litestream 持续增量复制到 N100，同时每小时执行一次 `sqlite3 .backup` 本地快照。Litestream 要求 SQLite 处于 WAL 模式，Taskwarrior 3 在本机是否保持常驻 WAL 以实测为准；若不满足则以每小时 `.backup` 加 Restic 同步作为主备份方案（全量备份与月度恢复演练见 [系统运维 §9](platform-ops.md#9-备份与恢复演练)）。

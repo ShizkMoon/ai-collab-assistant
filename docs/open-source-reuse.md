@@ -1,69 +1,75 @@
-# 开源复用地图
+# 开源复用清单
 
-> 规则：先复用；接近的包一层薄封装；没有先例才自建（见 [设计原则](principles.md)）。本表记的是选型意图，实际装了什么以本机 flake 为准。
+> 选型原则：优先直接复用成熟开源项目；功能接近的通过薄封装接入；仅在无现成方案时才自建（见 [设计原则](principles.md)）。本表记录选型方案，本机实际安装状态以 NixOS Flake 与各专题文档的实测基线为准。
 
-## 1. 骨架
+## 1. 基础骨架与运维
 
-| 需要 | 复用 | 备注 |
+| 功能需求 | 选用开源项目 | 说明 |
 |---|---|---|
-| 事项账 | **Taskwarrior 3** | 存储在 SQLite（`taskchampion.sqlite3`），支持 hooks、UDA、`wait`、`recur`，可多端同步 |
-| 设备事件、家居自动化 | **Home Assistant** + Mosquitto + Zigbee2MQTT + ESPHome | 已在 [智能家居](home-automation-stack.md) 中定型，NixOS 有原生模块 |
-| 小米设备 | 小米官方 HA 集成 `ha_xiaomi_home` | |
-| SaaS 和 webhook 串联 | **n8n**（N100） | 包括 IMAP、RSS、GitHub、飞书等节点；NixOS 有 `services.n8n`；许可为 Sustainable Use，个人使用没问题 |
-| 定时 | systemd timer / Taskwarrior `recur` | |
-| 账备份 | Litestream（SQLite 持续复制）或每日 `sqlite3 .backup` | |
-| 系统部署 | NixOS flake + colmena / deploy-rs | 两台主机共用一个 flake |
-| 桌面配置 | plasma-manager（home-manager 模块） | 覆盖面板、小组件、KRunner、快捷键 |
+| 任务库与周期调度 | **Taskwarrior 3** | 底层存储为 SQLite（`taskchampion.sqlite3`），原生支持 Hook、UDA、`wait`、`recur` 与多端同步 |
+| 智能家居与传感器接入 | **Home Assistant** + Mosquitto + Zigbee2MQTT + ESPHome | NixOS 提供原生服务模块，详细配置见 [智能家居技术栈](home-automation-stack.md) |
+| 米家设备接入 | 小米官方集成 `ha_xiaomi_home` | 接入存量米家设备 |
+| 外部 SaaS 与 Webhook 串联 | **n8n**（运行于 N100） | 提供 IMAP 邮件、RSS、GitHub、飞书等连接器，NixOS 原生支持 `services.n8n` |
+| 系统级定时任务 | `systemd.timer` + Taskwarrior `recur` | 无需额外引入调度框架 |
+| 任务库增量备份 | **Litestream** + 每小时 `sqlite3 .backup` | 持续复制 SQLite WAL 日志至 N100 |
+| 全量数据备份 | **Restic**（本地 + N100 + 异地加密） | 配合每月 1 日自动恢复演练，见 [系统运维 §9](platform-ops.md#9-备份与恢复演练) |
+| 跨设备虚拟局域网 | **Tailscale**（Mesh + Subnet Router + Exit Node + `tailscale serve`） | 免公网 IP 与端口转发，自动签发 HTTPS 证书，见 [网络与设备组网](network-fabric.md) |
+| 监控与日志收集 | **Uptime Kuma**、**Prometheus + node_exporter**、**Grafana**、**Loki + Alloy** | 见 [系统运维 §5–§6](platform-ops.md#5-监控与可观测性) |
+| 双机声明式部署 | **NixOS Flake** + `colmena` / `deploy-rs` | 工作站与 N100 共用同一个 Flake 仓库 |
+| KDE 桌面声明式配置 | **`plasma-manager`**（Home Manager 模块） | 统一管理面板、桌面组件、KRunner 与全局快捷键 |
 
-## 2. 入口与通知
+## 2. 交互入口与消息推送
 
-| 需要 | 复用 | 备注 |
+| 功能需求 | 选用开源项目 | 说明 |
 |---|---|---|
-| IM 入口 | **DS-Bot**（现有）；需要更多平台时用 **AstrBot** | AstrBot：AGPL-3.0，支持 QQ、企业微信、飞书、钉钉、公众号、Telegram，带 MCP 和插件 |
-| 手机连接 | KDE Connect | 通知、短信、剪贴板、远程命令、分享 |
-| 推送 | ntfy（自托管）/ HA companion | |
-| 桌面入口 | KRunner 插件 | 一句话直接入账 |
-| 语音 | FunASR / SenseVoice（转写）、CosyVoice（合成） | 中文效果好，本地运行 |
+| 对话与卡片入口 | **DS-Bot**（基于 DeepSeek Harness）；多平台群聊配合 **AstrBot** | AstrBot（AGPL-3.0）支持 QQ、企业微信、飞书、钉钉、公众号、Telegram 及 MCP 插件 |
+| 手机与桌面互联 | **KDE Connect** | 通知同步、剪贴板共享、文件快速分享录入任务 |
+| 手机消息推送 | **ntfy**（自托管） / Home Assistant Companion | 支持按告警级别设置免打扰穿透 |
+| 桌面快捷录入 | **KRunner** 插件 | `Alt+Space` 呼出直接录入任务 |
+| 语音识别与合成 | **FunASR / SenseVoice**（语音转写）、**CosyVoice**（语音合成） | 中文识别准确，支持本地离线运行 |
 
-## 3. 模型与推理
+## 3. 模型路由与知识检索
 
-| 需要 | 复用 | 备注 |
+| 功能需求 | 选用开源项目 | 说明 |
 |---|---|---|
-| 统一模型网关 | **LiteLLM** | OpenAI 兼容接口，路由、回退、花费统计都在这里 |
-| 本地推理 | ollama / vLLM（工作站 GPU） | 跑 7–9B 的 Qwen 等模型 |
-| 结构化决策 | Jev（TypeSafe）或 JSON Schema 约束输出 | 走 `decide()` 接口，后端可替换 |
-| N100 兜底分类 | sentence-transformers + bge 中文小模型 + SetFit 少样本分类 | 跑在 CPU 上 |
-| 召回 | SQLite FTS5 / sqlite-vec，或 Khoj | |
-| 代码与多步任务 | Orca + Devin / Codex / Claude Code | |
-| GUI 软件驱动 | CLI-Anything harness → computer-use + Jev | 见 [系统拓扑](system-topology.md) |
-| 上网和信息获取 | agent-reach（已装） | |
+| 统一模型网关 | **LiteLLM** | 提供 OpenAI 兼容接口，统一管理多后端路由、故障回退与 Token 成本统计 |
+| 工作站本地推理 | **vLLM** / **Ollama** | 运行 Qwen 7–14B 与 Embedding 模型 |
+| 结构化受限解码 | vLLM `guided_choice` / `guided_json`（XGrammar）、Ollama `format`（GBNF）、`outlines` | 统一封装为 `decide()` 接口，见 [模型路由与本地推理 §6](model-fleet.md#6-受限解码分类接口decidestate-schema) |
+| N100 CPU 兜底分类 | `sentence-transformers` + `bge-small-zh` + **SetFit** | 工作站休眠时在 N100 CPU 上运行，仅输出预测 `kind` |
+| 本地知识检索 | **SQLite FTS5 + `jieba` + `sqlite-vec`**（封装为 `kn` CLI） | 单文件三路混合召回与 RRF 融合，见 [知识库与记忆分层](knowledge-memory.md) |
+| 代码与多步任务编排 | **Orca** + Devin / Codex / Claude Code | 管理 Git Worktree 与多 Worker 协同 |
+| GUI 桌面软件控制 | `CLI-Anything` 封装 → `orca computer`（AT-SPI）→ 视觉点击（Jev + `ydotool`） | 见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) |
+| 外部平台只读抓取 | **`agent-reach`**（已安装） | 聚合 `yt-dlp`、`bili-cli`、`twitter-cli`、`rdt-cli` 等工具 |
 
-## 4. 能力 provider
+## 4. 领域能力 Provider
 
-| 能力 | 复用 |
+| 领域 | 选用开源或成熟工具 |
 |---|---|
-| 视频 | Remotion、ffmpeg、auto-editor、PySceneDetect、Kdenlive（MLT）、DaVinci Resolve 脚本 API |
-| 音乐 | ACE-Step 1.5（生成，Apache-2.0）、REAPER（ReaScript）、MuseScore |
-| 图像 | ComfyUI、ArtCraft PhotoCraft CLI、Krita、ImageMagick |
-| 订阅 | RSSHub + Miniflux / FreshRSS；公众号可以用 wewe-rss（已归档，能用多久不确定，只当备选） |
-| 价格监控 | changedetection.io |
-| 记账 | double-entry-generator（支付宝 / 微信 → Beancount）+ Fava |
-| 间隔重复 | Anki + AnkiConnect |
-| 日历 | Radicale |
-| 菜谱 | Mealie / Tandoor |
-| 照片 / 书 / 音乐 / 影视 | Immich / Calibre / beets + Navidrome / Jellyfin |
-| 墨水屏 | OpenEPaperLink（已定型） |
-| 状态灯 | WLED |
-| 热敏打印 | python-escpos |
-| 电源 | NUT（UPS）、Wake-on-LAN |
+| 视频制作 | Remotion、HyperFrames、Multiplane、`ffmpeg`、`auto-editor`、`PySceneDetect`、DaVinci Resolve、Kdenlive（MLT） |
+| 音乐与乐谱 | ACE-Step 1.5（Apache-2.0）、REAPER（ReaScript）、MuseScore CLI、LilyPond、FluidSynth |
+| 图像与设计 | ComfyUI、ArtCraft `photocraft-cli`、Krita、ImageMagick |
+| 信息订阅 | RSSHub + Miniflux / FreshRSS |
+| 价格监控 | `changedetection.io` |
+| 复式记账与预算 | `double-entry-generator`（支付宝/微信账单转换）+ **Beancount** + **Fava** + `fava-envelope` |
+| 间隔重复复习 | **Anki** + AnkiConnect（FSRS 算法） |
+| 日历与通讯录 | **Radicale**（CalDAV / CardDAV）+ `vdirsyncer` + `khal` |
+| 食谱与采购清单 | **Mealie** |
+| 个人媒体库 | **Immich**（照片）/ **Calibre**（电子书）/ **`beets` + Navidrome**（音乐）/ **Jellyfin**（影视） |
+| 墨水屏驱动与网关 | **OpenEPaperLink**（电子价签）、**epdiy**（并口裸屏直驱） |
+| 状态指示灯 | **WLED** |
+| 热敏小票打印 | `python-escpos` |
+| 电源与远程唤醒 | **NUT**（Network UPS Tools）、`wakeonlan` |
 
-## 5. 必须自建的部分（没有先例）
+## 5. 自建胶水层清单
 
-| 自建件 | 为什么没有现成的 | 大小 |
+仅以下粘合本机私有流程的轻量模块由自己编写：
+
+| 自建模块 | 自建原因 | 代码规模 |
 |---|---|---|
-| `ev` 封装 + 分派 hook | 只是把 Taskwarrior 的 UDA 接到规则表上，每个人的规则都不一样 | 几百行脚本 |
-| 能力 toml 和入口选择题 | 能力清单是你自己的 | 数据文件 + 一个提示词模板 |
-| 呈现面的渲染模板 | 墨水屏和小组件显示什么由你决定 | 模板 |
-| 场景 | 同上 | toml / HA script |
-
-其余部分有现成项目就不自己写。新增需求时，先在本表里补一行"复用什么"，再动手。
+| `ev` CLI + Hook + 派发器守护进程 `evd` | 将 Taskwarrior UDA 字段与个人路由规则表、Orca、Home Assistant 对接 | 约 700 行 Python，见 [事件运行时与派发器 §3](event-runtime.md#3-派发器守护进程evd) |
+| 能力与场景 TOML 配置集 | 声明个人使用的能力目录、触发示例与跨设备场景 | 声明式配置文件 + 提示词模板 |
+| 显示端 HTML 渲染模板 + **显示仲裁器** | 跨墨水屏、状态灯、桌面组件的动态优先级分配与帧哈希去重 | 渲染模板 + 约 400 行 Python，见 [多端显示仲裁](surface-arbiter.md) |
+| `kn` 知识库检索与数据源适配器 | 将 Taskwarrior、Orca、学习通（`xxt`）、`biliup` 接入同一个 SQLite + `sqlite-vec` 索引库 | 核心 SQL + 约 600 行适配器，见 [知识库与记忆分层](knowledge-memory.md) |
+| 语义缓存、温度缩放校准与 GPU 文件锁 | 针对个人任务反馈样本的轻量级校准与单卡显存互斥锁 | 分别约 40 / 30 / 20 行，见 [模型路由与本地推理 §3–§7](model-fleet.md) |
+| PrefixSpan 规则挖掘与影子测试对比器 | 基于 Taskwarrior 历史记录挖掘高频序列并对比新旧 Provider 产物 | 约 150 行 Python + 定时器，见 [系统运维 §1–§4](platform-ops.md) |
+| `hc` 健康检查脚本 | 按表执行本地健康检查，实现"连续 2 次失败才推送告警"的防抖逻辑 | 约 120 行 Python |

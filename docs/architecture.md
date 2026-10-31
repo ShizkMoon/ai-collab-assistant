@@ -1,101 +1,128 @@
 # 架构总览
 
-> 状态：设计中（P0 未实现）· 取向见 [设计原则](principles.md)：功能优先、复用优先
+> 状态：设计中（S0 未实现）· 设计取向见 [设计原则](principles.md)：功能优先、开源复用
 
-## 0. 一句话
+## 0. 核心流程
 
-**你说一句话或者发生一件事 → 系统听懂 → 找到对应能力 → 交给合适的执行者 → 做完用一句话告诉你 → 记进账。** 能力可以随时增加、替换和组合，设备和显示面也可以随时接入。
+**自然语言输入或外部事件触发 → 入口解析意图并匹配 `kind` → 派发器按规则路由给执行器 → 执行器完成后写回一句话执行摘要并通知用户。** 能力、硬件设备与显示端均可按需增删替换。
 
-## 1. 四层 + 三个确认点
+## 1. 五层架构与三类确认点
 
-| 层 | 回答的问题 | 内容 | 特点 | 文档 |
+| 层级 | 核心职责 | 包含内容 | 演进特征 | 专题文档 |
 |---|---|---|---|---|
-| **能力层** | 做什么 | 制作视频、作曲、写长文、整理账单、回家场景…… | 开放集合，持续增加 | [能力目录](capabilities.md) |
-| **流转层** | 进行到哪一步了 | 接收 → 处理中 → 等待 → 完成 / 放弃 | 封闭集合，就是一个小状态机 | [事件规格](event-spec.md) |
-| **执行层** | 怎么做 | worker Agent、CLI、HA 服务调用、浏览器、GUI 自动化 | 工具可以随时替换 | [系统拓扑](system-topology.md)、[本机工具链](local-toolchain.md) |
-| **设施层** | 在哪里跑 | 工作站、N100、AX6000、手机、墨水屏、传感器 | 物理设备 + NixOS | [工作站](workstation-nixos.md)、[智能家居](home-automation-stack.md) |
+| **能力层** | 声明系统能处理哪些事务 | 视频制作、配乐生成、长文写作、账单整理、家居场景等 | 开放集合，按需扩充 | [能力目录](capabilities.md) |
+| **状态层** | 追踪任务所处阶段 | 九种状态：`new` / `doing` / `waiting` / `blocked` / `escalated` / `failed` / `stalled` / `spec` / `parked` | 封闭状态机 | [事件与任务规格](event-spec.md) |
+| **执行层** | 具体调用什么工具完成任务 | Orca Worker、CLI 工具、HA 服务调用、浏览器与 GUI 自动化 | 底层实现可随时替换 | [系统拓扑](system-topology.md)、[本机工具链选型](local-toolchain.md) |
+| **设施层** | 算力、网络与硬件运行环境 | 工作站、N100、AX6000、手机、墨水屏、各类传感器 | 物理设备 + NixOS 声明式管理 | [工作站配置](workstation-nixos.md)、[智能家居技术栈](home-automation-stack.md) |
+| **知识层** | 检索历史任务与个人文档 | 任务记录、笔记、会话记录、命令历史的混合检索库 | 可从源数据重建 | [知识库与记忆分层](knowledge-memory.md) |
 
-**确认点**只有三类：**付款、删除、对外发布**。其余动作直接执行；可以撤销的动作配一个撤销窗口（默认 5 分钟，期间一键撤回）。
+**人工确认点**固定为三类：**付款、删除、对外发布**（[ADR 0002](adr/0002-three-confirmation-points.md)）。其余操作默认直接执行；可逆操作配备默认 5 分钟的撤销窗口，窗口期内可一键回退。
 
-## 2. 粘合：两端用语义，中间用约定
+状态机采用九态模型（`new` / `doing` / `waiting` / `blocked` / `escalated` / `failed` / `stalled` / `spec` / `parked`），与 Taskwarrior 字段的具体映射见 [事件与任务规格 §2](event-spec.md#2-任务状态) 和 [事件运行时与派发器 §2](event-runtime.md#2-状态机)。完整闭环设计见 [总体架构设计](architecture-north-star.md)。
+
+## 2. 意图分类与结构化路由
 
 ```
-你的话 ──[入口 Agent：做选择题]──> kind + 参数 ──> 流转 ──> 执行 ──> 一句话结果 ──[出口 Agent：说人话]──> 你
-机器事件（HA / 定时 / CI / webhook）─────────────> kind + 参数（不经过模型）
+自然语言输入 ──[入口 Agent：意图分类]──> kind + 参数 ──> 状态流转 ──> 执行器 ──> 执行摘要 ──[出口：自然语言回复]──> 用户
+机器事件（HA / 定时 / CI / Webhook）────> kind + 参数（直接映射，不经语言模型）
 ```
 
-- **入口只做选择**：入口 Agent 从 [能力目录](capabilities.md) 里挑一个 `kind`，填好参数，给出置信度。置信度高就直接做，中等就问你一句，低就进"待归类"。
-- **统一决策接口** `decide(state, schema) → {字段: 概率}`，后端可替换：
-  - 工作站 GPU：本地 7–9B 模型（ollama / vLLM），也可以接 Jev 这类结构化决策模型；
-  - N100：中文 embedding 小模型 + 近邻分类，工作站离线时兜底；
-  - 云端：DeepSeek / Qwen，处理长尾。
-  - 三者统一经 [LiteLLM](open-source-reuse.md#模型与推理) 网关出去，路由和回退都在网关里配置。
-- **账就是训练数据**：你每次确认或改正一个归类，都是一条带标签的样本，阈值和本地分类器会越来越准。
-- **成本**：机器事件不经过模型；你说的话每条只翻译一次。成本大头在 worker 执行，判断部分几乎可以忽略。
+- **受限意图分类**：入口 Agent 从 [能力目录](capabilities.md) 的候选集中选择匹配的 `kind`，提取结构化参数并输出置信度。高置信度直接派发执行，中等置信度向用户追问确认，低置信度归入待分类队列（`meta.triage.pending`）。
+- **统一分类接口** `decide(state, schema) → {字段: 概率}`，底层推理后端可按需切换：
+  - 工作站 GPU：本地常驻 7–9B 模型（vLLM / Ollama）配合受限解码（XGrammar / GBNF）；
+  - N100 CPU：中文小型 Embedding 模型 + SetFit 少样本分类器，在工作站休眠或离线时提供兜底分类；
+  - 云端 API：DeepSeek / Qwen，处理长上下文或复杂长尾输入。
+  - 三类后端统一通过 [LiteLLM](open-source-reuse.md#3-模型与推理) 网关调用，由网关管理路由与故障回退。
+- **任务记录即训练样本**：用户每次在卡片上确认或修正分类结果，都会作为带标签样本存入本地库，用于定期更新分类器与置信度阈值。
+- **调用开销**：机器事件按确定性规则直接映射，不调用模型；自然语言输入每条仅在入口分类一次，主要算力消耗集中在后续 Worker 执行阶段。
 
-## 3. 账：复用 Taskwarrior + Home Assistant
+## 3. 状态存储：复用 Taskwarrior 与 Home Assistant
 
-| 数据 | 放在哪里 | 为什么 |
+| 数据类别 | 存储组件 | 选型原因 |
 |---|---|---|
-| 要处理的事项 | **Taskwarrior 3**（`taskchampion.sqlite3`） | 现成提供 `wait`（到点再出现）、`due`、周期任务、注解、自定义字段（UDA）、hooks、多端同步 |
-| 设备的原始事件和状态 | **Home Assistant recorder** | 传感器高频数据留在 HA，只有需要处理的事情才进 Taskwarrior |
-| 任务执行过程 | Orca（Run / Task） | worker 的会话和产物 |
+| 任务状态与生命周期 | **Taskwarrior 3**（`taskchampion.sqlite3`） | 原生支持延迟唤醒（`wait`）、截止时间（`due`）、周期任务（`recur`）、注解、自定义字段（UDA）、Hook 与多端同步 |
+| 传感器高频状态与原始事件 | **Home Assistant Recorder** | 温湿度、功率等高频时序数据留在 HA，仅需跟进处理的事件才转化为 Taskwarrior 任务 |
+| Agent 执行上下文与过程 | **Orca**（Run / Task） | 管理 Worker 的代码分支、终端会话与中间产物 |
 
-唯一需要自建的是一个**很薄的分派器**：Taskwarrior 的 hook 读取 `kind`，按规则表决定交给谁。字段和状态的映射见 [事件规格](event-spec.md)。
+核心自建组件是一个轻量级**派发器（`evd`）**：Taskwarrior Hook 仅负责将变更事件追加写入本地 Spool 目录（耗时 < 5ms，异常直接放行），由常驻守护进程异步读取并按规则表派发给对应执行器。详细字段定义见 [事件与任务规格](event-spec.md)，运行机制见 [事件运行时与派发器](event-runtime.md)。
 
-## 4. 规则：一张顺序匹配的表
+## 4. 规则表：按序匹配的路由配置
 
 ```toml
 [[rule]]
+name  = "video.make"
+order = 50
 match = { kind = "work.video.*" }
-to = "agent:orca"            # 交给 Orca worker
+to    = "agent:orca"         # 派发给 Orca Worker
 
 [[rule]]
-match = { kind = "home.scene.*" }
-to = "ha:script"             # 直接调用 HA 脚本
+name  = "home.device"
+order = 20
+match = { kind = "home.action.*" }
+to    = "ha:script"          # 直接调用 Home Assistant 脚本
 
 [[rule]]
-match = { kind = "life.maintain.*" }
-to = "notify"                # 到点提醒
+name  = "critical.push"
+order = 10
+match = { severity = "critical" }
+to    = "me"
+push  = { channel = ["ntfy:critical"], bypass_dnd = true }
+stop  = true
+
+[[rule]]
+name  = "doc.renew"
+order = 60
+match = { kind = "life.doc.renew" }
+to    = "notify"             # 到期提醒
 ```
 
-从上往下匹配，先命中先生效；都没命中就进"待归类"，在早报里提一句。**家居自动化直接用 HA 的 automation**，不在这里重复实现。
+规则按 `order` 升序匹配，首个命中即生效；未命中任何规则的任务归入待分类队列（`meta.triage.pending`），在每日早报中汇总提示。规则同时支持 `aggregate`（聚合）、`cooldown`（冷却时间）、`rate`（频率限制）与 `window`（执行时间窗）四类流量控制，完整语法见 [事件运行时与派发器 §1](event-runtime.md#1-规则表)。
 
-## 5. 执行者
+设备级本地闭环与安全兜底逻辑直接使用 **Home Assistant Automation** 实现，不在派发器规则表中重复维护。
 
-| 执行者 | 用在哪 | 复用 |
+## 5. 执行器列表
+
+| 执行器标识 | 适用场景 | 底层复用工具 |
 |---|---|---|
-| `agent:orca` | 多步任务：代码、文档、视频、写作 | Orca + Devin / Codex worker |
-| `ha:*` | 家居场景、设备控制 | Home Assistant 服务调用 |
-| `cli:*` | 一次性动作 | 现成 CLI（ffmpeg、calibre、double-entry-generator……） |
-| `n8n:*` | 第三方 SaaS 串联 | n8n 工作流（webhook、邮件、RSS） |
-| `notify` | 只提醒 | ntfy / KDE Connect / IM |
-| `me` | 需要你本人处理 | 卡片：`[做] [晚点] [不要]` |
+| `agent:orca` | 多步复杂任务：代码开发、文档编写、视频剪辑、长文写作 | Orca + Devin / Codex / Claude Code Worker |
+| `ha:*` | 智能家居设备控制、HA 脚本调用 | Home Assistant REST / 服务调用 |
+| `cli:*` | 单次确定性命令执行 | 现成 CLI 工具（`ffmpeg`、`calibre`、`double-entry-generator` 等） |
+| `n8n:*` | 外部 SaaS 与 Webhook 编排 | n8n 工作流（Webhook、IMAP 邮件、RSS） |
+| `notify` | 纯消息提醒 | ntfy / KDE Connect / IM |
+| `me` | 需人工确认或亲自处理的事项 | 交互卡片：`[执行] [延后] [忽略]` |
+| `render` | 触发显示端画面刷新 | [多端显示仲裁](surface-arbiter.md) |
+| `orca:run` | 带任务说明模板的长期异步任务 | Orca Run，返回产物路径与执行摘要 |
 
-## 6. 呈现面：全部从账派生
+各执行器统一输出七种返回状态：`done`、`waiting`、`me`、`blocked`、`failed`、`split`、`spec`，由派发器映射为任务库中的九种状态。耗时任务采用异步投递加租约机制，不阻塞派发器主循环。
 
-| 显示面 | 内容 | 复用 |
+## 6. 显示端分配
+
+所有显示端展示的内容均从任务库与 Home Assistant 状态只读派生：
+
+| 显示端 | 展示内容 | 底层实现 |
 |---|---|---|
-| 状态灯 | 不亮表示没事，黄色表示有事等你，红色表示有紧急事项 | WLED |
-| 墨水屏（门口 / 桌面 / 床头） | 出门清单 / 今日事项 / 明天第一件事 | OpenEPaperLink，见 [渲染管线](render-pipeline.md) |
-| Plasma 小组件、KRunner | 待处理数量、一句话入账 | Plasma、plasma-manager |
-| ThinkSmart View | 家庭面板 | HA dashboard，见 [主控台](thinksmart-view-console.md) |
-| 手机 / 手表 | 一个数字 + 推送 | KDE Connect、ntfy、HA companion |
-| IM | 卡片交互、早报和晚报 | DS-Bot / AstrBot |
-| 热敏小票 | 当日清单 | python-escpos |
+| 状态指示灯 | 熄灭=无待办，琥珀色=有待确认事项，红色=高优告警或故障 | WLED |
+| 墨水屏（门口 / 桌面 / 床头） | 出门清单 / 今日待办 / 明日首项任务 | OpenEPaperLink / LilyGo T5，见 [统一渲染管线](render-pipeline.md) |
+| Plasma 桌面组件、KRunner | 待处理任务计数、快捷录入任务 | KDE Plasma、`plasma-manager` |
+| ThinkSmart View | 桌面触控面板与语音入口 | HA Dashboard / Kiosk 浏览器，见 [桌面主控台](thinksmart-view-console.md) |
+| 手机 / 手表 | 待确认计数与即时推送 | KDE Connect、ntfy、HA Companion |
+| IM 客户端 | 交互确认卡片、每日早报与晚报 | DS-Bot / AstrBot |
+| 热敏打印机 | 纸质当日清单、采购清单 | `python-escpos` |
 
-**首屏契约**：任何呈现面的第一屏只回答"现在有哪几件事不能不管"。
+**首屏原则**：任何显示端的第一屏只展示当前亟需处理的事项。
 
-## 7. 召回与反哺
+各显示端展示的具体内容由 [显示仲裁器](surface-arbiter.md) 根据优先级、新鲜度、独占组与每日刷新预算动态分配。
 
-- **召回**：用 `info.recall` 回答"我上次是怎么弄的"，检索范围包括账、笔记、聊天记录和命令历史，复用 SQLite FTS5 / sqlite-vec 或 Khoj。
-- **周报**：本周完成了什么、哪类事最耗时、哪些事反复出现（建议把它们变成规则或新能力）、每个能力的返工次数。
-- **年度回顾**：从账里自动生成。
+## 7. 知识检索与周期复盘
 
-## 8. Bot 模式
+- **知识检索**：通过 `info.recall`（底层 CLI 为 `kn`）检索任务记录、笔记、历史会话与命令历史，数据统一存储在 `~/knowledge/kb.sqlite`（SQLite FTS5 + jieba 分词 + `sqlite-vec` 向量索引）。具体实现见 [知识库与记忆分层](knowledge-memory.md)。
+- **周报统计**：汇总本周完成任务、耗时分布、高频重复事项（作为新规则或新能力的提案线索）以及各能力的返工次数。
+- **年度总结**：年末基于全年任务记录与创作产物自动汇总生成。
 
-模式包括工作、生活、专注、勿扰、外出、出差，与 Plasma Activities 双向联动。模式只改变"什么时候、用什么渠道打扰你"。详见 [Personal Agent](personal-agent.md)。
+## 8. 通知模式
 
-## 9. 分阶段
+系统提供工作、生活、专注、勿扰、外出、出差六种通知模式，并与 KDE Plasma Activities 双向联动。通知模式仅调整推送的时机与渠道，详见 [Personal Agent 设计](personal-agent.md)。
 
-见 [路线图](roadmap.md)。
+## 9. 实施阶段
+
+实施顺序见 [总体架构设计 §13](architecture-north-star.md#13-实施阶段)，历史版本见 [路线图](roadmap.md)。
