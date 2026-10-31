@@ -1,141 +1,71 @@
-# 系统拓扑:常驻入口与本地编排
+# 系统拓扑：常驻入口与本地编排
 
-> 新架构说明：判定由分派 hook 的规则表完成，账用 Taskwarrior（见 [事件规格](event-spec.md)）；只有付款、删除、对外发布三类动作需要确认。本文中关于严格边界和校验的表述以 [设计原则](principles.md) 为准。
+> 状态：部分已部署 · 角色：执行层中 `agent:orca` 这一路的实现（见 [架构总览 §5](architecture.md)）
 
-> 状态：部分已部署 · 角色：**处置环节**的实现（[架构总览 §8](architecture.md) 的 `agent` handler）
+整体分三段：**入口常驻在 N100，编排在工作站本地，执行下沉到 worker**。手机等任何设备都能发起和跟踪任务，而需要用到本机文件、GPU 或桌面的执行只发生在工作站上。
 
-整套系统分三层:**入口在常驻宿主,编排在本地,执行下沉到 worker**。目标是任何设备(尤其手机)都能发起和跟踪任务,而真正碰设备的执行只发生在本地工作站上。
+## 1. 角色
 
-本文是事件主干里"处置"那一段的实现细节（命令面、通道、监督链路）。**什么触发处置、事件从哪来、如何落定与召回，不在这里定义**，见 [架构总览](architecture.md) §3、§7–§10。两者的边界：本文的"下发即监督"就是架构中的不变量 4（处置必须落定，不留悬挂状态）在 agent 路径上的落地。
+| 角色 | 组件 | 职责 |
+|---|---|---|
+| 入口（常驻） | DS-Bot（必要时加 AstrBot），跑在 N100 | 听懂你的话，从能力目录里选出 `kind`，入账，说人话回报，保存人格记忆 |
+| 编排（本地） | Orca，跑在工作站 | worktree、终端、Run/Task/Dispatch、消息队列，是本机工作的事实源 |
+| 执行（本地） | Devin / Codex / Claude Code worker，以及各能力的 provider | 只做派发下来的具体任务 |
 
-入口层实现已从 Hermes 切到 [DS-Bot](ds-bot-entry.md)。
+参考 [Super-agent](super-agent-architecture.md) 里的 Router / Worker 两层结构，本仓的做法正好相反：**Loop 和账都在本机，入口宿主只做转发**。单用户没有多租户需求，而本机的文件、GPU 和凭据在执行时都离不开。
 
-## 与"双层路由"的对应
+## 2. 什么交给入口，什么下发本机
 
-[Super-agent 架构参考](super-agent-architecture.md) 把常驻路由与隔离执行拆成 Router / Worker 两层。本仓的三层是它的具体落法：
+判断标准只有一个：**是否要用到本机设备**（文件系统、GPU、桌面应用、音视频和外设）。
 
-| 参考架构 | 本仓 |
-|---|---|
-| Router（常驻、不执行具体任务、甚至无 shell） | DS-Bot 入口层——有对话与记忆，**当前权限就不给裸 shell**，只经薄入口四类动作调 Orca |
-| Worker（隔离、挂完整工具、只向上汇报） | Orca 里的 worker 会话——worktree 隔离，结论经 `worker_done` 回传 |
-| Thread 订阅直通 | 尚未实现；当前所有下发都经 Router 一次，直通留到 P2 之后评估 |
-| 全双工 | 已有：worker 在跑时用户仍可下单、可 `terminal send` 追加 |
+- **入口自己办**：调研、写短文、规划、翻译、日程、只读抓取。
+- **下发本机**：视频、音乐、游戏开发、深度代码、本机运维，也就是所有要读本机文件、开本机窗口或改本机状态的任务。
+- 工作站离线时，入口回复"已排队"，然后通过 Wake-on-LAN 唤醒工作站。
 
-差异要说清：参考架构在云端跑 Loop、端侧只放无状态 daemon；本仓反过来——**Loop 与账都在本机，入口宿主只转发**。原因是单用户没有多租户隔离需求，而本机文件、GPU 与凭证是执行期必需，搬上云只会增加泄露面。DS-Bot 替换的是入口平台,不改变 Orca 的编排职责;它带来的插件兼容性只在 DSH 生态内成立。
+## 3. 通道
 
-## 角色分层
+- **网络**：节点之间用 Tailscale 组网。已入网的有工作站（systemd 常驻）和 KPW5（userspace 模式，只能出站）；N100 待加入。AX6000 仍是唯一网关，负责校园网认证、多出口和代理；N100 断电只影响入口能不能连上。见 [AX6000](ax6000-router.md)。
+- **命令面**：DS-Bot 通过 SSH 调用本机 `orca` CLI（当前 shim 为 `~/.config/orca/linux-orca-cli-shim/orca`，以原生安装为准）。不另造 RPC。
+- **薄入口**：在 `~/.local/bin/` 放一个脚本，只提供四个动作：创建任务、查询状态、读取输出、发送跟进。
 
-- **入口层(常驻)— DS-Bot**:基于 DeepSeek Harness 的 Bot 团队,以 Web/Desktop 形态常驻,是所有设备的统一入口。负责人格化交互、长期记忆、任务理解与路由;自身不执行设备相关任务。
-- **编排层(本地)— Orca**:本机 agent 运行时兼编排器。worktree、终端、Run/Task/Dispatch、消息队列都由它持有,是本机工作的唯一事实源。
-- **执行层(本地)— worker**:Devin / Codex / Claude 等 coding agent,以及 Hyperframe、MultiPlane、DAW、游戏引擎等本机生产力工具。
+## 4. 下发与跟进
 
-入口层的价值是"任何设备可及";编排层的价值是"状态可持久、可接管";执行层只做被派发的具体任务。
+- DS-Bot 用 `orchestration run-create` 建 Run，用 `worker-start --spec` 派发 worker，再用 `check --wait` 收回 `worker_done` / `escalation` / `question`，翻译成人话发给你。你的回复通过 `orchestration reply` 交回 worker。
+- 每个 Dispatch 都要跟到真正结束；超时只是检查点，不是结束。
+- 产物（成片、构建、分支）留在本机，只回传摘要和路径；你明确要文件时才搬运。
+- 做完之后调用 `ev done <id> "<一句话>"` 写回账。可复用的做法顺手更新到 skill 或 AGENTS.md。
 
-## 路由规则
+## 5. 呈现
 
-判据只有一个:**任务是否依赖具体设备**(本机文件系统、GPU、桌面应用、音视频与外设)。
+- **DS-Bot Web / Desktop**：任务卡片，带进度、跟进和挑选产物。
+- **IM**：通过 `@xmanrui/dsh-im` 插件接入私聊；群聊用 DS-Bot Web 或 AstrBot。卡片和进度渲染成图片发出。
+- 卡片读取的是 Orca 和 Taskwarrior 里的状态，不另存一份。
 
-- **入口侧执行(DS-Bot 自办)**:搜索调研、写作、规划、翻译、日程、邮件/IM、只读平台抓取——产出是信息或通信结果,不需要摸本机设备;受控网页操作由独立浏览器进程(或可选 worker)执行,购买、发送、删除等写动作必须显式确认。
-- **下发本机(经 Orca)**:视频制作(Hyperframe/MultiPlane)、音乐制作、游戏开发、深度代码、本机运维与系统维护——任何要读本机文件、开本机窗口或改动本机状态的任务。
-- 下发前先在入口侧把任务拆成"任务简报"(目标、上下文、验收标准);下发的最小单元是简报,不是逐条指令。
+## 6. 连续性
 
-## 通道
+- 执行状态只保存在 Orca。DS-Bot 只缓存 Run、Dispatch、worktree 的 ID 和最近一次摘要，断线后按 ID 恢复。
+- 回到电脑前，同一批 worktree 和 Run 在 Orca UI 里都能看到，直接接着做。DS-Bot 相当于 Orca 的手机外壳。
 
-- **网络层**:Tailscale 组网;入口宿主到本机只暴露 SSH,ACL 收敛到 DS-Bot 主机。**已落地**:workstation(systemd 常驻)、KPW5(userspace 模式——只能出不能入,找它走 WiFi 侧 SSH);DS-Bot 常驻宿主(N100)待加入。节点地址以 `tailscale status` 为准。
-- **宿主位置**:入口宿主是接在 AX6000 后面的 N100,不是云主机。AX6000 仍是唯一网关,负责校园网认证、多出口与代理;N100 断电只影响入口可达性,不影响任何设备联网。选型理由与硬约束见 [AX6000 校园网路由](ax6000-router.md)。
-- **命令面**:DS-Bot 经 SSH 调用本机 `orca` CLI(解析规则见 orca-cli skill;当前 shim 为 `~/.config/orca/linux-orca-cli-shim/orca`,以原生安装为准)。不另造 RPC,Orca CLI 已覆盖 worktree、agent launch、orchestration、terminal 读写。
-- **入口收敛**:SSH 侧放一个薄入口脚本(`~/.local/bin/`,与入口层约定一致),只暴露四类动作——创建任务、查询状态、读取输出、发送跟进;不给裸 shell 自由操作。
+## 7. GUI 自动化：结构化优先，像素循环用 Jev
 
-## 下发与监督链路
+1. **结构化**（默认）：浏览器走 `orca-cli` 的 DOM 控制，原生应用走 `orca computer` 的 AT-SPI 无障碍树。有现成 CLI 或 CLI-Anything harness 时优先用它们。
+2. **像素循环**（结构化够不到的情况，如画布、游戏画面、自绘 UI）：每一步决策交给 Jev 类决策模型做类型化选择（点哪个、跳过、是否完成），截图和输入注入用 Spectacle / KWin DBus + ydotool（见 [工作站 §4.2](workstation-nixos.md)）。
+3. **规划**：只在多次失败或任务需要重新拆分时，才调用大模型。
 
-只有一条路:**下发即监督**。凡经 DS-Bot 派到本机的任务一律走编排层,不存在"扔下去不管"的移交。
+Jev 不进入调度链路，而是写进 worker 自己的 skill / 规则："走像素路径时默认通过 Jev 薄封装"。不要修改 Orca 捆绑的 skill，因为 `orca skills update` 会覆盖它们。
 
-- DS-Bot 做 coordinator:`orchestration run-create` 建 Run,`worker-start --spec` 派发 worker(如 Devin),`check --wait` 回收 `worker_done` / `escalation` / `question`,翻译后推给用户;用户回复经 `orchestration reply` 回注 worker。复杂任务在同一 Run 内派 DAG。
-- 必须监控到每个 Dispatch 落定(worker_done 或证实的退出),且每次派发都必须有结果回答给用户——超时与失联是检查点而非终态,没落定就不能报"完成"或"失败"。
-- 完成回流:worker 的 `worker_done` 摘要 → DS-Bot → 用户。工件(成片、构建产物、分支)留在本机 worktree/artifact,DS-Bot 只回传摘要与指针;用户明确要求才搬运文件。
+## 8. 本机运维
 
-### 任务总结与反哺
+| 类型 | 做法 | 回退 |
+|---|---|---|
+| 诊断（查磁盘、看日志） | 问一句，入口或 worker 直接回答 | 不需要 |
+| 变更（装包、改配置） | 改 flake → `nixos-rebuild switch` → 冒烟检查 | 回滚 NixOS generation |
+| 系统更新 | `work.nixos.update`：先构建，再用 nvd 看差异、切换、检查，失败就自动回滚 | 同上 |
 
-每次派发落定后必须产出一份**任务记录**,这是链路的一部分而非可选报告:
+不把密码交给 agent。删除数据、对外发布属于确认点。
 
-- 内容:任务简报、实际执行路径(用了什么命令/工具、走了几次重试)、`worker_done` 摘要、卡点与根因、可复用的做法。
-- 归档:任务记录归记录层(见助理系统架构),与运行状态分离,完成后归档。
-- 反哺:记录中"可复用做法"与"卡点"定期回流到两处——派发侧的提示模板(让下次简报写得更准)和执行侧的 `AGENTS.md` / skill(把踩过的坑写成规则)。修改规则文件仍需显式确认,记录本身只提供候选,不自动改写。
+## 9. 当前状态
 
-手机端不问 Orca 直连:用户经 DS-Bot 间接做 `worker-list` / `check` / `terminal read`,也能经 DS-Bot 给运行中的 worker 发跟进(`terminal send` / `reply`)。
-
-## 呈现层:渠道自适应输出
-
-同一份状态,按渠道给不同形态:
-
-- **DS-Bot Web / Desktop**:生成式交互 UI——任务卡片带实时进度,可对内操作(发跟进、放行/拒绝、挑工件),用户操作回写为对 worker 的 `reply` / `terminal send`。
-- **IM 渠道**:不是 DS-Bot 自带能力。需要另装 DSH IM 插件;`@xmanrui/dsh-im` 已能把私聊绑定到 DS-Bot Bot,但只支持私聊,群聊仍走 DS-Bot Web/Desktop。IM 消息按纯文本 + 图片处理,任务卡片和进度渲染成图发送,不假设富交互能力。
-
-两条约束:
-
-- **表达即操作,但按需生成**:由 DS-Bot 按任务裁量——状态跟踪、工件预览、多方案对比给卡片;一问一答给纯文本。生成式 UI 是会话内一次性构件,不是常驻前端工程。
-- **前端不产生第二事实源**:卡片读的是 Orca 持有的同一份状态,DS-Bot 只做视图缓存;操作经编排链路回写,不旁路。
-
-## 连续性与事实源
-
-- 执行状态只存于本机 Orca runtime;DS-Bot 只缓存 Run ID、Dispatch ID、worktree id 和最近摘要,不复制状态(单一来源)。断线重连按 ID 恢复,消息队列可重放。
-- 用户回到 Linux 机器:同一批 worktree、chat、Run 在 Orca UI 原样可见,可直接键入接管——入口会话与本地桌面是同一份状态的两种视图,不存在"同步"动作。
-- 这正好补 Orca 的短板:它偏终端/桌面,不便手机操作;DS-Bot 是它的移动外壳。
-
-## GUI 自动化:结构化优先,像素循环内建 Jev
-
-本机的 ComputerUse / BrowserUse 默认走"截图 → 大模型推理 → 操作 → 再截图"的循环,慢且在 Linux 上易受 X11/Wayland 差异影响。整体仍按三层组织,但 Jev 不是外挂兜底——**它沉淀在像素循环内部,是这两套能力每步决策的引擎**:
-
-1. **结构化层(默认,最快最稳)**:Orca 内置浏览器走 `orca-cli` 的 DOM 级控制;本机原生应用走 `orca computer` 的 AT-SPI 无障碍树。无像素、无视觉模型,操作近乎即时,且在 X11/Wayland 下行为一致。能走这一层就不走下面两层。
-2. **像素循环(结构够不到时)**:画布、自绘 UI、webview 内部、游戏画面等目标需要截图操作。循环内部的每步决策固定走 Jev 类决策模型(Jev-Vision,开源 8B,一次前向约 160ms)的类型化问答:下一步点哪个候选元素(ground)、该元素是否已达成所需状态(skip)、上一步操作是否生效(effect)、目标是否完成(done)。候选元素用 Set-of-Mark 式标注给出,Jev 只返回概率;置信度与间隔门不达阈值宁可拒绝也不误点。**被替换的是"通用 VLM 逐步看图"这一环,不是 Orca 的驱动**——执行仍由 `orca computer` / DOM 完成。
-3. **规划层(只在异常时调用)**:决策门连续拒绝、任务需要重新分解时,才上调大模型。日常步进不经过它。
-
-### 沉淀方式(结合点)
-
-Jev 不进调度链路(DS-Bot/Orca 不管像素),而是沉淀进 **worker 的执行环境**——Devin 被派发后自己调它:
-
-- **决策即服务(云端)**:调用云端 Jev(`/v1/systemone` 兼容端点),本机不部署推理、不依赖 GPU。决策调用本身是毫秒级,延迟主要来自网络往返,仍远小于通用 VLM 逐步推理。
-- **调用面是薄封装**:给 agent 的入口是 `~/.local/bin` CLI 或本地 MCP server,只暴露 ground / skip / effect / done 四个类型化动作——browser-use 与 computer-use 的像素循环内部默认走它,对使用者透明。薄封装负责截图压缩/裁剪,控制每次上行的像素量;云端端点与 key 由封装持有,worker 只见命令面不见凭证。
-- **结合靠 worker 的规则层**:`worker-start` / `agent launch` 不需要为 Jev 传任何参数——Devin 的 skill/全局规则里写明"像素路径默认经 Jev 决策",它读到规则自然调用薄封装。这是唯一的注入点,也是为什么它必须放在 always-on 或触发式规则里而不是任务简报里。
-- **浏览器路径可以再省一步**:候选元素直接从 DOM/AT-SPI 快照取(近乎免费),Set-of-Mark 标注到截图后 Jev 只做"选哪个"——一步一次调用,连 tile 描述都不需要额外的视觉模型。
-- **不改 Orca 捆绑 skill**:computer-use / orca-cli 是版本化 stub,`orca skills update` 会覆盖本地改动。Jev 循环的教法放在我们自己维护的 skill/规则里(全局 `~/.agents/skills/` 或 AGENTS.md 层),与捆绑 skill 并存,升级互不干扰。
-- **边界要诚实**:Jev 是决策模型不是规划器,只回答类型化问题;任务分解、报错解读仍归规划层。它换掉的是每步的感知-决策延迟,不是 agent 本身。
-
-Linux 兼容与速度约定:
-
-- 截图:Wayland 走 PipeWire/XDG 门户,X11 走 XShm;输入注入走 uinput/ydotool(双栈通用),不依赖 xdotool(仅 X11)。
-- 单步总开销目标 <1s(决策调用 + 网络往返);规划层调用只发生在异常路径。
-- 像素路径的截图会出本机到云端决策端点,含敏感内容的画面要走门控或直接退避——这条写进调用面薄封装,不靠口头约定。
-- 每步的类型化问答天然是审计日志,直接并入任务记录反哺链路。
-
-## 本机运维任务
-
-运维在本仓不是"一种任务类型"，而是三条路径，按风险分级。判据是[事件规格 §3](event-spec.md) 的可逆性，不是命令行看着危不危险。
-
-| 级别 | 触发方式 | 谁来执行 | 回执里通常写什么 | 回退 |
-|---|---|---|---|---|
-| **诊断**（`read`） | `system.*` 事件、或人问一句 | NSBot 直接答，不派 worker | 一句话结论 + 命令与时间 | 无需 |
-| **变更**（`revertible`） | 规则派发 | worker 在维护工作区执行 | 一句话结论 + 退出码与变更后状态 | 快照或包清单变更 diff |
-| **系统级**（`irreversible`） | 必须人确认 | worker，且逐条确认 | 同上 + 引导/内核版本 | 回滚步骤写进任务记录 |
-
-四条固定约束：
-
-- **不把密码交给 agent**。需要提权的动作走句柄或预授权清单；清单外的每条命令都要人确认，确认记在账上（渠道 + 消息 id）。
-- **系统级变更必须写明回退路径**。CachyOS 侧是 btrfs 快照与 `snapper` 回滚，不是 NixOS 代际——旧的"NixOS 代际天然回退"只保留作历史说明，见[工作站重装](workstation-nixos.md)。
-- **诊断类不进摘要队列**。查个磁盘占用不该占用每日两帧；它只在被问到时回答，结果仍入账备查。
-- **变更完成后必跑一次状态核验**。装完包查版本，改完配置查服务状态；"安装成功"的终端输出不算数。
-
-开放问题：预授权清单的粒度（按命令还是按动作语义）；是否需要专门的维护 worktree 与日常开发隔离；长时间运维在手机上的节点级推送。
-
-## 边界与安全
-
-- SSH 只走 Tailscale,本机不对公网暴露;薄入口白名单化。
-- worker 消耗本机已登录的订阅与凭证;DS-Bot 不持有本机 agent 的 API key,凭证仍留本机原生位置。
-- 破坏性操作(worktree rm、push、发布)沿用自动化边界:必须显式指令,不因链路变长而放宽。
-- 本机 Orca 需常驻运行,入口宿主依赖 `orca` CLI 可达;若未来要真正的无头远端,再评估 Orca 的配对/远程 server 模式(`--environment` / `orca serve`),不提前引入。
-
-## 当前状态与阶段
-
-- 已就绪:Orca 1.4.237(NixOS 本机),`orca-cli` / `computer-use` / `orchestration` 三个 skill 已全局安装,worker 侧可被驱动。
-- 未就绪:DS-Bot 常驻部署及其加入 Tailscale(workstation、KPW5 已入网)、薄入口脚本。
-- 顺序:先在本机手动扮演入口层角色把编排链路跑通(建 Run → 派 worker → check 回收 → 回报),链路验证稳定后再部署 DS-Bot;通道和入口收敛最后做,且每一步留可回退路径。
+- 已就绪：Orca 1.4.237（NixOS 本机），`orca-cli` / `computer-use` / `orchestration` 三个 skill 已全局安装。
+- 未就绪：DS-Bot 常驻部署和加入 Tailscale、薄入口脚本。
+- 顺序：先在本机手动扮演入口，把建 Run → 派 worker → 收回结果 → 回报这条链路跑通，再部署 DS-Bot。
