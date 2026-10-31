@@ -1,0 +1,134 @@
+{
+  "recorded_at": "2026-10-27T21:22:00+08:00",
+  "router": {
+    "model": "Redmi AX6000 RB06",
+    "firmware": "OpenWrt SNAPSHOT r37185-f29dfe25ba",
+    "kernel": "6.18.55",
+    "management": "http://192.168.31.1",
+    "packages_after": 194,
+    "overlay_before": {
+      "used_mib": 48.3,
+      "size_mib": 61.6,
+      "used_percent": 83
+    },
+    "overlay_after": {
+      "used_mib": 8.9,
+      "size_mib": 61.6,
+      "used_percent": 15,
+      "available_mib": 49.5
+    },
+    "removed_packages": [
+      "luci-app-ninjaconnector2",
+      "luci-app-openclash",
+      "ua3f",
+      "smartdns",
+      "ruby",
+      "ruby-yaml",
+      "unzip",
+      "kmod-nft-tproxy",
+      "kmod-inet-diag",
+      "kmod-tun",
+      "ipset",
+      "iptables-nft",
+      "xtables-nft"
+    ],
+    "removed_package_count": 45,
+    "kept_packages": [
+      "libxtables12 (required by tc-full)",
+      "tc-full",
+      "kmod-sched-core",
+      "kmod-tcp-bbr"
+    ],
+    "kept_configuration": [
+      "/etc/nftables.d/90-ua3f-wan-ttl.nft",
+      "/etc/esurfing-deploy",
+      "/etc/esurfing-recovery",
+      "mwan3 ua3f_bal policy (unused)"
+    ],
+    "auth_pids": [
+      12275,
+      12276,
+      12277,
+      12278
+    ],
+    "auth4_heartbeat_timeout": {
+      "at": "2026-10-27T21:08:29+08:00",
+      "recovered": true,
+      "next_heartbeat": "2026-10-27T21:12:40+08:00",
+      "last_observed": "2026-10-27T21:33:33+08:00"
+    },
+    "wan_interfaces": [
+      {
+        "name": "wan",
+        "device": "wan",
+        "address": "10.207.117.115",
+        "online": true,
+        "http_204": true
+      },
+      {
+        "name": "wan2",
+        "device": "eswan2",
+        "address": "10.207.122.22",
+        "online": true,
+        "http_204": true
+      },
+      {
+        "name": "wan3",
+        "device": "eswan3",
+        "address": "10.207.112.193",
+        "online": true,
+        "http_204": true
+      },
+      {
+        "name": "wan4",
+        "device": "eswan4",
+        "address": "10.207.125.131",
+        "online": true,
+        "http_204": true
+      }
+    ],
+    "ttl_rules": 4,
+    "proxy_processes_after": 0,
+    "proxy_listeners_after": 0,
+    "luci_http_status": 200
+  },
+  "local_proxy": {
+    "host": "shizuku-nixos",
+    "core": "Mihomo Meta ab32ad2d linux amd64",
+    "core_path": "/home/shizuku/.local/lib/ninja/ninja",
+    "config_path": "/home/shizuku/.config/ninja/config.yaml",
+    "config_mode": "0600",
+    "service": "ninja-proxy.service",
+    "service_enabled": true,
+    "linger": true,
+    "restart_policy": "always",
+    "listen": "127.0.0.1:7890",
+    "controller": "127.0.0.1:9090",
+    "selected_group": "香港 02（专线；智能）",
+    "exit_ip": "188.253.112.163",
+    "exit_country": "HK",
+    "google_204": true,
+    "github_200": true,
+    "baidu_chain": "DIRECT",
+    "cloudflare_mbps": 180.2,
+    "direct_cloudflare_mbps": 8.7,
+    "subscription_nodes": 49,
+    "subscription_updated_at": "2026-10-27T08:47:58+08:00"
+  },
+  "browser": {
+    "browser": "Firefox",
+    "profile": "/home/shizuku/.config/mozilla/firefox/krou8ptl.default",
+    "user_js": true,
+    "proxy": "127.0.0.1:7890",
+    "headless_verified": true,
+    "headless_target": "https://ipinfo.io/json",
+    "observed_chain": "香港 02（专线；智能）",
+    "restart_required_for_running_instance": true
+  },
+  "not_verified": [
+    "router cold boot",
+    "four-channel cold start",
+    "four-channel aggregation retest",
+    "Windows or Android proxy switch"
+  ]
+}
