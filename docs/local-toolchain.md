@@ -118,6 +118,25 @@ ArtCraft 已覆盖大半;补两个开源件:LibreOffice(headless `--convert-to` 
 - ArtCraft Launcher 0.5.1 tarball 实测:二进制在 NixOS 直接可跑;Launcher 本身是 GUI(无 headless),各应用的 CLI/JSON 通道要逐个装出来验证
 - **PhotoCraft 0.16.0 已装**(2026-10-27,已从 0.7.0 升级):官方 Linux tarball 装到 `~/.local/opt/photocraft-0.16.0`,`photocraft`/`photocraft-cli` 已进 `~/.local/bin` 并写好 desktop 条目。GUI 需 wrapper 补 `LD_LIBRARY_PATH` 才能找到 `libwayland-client.so.0`(见 `~/.agents/notes/gotchas.md`);`photocraft-cli` 无头直跑,`mcp`/`serve` 即 agent 通道,convert/info/run/batch 已验证
 
+## 哪些工具会成为事件处理器
+
+工具清单不只是"装什么"，还要回答它在事件模型里站哪一层。判据是**它在一次处置里承担哪一段**：
+
+| 层 | 工具类型 | 在本仓的例子 | 限制 |
+|---|---|---|---|
+| 事件源 | 只能产生输入 | agent-reach、xxt、git hook、文件 watcher | 不判断、不处置 |
+| 处理器 | 能被规则调用完成一次动作 | HA service 调用、`ebook-convert`、`epubcheck`、`orca` CLI、`biliup` | 必须幂等、有退出码 |
+| 处置内部工具 | 只被 worker 在任务中调用 | ffmpeg、blender、reaper、imagemagick | 不直接接事件 |
+| 呈现面 | 只读消费账 | 墨水屏渲染、ThinkSmart、DS-Bot Web | 不写账 |
+
+三个新工具进来时必须先回答：
+
+1. **它是源、处理器、内部工具，还是呈现面？** 答不上来就先不装。
+2. **它能不能被规则调用并自己结束？** 需要人守在终端里接话的，当不了处理器。
+3. **它失败时的回退路径是什么？** 没有回退路径的，最高只能做到 `revertible`。
+
+**GUI 工具另算**：走 CLI-Anything harness 或 Jev 像素循环的，边界在「[系统拓扑](system-topology.md) GUI 自动化」那一节；它们作为处理器时，回执里放截图或产物路径，不是"点成功了"。
+
 ## 维护约定
 
 - 清单按"首选 / 备选 / 待验证"分层;新工具进来先标待验证,跑通一次 agent 驱动再升档。

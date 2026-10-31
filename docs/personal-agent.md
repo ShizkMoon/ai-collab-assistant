@@ -1,6 +1,10 @@
 # Personal Agent 设计
 
+> 状态：设计中 · 角色：**人的一侧**——体验约定、能力登记、记忆分层（见 [架构总览](architecture.md)）
+
 本文定义"个人 agent 系统"这一产品的形态：它不是一个 agent，而是一套**让多个 agent 长期稳定替你工作的制度**。参考本人 AIWORKSTATION 项目的架构方法（contracts/ADR/体验先行/不造轮子），但不照搬其 Rust Core + PostgreSQL 的重量级中心——我们的常驻中心是 Orca + 文档仓库，已够用。
+
+与事件模型的分工：本文回答"人希望怎么被对待"，[架构总览](architecture.md) 回答"事件怎么流动"。本文的三层（入口/编排/执行）+ 记录层，是事件主干里**处置**环节的实现；本文的任务生命周期是**事件被判定为派发之后**的那一段。两者对接点只有一个：派发单元是简报，落定时留一句结论（引用可选）。
 
 ## 与 AIWORKSTATION 的对照取舍
 
@@ -40,18 +44,27 @@
 
 worker 能力显式登记，路由时按表选，不靠记忆：
 
-| 能力件 | 形态 | 注册位置 | 覆盖域 |
-|---|---|---|---|
-| Devin/Codex worker | Orca Dispatch | orca-cli | 代码、文档、调研、长任务 |
-| re-toolkit | nix 包 → MCP stdio | mcp_config.json | 固件/二进制/设备逆向（只读） |
-| rea | npx MCP | mcp_config.json | 单二进制深度逆向 |
-| agent-reach / CloakBrowser | skill + 专用浏览器 | ~/.agents/skills + ~/.agent-reach | 平台只读抓取 |
-| Playwright / Chromium | 容器内进程 / 可选 worker | 服务端 browser worker | 网页操作/自动化 |
-| @xmanrui/dsh-im | DSH plugin | DSH web profile | IM/邮件入口 |
-| cli-anything-* | skill | ~/.config/devin/skills | GUI 软件 harness(Calibre 等） |
-| computer-use / orca-cli / orchestration | skill | 同上 | 桌面控制/编排协议 |
+登记表必须回答六个字段，缺一项就不能被规则引用（对应[架构总览 §12](architecture.md) 的挂载规则）：
 
-新增能力 = 三选一挂点：**标准工具 → nixpkgs-shizuku 包；agent 契约 → skill；运行时集成 → MCP 注册**。三者的取舍见 README 维护约定——这是"别的工具类同理"的落地规则。
+| 能力件 | 形态 | 注册位置 | 覆盖域 | 可接受 kind | 最高可触发 |
+|---|---|---|---|---|---|
+| Devin/Codex worker | Orca Dispatch | orca-cli | 代码、文档、调研、长任务 | `work.*` `study.*` `meta.*` | `irreversible`（经确认） |
+| re-toolkit | nix 包 → MCP stdio | mcp_config.json | 固件/二进制/设备逆向 | `work.firmware.*` | `read` |
+| rea | npx MCP | mcp_config.json | 单二进制深度逆向 | `work.binary.*` | `read` |
+| agent-reach / CloakBrowser | skill + 专用浏览器 | ~/.agents/skills + ~/.agent-reach | 平台只读抓取 | `platform.*` | `read` |
+| Playwright / Chromium | 容器内进程 / 可选 worker | 服务端 browser worker | 网页操作/自动化 | `work.web.*` | `revertible` |
+| @xmanrui/dsh-im | DSH plugin | DSH web profile | IM/邮件入口 | `person.*` | `revertible` |
+| cli-anything-* | skill | ~/.config/devin/skills | GUI 软件 harness（Calibre 等） | `work.app.*` | `reversible`（按应用自定） |
+| computer-use / orca-cli / orchestration | skill | 同上 | 桌面控制/编排协议 | 不直接接事件 | 仅经 worker 间接 |
+
+两列新字段的用法：
+
+- **可接受 kind**：派发时按 kind 前缀匹配，不匹配就不派。这条是**路由**，不是校验——它防的是规则写错把 `system.disk.pressure` 派给改装音工具的能力件，不是防越权。
+- **最高可触发**：能力的动作类别上限（`read` / `revertible` / `irreversible`）。信任不在这里判——`trust` 只在派发闸门查一次（[事件规格 §3](event-spec.md)），两道取交集只会把同一件事查两遍。
+
+新增能力 = 三选一挂点：**标准工具 → nixpkgs-shizuku 包；agent 契约 → skill；运行时集成 → MCP 注册**。三者取舍见 README 维护约定。
+
+新增能力不要求答"能不能自证"。落定只需要一句话结论，任何能力都写得出；引用可有可无。真正的门槛是它在一次处置里承担什么动作类别，而不是它能交什么材料。
 
 ## 任务生命周期（制度核心）
 
