@@ -1,5 +1,7 @@
 # Personal Agent 设计
 
+> 新架构说明：分层、账和能力分别以 [架构总览](architecture.md)、[事件规格](event-spec.md)、[能力目录](capabilities.md) 为准。本文保留体验约定和记忆分层；文中的能力登记表已迁到能力目录，信任闸门、`eventd` 等表述已由新架构替代。
+
 > 状态：设计中 · 角色：**人的一侧**——体验约定、能力登记、记忆分层（见 [架构总览](architecture.md)）
 
 本文定义"个人 agent 系统"这一产品的形态：它不是一个 agent，而是一套**让多个 agent 长期稳定替你工作的制度**。参考本人 AIWORKSTATION 项目的架构方法（contracts/ADR/体验先行/不造轮子），但不照搬其 Rust Core + PostgreSQL 的重量级中心——我们的常驻中心是 Orca + 文档仓库，已够用。

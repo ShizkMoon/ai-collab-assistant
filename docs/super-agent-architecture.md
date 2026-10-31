@@ -1,5 +1,7 @@
 # Super-agent 架构参考（外部）
 
+> 本仓最终取舍：判定用规则表加入口选择题，不用 LLM Router；账用 Taskwarrior；功能优先、复用优先，不引入严格的安全和校验层。§9 的对照表仅作历史参考，以 [架构总览](architecture.md) 为准。
+
 > 来源：DeepSeek 产品部《Super-agent 设计探索：迈向更自主的 Agent 系统》，微信公众号（2026-10）。本地存档：
 > `/home/shizuku/Downloads/Super-agent 设计探索：迈向更自主的 Agent 系统.html`（以原生文件为准）。
 > 性质：**外部参考**，不是本仓结论。本仓采纳哪些、改哪些、不采纳，见 §9。
