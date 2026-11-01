@@ -14,35 +14,38 @@
 - [架构总览](docs/architecture.md)：五层架构与三类确认点（速览入口）
 - [事件运行时与派发器](docs/event-runtime.md)：九态状态机、派发器守护进程（Hook 写 Spool 队列）、规则匹配与幂等控制 · 设计中
 - [事件与任务规格](docs/event-spec.md)：字段定义、状态映射与 `ev` CLI · 设计中
+- [多 Agent 运行时](docs/multi-agent-runtime.md)：归属树与依赖图、派发与结果信封、发散收敛、编排者的能力裁剪 · 设计中
 - [知识库与记忆分层](docs/knowledge-memory.md)：多源索引、三路混合检索、记忆分层与偏好提炼 · 设计中
 - [提案库](docs/proposals/README.md)：规则与能力的迭代流程
 
+## 能力与选型
+
+- [能力目录](docs/capabilities.md)：`kind` 全集的唯一权威来源
+- [开源复用清单](docs/open-source-reuse.md)：各模块复用的开源项目与自建边界
+
 ## 执行域
 
-- [系统拓扑](docs/system-topology.md)：DS-Bot 入口、Orca 本地编排、Worker 执行与 GUI 自动化
+- [系统拓扑](docs/system-topology.md)：常驻入口、Orca 本地编排、Worker 执行与 GUI 自动化
+- [多 Agent 协作规范](docs/agent-collaboration.md)：规则共享、协作模式与流水线分工
 - [内容创作流水线](docs/creative-studio.md)：视频、音乐、写作、电子书与播客的统一制作管线 · 设计中
 - [开发与逆向工程](docs/work-devsec.md)：代码开发、固件与软件逆向、游戏构建与设计工具链 · 设计中
 - [日常事务管理](docs/life-operations.md)：日程、健康、财务、物品、社交与课程学习 · 设计中
 - [自动化场景](docs/ritual-scenes.md)：14 个跨设备场景、触发方式与部分完成处理 · 设计中
 
-## 平台与运维
-
-- [系统运维](docs/platform-ops.md)：规则挖掘、影子测试、监控告警与备份恢复 · 设计中
-- [模型路由与本地推理](docs/model-fleet.md)：模型注册表、按类路由、降级缓存、16GB 显存分配与置信度校准 · 设计中
-- [开源复用清单](docs/open-source-reuse.md)：各模块复用的开源项目与自建边界
-- [路线图（历史）](docs/roadmap.md)：早期 P0–P4 划分，已被总体架构设计 §13 取代
-
-## 交互入口与协作
+## 交互与平台
 
 - [Personal Agent 设计](docs/personal-agent.md)：交互约定、通知模式与记忆分层
 - [DS-Bot 入口](docs/ds-bot-entry.md)：常驻宿主、IM 接入与迁移方案
-- [常驻服务分布](docs/assistant-system.md)：双机服务部署与凭据管理
-- [多 Agent 协作](docs/agent-collaboration.md)：规则共享、协作模式与流水线分工
+- [常驻服务分布](docs/assistant-system.md)：服务部署位置与凭据管理
 - [Super-agent 参考架构](docs/super-agent-architecture.md)：DeepSeek Super-agent 架构摘要与本仓取舍
+- [系统运维](docs/platform-ops.md)：规则挖掘、影子测试、监控告警与备份恢复 · 设计中
+- [模型路由与本地推理](docs/model-fleet.md)：模型注册表、按类路由、降级缓存、16GB 显存分配与置信度校准 · 设计中
+- [路线图（历史）](docs/roadmap.md)：早期 P0–P4 划分，已被总体架构设计 §13 取代
 
 ## 基础设施
 
-- [工作站：NixOS + KDE Plasma](docs/workstation-nixos.md)
+- [输入端口与输出路由](docs/output-routing.md)：`sources` / `surfaces` 约定、效果分类、投递回执与去重 · 设计中
+- [工作站：Arch + KDE Plasma](docs/workstation-arch.md)
 - [本机工具链选型](docs/local-toolchain.md)
 - [网络与设备组网](docs/network-fabric.md)：Tailscale 组网、出口感知与外设接入 · 设计中
 - [AX6000 校园网路由](docs/ax6000-router.md)
@@ -60,9 +63,11 @@
 
 - [ADR 0001](docs/adr/0001-taskwarrior-as-event-store.md)：使用 Taskwarrior 作为任务库
 - [ADR 0002](docs/adr/0002-three-confirmation-points.md)：仅对三类操作设置确认点
-- [ADR 0003](docs/adr/0003-loop-local-entry-remote.md)：入口常驻 N100，编排与执行留在工作站
+- [ADR 0003](docs/adr/0003-loop-local-entry-remote.md)：入口与编排循环分离
 - [ADR 0004](docs/adr/0004-draft-layer-ttl.md)：草稿层设置 24 小时 TTL
 - [ADR 0005](docs/adr/0005-proposal-shadow-promotion.md)：通过提案与影子测试上线新能力
+- [ADR 0006](docs/adr/0006-workstation-arch.md)：工作站改用 Arch Linux，回滚保证从 generation 挪到 btrfs 快照
+- [ADR 0007](docs/adr/0007-deferred-resident-node.md)：常驻入口延后，先单机加云端等待队列
 
 ## 能力专题
 

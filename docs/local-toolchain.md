@@ -1,6 +1,6 @@
 # 本机工具链选型
 
-本机软件选型优先考虑自动化与命令行可编程性：**能通过 CLI 或脚本接口完成的任务不启动 GUI，必须操作 GUI 的任务优先使用无障碍树而非像素级点击**。本文记录选型标准与软件矩阵，本机实际安装版本以 NixOS 配置与 `upctl` 状态为准。
+本机软件选型优先考虑自动化与命令行可编程性：**能通过 CLI 或脚本接口完成的任务不启动 GUI，必须操作 GUI 的任务优先使用无障碍树而非像素级点击**。本文记录选型标准与软件矩阵，本机实际安装版本以 `upctl` 状态为准。
 
 ## 1. 接口调用优先级
 
@@ -103,5 +103,5 @@ Agent 调用本地软件时按以下优先级依次选择：
 
 ## 4. 维护与升级约定
 
-- 全机非 NixOS 系统软件统一接入 `upctl`（`upctl check` / `upctl update [nix|npm|craft|uv|comfy|git|blender|biliup|all]`），禁止遗留无法一键更新的手动安装包。
+- 全机非 pacman 管理的软件统一接入 `upctl`（`upctl check` / `upctl update [nix|npm|craft|uv|comfy|git|blender|biliup|all]`），禁止遗留无法一键更新的手动安装包。
 - 新工具引入时先在本文标为"待验证"，跑通一次完整的 CLI 自动化调用后再写入对应能力的 Provider 包。

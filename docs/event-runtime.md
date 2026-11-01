@@ -88,7 +88,7 @@ to    = "triage"           # 归入待分类队列，在每日早报中汇总
 
 | 配置项 | 行为说明 |
 |---|---|
-| `aggregate.window` | 将时间窗口内同一 `thread` 的多条任务合并为一条父任务，子任务通过 `parent` 指向父任务 |
+| `aggregate.window` | 将时间窗口内同一 `thread` 的多条任务合并为一条父任务，子任务通过 `parent` 指向父任务归入同一棵节点树 |
 | `mode = "rollup"` | 窗口结束时生成一条指定 `emit` 类型的汇总任务，正文为各子任务的标题列表 |
 | `mode = "inline"` | 不新建父任务，直接向该 `thread` 最新一条任务追加注解 |
 | `serial = true`（默认） | 同一 `thread` 内部严格串行：前一条任务进入 `done` 或 `dropped` 前不派发下一条 |
@@ -130,15 +130,30 @@ to    = "triage"           # 归入待分类队列，在每日早报中汇总
 
 任务的终态对应 Taskwarrior 原生的 `completed`（即 `done`）与 `deleted`（即 `dropped`）。
 
-```
-new ──► doing ──► done
- │        │ └──► failed ──(retry)──► new
- │        └──► stalled ──► new
- ├──► waiting ──(到期)──► new
- ├──► blocked ──(依赖完成)──► new
- ├──► parked ──(条件恢复)──► new
- ├──► escalated ──[执行]──► doing / [延后]──► waiting / [忽略]──► dropped
- └──► spec ──(采纳)──► done / (过期或放弃)──► dropped
+```mermaid
+stateDiagram-v2
+  [*] --> new
+  new --> doing
+  doing --> done
+  doing --> failed
+  doing --> stalled
+  failed --> new : 重试
+  stalled --> new : 看门狗重置
+  new --> waiting
+  waiting --> new : 到期
+  new --> blocked
+  blocked --> new : 依赖完成
+  new --> parked
+  parked --> new : 条件恢复
+  new --> escalated
+  escalated --> doing : 执行
+  escalated --> waiting : 延后
+  escalated --> dropped : 忽略
+  new --> spec
+  spec --> done : 采纳
+  spec --> dropped : 过期或放弃
+  done --> [*]
+  dropped --> [*]
 ```
 
 ### 2.2 状态映射设计说明
@@ -162,7 +177,7 @@ new ──► doing ──► done
   __main__.py   80   CLI 入口
 ```
 
-派发器以单进程 `evd.service`（工作站上的 `systemd` 用户服务，`Restart=always`）运行。任务库与 `evd` 均部署在工作站本地：工作站休眠期间外部任务在 N100 入口暂存排队，N100 离线也仅影响远端入口，不影响工作站本地任务流转（见 [网络与设备组网 §4](network-fabric.md#4-失效阶梯)）。进程间队列直接采用本地 Spool 目录配合 `flock` 文件锁实现。
+派发器以单进程 `evd.service`（工作站上的 `systemd` 用户服务，`Restart=always`）运行。任务库与 `evd` 均部署在工作站本地：工作站休眠期间外部事件在云服务器的等待队列中暂存，云服务器离线只影响外部输入，不影响工作站本地任务流转（见 [网络与设备组网 §4](network-fabric.md#4-节点失效影响与恢复阶梯)）。进程间队列直接采用本地 Spool 目录配合 `flock` 文件锁实现。
 
 ### 3.2 Hook 规范
 

@@ -18,7 +18,8 @@
 | `state` | `status` + `start` + tags | 九种状态之一，见 §2 |
 | `summary` | 完成时的注解（annotation） | 一句话执行摘要 |
 | `payload` | UDA `payload` | 原始输入文件路径或结构化 JSON 参数（可为空） |
-| `parent`（可选） | `depends` | 派生该子任务的父任务 UUID（带阻塞依赖语义） |
+| `parent`（可选） | UDA `parent` | 归属节点：派生该子任务的父任务 UUID，决定汇总与升级方向。**不使用原生 `depends`**，原因见 [多 Agent 运行时 §3](multi-agent-runtime.md#3-两棵树不要合并) |
+| `depends`（可选） | 原生 `depends` | 执行依赖：开始执行前必须完成的节点，可以有多个；语义是父依赖子，与归属分开存放 |
 | `thread`（可选） | UDA `thread` | 串联同一主题下多条任务的线索 ID（同 `thread` 内默认串行） |
 | `severity`（可选） | UDA `severity` | `info` / `warn` / `critical`，控制推送渠道与免打扰穿透 |
 | `lifetime`（可选） | UDA `lifetime` | `ephemeral` / `durable`，决定草稿是否设置过期清理时间（TTL） |
@@ -79,7 +80,7 @@ Taskwarrior 原生的报表、过滤条件与同步子命令均可直接混用�
 | 自然语言输入 | DS-Bot / AstrBot → 入口意图分类选出 `kind` → `ev add` | `me` |
 | 智能家居设备 | Home Assistant Automation → 仅在需要跟进时调用 `ev add` | `ha` |
 | 定时调度 | `systemd.timer` 或 Taskwarrior `recur` | `cron` |
-| GitHub / 飞书 / Webhook | N100 上的 n8n 接收后调用 `ev add` | `github` / `webhook` |
+| GitHub / 飞书 / Webhook | 云端等待队列接收后写入事件表，工作站拉取并调用 `ev add` | `github` / `webhook` |
 | 邮件 / RSS | n8n（IMAP、RSS 节点）提取摘要后调用 `ev add` | `email` / `rss` |
 | 手机端分享 | KDE Connect 分享 / HA Companion → `ev add` | `phone` |
 | 网络出口变化 | AX6000 `hotplug` 脚本触发 `ev add --kind system.net.egress` | `net` |
@@ -88,4 +89,4 @@ Taskwarrior 原生的报表、过滤条件与同步子命令均可直接混用�
 
 ## 6. 任务库备份
 
-`taskchampion.sqlite3` 通过 Litestream 持续增量复制到 N100，同时每小时执行一次 `sqlite3 .backup` 本地快照。Litestream 要求 SQLite 处于 WAL 模式，Taskwarrior 3 在本机是否保持常驻 WAL 以实测为准；若不满足则以每小时 `.backup` 加 Restic 同步作为主备份方案（全量备份与月度恢复演练见 [系统运维 §9](platform-ops.md#9-备份与恢复演练)）。
+`taskchampion.sqlite3` 通过 Litestream 持续增量复制到云服务器 `orca-pool`，同时每小时执行一次 `sqlite3 .backup` 本地快照。Litestream 要求 SQLite 处于 WAL 模式，Taskwarrior 3 在本机是否保持常驻 WAL 以实测为准；若不满足则以每小时 `.backup` 加 Restic 同步作为主备份方案（全量备份与月度恢复演练见 [系统运维 §9](platform-ops.md#9-备份与恢复演练)）。

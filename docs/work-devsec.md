@@ -11,7 +11,7 @@
 | `orca` CLI | 可用；支持 `worktree create`、`agent launch`、`terminal wait`、`automations create`、`repo add`；已配置 `local`、`orca-pool`、`orca-pool-ts` 主机 |
 | `gh` CLI | 已登录 `ShizkMoon`，具备 `repo`、`workflow`、`gist`、`read:org` 权限 |
 | `claude` / `codex` / `gemini` / `dsh` | 均在 `PATH` 中，可用于跨厂商交叉审阅代码 |
-| `nix` + `~/Repo/nixpkgs-shizuku` | 可用 |
+| `git` + `just` + `~/agent-src/tools/` | 可用 |
 | `blender` | 5.2.3 LTS，支持无头模式（`-b -P`）运行 |
 | `photocraft-cli` | 0.16.0，已安装可用 |
 | ComfyUI | `comfyui.service`（systemd 用户服务）运行中，`127.0.0.1:8188` 响应正常 |
@@ -31,11 +31,11 @@
 | 2 | 仓库注册 | 已存在仓库直接注册；新项目创建私有仓 | `orca repo add --path ~/Repo/<r> --json`；`gh repo create shizkmoon/<r> --private --source=. --push` | Orca Repo ID | `work.code.task` |
 | 3 | 隔离分支 | 单任务单 Worktree，基于 `origin/main` 创建 | `orca worktree create --repo path:$PWD --name <slug> --base-branch origin/main --agent claude --model <id> --json` | 独立 Worktree 与分支 | `work.code.task` |
 | 4 | 代码实现 | Worker 在独立 Worktree 内编码，不在主工作区直接切换分支 | `orca agent launch --worktree name:<slug> --agent codex --prompt "$(cat docs/specs/<slug>.md)"` | Git Commit | `work.code.task` |
-| 5 | 构建与测试 | 在受控终端内运行测试并等待进程退出码 | `orca terminal create --worktree name:<slug> --command "nix flake check --no-build && nix build .#<pkg>" --json` → `orca terminal wait --terminal <h> --for exit --timeout-ms 1800000 --json` | 终端日志 + 退出码 | `work.code.verify` |
+| 5 | 构建与测试 | 在受控终端内运行测试并等待进程退出码 | `orca terminal create --worktree name:<slug> --command "just check && make build" --json` → `orca terminal wait --terminal <h> --for exit --timeout-ms 1800000 --json` | 终端日志 + 退出码 | `work.code.verify` |
 | 6 | 交叉评审 | 切换不同厂商的模型只读审阅 `git diff` | 见 §1.1 / §1.2 | `review.md` 或 PR 评论 | `work.code.review` |
 | 7 | 分支合并 | 创建 PR 并在 CI 通过后自动 Squash 合并 | `gh pr create --fill --base main` → `gh pr merge --squash --auto --delete-branch` | Merge Commit | `work.code.merge` |
-| 8 | 版本发布 | Nix 包合入 Flake，应用发布 GitHub Release，桌面工具同步接入 `upctl` | `nix flake check` / `gh release create v<x>` / `upctl update <section>` | Release Tag 与构建产物 | `work.code.release` |
-| 9 | 任务完成 | 将一句话执行摘要写回任务库 | `ev done <id> "完成 X 模块实现，nix flake check 通过并已合并至 main"` | 任务库注解 | - |
+| 8 | 版本发布 | 构建产物发布 GitHub Release，桌面工具同步接入 `upctl` | `just check` / `gh release create v<x>` / `upctl update <section>` | Release Tag 与构建产物 | `work.code.release` |
+| 9 | 任务完成 | 将一句话执行摘要写回任务库 | `ev done <id> "完成 X 模块实现，just check 通过并已合并至 main"` | 任务库注解 | - |
 
 ### 1.1 多 Agent 协同开发模式
 
@@ -44,7 +44,7 @@
 | 并行子分支 | `orca worktree create --parent-worktree name:<hp> --name <slug>-<n>` | 同一特性的多个独立子模块并行开发，通过 `orca worktree ps` 查看全局状态 |
 | 任务依赖图（DAG） | `orca orchestration run-create` → `task-create --deps '["<id>"]'` → `dispatch` | 存在 3 个以上先后依赖关系的复杂模块重构 |
 | 异构模型评审 | 另起只读会话，指定不同厂商模型审阅 `git diff origin/main...HEAD` | 减少同源模型的盲区（如 Codex 编写代码，Claude 或 DeepSeek 审阅） |
-| 合并冲突处理 | 先执行 `git fetch && git rebase origin/main`；若冲突文件 > 3 个则在独立 Worktree 中解析并输出补丁 | 可按需通过 `nix run nixpkgs#mergiraf -- merge` 调用语法感知合并工具 |
+| 合并冲突处理 | 先执行 `git fetch && git rebase origin/main`；若冲突文件 > 3 个则在独立 Worktree 中解析并输出补丁 | 可按需用 `mergiraf` 做语法感知合并 |
 | 分支合并串行化 | 个人仓库通过 `gh pr merge --auto` 配合本地 `main` 分支锁串行合入 | 多 PR 并行时可先合入 `next` 集成分支，验证通过后再快进合并至 `main` |
 | 架构方案决策点 | `orca orchestration gate-create --task <id> --question "..." --options '["A","B"]'` | 仅在涉及不可逆架构选型时挂起等待人工选择 |
 
@@ -93,7 +93,7 @@
 
 | 工具层 | 本机配置状态 |
 |---|---|
-| `re-toolkit` MCP | Nix 包定义在 `~/Repo/nixpkgs-shizuku/pkgs/re-toolkit`（v0.3.0），已注册至 `~/.config/devin/mcp_config.json` 与 `~/.claude.json`，共暴露 16 个工具函数（含 `apk_analyze`） |
+| `re-toolkit` MCP | 源码与安装脚本位于 `~/agent-src/tools/re-toolkit`（v0.3.0），已注册至 `~/.config/devin/mcp_config.json` 与 `~/.claude.json`，共暴露 16 个工具函数（含 `apk_analyze`） |
 | 底层分析工具 | Ghidra 12.1.4、`binwalk`、`unblob`、QEMU、`mitmproxy`、Frida、`rizin`、`jadx`、`apktool`、`payload-dumper-go`、Kaitai Struct、`tshark`、`flashrom`、`openocd`、`sigrok-cli`、`picocom`、`nmap` |
 | 配套 Skill | `~/.agents/skills/reverse-engineering`（REX）及 `~/.agents/vendor/rex` |
 | 历史分析仓库 | `~/Repo/kpw5-analysis`、`~/Repo/mu22mk2-analysis`、`~/Repo/chaoxing-app-analysis`、`~/Repo/d3v-analysis`、`~/Repo/sports-world-campus-analysis` |
@@ -181,7 +181,7 @@ to = "notify"          # 报告生成后推送给用户审阅，对外公开前�
 
 ### 3.1 Godot 4 无头构建与测试
 
-Godot 待加入 `~/Repo/nixpkgs-shizuku` 或系统 Profile，标准无头构建命令如下：
+Godot 以 pacman 或官方二进制安装，标准无头构建命令如下：
 
 ```bash
 # 首次构建前导入资产并生成 UID 缓存（CI 与无头导出必跑）
@@ -228,7 +228,7 @@ ComfyUI 工作流统一保存为 API 格式 JSON（存放于 `~/Repo/design/comf
 | 环节 | 交互方式 |
 |---|---|
 | 远程触发任务 | 通过 OpenSSH 调用 Windows 侧 `MAA.exe` CLI，或由 Windows 计划任务定时拉起 |
-| 结果回传 | MAA 完成后通过 Webhook 推送至 N100 上的 `ntfy` 或触发 `ev done`，将一句话摘要写回任务库（`kind = work.game.maa`） |
+| 结果回传 | MAA 完成后通过 Webhook 推送至 `ntfy` 或触发 `ev done`，将一句话摘要写回任务库（`kind = work.game.maa`） |
 
 ### 3.5 参数化 CAD 与 3D 打印
 

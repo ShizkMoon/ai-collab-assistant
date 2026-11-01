@@ -12,10 +12,10 @@
 |---|---|---|---|
 | 1. 观察采集 | 每晚 02:20 定时运行 | `observe/<date>.jsonl`：高频任务序列、返工聚类、未命中规则的记录 | `~/.local/state/aica/evo/` |
 | 2. 生成提案 | 候选模式评分 `score ≥ 3.0` | `proposals/<date>.md` 与 `proposal.json` | `~/.local/state/aica/evo/` 或 `docs/proposals/` |
-| 3. 编写草案 | 人工确认采纳或执行 `cap draft <id>` | `capabilities/<kind>.toml` + Provider Nix 包 + 正反触发例句 | NixOS Flake 分支 |
+| 3. 编写草案 | 人工确认采纳或执行 `cap draft <id>` | `capabilities/<kind>.toml` + Provider 安装脚本 + 正反触发例句 | `/etc/aica/`（Git 分支） |
 | 4. 影子测试 | 合入 `main` 分支但保持 `enabled = false` | `shadow/<date>/<uuid>.json` 旁路对比记录 | `~/.local/state/aica/shadow/` |
-| 5. 正式上线 | 样本数 ≥ 20 且达标率 ≥ 0.6 | 修改 `enabled = true` 并提交 Git Commit | NixOS Flake |
-| 6. 归档下线 | 连续 90 天零调用或连续 5 次执行失败 | 关闭配置并将旧 `kind` 映射到替代能力 | NixOS Flake |
+| 5. 正式上线 | 样本数 ≥ 20 且达标率 ≥ 0.6 | 修改 `enabled = true` 并提交 Git Commit | `/etc/aica/` |
+| 6. 归档下线 | 连续 90 天零调用或连续 5 次执行失败 | 关闭配置并将旧 `kind` 映射到替代能力 | `/etc/aica/` |
 
 ```toml
 # capabilities/work.video.make.toml（影子测试阶段）
@@ -95,8 +95,8 @@ score = log2(support) × (预估节省分钟数 / 60) × (1 − 与现有规则�
 
 | 监控层级 | 选用工具 | 部署位置 | 监控范围 |
 |---|---|---|---|
-| 服务探活 | **Uptime Kuma** | N100 | HTTP / TCP / Ping 连通性探测与状态页 |
-| 主机与硬件指标 | **Prometheus + node_exporter + Grafana** | N100 采集双机指标 | CPU、内存、磁盘、systemd 单元状态、工作站 GPU |
+| 服务探活 | **Uptime Kuma** | 工作站 | HTTP / TCP / Ping 连通性探测与状态页 |
+| 主机与硬件指标 | **Prometheus + node_exporter + Grafana** | 工作站采集主机与云服务器指标 | CPU、内存、磁盘、systemd 单元状态、工作站 GPU |
 | 任务队列概览 | **`ev status` + HA Dashboard** | 工作站终端 / ThinkSmart View | 待处理任务计数、当前通知模式、今日完成列表 |
 
 ```nix
@@ -115,7 +115,7 @@ services.grafana = { enable = true; settings.server.http_port = 3000; };
 
 ## 6. 日志聚合与链路追踪
 
-双机的 `systemd-journald` 日志与 Orca / Worker 运行日志统一由 **Grafana Alloy** 采集并推送至 N100 上的 Loki，保留周期设为 30 天，磁盘配额上限 20GB（上游 Promtail 已于 2025 年停止维护，统一使用 Alloy）：
+工作站的 `systemd-journald` 日志与 Orca / Worker 运行日志统一由 **Grafana Alloy** 采集并写入本地 Loki，保留周期设为 30 天，磁盘配额上限 20GB（上游 Promtail 已于 2025 年停止维护，统一使用 Alloy）：
 
 ```alloy
 loki.source.journal "system" {
@@ -170,10 +170,10 @@ systemd.timers.hc = { wantedBy = [ "timers.target" ]; timerConfig = { OnBootSec 
 | 故障现象 | 自动恢复动作 | 失败兜底处理 |
 |---|---|---|
 | 常驻守护进程崩溃 | 配置 `Restart=on-failure`、`RestartSec=5s`、`StartLimitBurst=5` | 达到重启上限后触发 `OnFailure=` 告警通知，防止无限重启风暴 |
-| `nixos-rebuild` 切换后冒烟测试失败 | 自动执行 `nixos-rebuild switch --rollback` | 发送告警通知并保留构建错误日志 |
-| 工作站意外休眠或断电离线 | N100 发送有线 WoL 魔术包，等待 120 秒后重测连通性 | 连续 3 次唤醒失败后推送通知提醒人工开机 |
+| 系统升级后冒烟检查失败 | 自动执行 `snapper rollback` 并重启 | 发送告警通知并保留构建错误日志 |
+| 工作站意外关机 | 云服务器继续接收外部消息并写入等待队列 | 持续不可达超过 2 小时推送通知提醒人工开机 |
 | 根分区可用空间低于阈值 | 自动执行 `nix-collect-garbage --delete-older-than 14d` 并轮转日志 | 清理后仍不足则推送告警 |
-| N100 断电后恢复供电 | BIOS 配置来电自启，开机后执行 `hc check` 汇总离线期间状态 | - |
+| 工作站断电后恢复供电 | BIOS 配置来电自启，开机后执行 `hc check` 汇总离线期间状态并触发 `ev sync` 补拉事件 | - |
 
 ```nix
 systemd.services.orca.serviceConfig = { Restart = "on-failure"; RestartSec = "5s";
@@ -185,7 +185,7 @@ systemd.services.orca.unitConfig.OnFailure = "aica-notify@%n.service";
 
 ## 9. 备份与恢复演练
 
-数据备份遵循 3-2-1 原则（工作站本地一份、N100 副本一份、加密异地对象存储或外置硬盘一份）：
+数据备份遵循 3-2-1 原则（工作站本地一份、云服务器副本一份、加密异地对象存储或外置硬盘一份）：
 
 | 数据项 | 备份频率 | 备份工具 | 恢复验证周期 |
 |---|---|---|---|
@@ -194,7 +194,7 @@ systemd.services.orca.unitConfig.OnFailure = "aica-notify@%n.service";
 | Home Assistant 配置与 Recorder | 每日 | HA 原生备份 + Restic | 每季度 |
 | `~/knowledge/kb.sqlite`（知识库） | 每日 | Restic | 每月 |
 | Calibre 书库、音乐库 | 每周 | Restic | 每季度 |
-| `~/Repo`（含 NixOS Flake） | 每日 | Git + Restic | 每月 |
+| `~/Repo`（含文档与 Provider 源码） | 每日 | Git + Restic | 每月 |
 | 应用凭据 | 变更时触发 | 原生位置（KWallet）+ 加密归档 | 每季度 |
 
 每日定时备份脚本（`~/.config/aica/backup.sh`）：

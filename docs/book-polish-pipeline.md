@@ -66,4 +66,4 @@
 ## 4. 关联工具链与本机状态
 
 - **本机已就绪工具**：Calibre `9.16.0`（含 `calibredb`、`ebook-convert`、`ebook-meta`）、`cli-anything-calibre`、Kindle KPW5（已越狱安装 KOReader，`/mnt/us/fonts/` 已预置思源宋体、Literata 与苹方字体）。
-- **待按需补装工具**：`epubcheck`、`pandoc`、`typst` / `weasyprint`（统一通过 NixOS Flake 或 `upctl` 安装）。
+- **待按需补装工具**：`epubcheck`、`pandoc`、`typst` / `weasyprint`（统一通过 pacman 或 `upctl` 安装）。

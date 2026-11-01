@@ -1,21 +1,21 @@
 # 开源复用清单
 
-> 选型原则：优先直接复用成熟开源项目；功能接近的通过薄封装接入；仅在无现成方案时才自建（见 [设计原则](principles.md)）。本表记录选型方案，本机实际安装状态以 NixOS Flake 与各专题文档的实测基线为准。
+> 选型原则：优先直接复用成熟开源项目；功能接近的通过薄封装接入；仅在无现成方案时才自建（见 [设计原则](principles.md)）。本表记录选型方案，本机实际安装状态以 `upctl` 状态与各专题文档的实测基线为准。
 
 ## 1. 基础骨架与运维
 
 | 功能需求 | 选用开源项目 | 说明 |
 |---|---|---|
 | 任务库与周期调度 | **Taskwarrior 3** | 底层存储为 SQLite（`taskchampion.sqlite3`），原生支持 Hook、UDA、`wait`、`recur` 与多端同步 |
-| 智能家居与传感器接入 | **Home Assistant** + Mosquitto + Zigbee2MQTT + ESPHome | NixOS 提供原生服务模块，详细配置见 [智能家居技术栈](home-automation-stack.md) |
+| 智能家居与传感器接入 | **Home Assistant** + Mosquitto + Zigbee2MQTT + ESPHome | 部署方式随常驻节点一并延后（[ADR 0007](adr/0007-deferred-resident-node.md)），配置方案见 [智能家居技术栈](home-automation-stack.md) |
 | 米家设备接入 | 小米官方集成 `ha_xiaomi_home` | 接入存量米家设备 |
-| 外部 SaaS 与 Webhook 串联 | **n8n**（运行于 N100） | 提供 IMAP 邮件、RSS、GitHub、飞书等连接器，NixOS 原生支持 `services.n8n` |
+| 外部 SaaS 与 Webhook 串联 | **n8n** | 提供 IMAP 邮件、RSS、GitHub、飞书等连接器；常驻节点落地后再部署 |
 | 系统级定时任务 | `systemd.timer` + Taskwarrior `recur` | 无需额外引入调度框架 |
-| 任务库增量备份 | **Litestream** + 每小时 `sqlite3 .backup` | 持续复制 SQLite WAL 日志至 N100 |
-| 全量数据备份 | **Restic**（本地 + N100 + 异地加密） | 配合每月 1 日自动恢复演练，见 [系统运维 §9](platform-ops.md#9-备份与恢复演练) |
+| 任务库增量备份 | **Litestream** + 每小时 `sqlite3 .backup` | 持续复制 SQLite WAL 日志至云服务器 |
+| 全量数据备份 | **Restic**（本地 + 云服务器 + 异地加密） | 配合每月 1 日自动恢复演练，见 [系统运维 §9](platform-ops.md#9-备份与恢复演练) |
 | 跨设备虚拟局域网 | **Tailscale**（Mesh + Subnet Router + Exit Node + `tailscale serve`） | 免公网 IP 与端口转发，自动签发 HTTPS 证书，见 [网络与设备组网](network-fabric.md) |
 | 监控与日志收集 | **Uptime Kuma**、**Prometheus + node_exporter**、**Grafana**、**Loki + Alloy** | 见 [系统运维 §5–§6](platform-ops.md#5-监控与可观测性) |
-| 双机声明式部署 | **NixOS Flake** + `colmena` / `deploy-rs` | 工作站与 N100 共用同一个 Flake 仓库 |
+| 单机 + 云端部署 | `ansible` 或安装脚本 + `upctl` | 工作站为执行节点，云服务器只跑等待队列 |
 | KDE 桌面声明式配置 | **`plasma-manager`**（Home Manager 模块） | 统一管理面板、桌面组件、KRunner 与全局快捷键 |
 
 ## 2. 交互入口与消息推送
@@ -35,7 +35,7 @@
 | 统一模型网关 | **LiteLLM** | 提供 OpenAI 兼容接口，统一管理多后端路由、故障回退与 Token 成本统计 |
 | 工作站本地推理 | **vLLM** / **Ollama** | 运行 Qwen 7–14B 与 Embedding 模型 |
 | 结构化受限解码 | vLLM `guided_choice` / `guided_json`（XGrammar）、Ollama `format`（GBNF）、`outlines` | 统一封装为 `decide()` 接口，见 [模型路由与本地推理 §6](model-fleet.md#6-受限解码分类接口decidestate-schema) |
-| N100 CPU 兜底分类 | `sentence-transformers` + `bge-small-zh` + **SetFit** | 工作站休眠时在 N100 CPU 上运行，仅输出预测 `kind` |
+| 云端 CPU 兜底分类 | `sentence-transformers` + `bge-small-zh` + **SetFit** | 工作站休眠时在云服务器 CPU 上运行，仅输出预测 `kind` |
 | 本地知识检索 | **SQLite FTS5 + `jieba` + `sqlite-vec`**（封装为 `kn` CLI） | 单文件三路混合召回与 RRF 融合，见 [知识库与记忆分层](knowledge-memory.md) |
 | 代码与多步任务编排 | **Orca** + Devin / Codex / Claude Code | 管理 Git Worktree 与多 Worker 协同 |
 | GUI 桌面软件控制 | `CLI-Anything` 封装 → `orca computer`（AT-SPI）→ 视觉点击（Jev + `ydotool`） | 见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) |

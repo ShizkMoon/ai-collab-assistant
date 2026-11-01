@@ -1,38 +1,62 @@
-# 系统拓扑：常驻入口与本地编排
+# 系统拓扑：云端等待队列与本地编排
 
 > 状态：部分已部署 · 角色：执行层中 `agent:orca` 链路的部署拓扑（见 [架构总览 §5](architecture.md#5-执行器列表)）
+>
+> 常驻节点因成本原因延后（[ADR 0007](adr/0007-deferred-resident-node.md)），当前拓扑只有一个执行节点：工作站。云服务器 `orca-pool` 只承担消息接收与等待队列，不执行任何任务。
 
-系统整体按职责分为三层：**常驻入口部署在 N100，任务编排运行在工作站本地，具体执行下沉至各 Worker 与 Provider**。用户可通过手机或任意终端随时发起和跟进任务，而依赖本地文件、GPU 或桌面环境的任务均在工作站本地完成。
+## 1. 两层职责划分
 
-## 1. 三层职责划分
+```mermaid
+flowchart LR
+  subgraph CLOUD["云服务器 orca-pool（24h 在线）"]
+    SRC["消息端口轮询<br/>微信 / QQ / 飞书 / 邮件 / RSS"]
+    Q["等待队列<br/>events.sqlite3"]
+  end
+  subgraph WS["工作站（按需唤醒）"]
+    EV["派发器 evd"]
+    T["任务库 Taskwarrior"]
+    OR["Orca 编排"]
+    W["Worker / Provider"]
+    R["投递路由"]
+  end
+  SRC -->|事件入库| Q
+  Q -->|工作站在线时拉取| EV
+  EV --> T --> OR --> W --> R
+  R -->|ntfy / IM 卡片| SRC
+```
 
 | 层级 | 核心组件 | 职责范围 |
 |---|---|---|
-| 常驻入口 | DS-Bot（按需配合 AstrBot），运行于 N100 | 解析自然语言输入，从能力目录中匹配 `kind` 并录入任务；向用户发送执行摘要与交互卡片；维护轻量交互设定 |
+| 云端等待队列 | `orca-pool`：端口轮询脚本、`events.sqlite3`、ntfy | 接收外部消息并落库；工作站离线时不丢弃、不解析、不执行 |
 | 本地编排 | Orca，运行于工作站 | 管理 Git Worktree、终端会话、Run / Task / Dispatch 生命周期与消息队列，作为代码与多步任务执行的权威状态源 |
 | 任务执行 | Devin / Codex / Claude Code Worker，以及各能力 Provider | 在隔离的 Worktree 或运行目录内完成具体派发的子任务 |
 
-对比 [Super-agent 参考架构](super-agent-architecture.md) 的云端 Router / 端侧轻量守护进程模式，本系统采用了相反的部署方向（[ADR 0003](adr/0003-loop-local-entry-remote.md)）：**将任务库与编排核心留在工作站本地，远端入口仅负责意图解析与消息转发**，避免为访问本地文件、GPU 与原生凭据而引入复杂的跨机 RPC。
+与 [Super-agent 参考架构](super-agent-architecture.md) 的云端 Router / 端侧守护进程模式相比，本系统仍保持 [ADR 0003](adr/0003-loop-local-entry-remote.md) 的方向：**编排循环与执行留在工作站，远端只做搬运**。差别在于搬运的那一端从 N100 换成了已有的云服务器，且在途消息以事件形式持久化，而不是以会话状态形式存在。
 
-## 2. 入口直办与下发工作站的分界
+## 2. 能做什么由端口决定
 
-任务在 N100 入口直接处理还是派发至工作站，取决于**是否依赖工作站本地资源**（本地文件系统、独立显卡、桌面 GUI 应用与外设）：
+云端队列只做两件事：把外部消息变成 [事件](output-routing.md#3-事件线索与线索上下文)，把工作站产出的提醒转发出去。**它不解析意图，也不判断轻重**。理由：
 
-- **N100 入口直接处理**：信息检索、短文起草、日程管理、文本翻译、公开网页只读抓取。
-- **派发至工作站执行**：视频渲染、音乐生成、游戏构建、代码仓库开发、逆向分析及本机系统维护。
-- 当工作站处于休眠或关机状态时，N100 入口将任务加入等待队列并回复"已排队"，同时通过有线局域网发送 Wake-on-LAN（WoL）魔术包唤醒工作站。
+- 意图解析需要能力目录与上下文，这些是随代码演进的，放在云端会形成第二份需要同步的配置；
+- 队列只需要「事件不丢」，用小模型兜底分类反而增加一处失败点；
+- 工作站离线期间，唯一有价值的动作是把消息留住，而不是猜它要干什么。
+
+因此不存在「这个任务在云端直接处理还是下发工作站」的判断——所有任务都在工作站处理。工作站休眠时的行为是等待，不是降级。
 
 ## 3. 跨机通信通道
 
-- **虚拟局域网**：各节点通过 Tailscale 互联。目前工作站（`systemd` 常驻服务）与 Kindle KPW5（Userspace 网络模式，仅支持出站连接）已接入；N100 接入后同时配置为 **Tailscale 子网路由（Subnet Router）与出口节点（Exit Node）**，通过 `tailscale0 → eth0` 的 SNAT 将局域网 `192.168.31.0/24` 暴露给 Tailnet。AX6000 仍作为局域网唯一默认网关，负责校园网多账号认证、分流与透明代理。详见 [网络与设备组网 §3](network-fabric.md#3-子网路由与-exit-node-选型) 与 [AX6000 校园网路由](ax6000-router.md)。
-- **命令调用通道**：N100 上的 DS-Bot 通过 Tailscale SSH 调用工作站上的受限入口脚本，底层转发至本机 `orca` CLI（当前路径为 `~/.config/orca/linux-orca-cli-shim/orca`，以原生安装为准），不额外开发自定义 RPC 协议。
+- **云端队列拉取**：工作站由 `systemd.timer` 每 2 分钟拉起一次 `ev sync`，按端口游标增量拉取事件并推进游标；拉取使用 [输入端口](output-routing.md#2-输入端口sourcestoml) 中声明的 `cursor.mode`。
+- **虚拟局域网**：各节点通过 Tailscale 互联。工作站、云服务器与手机在同一个 Tailnet；Kindle KPW5 以 Userspace 网络模式接入，仅支持出站连接。子网路由与 Exit Node 暂不由本机房节点提供（[ADR 0007](adr/0007-deferred-resident-node.md)）。
+- **命令调用通道**：云端脚本通过 Tailscale SSH 调用工作站上的受限入口脚本，底层转发至本机 `orca` CLI（当前路径为 `~/.config/orca/linux-orca-cli-shim/orca`，以原生安装为准）。
 - **受限入口脚本**：在工作站 `~/.local/bin/` 下放置封装脚本，仅向远端暴露四项受控操作：创建任务、查询状态、读取输出、发送跟进回复。
+
+云端从不主动向工作站推送执行请求——所有执行请求都由工作站主动拉取。这样工作站休眠、断网、换 IP 都不会造成云端积压出错。
 
 ## 4. 任务派发与闭环跟进
 
-- DS-Bot 通过 `orca orchestration run-create` 创建 Run，调用 `worker-start --spec` 派发 Worker，并通过 `check --wait` 等待 `worker_done`、`escalation` 或 `question` 事件，将结果整理为简明通知发给用户；用户的确认或补充回复再经 `orca orchestration reply` 传回 Worker。
+- 入口经 `orca orchestration run-create` 创建 Run，调用 `worker-start --spec` 派发 Worker，并通过 `check --wait` 等待 `worker_done`、`escalation` 或 `question` 事件，将结果整理为简明通知；用户的确认或补充回复再经 `orca orchestration reply` 传回 Worker。
 - 每次派发均持续跟踪至任务进入终态；单次轮询超时仅作为进度检查点，不将超时静默标记为完成。
-- 渲染成片、构建包、代码分支等大体积产物保留在工作站本地，仅向入口回传执行摘要与本地文件路径；仅在用户明确索取文件时才跨机传输。
+- 渲染成片、构建包、代码分支等大体积产物保留在工作站本地，仅回传执行摘要与本地文件路径；跨机传输只在用户明确索取文件时发生。
 - 任务执行完毕后调用 `ev done <id> "<执行摘要>"` 写回任务库；执行过程中总结出的通用做法同步沉淀至对应 Skill 或 `AGENTS.md`。
 
 ## 5. 状态展示与交互界面
@@ -43,7 +67,8 @@
 
 ## 6. 会话连续性
 
-- 任务的完整执行状态保存在工作站 Orca 中。DS-Bot 仅缓存 `Run`、`Dispatch`、`Worktree` 的 ID 与最新摘要，网络重连后按 ID 即可恢复跟踪。
+- 任务的完整执行状态保存在工作站 Orca 中。入口仅缓存 `Run`、`Dispatch`、`Worktree` 的 ID 与最新摘要，网络重连后按 ID 即可恢复跟踪。
+- 跨设备、跨渠道的上下文不依赖会话状态，由 [线索上下文](output-routing.md#3-事件线索与线索上下文)从事件重建。
 - 用户回到工作站桌面后，可在 Orca GUI 中直接查看并接管同一批 Worktree 与 Run。
 
 ## 7. GUI 自动化分级策略
@@ -51,7 +76,7 @@
 对于必须操作图形界面的软件，按以下优先级依次降级：
 
 1. **结构化接口优先（默认）**：具备原生 CLI 或 `CLI-Anything` 封装的工具直接走命令行；浏览器网页通过 `orca-cli` 的 DOM 接口控制；原生桌面应用通过 `orca computer` 读取 AT-SPI 无障碍树进行操控。
-2. **像素级视觉操作（兜底）**：面对自绘画布、游戏窗口或无障碍树缺失的界面，使用 KWin DBus / `spectacle` 截图并配合视觉决策模型（如本地 VL 模型或 Jev）输出坐标动作，通过 `ydotool` 注入键鼠事件（见 [工作站配置 §4.2](workstation-nixos.md#42-桌面自动化命令行接口)）。
+2. **像素级视觉操作（兜底）**：面对自绘画布、游戏窗口或无障碍树缺失的界面，使用 KWin DBus / `spectacle` 截图并配合视觉决策模型（如本地 VL 模型或 Jev）输出坐标动作，通过 `ydotool` 注入键鼠事件（见 [工作站配置 §4.2](workstation-arch.md#42-桌面自动化命令行接口)）。
 3. **重规划升级**：仅在连续多次操作失败或任务需要重新拆解时，才升级调用大参数模型重新规划步骤。
 
 视觉操作逻辑封装在 Worker 自身的 Skill 中，不直接修改 Orca 内置 Skill（避免被 `orca skills update` 覆盖）。
@@ -61,13 +86,13 @@
 | 操作类别 | 执行方式 | 回滚手段 |
 |---|---|---|
 | 状态诊断（查磁盘、看日志） | 入口或 Worker 直接执行只读命令并返回结论 | 无需回滚 |
-| 配置与软件包变更 | 修改 NixOS Flake → `nixos-rebuild switch` → 执行冒烟检查 | 回滚 NixOS generation |
-| 系统例行升级 | `work.nixos.update`：先构建、用 `nvd` 对比包差异、切换配置并检查服务，失败自动回滚 | 回滚 NixOS generation |
+| 配置与软件包变更 | 修改 `/etc` 下受管配置或安装包 → 执行 `just check` 冒烟校验 | btrfs 快照回滚 + `downgrade` |
+| 系统例行升级 | `meta.system.update`：更新前自动快照、执行 `pacman -Syu` 与各分区更新、检查服务，失败回滚快照 | 快照回滚 |
 
-系统不向 Agent 暴露 `sudo` 明文密码（本机 `wheel` 组已配置免密 `nixos-rebuild`）。涉及删除用户数据或对外发布的操作严格受确认点约束。
+系统不向 Agent 暴露 `sudo` 明文密码（本机 `wheel` 组已配置免密 sudo 规则）。涉及删除用户数据或对外发布的操作严格受确认点约束。快照回滚的具体规则见 [工作站配置 §5](workstation-arch.md#5-更新回滚与故障恢复)。
 
 ## 9. 部署进度
 
-- **已就绪**：工作站已安装 Orca 1.4.237，全局已配置 `orca-cli`、`computer-use`、`orchestration` 三个 Skill。
-- **待部署**：N100 上的 DS-Bot 容器化常驻部署、Tailscale 子网路由配置、工作站受限入口脚本。
-- **推进顺序**：先在工作站本地跑通"创建 Run → 派发 Worker → 回收结果 → 写回任务库"的完整闭环，再将入口迁移至 N100 常驻。
+- **已就绪**：工作站已安装 Orca 1.4.237，全局已配置 `orca-cli`、`computer-use`、`orchestration` 三个 Skill；云服务器 `orca-pool` 已通过 Tailscale 接入。
+- **待部署**：工作站的 `ev sync` 定时拉取、云端的事件落库脚本与 ntfy 转发、工作站受限入口脚本、工作站系统迁移至 Arch（[ADR 0006](adr/0006-workstation-arch.md)）。
+- **推进顺序**：先在工作站本地跑通「创建 Run → 派发 Worker → 回收结果 → 写回任务库」的完整闭环，再接入云端事件拉取；系统迁移放在闭环稳定之后，避免同时变动运行时与运行环境。

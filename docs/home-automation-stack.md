@@ -1,22 +1,22 @@
-# 智能家居技术栈（NixOS + Zigbee2MQTT + ESPHome）
+# 智能家居技术栈（Home Assistant + Zigbee2MQTT + ESPHome）
 
-> 状态：设计定稿 · 上位文档：[宿舍智能家居方案](dorm-smart.md)、[网络与设备组网](network-fabric.md)
+> 状态：设计定稿（部署待常驻节点落地） · 上位文档：[宿舍智能家居方案](dorm-smart.md)、[网络与设备组网](network-fabric.md)
 >
-> 本文记录将 Home Assistant + Mosquitto + Zigbee2MQTT + ESPHome 部署在 NixOS（N100 常驻主机）上的实施细节，包括 NixOS 模块配置项、传感器刷机与接线方法、本地自动化分层兜底、密钥管理以及断电断网恢复行为。
+> 本文记录 Home Assistant + Mosquitto + Zigbee2MQTT + ESPHome 的选型、传感器刷机与接线方法、本地自动化分层兜底、密钥管理以及断电断网恢复行为。常驻节点因成本原因暂不采购（[ADR 0007](adr/0007-deferred-resident-node.md)），第 1 节中的 NixOS 模块配置属于当时方案，落地时需按所选发行版改写为容器或原生包安装，其余章节与部署形态无关。
 >
-> **参考资料来源**：NixOS 官方 Wiki 与 `nixpkgs` 模块源码（`nixos-unstable`）、Zigbee2MQTT 官方文档、ESPHome 官方文档、`atc1441` / `pvvx` 开源固件仓库、Tailscale 官方文档。
+> **参考资料来源**：Zigbee2MQTT 官方文档、ESPHome 官方文档、`atc1441` / `pvvx` 开源固件仓库、Tailscale 官方文档；NixOS 特定配置项来自当时的 NixOS Wiki 与 `nixpkgs` 模块源码。
 
 ## 0. 核心选型汇总
 
 | 决策项 | 确定方案 |
 |---|---|
-| 服务部署形态 | 在 N100 的 NixOS 上直接启用原生 `services.*` 模块（`home-assistant` + `mosquitto` + `zigbee2mqtt`），无需配置容器 USB 串口直通 |
+| 服务部署形态 | **待定**：常驻节点落地时在容器与原生包之间重新选择，需要直通 USB 协调器 |
 | Zigbee 协调器 | **SONOFF ZBDongle-E**（EFR32MG21，`ember` 驱动）或 **ZBDongle-P**（CC2652P，`zstack` 驱动），两者均在 Z2M 官方推荐列表中 |
 | 温湿度计（LYWSD03MMC） | 通过 TelinkFlasher 网页蓝牙 OTA 刷入 `pvvx` / `ATC` 开源固件，切换为 BTHome 广播格式（支持随时刷回原厂固件） |
 | 人体存在传感器（LD2410） | 选用 **LD2410C**（2.54mm 标准排针免焊接），5V 供电，通过硬件 UART（256000 8N1）接入 ESP32 运行 ESPHome 原生 `ld2410` 组件 |
 | 自动化兜底分层 | 物理开关控制灯具/插座优先配置 **Zigbee Direct Binding**；单板闭环逻辑写入 **ESPHome**；跨设备与通知逻辑放入 **Home Assistant** |
 | Zigbee 网络密钥 | 自定义 16 字节 `network_key` 并保存在 `secret.yaml` 中；**禁止在 NixOS `settings` 中直接写 `"GENERATE"`**（否则每次重启服务都会覆盖并重生成密钥导致全网失联） |
-| MQTT 认证管理 | Mosquitto 账号密码使用 `hashedPasswordFile`（通过 `systemd` Credentials 注入，避免密码哈希落入全局可读的 `/nix/store`） |
+| MQTT 认证管理 | Mosquitto 账号密码使用哈希文件，通过 `systemd` Credentials 或权限 600 的文件注入 |
 
 ## 1. Home Assistant 部署方式对比
 
@@ -25,7 +25,7 @@
 | 声明式管理程度 | **高**：`config` 属性集直接生成 `configuration.yaml`，仪表盘与组件依赖全部纳入 Flake | 仅容器启动参数声明式，`/config` 卷内配置需在 UI 中手动维护 | 完全依赖 Web UI 手动配置与备份 |
 | 升级与回滚 | 随 `nixos-rebuild` 升级，支持 generation 回滚（回滚跨大版本前需注意备份 `/var/lib/hass` 数据库） | 需手动更新镜像 Tag | 使用 HAOS 内置更新器 |
 | Zigbee 串口权限 | **零额外配置**：`zigbee2mqtt` 模块自动配置 `dialout` 组与 `DeviceAllow` | 需映射 `/dev/serial/by-id/...`，Rootless 容器下易遇到 `ttyUSB` 权限问题（`nixpkgs` #416817） | 直接插拔使用 |
-| 结论 | **采用**（部署于 N100 NixOS 主机） | 不采用 | 不采用（N100 同时还需运行 DS-Bot、LiteLLM 等 NixOS 服务） |
+| 结论 | **待定**（原方案部署于 N100 NixOS 主机） | 待定 | 待定（常驻节点还需同时运行 DS-Bot、LiteLLM 等服务） |
 
 ### 1.1 `services.home-assistant` 常用配置项
 
@@ -171,8 +171,8 @@ Zigbee 与 2.4GHz Wi-Fi 共用频段，建网时按宿舍主 Wi-Fi 信道选择�
 |---|---|---|---|
 | **1. Zigbee Direct Binding** | Zigbee 无线开关/遥控器直连控制 Zigbee 灯具或插座 | 仅需开关与受控灯具/插座带电（Z2M 与 HA 全部停机仍可工作） | 床头与门口无线开关控制主照明 |
 | **2. ESPHome 板载自动化** | 单个 ESP32 开发板内部的传感器输入与 GPIO / 红外输出 | 仅需开发板带电（无需 Wi-Fi 与 HA） | 板载物理按键切换继电器、过温保护断电 |
-| **3. Home Assistant 本地自动化** | 跨协议设备联动（Zigbee + BLE + Wi-Fi）、定时控制、高危安全告警 | N100 主机、Mosquitto、Z2M 与 HA 正常运行（无需外网与工作站） | 回宿亮灯、离宿断电、入睡关灯、水浸告警 |
-| **4. 派发器与 Agent 场景** | 结合日历、外部信息、墨水屏渲染与自然语言摘要的跨领域编排 | N100 与工作站 `evd` 正常运行 | 晨间早报推送、出门携物清单渲染、异常用电判断 |
+| **3. Home Assistant 本地自动化** | 跨协议设备联动（Zigbee + BLE + Wi-Fi）、定时控制、高危安全告警 | 常驻节点、Mosquitto、Z2M 与 HA 正常运行（无需外网与工作站） | 回宿亮灯、离宿断电、入睡关灯、水浸告警 |
+| **4. 派发器与 Agent 场景** | 结合日历、外部信息、墨水屏渲染与自然语言摘要的跨领域编排 | 常驻节点与工作站 `evd` 正常运行 | 晨间早报推送、出门携物清单渲染、异常用电判断 |
 
 Zigbee 设备直连绑定（Direct Binding）可在 Z2M Web 前端的"绑定（Bind）"标签页配置，或向 `zigbee2mqtt/bridge/request/device/bind` 发布 JSON：
 
@@ -184,12 +184,12 @@ Zigbee 设备直连绑定（Direct Binding）可在 Z2M Web 前端的"绑定（B
 
 | 故障场景 | Wi-Fi 设备（ESPHome / 红外） | Zigbee 设备网络 | BLE 温湿度计 | 自动化可用范围 |
 |---|---|---|---|---|
-| **仅路由器断电 / 外网中断**（N100 带电） | 暂时离线（ESPHome 板载逻辑继续运行） | **完全正常**（USB 协调器、Z2M、Mosquitto、HA 均在 N100 本地闭环） | ESP32 代理随 Wi-Fi 离线暂停转发 | Zigbee 传感器、开关与 HA 本地自动化全部正常 |
-| **N100 关机或重启** | 在线但无 HA 接收 | **Zigbee Direct Binding 直连开关仍可正常控灯** | 持续广播 | 物理开关直连控灯与 ESPHome 板载逻辑可用 |
-| **全宿舍拉闸停电后恢复供电** | ESP32 秒级启动并自动重连 Wi-Fi 与 HA | N100 开机自启 Z2M 恢复网络；市电插座数十秒内归队，电池传感器在下个唤醒周期归队 | 持续广播，零恢复时间 | 供电恢复后约 1–2 分钟全栈自动恢复 |
+| **仅路由器断电 / 外网中断**（常驻节点带电） | 暂时离线（ESPHome 板载逻辑继续运行） | **完全正常**（USB 协调器、Z2M、Mosquitto、HA 均在常驻节点本地闭环） | ESP32 代理随 Wi-Fi 离线暂停转发 | Zigbee 传感器、开关与 HA 本地自动化全部正常 |
+| **常驻节点关机或重启** | 在线但无 HA 接收 | **Zigbee Direct Binding 直连开关仍可正常控灯** | 持续广播 | 物理开关直连控灯与 ESPHome 板载逻辑可用 |
+| **全宿舍拉闸停电后恢复供电** | ESP32 秒级启动并自动重连 Wi-Fi 与 HA | 常驻节点开机自启 Z2M 恢复网络；市电插座数十秒内归队，电池传感器在下个唤醒周期归队 | 持续广播，零恢复时间 | 供电恢复后约 1–2 分钟全栈自动恢复 |
 
 **断电恢复配置细节**：
 
-- **灯具与插座上电状态（`power_on_behavior`）**：在 Z2M 中将宿舍灯具的 `power_on_behavior` 统一设为 `off`（或 `previous`），防止夜间宿舍恢复供电时所有灯光突然全亮；将路由器、N100 与充电器所在插座设为 `on`（来电自动导通）。
+- **灯具与插座上电状态（`power_on_behavior`）**：在 Z2M 中将宿舍灯具的 `power_on_behavior` 统一设为 `off`（或 `previous`），防止夜间宿舍恢复供电时所有灯光突然全亮；将路由器、常驻节点与充电器所在插座设为 `on`（来电自动导通）。
 - **Home Assistant 重启补偿**：HA 重启期间错过的边沿事件不会自动重放，且正在执行中的长时间 `delay` 或 `wait_template` 会被中断。因此，超过 5 分钟的延迟操作统一改为基于时间戳的定时触发，或在 `homeassistant.start` 事件触发时检查当前传感器状态进行补偿。
 - **Z2M 数据目录备份**：将 `/var/lib/zigbee2mqtt`（包含 `configuration.yaml`、`secret.yaml`、`coordinator_backup.json`、`devices.yaml`、`database.db`）纳入每日 Restic 备份，更换协调器硬件或重装系统时可直接恢复全网配对状态。

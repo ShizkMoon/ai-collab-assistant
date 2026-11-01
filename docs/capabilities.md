@@ -7,7 +7,7 @@
 ## 1. 能力声明与 Provider 实现分离
 
 - **能力（Capability）**：声明 `kind` 名称、功能简述、正反触发示例、所需软硬件依赖与自治等级。入口意图分类器仅针对 `kind` 进行路由。
-- **实现（Provider）**：具体的工具链或脚本，打包为 Nix 包放入 `~/Repo/nixpkgs-shizuku`，支持多版本并存与回滚。
+- **实现（Provider）**：具体的工具链或脚本，源码与安装脚本放入 `~/agent-src/tools/`，安装至 `~/.local/bin` 或 `/usr/local/bin`，由 `upctl` 统一更新。
 
 ```toml
 # capabilities/work.video.make.toml
@@ -22,7 +22,7 @@ autonomy = "L2"                  # 可选，见总体架构设计 §5
 enabled = true
 ```
 
-能力与场景的 TOML 配置文件均纳入 NixOS Flake 管理。**新编写的能力默认设置 `enabled = false`**，经过提案与影子测试达标后再正式启用（见 [ADR 0005](adr/0005-proposal-shadow-promotion.md)）。
+能力、场景与端口定义统一放在 `/etc/aica/` 下并纳入 Git 管理，随 btrfs 快照留存版本。**新编写的能力默认设置 `enabled = false`**，经过提案与影子测试达标后再正式启用（见 [ADR 0005](adr/0005-proposal-shadow-promotion.md)）。
 
 ## 2. `kind` 分类清单
 
@@ -58,18 +58,18 @@ enabled = true
 
 ### 软件开发与系统维护
 
-`work.code.task` 为代码开发父任务，其下六个子阶段作为带 `parent` 依赖的子任务流转，详见 [开发与逆向工程 §1](work-devsec.md#1-代码开发流水线)。
+`work.code.task` 为代码开发父任务，其下六个子阶段作为带 `parent` 归属的子任务流转，父任务经 `depends` 等待子任务完成，详见 [开发与逆向工程 §1](work-devsec.md#1-代码开发流水线)。
 
 | `kind` | 功能说明 | 复用工具链 |
 |---|---|---|
 | `work.code.task` | 代码开发父任务 | Orca + Devin / Codex / Claude Code Worker |
 | `work.code.spec` | 将需求整理为结构化开发规格说明（Spec） | `gh issue` / `docs/specs/<slug>.md` |
-| `work.code.verify` | 在隔离终端执行构建与测试并检查退出码 | `orca terminal wait --for exit`、`nix flake check` |
+| `work.code.verify` | 在隔离终端执行构建与测试并检查退出码 | `orca terminal wait --for exit`、`just check` |
 | `work.code.review` | 调用异构厂商模型审阅代码 Diff | Orca Worktree + LiteLLM |
 | `work.code.merge` | 创建 PR 并在 CI 通过后自动合并 | `gh pr merge --auto` |
 | `work.code.release` | 打标签发版、更新 Nix 软件源或 `upctl` 组件 | `gh release`、`upctl update <section>` |
 | `work.repo.patrol` | 仓库依赖更新与 CI 失败巡检 | Renovate、`gh` CLI |
-| `work.nixos.update` | NixOS Flake 更新、构建、差异对比、切换与失败自动回滚 | `nixos-rebuild`、`nvd` |
+| `meta.system.update` | 系统与各组件更新、更新前快照、失败回滚 | `upctl update`、`snapper` |
 
 ### 逆向工程与安全分析
 
@@ -136,7 +136,7 @@ enabled = true
 | `kind` | 功能说明 | 复用工具链 |
 |---|---|---|
 | `net.egress` | 校园网多出口状态变更与代理状态同步 | AX6000 `hotplug` 脚本（见 [网络与设备组网](network-fabric.md)） |
-| `net.wake` | 由 N100 发送有线 WoL 魔术包唤醒工作站 | `wakeonlan` + Tailscale |
+| `net.wake` | 已停用：单机方案下没有第二台节点发出 WoL，工作站改为接交流电时保持唤醒 | - |
 
 注：`net.github`、`net.nix` 等属于能力配置中 `needs` 字段的**环境依赖标识**，并非任务 `kind`。
 
@@ -195,7 +195,7 @@ steps = [
 
 | 维护操作 | 标准流程 |
 |---|---|
-| 升级或更换底层工具 | 修改对应 Provider 的 Nix 包定义 → 执行 `nixos-rebuild switch` → 异常时回滚 generation |
+| 升级或更换底层工具 | 修改对应 Provider 的安装脚本 → 执行 `upctl update` → 异常时 `downgrade` 或回滚快照 |
 | 新增能力 | 先核对 [开源复用清单](open-source-reuse.md)；编写能力 TOML 与 Provider 包（默认 `enabled = false`）；经影子测试验证达标后启用 |
 | 能力组合调用 | 通过创建带 `parent` 的子任务进行编排（如视频制作任务派生配乐子任务），不在 Provider 内部硬编码耦合其他能力的脚本 |
 | 能力下线 | 设置 `enabled = false` 观察 90 天后移除配置，并将旧 `kind` 在路由表中映射到替代能力 |

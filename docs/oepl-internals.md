@@ -8,19 +8,18 @@
 
 ## 1. 系统三平面拓扑
 
-```
-上层内容源（渲染服务 HTTP API / Home Assistant 集成 / 内置模板）
-    │
-    ▼  ESP32-S3 主控板（运行 AP 固件：Wi-Fi 接入 + LittleFS 存储 + 图像量化 + WebUI）
-    │    │
-    │    ├──► 串口协处理器通道（UART 115200 bps v1 ASCII / 2 Mbaud v2 COBS 帧）：
-    │    │     · ESP32-C6 / H2  → IEEE 802.15.4 @ 2.4GHz（自定义裸 MAC 协议，非 Zigbee）
-    │    │     · TLSR825x       → IEEE 802.15.4 或 2.4GHz GFSK（hwType 0xF8/0xF9）
-    │    │     · CC1101 模块    → Sub-GHz GFSK @ 868 / 915 MHz
-    │    │
-    │    └──► ESP32-S3 内置 BLE 射频（与 Wi-Fi 分时复用）→ BLE 电子价签
-    ▼
-电子价签终端（Tag：深度休眠 → 定时唤醒发起 Check-in → 按块拉取图像并刷屏）
+```mermaid
+flowchart TD
+  SRC["上层内容源<br/>渲染服务 HTTP API / HA 集成 / 内置模板"] --> AP["ESP32-S3 主控板<br/>AP 固件：Wi-Fi + LittleFS + 图像量化 + WebUI"]
+  AP --> UART["串口协处理器通道<br/>UART 115200 bps v1 / 2 Mbaud v2 COBS"]
+  UART --> R1["ESP32-C6 / H2<br/>IEEE 802.15.4 @ 2.4GHz（自定义裸 MAC，非 Zigbee）"]
+  UART --> R2["TLSR825x<br/>802.15.4 或 2.4GHz GFSK（hwType 0xF8/0xF9）"]
+  UART --> R3["CC1101 模块<br/>Sub-GHz GFSK @ 868 / 915 MHz"]
+  AP --> BLE["ESP32-S3 内置 BLE 射频<br/>（与 Wi-Fi 分时复用）"]
+  R1 --> TAG["电子价签终端<br/>深度休眠 → 定时唤醒 Check-in → 按块拉取图像刷屏"]
+  R2 --> TAG
+  R3 --> TAG
+  BLE --> TAG
 ```
 
 核心通信原则：
@@ -119,13 +118,17 @@ AP 的 `ble_filter.cpp` 原生识别以下三种 BLE 广播与传输协议：
 
 ## 7. 图像下发、压缩与无线 OTA 机制
 
-```
-上层调用 POST /imgupload 上传图像
-  → AP makeimage.cpp：解码 → 缩放 → 抖动量化为 1bpp/2bpp → 压缩（G5 或 zlib）
-  → 计算 MD5 低 8 字节作为 dataVer 存入 tagDB，并将数据块推入 C6 射频缓存
-  → 标签定时唤醒（40–60s）发送 ADR（或发出 BLE 广播）
-  → AP 比对发现 dataVer 变化，下发新图像分块
-  → 标签校验收齐后根据 dataTypeArgument 选择 LUT（全刷/快刷）驱动 EPD 面板
+```mermaid
+sequenceDiagram
+  participant S as 上层服务
+  participant AP as OEPL AP
+  participant T as 电子价签
+  S->>AP: POST /imgupload 上传图像
+  AP->>AP: makeimage.cpp 解码 → 缩放 → 抖动量化为 1bpp/2bpp → 压缩（G5 或 zlib）
+  AP->>AP: 计算 MD5 低 8 字节作为 dataVer 存入 tagDB，数据块推入 C6 射频缓存
+  T->>AP: 定时唤醒（40–60s）发送 ADR / BLE 广播
+  AP->>T: 比对 dataVer 有变化，下发新图像分块
+  T->>T: 校验收齐后按 dataTypeArgument 选择 LUT（全刷/快刷）驱动 EPD 面板
 ```
 
 - **无损压缩算法**：黑白双色图优先采用 Larry Bank 的 **Group 5（G5）** 游程编码压缩，多色或复杂位图采用 **zlib** 压缩，可减少 50%–80% 的空中传输分片数。

@@ -1,32 +1,38 @@
 # 常驻服务分布与凭据管理
 
-> 状态：设计中 · 上位文档：[架构总览](architecture.md)、[工作站配置](workstation-nixos.md)
+> 状态：设计中 · 上位文档：[架构总览](architecture.md)、[工作站配置](workstation-arch.md)、[ADR 0007](adr/0007-deferred-resident-node.md)
 
-## 1. 双机组件分布
+## 1. 服务分布
 
-| 服务组件 | 部署主机 | 底层实现 |
+工作站是唯一的执行节点；云服务器只承担消息搬运。家居类服务（Home Assistant、Zigbee2MQTT、n8n）随常驻节点一起延后，不在此表中。
+
+| 服务组件 | 部署位置 | 底层实现 |
 |---|---|---|
 | 任务库 + `ev` CLI + 派发器守护进程 `evd` | 工作站 | Taskwarrior 3 + 自建轻量守护进程 |
+| 事件库与线索（`events.sqlite3`） | 工作站（主）/ 云服务器（入站暂存） | SQLite，见 [输入端口与输出路由 §3](output-routing.md#3-事件线索与线索上下文) |
 | 多 Agent 任务编排 | 工作站 | Orca |
 | 本地大模型与向量推理 | 工作站 | vLLM / Ollama |
-| 统一模型网关 | N100 | LiteLLM |
-| 对话与 IM 入口 | N100 | DS-Bot / AstrBot |
-| 智能家居中枢 | N100 | Home Assistant + Mosquitto + Zigbee2MQTT + ESPHome |
-| 外部 SaaS 与 Webhook 接入 | N100 | n8n |
-| 消息推送服务 | N100 | ntfy |
-| 任务库增量备份 | N100 | Litestream + 每日 `.backup` + Restic |
-| UPS 电源监控 | 工作站 + N100 | NUT（N100 作为 Primary，工作站作为 Secondary） |
+| 统一模型网关 | 工作站 | LiteLLM |
+| 入口解析与 IM 收发 | 工作站 | DS-Bot / AstrBot |
+| 消息接收与等待队列 | 云服务器 `orca-pool` | 端口轮询脚本 + `events.sqlite3` |
+| 消息推送服务 | 云服务器 `orca-pool` | ntfy |
+| 任务库增量备份 | 云服务器 `orca-pool` | Litestream + 每日 `.backup` + Restic |
+
+数据库与模型缓存放在工作站本地磁盘，不做网络挂载——本地文件系统是编排循环的前提（[ADR 0003](adr/0003-loop-local-entry-remote.md)）。
 
 ## 2. 常驻服务管理规范
 
-- 所有常驻服务统一通过 NixOS 的 `systemd.services` 或 `systemd.user.services` 在 Flake 中声明，随系统开机自启并在后台静默运行。
+- 全部服务以 `systemd` 单元声明（系统级或用户级），随开机自启并在后台静默运行；单元定义放入 `/etc/aica/units/` 并由安装脚本软链至 systemd 目录，纳入快照。
 - 命令行入口统一放置在 `~/.local/bin/` 下，需要补充环境变量或运行路径时通过轻量 Wrapper 脚本封装。
-- 当工作站处于休眠或关机状态时，N100 上的入口服务负责将重负载任务暂存排队，向用户回复"已加入队列，等待工作站唤醒后处理"，同时发送有线 Wake-on-LAN（WoL）魔术包唤醒工作站。
+- 工作站休眠或关机期间，云服务器只把外部消息写入等待队列，不回复、不解析、不执行；恢复后由工作站按端口游标增量拉取。回复用户的「已收到」提示由端口声明，不由云服务器自行生成。
+- 单机方案的直接后果是**没有服务级高可用**：工作站关机即全系统暂停。可接受的边界是输入不丢、任务不丢，否则需要重新评估常驻节点（[ADR 0007](adr/0007-deferred-resident-node.md) 的复评条件）。
 
 ## 3. 凭据与运行状态保护
 
 - API 密钥、OAuth 令牌与平台 Cookie 一律保存在各应用的原生安全位置（如 KDE KWallet 或应用私有配置目录），严禁写入本设计仓库、规则文件或 Taskwarrior 任务字段中。
 - 各工具的登录态 Cookie 与本地会话数据库属于有状态运行数据，不得作为临时缓存目录清理。
+- 云端只保存推送凭据与端口轮询所需的会话文件，且使用独立的最小权限账号；工作站的 SSH 密钥不复制到云端。
+- 端口配置文件中只写凭据的**引用路径**（如 `cred_ref = "kwallet:aica/wechat"`），不写凭据本身。
 
 ## 4. 人工确认点
 

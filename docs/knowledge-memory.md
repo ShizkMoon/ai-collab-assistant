@@ -30,7 +30,7 @@
 | B 站账号动态 | `~/.config/biliup/`（仅 Cookie）+ 投稿 API 返回 | JSON | 投稿元数据、本人评论与回复 | 投稿完成后触发 + 每日定时同步 | 90 天 |
 | 学习通课程 | `xxt hw\|notice --all-courses --json` | JSON | 单条作业或通知 = 1 个 `doc` | 每日 07:00 定时拉取 | 当前学期 |
 | Shell 命令历史 | `~/.bash_history` | 纯文本 | 完整复合命令 | 每日增量同步，过滤裸命令（如单独的 `ls`、`claude`） | 90 天 |
-| 邮件 | N100 上的 n8n IMAP 节点 | 结构化摘要 | 仅索引摘要与关键字段，不索引邮件正文全文 | 每日同步 | 30 天 |
+| 邮件 | 端口适配器（IMAP） | 结构化摘要 | 仅索引摘要与关键字段，不索引邮件正文全文 | 每日同步 | 30 天 |
 | Home Assistant | Recorder 数据库 | 时序数据 | **不纳入知识库** | 按需通过 HA API 实时查询 | - |
 | Claude 项目记忆 | `~/.claude/projects/*/memory/*.md` | Markdown + YAML | 单文件 = 1 个 `doc` | 文件变更时触发 | 永久 |
 
@@ -51,7 +51,7 @@ Orca 自带的 `session-search.sqlite` 已包含 7.5 万条历史消息的 FTS5 
 └── export/                # kn mem export 导出的 Markdown 快照
 ```
 
-统一命令行入口为 `kn`（打包为 Nix 包放入 `~/Repo/nixpkgs-shizuku`），包含五个子命令：`ingest`、`search`、`recall`、`mem`、`stats`。
+统一命令行入口为 `kn`（源码与安装脚本位于 `~/agent-src/tools/knowledge`），包含五个子命令：`ingest`、`search`、`recall`、`mem`、`stats`。
 
 ## 3. 数据库 Schema
 
@@ -128,10 +128,17 @@ CREATE TABLE edge   (src INTEGER, dst INTEGER, rel TEXT, weight REAL DEFAULT 1,
 
 ## 5. 三路混合召回与 RRF 融合
 
-```
-查询词 ──> 查询改写（同义词 + 实体链接） ──┬─> 词法召回 FTS5 Top 50    ┐
-                                           ├─> 向量召回 vec0 k=50      ├─> RRF 融合 ─> 重排（Reranker/规则） ─> Top 8 结果 + URI
-                                           └─> 实体图一跳关联切片       ┘
+```mermaid
+flowchart LR
+  Q["查询词"] --> RW["查询改写<br/>同义词 + 实体链接"]
+  RW --> L["词法召回<br/>FTS5 Top 50"]
+  RW --> V["向量召回<br/>vec0 k=50"]
+  RW --> G["实体图<br/>一跳关联切片"]
+  L --> RRF["RRF 融合"]
+  V --> RRF
+  G --> RRF
+  RRF --> RR["重排<br/>Reranker / 规则"]
+  RR --> OUT["Top 8 结果 + URI"]
 ```
 
 三路召回与 RRF 融合查询 SQL：
@@ -293,10 +300,14 @@ CREATE TABLE recall_log (
 
 ### 7.3 偏好提炼与升级路径
 
-```
-单次任务结论 ──> candidate ──(累计证据 ≥ 2 或人工确认)──> active ──(持续命中)──> salience 提升
-                     │                                        │
-                     └──(90 天无新增证据)──> forgotten        └──(被新偏好覆盖)──> demoted (记录 superseded_by)
+```mermaid
+stateDiagram-v2
+  [*] --> candidate : 单次任务结论
+  candidate --> active : 累计证据 ≥ 2 或人工确认
+  active --> active : 持续命中，salience 提升
+  candidate --> forgotten : 90 天无新增证据
+  active --> demoted : 被新偏好覆盖（记录 superseded_by）
+  active --> active : 人工点击采纳（confidence 上调）
 ```
 
 | 流转阶段 | 触发条件 | 执行动作 |

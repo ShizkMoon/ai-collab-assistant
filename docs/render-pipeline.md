@@ -8,10 +8,13 @@
 
 ## 1. 管线数据流
 
-```
-数据源（Taskwarrior 任务库 / HA 状态 / 日历） ──┐
-                                              ├─► 显示仲裁器 ──► HTML/CSS 模板渲染 ──► 灰度/调色板抖动量化 ──► 下发通道（OEPL / HTTP / MQTT）
-触发源（任务状态变更 Hook / 定时巡检） ─────────┘                                    （输出 PNG + 刷新元数据）
+```mermaid
+flowchart LR
+  D1["数据源<br/>Taskwarrior / HA 状态 / 日历"] --> AR["显示仲裁器"]
+  D2["触发源<br/>任务状态变更 Hook / 定时巡检"] --> AR
+  AR --> TP["HTML/CSS 模板渲染"]
+  TP --> QT["灰度 / 调色板抖动量化<br/>输出 PNG + 刷新元数据"]
+  QT --> CH["下发通道<br/>OEPL / HTTP / MQTT"]
 ```
 
 **单次渲染输出 = 1 帧目标位深 PNG 图像 + 刷新控制元数据（`full` / `partial`、`temp_band`、`event_ids`）**。当网络中断或渲染服务停机时，墨水屏终端物理保持最后一帧画面及底部的数据时间戳。

@@ -27,11 +27,11 @@ v6 与 v7 的底层差异全部隔离在 `output_*` 驱动层，上层应用调�
 
 E Ink 原厂波形以二进制 `.wbf`（面板 Flash 烧录格式）或 `.wrf`（Kindle 固件格式）分发。`epdiy` 不在 ESP32 运行时动态解析二进制文件，而是通过离线工具链将其转换为 C 结构体数组直接编译进固件镜像：
 
-```
-原厂 .wbf / .wrf 二进制文件
-  ──[inkwave 解析]──► JSON（按 刷新模式 × 温度区间 × Phase 展开的 16×16 矩阵）
-  ──[scripts/waveform_hdrgen.py]──► epdiy_<panel>.h（EpdWaveform 常量结构体）
-  ──[ESP-IDF 编译链接]──► 固件镜像
+```mermaid
+flowchart LR
+  WB["原厂 .wbf / .wrf 二进制"] -->|inkwave 解析| J["JSON<br/>刷新模式 × 温度区间 × Phase<br/>展开的 16×16 矩阵"]
+  J -->|waveform_hdrgen.py| H["epdiy_panel.h<br/>EpdWaveform 常量结构体"]
+  H -->|ESP-IDF 编译链接| FW["固件镜像"]
 ```
 
 为节省 Flash 空间，可通过 `waveform_hdrgen.py --export-modes 1,2,5,16 --temperature-range 15,35` 仅导出实际需要的刷新模式与室温区间。

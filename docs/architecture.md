@@ -13,7 +13,7 @@
 | **能力层** | 声明系统能处理哪些事务 | 视频制作、配乐生成、长文写作、账单整理、家居场景等 | 开放集合，按需扩充 | [能力目录](capabilities.md) |
 | **状态层** | 追踪任务所处阶段 | 九种状态：`new` / `doing` / `waiting` / `blocked` / `escalated` / `failed` / `stalled` / `spec` / `parked` | 封闭状态机 | [事件与任务规格](event-spec.md) |
 | **执行层** | 具体调用什么工具完成任务 | Orca Worker、CLI 工具、HA 服务调用、浏览器与 GUI 自动化 | 底层实现可随时替换 | [系统拓扑](system-topology.md)、[本机工具链选型](local-toolchain.md) |
-| **设施层** | 算力、网络与硬件运行环境 | 工作站、N100、AX6000、手机、墨水屏、各类传感器 | 物理设备 + NixOS 声明式管理 | [工作站配置](workstation-nixos.md)、[智能家居技术栈](home-automation-stack.md) |
+| **设施层** | 算力、网络与硬件运行环境 | 工作站、AX6000、手机、墨水屏、各类传感器 | 物理设备 + 快照与包管理 | [工作站配置](workstation-arch.md)、[智能家居技术栈](home-automation-stack.md) |
 | **知识层** | 检索历史任务与个人文档 | 任务记录、笔记、会话记录、命令历史的混合检索库 | 可从源数据重建 | [知识库与记忆分层](knowledge-memory.md) |
 
 **人工确认点**固定为三类：**付款、删除、对外发布**（[ADR 0002](adr/0002-three-confirmation-points.md)）。其余操作默认直接执行；可逆操作配备默认 5 分钟的撤销窗口，窗口期内可一键回退。
@@ -22,15 +22,20 @@
 
 ## 2. 意图分类与结构化路由
 
-```
-自然语言输入 ──[入口 Agent：意图分类]──> kind + 参数 ──> 状态流转 ──> 执行器 ──> 执行摘要 ──[出口：自然语言回复]──> 用户
-机器事件（HA / 定时 / CI / Webhook）────> kind + 参数（直接映射，不经语言模型）
+```mermaid
+flowchart LR
+  I1["自然语言输入"] --> CL["意图分类"]
+  I2["机器事件（HA / 定时 / CI / Webhook）"] --> M["直接映射"]
+  CL --> K["kind + 参数"]
+  M --> K
+  K --> ST["状态流转"] --> EX["执行器"] --> SM["执行摘要"]
+  SM --> OUT["投递路由"] --> U["用户"]
 ```
 
 - **受限意图分类**：入口 Agent 从 [能力目录](capabilities.md) 的候选集中选择匹配的 `kind`，提取结构化参数并输出置信度。高置信度直接派发执行，中等置信度向用户追问确认，低置信度归入待分类队列（`meta.triage.pending`）。
 - **统一分类接口** `decide(state, schema) → {字段: 概率}`，底层推理后端可按需切换：
   - 工作站 GPU：本地常驻 7–9B 模型（vLLM / Ollama）配合受限解码（XGrammar / GBNF）；
-  - N100 CPU：中文小型 Embedding 模型 + SetFit 少样本分类器，在工作站休眠或离线时提供兜底分类；
+  - 云服务器 CPU：中文小型 Embedding 模型 + SetFit 少样本分类器，在工作站休眠时提供兜底分类；
   - 云端 API：DeepSeek / Qwen，处理长上下文或复杂长尾输入。
   - 三类后端统一通过 [LiteLLM](open-source-reuse.md#3-模型与推理) 网关调用，由网关管理路由与故障回退。
 - **任务记录即训练样本**：用户每次在卡片上确认或修正分类结果，都会作为带标签样本存入本地库，用于定期更新分类器与置信度阈值。
@@ -89,6 +94,7 @@ to    = "notify"             # 到期提醒
 | `cli:*` | 单次确定性命令执行 | 现成 CLI 工具（`ffmpeg`、`calibre`、`double-entry-generator` 等） |
 | `n8n:*` | 外部 SaaS 与 Webhook 编排 | n8n 工作流（Webhook、IMAP 邮件、RSS） |
 | `notify` | 纯消息提醒 | ntfy / KDE Connect / IM |
+| `route` | 按效果类型确定投递目标并发送 | `sources` / `surfaces` 端口表，见 [输入端口与输出路由](output-routing.md) |
 | `me` | 需人工确认或亲自处理的事项 | 交互卡片：`[执行] [延后] [忽略]` |
 | `render` | 触发显示端画面刷新 | [多端显示仲裁](surface-arbiter.md) |
 | `orca:run` | 带任务说明模板的长期异步任务 | Orca Run，返回产物路径与执行摘要 |
@@ -97,7 +103,7 @@ to    = "notify"             # 到期提醒
 
 ## 6. 显示端分配
 
-所有显示端展示的内容均从任务库与 Home Assistant 状态只读派生：
+所有显示端展示的内容均从任务库与 Home Assistant 状态只读派生。显示端内部的内容竞争见 [多端显示仲裁](surface-arbiter.md)；产物投到哪一类终端（播放、提醒、动作）由 [输入端口与输出路由](output-routing.md) 决定，两者是不同层：前者决定「这一屏上放什么」，后者决定「这类输出去哪」。下表列出各终端承担的角色：
 
 | 显示端 | 展示内容 | 底层实现 |
 |---|---|---|
@@ -106,6 +112,7 @@ to    = "notify"             # 到期提醒
 | Plasma 桌面组件、KRunner | 待处理任务计数、快捷录入任务 | KDE Plasma、`plasma-manager` |
 | ThinkSmart View | 桌面触控面板与语音入口 | HA Dashboard / Kiosk 浏览器，见 [桌面主控台](thinksmart-view-console.md) |
 | 手机 / 手表 | 待确认计数与即时推送 | KDE Connect、ntfy、HA Companion |
+| 音箱 / 电视 / 耳机 | 语音播报与播放 | 投递路由的 `playback` 效果，见 [输入端口与输出路由 §5](output-routing.md#5-输出效果类型优先于设备) |
 | IM 客户端 | 交互确认卡片、每日早报与晚报 | DS-Bot / AstrBot |
 | 热敏打印机 | 纸质当日清单、采购清单 | `python-escpos` |
 

@@ -114,14 +114,14 @@
 
 | 参考架构机制 | 本系统对应设计 | 取舍说明 |
 |---|---|---|
-| Router / Worker 双层职责分离 | N100 上的 DS-Bot 入口 + 工作站上的 Orca Worker（见 [系统拓扑](system-topology.md)） | **采纳**：入口只负责意图解析与通知，不直接跑重任务 |
+| Router / Worker 双层职责分离 | 工作站上的 DS-Bot 入口 + 工作站上的 Orca Worker（见 [系统拓扑](system-topology.md)） | **部分采纳**：入口与 Worker 分层，但两者同机部署；云端只做消息搬运 |
 | Trigger 两级过滤 | 机器事件直接查 TOML 规则表；自然语言输入走受限意图分类 `decide()`（见 [架构总览 §2](architecture.md#2-意图分类与结构化路由)） | **改造采纳**：将开放式语义判断收敛为针对能力目录的 `kind` 分类 |
 | Thread 线索关联 | 复用 Taskwarrior 的 `thread` 字段串联同一主题的子任务 | **简化采纳**：同 `thread` 内串行，不引入多对多订阅总线 |
 | Inline / Spill 与链式召回 | 任务说明仅传递文件路径与一句话摘要；历史上下文通过 `kn recall` 按需检索 | **采纳** |
 | 预执行（Speculative Execution） | 映射为任务库中带 24h TTL 的 `spec`（草稿）状态（见 [事件运行时与派发器 §2](event-runtime.md#2-状态机)） | **按需采用**：仅在邮件行程提取、会议准备等场景生成待确认草稿 |
 | 异步全双工执行 | `evd` 投递 Orca Run 后立即返回，Worker 完成后异步调用 `ev done` 回写 | **采纳** |
 | 多信道差异化输出 | IM 推送一句话摘要与三按钮卡片；代码与分析报告通过 Git PR 与 Markdown 交付 | **采纳** |
-| 存算与执行环境分离 | **反向部署**：任务库、Orca 循环与本地文件全部留在工作站，N100 仅部署轻量入口（[ADR 0003](adr/0003-loop-local-entry-remote.md)） | **变体**：单用户本地自托管，避免跨机挂载本地文件与 GPU |
+| 存算与执行环境分离 | **反向部署**：任务库、Orca 循环与本地文件全部留在工作站，云端仅保留等待队列（[ADR 0003](adr/0003-loop-local-entry-remote.md)、[ADR 0007](adr/0007-deferred-resident-node.md)） | **变体**：单用户本地自托管，避免跨机挂载本地文件与 GPU |
 | 外部 Watchdog | 采用 `systemd.timer` 运行无状态巡检脚本（`ev-watchdog` 与 `hc check`），不维护常驻 Watchdog Agent 会话 | **简化采纳**：省去常驻会话的 Token 消耗 |
 | 多实例分片与 A2A | 不引入 | 单人单实例无需分片 |
 | 凭据隔离 | 凭据保存在 KWallet 与各工具原生配置中，Agent 仅调用封装好的 CLI（如 `biliup`、`xxt`、`gh`） | **采纳** |

@@ -16,7 +16,7 @@
 
 ## 1. 模型注册表：`models.toml`
 
-所有本地与云端模型统一在 `models.toml` 中声明，LiteLLM 的网关配置、N100 兜底模型清单以及成本统计分组均由该文件生成：
+所有本地与云端模型统一在 `models.toml` 中声明，LiteLLM 的网关配置、云端兜底模型清单以及成本统计分组均由该文件生成：
 
 | 模型 ID | 运行位置 | 推理引擎 | 上下文窗口 | 显存占用 | 主要用途 | 结构化输出能力 | p50 延迟 | 参考价格（元 / 1M in·out） |
 |---|---|---|---|---|---|---|---|---|
@@ -24,12 +24,12 @@
 | `qwen3-14b-q4` | 工作站 GPU | Ollama 按需加载 | 8k | 10.8 GB | 夜间批处理、复杂推理 | GBNF Schema | 1.8s | 0 |
 | `qwen2.5-vl-7b` | 工作站 GPU | vLLM 按需加载 | 8k | 7.0 GB | 本地桌面截图理解与视觉点击 | Schema | 1.4s | 0 |
 | `bge-m3` + Reranker | 工作站 GPU | Ollama | 8k | 2.3 GB | 知识库向量化与重排 | - | 60ms | 0 |
-| `bge-small-zh` | N100 CPU | `sentence-transformers` | 512 | - | N100 兜底 Embedding 与 SetFit 分类 | - | 35ms | 0 |
+| `bge-small-zh` | 云端 CPU | `sentence-transformers` | 512 | - | 云端兜底 Embedding 与 SetFit 分类 | - | 35ms | 0 |
 | `paraformer-zh` | 工作站 | FunASR | - | 0.9 GB | 语音输入转写、播客字幕 | - | 实时 | 0 |
 | `deepseek-chat` | 云端 API | 官方 API | 64k | - | 长文写作、代码开发、复杂长尾任务 | `json_schema` | 3.2s | 2 / 8 |
 | `qwen-max` | 云端 API | DashScope | 128k | - | 长文审校与跨厂商交叉评审 | `json_schema` | 4.0s | 按官方计费 |
 
-NixOS 下的 LiteLLM 服务配置生成逻辑：
+LiteLLM 服务配置生成逻辑：
 
 ```nix
 # modules/agent/litellm.nix
@@ -56,7 +56,7 @@ in { services.litellm = { enable = true;
 | `longform` | `work.write.longform`、`work.book.polish` | 云端大模型（经 Orca Worker） | 生成质量优先 |
 | `code` | `work.code.task`、`work.rev.*` | 云端代码模型（Devin / Codex / Claude） | 由执行层 Worker 直接调用 |
 | `vision` | 桌面截图理解、GUI 视觉操作 | 本地 `qwen2.5-vl-7b` | 屏幕截图留在本地处理，保障隐私 |
-| `embed` | `info.recall`、规则聚类挖掘 | 工作站 `bge-m3` / N100 `bge-small-zh` | 高频向量化，本地低延迟 |
+| `embed` | `info.recall`、规则聚类挖掘 | 工作站 `bge-m3` / 云端 `bge-small-zh` | 高频向量化，本地低延迟 |
 | `asr` | 语音指令输入、播客音频转写 | 本地 `paraformer-zh` / SenseVoice | 中文识别率高，支持本地离线运行 |
 | `batch` | 夜间批量转写、书库标签整理 | 夜间批处理窗口 + 云端折扣时段 | 时效要求低，集中调度降本 |
 
@@ -84,11 +84,11 @@ router_settings: { num_retries: 2, timeout: 20, allowed_fails: 2, cooldown_time:
 入口意图分类的四级降级顺序：
 
 ```
-1. 工作站本地 vLLM (qwen3-8b) → 2. 云端 API (deepseek-chat) → 3. N100 CPU 分类器 (SetFit/kNN) → 4. 待分类队列 (meta.triage.pending)
+1. 工作站本地 vLLM (qwen3-8b) → 2. 云端 API (deepseek-chat) → 3. 云端 CPU 分类器 (SetFit/kNN) → 4. 待分类队列 (meta.triage.pending)
 ```
 
-- **工作站休眠场景**：当工作站休眠不可达时，请求回退至云端或 N100 本地分类器；若匹配出的任务需要工作站本地资源，则同时生成一条 `net.wake` 任务通过有线 WoL 唤醒工作站（见 [网络与设备组网 §7](network-fabric.md#7-睡眠唤醒wolnut-ups-与夜间批处理)）。
-- **N100 CPU 兜底边界**：N100 上的 SetFit 分类器仅负责预测 `kind` 并将原始文本存入 `payload`，不运行生成式大模型提取复杂参数（受限于 N100 的内存预算）。
+- **工作站休眠场景**：工作站改为接交流电时保持唤醒（[网络与设备组网 §6](network-fabric.md#6-电源唤醒与夜间批处理)），云端兜底分类只在工作站确实不可达时使用；事件先入等待队列，不另设唤醒链路。
+- **云端 CPU 兜底边界**：云服务器上的 SetFit 分类器仅负责预测 `kind` 并将原始文本存入 `payload`，不运行生成式大模型提取复杂参数（受限于云服务器的内存预算）。
 - **兜底归档**：若前三级均无法给出达标结果，任务归入 `meta.triage.pending`，在次日早报中汇总提示，不发送即时弹窗打扰。
 
 推理请求设置四层缓存：
