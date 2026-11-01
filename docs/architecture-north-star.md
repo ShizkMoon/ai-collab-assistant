@@ -207,7 +207,7 @@ flowchart LR
 | 交互 | [Super-agent 参考架构](super-agent-architecture.md) | 外部参考架构摘要与本仓取舍 |
 | 平台运维 | [系统运维](platform-ops.md) | 规则挖掘、影子测试、监控告警与备份恢复 |
 | 平台运维 | [模型路由与本地推理](model-fleet.md) | 模型注册表、路由降级、显存分配与置信度校准 |
-| 基础设施 | [输入端口与输出路由](output-routing.md) | `sources` / `surfaces`、效果分类、投递回执与去重 |
+| 基础设施 | [输入端口与输出路由](output-routing.md) | `sources` / `surfaces`、效果分类、可打扰性门控、投递回执与去重 |
 | 基础设施 | [网络与设备组网](network-fabric.md) | Tailscale 组网、出口感知与外设接入 |
 | 基础设施 | [工作站：Arch + KDE Plasma](workstation-arch.md) | 工作站软硬件配置、快照回滚与桌面自动化接口 |
 | 基础设施 | [本机工具链选型](local-toolchain.md) | 本地软件选型与 CLI 调用优先级 |

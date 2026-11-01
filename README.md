@@ -44,7 +44,7 @@
 
 ## 基础设施
 
-- [输入端口与输出路由](docs/output-routing.md)：`sources` / `surfaces` 约定、效果分类、投递回执与去重 · 设计中
+- [输入端口与输出路由](docs/output-routing.md)：`sources` / `surfaces` 约定、效果分类、可打扰性门控、投递回执与去重 · 设计中（显示端未定）
 - [工作站：Arch + KDE Plasma](docs/workstation-arch.md)
 - [本机工具链选型](docs/local-toolchain.md)
 - [网络与设备组网](docs/network-fabric.md)：Tailscale 组网、出口感知与外设接入 · 设计中
