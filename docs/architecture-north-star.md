@@ -191,6 +191,7 @@ flowchart LR
 | 核心机制 | [事件与任务规格](event-spec.md) | 任务字段定义与 `ev` CLI 规范 |
 | 核心机制 | [多 Agent 运行时](multi-agent-runtime.md) | 树与依赖 DAG、`spec` / `result` 信封、发散与收敛、程序化约束 |
 | 核心机制 | [知识库与记忆分层](knowledge-memory.md) | 三路混合检索、记忆分层与偏好提炼 |
+| 核心机制 | [IM 采集](im-ingest.md) | 主账号只读采集、双账号分工、会话切分与检索参数 |
 | 核心机制 | [提案库](proposals/README.md) | 候选规则、能力与场景的评审流程 |
 | 决策记录 | [ADR](adr/) | 0001 任务库；0002 三类确认点；0003 入口与循环分离；0004 草稿 TTL；0005 提案与影子测试；0006 工作站改用 Arch；0007 常驻节点延后 |
 | 能力与选型 | [能力目录](capabilities.md) | `kind` 全集的唯一权威来源 |

@@ -35,6 +35,7 @@ DS-Bot 是运行在 [DeepSeek Harness（DSH）](https://github.com/deepseek-ai/d
 - `@xmanrui/dsh-im`（v5.7.0）支持将微信、飞书、钉钉、企业微信、QQ、Slack 等平台的**私聊会话**绑定至 DS-Bot 的指定角色上，但不支持群聊，且与 DS-Bot 版本绑定较紧，部署时需实测验证。
 - 其他通用 DSH IM 网关（如 `dsh-im-gateway`、`dsh-telegram-channel`、`@addozhang/dsh-discord`）仅能绑定普通 DSH Session，无法直接映射 DS-Bot 的多角色语义。
 - **实施方案**：私聊优先测试 `@xmanrui/dsh-im`；需要群聊或更稳定的多平台接入时，在工作站上并行部署 AstrBot，让 AstrBot 直接调用 `ev add` 与工作站受限入口脚本。
+- **与采集端分离**：本节描述的是「你发指令、它回卡片」的入口端。把聊天记录全量读进来是另一件事，由独立的主账号采集端完成，只读、零出站、不参与意图分类，见 [IM 采集](im-ingest.md)。两者共用同一套端口配置，但进程与凭据分开。
 
 ## 4. Linux 桌面端实测（Wayland）
 

@@ -70,6 +70,7 @@ kind_hint = ["life.course.*", "life.doc.*"]
 | 本机 CLI / KRunner | `cli` | owner | push | |
 | 手机分享 / KDE Connect | `share` | owner | push | |
 | 微信（私聊 / 群） | `im` | owner / group | poll | 无官方 API，走本地协议适配，限速从严 |
+| 微信主账号采集 | `im` | untrusted | poll | 只读全量采集，零出站，见 [IM 采集](im-ingest.md) |
 | QQ、飞书、钉钉、Discord | `im` | group | push | 飞书与钉钉走官方机器人或 Webhook |
 | X / RSS / 邮件 | `feed` | public | poll | 只读，L0 |
 | Home Assistant | `ha` | machine | push | |

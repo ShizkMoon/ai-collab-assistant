@@ -16,6 +16,7 @@
 - [事件与任务规格](docs/event-spec.md)：字段定义、状态映射与 `ev` CLI · 设计中
 - [多 Agent 运行时](docs/multi-agent-runtime.md)：归属树与依赖图、派发与结果信封、发散收敛、编排者的能力裁剪 · 设计中
 - [知识库与记忆分层](docs/knowledge-memory.md)：多源索引、三路混合检索、记忆分层与偏好提炼 · 设计中
+- [IM 采集](docs/im-ingest.md)：主账号只读采集、双账号分工、会话切分与检索参数 · 设计中
 - [提案库](docs/proposals/README.md)：规则与能力的迭代流程
 
 ## 能力与选型

@@ -31,6 +31,7 @@
 | 学习通课程 | `xxt hw\|notice --all-courses --json` | JSON | 单条作业或通知 = 1 个 `doc` | 每日 07:00 定时拉取 | 当前学期 |
 | Shell 命令历史 | `~/.bash_history` | 纯文本 | 完整复合命令 | 每日增量同步，过滤裸命令（如单独的 `ls`、`claude`） | 90 天 |
 | 邮件 | 端口适配器（IMAP） | 结构化摘要 | 仅索引摘要与关键字段，不索引邮件正文全文 | 每日同步 | 30 天 |
+| IM 聊天记录 | `kb.sqlite` 的 `im_message` 表（采集见 [IM 采集](im-ingest.md)） | SQLite | 群聊按时间窗、对话按回复对 | 主账号协议轮询 + 专用账号 Webhook | 原始永久，切分视图可重建 |
 | Home Assistant | Recorder 数据库 | 时序数据 | **不纳入知识库** | 按需通过 HA API 实时查询 | - |
 | Claude 项目记忆 | `~/.claude/projects/*/memory/*.md` | Markdown + YAML | 单文件 = 1 个 `doc` | 文件变更时触发 | 永久 |
 
@@ -167,6 +168,7 @@ JOIN chunk c ON c.id = s.id
 JOIN doc   d ON d.id = c.doc_id
 JOIN source src ON src.id = d.source_id
 WHERE d.deleted = 0 AND (:since IS NULL OR d.ts >= :since)
+                  AND (:until IS NULL OR d.ts <= :until)
 ORDER BY final DESC LIMIT :k;
 ```
 
@@ -214,6 +216,11 @@ kn recall --json <<'EOF'
   "since": "2026-01-01",
   "mode": "auto",              // auto | lex | vec | graph | deep
   "all_time": false,
+  "until": "2026-10-31",       // 时间上界，「上个月」这类闭区间必填
+  "author": "me",              // me | <author_id>，限定本人或某位发言者
+  "conv": null,                // 限定会话 id，见 im-ingest.md §5
+  "expand": 0,                 // 命中后按 continued 向前后扩展的 chunk 数
+
   "include": ["snippets", "entities", "paths"]
 }
 EOF
