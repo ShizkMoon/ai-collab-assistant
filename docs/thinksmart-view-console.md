@@ -48,7 +48,7 @@
 
 Linux 工作站下使用开源 [`bkerler/edl`](https://github.com/bkerler/edl) 工具刷机命令：
 
-```bash
+```powershell
 # 设备断电状态下按住音量+与音量-键，插入电源与 USB-C 数据线进入 9008 模式
 edl qfil rawprogram_unsparse.xml patch0.xml .
 ```

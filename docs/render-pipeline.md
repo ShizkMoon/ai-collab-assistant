@@ -34,7 +34,7 @@ flowchart LR
 | **ThinkSmart View 主控台** | 实时 HTML 页面 | 24bit 全彩 | Fully Kiosk Browser 直接加载模板 URL，不经过 PNG 光栅化 |
 | **Kindle KPW5（可选看板模式）** | 8bpp 灰度 PNG | 8bpp | KPW5 经 Tailscale 定时 `wget` 拉取并通过 `fbink` / KOReader 刷屏 |
 
-帧缓存目录结构：`/var/lib/renderd/frames/{surface_id}/{frame_hash}.png` 及配套 `meta.json`（记录模板版本、数据快照哈希与关联任务 UUID）。
+帧缓存目录结构：`%ProgramData%\aica\renderd\frames\{surface_id}\{frame_hash}.png` 及配套 `meta.json`（记录模板版本、数据快照哈希与关联任务 UUID）。
 
 ## 4. 墨水屏刷新策略（移植自 KPW5 固件逆向结论）
 
@@ -46,7 +46,7 @@ flowchart LR
 
 ## 5. 触发机制与容错约束
 
-- **事件驱动为主，定时巡检为辅**：当 Taskwarrior 中关联 `kind` 的任务完成或新增 `+me` 待确认项时，由派发器触发 [显示仲裁器](surface-arbiter.md) 重算；`systemd.timer` 仅作为低频保底检查。
+- **事件驱动为主，定时巡检为辅**：当 Taskwarrior 中关联 `kind` 的任务完成或新增 `+me` 待确认项时，由派发器触发 [显示仲裁器](surface-arbiter.md) 重算；任务计划程序仅作为低频保底检查。
 - **所有展示数据必须可追溯**：画面上的每个信息区块必须对应明确的 `event_id` 列表或 Home Assistant 实体 ID。
 - **渲染异常不阻塞任务主链路**：若 Chromium 截图或 AP 网络推送失败，仅记录一条 `system.render.failed` 事件，墨水屏继续保留上一帧画面与旧时间戳，绝不阻塞派发器 `evd` 的正常任务流转。
 

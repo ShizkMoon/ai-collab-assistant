@@ -10,7 +10,8 @@ Agent 调用本地软件时按以下优先级依次选择：
 2. **内嵌脚本 API**：支持无头运行 Python / Lua / JS 脚本（如 Blender `bpy`、REAPER ReaScript），通过薄封装脚本转为标准 CLI。
 3. **`CLI-Anything` 封装（Agent Harness）**：针对缺少原生 CLI 的桌面应用，采用 [HKUDS/CLI-Anything](https://github.com/HKUDS/CLI-Anything) 模式封装出命令行接口。
 4. **MCP Server**：作为补充接口接入（如 `re-toolkit` MCP），在需要结构化工具调用时配合使用。
-5. **GUI 自动化（`orca computer` + 视觉点击）**：最后兜底路径，优先读取 AT-SPI 无障碍树，自绘画布等特殊场景再结合视觉模型与 `ydotool` 操作（见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略)）。
+5. **网页接口（`ego-browser`）**：有登录态或需要多步交互的网页任务走 ego(lite) 的 Space + Snapshot，再降级才是 GUI 自动化（见 §2.8）。
+6. **GUI 自动化（`orca computer` + 视觉点击）**：最后兜底路径，优先读取 UI Automation 无障碍树，自绘画布等特殊场景再结合视觉模型与 AutoHotkey v2 / `SendInput` 操作（见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略)）。
 
 ## 2. 领域工具选型矩阵
 
@@ -41,19 +42,19 @@ Agent 调用本地软件时按以下优先级依次选择：
 
 | 软件工具 | 选型定位 | 自动化调用路径 |
 | --- | --- | --- |
-| **MAA / MAAend** | 《明日方舟》与《终末地》日常托管 | 运行于 Windows 11 侧，Linux 侧通过 SSH / Webhook 远程触发并回收结果 |
+| **MAA / MAAend** | 《明日方舟》与《终末地》日常托管 | 本机原生运行，通过 MAA CLI / Webhook 触发并回收结果 |
 | **Steam / `steamcmd`** | 游戏发行与下载平台 | `steamcmd` 支持无头上传构建包（Depot）与管理下载 |
-| Lutris / Proton | Windows 游戏兼容运行 | 提供 `lutris` CLI 管理运行环境 |
+| Steam 原生游戏 | 游戏运行 | 直接运行，不需要兼容层 |
 
 ### 2.4 音乐制作与乐谱排版
 
 | 软件工具 | 选型定位 | 自动化调用路径 |
 | --- | --- | --- |
-| **REAPER** | **主力宿主（DAW）** | Linux 原生轻量运行，支持 ReaScript（Lua / Python）深度无头自动化 |
+| **REAPER** | **主力宿主（DAW）** | Windows 原生运行，支持 ReaScript（Lua / Python）深度无头自动化 |
 | **MuseScore 4 / LilyPond** | **乐谱排版与转换** | `mscore` CLI 支持批量导出 PDF / MIDI / MusicXML；LilyPond 纯文本编译乐谱 |
 | **FluidSynth** | SF2 音色库合成渲染 | 纯 CLI 将 MIDI 渲染为 WAV 音频 |
 | SoundCraft | ArtCraft 系列 DAW | 提供 `soundcraft-cli` 无头命令行与 MCP 接口 |
-| Bitwig Studio / Ardour | 备选 Linux DAW | 支持控制器脚本或 Lua 自动化 |
+| Bitwig Studio / Ardour | 备选 DAW | 支持控制器脚本或 Lua 自动化 |
 
 ### 2.5 图形设计与办公套件（ArtCraft 系列）
 
@@ -82,7 +83,7 @@ Agent 调用本地软件时按以下优先级依次选择：
 | 工具或链路 | 当前状态 | 自动化与维护细节 |
 | --- | --- | --- |
 | **Calibre 9.16.0** | 已安装 | 提供 `calibredb`、`ebook-convert`、`ebook-meta` 全套原生 CLI，并已配置 `cli-anything-calibre` |
-| **KPW5 USB 有线传书** | 已打通 | KPW5 识别为 USB 大容量存储设备（`1949:0324`），由 `udisks2` 自动挂载至 `/run/media/$USER/Kindle` |
+| **KPW5 USB 有线传书** | 已打通 | KPW5 识别为 USB 大容量存储设备（`1949:0324`），Windows 挂载为盘符（通常为 `E:`，实际盘符以设备管理器为准） |
 | **KOReader（已越狱接管）** | 已部署 | KPW5 已越狱并安装 KOReader，开启 SSH 与 Tailscale（Userspace 模式）；原厂 OTA 升级程序（`otaupd`/`otav3`/`otaup`）均已重命名为 `.bck` 禁用 |
 | **OPDS / Send to Kindle** | 无线传书备选 | 支持通过 KOReader OPDS 目录拉取或 Calibre 邮件推送 |
 
@@ -90,18 +91,40 @@ Agent 调用本地软件时按以下优先级依次选择：
 
 本机已安装 `agent-reach` v1.5.0 及配套上游 CLI（`yt-dlp`、`bili-cli`、`twitter-cli`、`rdt-cli`、`mcporter` + Exa、`OpenCLI`），直接支持网页正文抓取（Jina）、YouTube 字幕、RSS、V2EX、B 站搜索与 GitHub 查询。需要登录态的平台（Twitter/X、雪球、小红书、Reddit、Boss直聘）由用户在本地浏览器导出 Cookie 或登录专用 Profile 后供工具只读调用，Agent 不代管账号密码。
 
+### 2.8 浏览器与网页自动化（ego(lite)）
+
+本机浏览器选型为 **ego(lite)**（Chromium 内核，Windows 版目前为 beta）。选它不是为了换掉日常浏览器，而是因为它的 Agent 模型与本仓的派发方式吻合：
+
+- **Space 隔离**：Agent 在独立的 Space 里开标签页，不切换用户当前标签页、不抢键盘焦点；同一浏览器可并行多个任务，上限取决于本机内存与 CPU。
+- **沿用登录态**：首次启动可从 Chrome / Edge 导入资料，Agent 直接使用已登录的账号，不需要另配一套无头 Profile 或导出 Cookie。
+- **接口形态**：控制面是 `ego-browser` Skill（随应用安装，也可 `npx skills add github:CitroLabs/ego-lite/skills/ego-browser` 单独安装）。Agent 通过 stdin 提交一段 Node.js 流程，helper 已预注入，例如：
+
+  ```powershell
+  @'
+  const task = await useOrCreateTaskSpace('check campus notices')
+  await openOrReuseTab('https://example.edu/notice', { wait: true, timeout: 20 })
+  cliLog(await snapshotText())
+  await completeTaskSpace(task.name)
+  '@ | ego-browser nodejs
+  ```
+
+  核心 helper：`useOrCreateTaskSpace`、`openOrReuseTab`、`gotoAndWait`、`snapshotText`、`click`、`fillInput`、`typeText`、`pressKey`、`uploadFile`、`captureScreenshot`、`js`、`cdp`。`snapshotText()` 返回带 `@N` 引用的语义树，`@N` 只对最近一次快照有效，跨轮引用要用 `loc=...` 或 CSS selector。
+- **定位边界**：优先用于「必须有登录态、需要多步点击或上传文件」的网页任务（`info.web.browse`）。无登录态的抓取仍走 `agent-reach` / RSS；纯 HTML 转图仍走 Playwright 无头截图；付款、删除、对外发布照常停在确认点。
+
+已知限制（以官方文档为准）：Linux 版在路线图中、Windows 版为 beta；官方文档未列出 profile / 代理参数，也没有 MCP 或 REST 接口，驱动入口只有 `ego-browser`；会话仅限本机，不支持远程或容器内运行（DS-Bot 容器版因此需把浏览器任务派回工作站，见 [DS-Bot 入口 §2](ds-bot-entry.md#2-功能缺口与配套补充方案)）。
+
 ## 3. 工具在事件架构中的角色分类
 
 引入任何新工具前，需明确其在系统中的职责层级：
 
 | 角色层级 | 职责定义 | 典型工具示例 | 调用约束 |
 |---|---|---|---|
-| **事件采集源（Event Source）** | 从外部拉取或监听变化并生成原始输入 | `agent-reach`、`xxt`、`inotify` 文件监听、Git Hook | 仅负责采集并调用 `ev add`，不直接触发下游重操作 |
-| **执行器 / Provider** | 接收派发器调用，独立完成一项能力并返回退出码与摘要 | Home Assistant 服务调用、`biliup`、`orca` CLI、`ebook-convert` | 必须支持无交互运行、具备幂等性与明确退出码 |
+| **事件采集源（Event Source）** | 从外部拉取或监听变化并生成原始输入 | `agent-reach`、`xxt`、`FileSystemWatcher` 目录监听、Git Hook | 仅负责采集并调用 `ev add`，不直接触发下游重操作 |
+| **执行器 / Provider** | 接收派发器调用，独立完成一项能力并返回退出码与摘要 | Home Assistant 服务调用、`biliup`、`orca` CLI、`ebook-convert`、`ego-browser` | 必须支持无交互运行、具备幂等性与明确退出码 |
 | **内部工具（Internal Tool）** | 仅在某个 Worker 执行过程中作为底层命令被调用 | `ffmpeg`、`blender`、`reaper`、ImageMagick、Ghidra | 不直接订阅任务库事件 |
 | **显示端（Output Surface）** | 只读消费任务库与状态数据并渲染展示 | 墨水屏渲染服务、ThinkSmart View、DS-Bot Web | 只读展示，不产生独立的业务状态源 |
 
 ## 4. 维护与升级约定
 
-- 全机非 pacman 管理的软件统一接入 `upctl`（`upctl check` / `upctl update [nix|npm|craft|uv|comfy|git|blender|biliup|all]`），禁止遗留无法一键更新的手动安装包。
+- 全机软件统一接入 `upctl`（`upctl check` / `upctl update [winget|scoop|npm|craft|uv|comfy|git|blender|biliup|all]`），系统层由 `winget upgrade --all` 承担，禁止遗留无法一键更新的手动安装包。
 - 新工具引入时先在本文标为"待验证"，跑通一次完整的 CLI 自动化调用后再写入对应能力的 Provider 包。

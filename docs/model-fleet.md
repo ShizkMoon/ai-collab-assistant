@@ -2,17 +2,17 @@
 
 > 状态：设计中 · 上位文档：[架构总览 §2](architecture.md#2-意图分类与结构化路由)、[系统运维](platform-ops.md)、[开源复用清单](open-source-reuse.md)
 >
-> 本文定义模型注册表、`kind → 任务类别 → 模型` 的路由策略、多级降级链与缓存、批处理成本核算、16GB 显存分配机制，以及受限解码（Guided Decoding）与置信度温度校准方案。系统以 **LiteLLM 作为统一模型网关**，配合轻量级本地路由与 `flock` 显存锁运行。
+> 本文定义模型注册表、`kind → 任务类别 → 模型` 的路由策略、多级降级链与缓存、批处理成本核算、16GB 显存分配机制，以及受限解码（Guided Decoding）与置信度温度校准方案。系统以 **LiteLLM 作为统一模型网关**，配合轻量级本地路由与独占文件锁串行化显存使用。
 
 ## 0. 状态与缓存路径约定
 
-模型网关、校准数据库与权重缓存统一遵循 XDG 目录规范：
+模型网关、校准数据库与权重缓存的路径按 [工作站配置 §3](workstation-windows.md#3-目录布局) 的 Windows 目录约定放置：
 
 | 用途 | 路径 | 当前本机状态 |
 |---|---|---|
-| 运行时状态（花费记录、置信度校准、批处理队列） | `~/.local/state/aica/` | 父目录已存在 |
-| 模型权重缓存与导出数据 | `~/.local/share/aica/` | 父目录已存在 |
-| 大体积产物与备份暂存 | `/data/aica/` | 3.7T 挂载点已就绪，首次使用前需执行 `sudo mkdir -p /data/aica && sudo chown $USER /data/aica` |
+| 运行时状态（花费记录、置信度校准、批处理队列） | `%LOCALAPPDATA%\aica\state\` | 安装脚本创建 |
+| 模型权重缓存与导出数据 | `%LOCALAPPDATA%\aica\data\` | 安装脚本创建 |
+| 大体积产物与备份暂存 | `D:\aica\` | `D:` 数据卷已就绪，首次使用前需执行 `New-Item -ItemType Directory D:\aica` |
 
 ## 1. 模型注册表：`models.toml`
 
@@ -31,17 +31,28 @@
 
 LiteLLM 服务配置生成逻辑：
 
-```nix
-# modules/agent/litellm.nix
-let models = builtins.fromTOML (builtins.readFile ../models.toml);
-    entry = m: { model_name = m.id; litellm_params = {
-      model = if m.where == "cloud" then "${m.provider}/${m.id}" else "${m.engine}/${m.id}";
-      api_base = if m.where == "workstation" then "http://workstation.ts.net:${m.port}" else "http://127.0.0.1:${m.port}";
-      num_ctx = m.ctx;
-    } // lib.optionalAttrs (m.where == "cloud") { api_key = "os.environ/" + m.key_env; }; };
-in { services.litellm = { enable = true;
-      settings.model_list = map entry (builtins.filter (m: m.where != "n100") models);
-      environment.DATABASE_URL = "sqlite:////home/shizuku/.local/state/aica/litellm/spend.db"; }; }
+```python
+# %ProgramData%\aica\gen\litellm_config.py —— 由 models.toml 生成 LiteLLM 配置
+import os, pathlib, tomllib
+
+models = tomllib.loads(pathlib.Path("models.toml").read_text(encoding="utf-8"))["models"]
+spend = pathlib.Path(os.environ["LOCALAPPDATA"]) / "aica" / "state" / "litellm" / "spend.db"
+
+def entry(m):
+    params = {
+        "model": f"{m['provider']}/{m['id']}" if m["where"] == "cloud" else f"{m['engine']}/{m['id']}",
+        "api_base": (f"http://workstation.ts.net:{m['port']}" if m["where"] == "workstation"
+                     else f"http://127.0.0.1:{m['port']}"),
+        "num_ctx": m["ctx"],
+    }
+    if m["where"] == "cloud":
+        params["api_key"] = "os.environ/" + m["key_env"]
+    return {"model_name": m["id"], "litellm_params": params}
+
+config = {
+    "model_list": [entry(m) for m in models if m["where"] != "n100"],
+    "environment": {"DATABASE_URL": f"sqlite:///{spend.as_posix()}"},
+}
 ```
 
 ## 2. 按任务类别路由：`kind` → `task_class` → 模型
@@ -102,7 +113,7 @@ router_settings: { num_retries: 2, timeout: 20, allowed_fails: 2, cooldown_time:
 
 ## 4. 夜间批处理与成本统计
 
-标记为 `lane = "batch"` 的任务写入 `~/.local/state/aica/batch/queue.jsonl`，白天仅入队不执行；每日凌晨 01:00 由 `systemd.timer` 拉起处理，充分利用云端 API 夜间折扣时段与本地空闲算力。若队列中存在驻留超过 48 小时的任务，在早报中提示。
+标记为 `lane = "batch"` 的任务写入 `%LOCALAPPDATA%\aica\state\batch\queue.jsonl`，白天仅入队不执行；每日凌晨 01:00 由任务计划程序拉起处理，充分利用云端 API 夜间折扣时段与本地空闲算力。若队列中存在驻留超过 48 小时的任务，在早报中提示。
 
 系统每晚汇总三项成本来源并按 `kind` 关联（调用网关时附带 `metadata.tags = ["kind:<kind>", "task:<uuid>"]`）：
 
@@ -118,7 +129,7 @@ FROM daily_usage GROUP BY 1,2,3;
 
 ## 5. 本地推理显存分配（16GB VRAM）
 
-工作站 KDE Plasma 桌面运行在核显（iGPU）上，独显（RTX 4080 Laptop 16GB）在非图形渲染时段可全量供计算任务使用：
+工作站桌面合成运行在核显（iGPU）上，独显（RTX 4080 Laptop 16GB）在非图形渲染时段可全量供计算任务使用（在 NVIDIA 控制面板或 Windows 图形设置中把计算程序显式指定到独显）：
 
 | 模型或任务 | 权重显存（Q4） | 8k 上下文 KV Cache | 显存合计（GB） | 驻留策略 |
 |---|---|---|---|---|
@@ -130,23 +141,26 @@ FROM daily_usage GROUP BY 1,2,3;
 | ACE-Step 1.5 音乐生成 | ~4.0 | - | ~4.0 | 按需加载 |
 | ComfyUI（MOSS / SDXL / Flux） | 6.0–11.0 | - | 6.0–11.0 | 出图期间独占高显存，空闲回落至 ~3GB |
 
-常驻的 `qwen3-8b`（6.2GB）与 `bge-m3`（2.3GB）合计占用约 8.5GB，剩余约 7.5GB 供中小型按需任务使用。对于 ComfyUI 出图、14B 模型推理、Blender Cycles 渲染等高显存独占任务，统一通过 `~/.local/state/aica/gpu-lease` 文件锁串行化调度：
+常驻的 `qwen3-8b`（6.2GB）与 `bge-m3`（2.3GB）合计占用约 8.5GB，剩余约 7.5GB 供中小型按需任务使用。对于 ComfyUI 出图、14B 模型推理、Blender Cycles 渲染等高显存独占任务，统一通过 `%LOCALAPPDATA%\aica\state\gpu-lease` 文件锁（独占打开，进程退出自动释放）串行化调度：
 
-```bash
-# 所有高显存 Provider 启动前先获取文件锁，进程退出自动释放
-install -d ~/.local/state/aica
-exec 9>~/.local/state/aica/gpu-lease
-flock -w 120 9 || exit 75     # 75 = EX_TEMPFAIL，派发器收到后自动延后重试
+```powershell
+# 所有高显存 Provider 启动前先独占打开租约文件，进程退出自动释放
+$lease = Join-Path $env:LOCALAPPDATA 'aica\state\gpu-lease'
+$fs = [IO.File]::Open($lease, 'OpenOrCreate', 'ReadWrite', 'None')  # 拿不到即抛 IOException
+try { <启动 Provider> } finally { $fs.Dispose() }
 ```
 
-工作站常驻 vLLM 服务配置：
+租约等待 120 秒仍拿不到的，Provider 以退出码 75 结束（`EX_TEMPFAIL`），派发器收到后自动延后重试。常驻 vLLM 由 WinSW 包装为 Windows 服务，等价于：
 
-```nix
-systemd.services.vllm = { wantedBy = [ "multi-user.target" ];
-  serviceConfig = { ExecStart = "${pkgs.aica-vllm}/bin/vllm serve Qwen/Qwen3-8B-AWQ \
-      --port 8000 --max-model-len 8192 --gpu-memory-utilization 0.55 \
-      --guided-decoding-backend xgrammar --enable-prefix-caching";
-    Restart = "on-failure"; RestartSec = "10s"; }; };
+```xml
+<!-- %ProgramData%\aica\units\vllm.xml（WinSW） -->
+<service>
+  <id>vllm</id>
+  <executable>vllm.exe</executable>
+  <arguments>serve Qwen/Qwen3-8B-AWQ --port 8000 --max-model-len 8192 --gpu-memory-utilization 0.55 --guided-decoding-backend xgrammar --enable-prefix-caching</arguments>
+  <onfailure action="restart" delay="10 sec"/>
+  <startmode>Automatic</startmode>
+</service>
 ```
 
 ## 6. 受限解码分类接口：`decide(state, schema)`
@@ -182,7 +196,7 @@ def decide(state: str, labels: list[str], model="decide-local") -> dict[str, flo
 - `0.50 ≤ p < 0.85`：向用户发送卡片追问确认；
 - `p < 0.50`：归入待分类队列（`meta.triage.pending`）。
 
-各 `kind` 的具体阈值独立保存在 `~/.local/state/aica/calibration.db` 中，防止低频长尾能力因全局固定阈值过高而始终无法自动派发。
+各 `kind` 的具体阈值独立保存在 `%LOCALAPPDATA%\aica\state\calibration.db` 中，防止低频长尾能力因全局固定阈值过高而始终无法自动派发。
 
 ## 7. 置信度温度缩放校准（Temperature Scaling）
 

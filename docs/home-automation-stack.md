@@ -2,9 +2,9 @@
 
 > 状态：设计定稿（部署待常驻节点落地） · 上位文档：[宿舍智能家居方案](dorm-smart.md)、[网络与设备组网](network-fabric.md)
 >
-> 本文记录 Home Assistant + Mosquitto + Zigbee2MQTT + ESPHome 的选型、传感器刷机与接线方法、本地自动化分层兜底、密钥管理以及断电断网恢复行为。常驻节点因成本原因暂不采购（[ADR 0007](adr/0007-deferred-resident-node.md)），第 1 节中的 NixOS 模块配置属于当时方案，落地时需按所选发行版改写为容器或原生包安装，其余章节与部署形态无关。
+> 本文记录 Home Assistant + Mosquitto + Zigbee2MQTT + ESPHome 的选型、传感器刷机与接线方法、本地自动化分层兜底、密钥管理以及断电断网恢复行为。常驻节点因成本原因暂不采购（[ADR 0007](adr/0007-deferred-resident-node.md)），第 1 节曾记录 NixOS 模块配置，工作站改用 Windows 后已改写为部署形态无关的写法，其余章节与部署形态无关。
 >
-> **参考资料来源**：Zigbee2MQTT 官方文档、ESPHome 官方文档、`atc1441` / `pvvx` 开源固件仓库、Tailscale 官方文档；NixOS 特定配置项来自当时的 NixOS Wiki 与 `nixpkgs` 模块源码。
+> **参考资料来源**：Zigbee2MQTT 官方文档、ESPHome 官方文档、`atc1441` / `pvvx` 开源固件仓库、Tailscale 官方文档；早期 NixOS 特定配置项来自当时的 NixOS Wiki 与 `nixpkgs` 模块源码，现已按 Windows / 容器形态改写。
 
 ## 0. 核心选型汇总
 
@@ -15,90 +15,88 @@
 | 温湿度计（LYWSD03MMC） | 通过 TelinkFlasher 网页蓝牙 OTA 刷入 `pvvx` / `ATC` 开源固件，切换为 BTHome 广播格式（支持随时刷回原厂固件） |
 | 人体存在传感器（LD2410） | 选用 **LD2410C**（2.54mm 标准排针免焊接），5V 供电，通过硬件 UART（256000 8N1）接入 ESP32 运行 ESPHome 原生 `ld2410` 组件 |
 | 自动化兜底分层 | 物理开关控制灯具/插座优先配置 **Zigbee Direct Binding**；单板闭环逻辑写入 **ESPHome**；跨设备与通知逻辑放入 **Home Assistant** |
-| Zigbee 网络密钥 | 自定义 16 字节 `network_key` 并保存在 `secret.yaml` 中；**禁止在 NixOS `settings` 中直接写 `"GENERATE"`**（否则每次重启服务都会覆盖并重生成密钥导致全网失联） |
-| MQTT 认证管理 | Mosquitto 账号密码使用哈希文件，通过 `systemd` Credentials 或权限 600 的文件注入 |
+| Zigbee 网络密钥 | 自定义 16 字节 `network_key` 预先生成并保存在 `secret.yaml` 中；**禁止让 Z2M 自动生成**（否则配置被部署脚本覆盖时会重生成密钥导致全网失联） |
+| MQTT 认证管理 | Mosquitto 账号密码使用哈希文件，文件权限收紧到仅服务账号可读 |
 
 ## 1. Home Assistant 部署方式对比
 
-| 评估维度 | NixOS 原生模块（`services.home-assistant`） | OCI 容器（HA Container） | 独立 HAOS 镜像 |
+> 早在 NixOS 上曾用 `services.home-assistant` 声明式部署（当时方案）。工作站改为 Windows、且常驻节点仍未落地后，部署形态改为在下表三种里重新选择，原 Nix 模块配置不再适用。
+
+| 评估维度 | Windows 原生 Python venv | OCI 容器（HA Container，Docker Desktop / Podman） | 独立 HAOS 镜像 |
 |---|---|---|---|
-| 声明式管理程度 | **高**：`config` 属性集直接生成 `configuration.yaml`，仪表盘与组件依赖全部纳入 Flake | 仅容器启动参数声明式，`/config` 卷内配置需在 UI 中手动维护 | 完全依赖 Web UI 手动配置与备份 |
-| 升级与回滚 | 随 `nixos-rebuild` 升级，支持 generation 回滚（回滚跨大版本前需注意备份 `/var/lib/hass` 数据库） | 需手动更新镜像 Tag | 使用 HAOS 内置更新器 |
-| Zigbee 串口权限 | **零额外配置**：`zigbee2mqtt` 模块自动配置 `dialout` 组与 `DeviceAllow` | 需映射 `/dev/serial/by-id/...`，Rootless 容器下易遇到 `ttyUSB` 权限问题（`nixpkgs` #416817） | 直接插拔使用 |
-| 结论 | **待定**（原方案部署于 N100 NixOS 主机） | 待定 | 待定（常驻节点还需同时运行 DS-Bot、LiteLLM 等服务） |
+| 配置管理 | `configuration.yaml` + `!include` 目录，整目录纳入 Git 与 Restic | 容器启动参数声明式，`/config` 卷内配置仍手写在同一目录 | 完全依赖 Web UI 手动配置与备份 |
+| 升级与回滚 | `pip install --upgrade homeassistant`，回滚靠还原点与备份 | 固定镜像 Tag，回滚即改 Tag | 使用 HAOS 内置更新器 |
+| Zigbee 串口权限 | 需直通 COM 口（按 USB 描述符固定端口号，避免 COM 号漂移） | 需映射 `COM3` 之类的主机串口，容器内不能自动发现 | 直插直用 |
+| 结论 | 与工作站共用一套 Python 与 `upctl`，适合单机 | 依赖虚拟化层，与「纯 Windows 原生」取向冲突 | 推荐作为常驻节点落地时的首选 |
 
-### 1.1 `services.home-assistant` 常用配置项
+### 1.1 Home Assistant 常用配置项（`configuration.yaml`）
 
-| 配置选项 | 功能说明 | 注意事项 |
+| 配置项 | 功能说明 | 注意事项 |
 |---|---|---|
-| `config` | 对应 `configuration.yaml` 的 Nix 属性集 | 模块会自动解析并安装启用集成所需的 Python 依赖 |
-| `extraComponents` | 显式追加内置集成组件 | 首次初始化建议包含 `"isal"`、`"met"`、`"radio_browser"`、`"shopping_list"`、`"analytics"` |
-| `extraPackages` / `customComponents` / `customLovelaceModules` | 追加 Python 依赖包、自定义集成与前端卡片 | `nixpkgs` 已打包主流 HACS 组件与前端卡片 |
-| `configWritable` | 允许 Web UI 修改配置文件 | 建议保持默认只读，将 UI 编辑的自动化分离至 `!include automations.yaml` |
+| `default_config:` | 启用默认集成集合（前端、历史、日志等） | 子项按需显式覆盖 |
+| `http.use_x_forwarded_for` | 反向代理场景下记录真实来源 IP | 配合 `tailscale serve` 本地反代 |
+| `http.trusted_proxies` | 声明可信代理地址 | 只填本机回环地址，不要放通内网段 |
+| `automation: !include automations.yaml` | 自动化与主配置分离 | 自动化仍建议在 Web UI 编辑，主配置只保留 `!include` |
 
-```nix
-# hosts/n100/home-assistant.nix
-services.home-assistant = {
-  enable = true;
-  extraComponents = [ "isal" "met" "radio_browser" "google_translate" "shopping_list" "analytics" "esphome" "mqtt" ];
-  config = {
-    default_config = {};
-    "automation" = "!include automations.yaml";
-    http = {
-      use_x_forwarded_for = true;      # 配合 tailscale serve 本地反代
-      trusted_proxies = [ "127.0.0.1" "::1" ];
-    };
-  };
-};
+```yaml
+# configuration.yaml
+default_config:
+automation: !include automations.yaml
+http:
+  use_x_forwarded_for: true
+  trusted_proxies: [127.0.0.1, "::1"]
 ```
 
-**凭据安全注意事项**：`services.home-assistant.config` 渲染生成的配置文件存放在 `/nix/store` 中且对本机所有用户可读，因此**不要在 Nix 属性集内直接写入明文密码或 Token**。需要认证的集成（如 MQTT、ESPHome 加密密钥）统一通过 Web UI 的配置向导（Config Flow）录入，使密钥保存在权限受控的 `/var/lib/hass/.storage/` 目录下。
+**凭据安全注意事项**：`configuration.yaml` 与 `automations.yaml` 纳入 Git 时**不得出现明文密码或 Token**。需要认证的集成（MQTT、ESPHome 加密密钥等）统一通过 Web UI 的配置向导（Config Flow）录入，密钥保存在 `config/.storage/` 下，该目录只做 Restic 备份、不进 Git。
 
-## 2. Mosquitto、Zigbee2MQTT 与 ESPHome 模块配置
+## 2. Mosquitto、Zigbee2MQTT 与 ESPHome 配置
 
-### 2.1 Mosquitto（`services.mosquitto.*`）
+以下路径用 `{{dataDir}}` 表示各服务自身的数据目录，具体位置随部署形态而定（容器挂载卷或 Windows 原生服务的 `%ProgramData%\<service>\`）。
 
-由于 Home Assistant、Zigbee2MQTT 与本地桥接脚本均运行在同一台主机上，Mosquitto 默认仅监听本地回环地址 `127.0.0.1`，并为每个服务分配独立账号与 Topic ACL。密码文件通过 `hashedPasswordFile` 引用（使用 `nix shell nixpkgs#mosquitto -c mosquitto_passwd -c /tmp/pw <user>` 生成），由 `systemd` `LoadCredential` 安全加载，避免哈希值写入 `/nix/store`：
+### 2.1 Mosquitto
 
-```nix
-services.mosquitto = {
-  enable = true;
-  listeners = [{
-    address = "127.0.0.1";
-    users.zigbee2mqtt = {
-      hashedPasswordFile = "/var/lib/mosquitto-secrets/z2m.pwhash";
-      acl = [ "readwrite zigbee2mqtt/#" "readwrite homeassistant/#" ];
-    };
-    users.ha = {
-      hashedPasswordFile = "/var/lib/mosquitto-secrets/ha.pwhash";
-      acl = [ "readwrite homeassistant/#" "readwrite zigbee2mqtt/#" ];
-    };
-  }];
-};
+由于 Home Assistant、Zigbee2MQTT 与本地桥接脚本均运行在同一台主机上，Mosquitto 默认仅监听本地回环地址 `127.0.0.1`，并为每个服务分配独立账号与 Topic ACL。密码用 `mosquitto_passwd -c <file> <user>` 生成哈希文件，权限收紧到仅服务账号可读：
+
+```conf
+# mosquitto.conf
+listener 1883 127.0.0.1
+allow_anonymous false
+password_file {{dataDir}}/passwd
+acl_file      {{dataDir}}/acl
 ```
 
-### 2.2 Zigbee2MQTT（`services.zigbee2mqtt.*`）
+```
+# acl
+user zigbee2mqtt
+topic readwrite zigbee2mqtt/#
+topic readwrite homeassistant/#
+user ha
+topic readwrite homeassistant/#
+topic readwrite zigbee2mqtt/#
+```
 
-`nixpkgs` 的 `zigbee2mqtt` 模块会在每次服务启动前（`ExecStartPre`）将 `settings` 渲染出的 YAML 复制覆盖到 `${dataDir}/configuration.yaml`，并自动根据 `settings.serial.port` 配置 `systemd` 的 `DeviceAllow` 权限。
+### 2.2 Zigbee2MQTT
+
+Z2M 原生配置放在 `{{dataDir}}/configuration.yaml`。**Windows 下串口必须按 USB 设备描述符固定，不能用 COM 号**——换个接口 COM 号就会漂移，用 `serial.port` 写 COM 号等于把配对状态绑死在物理插口上。稳妥做法是在设备管理器里按硬件 ID 查端口，或让 Z2M 使用 `by-id` 等价的目标（Windows 侧可借助 `usbip` / 固定端口映射实现）。
 
 | 配置键 | 设定值 | 说明 |
 |---|---|---|
-| `serial.port` | `"/dev/serial/by-id/usb-..."` | **必须填写 `/dev/serial/by-id/` 下的持久路径**，防止更换 USB 接口或重启后设备号漂移 |
-| `serial.adapter` | `"ember"`（ZBDongle-E）或 `"zstack"`（ZBDongle-P） | ZBDongle-E 使用新版 `ember` 驱动（旧名 `ezsp` 已废弃） |
+| `serial.port` | 协调器的固定串口标识 | **不要写裸 COM 号**，防止更换 USB 接口或重启后设备号漂移 |
+| `serial.adapter` | `ember`（ZBDongle-E）或 `zstack`（ZBDongle-P） | ZBDongle-E 使用新版 `ember` 驱动（旧名 `ezsp` 已废弃） |
 | `serial.rtscts` | `false` | ZBDongle-E / P 均不使用硬件流控，保持关闭 |
-| `mqtt.password` | `"!secret.yaml mqtt_password"` | 从 `${dataDir}/secret.yaml` 读取密码 |
-| `advanced.network_key` | `"!secret.yaml network_key"` | **切勿在 Nix 配置中写 `"GENERATE"`**（见下方说明） |
+| `mqtt.password` | `"!secret.yaml mqtt_password"` | 从 `{{dataDir}}/secret.yaml` 读取密码 |
+| `advanced.network_key` | `"!secret.yaml network_key"` | **切勿写 `"GENERATE"`**（见下方说明） |
 | `advanced.channel` | `15` / `20` / `25` | 避开宿舍 2.4GHz Wi-Fi 主信道（见 §3.4） |
 | `permit_join` | `false` | 日常保持关闭，仅在添加新设备时通过 Web 前端临时开启 |
 
-**NixOS 下配置 `zigbee2mqtt` 的两项关键注意事项**：
+**配置 `zigbee2mqtt` 的两项关键注意事项**：
 
-1. **禁止在 Nix 配置中写 `network_key = "GENERATE"`**：Z2M 原生机制是在首次启动生成随机密钥后回写 `configuration.yaml`；但 NixOS 模块每次启动服务都会用 `/nix/store` 里的模板覆盖 `configuration.yaml`。若写成 `"GENERATE"`，每次重启都会生成新密钥并与协调器 NVRAM 中保存的网络状态冲突（报错 `configuration-adapter mismatch`）。正确做法是预先生成 16 字节随机密钥写入 `/var/lib/zigbee2mqtt/secret.yaml`，并在 Nix 中配置 `settings.advanced.network_key = "!secret.yaml network_key";`。
-2. **设备别名与分组保存在数据目录**：将 `devices = "devices.yaml"` 与 `groups = "groups.yaml"` 指向 `dataDir` 内部文件，即可在 Z2M Web 前端直接重命名设备而不会被 `nixos-rebuild` 覆盖。
+1. **预先生成 `network_key` 再写死，不要交给 Z2M 自动生成。** Z2M 首次启动时若没有密钥会随机生成并回写 `configuration.yaml`；一旦 `configuration.yaml` 被部署脚本或模板覆盖、又恰好回到 `"GENERATE"`，就会重新生成密钥，与协调器 NVRAM 中保存的网络状态冲突（报错 `configuration-adapter mismatch`），全网失联。正确做法是预先生成 16 字节随机密钥写入 `{{dataDir}}/secret.yaml`，`configuration.yaml` 里只保留 `advanced.network_key: "!secret.yaml network_key"`，部署脚本不覆盖该文件。
+2. **设备别名与分组保存在数据目录**：把 `devices` 与 `groups` 指向 `{{dataDir}}` 内部文件（默认就是），在 Z2M Web 前端重命名设备即可持久化，升级镜像或重装服务不会丢。
 
-### 2.3 ESPHome（`services.esphome.*`）
+### 2.3 ESPHome
 
-ESPHome 仅在编译与 OTA 更新固件时需要开启 Dashboard 服务（默认端口 `6052`）；日常运行时，已刷好固件的 ESP32 节点直接通过 ESPHome Native API（加密 TCP 长连接）与 Home Assistant 通信，不依赖 `esphome.service` 常驻。
+ESPHome 仅在编译与 OTA 更新固件时需要开启 Dashboard 服务（默认端口 `6052`）；日常运行时，已刷好固件的 ESP32 节点直接通过 ESPHome Native API（加密 TCP 长连接）与 Home Assistant 通信，不依赖常驻的 `esphome` 服务。
 
 ## 3. 硬件选购、刷机与接线指南
 
@@ -192,4 +190,4 @@ Zigbee 设备直连绑定（Direct Binding）可在 Z2M Web 前端的"绑定（B
 
 - **灯具与插座上电状态（`power_on_behavior`）**：在 Z2M 中将宿舍灯具的 `power_on_behavior` 统一设为 `off`（或 `previous`），防止夜间宿舍恢复供电时所有灯光突然全亮；将路由器、常驻节点与充电器所在插座设为 `on`（来电自动导通）。
 - **Home Assistant 重启补偿**：HA 重启期间错过的边沿事件不会自动重放，且正在执行中的长时间 `delay` 或 `wait_template` 会被中断。因此，超过 5 分钟的延迟操作统一改为基于时间戳的定时触发，或在 `homeassistant.start` 事件触发时检查当前传感器状态进行补偿。
-- **Z2M 数据目录备份**：将 `/var/lib/zigbee2mqtt`（包含 `configuration.yaml`、`secret.yaml`、`coordinator_backup.json`、`devices.yaml`、`database.db`）纳入每日 Restic 备份，更换协调器硬件或重装系统时可直接恢复全网配对状态。
+- **Z2M 数据目录备份**：将 Z2M 数据目录（包含 `configuration.yaml`、`secret.yaml`、`coordinator_backup.json`、`devices.yaml`、`database.db`）纳入每日 Restic 备份，更换协调器硬件或重装系统时可直接恢复全网配对状态。

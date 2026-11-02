@@ -11,7 +11,7 @@
 | 触发入口 | 接入链路 |
 | --- | --- |
 | **DS-Bot 对话上传** | 用户在手机或桌面将电子书文件发送给 DS-Bot → 入口创建 `work.book.polish` 任务 → 派发器启动 Orca Run |
-| **本地目录自动监听** | 本地待处理目录新增文件 → `systemd.path`（`inotify`）触发 `ev add --kind work.book.polish` → 进入同一条派发链路 |
+| **本地目录自动监听** | 本地待处理目录新增文件 → 文件系统监听守护进程（`FileSystemWatcher`）触发 `ev add --kind work.book.polish` → 进入同一条派发链路 |
 
 整条流水线由协调 Worker 按阶段推进，每个阶段完成时向任务库写入一句话执行摘要，不在后台静默吞掉异常。
 
@@ -66,4 +66,4 @@
 ## 4. 关联工具链与本机状态
 
 - **本机已就绪工具**：Calibre `9.16.0`（含 `calibredb`、`ebook-convert`、`ebook-meta`）、`cli-anything-calibre`、Kindle KPW5（已越狱安装 KOReader，`/mnt/us/fonts/` 已预置思源宋体、Literata 与苹方字体）。
-- **待按需补装工具**：`epubcheck`、`pandoc`、`typst` / `weasyprint`（统一通过 pacman 或 `upctl` 安装）。
+- **待按需补装工具**：`epubcheck`、`pandoc`、`typst` / `weasyprint`（统一通过 `winget` 或 `upctl` 安装）。

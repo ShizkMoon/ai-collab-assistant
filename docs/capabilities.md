@@ -7,7 +7,7 @@
 ## 1. 能力声明与 Provider 实现分离
 
 - **能力（Capability）**：声明 `kind` 名称、功能简述、正反触发示例、所需软硬件依赖与自治等级。入口意图分类器仅针对 `kind` 进行路由。
-- **实现（Provider）**：具体的工具链或脚本，源码与安装脚本放入 `~/agent-src/tools/`，安装至 `~/.local/bin` 或 `/usr/local/bin`，由 `upctl` 统一更新。
+- **实现（Provider）**：具体的工具链或脚本，源码与安装脚本放入 `%USERPROFILE%\agent-src\tools\`，安装至 `%USERPROFILE%\.local\bin\`，由 `upctl` 统一更新。
 
 ```toml
 # capabilities/work.video.make.toml
@@ -22,7 +22,7 @@ autonomy = "L2"                  # 可选，见总体架构设计 §5
 enabled = true
 ```
 
-能力、场景与端口定义统一放在 `/etc/aica/` 下并纳入 Git 管理，随 btrfs 快照留存版本。**新编写的能力默认设置 `enabled = false`**，经过提案与影子测试达标后再正式启用（见 [ADR 0005](adr/0005-proposal-shadow-promotion.md)）。
+能力、场景与端口定义统一放在 `%ProgramData%\aica\` 下并纳入 Git 管理，随 `restic` 备份与系统还原点留存版本。**新编写的能力默认设置 `enabled = false`**，经过提案与影子测试达标后再正式启用（见 [ADR 0005](adr/0005-proposal-shadow-promotion.md)）。
 
 ## 2. `kind` 分类清单
 
@@ -54,6 +54,7 @@ enabled = true
 | `info.feed.item` | 将值得跟进的单条订阅内容录入任务库 | 同上 |
 | `info.paper.track` | arXiv 论文关键词追踪与归档 | arXiv RSS + Zotero |
 | `info.price.watch` | 商品价格监控与降价提醒 | `changedetection.io` |
+| `info.web.browse` | 需要登录态或交互的网页操作（查询、下单前填表、下载已购内容），不负责付款与提交 | `ego-browser`（ego(lite) Skill，见 [本机工具链选型 §2.8](local-toolchain.md#28-浏览器与网页自动化egolite)） |
 | `info.recall` | 检索历史任务记录、笔记与会话（"上次是怎么处理的"） | `kn` CLI（见 [知识库与记忆分层](knowledge-memory.md)） |
 
 ### 软件开发与系统维护
@@ -67,9 +68,9 @@ enabled = true
 | `work.code.verify` | 在隔离终端执行构建与测试并检查退出码 | `orca terminal wait --for exit`、`just check` |
 | `work.code.review` | 调用异构厂商模型审阅代码 Diff | Orca Worktree + LiteLLM |
 | `work.code.merge` | 创建 PR 并在 CI 通过后自动合并 | `gh pr merge --auto` |
-| `work.code.release` | 打标签发版、更新 Nix 软件源或 `upctl` 组件 | `gh release`、`upctl update <section>` |
+| `work.code.release` | 打标签发版、更新 `winget` / Scoop 或 `upctl` 组件 | `gh release`、`upctl update <section>` |
 | `work.repo.patrol` | 仓库依赖更新与 CI 失败巡检 | Renovate、`gh` CLI |
-| `meta.system.update` | 系统与各组件更新、更新前快照、失败回滚 | `upctl update`、`snapper` |
+| `meta.system.update` | 系统与各组件更新、更新前建还原点、失败回滚 | `upctl update`、`Checkpoint-Computer` |
 
 ### 逆向工程与安全分析
 
@@ -138,7 +139,7 @@ enabled = true
 | `net.egress` | 校园网多出口状态变更与代理状态同步 | AX6000 `hotplug` 脚本（见 [网络与设备组网](network-fabric.md)） |
 | `net.wake` | 已停用：单机方案下没有第二台节点发出 WoL，工作站改为接交流电时保持唤醒 | - |
 
-注：`net.github`、`net.nix` 等属于能力配置中 `needs` 字段的**环境依赖标识**，并非任务 `kind`。
+注：`net.github`、`workstation.gpu` 等属于能力配置中 `needs` 字段的**环境依赖标识**，并非任务 `kind`。
 
 ### 个人媒体库
 
@@ -158,7 +159,7 @@ enabled = true
 | `meta.scene.record` | 将近期连续执行的一组操作固化为可复用的场景配置 |
 | `meta.scene.<id>` | 记录一次自动化场景的执行结果（如 `meta.scene.morning`） |
 | `meta.contest.run` | 并行运行多个 Provider 生成候选方案并收集人工选择结果 |
-| `meta.device.discovered` | 局域网发现新设备时的接入提示（见 [网络与设备组网 §6](network-fabric.md#6-设备接入方式)） |
+| `meta.device.discovered` | 局域网发现新设备时的接入提示（见 [网络与设备组网 §5](network-fabric.md#5-外部设备接入方式汇总)） |
 | `meta.triage.pending` | 未命中任何规则或低置信度任务的待人工分类入口 |
 
 ### 系统自检事件（`system.*`）
@@ -173,7 +174,7 @@ enabled = true
 | `system.net.egress` | AX6000 `hotplug` | 路由器出口或透明代理状态变化，触发 `parked` 任务恢复检查 |
 | `system.power.*` | NUT 守护进程 | 市电中断、UPS 电量低或市电恢复事件 |
 | `system.render.failed` | 渲染管线服务 | 显示端图像渲染或下发失败（终端画面保留上一帧） |
-| `system.host.journal` | 远端主机日志 | 远端服务器关键 systemd 日志告警接入 |
+| `system.host.journal` | 远端主机日志 | 远端服务器关键服务日志告警接入 |
 
 ## 3. 场景配置示例
 
@@ -182,7 +183,7 @@ enabled = true
 id = "start-work"
 triggers = ["me: 开始工作", "nfc: desk"]
 steps = [
-  { action = "plasma.activity", args = { name = "work" } },
+  { action = "desktop.virtual", args = { name = "work" } },
   { action = "home.light.focus" },
   { action = "info.feed.digest", args = { short = true } },
   { action = "ev.ls", args = { today = true } },
@@ -195,7 +196,7 @@ steps = [
 
 | 维护操作 | 标准流程 |
 |---|---|
-| 升级或更换底层工具 | 修改对应 Provider 的安装脚本 → 执行 `upctl update` → 异常时 `downgrade` 或回滚快照 |
+| 升级或更换底层工具 | 修改对应 Provider 的安装脚本 → 执行 `upctl update` → 异常时 `winget install --version` 或回滚还原点 |
 | 新增能力 | 先核对 [开源复用清单](open-source-reuse.md)；编写能力 TOML 与 Provider 包（默认 `enabled = false`）；经影子测试验证达标后启用 |
 | 能力组合调用 | 通过创建带 `parent` 的子任务进行编排（如视频制作任务派生配乐子任务），不在 Provider 内部硬编码耦合其他能力的脚本 |
 | 能力下线 | 设置 `enabled = false` 观察 90 天后移除配置，并将旧 `kind` 在路由表中映射到替代能力 |

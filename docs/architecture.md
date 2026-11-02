@@ -13,7 +13,7 @@
 | **能力层** | 声明系统能处理哪些事务 | 视频制作、配乐生成、长文写作、账单整理、家居场景等 | 开放集合，按需扩充 | [能力目录](capabilities.md) |
 | **状态层** | 追踪任务所处阶段 | 九种状态：`new` / `doing` / `waiting` / `blocked` / `escalated` / `failed` / `stalled` / `spec` / `parked` | 封闭状态机 | [事件与任务规格](event-spec.md) |
 | **执行层** | 具体调用什么工具完成任务 | Orca Worker、CLI 工具、HA 服务调用、浏览器与 GUI 自动化 | 底层实现可随时替换 | [系统拓扑](system-topology.md)、[本机工具链选型](local-toolchain.md) |
-| **设施层** | 算力、网络与硬件运行环境 | 工作站、AX6000、手机、墨水屏、各类传感器 | 物理设备 + 快照与包管理 | [工作站配置](workstation-arch.md)、[智能家居技术栈](home-automation-stack.md) |
+| **设施层** | 算力、网络与硬件运行环境 | 工作站、AX6000、手机、墨水屏、各类传感器 | 物理设备 + 快照与包管理 | [工作站配置](workstation-windows.md)、[智能家居技术栈](home-automation-stack.md) |
 | **知识层** | 检索历史任务与个人文档 | 任务记录、笔记、会话记录、命令历史的混合检索库 | 可从源数据重建 | [知识库与记忆分层](knowledge-memory.md) |
 
 **人工确认点**固定为三类：**付款、删除、对外发布**（[ADR 0002](adr/0002-three-confirmation-points.md)）。其余操作默认直接执行；可逆操作配备默认 5 分钟的撤销窗口，窗口期内可一键回退。
@@ -37,7 +37,7 @@ flowchart LR
   - 工作站 GPU：本地常驻 7–9B 模型（vLLM / Ollama）配合受限解码（XGrammar / GBNF）；
   - 云服务器 CPU：中文小型 Embedding 模型 + SetFit 少样本分类器，在工作站休眠时提供兜底分类；
   - 云端 API：DeepSeek / Qwen，处理长上下文或复杂长尾输入。
-  - 三类后端统一通过 [LiteLLM](open-source-reuse.md#3-模型与推理) 网关调用，由网关管理路由与故障回退。
+  - 三类后端统一通过 [LiteLLM](open-source-reuse.md#3-模型路由与知识检索) 网关调用，由网关管理路由与故障回退。
 - **任务记录即训练样本**：用户每次在卡片上确认或修正分类结果，都会作为带标签样本存入本地库，用于定期更新分类器与置信度阈值。
 - **调用开销**：机器事件按确定性规则直接映射，不调用模型；自然语言输入每条仅在入口分类一次，主要算力消耗集中在后续 Worker 执行阶段。
 
@@ -93,7 +93,7 @@ to    = "notify"             # 到期提醒
 | `ha:*` | 智能家居设备控制、HA 脚本调用 | Home Assistant REST / 服务调用 |
 | `cli:*` | 单次确定性命令执行 | 现成 CLI 工具（`ffmpeg`、`calibre`、`double-entry-generator` 等） |
 | `n8n:*` | 外部 SaaS 与 Webhook 编排 | n8n 工作流（Webhook、IMAP 邮件、RSS） |
-| `notify` | 纯消息提醒 | ntfy / KDE Connect / IM |
+| `notify` | 纯消息提醒 | ntfy / Phone Link / IM |
 | `route` | 按效果类型确定投递目标并发送 | `sources` / `surfaces` 端口表，见 [输入端口与输出路由](output-routing.md) |
 | `me` | 需人工确认或亲自处理的事项 | 交互卡片：`[执行] [延后] [忽略]` |
 | `render` | 触发显示端画面刷新 | [多端显示仲裁](surface-arbiter.md) |
@@ -109,9 +109,9 @@ to    = "notify"             # 到期提醒
 |---|---|---|
 | 状态指示灯 | 熄灭=无待办，琥珀色=有待确认事项，红色=高优告警或故障 | WLED |
 | 墨水屏（门口 / 桌面 / 床头） | 出门清单 / 今日待办 / 明日首项任务 | OpenEPaperLink / LilyGo T5，见 [统一渲染管线](render-pipeline.md) |
-| Plasma 桌面组件、KRunner | 待处理任务计数、快捷录入任务 | KDE Plasma、`plasma-manager` |
+| 桌面组件、PowerToys Run | 待处理任务计数、快捷录入任务 | Rainmeter 或 WebView2 面板、PowerToys Run 插件 |
 | ThinkSmart View | 桌面触控面板与语音入口 | HA Dashboard / Kiosk 浏览器，见 [桌面主控台](thinksmart-view-console.md) |
-| 手机 / 手表 | 待确认计数与即时推送 | KDE Connect、ntfy、HA Companion |
+| 手机 / 手表 | 待确认计数与即时推送 | Phone Link、ntfy、HA Companion |
 | 音箱 / 电视 / 耳机 | 语音播报与播放 | 投递路由的 `playback` 效果，见 [输入端口与输出路由 §5](output-routing.md#5-输出效果类型优先于设备) |
 | IM 客户端 | 交互确认卡片、每日早报与晚报 | DS-Bot / AstrBot |
 | 热敏打印机 | 纸质当日清单、采购清单 | `python-escpos` |
@@ -122,13 +122,13 @@ to    = "notify"             # 到期提醒
 
 ## 7. 知识检索与周期复盘
 
-- **知识检索**：通过 `info.recall`（底层 CLI 为 `kn`）检索任务记录、笔记、历史会话与命令历史，数据统一存储在 `~/knowledge/kb.sqlite`（SQLite FTS5 + jieba 分词 + `sqlite-vec` 向量索引）。具体实现见 [知识库与记忆分层](knowledge-memory.md)。
+- **知识检索**：通过 `info.recall`（底层 CLI 为 `kn`）检索任务记录、笔记、历史会话与命令历史，数据统一存储在 `%LOCALAPPDATA%\aica\data\knowledge\kb.sqlite`（SQLite FTS5 + jieba 分词 + `sqlite-vec` 向量索引）。具体实现见 [知识库与记忆分层](knowledge-memory.md)。
 - **周报统计**：汇总本周完成任务、耗时分布、高频重复事项（作为新规则或新能力的提案线索）以及各能力的返工次数。
 - **年度总结**：年末基于全年任务记录与创作产物自动汇总生成。
 
 ## 8. 通知模式
 
-系统提供工作、生活、专注、勿扰、外出、出差六种通知模式，并与 KDE Plasma Activities 双向联动。通知模式仅调整推送的时机与渠道，详见 [Personal Agent 设计](personal-agent.md)。
+系统提供工作、生活、专注、勿扰、外出、出差六种通知模式，并与 PowerToys Workspaces 切换的虚拟桌面联动。通知模式仅调整推送的时机与渠道，详见 [Personal Agent 设计](personal-agent.md)。
 
 ## 9. 实施阶段
 

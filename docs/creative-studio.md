@@ -52,15 +52,15 @@
 
 视频制作任务的命令行拆解示例：
 
-```bash
-THREAD=$(uuidgen)
+```powershell
+$thread = [guid]::NewGuid().ToString()
 ev add "剪辑周末爬山 vlog" --kind work.video.make   # 假设返回 id=17
-task 17 modify thread:$THREAD +video
+task 17 modify thread:$thread +video
 
-ev add "导入与归一化素材" --kind work.video.ingest --parent 17 thread:$THREAD
-ev add "生成配乐（ACE-Step）" --kind work.music.compose --parent 17 thread:$THREAD
+ev add "导入与归一化素材" --kind work.video.ingest --parent 17 thread:$thread
+ev add "生成配乐（ACE-Step）" --kind work.music.compose --parent 17 thread:$thread
 # 按 thread 查询整条流水线状态
-task thread:$THREAD export
+task thread:$thread export
 ```
 
 ## 3. 多候选比选（Best-of-N）
@@ -136,12 +136,12 @@ run/04-review/cover/choice.json   { "chosen": "cand-02", "rejected": ["cand-01",
 
 ## 5. 视频制作管线
 
-### 5.1 工程目录结构（`~/Repo/video/<片名>/`）
+### 5.1 工程目录结构（`D:\repo\video\<片名>\`）
 
-在 `~/.agents/notes/video.md`（以原生文件为准）规范的基础上，补充 `run/` 与 `out/` 目录：
+在 `%USERPROFILE%\.agents\notes\video.md`（以原生文件为准）规范的基础上，补充 `run/` 与 `out/` 目录：
 
 ```
-~/Repo/video/<片名>/
+D:\repo\video\<片名>\
   NOTES.md               记录使用的 Skill、目标时长与画幅、BGM 与音效出处及许可协议
   run/
     01-ingest/manifest.json
@@ -159,15 +159,15 @@ run/04-review/cover/choice.json   { "chosen": "cand-02", "rejected": ["cand-01",
 
 **素材归一化、分镜检测与静音裁剪**：
 
-```bash
-mkdir -p run/01-ingest run/02-plan
+```powershell
+New-Item -ItemType Directory -Force run/01-ingest, run/02-plan | Out-Null
 # 统一转码为 1080p 中间格式，确保后续拼接参数一致
-for f in assets/raw/*.MP4; do
-  ffmpeg -hide_banner -loglevel error -i "$f" \
-    -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,setsar=1" \
-    -c:v libx264 -preset fast -crf 18 -c:a aac -b:a 192k \
-    "run/01-ingest/$(basename "${f%.*}").mp4"
-done
+Get-ChildItem assets/raw/*.MP4 | ForEach-Object {
+  ffmpeg -hide_banner -loglevel error -i $_.FullName `
+    -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,setsar=1" `
+    -c:v libx264 -preset fast -crf 18 -c:a aac -b:a 192k `
+    (Join-Path run/01-ingest ($_.BaseName + ".mp4"))
+}
 
 scenedetect -i run/01-ingest/*.mp4 detect-adaptive list-scenes -o run/01-ingest/
 auto-editor run/01-ingest/clip.mp4 --edit audio:threshold=-32dB \
@@ -184,26 +184,28 @@ auto-editor run/01-ingest/clip.mp4 --edit audio:threshold=-32dB \
 
 **字幕识别、音画混流与字幕压制**：
 
-```bash
-funasr --model sensevoice-small --input run/05-assemble/final.wav \
+```powershell
+funasr --model sensevoice-small --input run/05-assemble/final.wav `
   --output-format srt > run/05-assemble/subs.srt
 
 # 混音（人声标准化至 -14 LUFS，背景音乐压低 8dB 并加限幅）
-ffmpeg -i run/03-draft/draft.mp4 -i run/05-assemble/bgm.wav \
-  -filter_complex "[0:a]loudnorm=I=-14[a0];[1:a]volume=-8dB,alimiter=limit=0.9[a1];[a0][a1]amix=inputs=2:duration=first[aout]" \
+ffmpeg -i run/03-draft/draft.mp4 -i run/05-assemble/bgm.wav `
+  -filter_complex "[0:a]loudnorm=I=-14[a0];[1:a]volume=-8dB,alimiter=limit=0.9[a1];[a0][a1]amix=inputs=2:duration=first[aout]" `
   -map 0:v -map "[aout]" -c:v copy -c:a aac -b:a 192k run/05-assemble/final.mp4
-ffmpeg -i run/05-assemble/final.mp4 \
-  -vf "subtitles=run/05-assemble/subs.srt:force_style='FontName=Noto Sans SC,FontSize=22'" \
-  -c:v libx264 -crf 20 -preset slow -c:a copy run/06-export/$(basename $PWD).mp4
+# Windows 下 subtitles 滤镜的路径分隔符与盘符冒号需要转义
+$sub = (Resolve-Path run/05-assemble/subs.srt).Path -replace '\\','/' -replace '^([A-Za-z]):','$1\:'
+ffmpeg -i run/05-assemble/final.mp4 `
+  -vf "subtitles='$sub':force_style='FontName=Microsoft YaHei,FontSize=22'" `
+  -c:v libx264 -crf 20 -preset slow -c:a copy ("run/06-export/" + (Split-Path $PWD -Leaf) + ".mp4")
 ```
 
 ### 5.3 交付前抽帧与编码检查
 
-```bash
-for t in 0 30 75 120 180; do
-  ffmpeg -ss $t -i run/06-export/<片名>.mp4 -frames:v 1 -q:v 2 /tmp/frame-$t.jpg
-done
-ffprobe -v error -show_entries format=duration,size:stream=width,height,codec_name \
+```powershell
+foreach ($t in 0, 30, 75, 120, 180) {
+  ffmpeg -ss $t -i run/06-export/<片名>.mp4 -frames:v 1 -q:v 2 "$env:TEMP\frame-$t.jpg"
+}
+ffprobe -v error -show_entries format=duration,size:stream=width,height,codec_name `
   -of default=nw=1 run/06-export/<片名>.mp4
 ```
 
@@ -213,11 +215,11 @@ ffprobe -v error -show_entries format=duration,size:stream=width,height,codec_na
 ACE-Step 生成候选曲目 → REAPER ReaScript 无头后期处理 → 导出分轨（Stems）→ 混音交付
 ```
 
-```bash
+```powershell
 # 生成 2 个不同风格的候选版本供比选
-ace-step generate --prompt "cinematic, warm strings, 90 bpm, hopeful" \
+ace-step generate --prompt "cinematic, warm strings, 90 bpm, hopeful" `
   --duration 180 --seed 42 -o run/04-review/bgm/cand-01.wav
-ace-step generate --prompt "city pop, 100 bpm, nostalgic guitar" \
+ace-step generate --prompt "city pop, 100 bpm, nostalgic guitar" `
   --duration 180 --seed 7 -o run/04-review/bgm/cand-02.wav
 
 # 调用 REAPER 无头渲染工程
@@ -237,15 +239,15 @@ reaper.Undo_EndBlock("bgm post", -1)
 
 **本机已安装工具链替代路径**（在 ACE-Step 与 REAPER 尚未安装时使用 FluidSynth + LilyPond）：
 
-```bash
-fluidsynth -ni -F run/05-assemble/melody.wav -r 44100 -g 0.8 \
-  /nix/store/*-Fluid-3/share/soundfonts/FluidR3_GM2-2.sf2 run/05-assemble/melody.mid
+```powershell
+fluidsynth -ni -F run/05-assemble/melody.wav -r 44100 -g 0.8 `
+  "$env:ProgramFiles\FluidSynth\share\soundfonts\FluidR3_GM2-2.sf2" run/05-assemble/melody.mid
 lilypond -o run/06-export run/05-assemble/score.ly
 ```
 
 ## 7. 显卡显存分配（RTX 4080 Laptop 16GB）
 
-本机实测数据：ComfyUI 运行 MOSS-Image SFT int8（1024×1024，25 步）单张耗时 36–52 秒，峰值显存占用 10.7GB；配置 `--disable-smart-memory --reserve-vram 2` 后空闲显存回落至约 3.0GB。由于本机直接运行 `nvidia-smi` 会触发段错误（Segfault），显存查询统一通过 Python 调用 NVML 动态库完成。
+本机实测数据：ComfyUI 运行 MOSS-Image SFT int8（1024×1024，25 步）单张耗时 36–52 秒，峰值显存占用 10.7GB；配置 `--disable-smart-memory --reserve-vram 2` 后空闲显存回落至约 3.0GB。显存查询统一通过 Python 调用 NVML 动态库完成，不依赖 `nvidia-smi` 的文本输出。
 
 | 任务类型 | 显存占用（VRAM） | 能否与 ComfyUI 空闲态共存 | 调度说明 |
 |---|---|---|---|
@@ -259,19 +261,23 @@ lilypond -o run/06-export run/05-assemble/score.ly
 | Blender Headless（Eevee / Cycles） | 2–8 GB | 视场景复杂度而定 | Cycles OptiX 渲染需独占显存锁 |
 | Godot Headless 游戏导出 | 0 | 可共存 | `godot --headless --export-release` |
 
-**显存互斥规则**：同一时刻只允许运行一个高显存生成任务（ComfyUI 出图、ACE-Step 生成、Blender 渲染或本地大模型推理），所有高显存 Provider 共用 `~/.local/state/aica/gpu-lease` 文件锁（见 [模型路由与本地推理 §5](model-fleet.md#5-本地推理显存分配16gb-vram)）。CPU 类任务可并发执行。
+**显存互斥规则**：同一时刻只允许运行一个高显存生成任务（ComfyUI 出图、ACE-Step 生成、Blender 渲染或本地大模型推理），所有高显存 Provider 共用 `%LOCALAPPDATA%\aica\state\gpu-lease` 文件锁（见 [模型路由与本地推理 §5](model-fleet.md#5-本地推理显存分配16gb-vram)）。CPU 类任务可并发执行。
 
 通过 NVML 查询当前显存占用的脚本：
 
-```bash
-python3 - <<'PY'
-import ctypes
-nvml = ctypes.CDLL("/run/opengl-driver/lib/libnvidia-ml.so.1")
+```python
+# vram.py —— 通过 NVML 查询显存；Windows 下 DLL 由驱动安装，优先从 NVSMI 目录加载
+import ctypes, os, pathlib
+
+candidates = [
+    pathlib.Path(os.environ["ProgramFiles"]) / "NVIDIA Corporation" / "NVSMI" / "nvml.dll",
+    pathlib.Path(os.environ["SystemRoot"]) / "System32" / "nvml.dll",
+]
+nvml = ctypes.CDLL(next(p for p in candidates if p.exists()).as_posix())
 nvml.nvmlInit()
 h = ctypes.c_void_p(); nvml.nvmlDeviceGetHandleByIndex(0, ctypes.byref(h))
-m = (ctypes.c_uint64*3)(); nvml.nvmlDeviceGetMemoryInfo(h, m)
-print(f"VRAM {m[0]/2**30:.1f}GB total, {m[1]/2**30:.1f}GB used")
-PY
+m = (ctypes.c_uint64 * 3)(); nvml.nvmlDeviceGetMemoryInfo(h, m)
+print(f"VRAM {m[0] / 2**30:.1f}GB total, {m[1] / 2**30:.1f}GB used")
 ```
 
 Blender 与 Godot 在创作管线中的调用方式：
@@ -279,7 +285,7 @@ Blender 与 Godot 在创作管线中的调用方式：
 | 工具 | 适用环节 | 标准无头命令 |
 |---|---|---|
 | Blender Headless | 3D 镜头渲染、片头立体字、产品展示动画 | `blender -b scene.blend -P render.py -o //run/03-draft/frames/ -F PNG -a` |
-| Godot Headless | 游戏实机演示录制、UI 交互动效导出 | `godot --headless --path . --export-release "Linux/X11" run/06-export/demo.x86_64` |
+| Godot Headless | 游戏实机演示录制、UI 交互动效导出 | `godot --headless --path . --export-release "Windows Desktop" run/06-export/demo.exe` |
 | 序列帧合成视频 | 将 Blender 输出序列帧压制为 MP4 | `ffmpeg -framerate 30 -i run/03-draft/frames/%04d.png -c:v libx264 -pix_fmt yuv420p out.mp4` |
 
 ## 8. 作品分发与成品登记
@@ -288,7 +294,7 @@ Blender 与 Godot 在创作管线中的调用方式：
 
 | 分发渠道 | 调用工具 | 是否触发确认点 | 执行边界 |
 |---|---|---|---|
-| B 站投稿 | `biliup`（`~/.local/bin/biliup`，配置在 `~/.config/biliup/`） | **触发对外发布确认点** | 管线仅生成 `draft.yaml`，人工确认后才执行 `biliup upload` |
+| B 站投稿 | `biliup`（`%USERPROFILE%\.local\bin\biliup.exe`，配置在 `%APPDATA%\biliup\`） | **触发对外发布确认点** | 管线仅生成 `draft.yaml`，人工确认后才执行 `biliup upload` |
 | 微信公众号 | Markdown 转 HTML + 官方草稿箱接口 | **触发对外发布确认点** | 仅上传至公众号后台草稿箱，由人工点击群发 |
 | 播客 RSS | 静态 RSS Feed 生成 | **触发对外发布确认点** | 先生成本地 Feed 预览，人工确认后同步至公网 |
 | Kindle 阅读器 | Calibre + OPDS / KOSync | 无需确认（私有设备） | 精修完成后直接推送 |
@@ -310,18 +316,18 @@ streamers:
     copyright: 1
 ```
 
-```bash
-biliup -u ~/.config/biliup/cookies.json upload -c run/07-publish/draft.yaml
+```powershell
+biliup -u "$env:APPDATA\biliup\cookies.json" upload -c run/07-publish/draft.yaml
 biliup list --not-pubed
 biliup show BV1xxxxxxxxx
 biliup append --vid BV1xxxxxxxxx run/06-export/第2集.mp4
 ```
 
-注：`biliup` 关闭评论与弹幕的参数名为 `--up-close-reply` 与 `--up-close-danmu`；若遇到 `601` 错误码表示上传频次过快，需间隔十余分钟后重试；请使用 `~/.local/bin/biliup` 的预编译 `biliupR` 二进制，不要安装缺少入口的 PyPI 版本。
+注：`biliup` 关闭评论与弹幕的参数名为 `--up-close-reply` 与 `--up-close-danmu`；若遇到 `601` 错误码表示上传频次过快，需间隔十余分钟后重试；请使用 `%USERPROFILE%\.local\bin\biliup.exe`（预编译 `biliupR`），不要安装缺少入口的 PyPI 版本。
 
 ### 8.3 成品登记与反馈回收表
 
-所有创作领域的导出成片统一记录在 `~/.local/share/aica/studio/works.db` 中，通过 `task_uuid` 与任务库关联：
+所有创作领域的导出成片统一记录在 `%LOCALAPPDATA%\aica\data\studio/works.db` 中，通过 `task_uuid` 与任务库关联：
 
 ```sql
 CREATE TABLE works (
@@ -357,7 +363,7 @@ CREATE TABLE feedback (               -- 发布后数据与评论摘要回采
 
 ### 8.4 本地私有媒体库归档命令
 
-```bash
+```powershell
 beet import run/06-export/stems/
 immich upload run/06-export/cover.jpg
 calibredb add run/06-export/<书名>.epub --with-library <书库路径>   # 书库路径以实际创建位置为准

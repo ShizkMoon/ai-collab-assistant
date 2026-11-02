@@ -12,7 +12,7 @@
 | **零主动打扰** | 无背光、无蜂鸣器提示音；画面更新如同纸张翻页，夜间睡眠时段停止非必要刷新 |
 | **断网保留最后有效帧** | 利用墨水屏双稳态特性，断电或断网时物理保留上一帧画面；画面底部固定印有**数据快照时间戳**，方便一眼识别数据是否陈旧（Stale） |
 | **一屏一事** | 单块小屏不做轮播、不做多层菜单跳转；需要常驻展示第二类信息时直接增贴一块低成本价签 |
-| **纯被动显示** | 墨水屏端不设复杂按键交互；确认或修改任务统一通过手机卡片、桌面 KRunner 或 ThinkSmart View 主控台完成 |
+| **纯被动显示** | 墨水屏端不设复杂按键交互；确认或修改任务统一通过手机卡片、桌面 PowerToys Run 或 ThinkSmart View 主控台完成 |
 
 ## 2. 宿舍点位与版面分配
 
@@ -88,12 +88,12 @@
 
 可通过 Chrome / Edge 打开官方网页烧录器（[`install.openepaperlink.de`](https://install.openepaperlink.de/)）一键刷入，或在工作站终端使用 `esptool` 烧录：
 
-```bash
-nix run nixpkgs#esptool -- --chip esp32s3 -p /dev/ttyACM0 write_flash 0x0 BLE_ONLY_AP_full.bin
+```powershell
+esptool --chip esp32s3 -p COM3 write_flash 0x0 BLE_ONLY_AP_full.bin
 ```
 
 ### 5.3 AP 配网与标签入网验收
 
 1. **配置 Wi-Fi**：ESP32-S3 烧录完成后自动开启名为 `OpenEPaperLink` 的热点，连接后在配置页填入宿舍 Wi-Fi 密码；重启后在浏览器访问 `http://<AP局域网IP>` 进入管理后台。
-2. **标签首刷与上线**：将已刷入 `OpenEPaperLink_TLSR` 或 `ATC_TLSR_Paper` 固件的汉朔价签装入 CR2450 电池（首刷接线方法见 [电子价签刷机与验收 §1.3](esl-tag-ops.md#13-tlsr8359--825x-系列汉朔--giciskyusb-ttl-四线首刷)），AP 管理台将在 1 分钟内自动发现标签并显示电量与信号强度。
+2. **标签首刷与上线**：将已刷入 `OpenEPaperLink_TLSR` 或 `ATC_TLSR_Paper` 固件的汉朔价签装入 CR2450 电池（首刷接线方法见 [电子价签刷机与验收 §1.2](esl-tag-ops.md#12-汉朔-tlsr8359--8258-系列usb-ttl-四线首刷步骤)），AP 管理台将在 1 分钟内自动发现标签并显示电量与信号强度。
 3. **接口推图测试**：在工作站执行 `curl -F "file=@test.jpg" -F "mac=<标签MAC>" http://<AP-IP>/imgupload`，确认标签在下一个唤醒周期完成刷屏显示。

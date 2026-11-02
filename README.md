@@ -46,7 +46,7 @@
 ## 基础设施
 
 - [输入端口与输出路由](docs/output-routing.md)：`sources` / `surfaces` 约定、效果分类、可打扰性门控、投递回执与去重 · 设计中（显示端未定）
-- [工作站：Arch + KDE Plasma](docs/workstation-arch.md)
+- [工作站：Windows 11 原生](docs/workstation-windows.md)
 - [本机工具链选型](docs/local-toolchain.md)
 - [网络与设备组网](docs/network-fabric.md)：Tailscale 组网、出口感知与外设接入 · 设计中
 - [AX6000 校园网路由](docs/ax6000-router.md)
@@ -67,7 +67,7 @@
 - [ADR 0003](docs/adr/0003-loop-local-entry-remote.md)：入口与编排循环分离
 - [ADR 0004](docs/adr/0004-draft-layer-ttl.md)：草稿层设置 24 小时 TTL
 - [ADR 0005](docs/adr/0005-proposal-shadow-promotion.md)：通过提案与影子测试上线新能力
-- [ADR 0006](docs/adr/0006-workstation-arch.md)：工作站改用 Arch Linux，回滚保证从 generation 挪到 btrfs 快照
+- [ADR 0006](docs/adr/0006-workstation-windows.md)：工作站改用 Windows 11 原生，放弃 Linux 与 WSL
 - [ADR 0007](docs/adr/0007-deferred-resident-node.md)：常驻入口延后，先单机加云端等待队列
 
 ## 能力专题

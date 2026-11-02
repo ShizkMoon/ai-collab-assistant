@@ -10,22 +10,22 @@
 | 智能家居与传感器接入 | **Home Assistant** + Mosquitto + Zigbee2MQTT + ESPHome | 部署方式随常驻节点一并延后（[ADR 0007](adr/0007-deferred-resident-node.md)），配置方案见 [智能家居技术栈](home-automation-stack.md) |
 | 米家设备接入 | 小米官方集成 `ha_xiaomi_home` | 接入存量米家设备 |
 | 外部 SaaS 与 Webhook 串联 | **n8n** | 提供 IMAP 邮件、RSS、GitHub、飞书等连接器；常驻节点落地后再部署 |
-| 系统级定时任务 | `systemd.timer` + Taskwarrior `recur` | 无需额外引入调度框架 |
+| 系统级定时任务 | **任务计划程序**（任务 XML）+ Taskwarrior `recur` | 无需额外引入调度框架；任务 XML 纳入 `%ProgramData%\aica\tasks\` |
 | 任务库增量备份 | **Litestream** + 每小时 `sqlite3 .backup` | 持续复制 SQLite WAL 日志至云服务器 |
 | 全量数据备份 | **Restic**（本地 + 云服务器 + 异地加密） | 配合每月 1 日自动恢复演练，见 [系统运维 §9](platform-ops.md#9-备份与恢复演练) |
 | 跨设备虚拟局域网 | **Tailscale**（Mesh + Subnet Router + Exit Node + `tailscale serve`） | 免公网 IP 与端口转发，自动签发 HTTPS 证书，见 [网络与设备组网](network-fabric.md) |
 | 监控与日志收集 | **Uptime Kuma**、**Prometheus + node_exporter**、**Grafana**、**Loki + Alloy** | 见 [系统运维 §5–§6](platform-ops.md#5-监控与可观测性) |
-| 单机 + 云端部署 | `ansible` 或安装脚本 + `upctl` | 工作站为执行节点，云服务器只跑等待队列 |
-| KDE 桌面声明式配置 | **`plasma-manager`**（Home Manager 模块） | 统一管理面板、桌面组件、KRunner 与全局快捷键 |
+| 单机 + 云端部署 | PowerShell 安装脚本 + `upctl` | 工作站为执行节点，云服务器只跑等待队列；Windows 侧不再使用 Ansible |
+| 桌面配置与快捷键 | **PowerToys** + 导出的 `.reg` / AutoHotkey 脚本 | Windows 无声明式桌面配置，改为「导出配置 + 安装脚本导入」，纳入 `%ProgramData%\aica\managed.list` |
 
 ## 2. 交互入口与消息推送
 
 | 功能需求 | 选用开源项目 | 说明 |
 |---|---|---|
 | 对话与卡片入口 | **DS-Bot**（基于 DeepSeek Harness）；多平台群聊配合 **AstrBot** | AstrBot（AGPL-3.0）支持 QQ、企业微信、飞书、钉钉、公众号、Telegram 及 MCP 插件 |
-| 手机与桌面互联 | **KDE Connect** | 通知同步、剪贴板共享、文件快速分享录入任务 |
+| 手机与桌面互联 | **Phone Link** | 通知同步、短信与通话记录；文件分享仍走 IM 或 Tailscale 直传 |
 | 手机消息推送 | **ntfy**（自托管） / Home Assistant Companion | 支持按告警级别设置免打扰穿透 |
-| 桌面快捷录入 | **KRunner** 插件 | `Alt+Space` 呼出直接录入任务 |
+| 桌面快捷录入 | **PowerToys Run** 插件 | `Alt+Space` 呼出直接录入任务 |
 | 语音识别与合成 | **FunASR / SenseVoice**（语音转写）、**CosyVoice**（语音合成） | 中文识别准确，支持本地离线运行 |
 
 ## 3. 模型路由与知识检索
@@ -38,8 +38,9 @@
 | 云端 CPU 兜底分类 | `sentence-transformers` + `bge-small-zh` + **SetFit** | 工作站休眠时在云服务器 CPU 上运行，仅输出预测 `kind` |
 | 本地知识检索 | **SQLite FTS5 + `jieba` + `sqlite-vec`**（封装为 `kn` CLI） | 单文件三路混合召回与 RRF 融合，见 [知识库与记忆分层](knowledge-memory.md) |
 | 代码与多步任务编排 | **Orca** + Devin / Codex / Claude Code | 管理 Git Worktree 与多 Worker 协同 |
-| GUI 桌面软件控制 | `CLI-Anything` 封装 → `orca computer`（AT-SPI）→ 视觉点击（Jev + `ydotool`） | 见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) |
+| GUI 桌面软件控制 | `CLI-Anything` 封装 → `orca computer`（UI Automation）→ 视觉点击（Jev + AutoHotkey v2 / `SendInput`） | 见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) |
 | 外部平台只读抓取 | **`agent-reach`**（已安装） | 聚合 `yt-dlp`、`bili-cli`、`twitter-cli`、`rdt-cli` 等工具 |
+| 需要登录态的网页操作 | **ego(lite)** + `ego-browser` Skill | 独立 Chromium，Agent 在隔离 Space 内操作并沿用本机登录态；接口为页面内 JS（Snapshot + `click` / `fill`），不抢用户标签页与焦点，见 [本机工具链选型 §2.8](local-toolchain.md#28-浏览器与网页自动化egolite) |
 
 ## 4. 领域能力 Provider
 

@@ -2,17 +2,17 @@
 
 ## 1. 统一规则入口
 
-不同 Agent 工具默认读取的规则文件名各不相同（如 `AGENTS.md`、`CLAUDE.md`、`GEMINI.md` 以及各自配置目录下的全局文件）。本机通过符号链接（`~/.agents/link-skills.sh`）将它们统一指向同一份源文件，确保所有 Agent 共享一致的工程规范，修改时只需维护一处。
+不同 Agent 工具默认读取的规则文件名各不相同（如 `AGENTS.md`、`CLAUDE.md`、`GEMINI.md` 以及各自配置目录下的全局文件）。本机通过脚本（`%USERPROFILE%\.agents\link-skills.ps1`）把它们统一指向同一份源文件：Windows 下建符号链接需要开发者模式或管理员权限，脚本优先建目录联接（junction），权限不足时退化为复制并提示重新运行，确保所有 Agent 共享一致的工程规范，修改时只需维护一处。
 
 ## 2. 上下文分层加载
 
 - **常驻基础规则（Always-on）**：存放在全局与项目根目录的 `AGENTS.md` 中，保持简明扼要，具体领域细节通过相对路径链接指向专题文件。
 - **按需加载技能（Skills）**：按具体任务类型拆分为独立 Skill，命中任务类型时才加载对应说明，避免常驻上下文膨胀分散模型注意力。
-- **历史经验与笔记**：沉淀在 `~/.agents/notes/` 与本地知识库（`~/knowledge/kb.sqlite`）中，通过 `kn recall` 按需检索。
+- **历史经验与笔记**：沉淀在 `%USERPROFILE%\.agents\notes\` 与本地知识库（`%LOCALAPPDATA%\aica\data\knowledge\kb.sqlite`）中，通过 `kn recall` 按需检索。
 
 ## 3. 运行状态与权限边界
 
-- 常驻后台服务由 `systemd` 统一管理生命周期，与单次交互式 Agent 会话解耦。
+- 常驻后台服务由 Windows 服务管理器（WinSW / `sc.exe`）统一管理生命周期，与单次交互式 Agent 会话解耦。
 - 每个 Agent 的会话记录、缓存与登录凭据保留在各自原生目录中；跨 Agent 仅通过磁盘文件与任务库交接，不直接共享内存状态。
 - 全系统仅对**付款、删除、对外发布**三类操作要求人工确认（[ADR 0002](adr/0002-three-confirmation-points.md)）；其余操作直接执行，依靠执行摘要与撤销窗口兜底。
 
@@ -36,7 +36,7 @@
 ### 4.1 长文写作协同示例
 
 ```text
-用户需求：撰写一篇 NixOS + KDE Plasma 6 桌面迁移总结
+用户需求：撰写一篇工作站桌面环境迁移总结
 协调 Worker → 生成章节提纲（推送卡片供用户确认）
             → 派发 3 个写作 Worker 并行撰写各节（各自调用 info.recall 检索历史配置记录）
             → 派发异构模型审校全文 → 统稿并转换为微信公众号排版 HTML

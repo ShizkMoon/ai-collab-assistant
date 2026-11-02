@@ -48,13 +48,13 @@
 
 Solum M2 系列的 10 个标准测试焊盘同样位于背面电池仓盖内侧（无需拆解外壳）。由于 ZBS243 采用自定义 4 线 SPI 调试时序，且进入调试模式需要在芯片上电复位瞬间向 `CLK` 发送特定握手节拍，必须使用一块 **ESP32-S2（如 Wemos S2-Mini，约 ¥15）** 刷入官方 `Tag_Flasher` 固件充当编程器，并将价签的 `VCC` 接在编程器受控的电源引脚（或 MOSFET 开关）上。
 
-```bash
+```powershell
 # 1. 首次刷写前必须完整备份原厂 64KB Flash 与 1KB Infopage（内含原厂唯一 MAC 地址与校准值）
-python3 OEPL-Flasher.py -p /dev/ttyACM0 -z read backup_flash.bin
-python3 OEPL-Flasher.py -p /dev/ttyACM0 -z -i read backup_infopage.bin
+python OEPL-Flasher.py -p COM3 -z read backup_flash.bin
+python OEPL-Flasher.py -p COM3 -z -i read backup_infopage.bin
 
 # 2. 刷入 OEPL 固件（脚本会自动将 Infopage 中的原厂 MAC 保留写入新固件）
-python3 OEPL-Flasher.py -p /dev/ttyACM0 -z write ZBS243_OEPL_Full.bin
+python OEPL-Flasher.py -p COM3 -z write ZBS243_OEPL_Full.bin
 ```
 
 刷写完成后拔下编程器、装回 CR2450 电池（注意先短接一下电池座正负极放掉板载电容余电以触发完整上电复位），屏幕刷出 OEPL 启动画面即告成功。

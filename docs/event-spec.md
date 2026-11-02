@@ -79,10 +79,10 @@ Taskwarrior 原生的报表、过滤条件与同步子命令均可直接混用�
 |---|---|---|
 | 自然语言输入 | DS-Bot / AstrBot → 入口意图分类选出 `kind` → `ev add` | `me` |
 | 智能家居设备 | Home Assistant Automation → 仅在需要跟进时调用 `ev add` | `ha` |
-| 定时调度 | `systemd.timer` 或 Taskwarrior `recur` | `cron` |
+| 定时调度 | 任务计划程序或 Taskwarrior `recur` | 任务计划程序 |
 | GitHub / 飞书 / Webhook | 云端等待队列接收后写入事件表，工作站拉取并调用 `ev add` | `github` / `webhook` |
 | 邮件 / RSS | n8n（IMAP、RSS 节点）提取摘要后调用 `ev add` | `email` / `rss` |
-| 手机端分享 | KDE Connect 分享 / HA Companion → `ev add` | `phone` |
+| 手机端分享 | Phone Link / 微信文件传输 / HA Companion → `ev add` | `phone` |
 | 网络出口变化 | AX6000 `hotplug` 脚本触发 `ev add --kind system.net.egress` | `net` |
 | UPS 电源事件 | NUT 触发 `ev add --kind system.power.*` | `nut` |
 | Agent 任务回调 | Orca Run 完成后调用 `ev done` | `orca` |

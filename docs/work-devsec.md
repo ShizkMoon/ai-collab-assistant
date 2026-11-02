@@ -11,15 +11,15 @@
 | `orca` CLI | 可用；支持 `worktree create`、`agent launch`、`terminal wait`、`automations create`、`repo add`；已配置 `local`、`orca-pool`、`orca-pool-ts` 主机 |
 | `gh` CLI | 已登录 `ShizkMoon`，具备 `repo`、`workflow`、`gist`、`read:org` 权限 |
 | `claude` / `codex` / `gemini` / `dsh` | 均在 `PATH` 中，可用于跨厂商交叉审阅代码 |
-| `git` + `just` + `~/agent-src/tools/` | 可用 |
+| `git` + `just` + `%USERPROFILE%\agent-src\tools\` | 可用 |
 | `blender` | 5.2.3 LTS，支持无头模式（`-b -P`）运行 |
 | `photocraft-cli` | 0.16.0，已安装可用 |
-| ComfyUI | `comfyui.service`（systemd 用户服务）运行中，`127.0.0.1:8188` 响应正常 |
+| ComfyUI | Windows 服务 `comfyui`（WinSW）运行中，`127.0.0.1:8188` 响应正常 |
 | `adb` | 可用 |
 | `godot` / `butler` / `pre-commit` / `mergiraf` / `jj` / `git-absorb` | 当前未安装 |
-| `~/.agents` | 包含 71 个 Skill 及 `vendor/` 子库，当前尚未初始化 Git 仓库 |
+| `%USERPROFILE%\.agents` | 包含 71 个 Skill 及 `vendor/` 子库，当前尚未初始化 Git 仓库 |
 
-存储路径说明：本机 `/data` 为 3.7T 空挂载点（属主 `nobody:nogroup`），大体积文件统一规划存放在 `/data/aica/`（首次使用前需执行 `sudo mkdir -p /data/aica && sudo chown $USER /data/aica`），在目录建好前暂存至 `~/.local/share/aica/`。
+存储路径说明：工作站的 `D:` 数据卷（4TB NTFS）存放全部大体积文件，统一规划存放在 `D:\aica\`（首次使用前执行 `New-Item -ItemType Directory D:\aica`），目录建好前暂存至 `%LOCALAPPDATA%\aica\data\`。
 
 ## 1. 代码开发流水线
 
@@ -28,7 +28,7 @@
 | 阶段 | 阶段名 | 执行动作 | 标准命令 | 产出物 | 对应 `kind` |
 |---|---|---|---|---|---|
 | 1 | 需求定义 | 将需求整理为结构化规格说明（Spec） | `gh issue create --repo <owner>/<r> --title <t>` 或编写 `<repo>/docs/specs/<slug>.md` | Issue 或 Spec 文档 | `work.code.spec` |
-| 2 | 仓库注册 | 已存在仓库直接注册；新项目创建私有仓 | `orca repo add --path ~/Repo/<r> --json`；`gh repo create shizkmoon/<r> --private --source=. --push` | Orca Repo ID | `work.code.task` |
+| 2 | 仓库注册 | 已存在仓库直接注册；新项目创建私有仓 | `orca repo add --path D:\repo\<r> --json`；`gh repo create shizkmoon/<r> --private --source=. --push` | Orca Repo ID | `work.code.task` |
 | 3 | 隔离分支 | 单任务单 Worktree，基于 `origin/main` 创建 | `orca worktree create --repo path:$PWD --name <slug> --base-branch origin/main --agent claude --model <id> --json` | 独立 Worktree 与分支 | `work.code.task` |
 | 4 | 代码实现 | Worker 在独立 Worktree 内编码，不在主工作区直接切换分支 | `orca agent launch --worktree name:<slug> --agent codex --prompt "$(cat docs/specs/<slug>.md)"` | Git Commit | `work.code.task` |
 | 5 | 构建与测试 | 在受控终端内运行测试并等待进程退出码 | `orca terminal create --worktree name:<slug> --command "just check && make build" --json` → `orca terminal wait --terminal <h> --for exit --timeout-ms 1800000 --json` | 终端日志 + 退出码 | `work.code.verify` |
@@ -64,28 +64,28 @@
 
 1. 每次代码评审打回或人工手动返工时，在任务注解中标记返工类型：`rework:style`、`rework:missing-test`、`rework:wrong-layer`、`rework:destructive`。
 2. 每周复盘任务（`meta.review.weekly`）统计各标签频次，同一类问题累计出现 **≥ 3 次**时生成规则提案。
-3. 跨仓库通用规则写入 `~/.agents/rules/common/`，特定仓库约束写入对应仓库的 `AGENTS.md`。每条规则遵循 `writing-for-agents` 规范：明确写出触发条件与可判定的禁止项，并附带简短示例。
+3. 跨仓库通用规则写入 `%USERPROFILE%\.agents\rules\common\`，特定仓库约束写入对应仓库的 `AGENTS.md`。每条规则遵循 `writing-for-agents` 规范：明确写出触发条件与可判定的禁止项，并附带简短示例。
 4. 新规则上线 30 天后复查同类返工是否下降；长期不触发的过时规则通过 `config-gc` 定期清理。
 
 | 配置文件位置 | 承载内容 | 维护方式 |
 |---|---|---|
-| `~/.claude/CLAUDE.md` / `~/.config/devin/AGENTS.md` | 全局核心约束与笔记索引指针 | 人工维护，保持精简 |
-| `~/.agents/rules/common/` | 跨仓库复用的具体工程规则 | 由周报提案合入 |
+| `%USERPROFILE%\.claude\CLAUDE.md` / `%APPDATA%\devin\AGENTS.md` | 全局核心约束与笔记索引指针 | 人工维护，保持精简 |
+| `%USERPROFILE%\.agents\rules\common\` | 跨仓库复用的具体工程规则 | 由周报提案合入 |
 | `<repo>/AGENTS.md` | 单个项目的目录结构、构建命令与测试方法 | 随项目代码提交维护 |
-| `~/.agents/link-skills.sh` | 将同一套规则与 Skill 符号链接至各家 Agent 配置目录 | 脚本同步 |
+| `%USERPROFILE%\.agents\link-skills.ps1` | 将同一套规则与 Skill 符号链接至各家 Agent 配置目录 | 脚本同步 |
 | `docs/adr/` | 关键架构决策记录 | 做出不可逆选型时编写 |
 
 ### 1.4 Skill 开发与维护生命周期
 
-当前 `~/.agents/` 下共有 71 个自定义 Skill 与 `vendor/` 下的四个外部技能集（`gamedev`、`litrev`、`music`、`rex`）。需尽快执行 `git init ~/.agents` 将其纳入版本控制。
+当前 `%USERPROFILE%\.agents\` 下共有 71 个自定义 Skill 与 `vendor/` 下的四个外部技能集（`gamedev`、`litrev`、`music`、`rex`）。需尽快执行 `git init %USERPROFILE%\.agents` 将其纳入版本控制。
 
 | 阶段 | 执行规范 |
 |---|---|
 | 编写 | 遵循 `writing-for-agents` 规范，每个 Skill 独立目录（`SKILL.md` + `scripts/` + `references/`），`description` 字段写明触发场景与用户常见表述 |
 | 验证 | 使用 `skills-stocktake` 审查描述清晰度；在真实任务中测试触发准确性，并在干净 Shell 中验证全部配套脚本 |
-| 版本控制 | `~/.agents/skills/` 纳入 Git 管理，`vendor/` 下的第三方技能库作为只读上游（通过入口 Skill 路由，不直接修改上游文件） |
-| 分享与发布 | 对外分享前剥离本机绝对路径与私有主机名，通过 `orca skills share` 或独立仓库 `~/agent-src/skills/` 发布 |
-| 定期清理 | 连续 30 天未触发或与其它 Skill 功能重叠的条目，经 `config-gc` 盘点确认后归档至 `~/.agents/_gc_trash/` |
+| 版本控制 | `%USERPROFILE%\.agents\skills\` 纳入 Git 管理，`vendor/` 下的第三方技能库作为只读上游（通过入口 Skill 路由，不直接修改上游文件） |
+| 分享与发布 | 对外分享前剥离本机绝对路径与私有主机名，通过 `orca skills share` 或独立仓库 `%USERPROFILE%\agent-src\skills\` 发布 |
+| 定期清理 | 连续 30 天未触发或与其它 Skill 功能重叠的条目，经 `config-gc` 盘点确认后归档至 `%USERPROFILE%\.agents\_gc_trash\` |
 
 ## 2. 安全与逆向分析
 
@@ -93,10 +93,10 @@
 
 | 工具层 | 本机配置状态 |
 |---|---|
-| `re-toolkit` MCP | 源码与安装脚本位于 `~/agent-src/tools/re-toolkit`（v0.3.0），已注册至 `~/.config/devin/mcp_config.json` 与 `~/.claude.json`，共暴露 16 个工具函数（含 `apk_analyze`） |
+| `re-toolkit` MCP | 源码与安装脚本位于 `%USERPROFILE%\agent-src\tools\re-toolkit`（v0.3.0），已注册至 `%APPDATA%\devin\mcp_config.json` 与 `%USERPROFILE%\.claude.json`，共暴露 16 个工具函数（含 `apk_analyze`） |
 | 底层分析工具 | Ghidra 12.1.4、`binwalk`、`unblob`、QEMU、`mitmproxy`、Frida、`rizin`、`jadx`、`apktool`、`payload-dumper-go`、Kaitai Struct、`tshark`、`flashrom`、`openocd`、`sigrok-cli`、`picocom`、`nmap` |
-| 配套 Skill | `~/.agents/skills/reverse-engineering`（REX）及 `~/.agents/vendor/rex` |
-| 历史分析仓库 | `~/Repo/kpw5-analysis`、`~/Repo/mu22mk2-analysis`、`~/Repo/chaoxing-app-analysis`、`~/Repo/d3v-analysis`、`~/Repo/sports-world-campus-analysis` |
+| 配套 Skill | `%USERPROFILE%\.agents\skills\reverse-engineering`（REX）及 `%USERPROFILE%\.agents\vendor\rex` |
+| 历史分析仓库 | `D:\repo\kpw5-analysis`、`D:\repo\mu22mk2-analysis`、`D:\repo\chaoxing-app-analysis`、`D:\repo\d3v-analysis`、`D:\repo\sports-world-campus-analysis` |
 
 ### 2.2 六类逆向分析流水线
 
@@ -111,7 +111,7 @@
 | **硬件接口采集** | `serial_capture` 只读抓取 UART 日志 → `sigrok-cli` 采集逻辑电平 → `openocd` / `flash_read` 只读导出 Flash 镜像 | 引导日志、引脚时序图与原始 Flash 镜像 |
 | **系统仿真** | `qemu_boot --machine <m> --kernel <img>` 捕获串口输出 | 内核引导日志与外设缺失阻断点定位 |
 
-为防止反编译输出撑爆模型上下文，工具调用默认仅返回函数列表与交叉引用摘要，仅对明确点名的目标函数拉取伪 C 代码。大体积原始固件镜像存放在 `/data/aica/re/<case>/`（或 `~/.local/share/aica/re/<case>/`），不提交至 Git 仓库。
+为防止反编译输出撑爆模型上下文，工具调用默认仅返回函数列表与交叉引用摘要，仅对明确点名的目标函数拉取伪 C 代码。大体积原始固件镜像存放在 `D:\aica\re/<case>/`（或 `%LOCALAPPDATA%\aica\data\re/<case>/`），不提交至 Git 仓库。
 
 ### 2.3 分析案例仓库目录结构
 
@@ -146,9 +146,9 @@
 
 | 规范项 | 具体做法 |
 |---|---|
-| 独立源仓库维护 | 每台受管设备建立独立的实验记录仓库 `~/Repo/<device>-records`，原始调试 JSON 与恢复脚本在源仓库提交 |
+| 独立源仓库维护 | 每台受管设备建立独立的实验记录仓库 `D:\repo\<device>-records`，原始调试 JSON 与恢复脚本在源仓库提交 |
 | 设计结论提炼入 `docs/` | 跨设备复用的架构结论写入本仓 `docs/`，原始实验数据保留在子树内 |
-| 单向 `git subtree` 同步 | 通过 `git subtree add --prefix <device>-records ~/Repo/<device>-records main --squash` 引入；后续更新一律在源仓提交后执行 `git subtree pull`，不在本仓子树目录内直接修改 |
+| 单向 `git subtree` 同步 | 通过 `git subtree add --prefix <device>-records D:\repo\<device>-records main --squash` 引入；后续更新一律在源仓提交后执行 `git subtree pull`，不在本仓子树目录内直接修改 |
 | 排除大文件与凭据 | 固件二进制、私钥、订阅链接与包含密码的备份包不入库，仅在 `manifest.json` 中记录 SHA256 校验值 |
 
 ### 2.5 逆向任务接入派发器
@@ -157,7 +157,7 @@
 [[rule]]
 match = { kind = "work.rev.firmware" }
 to = "orca:run"
-run = { workdir = "/home/shizuku/Repo/<case>-analysis", agent = "claude", model = "deepseek-chat" }
+run = { workdir = 'D:\repo\<case>-analysis', agent = "claude", model = "deepseek-chat" }
 
 [[rule]]
 match = { kind = "work.rev.apk" }
@@ -181,14 +181,13 @@ to = "notify"          # 报告生成后推送给用户审阅，对外公开前�
 
 ### 3.1 Godot 4 无头构建与测试
 
-Godot 以 pacman 或官方二进制安装，标准无头构建命令如下：
+Godot 以 `winget` 或官方二进制安装，标准无头构建命令如下：
 
-```bash
+```powershell
 # 首次构建前导入资产并生成 UID 缓存（CI 与无头导出必跑）
 godot --headless --path . --import
 
 # 按 export_presets.cfg 中的预设名导出各平台构建包
-godot --headless --path . --export-release "Linux/X11" build/linux/<game>.x86_64
 godot --headless --path . --export-release "Windows Desktop" build/win/<game>.exe
 
 # 运行 GUT 单元测试套件
@@ -197,13 +196,13 @@ godot --headless --path . -s addons/gut/gut_cmdln.gd -gdir=res://test -gexit
 
 - **版本号管理**：以仓库根目录 `version.txt` 为唯一来源，导出脚本自动同步至 `project.godot` 的 `config/version`。
 - **3D 资产导入**：Blender 无头脚本将 `art/source/*.blend` 导出为 `.glb` 至工程目录，再由 `godot --headless --import` 编译；源文件纳入 Git（大文件走 Git LFS），`build/` 构建产物不入库。
-- **渠道发布**：itch.io 使用 `butler push build/linux user/<game>:linux` 上传；Steam 使用 `steamcmd` 上传 Depot，商店页面配置与最终发布上线作为人工确认点处理。
+- **渠道发布**：itch.io 使用 `butler push build/win user/<game>:windows` 上传；Steam 使用 `steamcmd` 上传 Depot，商店页面配置与最终发布上线作为人工确认点处理。
 
 ### 3.2 Blender 无头资产管线
 
-本机已安装 Blender 5.2.3 LTS（`~/.local/bin/blender`），通过 Python 脚本无头导出资产：
+本机已安装 Blender 5.2.3 LTS（`%USERPROFILE%\.local\bin\blender.exe`），通过 Python 脚本无头导出资产：
 
-```bash
+```powershell
 blender -b art/source/character.blend -P tools/export_gltf.py -- --out build/assets/character.glb
 ```
 
@@ -214,12 +213,12 @@ blender -b art/source/character.blend -P tools/export_gltf.py -- --out build/ass
 | 处理需求 | 调用入口 | 标准命令示例 |
 |---|---|---|
 | 格式转换与 PSD 图层处理 | `photocraft-cli convert` | `photocraft-cli convert in.psd out.png --quality 92`（保留 TIFF 图层加 `--tiff-layers`） |
-| 批量预设动作（封面裁切、墨水屏抖动） | `photocraft-cli batch` | `photocraft-cli batch --actions ~/Repo/design/actions/covers.json --in raw --out out --format png` |
+| 批量预设动作（封面裁切、墨水屏抖动） | `photocraft-cli batch` | `photocraft-cli batch --actions D:\repo\design\actions\covers.json --in raw --out out --format png` |
 | 脚本化图层编辑 | `photocraft-cli run` | `photocraft-cli run in.pcraft --cmd layer.new.layer --params '{...}' --out out.pcraft` |
 | 生成式图像制作 | ComfyUI HTTP API（`127.0.0.1:8188`） | `curl -s -X POST 127.0.0.1:8188/prompt -H 'content-type: application/json' -d @wf-api.json`，轮询 `/history/<prompt_id>` 获取输出文件 |
 | 矢量图形与 UI 设计 | VectorCraft / FigCraft CLI | 通过 `craft-apps` Skill 调用对应无头 CLI |
 
-ComfyUI 工作流统一保存为 API 格式 JSON（存放于 `~/Repo/design/comfy/<用途>.json`），并在元数据中记录 `prompt_id`、工作流哈希与随机种子以保证可复现。调用 ComfyUI 出图前需先获取 `~/.local/state/aica/gpu-lease` 显存锁。
+ComfyUI 工作流统一保存为 API 格式 JSON（存放于 `D:\repo\design\comfy\<用途>.json`），并在元数据中记录 `prompt_id`、工作流哈希与随机种子以保证可复现。调用 ComfyUI 出图前需先获取 `%LOCALAPPDATA%\aica\state\gpu-lease` 显存锁。
 
 ### 3.4 Windows 侧游戏日常托管（MAA）
 

@@ -1,6 +1,6 @@
 # 常驻服务分布与凭据管理
 
-> 状态：设计中 · 上位文档：[架构总览](architecture.md)、[工作站配置](workstation-arch.md)、[ADR 0007](adr/0007-deferred-resident-node.md)
+> 状态：设计中 · 上位文档：[架构总览](architecture.md)、[工作站配置](workstation-windows.md)、[ADR 0007](adr/0007-deferred-resident-node.md)
 
 ## 1. 服务分布
 
@@ -22,17 +22,17 @@
 
 ## 2. 常驻服务管理规范
 
-- 全部服务以 `systemd` 单元声明（系统级或用户级），随开机自启并在后台静默运行；单元定义放入 `/etc/aica/units/` 并由安装脚本软链至 systemd 目录，纳入快照。
-- 命令行入口统一放置在 `~/.local/bin/` 下，需要补充环境变量或运行路径时通过轻量 Wrapper 脚本封装。
+- 全部服务以 Windows 服务或计划任务声明，随开机自启并在后台静默运行：系统级服务用 WinSW 包装后 `sc.exe create`，用户态进程用「登录时启动」的计划任务。服务定义（WinSW XML 与任务 XML）放入 `%ProgramData%\aica\units\`，由安装脚本注册，并随 `restic` 备份留存版本。
+- 命令行入口统一放置在 `%USERPROFILE%\.local\bin\` 下并加入用户 `PATH`，需要补充环境变量或运行路径时通过轻量 `.cmd` / PowerShell Wrapper 封装。
 - 工作站休眠或关机期间，云服务器只把外部消息写入等待队列，不回复、不解析、不执行；恢复后由工作站按端口游标增量拉取。回复用户的「已收到」提示由端口声明，不由云服务器自行生成。
 - 单机方案的直接后果是**没有服务级高可用**：工作站关机即全系统暂停。可接受的边界是输入不丢、任务不丢，否则需要重新评估常驻节点（[ADR 0007](adr/0007-deferred-resident-node.md) 的复评条件）。
 
 ## 3. 凭据与运行状态保护
 
-- API 密钥、OAuth 令牌与平台 Cookie 一律保存在各应用的原生安全位置（如 KDE KWallet 或应用私有配置目录），严禁写入本设计仓库、规则文件或 Taskwarrior 任务字段中。
+- API 密钥、OAuth 令牌与平台 Cookie 一律保存在各应用的原生安全位置（Windows 凭据管理器 / DPAPI 加密或应用私有配置目录），严禁写入本设计仓库、规则文件或 Taskwarrior 任务字段中。
 - 各工具的登录态 Cookie 与本地会话数据库属于有状态运行数据，不得作为临时缓存目录清理。
 - 云端只保存推送凭据与端口轮询所需的会话文件，且使用独立的最小权限账号；工作站的 SSH 密钥不复制到云端。
-- 端口配置文件中只写凭据的**引用路径**（如 `cred_ref = "kwallet:aica/wechat"`），不写凭据本身。
+- 端口配置文件中只写凭据的**引用路径**（如 `cred_ref = "credman:aica/wechat"`，指向 Windows 凭据管理器的目标名），不写凭据本身。
 
 ## 4. 人工确认点
 

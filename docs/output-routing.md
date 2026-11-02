@@ -44,7 +44,7 @@ direction = { in = true, out = false }   # 该端口只能收，不能替本人�
 
 [cursor]
 mode     = "seq"          # seq | timestamp | etag | none
-store    = "~/.local/state/aica/cursors/wechat-course-group.json"
+store    = "%LOCALAPPDATA%\aica\state\cursors/wechat-course-group.json"
 max_gap  = "6h"           # 超过该时长未推进即告警，不静默跳过
 backfill = 200            # 断线后最多回补的事件数，超出则记一条 meta.ingest.gap
 
@@ -67,8 +67,8 @@ kind_hint = ["life.course.*", "life.doc.*"]
 
 | 端口 | kind | trust | cadence | 备注 |
 |---|---|---|---|---|
-| 本机 CLI / KRunner | `cli` | owner | push | |
-| 手机分享 / KDE Connect | `share` | owner | push | |
+| 本机 CLI / PowerToys Run | `cli` | owner | push | |
+| 手机分享 / Phone Link | `share` | owner | push | |
 | 微信（私聊 / 群） | `im` | owner / group | poll | 无官方 API，走本地协议适配，限速从严 |
 | 微信主账号采集 | `im` | untrusted | poll | 只读全量采集，零出站，见 [IM 采集](im-ingest.md) |
 | QQ、飞书、钉钉、Discord | `im` | group | push | 飞书与钉钉走官方机器人或 Webhook |
@@ -226,8 +226,8 @@ flowchart TD
 | 2 | 屏幕是否亮 / 距上次亮屏 | 端口上报 | 移动端最强单项，去掉即掉 8.8 个百分点 |
 | 3 | 距上次查看通知 | **本系统的 `opened` 回执** | 不依赖平台 |
 | 4 | 待处理通知数 | **任务库派生**（未完成且 `severity` ≥ `warn`） | 不依赖平台 |
-| 5 | 窗口 / 应用切换率（1、5、10 分钟） | KWin 窗口事件 | |
-| 6 | 是否在通话 / 与来访者交谈 | PipeWire 麦克风占用；对话检测 | 只靠这一项就能接近人的判断 |
+| 5 | 窗口 / 应用切换率（1、5、10 分钟） | Windows 前台窗口事件（`GetForegroundWindow` 轮询 / UIA 焦点事件） | |
+| 6 | 是否在通话 / 与来访者交谈 | 默认录音设备被占用（`AudioDeviceCmdlets` / WASAPI 会话枚举）；对话检测 | 只靠这一项就能接近人的判断 |
 | 7 | 15 分钟内是否有日历事件 | 日历 | 廉价先验，还能预告「会快开完了」 |
 | 8 | 小时 + 星期 | 本机时钟 | 稳定节律 |
 
@@ -292,7 +292,7 @@ flowchart TD
 id     = "port:desk"
 kind   = "playback"            # 与 effect 同名，便于直接匹配
 device = "ws"                  # 承载该端口的主机
-transport = "pipewire"
+transport = "wasapi"
 capabilities = ["audio", "tts"]
 default_for  = ["playback"]
 presence     = "ac"            # ac | always | manual

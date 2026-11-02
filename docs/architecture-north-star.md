@@ -63,12 +63,12 @@ flowchart LR
 - **默认放行**：Agent 可直接读取被授权目录的文件并执行常规命令，不设工具白名单或逐参数校验。
 - **三类人工确认点**：仅对**付款、删除、对外发布**三类不可逆操作要求人工确认（[ADR 0002](adr/0002-three-confirmation-points.md)）。
 - **可逆操作带撤销窗口**：常规变更默认提供 5 分钟撤销窗口，窗口期内可一键回退，超时后视为正式完成。
-- **配置与软件包变更靠版本回滚**：修改系统配置、安装软件包或调整路由策略直接执行，出现问题通过 btrfs 快照或 Git 回滚（[ADR 0006](adr/0006-workstation-arch.md)）。
+- **配置与软件包变更靠版本回滚**：修改系统配置、安装软件包或调整路由策略直接执行，出现问题通过系统还原点、VSS 卷影副本或 Git 回滚（[ADR 0006](adr/0006-workstation-windows.md)）。
 - **输入按端口声明信任级别**：每条外部消息先归属一个 `source` 端口，端口声明的 `trust` 决定派生任务的自治上限（[输入端口与输出路由 §1](output-routing.md#1-三个正交轴)）。
 - **安全告警直达人工**：水浸、功率过载、门窗异常等高危事件绕过摘要队列与 Agent 筛选，直接推送给用户。
-- **凭据留存原生位置**：密钥与 Cookie 保存在 KWallet 或各应用原生配置目录中，Agent 通过封装好的 CLI 调用能力，不将明文凭据读入模型上下文。
+- **凭据留存原生位置**：密钥与 Cookie 保存在 Windows 凭据管理器 / DPAPI 加密或各应用原生配置目录中，Agent 通过封装好的 CLI 调用能力，不将明文凭据读入模型上下文。
 
-因此，系统不引入 RBAC/ABAC 策略引擎或分级授权框架，而是通过控制爆炸半径与提供回滚手段（btrfs 快照、Git、撤销窗口）保障安全。
+因此，系统不引入 RBAC/ABAC 策略引擎或分级授权框架，而是通过控制爆炸半径与提供回滚手段（系统还原点、卷影副本、`restic` 备份、Git、撤销窗口）保障安全。
 
 ## 5. 自治等级
 
@@ -91,7 +91,7 @@ flowchart LR
 | 故障域 | 失效影响 | 降级路径 | 恢复方式 |
 |---|---|---|---|
 | **工作站** | GPU、本机文件、Orca、桌面环境与全部常驻服务不可用 | 云服务器只接收消息并写入等待队列，不处理；其余能力暂停 | 开工作站后消费队列 |
-| **云服务器** | 外部消息接收与等待队列不可用 | 本机 CLI 与 KRunner 直接录入任务；外网来源的端口游标停在原位，恢复后回补 | 服务重启后按 `cursor` 回补 |
+| **云服务器** | 外部消息接收与等待队列不可用 | 本机 CLI 与 PowerToys Run 直接录入任务；外网来源的端口游标停在原位，恢复后回补 | 服务重启后按 `cursor` 回补 |
 | **AX6000** | 校园网出口与 Wi-Fi 不可用 | 工作站通过有线局域网维持本地闭环 | 重启路由器 |
 | **外网** | 云端模型、B 站投稿、外部订阅拉取失败 | 切换工作站本地 7–14B 模型；对外发布与网络请求进入等待队列；B 站投稿保存为本地草稿 | 网络恢复后重放队列 |
 | **云端模型** | 模型 API 不可用 | 本地模型接管意图分类与文本生成；长文任务分段处理 | 健康检查通过后恢复 |
@@ -113,7 +113,7 @@ flowchart LR
 | 每季 | 季初 | 能力调用评估、下线候选清理、模型选型复查 | 提案库 |
 | 每年 | 生日前后 | 年度总结、档案归档、年度照片精选 | 长期文档 |
 
-周期调度直接复用 `systemd.timer` 与 Taskwarrior 的 `recur` 机制，不引入额外的调度框架。
+周期调度直接复用任务计划程序与 Taskwarrior 的 `recur` 机制，不引入额外的调度框架。
 
 ## 8. 规则与能力的演进闭环
 
@@ -139,43 +139,42 @@ flowchart LR
 |---|---|---|---|
 | 任务状态与历史 | Taskwarrior | `taskchampion.sqlite3` | Litestream 同步至云服务器 + 每日快照 |
 | 家居设备状态 | Home Assistant Recorder | SQLite | 每周导出备份 |
-| 多 Agent 运行目录 | `~/.local/state/aica/runs/<root_id>/` | JSON + 产物文件 | 随任务库同步备份；`plan.v(k)` 不覆盖 |
+| 多 Agent 运行目录 | `%LOCALAPPDATA%\aica\state\runs/<root_id>/` | JSON + 产物文件 | 随任务库同步备份；`plan.v(k)` 不覆盖 |
 | Agent 执行过程 | Orca Run / Task | 原生存储 | 与任务库同步备份 |
-| 输入事件与线索 | `~/.local/state/aica/events.sqlite3` | Event 追加表 + Thread 成员关系 | 每日快照；`ThreadCtx` 不入备份 |
+| 输入事件与线索 | `%LOCALAPPDATA%\aica\state\events.sqlite3` | Event 追加表 + Thread 成员关系 | 每日快照；`ThreadCtx` 不入备份 |
 | 创作与构建产物 | 文件系统 + `manifest.json` | 文件路径 + 元数据 | 按领域分库备份（书库/视频/代码仓） |
 | 知识库索引 | 本地 SQLite（`kb.sqlite`） | FTS5 + sqlite-vec | 可从源数据重建，每日快照 |
 | 能力偏好 | 能力目录旁 `prefs.toml` | TOML | Git 版本控制 |
-| 规则、能力、场景、端口定义 | `/etc/aica/` 下 TOML | TOML | Git 版本控制 |
+| 规则、能力、场景、端口定义 | `%ProgramData%\aica\` 下 TOML | TOML | Git 版本控制 |
 | 演进提案 | `docs/proposals/` | Markdown | Git 版本控制 |
-| 全局与项目规则 | 本仓 + `~/.claude/CLAUDE.md` + `~/.agents/` | Markdown | Git（`~/.agents` 待初始化仓库） |
-| 密钥与凭据 | 各应用原生位置（KWallet 等） | — | 加密副本独立备份，不进本仓 |
+| 全局与项目规则 | 本仓 + `%USERPROFILE%\.claude\CLAUDE.md` + `%USERPROFILE%\.agents\` | Markdown | Git（`.agents` 待初始化仓库） |
+| 密钥与凭据 | 各应用原生位置（Windows 凭据管理器 / DPAPI 等） | — | 加密副本独立备份，不进本仓 |
 
 任务库属于不可重建的原始状态，备份优先级最高；知识库索引可从源文件重建。
 
 ## 10. 仓库与目录布局
 
 ```
-~/Repo/ai-collab-assistant/      # 架构与设计文档（本仓）
-  docs/                          # 专题设计文档
-  docs/proposals/                # 演进提案库
-  docs/adr/                      # 架构决策记录（ADR）
+D:\repo\ai-collab-assistant\     # 架构与设计文档（本仓）
+  docs\                          # 专题设计文档
+  docs\proposals\                # 演进提案库
+  docs\adr\                      # 架构决策记录（ADR）
   GLOSSARY.md                    # 统一术语表
-/etc/aica/                       # 规则表、能力与场景 TOML、端口定义（纳入快照）
-/var/lib/taskwarrior/            # taskchampion.sqlite3
-~/.local/state/aica/             # 运行时状态：Spool、队列、运行目录、游标、校准参数
-~/.local/share/aica/             # 导出数据、模型权重缓存
-/data/aica/                      # 大体积文件：成片、书库、固件镜像、备份暂存（需先建目录并 chown）
-~/Repo/                          # 个人项目仓库（视频/音乐/代码/游戏）
-~/Repo/video/                    # 视频工程目录
-~/agent-src/tools/               # Provider 源码仓（re-toolkit 等）
-~/.agents/                       # Skill、规则、笔记（待纳入 Git 管理）
-  ~/.agents/vendor/              # 第三方大型技能库（gamedev / music）
+%ProgramData%\aica\              # 规则表、能力与场景 TOML、端口定义、服务与任务 XML
+%LOCALAPPDATA%\aica\state\       # 运行时状态：Spool、队列、运行目录、游标、校准参数、任务库
+%LOCALAPPDATA%\aica\data\        # 导出数据、模型权重缓存、知识库索引
+D:\aica\                         # 大体积文件：成片、书库、固件镜像、备份暂存
+D:\repo\                          # 个人项目仓库（视频/音乐/代码/游戏）
+D:\repo\video\                    # 视频工程目录
+%USERPROFILE%\agent-src\tools\   # Provider 源码仓（re-toolkit 等）
+%USERPROFILE%\.agents\            # Skill、规则、笔记（待纳入 Git 管理）
+  %USERPROFILE%\.agents\vendor\   # 第三方大型技能库（gamedev / music）
 <书库路径>                       # Calibre 书库（以本机实际路径为准）
 ```
 
-目录分工：**设计文档进本仓，可执行工具进 `~/agent-src/tools/`，运行时状态进 XDG 状态目录，大体积文件进 `/data/aica/`**。
+目录分工：**设计文档进本仓，可执行工具进 `%USERPROFILE%\agent-src\tools\`，运行时状态进 `%LOCALAPPDATA%\aica\`，大体积文件进 `D:\aica\`**。完整路径表见 [工作站配置 §3](workstation-windows.md#3-目录布局)。
 
-本机实测（2026-11-01）：`/data` 为 3.7T 空挂载点（属主 `nobody:nogroup`，当前不可写），旧文档中的 `/data/Agent/` 与 `/data/EBook/` 均不存在，已统一迁移至 XDG 目录约定。
+本机实测（2026-10-31）：数据盘 `D:` 为 4TB NTFS 单分区（原 NixOS 分区，重装时抹掉重建），旧文档中的 `/data/Agent/`、`/data/EBook/`、`~/.local/state/aica` 等 Linux 路径一律作废。
 
 ## 11. 文档地图
 
@@ -193,7 +192,7 @@ flowchart LR
 | 核心机制 | [知识库与记忆分层](knowledge-memory.md) | 三路混合检索、记忆分层与偏好提炼 |
 | 核心机制 | [IM 采集](im-ingest.md) | 主账号只读采集、双账号分工、会话切分与检索参数 |
 | 核心机制 | [提案库](proposals/README.md) | 候选规则、能力与场景的评审流程 |
-| 决策记录 | [ADR](adr/) | 0001 任务库；0002 三类确认点；0003 入口与循环分离；0004 草稿 TTL；0005 提案与影子测试；0006 工作站改用 Arch；0007 常驻节点延后 |
+| 决策记录 | [ADR](adr/) | 0001 任务库；0002 三类确认点；0003 入口与循环分离；0004 草稿 TTL；0005 提案与影子测试；0006 工作站改用 Windows 11 原生；0007 常驻节点延后 |
 | 能力与选型 | [能力目录](capabilities.md) | `kind` 全集的唯一权威来源 |
 | 能力与选型 | [开源复用清单](open-source-reuse.md) | 各模块复用的开源项目与自建边界 |
 | 执行域 | [系统拓扑](system-topology.md) | 常驻入口、Orca 编排与 Worker 分工 |
@@ -210,7 +209,7 @@ flowchart LR
 | 平台运维 | [模型路由与本地推理](model-fleet.md) | 模型注册表、路由降级、显存分配与置信度校准 |
 | 基础设施 | [输入端口与输出路由](output-routing.md) | `sources` / `surfaces`、效果分类、可打扰性门控、投递回执与去重 |
 | 基础设施 | [网络与设备组网](network-fabric.md) | Tailscale 组网、出口感知与外设接入 |
-| 基础设施 | [工作站：Arch + KDE Plasma](workstation-arch.md) | 工作站软硬件配置、快照回滚与桌面自动化接口 |
+| 基础设施 | [工作站：Windows 11 原生](workstation-windows.md) | 工作站软硬件配置、还原点与备份回滚、桌面自动化接口 |
 | 基础设施 | [本机工具链选型](local-toolchain.md) | 本地软件选型与 CLI 调用优先级 |
 | 基础设施 | [AX6000 校园网路由](ax6000-router.md) | 多出口认证、分流与透明代理拓扑 |
 | 基础设施 | [智能家居技术栈](home-automation-stack.md) | HA、Zigbee2MQTT 与 ESPHome 的部署细节 |
@@ -242,11 +241,11 @@ flowchart LR
 | 阶段 | 目标 | 核心内容 | 验收标志 |
 |---|---|---|---|
 | **S0** | 主干骨架 | Taskwarrior + `ev` CLI + 状态机 + 派发器守护进程 + 日志 | 单条任务可从录入完整流转至完成 |
-| **S1** | 日常交互 | KRunner 任务录入 + 每日早晚报 + 交互卡片 + 撤销窗口 | 连续一周日常实际使用 |
+| **S1** | 日常交互 | PowerToys Run 任务录入 + 每日早晚报 + 交互卡片 + 撤销窗口 | 连续一周日常实际使用 |
 | **S2** | 显示终端闭环 | WLED 状态灯 + 1 块墨水屏 + 显示仲裁器 v0 | 不看手机即可获知当日核心待办 |
 | **S3** | 首条领域流水线 | 跑通视频或电子书精修的端到端创作流水线 | 单个作品从原始素材自动推进至发布草稿 |
 | **S4** | 演进闭环 | 周度复盘统计 + 提案库 + 影子测试机制 | 周报可根据历史任务自动生成一条候选规则 |
-| **S5** | 故障演练与备份 | 故障域降级切换 + Restic / Litestream 备份恢复演练 + btrfs 快照回滚演练 | 从快照回滚后系统与配置均恢复至已知良好状态 |
+| **S5** | 故障演练与备份 | 故障域降级切换 + Restic / Litestream 备份恢复演练 + 系统还原点回滚演练 | 从还原点回滚后系统与配置均恢复至已知良好状态 |
 | **S6** | 领域扩展 | 日常事务、逆向研究、游戏构建等能力逐步接入 | 按周报统计的高频需求优先级依次扩充 |
 
 早期 P0–P4 路线图保留在 [roadmap.md](roadmap.md) 供参考，当前实施计划以本节为准。

@@ -2,15 +2,15 @@
 
 > 状态：设计中 · 上位文档：[总体架构设计 §8 规则与能力的演进闭环](architecture-north-star.md#8-规则与能力的演进闭环)
 >
-> 本文细化 `info.recall` 与 [Personal Agent §6 记忆分层](personal-agent.md#6-记忆分层) 的具体实现。系统采用**单个 SQLite 文件（`~/knowledge/kb.sqlite`）同时承载词法检索（FTS5）、向量检索（`sqlite-vec`）与实体关系表**，记忆数据作为同一数据库中的一张表维护，不额外运行常驻检索服务。
+> 本文细化 `info.recall` 与 [Personal Agent §6 记忆分层](personal-agent.md#6-记忆分层) 的具体实现。系统采用**单个 SQLite 文件（`%LOCALAPPDATA%\aica\data\knowledge\kb.sqlite`）同时承载词法检索（FTS5）、向量检索（`sqlite-vec`）与实体关系表**，记忆数据作为同一数据库中的一张表维护，不额外运行常驻检索服务。
 
 ## 0. 核心选型决策
 
 | 模块 | 选型决定 | 依据说明 |
 |---|---|---|
-| 底层存储 | 单文件 `~/knowledge/kb.sqlite`（WAL 模式） | 与 Taskwarrior、Orca、Home Assistant 同技术栈，复用同一条 Litestream 备份链路 |
+| 底层存储 | 单文件 `%LOCALAPPDATA%\aica\data\knowledge\kb.sqlite`（WAL 模式） | 与 Taskwarrior、Orca、Home Assistant 同技术栈，复用同一条 Litestream 备份链路 |
 | 词法检索 | SQLite FTS5 + `jieba` 预分词列 | 本机 SQLite 默认 `unicode61` 无法切分中文词，`trigram` 无法匹配双字词（见 §4） |
-| 向量检索 | `sqlite-vec`（`vec0` 虚拟表），`bge-small-zh-v1.5`（512 维） | `nixpkgs` 已收录 `sqlite-vec`；20 万条切片约占 400MB（float32）或 100MB（int8） |
+| 向量检索 | `sqlite-vec`（`vec0` 虚拟表），`bge-small-zh-v1.5`（512 维） | 需自行编译 `sqlite-vec` 扩展并拷入 SQLite 的 `load_extension` 路径；20 万条切片约占 400MB（float32）或 100MB（int8） |
 | 实体关系图 | 普通关系表 `entity` / `mention` / `edge`，支持一跳扩展 | 单用户规模下实体数量 < 10⁴，无需引入独立图数据库 |
 | 多路融合 | RRF（Reciprocal Rank Fusion，k=60）+ 时间衰减 + 数据源权重 | 单条 SQL CTE 查询即可完成三路召回与融合排序（见 §5） |
 | 结果重排 | 优先使用 `bge-reranker-base-zh`，模型缺失时回退为规则重排 | 20 条候选在 CPU 上重排耗时约 150ms |
@@ -21,19 +21,19 @@
 
 | 数据源 | 本机路径（以原生文件为准） | 存储形态 | 索引切分粒度 | 同步方式 | 保留周期 |
 |---|---|---|---|---|---|
-| 任务库 | `~/.local/share/task/taskchampion.sqlite3`（TW3 默认路径） | SQLite | 单条任务 = 1 个 `doc`，每条注解 = 1 个 `chunk` | `on-modify` Hook 触发 `kn ingest task`（5s 防抖） | 永久 |
-| Orca 会话 | `~/.config/orca/ai-vault/session-search.sqlite` | 已有 FTS5 表（约 7.5 万条消息） | 单条消息 | 只读 `ATTACH`，按 `sessions.updated_at` 增量同步 | 热数据 90 天，超期归档 |
-| Claude Code 会话 | `~/.claude/projects/*/*.jsonl`（约 751MB） | JSONL | 单轮 `user + assistant` 对话为 1 个 `chunk` | 按文件 `mtime` 增量扫描，跳过大体积 `tool_result` 与 Base64 内容 | 180 天 |
-| 规则与设计文档 | `~/.claude/CLAUDE.md`、`~/.agents/**`、各仓 `AGENTS.md` 与 `docs/**` | Markdown | 按二级标题 `##` 切分章节 | `inotify` 监听 + Git `pre-commit` 钩子 | 永久（带版本哈希） |
-| 个人技术笔记 | `~/.agents/notes/*.md` | Markdown | 按二级标题 `##` 切分章节 | 同上 | 永久 |
-| Calibre 书库 | 书库路径待建（本机暂无 `~/EBook/Calibre`） | SQLite + EPUB | 书籍元数据全量索引；正文按需解包，仅索引前 3 章 | 每小时调用 `calibredb list --for-machine` | 元数据永久保留 |
-| B 站账号动态 | `~/.config/biliup/`（仅 Cookie）+ 投稿 API 返回 | JSON | 投稿元数据、本人评论与回复 | 投稿完成后触发 + 每日定时同步 | 90 天 |
+| 任务库 | `%LOCALAPPDATA%\aica\state\taskchampion.sqlite3` | SQLite | 单条任务 = 1 个 `doc`，每条注解 = 1 个 `chunk` | `on-modify` Hook 触发 `kn ingest task`（5s 防抖） | 永久 |
+| Orca 会话 | `%APPDATA%\orca\ai-vault\session-search.sqlite`（以原生安装为准） | 已有 FTS5 表（约 7.5 万条消息） | 单条消息 | 只读 `ATTACH`，按 `sessions.updated_at` 增量同步 | 热数据 90 天，超期归档 |
+| Claude Code 会话 | `%USERPROFILE%\.claude\projects\*\*.jsonl` | JSONL | 单轮 `user + assistant` 对话为 1 个 `chunk` | 按文件 `mtime` 增量扫描，跳过大体积 `tool_result` 与 Base64 内容 | 180 天 |
+| 规则与设计文档 | `%USERPROFILE%\.claude\CLAUDE.md`、`%USERPROFILE%\.agents\**`、各仓 `AGENTS.md` 与 `docs/**` | Markdown | 按二级标题 `##` 切分章节 | 文件系统监听 + Git `pre-commit` 钩子 | 永久（带版本哈希） |
+| 个人技术笔记 | `%USERPROFILE%\.agents\notes\*.md` | Markdown | 按二级标题 `##` 切分章节 | 同上 | 永久 |
+| Calibre 书库 | 书库路径待建（`D:\aica\calibre-library\`） | SQLite + EPUB | 书籍元数据全量索引；正文按需解包，仅索引前 3 章 | 每小时调用 `calibredb list --for-machine` | 元数据永久保留 |
+| B 站账号动态 | `%APPDATA%\biliup\`（仅 Cookie）+ 投稿 API 返回 | JSON | 投稿元数据、本人评论与回复 | 投稿完成后触发 + 每日定时同步 | 90 天 |
 | 学习通课程 | `xxt hw\|notice --all-courses --json` | JSON | 单条作业或通知 = 1 个 `doc` | 每日 07:00 定时拉取 | 当前学期 |
-| Shell 命令历史 | `~/.bash_history` | 纯文本 | 完整复合命令 | 每日增量同步，过滤裸命令（如单独的 `ls`、`claude`） | 90 天 |
+| Shell 命令历史 | PowerShell `ConsoleHost_history.txt`（`$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\`） | 纯文本 | 完整复合命令 | 每日增量同步，过滤裸命令（如单独的 `ls`、`claude`） | 90 天 |
 | 邮件 | 端口适配器（IMAP） | 结构化摘要 | 仅索引摘要与关键字段，不索引邮件正文全文 | 每日同步 | 30 天 |
 | IM 聊天记录 | `kb.sqlite` 的 `im_message` 表（采集见 [IM 采集](im-ingest.md)） | SQLite | 群聊按时间窗、对话按回复对 | 主账号协议轮询 + 专用账号 Webhook | 原始永久，切分视图可重建 |
 | Home Assistant | Recorder 数据库 | 时序数据 | **不纳入知识库** | 按需通过 HA API 实时查询 | - |
-| Claude 项目记忆 | `~/.claude/projects/*/memory/*.md` | Markdown + YAML | 单文件 = 1 个 `doc` | 文件变更时触发 | 永久 |
+| Claude 项目记忆 | `%USERPROFILE%\.claude\projects\*\memory\*.md` | Markdown + YAML | 单文件 = 1 个 `doc` | 文件变更时触发 | 永久 |
 
 收录标准：仅纳入有助于回答"某件事上次是如何处理的"的文本与元数据；传感器读数、视频播放量等高频时序数据留在各自原生系统中。
 
@@ -42,7 +42,7 @@ Orca 自带的 `session-search.sqlite` 已包含 7.5 万条历史消息的 FTS5 
 ## 2. 目录结构
 
 ```
-~/knowledge/
+%LOCALAPPDATA%\aica\data\knowledge\
 ├── kb.sqlite              # 知识库主文件（doc / chunk / fts / vec / graph / mem）
 ├── ingest/                # 各数据源导入适配器（每个 < 100 行）
 │   ├── task.py  orca.py  transcript.py  files.py
@@ -52,7 +52,7 @@ Orca 自带的 `session-search.sqlite` 已包含 7.5 万条历史消息的 FTS5 
 └── export/                # kn mem export 导出的 Markdown 快照
 ```
 
-统一命令行入口为 `kn`（源码与安装脚本位于 `~/agent-src/tools/knowledge`），包含五个子命令：`ingest`、`search`、`recall`、`mem`、`stats`。
+统一命令行入口为 `kn`（源码与安装脚本位于 `%USERPROFILE%\agent-src\tools\knowledge`），包含五个子命令：`ingest`、`search`、`recall`、`mem`、`stats`。
 
 ## 3. 数据库 Schema
 
@@ -207,8 +207,7 @@ ORDER BY final DESC LIMIT :k;
 
 所有 Agent（入口、Worker、写作子任务）统一通过 `kn recall` 调用知识检索：
 
-```bash
-kn recall --json <<'EOF'
+```json
 {
   "query": "上次剪 vlog 是怎么配乐和投 B 站的",
   "k": 8,
@@ -220,10 +219,14 @@ kn recall --json <<'EOF'
   "author": "me",              // me | <author_id>，限定本人或某位发言者
   "conv": null,                // 限定会话 id，见 im-ingest.md §5
   "expand": 0,                 // 命中后按 continued 向前后扩展的 chunk 数
-
   "include": ["snippets", "entities", "paths"]
 }
-EOF
+```
+
+调用方式（PowerShell 下用 `Get-Content` 管道传入，避免 here-doc 语义）：
+
+```powershell
+Get-Content .\query.json -Raw | kn recall --json
 ```
 
 返回 JSON 结构（进程退出码：`0` 正常返回 · `2` 结果为空 · `3` 降级模式返回 · `4` 索引文件缺失）：
@@ -264,7 +267,7 @@ EOF
 
 | 记忆层级 | 权威存储位置 | 写入方式 | 生命周期 | 数据权威性 |
 |---|---|---|---|---|
-| 全局与系统规则 | `~/.claude/CLAUDE.md`、`~/.agents/SKILLS.md`、各仓 `AGENTS.md` | 人工编写，或由 `meta.capability.propose` 提交 PR | 永久 | 以 Markdown 原文件为准，`kb.sqlite` 仅建索引 |
+| 全局与系统规则 | `%USERPROFILE%\.claude\CLAUDE.md`、`%USERPROFILE%\.agents\SKILLS.md`、各仓 `AGENTS.md` | 人工编写，或由 `meta.capability.propose` 提交 PR | 永久 | 以 Markdown 原文件为准，`kb.sqlite` 仅建索引 |
 | 项目级约定 | 各代码仓库的 `AGENTS.md` | 人工或随代码 PR 更新 | 永久 | 以仓库原文件为准 |
 | 任务执行历史 | Taskwarrior + Orca 原生存储 | 派发器与 Worker 写回 | 永久 | 以原生数据库为准 |
 | 能力偏好（`pref`） | `kb.sqlite` 的 `mem` 表（`layer='pref'`） | 从历史任务选择与返工记录中提炼 | 半衰期 180 天 | 以 `mem` 表为准，可导出快照 |
@@ -370,14 +373,14 @@ CREATE TABLE label_sample (
 | 重训触发条件 | 新增样本满 200 条，或每周日定时触发 |
 | 验证集划分 | 按时间顺序切分，取最近 20% 样本作为 `holdout` 验证集，防止时间穿越泄漏 |
 | 替换上线标准 | 新模型在 `holdout` 集上的准确率较当前线上模型提升 **≥ 2 个百分点**才替换，否则保留原模型 |
-| 部署与回滚 | 导出 ONNX 模型至 `~/knowledge/models/intent-<ver>/`，通过 `intent-current` 符号链接原子切换 |
+| 部署与回滚 | 导出 ONNX 模型至 `%LOCALAPPDATA%\aica\data\knowledge\models\intent-<ver>\`，通过 `intent-current` 目录联接（junction）原子切换 |
 
 ### 7.6 与本地 Markdown 记忆文件的协同
 
-Claude Code 等工具会在 `~/.claude/projects/<proj>/memory/` 下维护带 YAML frontmatter 的 Markdown 记忆文件：
+Claude Code 等工具会在 `%USERPROFILE%\.claude\projects\<proj>\memory\` 下维护带 YAML frontmatter 的 Markdown 记忆文件：
 
 - **权威方向**：人工或 Agent 直接编写的 Markdown 文件以磁盘原文件为准，`kb.sqlite` 仅做单向索引。
-- **偏好快照导出**：执行 `kn mem export` 时，将数据库中 `layer='pref'` 的活跃偏好单向导出至 `~/.agents/notes/prefs.md`（文件头标注 `generated: true`），不覆盖人工手写的笔记条目。
+- **偏好快照导出**：执行 `kn mem export` 时，将数据库中 `layer='pref'` 的活跃偏好单向导出至 `%USERPROFILE%\.agents\notes\prefs.md`（文件头标注 `generated: true`），不覆盖人工手写的笔记条目。
 - **检索权重**：文档与规则类切片的基础权重设为 `0.9`，高于普通聊天记录的 `0.4`；当两者结论冲突时优先采用文档与规则中的定义。
 
 ### 7.7 外部开源记忆方案借鉴

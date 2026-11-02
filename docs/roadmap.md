@@ -12,8 +12,8 @@
 
 | 原阶段 | 包含内容 | 对应新阶段（总体架构设计 §13） | 调整说明 |
 |---|---|---|---|
-| **P0** | Taskwarrior + `ev` CLI + 每日早晚报 + KRunner + Plasma 桌面组件 | **S0 主干骨架** | 具体启动步骤见下方 §3 |
-| **P1** | 意图分类 + 交互卡片 + KDE Connect + ntfy + 状态灯 | **S1 日常交互** | 同步增加 `hc check` 与每晚任务快照导出 |
+| **P0** | Taskwarrior + `ev` CLI + 每日早晚报 + PowerToys Run + 桌面小组件 | **S0 主干骨架** | 具体启动步骤见下方 §3 |
+| **P1** | 意图分类 + 交互卡片 + Phone Link + ntfy + 状态灯 | **S1 日常交互** | 同步增加 `hc check` 与每晚任务快照导出 |
 | **P2** | 首批领域能力：视频、配乐、长文、订阅早报、知识检索、`meta.system.update`、财务记账 | **S3 首条领域流水线** + **S6 领域扩展** | S3 先跑通单条创作流水线，其余能力在 S6 按需扩展 |
 | **P3** | 硬件接入：WoL、UPS、NFC、毫米波雷达、墨水屏、热敏打印 | **S2 显示终端闭环** + **S5 故障演练与备份** | 显示仲裁器需在至少两块物理屏幕就绪后再启用 |
 | **P4** | 周报/年报、能力提案、场景录制、偏好提炼、云服务器兜底分类 | **S4 演进闭环** | 所需训练样本自 S1 起持续积累 |
@@ -23,9 +23,9 @@
 1. 安装 `taskwarrior`，并在 `.taskrc` 中配置 UDA 字段：`kind`、`source`、`thread`、`parent`、`payload`、`severity`、`lifetime`、`reversible`、`attempts`、`lane`（见 [事件与任务规格 §1](event-spec.md#1-任务字段定义)）。
 2. 编写 `ev` CLI 封装、只写 Spool 队列的 `on-add` / `on-modify` Hook 以及常驻派发器 `evd` 骨架（见 [事件运行时与派发器 §3](event-runtime.md#3-派发器守护进程evd)）。
 3. 首批注册 5 类基础 `kind`：`work.code.task`、`life.maintain.home`、`life.schedule.*`、`info.feed.digest`、`meta.review.weekly`。
-4. 配置 `systemd.timer` 每日定时生成早晚报摘要并推送至手机。
-5. 配置 KDE Plasma KRunner 快捷录入插件与桌面待办计数小组件。
-6. 配置每晚定时导出任务快照至 `~/.local/state/aica/evo/observe/`，并启用前两项基础健康检查（任务库 SQLite 完整性检查、LiteLLM 网关探活）。
+4. 配置任务计划程序每日定时生成早晚报摘要并推送至手机。
+5. 配置 PowerToys Run 快捷录入插件与桌面待办计数小组件。
+6. 配置每晚定时导出任务快照至 `%LOCALAPPDATA%\aica\state\evo\observe\`，并启用前两项基础健康检查（任务库 SQLite 完整性检查、LiteLLM 网关探活）。
 
 ## 4. 首批零硬件依赖的实用能力
 

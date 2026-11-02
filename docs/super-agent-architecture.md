@@ -1,7 +1,7 @@
 # Super-agent 架构参考（外部文献笔记）
 
 > 来源：DeepSeek 产品部《Super-agent 设计探索：迈向更自主的 Agent 系统》，微信公众号（2026-10）。本地存档：
-> `/home/shizuku/Downloads/Super-agent 设计探索：迈向更自主的 Agent 系统.html`（以原生文件为准）。
+> `%USERPROFILE%\Downloads\Super-agent 设计探索：迈向更自主的 Agent 系统.html`（以原生文件为准）。
 > 说明：本文为**外部参考架构摘要**，本系统对其各项机制的具体取舍见文末 §9。
 
 ## 0. 核心观点摘要
@@ -122,8 +122,8 @@
 | 异步全双工执行 | `evd` 投递 Orca Run 后立即返回，Worker 完成后异步调用 `ev done` 回写 | **采纳** |
 | 多信道差异化输出 | IM 推送一句话摘要与三按钮卡片；代码与分析报告通过 Git PR 与 Markdown 交付 | **采纳** |
 | 存算与执行环境分离 | **反向部署**：任务库、Orca 循环与本地文件全部留在工作站，云端仅保留等待队列（[ADR 0003](adr/0003-loop-local-entry-remote.md)、[ADR 0007](adr/0007-deferred-resident-node.md)） | **变体**：单用户本地自托管，避免跨机挂载本地文件与 GPU |
-| 外部 Watchdog | 采用 `systemd.timer` 运行无状态巡检脚本（`ev-watchdog` 与 `hc check`），不维护常驻 Watchdog Agent 会话 | **简化采纳**：省去常驻会话的 Token 消耗 |
+| 外部 Watchdog | 采用任务计划程序运行无状态巡检脚本（`ev-watchdog` 与 `hc check`），不维护常驻 Watchdog Agent 会话 | **简化采纳**：省去常驻会话的 Token 消耗 |
 | 多实例分片与 A2A | 不引入 | 单人单实例无需分片 |
-| 凭据隔离 | 凭据保存在 KWallet 与各工具原生配置中，Agent 仅调用封装好的 CLI（如 `biliup`、`xxt`、`gh`） | **采纳** |
+| 凭据隔离 | 凭据保存在 Windows 凭据管理器 / DPAPI 与各工具原生配置中，Agent 仅调用封装好的 CLI（如 `biliup`、`xxt`、`gh`） | **采纳** |
 
 与面向研发团队的 Super-agent 原型相比，本系统额外引入了 **Taskwarrior 任务库**作为跨领域（涵盖日常事务、智能家居、内容创作与软件开发）的统一状态源。

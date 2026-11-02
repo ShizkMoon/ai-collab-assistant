@@ -22,7 +22,7 @@ version = 1
 [defaults]
 lane_parallel = 4          # 全局最大并发数
 lease         = "30m"      # 默认执行租约时长，执行器可续期
-gate_file     = "~/.local/state/aica/ev/gates.json"
+gate_file     = "%LOCALAPPDATA%\aica\state\ev/gates.json"
 
 [[rule]]
 name  = "alert.critical"
@@ -72,7 +72,7 @@ to    = "triage"           # 归入待分类队列，在每日早报中汇总
 | `reversible` | 标识操作是否可逆，决定能否自动执行 | 读取 UDA `reversible` |
 | `lane` | `interactive`（交互） / `batch`（批处理） | 读取 UDA `lane` |
 | `when` | 单行 Python 表达式，可访问 `payload`、`mode`、`egress` 三个变量 | 规则文件属于本地受控配置，直接通过 `eval` 求值 |
-| `needs` | 执行前置依赖（如特定网络出口），未满足时转入 `parked` 并订阅对应 `system.*` 事件 | 见 [网络与设备组网 §5](network-fabric.md#5-出口策略如何被-agent-感知) |
+| `needs` | 执行前置依赖（如特定网络出口），未满足时转入 `parked` 并订阅对应 `system.*` 事件 | 见 [网络与设备组网 §7](network-fabric.md#7-出口状态感知与任务挂起恢复) |
 | `gate` | 支持 `cooldown`、`rate`、`window` 限流策略，被抑制时记录 `sys.gate.suppressed` | 见 §1.5 |
 
 为保持规则表直观易读，不支持正文正则匹配、多层嵌套布尔树或规则继承。
@@ -98,7 +98,7 @@ to    = "triage"           # 归入待分类队列，在每日早报中汇总
 ### 1.5 流量门控（Gate）
 
 ```json
-// ~/.local/state/aica/ev/gates.json（由 flock 文件锁保护，每小时清理过期项）
+// %LOCALAPPDATA%\aica\state\ev\gates.json（由独占文件锁保护，每小时清理过期项）
 {"home.plug.power": {"hits": [1761987654, 1761991200], "suppressed": 3, "until": null}}
 ```
 
@@ -167,7 +167,7 @@ stateDiagram-v2
 ### 3.1 模块划分
 
 ```
-~/.local/lib/ev/            # 约 700 行 Python 3.12，仅依赖标准库
+%USERPROFILE%\.local\lib\ev\   # 约 700 行 Python 3.12，仅依赖标准库
   hook.py       60   on-add / on-modify：将变更写入 Spool 目录并原样回显
   rules.py     120   加载 TOML、预编译通配符、规则匹配、聚合窗口处理
   gates.py      50   cooldown / rate / window 限流控制
@@ -177,13 +177,13 @@ stateDiagram-v2
   __main__.py   80   CLI 入口
 ```
 
-派发器以单进程 `evd.service`（工作站上的 `systemd` 用户服务，`Restart=always`）运行。任务库与 `evd` 均部署在工作站本地：工作站休眠期间外部事件在云服务器的等待队列中暂存，云服务器离线只影响外部输入，不影响工作站本地任务流转（见 [网络与设备组网 §4](network-fabric.md#4-节点失效影响与恢复阶梯)）。进程间队列直接采用本地 Spool 目录配合 `flock` 文件锁实现。
+派发器以单进程 Windows 服务 `evd`（WinSW 包装，失败自动重启）运行。任务库与 `evd` 均部署在工作站本地：工作站休眠期间外部事件在云服务器的等待队列中暂存，云服务器离线只影响外部输入，不影响工作站本地任务流转（见 [网络与设备组网 §4](network-fabric.md#4-节点失效影响与恢复阶梯)）。进程间队列直接采用本地 Spool 目录配合独占文件句柄锁（`msvcrt.locking` / 独占打开）实现。
 
 ### 3.2 Hook 规范
 
 ```sh
 #!/bin/sh
-# ~/.config/task/hooks/on-add.ev.sh：为 Taskwarrior Hook 增加 3 秒超时保护
+# %ProgramData%\aica\hooks\on-add.ev.ps1：为 Taskwarrior Hook 增加 3 秒超时保护
 exec timeout 3s ev hook on-add
 ```
 
@@ -199,7 +199,7 @@ def on_modify():
 |---|---|
 | 执行耗时上限 | p99 < 5ms，确保日常执行 `task add` 无体感延迟 |
 | Hook 内禁止的操作 | 禁止回调 `task` 命令（会触发锁死锁）、禁止发起网络请求、禁止调用模型或拉起耗时子进程 |
-| 异常处理策略 | 超时或异常时一律原样输出输入 JSON（Fail-open），错误信息追加记录至 `~/.local/state/aica/ev/hook.err` |
+| 异常处理策略 | 超时或异常时一律原样输出输入 JSON（Fail-open），错误信息追加记录至 `%LOCALAPPDATA%\aica\state\ev/hook.err` |
 
 ### 3.3 幂等控制与事件重放
 
@@ -224,7 +224,7 @@ def on_modify():
 ```
 
 ```json
-{"status":"done",   "summary":"成片 3:41 已导出至 /data/aica/out/vlog-1101.mp4","attach":["…"]}
+{"status":"done",   "summary":"成片 3:41 已导出至 D:\aica\out/vlog-1101.mp4","attach":["…"]}
 {"status":"waiting","summary":"等待 22:30 后确认配乐","wake":"2026-11-01T22:30+08:00"}
 {"status":"me",     "summary":"需本人完成实名认证","card":{"执行":"","延后":"6h","忽略":""}}
 {"status":"blocked","summary":"等待前置构建任务完成","blocked_by":["3f1c…"]}
@@ -248,14 +248,14 @@ def on_modify():
 |---|---|
 | 同 `thread` 内部串行 | 维护 `thread → asyncio.Lock` 映射表；`evd` 派发前先获取对应 `thread` 锁，不同 `thread` 之间完全并行 |
 | 跨 `thread` 并发配额 | 全局并发上限 `lane_parallel`（默认 4），其中批处理通道（`batch` lane）独立配额（默认 2） |
-| Taskwarrior 文件锁竞争 | Taskwarrior 3 写入时锁定数据目录；所有写操作统一经过 `tw()` 包装函数，配合 `flock` 与最多 4 次指数退避重试 |
+| Taskwarrior 文件锁竞争 | Taskwarrior 3 写入时锁定数据目录；所有写操作统一经过 `tw()` 包装函数，配合文件锁与最多 4 次指数退避重试 |
 | 人工直接执行 `task` 命令 | 允许人工直接操作 CLI；`on-modify` Hook 将变更写入 Spool，`evd` 读取后同步内部状态而不覆盖人工修改 |
 | 乱序事件处理 | 同一 `thread` 内的任务按创建时间 `entry` 排序；若外部信号携带时间戳 `signal.t`，丢弃晚到的旧状态信号 |
 
 ```python
 def tw(*args, tries=4):
     for i in range(tries):
-        with flock(WLOCK):
+        with file_lock(WLOCK):
             p = subprocess.run(["task", *args], capture_output=True, text=True, timeout=30)
         if "lock" not in (p.stdout + p.stderr).lower():
             return p
@@ -265,7 +265,7 @@ def tw(*args, tries=4):
 
 ## 5. 运行状态监控与看门狗
 
-系统不额外维护常驻的 Watchdog Agent 会话（对比 [Super-agent 参考架构 §6](super-agent-architecture.md#6-watchdog)），而是通过 `systemd.timer` 定期运行无状态检查脚本，将异常情况作为 `system.*` 任务写入任务库。
+系统不额外维护常驻的 Watchdog Agent 会话（对比 [Super-agent 参考架构 §6](super-agent-architecture.md#6-外部看门狗watchdog)），而是通过任务计划程序定期运行无状态检查脚本，将异常情况作为 `system.*` 任务写入任务库。
 
 ### 5.1 `ev status` 终端概览
 
@@ -331,8 +331,8 @@ report.faults.sort=modified-
 | 功能需求 | 选用方案 | 自建或取舍说明 |
 |---|---|---|
 | 任务存储、依赖、周期与同步 | Taskwarrior 3 | 直接复用 |
-| 本地事件队列 | 文件系统 Spool 目录 + `flock` | 单机单用户场景无需引入 Redis 或 NATS |
+| 本地事件队列 | 文件系统 Spool 目录 + 独占文件锁 | 单机单用户场景无需引入 Redis 或 NATS |
 | 并发控制 | Python `asyncio` + 按 `thread` 加锁 | 并发上限为 4，无需引入 Celery / Prefect |
-| 状态观测 | Taskwarrior 自定义报表 + `systemd.timer` | 命令行可查，无需单独为任务队列维护监控大盘 |
+| 状态观测 | Taskwarrior 自定义报表 + 任务计划程序 | 命令行可查，无需单独为任务队列维护监控大盘 |
 | 状态机表达 | Taskwarrior 原生 `status`、`tags` 与 `depends` | 保持单一数据源 |
 | **自建部分** | 规则匹配、幂等控制与执行器适配层（`ev` / `evd`） | 需对接本机 Orca、Home Assistant 与自定义 CLI，整体约 700 行 Python |

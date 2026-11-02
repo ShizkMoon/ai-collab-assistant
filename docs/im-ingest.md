@@ -64,7 +64,7 @@ account   = "self"               # self | bot
 
 [cursor]
 mode     = "timestamp"           # 个人号协议按时间回溯，无稳定 seq
-store    = "~/.local/state/aica/cursors/im-wechat-self.json"
+store    = "%LOCALAPPDATA%\aica\state\cursors/im-wechat-self.json"
 max_gap  = "2h"                  # 群聊断线几小时即形成永久缺口
 backfill = 5000                  # 首次回溯上限，超出记一条 meta.ingest.gap
 

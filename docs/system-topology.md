@@ -45,10 +45,10 @@ flowchart LR
 
 ## 3. 跨机通信通道
 
-- **云端队列拉取**：工作站由 `systemd.timer` 每 2 分钟拉起一次 `ev sync`，按端口游标增量拉取事件并推进游标；拉取使用 [输入端口](output-routing.md#2-输入端口sourcestoml) 中声明的 `cursor.mode`。
+- **云端队列拉取**：工作站由任务计划程序每 2 分钟拉起一次 `ev sync`，按端口游标增量拉取事件并推进游标；拉取使用 [输入端口](output-routing.md#2-输入端口sourcestoml) 中声明的 `cursor.mode`。
 - **虚拟局域网**：各节点通过 Tailscale 互联。工作站、云服务器与手机在同一个 Tailnet；Kindle KPW5 以 Userspace 网络模式接入，仅支持出站连接。子网路由与 Exit Node 暂不由本机房节点提供（[ADR 0007](adr/0007-deferred-resident-node.md)）。
-- **命令调用通道**：云端脚本通过 Tailscale SSH 调用工作站上的受限入口脚本，底层转发至本机 `orca` CLI（当前路径为 `~/.config/orca/linux-orca-cli-shim/orca`，以原生安装为准）。
-- **受限入口脚本**：在工作站 `~/.local/bin/` 下放置封装脚本，仅向远端暴露四项受控操作：创建任务、查询状态、读取输出、发送跟进回复。
+- **命令调用通道**：云端脚本通过 Tailscale SSH 调用工作站上的受限入口脚本，底层转发至本机 `orca` CLI（路径以原生安装为准）。
+- **受限入口脚本**：在工作站 `%USERPROFILE%\.local\bin\` 下放置封装脚本（PowerShell），仅向远端暴露四项受控操作：创建任务、查询状态、读取输出、发送跟进回复。
 
 云端从不主动向工作站推送执行请求——所有执行请求都由工作站主动拉取。这样工作站休眠、断网、换 IP 都不会造成云端积压出错。
 
@@ -75,8 +75,8 @@ flowchart LR
 
 对于必须操作图形界面的软件，按以下优先级依次降级：
 
-1. **结构化接口优先（默认）**：具备原生 CLI 或 `CLI-Anything` 封装的工具直接走命令行；浏览器网页通过 `orca-cli` 的 DOM 接口控制；原生桌面应用通过 `orca computer` 读取 AT-SPI 无障碍树进行操控。
-2. **像素级视觉操作（兜底）**：面对自绘画布、游戏窗口或无障碍树缺失的界面，使用 KWin DBus / `spectacle` 截图并配合视觉决策模型（如本地 VL 模型或 Jev）输出坐标动作，通过 `ydotool` 注入键鼠事件（见 [工作站配置 §4.2](workstation-arch.md#42-桌面自动化命令行接口)）。
+1. **结构化接口优先（默认）**：具备原生 CLI 或 `CLI-Anything` 封装的工具直接走命令行；需要登录态或复杂交互的网页操作走 `ego-browser`（ego(lite) 的 Space + Snapshot，见 [本机工具链选型 §2.8](local-toolchain.md#28-浏览器与网页自动化egolite)）；原生桌面应用通过 `orca computer` 读取 UI Automation 无障碍树进行操控。
+2. **像素级视觉操作（兜底）**：面对自绘画布、游戏窗口或无障碍树缺失的界面，用 `nircmd` 或 PowerShell `System.Drawing` 截图，配合视觉决策模型（如本地 VL 模型或 Jev）输出坐标动作，通过 AutoHotkey v2 `Send` / `SendInput` 注入键鼠事件（见 [工作站配置 §4.2](workstation-windows.md#42-桌面自动化命令行接口)）。
 3. **重规划升级**：仅在连续多次操作失败或任务需要重新拆解时，才升级调用大参数模型重新规划步骤。
 
 视觉操作逻辑封装在 Worker 自身的 Skill 中，不直接修改 Orca 内置 Skill（避免被 `orca skills update` 覆盖）。
@@ -86,13 +86,13 @@ flowchart LR
 | 操作类别 | 执行方式 | 回滚手段 |
 |---|---|---|
 | 状态诊断（查磁盘、看日志） | 入口或 Worker 直接执行只读命令并返回结论 | 无需回滚 |
-| 配置与软件包变更 | 修改 `/etc` 下受管配置或安装包 → 执行 `just check` 冒烟校验 | btrfs 快照回滚 + `downgrade` |
-| 系统例行升级 | `meta.system.update`：更新前自动快照、执行 `pacman -Syu` 与各分区更新、检查服务，失败回滚快照 | 快照回滚 |
+| 配置与软件包变更 | 修改 `%ProgramData%\aica\` 下受管配置或安装包 → 执行 `just check` 冒烟校验 | 系统还原点回滚 + `winget install --version` |
+| 系统例行升级 | `meta.system.update`：更新前自动建还原点、执行 `winget upgrade --all` 与各分区更新、检查服务，失败回滚还原点 | 还原点 + `restic` |
 
-系统不向 Agent 暴露 `sudo` 明文密码（本机 `wheel` 组已配置免密 sudo 规则）。涉及删除用户数据或对外发布的操作严格受确认点约束。快照回滚的具体规则见 [工作站配置 §5](workstation-arch.md#5-更新回滚与故障恢复)。
+系统不向 Agent 暴露管理员凭据（需要提权的操作由 `upctl` 内置的提权入口申请 UAC，不把密码交给模型）。涉及删除用户数据或对外发布的操作严格受确认点约束。快照回滚的具体规则见 [工作站配置 §5](workstation-windows.md#5-更新回滚与故障恢复)。
 
 ## 9. 部署进度
 
 - **已就绪**：工作站已安装 Orca 1.4.237，全局已配置 `orca-cli`、`computer-use`、`orchestration` 三个 Skill；云服务器 `orca-pool` 已通过 Tailscale 接入。
-- **待部署**：工作站的 `ev sync` 定时拉取、云端的事件落库脚本与 ntfy 转发、工作站受限入口脚本、工作站系统迁移至 Arch（[ADR 0006](adr/0006-workstation-arch.md)）。
+- **待部署**：工作站的 `ev sync` 定时拉取、云端的事件落库脚本与 ntfy 转发、工作站受限入口脚本、工作站系统迁移至 Windows 11 原生（[ADR 0006](adr/0006-workstation-windows.md)）。
 - **推进顺序**：先在工作站本地跑通「创建 Run → 派发 Worker → 回收结果 → 写回任务库」的完整闭环，再接入云端事件拉取；系统迁移放在闭环稳定之后，避免同时变动运行时与运行环境。

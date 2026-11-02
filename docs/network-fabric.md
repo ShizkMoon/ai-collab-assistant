@@ -37,9 +37,9 @@ flowchart TD
 
 工作站侧安装与启动：
 
-```bash
+```powershell
 # 工作站：只作为 Tailnet 客户端，接受云服务器宣告的路由（如有）
-sudo tailscale up --ssh --accept-routes
+& "C:\Program Files\Tailscale\tailscale.exe" up --ssh --accept-routes
 ```
 
 ```toml
@@ -89,21 +89,21 @@ users  = ["root", "shizuku"]
 | **BLE 传感器广播** | ESPHome `bluetooth_proxy` | BLE 广播 → ESP32 代理节点 → HA 原生 BTHome 集成 | 小米温湿度计 LYWSD03MMC（ATC/pvvx 固件） | 待常驻节点 |
 | **Zigbee 传感器与开关** | Zigbee2MQTT + Mosquitto | Zigbee 协调器 → Z2M → MQTT → HA | 门磁、水浸传感器、计量插座、无线开关 | 待常驻节点 |
 | **Home Assistant 自动化** | HA `automation` | 设备状态变化 → HA 自动化 → `ev add` | 全部家居联动 | 待常驻节点 |
-| **USB HID / 串口设备** | Linux `udev` + 守护进程 | 插拔或状态事件 → `systemd` 规则 → `ev add` | 数位板、读卡器、UPS 电源 | 工作站可用 |
+| **USB HID / 串口设备** | Windows 设备通知（`WM_DEVICECHANGE`）+ 守护进程 | 插拔或状态事件 → 守护进程 → `ev add` | 数位板、读卡器、UPS 电源 | 工作站可用 |
 | **Linux 远端主机** | 目标主机 `sshd` | 执行器通过 Tailscale SSH 调用远端命令 | `orca-pool` | 可用 |
-| **局域网新设备发现** | Avahi（mDNS / DNS-SD） | 定时运行 `avahi-browse` 比对已知列表 → `meta.device.discovered` | 检测新入网设备或 IP 变化 | 工作站可用 |
-| **网络与热敏打印机** | CUPS / `python-escpos` | 派发器调用 CLI 打印当日清单 | 热敏小票机、常规打印机 | 工作站可用 |
+| **局域网新设备发现** | Bonjour / mDNS 扫描（`dnssd` 或 `nmap -sn`） | 定时扫描比对已知列表 → `meta.device.discovered` | 检测新入网设备或 IP 变化 | 工作站可用 |
+| **网络与热敏打印机** | Windows 打印队列 / `python-escpos` | 派发器调用 CLI 打印当日清单 | 热敏小票机、常规打印机 | 工作站可用 |
 | **自定义物联网节点** | Mosquitto MQTT Broker | 设备向 `ev/ingest` 主题发布 JSON 消息 | ESP32 自制节点、OpenEPaperLink AP | 工作站可用 |
-| **本地文件目录监听** | `systemd.path`（基于 `inotify`） | 指定目录新增文件 → 触发服务执行 `ev add` | 扫描件归档、下载目录、新电子书入库 | 工作站可用 |
+| **本地文件目录监听** | 文件系统监听守护进程（`FileSystemWatcher` / `ReadDirectoryChangesW`） | 指定目录新增文件 → 触发服务执行 `ev add` | 扫描件归档、下载目录、新电子书入库 | 工作站可用 |
 
 ## 6. 电源、唤醒与夜间批处理
 
 单机方案下没有第二台机器发 WoL，工作站改为**常开**：
 
-- **保持唤醒**：`systemd-inhibit --what=sleep` 仅在交流电供电时生效；电池供电时按正常策略休眠。合盖行为设为 `HandleLidSwitch=ignore`。
-- **电池保护**：长期插电使用，充电上限设为 60–80%（BIOS 或 `acpi` 设置）。
+- **保持唤醒**：仅接交流电时生效——电源计划在 AC 下设为「从不睡眠」，或用 `SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED)` 的守护进程持有唤醒锁；电池供电时恢复默认休眠策略。合盖行为（`powercfg /setacvalueindex ... LIDACTION 0`）设为「不采取任何操作」。
+- **电池保护**：长期插电使用，在 MSI Center 或 BIOS 里把充电上限设为 60–80%。
 - **UPS（可选）**：若接入 UPS，由工作站自身作为 NUT `standalone` 节点，`schedulerRules` 在电量低于阈值时执行 `ev add --kind system.power.low` 并安全关机。
-- **夜间批处理防休眠**：批处理窗口为 **01:00–07:00**，与本地推理共用 `~/.local/state/aica/gpu-lease` 显存锁（见 [模型路由与本地推理 §5](model-fleet.md#5-本地推理显存分配16gb-vram)）。队列非空时批处理服务持有 `systemd-inhibit --what=sleep:idle`，锁标识 `/run/aica/batch.active`，队列清空后释放。
+- **夜间批处理防休眠**：批处理窗口为 **01:00–07:00**，与本地推理共用 `%LOCALAPPDATA%\aica\state\gpu-lease` 显存锁（见 [模型路由与本地推理 §5](model-fleet.md#5-本地推理显存分配16gb-vram)）。队列非空时批处理守护进程调用 `SetThreadExecutionState` 持有系统与空闲唤醒锁，锁标识 `%LOCALAPPDATA%\aica\state\batch\active.lock`，队列清空后释放。
 
 ## 7. 出口状态感知与任务挂起恢复
 
@@ -146,23 +146,22 @@ fallback = { egress = "any", model = "ollama:qwen3-8b" }
 
 | 常驻服务 | 常驻内存（RSS） | 峰值内存 | 备注 |
 |---|---|---|---|
-| Arch 基础系统 + `sshd` + `tailscaled` | 400 MB | 600 MB | 系统底座 |
+| Windows 11 基础系统 + OpenSSH Server + `tailscaled` | 2.0 GB | 2.6 GB | 系统底座（含桌面合成与 Defender） |
 | Taskwarrior + `evd` + `events.sqlite3` | 80 MB | 200 MB | 事件消费 |
 | Orca + 编排服务 | 600 MB | 1.5 GB | 编排核心 |
 | DS-Bot + DSH | 1.2 GB | 3.0 GB | 常驻对话入口 |
 | LiteLLM 网关 | 350 MB | 700 MB | 统一 API 路由与计费 |
 | ntfy（本地实例） | 30 MB | 60 MB | 与云服务器实例二选一 |
-| `node_exporter` | 25 MB | 40 MB | 主机指标导出 |
-| **常驻服务合计** | **≈ 2.7 GB** | - | 剩余约 28 GB |
+| `windows_exporter` | 30 MB | 50 MB | 主机指标导出 |
+| **常驻服务合计** | **≈ 4.3 GB** | - | 剩余约 26.5 GB |
 | 本地推理（vLLM / Ollama） | 按模型加载 | 受 16GB 显存限制 | 由显存锁串行调度 |
 | 无头 Chromium（按需拉起） | 0（非常驻） | 2.0–4.0 GB | 任务执行完即释放 |
 
-按需启动的浏览器或工作流异常膨胀时优先影响推理服务，因此仍启用 `systemd-oomd`，并对推理服务设置较低的 `OOMScoreAdjust`：
+按需启动的浏览器或工作流异常膨胀时优先影响推理服务，因此启用 Windows Resource Governor 的内存限制，并把推理服务的进程优先级设为 `BelowNormal`（`PriorityClass`）与低页错误优先级：
 
-```ini
-# /etc/systemd/system/vllm.service.d/oom.conf
-[Service]
-OOMScoreAdjust=-200
+```powershell
+# WinSW 服务 XML 中声明；内存超限时由 Resource Governor 限制而不是杀进程
+Get-Process vllm | ForEach-Object { $_.PriorityClass = 'BelowNormal' }
 ```
 
 ## 9. 云端等待队列的数据面

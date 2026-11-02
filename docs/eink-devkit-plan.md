@@ -24,7 +24,7 @@
 | **1. 高压驱动电源电路（±15V / +22V / −20V / VCOM）** | 中 | 直接复用开源 **epdiy v7** 的 **TPS65185 PMIC** 参考原理图与 BOM 打板 |
 | **2. FPC 排线转接** | 低 | 根据面板背面丝印引脚定义绘制 0.5mm 间距 FPC 转接板（嘉立创打样） |
 | **3. ESP32-S3 并口刷屏固件** | 中高 | 基于 `epdiy` 的 `output_lcd`（LCD_CAM 外设 + GDMA + RMT）框架配置 `displays.c` 分辨率与行选通时序 |
-| **4. 面板原厂波形表（Waveform）** | 可从固件提取 | KPW5 官方恢复包（`update_kindle_pw5*.bin`）的 RootFS 中包含该面板的原厂 `.wrf` 波形文件与 Regal 4 查找表（已通过 `~/Repo/kpw5-analysis` 完成格式解析），可编写脚本离线转换为 `epdiy` 的 `EpdWaveform` C 头文件 |
+| **4. 面板原厂波形表（Waveform）** | 可从固件提取 | KPW5 官方恢复包（`update_kindle_pw5*.bin`）的 RootFS 中包含该面板的原厂 `.wrf` 波形文件与 Regal 4 查找表（已通过 `D:\repo\kpw5-analysis` 完成格式解析），可编写脚本离线转换为 `epdiy` 的 `EpdWaveform` C 头文件 |
 
 ### 1.3 风险与投入产出评估
 
