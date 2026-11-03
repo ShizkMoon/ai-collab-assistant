@@ -37,6 +37,7 @@
 ## 交互与平台
 
 - [Personal Agent 设计](docs/personal-agent.md)：交互约定、通知模式与记忆分层
+- [生成式 UI 工作台](docs/workbench-ui.md)：Tauri 壳 + UI spec 渲染层，Run 查看与接管主界面 · 设计中
 - [DS-Bot 入口](docs/ds-bot-entry.md)：常驻宿主、IM 接入与迁移方案
 - [常驻服务分布](docs/assistant-system.md)：服务部署位置与凭据管理
 - [Super-agent 参考架构](docs/super-agent-architecture.md)：DeepSeek Super-agent 架构摘要与本仓取舍

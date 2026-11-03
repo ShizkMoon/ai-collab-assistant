@@ -203,6 +203,7 @@ D:\repo\video\                    # 视频工程目录
 | 执行域 | [日常事务管理](life-operations.md) | 日程、健康、财务、物品、社交与学习 |
 | 执行域 | [自动化场景](ritual-scenes.md) | 14 个跨设备场景、触发方式与部分完成处理 |
 | 交互 | [Personal Agent 设计](personal-agent.md) | 交互约定、通知模式与记忆分层 |
+| 交互 | [生成式 UI 工作台](workbench-ui.md) | Tauri 壳 + UI spec 渲染层、数据面契约与界面分工 |
 | 交互 | [常驻服务分布](assistant-system.md) | 服务部署位置与凭据管理 |
 | 交互 | [DS-Bot 入口](ds-bot-entry.md) | 常驻宿主、IM 接入与迁移方案 |
 | 交互 | [Super-agent 参考架构](super-agent-architecture.md) | 外部参考架构摘要与本仓取舍 |
