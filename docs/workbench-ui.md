@@ -8,7 +8,7 @@
 
 ```mermaid
 flowchart LR
-  RUNS["runs/<root_id>/<br/>信封 + events.jsonl"] --> SH["Shell（Tauri）<br/>固定层"]
+  RUNS["runs/<root_id>/<br/>信封 + events.jsonl"] --> SH["Shell（固定层）<br/>v0: Edge --app · 目标: Tauri"]
   TW["任务库 / surfaces 状态"] --> SH
   SH -->|文件监听 + ar 调用| GEN["生成层<br/>UI spec → 组件渲染"]
   GEN --> U["用户：查看 / 接管 / 确认"]
@@ -22,11 +22,12 @@ flowchart LR
 
 Shell 长期稳定、只提供能力；界面形态跟随模型与任务走。这与系统主干「能力作插件挂载」是同一原则在界面层的投影。
 
-## 2. 技术选型：Tauri + 系统 WebView2
+## 2. 技术选型：系统 WebView2，壳体分两期
 
 | 候选 | 取舍 |
 |---|---|
-| **Tauri（选定）** | Windows 上复用系统 WebView2（与 Edge 同源引擎，滚动与字体渲染即原生体感）；二进制 ~10MB；Rust 侧只做文件 IO 与 `ar` 进程桥接，壳体极薄 |
+| **Tauri（目标壳）** | Windows 上复用系统 WebView2（与 Edge 同源引擎，滚动与字体渲染即原生体感）；二进制 ~10MB；Rust 侧只做文件 IO 与 `ar` 进程桥接，壳体极薄。**前置条件**：Rust + MSVC Build Tools（当前工作站未装，安装约 2–7 GB），工具链到位后切换 |
+| **Edge `--app=`（v0 壳，已落地）** | `node workbench/server.ts` 桥接 `runs/` + `msedge --app=<url>` 无铬窗口——同一 WebView2/Chromium 引擎、独立任务栏窗口，**零新增工具链**。桥接与渲染层与 Tauri 方案完全一致，届时只换窗口宿主，前端与 API 原样保留。实现于 `C:\Repos\agent-local-runtime\workbench\` |
 | Electron | DS-Bot Desktop 采用此方案（Electron + Vite，壳内显示 DSH 的 Web 前端），证明「壳 + Web UI」模式成立；但需自养一个 Chromium 实例，与本机已有 ego(lite) 功能重复，常驻成本不符合作风 |
 | Qt / PySide6 | 原生控件擅长静态表单；生成式界面是模型运行时产出的动态文档流，声明式动态渲染反而别扭 |
 | WinUI 3 | 最贴近系统观感，但 XAML 静态结构与「模型说什么就渲染什么」之间存在额外生成层，开发成本高收益低 |
