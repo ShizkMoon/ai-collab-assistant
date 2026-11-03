@@ -37,6 +37,7 @@
 | 结构化受限解码 | vLLM `guided_choice` / `guided_json`（XGrammar）、Ollama `format`（GBNF）、`outlines` | 统一封装为 `decide()` 接口，见 [模型路由与本地推理 §6](model-fleet.md#6-受限解码分类接口decidestate-schema) |
 | 云端 CPU 兜底分类 | `sentence-transformers` + `bge-small-zh` + **SetFit** | 工作站休眠时在云服务器 CPU 上运行，仅输出预测 `kind` |
 | 本地知识检索 | **SQLite FTS5 + `jieba` + `sqlite-vec`**（封装为 `kn` CLI） | 单文件三路混合召回与 RRF 融合，见 [知识库与记忆分层](knowledge-memory.md) |
+| Agent 会话历史检索 | **Obelisk**（待验证） | 开源 coding agent session 检索，直接支持 Pi / Claude Code / Codex 会话格式（对话、工具调用、子 agent、工作流），SQLite FTS5 + agent 主动查询；`events.jsonl` 对齐其 schema 即接入，见 [agent:local 运行时设计 §4](agent-local-runtime.md#4-数据面唯一新增eventsjsonl) |
 | 代码与多步任务编排 | **自建 `agent:local` 运行时**（`ar` CLI + `runs/` 信封协议）+ Pi / DSH agent loop + Devin / Codex / Claude Code Worker | 管理 Git Worktree 与多 Worker 协同；交互界面为自建生成式 UI（[ADR 0008](adr/0008-local-agent-runtime.md)） |
 | GUI 桌面软件控制 | `CLI-Anything` 封装 → `agent-desktop`（UIA 无障碍树 + ref 语义动作）→ 视觉点击（Jev + AutoHotkey v2 / `SendInput`） | 见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) |
 | 外部平台只读抓取 | **`agent-reach`**（已安装） | 聚合 `yt-dlp`、`bili-cli`、`twitter-cli`、`rdt-cli` 等工具 |

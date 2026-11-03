@@ -51,6 +51,8 @@ Worker 的工具面由名为 **`aica-pi`** 的 pi package 统一提供：`ev`（
 
 理由：这是生成式 UI 工作台与 DS-Bot 进度卡片的唯一数据面。没有它，UI 只能解析 stdout 文本或事后读 result——进度展示、Run 树视图、diff 预览全都退化为猜测。事件流由 Worker 的 aica-pi 扩展写入，daemon 与 UI 只读。整个运行目录保持纯文件：restic / Litestream 备份、`runs.py` 知识库接入、崩溃后按目录恢复，全部沿用既有链路。
 
+事件格式刻意对齐 **Obelisk**（开源 coding agent session 检索，支持 Pi / Claude Code / Codex 会话，SQLite FTS5 + agent 主动查询）的索引 schema：`events.jsonl` 落盘即被其直接召回，Worker 可查询"上个任务进行到哪、某段代码当初为什么这么写"的原始证据——原始历史全留、不做预判式提炼（RAW-RAG 思路），见 [开源复用清单](open-source-reuse.md#3-模型路由与知识检索) 待验证条目。
+
 ## 5. 不重复 evd 的职责
 
 调度（ready 集计算、串行边界、并发通道）、幂等（`ev_id`）、租约与 `+stalled` 看门狗、失败重试与升级，全部留在 `evd`。`ar` 不做第二套调度器——它只回答三件事：**这个 Run 现在长什么样（`check`）、给它一个节点（派发意图）、替我向它说话（`reply`）**。协议层的状态机与七态返回码完全复用，不新增枚举。
@@ -64,9 +66,21 @@ Worker 的工具面由名为 **`aica-pi`** 的 pi package 统一提供：`ev`（
 | **v2 编排者** | `pi-agent-core` 内嵌编排节点、diverge / converge、plan.v(k) 重规划 | 发散收敛节点按 spec 运行，重规划留版本历史 |
 | **v3 界面** | 生成式 UI 消费 `runs/` 与 `events.jsonl`；可选 ACP 导出对接第三方控制面 | 工作站桌面可查看并接管 Run，无需开终端 |
 
+UI 渲染的是运行产物（进度卡片、Run 树、diff 预览），**不渲染 DAG 本身**——图是执行数据不是界面形态，用户面前只有被渲染过的结果。
+
 前置条件：Node.js ≥ 22.19（`winget install OpenJS.NodeJS.LTS`，纳入 `%ProgramData%\aica\managed.list`）；`ar` 源码放 `%USERPROFILE%\agent-src\tools\ar\`。
 
-## 7. 明确不做
+## 7. 技术选型
+
+| 层 | 选型 | 理由 |
+|---|---|---|
+| `ar` CLI + `ar daemon` | **TypeScript / ESM / Node 22，`node:` 标准库为主** | `aica-pi` 扩展、编排者内嵌 `pi-agent-core`、生成式 UI 共享信封类型三处已是 TS，全栈单语言避免两套 schema |
+| 信封 Schema | **TypeBox** | `pi-ai` 已 re-export，一次定义、CLI / daemon / 扩展 / UI 四处复用 |
+| Worker 工具面 | **`aica-pi` pi package**（extensions + skills） | 原生扩展点，复用 `%USERPROFILE%\.agents\skills\` 装载机制 |
+| 依赖纪律 | **v0 零三方运行时依赖** | `node:util parseArgs` 命令行、`node:child_process` 进程、`node:fs` 信封；与 `evd` 纯标准库取向一致 |
+| Python 存量 | **不动** | `evd` / `kn` / `hc` 保持 Python；`evd → ar` 走 stdin/stdout JSON，语言天然隔离 |
+
+## 8. 明确不做
 
 - **不做第二调度器**：ready 集、串行、并发配额归 `evd`。
 - **不做会话状态数据库**：`runs/` 目录即状态，可重建、可备份、可审计。
