@@ -1,8 +1,8 @@
 # 生成式 UI 工作台
 
-> 状态：设计中 · 上位文档：[ADR 0008](adr/0008-local-agent-runtime.md)、[agent:local 运行时设计](agent-local-runtime.md) · 关联：[Personal Agent 设计](personal-agent.md)、[多端显示仲裁](surface-arbiter.md)、[统一渲染管线](render-pipeline.md)
+> 状态：v0 已实现（固定组件 + Edge `--app` 壳），生成层（UI spec）仍属 v3 · 上位文档：[ADR 0008](adr/0008-local-agent-runtime.md)、[agent:local 运行时设计](agent-local-runtime.md) · 关联：[Personal Agent 设计](personal-agent.md)、[多端显示仲裁](surface-arbiter.md)、[统一渲染管线](render-pipeline.md)
 >
-> 本文定义工作站桌面上的人机交互界面（v3 阶段）：用户查看与接管 `agent:local` Run 的主要界面。形态参考 T3Code 一类生成式界面——模型按需产出界面组件，而不是一套固定的前端布局。
+> 本文定义工作站桌面上的人机交互界面：用户查看与接管 `agent:local` Run 的主要界面。形态参考 T3Code / Grok / Codex Desktop / DSBot 一类对话流工作台——v0 已实现三栏+事件流卡片+composer 直派任务（`C:\Repos\agent-local-runtime\workbench\`），生成层（模型按需产出界面组件）为 v3 目标。
 
 ## 1. 两层结构：固定壳 + 生成层
 
