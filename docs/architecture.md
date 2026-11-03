@@ -12,7 +12,7 @@
 |---|---|---|---|---|
 | **能力层** | 声明系统能处理哪些事务 | 视频制作、配乐生成、长文写作、账单整理、家居场景等 | 开放集合，按需扩充 | [能力目录](capabilities.md) |
 | **状态层** | 追踪任务所处阶段 | 九种状态：`new` / `doing` / `waiting` / `blocked` / `escalated` / `failed` / `stalled` / `spec` / `parked` | 封闭状态机 | [事件与任务规格](event-spec.md) |
-| **执行层** | 具体调用什么工具完成任务 | Orca Worker、CLI 工具、HA 服务调用、浏览器与 GUI 自动化 | 底层实现可随时替换 | [系统拓扑](system-topology.md)、[本机工具链选型](local-toolchain.md) |
+| **执行层** | 具体调用什么工具完成任务 | `agent:local` Worker、CLI 工具、HA 服务调用、浏览器与 GUI 自动化 | 底层实现可随时替换 | [系统拓扑](system-topology.md)、[本机工具链选型](local-toolchain.md) |
 | **设施层** | 算力、网络与硬件运行环境 | 工作站、AX6000、手机、墨水屏、各类传感器 | 物理设备 + 快照与包管理 | [工作站配置](workstation-windows.md)、[智能家居技术栈](home-automation-stack.md) |
 | **知识层** | 检索历史任务与个人文档 | 任务记录、笔记、会话记录、命令历史的混合检索库 | 可从源数据重建 | [知识库与记忆分层](knowledge-memory.md) |
 
@@ -47,7 +47,7 @@ flowchart LR
 |---|---|---|
 | 任务状态与生命周期 | **Taskwarrior 3**（`taskchampion.sqlite3`） | 原生支持延迟唤醒（`wait`）、截止时间（`due`）、周期任务（`recur`）、注解、自定义字段（UDA）、Hook 与多端同步 |
 | 传感器高频状态与原始事件 | **Home Assistant Recorder** | 温湿度、功率等高频时序数据留在 HA，仅需跟进处理的事件才转化为 Taskwarrior 任务 |
-| Agent 执行上下文与过程 | **Orca**（Run / Task） | 管理 Worker 的代码分支、终端会话与中间产物 |
+| Agent 执行上下文与过程 | **`agent:local` 运行时**（`runs/` 运行目录 / 节点） | 管理 Worker 的代码分支、终端会话与中间产物（[ADR 0008](adr/0008-local-agent-runtime.md)） |
 
 核心自建组件是一个轻量级**派发器（`evd`）**：Taskwarrior Hook 仅负责将变更事件追加写入本地 Spool 目录（耗时 < 5ms，异常直接放行），由常驻守护进程异步读取并按规则表派发给对应执行器。详细字段定义见 [事件与任务规格](event-spec.md)，运行机制见 [事件运行时与派发器](event-runtime.md)。
 
@@ -58,7 +58,7 @@ flowchart LR
 name  = "video.make"
 order = 50
 match = { kind = "work.video.*" }
-to    = "agent:orca"         # 派发给 Orca Worker
+to    = "agent:local"         # 派发给 agent:local Worker
 
 [[rule]]
 name  = "home.device"
@@ -89,7 +89,7 @@ to    = "notify"             # 到期提醒
 
 | 执行器标识 | 适用场景 | 底层复用工具 |
 |---|---|---|
-| `agent:orca` | 多步复杂任务：代码开发、文档编写、视频剪辑、长文写作 | Orca + Devin / Codex / Claude Code Worker |
+| `agent:local` | 多步复杂任务：代码开发、文档编写、视频剪辑、长文写作 | 自建运行时 `ar` + Pi / DSH agent loop + Devin / Codex / Claude Code Worker（[ADR 0008](adr/0008-local-agent-runtime.md)） |
 | `ha:*` | 智能家居设备控制、HA 脚本调用 | Home Assistant REST / 服务调用 |
 | `cli:*` | 单次确定性命令执行 | 现成 CLI 工具（`ffmpeg`、`calibre`、`double-entry-generator` 等） |
 | `n8n:*` | 外部 SaaS 与 Webhook 编排 | n8n 工作流（Webhook、IMAP 邮件、RSS） |
@@ -97,7 +97,6 @@ to    = "notify"             # 到期提醒
 | `route` | 按效果类型确定投递目标并发送 | `sources` / `surfaces` 端口表，见 [输入端口与输出路由](output-routing.md) |
 | `me` | 需人工确认或亲自处理的事项 | 交互卡片：`[执行] [延后] [忽略]` |
 | `render` | 触发显示端画面刷新 | [多端显示仲裁](surface-arbiter.md) |
-| `orca:run` | 带任务说明模板的长期异步任务 | Orca Run，返回产物路径与执行摘要 |
 
 各执行器统一输出七种返回状态：`done`、`waiting`、`me`、`blocked`、`failed`、`split`、`spec`，由派发器映射为任务库中的九种状态。耗时任务采用异步投递加租约机制，不阻塞派发器主循环。
 

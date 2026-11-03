@@ -8,7 +8,7 @@
 
 | 模块 | 选型决定 | 依据说明 |
 |---|---|---|
-| 底层存储 | 单文件 `%LOCALAPPDATA%\aica\data\knowledge\kb.sqlite`（WAL 模式） | 与 Taskwarrior、Orca、Home Assistant 同技术栈，复用同一条 Litestream 备份链路 |
+| 底层存储 | 单文件 `%LOCALAPPDATA%\aica\data\knowledge\kb.sqlite`（WAL 模式） | 与 Taskwarrior、`agent:local` 运行目录、Home Assistant 同技术栈，复用同一条 Litestream 备份链路 |
 | 词法检索 | SQLite FTS5 + `jieba` 预分词列 | 本机 SQLite 默认 `unicode61` 无法切分中文词，`trigram` 无法匹配双字词（见 §4） |
 | 向量检索 | `sqlite-vec`（`vec0` 虚拟表），`bge-small-zh-v1.5`（512 维） | 需自行编译 `sqlite-vec` 扩展并拷入 SQLite 的 `load_extension` 路径；20 万条切片约占 400MB（float32）或 100MB（int8） |
 | 实体关系图 | 普通关系表 `entity` / `mention` / `edge`，支持一跳扩展 | 单用户规模下实体数量 < 10⁴，无需引入独立图数据库 |
@@ -22,7 +22,7 @@
 | 数据源 | 本机路径（以原生文件为准） | 存储形态 | 索引切分粒度 | 同步方式 | 保留周期 |
 |---|---|---|---|---|---|
 | 任务库 | `%LOCALAPPDATA%\aica\state\taskchampion.sqlite3` | SQLite | 单条任务 = 1 个 `doc`，每条注解 = 1 个 `chunk` | `on-modify` Hook 触发 `kn ingest task`（5s 防抖） | 永久 |
-| Orca 会话 | `%APPDATA%\orca\ai-vault\session-search.sqlite`（以原生安装为准） | 已有 FTS5 表（约 7.5 万条消息） | 单条消息 | 只读 `ATTACH`，按 `sessions.updated_at` 增量同步 | 热数据 90 天，超期归档 |
+| `agent:local` 节点记录 | `%LOCALAPPDATA%\aica\state\runs\` 下各节点的消息与信封 JSONL | JSONL | 单条消息 | 按文件 `mtime` 增量扫描 | 热数据 90 天，超期归档 |
 | Claude Code 会话 | `%USERPROFILE%\.claude\projects\*\*.jsonl` | JSONL | 单轮 `user + assistant` 对话为 1 个 `chunk` | 按文件 `mtime` 增量扫描，跳过大体积 `tool_result` 与 Base64 内容 | 180 天 |
 | 规则与设计文档 | `%USERPROFILE%\.claude\CLAUDE.md`、`%USERPROFILE%\.agents\**`、各仓 `AGENTS.md` 与 `docs/**` | Markdown | 按二级标题 `##` 切分章节 | 文件系统监听 + Git `pre-commit` 钩子 | 永久（带版本哈希） |
 | 个人技术笔记 | `%USERPROFILE%\.agents\notes\*.md` | Markdown | 按二级标题 `##` 切分章节 | 同上 | 永久 |
@@ -37,7 +37,7 @@
 
 收录标准：仅纳入有助于回答"某件事上次是如何处理的"的文本与元数据；传感器读数、视频播放量等高频时序数据留在各自原生系统中。
 
-Orca 自带的 `session-search.sqlite` 已包含 7.5 万条历史消息的 FTS5 索引，直接通过 SQLite `ATTACH` 挂载读取；Taskwarrior UDA、Orca、学习通（`xxt`）与 `biliup` 的数据接入则通过各自的轻量级 Python 适配器（每个约 50–100 行）完成。
+历史 Orca 会话（`%APPDATA%\orca\ai-vault\session-search.sqlite`，以原生安装为准）保留只读 `ATTACH` 接入作为归档数据源，不再产生增量；Taskwarrior UDA、`agent:local` 运行目录、学习通（`xxt`）与 `biliup` 的数据接入则通过各自的轻量级 Python 适配器（每个约 50–100 行）完成。
 
 ## 2. 目录结构
 
@@ -45,7 +45,7 @@ Orca 自带的 `session-search.sqlite` 已包含 7.5 万条历史消息的 FTS5 
 %LOCALAPPDATA%\aica\data\knowledge\
 ├── kb.sqlite              # 知识库主文件（doc / chunk / fts / vec / graph / mem）
 ├── ingest/                # 各数据源导入适配器（每个 < 100 行）
-│   ├── task.py  orca.py  transcript.py  files.py
+│   ├── task.py  runs.py  transcript.py  files.py
 │   └── calibre.py  bili.py  xxt.py  history.py
 ├── models/                # bge-small-zh-v1.5、bge-reranker-base-zh、jieba 自定义词典
 ├── state/                 # 各数据源增量游标与水位线（JSON）
@@ -269,7 +269,7 @@ Get-Content .\query.json -Raw | kn recall --json
 |---|---|---|---|---|
 | 全局与系统规则 | `%USERPROFILE%\.claude\CLAUDE.md`、`%USERPROFILE%\.agents\SKILLS.md`、各仓 `AGENTS.md` | 人工编写，或由 `meta.capability.propose` 提交 PR | 永久 | 以 Markdown 原文件为准，`kb.sqlite` 仅建索引 |
 | 项目级约定 | 各代码仓库的 `AGENTS.md` | 人工或随代码 PR 更新 | 永久 | 以仓库原文件为准 |
-| 任务执行历史 | Taskwarrior + Orca 原生存储 | 派发器与 Worker 写回 | 永久 | 以原生数据库为准 |
+| 任务执行历史 | Taskwarrior + `agent:local` 运行目录 | 派发器与 Worker 写回 | 永久 | 以任务库与 `runs/` 信封为准 |
 | 能力偏好（`pref`） | `kb.sqlite` 的 `mem` 表（`layer='pref'`） | 从历史任务选择与返工记录中提炼 | 半衰期 180 天 | 以 `mem` 表为准，可导出快照 |
 | 交互设定（`persona`） | `kb.sqlite` 的 `mem` 表（`layer='persona'`） | DS-Bot 入口摘要写入 | 半衰期 365 天 | 以 `mem` 表为准 |
 

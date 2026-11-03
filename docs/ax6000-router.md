@@ -43,14 +43,14 @@
 flowchart TD
   NET["校园网入户网口"] --> RT["AX6000<br/>默认网关 + Wi-Fi AP + ESurfing 四拨 + mwan3 + TTL64 + OpenClash"]
   RT -->|Wi-Fi| DEV["手机 / 墨水屏 / ThinkSmart View / 传感器"]
-  RT -->|LAN 192.168.31.0/24| WS["工作站<br/>Orca + 任务库 + evd"]
+  RT -->|LAN 192.168.31.0/24| WS["工作站<br/>agent:local + 任务库 + evd"]
   WS -.->|Tailscale 隧道| CLOUD["云服务器 orca-pool<br/>等待队列 + ntfy"]
 ```
 
 各节点网络职责边界：
 
 - **AX6000**：作为局域网唯一默认网关，统一负责校园网认证、多 WAN 负载均衡、TTL 改写、DNS 分流与局域网透明代理。
-- **工作站**：运行任务库、派发器 `evd` 与 Orca Worker，通过有线网口接入局域网，是局域网内唯一的应用服务节点。
+- **工作站**：运行任务库、派发器 `evd` 与 `agent:local` Worker，通过有线网口接入局域网，是局域网内唯一的应用服务节点。
 - **云服务器**：只通过 Tailscale 与工作站互联，不接入宿舍局域网，也不承担子网路由或 Exit Node（[网络与设备组网 §3](network-fabric.md#3-子网路由与-exit-node)）。
 
 ## 5. 应用服务节点的硬件规格（延后采购）

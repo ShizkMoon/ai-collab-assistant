@@ -8,7 +8,7 @@
 
 | 工具或资产 | 本机实测状态 |
 |---|---|
-| `orca` CLI | 可用；支持 `worktree create`、`agent launch`、`terminal wait`、`automations create`、`repo add`；已配置 `local`、`orca-pool`、`orca-pool-ts` 主机 |
+| `ar` CLI（自建 `agent:local` 运行时） | 待实现；命令面对齐原 `orca` CLI：`worktree create|ps`、`agent launch`、`terminal create|wait`、`orchestration run-create|task-create|dispatch|gate-create|check|reply`、`repo add`；过渡期内 `orca` CLI 保留为影子期兜底（[ADR 0008](adr/0008-local-agent-runtime.md)） |
 | `gh` CLI | 已登录 `ShizkMoon`，具备 `repo`、`workflow`、`gist`、`read:org` 权限 |
 | `claude` / `codex` / `gemini` / `dsh` | 均在 `PATH` 中，可用于跨厂商交叉审阅代码 |
 | `git` + `just` + `%USERPROFILE%\agent-src\tools\` | 可用 |
@@ -28,10 +28,10 @@
 | 阶段 | 阶段名 | 执行动作 | 标准命令 | 产出物 | 对应 `kind` |
 |---|---|---|---|---|---|
 | 1 | 需求定义 | 将需求整理为结构化规格说明（Spec） | `gh issue create --repo <owner>/<r> --title <t>` 或编写 `<repo>/docs/specs/<slug>.md` | Issue 或 Spec 文档 | `work.code.spec` |
-| 2 | 仓库注册 | 已存在仓库直接注册；新项目创建私有仓 | `orca repo add --path D:\repo\<r> --json`；`gh repo create shizkmoon/<r> --private --source=. --push` | Orca Repo ID | `work.code.task` |
-| 3 | 隔离分支 | 单任务单 Worktree，基于 `origin/main` 创建 | `orca worktree create --repo path:$PWD --name <slug> --base-branch origin/main --agent claude --model <id> --json` | 独立 Worktree 与分支 | `work.code.task` |
-| 4 | 代码实现 | Worker 在独立 Worktree 内编码，不在主工作区直接切换分支 | `orca agent launch --worktree name:<slug> --agent codex --prompt "$(cat docs/specs/<slug>.md)"` | Git Commit | `work.code.task` |
-| 5 | 构建与测试 | 在受控终端内运行测试并等待进程退出码 | `orca terminal create --worktree name:<slug> --command "just check && make build" --json` → `orca terminal wait --terminal <h> --for exit --timeout-ms 1800000 --json` | 终端日志 + 退出码 | `work.code.verify` |
+| 2 | 仓库注册 | 已存在仓库直接注册；新项目创建私有仓 | `ar repo add --path D:\repo\<r> --json`；`gh repo create shizkmoon/<r> --private --source=. --push` | 运行时 Repo ID | `work.code.task` |
+| 3 | 隔离分支 | 单任务单 Worktree，基于 `origin/main` 创建 | `ar worktree create --repo path:$PWD --name <slug> --base-branch origin/main --agent claude --model <id> --json` | 独立 Worktree 与分支 | `work.code.task` |
+| 4 | 代码实现 | Worker 在独立 Worktree 内编码，不在主工作区直接切换分支 | `ar agent launch --worktree name:<slug> --agent codex --prompt "$(cat docs/specs/<slug>.md)"` | Git Commit | `work.code.task` |
+| 5 | 构建与测试 | 在受控终端内运行测试并等待进程退出码 | `ar terminal create --worktree name:<slug> --command "just check && make build" --json` → `ar terminal wait --terminal <h> --for exit --timeout-ms 1800000 --json` | 终端日志 + 退出码 | `work.code.verify` |
 | 6 | 交叉评审 | 切换不同厂商的模型只读审阅 `git diff` | 见 §1.1 / §1.2 | `review.md` 或 PR 评论 | `work.code.review` |
 | 7 | 分支合并 | 创建 PR 并在 CI 通过后自动 Squash 合并 | `gh pr create --fill --base main` → `gh pr merge --squash --auto --delete-branch` | Merge Commit | `work.code.merge` |
 | 8 | 版本发布 | 构建产物发布 GitHub Release，桌面工具同步接入 `upctl` | `just check` / `gh release create v<x>` / `upctl update <section>` | Release Tag 与构建产物 | `work.code.release` |
@@ -41,12 +41,12 @@
 
 | 协作模式 | 实现方式 | 适用场景 |
 |---|---|---|
-| 并行子分支 | `orca worktree create --parent-worktree name:<hp> --name <slug>-<n>` | 同一特性的多个独立子模块并行开发，通过 `orca worktree ps` 查看全局状态 |
-| 任务依赖图（DAG） | `orca orchestration run-create` → `task-create --deps '["<id>"]'` → `dispatch` | 存在 3 个以上先后依赖关系的复杂模块重构 |
+| 并行子分支 | `ar worktree create --parent-worktree name:<hp> --name <slug>-<n>` | 同一特性的多个独立子模块并行开发，通过 `ar worktree ps` 查看全局状态 |
+| 任务依赖图（DAG） | `ar orchestration run-create` → `task-create --deps '["<id>"]'` → `dispatch` | 存在 3 个以上先后依赖关系的复杂模块重构 |
 | 异构模型评审 | 另起只读会话，指定不同厂商模型审阅 `git diff origin/main...HEAD` | 减少同源模型的盲区（如 Codex 编写代码，Claude 或 DeepSeek 审阅） |
 | 合并冲突处理 | 先执行 `git fetch && git rebase origin/main`；若冲突文件 > 3 个则在独立 Worktree 中解析并输出补丁 | 可按需用 `mergiraf` 做语法感知合并 |
 | 分支合并串行化 | 个人仓库通过 `gh pr merge --auto` 配合本地 `main` 分支锁串行合入 | 多 PR 并行时可先合入 `next` 集成分支，验证通过后再快进合并至 `main` |
-| 架构方案决策点 | `orca orchestration gate-create --task <id> --question "..." --options '["A","B"]'` | 仅在涉及不可逆架构选型时挂起等待人工选择 |
+| 架构方案决策点 | `ar orchestration gate-create --task <id> --question "..." --options '["A","B"]'` | 仅在涉及不可逆架构选型时挂起等待人工选择 |
 
 ### 1.2 代码评审输出规范
 
@@ -84,7 +84,7 @@
 | 编写 | 遵循 `writing-for-agents` 规范，每个 Skill 独立目录（`SKILL.md` + `scripts/` + `references/`），`description` 字段写明触发场景与用户常见表述 |
 | 验证 | 使用 `skills-stocktake` 审查描述清晰度；在真实任务中测试触发准确性，并在干净 Shell 中验证全部配套脚本 |
 | 版本控制 | `%USERPROFILE%\.agents\skills\` 纳入 Git 管理，`vendor/` 下的第三方技能库作为只读上游（通过入口 Skill 路由，不直接修改上游文件） |
-| 分享与发布 | 对外分享前剥离本机绝对路径与私有主机名，通过 `orca skills share` 或独立仓库 `%USERPROFILE%\agent-src\skills\` 发布 |
+| 分享与发布 | 对外分享前剥离本机绝对路径与私有主机名，通过独立仓库 `%USERPROFILE%\agent-src\skills\` 或 `npx skills` 发布 |
 | 定期清理 | 连续 30 天未触发或与其它 Skill 功能重叠的条目，经 `config-gc` 盘点确认后归档至 `%USERPROFILE%\.agents\_gc_trash\` |
 
 ## 2. 安全与逆向分析
@@ -156,12 +156,12 @@
 ```toml
 [[rule]]
 match = { kind = "work.rev.firmware" }
-to = "orca:run"
-run = { workdir = 'D:\repo\<case>-analysis', agent = "claude", model = "deepseek-chat" }
+to = "agent:local"
+exec = { workdir = 'D:\repo\<case>-analysis', agent = "claude", model = "deepseek-chat" }
 
 [[rule]]
 match = { kind = "work.rev.apk" }
-to = "orca:run"
+to = "agent:local"
 
 [[rule]]
 match = { kind = "work.rev.report" }

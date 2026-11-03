@@ -37,8 +37,8 @@
 | 结构化受限解码 | vLLM `guided_choice` / `guided_json`（XGrammar）、Ollama `format`（GBNF）、`outlines` | 统一封装为 `decide()` 接口，见 [模型路由与本地推理 §6](model-fleet.md#6-受限解码分类接口decidestate-schema) |
 | 云端 CPU 兜底分类 | `sentence-transformers` + `bge-small-zh` + **SetFit** | 工作站休眠时在云服务器 CPU 上运行，仅输出预测 `kind` |
 | 本地知识检索 | **SQLite FTS5 + `jieba` + `sqlite-vec`**（封装为 `kn` CLI） | 单文件三路混合召回与 RRF 融合，见 [知识库与记忆分层](knowledge-memory.md) |
-| 代码与多步任务编排 | **Orca** + Devin / Codex / Claude Code | 管理 Git Worktree 与多 Worker 协同 |
-| GUI 桌面软件控制 | `CLI-Anything` 封装 → `orca computer`（UI Automation）→ 视觉点击（Jev + AutoHotkey v2 / `SendInput`） | 见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) |
+| 代码与多步任务编排 | **自建 `agent:local` 运行时**（`ar` CLI + `runs/` 信封协议）+ Pi / DSH agent loop + Devin / Codex / Claude Code Worker | 管理 Git Worktree 与多 Worker 协同；交互界面为自建生成式 UI（[ADR 0008](adr/0008-local-agent-runtime.md)） |
+| GUI 桌面软件控制 | `CLI-Anything` 封装 → `agent-desktop`（UIA 无障碍树 + ref 语义动作）→ 视觉点击（Jev + AutoHotkey v2 / `SendInput`） | 见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) |
 | 外部平台只读抓取 | **`agent-reach`**（已安装） | 聚合 `yt-dlp`、`bili-cli`、`twitter-cli`、`rdt-cli` 等工具 |
 | 需要登录态的网页操作 | **ego(lite)** + `ego-browser` Skill | 独立 Chromium，Agent 在隔离 Space 内操作并沿用本机登录态；接口为页面内 JS（Snapshot + `click` / `fill`），不抢用户标签页与焦点，见 [本机工具链选型 §2.8](local-toolchain.md#28-浏览器与网页自动化egolite) |
 
@@ -67,10 +67,12 @@
 
 | 自建模块 | 自建原因 | 代码规模 |
 |---|---|---|
-| `ev` CLI + Hook + 派发器守护进程 `evd` | 将 Taskwarrior UDA 字段与个人路由规则表、Orca、Home Assistant 对接 | 约 700 行 Python，见 [事件运行时与派发器 §3](event-runtime.md#3-派发器守护进程evd) |
+| `ev` CLI + Hook + 派发器守护进程 `evd` | 将 Taskwarrior UDA 字段与个人路由规则表、`agent:local` 运行时、Home Assistant 对接 | 约 700 行 Python，见 [事件运行时与派发器 §3](event-runtime.md#3-派发器守护进程evd) |
+| `agent:local` 运行时（`ar` CLI） | Run / 节点生命周期、Worktree 隔离、Worker 派发与升级通道；无现成开源实现与本仓信封协议完全同构 | 预计 1.5–3k 行（Pi / DSH agent loop 复用），见 [多 Agent 运行时](multi-agent-runtime.md) 与 [ADR 0008](adr/0008-local-agent-runtime.md) |
+| 生成式 UI 工作台 | 消费 `runs/` 运行目录渲染 Run 树、diff 预览与升级卡片；第三方控制面均绑定各自 runtime，无法消费本仓信封协议 | 与渲染管线复用（[ADR 0008](adr/0008-local-agent-runtime.md)） |
 | 能力与场景 TOML 配置集 | 声明个人使用的能力目录、触发示例与跨设备场景 | 声明式配置文件 + 提示词模板 |
 | 显示端 HTML 渲染模板 + **显示仲裁器** | 跨墨水屏、状态灯、桌面组件的动态优先级分配与帧哈希去重 | 渲染模板 + 约 400 行 Python，见 [多端显示仲裁](surface-arbiter.md) |
-| `kn` 知识库检索与数据源适配器 | 将 Taskwarrior、Orca、学习通（`xxt`）、`biliup` 接入同一个 SQLite + `sqlite-vec` 索引库 | 核心 SQL + 约 600 行适配器，见 [知识库与记忆分层](knowledge-memory.md) |
+| `kn` 知识库检索与数据源适配器 | 将 Taskwarrior、`agent:local` 运行目录、学习通（`xxt`）、`biliup` 接入同一个 SQLite + `sqlite-vec` 索引库 | 核心 SQL + 约 600 行适配器，见 [知识库与记忆分层](knowledge-memory.md) |
 | 语义缓存、温度缩放校准与 GPU 文件锁 | 针对个人任务反馈样本的轻量级校准与单卡显存互斥锁 | 分别约 40 / 30 / 20 行，见 [模型路由与本地推理 §3–§7](model-fleet.md) |
 | PrefixSpan 规则挖掘与影子测试对比器 | 基于 Taskwarrior 历史记录挖掘高频序列并对比新旧 Provider 产物 | 约 150 行 Python + 定时器，见 [系统运维 §1–§4](platform-ops.md) |
 | `hc` 健康检查脚本 | 按表执行本地健康检查，实现"连续 2 次失败才推送告警"的防抖逻辑 | 约 120 行 Python |

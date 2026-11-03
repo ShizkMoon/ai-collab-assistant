@@ -43,7 +43,7 @@ exec  = { script = "script.{obj}_{verb}" }   # {obj}/{verb} 提取自 kind 三�
 name  = "video.make"
 order = 300
 match = { kind = "work.video.make", source = ["me", "cron", "ha"] }
-to    = "agent:orca"
+to    = "agent:local"
 exec  = { skill = "hyperframes", lane = "batch" }
 lease = "90m"
 
@@ -52,7 +52,7 @@ name  = "feed.rollup"
 order = 400
 match = { kind = "info.feed.item", thread = "feed:*" }
 aggregate = { by = "thread", window = "6h", mode = "rollup", emit = "info.feed.digest" }
-to    = "agent:orca"
+to    = "agent:local"
 exec  = { skill = "agent-reach" }
 
 [[rule]]
@@ -172,7 +172,7 @@ stateDiagram-v2
   rules.py     120   加载 TOML、预编译通配符、规则匹配、聚合窗口处理
   gates.py      50   cooldown / rate / window 限流控制
   daemon.py    220   Spool 消费循环、并发通道（Lane）调度、租约管理、写回 Taskwarrior
-  executors.py 180   orca / ha / cli / n8n / notify / me / triage 执行器适配
+  executors.py 180   local / ha / cli / n8n / notify / me / triage 执行器适配
   status.py    120   ev status 与 ev doctor 终端状态输出
   __main__.py   80   CLI 入口
 ```
@@ -214,7 +214,7 @@ def on_modify():
 - **确定性幂等键**：`ev_id = uuid5(task.uuid, rule.name, attempt)`，同一任务在同一规则下的同一次尝试始终生成相同的 ID。
 - **手动重放**：执行 `ev replay --since 2h --rule video.make` 时，自动跳过 `runs/` 目录中已存在结果或任务库中已有对应 `ev:<ev_id>` 注解的任务。
 - **崩溃恢复处理**：若 `spool/` 中存在记录而 `runs/` 中无结果，说明崩溃前可能已触发执行；为避免高耗时任务（如 20 分钟的视频渲染）重复执行，默认不自动重跑，由 `ev doctor` 列出交由人工裁决。
-- **执行器侧幂等**：Orca 使用固定 Worktree 名称去重，CLI 工具添加 `--if-not-exists` 参数，Home Assistant 调用幂等的 `scene.turn_on` 服务。
+- **执行器侧幂等**：`agent:local` 使用固定 Worktree 与运行目录名称去重，CLI 工具添加 `--if-not-exists` 参数，Home Assistant 调用幂等的 `scene.turn_on` 服务。
 
 ### 3.4 执行器输入输出协议
 
@@ -237,8 +237,8 @@ def on_modify():
 
 ### 3.5 长耗时异步任务
 
-- 路由至 `to = "agent:orca"` 的任务采用**异步投递模式**：`evd` 创建 Orca Run 并将 `run_id` 写入任务注解后立即返回，任务状态保持为 `doing`。
-- Worker 执行完毕后主动调用 `ev done <id> "<执行摘要>"` 或 `ev fail` 写回状态，`evd` 无需轮询 Orca。
+- 路由至 `to = "agent:local"` 的任务采用**异步投递模式**：`evd` 创建 `agent:local` Run（`runs/<root_id>/`）并将 `root_id` 写入任务注解后立即返回，任务状态保持为 `doing`。
+- Worker 执行完毕后主动调用 `ev done <id> "<执行摘要>"` 或 `ev fail` 写回状态，`evd` 无需轮询运行时。
 - **租约监控**：任务处于 `doing` 状态的时长超过 `2 × lease` 时，看门狗为其添加 `+stalled` 标签并发出告警，不强行中断可能仍在运行的 Worker。
 - **动态续租**：执行器可输出 `{"status":"doing","lease_next":"20m"}` 延长租约，`evd` 收到后刷新租约时间戳。
 
@@ -335,4 +335,4 @@ report.faults.sort=modified-
 | 并发控制 | Python `asyncio` + 按 `thread` 加锁 | 并发上限为 4，无需引入 Celery / Prefect |
 | 状态观测 | Taskwarrior 自定义报表 + 任务计划程序 | 命令行可查，无需单独为任务队列维护监控大盘 |
 | 状态机表达 | Taskwarrior 原生 `status`、`tags` 与 `depends` | 保持单一数据源 |
-| **自建部分** | 规则匹配、幂等控制与执行器适配层（`ev` / `evd`） | 需对接本机 Orca、Home Assistant 与自定义 CLI，整体约 700 行 Python |
+| **自建部分** | 规则匹配、幂等控制与执行器适配层（`ev` / `evd`） | 需对接本机 `agent:local` 运行时、Home Assistant 与自定义 CLI，整体约 700 行 Python |

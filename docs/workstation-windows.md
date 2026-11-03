@@ -65,14 +65,16 @@
 | 控制需求 | 接口 |
 | --- | --- |
 | 显示器输出、分辨率、刷新率切换 | `DisplaySwitch.exe`、`MultiMonitorTool.exe` |
-| 截图（全屏 / 区域 / 窗口） | `nircmd savescreenshot`、PowerShell + `System.Drawing`、`orca computer` 内置截图 |
-| 窗口枚举、搜索与激活 | AutoHotkey v2 `WinGet` 系列、`orca computer` 走 UI Automation |
-| 全局键鼠事件注入 | AutoHotkey v2 `Send` / `Input`，或 `SendInput` 直接调用 |
+| 截图（全屏 / 区域 / 窗口） | `nircmd savescreenshot`、PowerShell + `System.Drawing`、`agent-desktop screenshot` |
+| 窗口枚举、搜索与激活 | AutoHotkey v2 `WinGet` 系列、`agent-desktop list-windows` / `focus-window`（UIA） |
+| 全局键鼠事件注入 | AutoHotkey v2 `Send` / `Input`，或 `SendInput` 直接调用；`agent-desktop` 的 `type` / `press` / `mouse-*` 需 `--headed` |
 | 系统配置读写 | 注册表 `reg.exe`、`Get-ItemProperty` / `Set-ItemProperty`；长期配置以导出 `.reg` 或 JSON 纳管 |
 | 音频路由与音量 | PowerShell `AudioDeviceCmdlets`（`Get-AudioDevice` / `Set-AudioDevice`） |
-| 剪贴板读写 | `Get-Clipboard` / `Set-Clipboard` |
-| 无障碍控件树 | **UI Automation**（UIA），供 `orca computer` 结构化控制 GUI 应用 |
+| 剪贴板读写 | `Get-Clipboard` / `Set-Clipboard`、`agent-desktop clipboard-*` |
+| 无障碍控件树 | **UI Automation**（UIA），由 `agent-desktop snapshot` 读取并返回带 ref 的 JSON 树，ref 语义动作默认 headless、不抢焦点；最小化窗口与 UAC 安全桌面不可达，详见 `agent-desktop skills get platform` |
 | 通知 | `BurntToast` PowerShell 模块或自建 toast 转发 |
+
+注意：`agent-desktop` 只能操作**已登录用户的交互式桌面会话**。以 WinSW 服务或计划任务（Session 0）运行的进程观察不到桌面，GUI 自动化任务必须由用户会话内的 Worker 进程调用；Session 0、锁屏与 UAC 提示均为盲区。
 
 ### 4.3 与助理系统的集成点
 
@@ -107,7 +109,7 @@
 
 ## 6. 本地服务与电源管理
 
-- **常驻服务**：Orca、Taskwarrior + 派发器守护进程 `evd`、本地推理服务。桌面应用型服务用 WinSW 或 `sc.exe` 注册为 Windows 服务；用户态进程用「登录时启动」的计划任务。
+- **常驻服务**：`agent:local` 运行时（`ar`）、Taskwarrior + 派发器守护进程 `evd`、本地推理服务。桌面应用型服务用 WinSW 或 `sc.exe` 注册为 Windows 服务；用户态进程用「登录时启动」的计划任务。
 - **定时任务**：统一走任务计划程序（`schtasks` 或任务 XML），替代 `systemd.timer`。任务 XML 纳入 `%ProgramData%\aica\tasks\` 并由安装脚本 `schtasks /create /xml` 注册。
 - **保持唤醒**：工作站独机常驻，接交流电时禁止睡眠——电源计划设为「从不睡眠」，或用调用 `SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED)` 的守护进程在 AC 供电下持有唤醒锁，电池供电时恢复默认策略。
 - **电池保护**：长期插电使用，MyASUS / MSI Center 里把充电上限设到 60–80%。

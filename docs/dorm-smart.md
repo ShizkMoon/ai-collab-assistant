@@ -35,7 +35,7 @@ flowchart TD
     Z["Zigbee2MQTT / ESPHome BLE Proxy"] --> MQ["Mosquitto MQTT"] --> H["Home Assistant：本地自动化兜底"]
   end
   subgraph WS["跨领域编排与增强层（工作站）"]
-    E["派发器 evd + Taskwarrior"] --> O["Orca Worker + 墨水屏渲染"]
+    E["派发器 evd + Taskwarrior"] --> O["agent:local Worker + 墨水屏渲染"]
   end
   S -->|BLE / Zigbee| Z
   A -->|Zigbee / Wi-Fi| Z

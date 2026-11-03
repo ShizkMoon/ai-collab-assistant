@@ -2,7 +2,7 @@
 
 > 状态：设计中 · 上位文档：[总体架构设计](architecture-north-star.md) · 关联：[事件运行时与派发器](event-runtime.md)、[任务规格](event-spec.md)、[多 Agent 协作规范](agent-collaboration.md)
 >
-> 本文规定多个 Agent 之间如何传递工作、如何避免自由对话的上下文成本，以及「让模型决定发散还是收敛」如何在不依赖提示词的情况下落地。协作模式的业务分类见 [多 Agent 协作规范](agent-collaboration.md)，本文只讲机制。
+> 本文规定多个 Agent 之间如何传递工作、如何避免自由对话的上下文成本，以及「让模型决定发散还是收敛」如何在不依赖提示词的情况下落地。协作模式的业务分类见 [多 Agent 协作规范](agent-collaboration.md)，本文只讲机制。本文即 `agent:local` 运行时（`ar` CLI）的实现规格，见 [ADR 0008](adr/0008-local-agent-runtime.md)。
 
 ## 1. 为什么不让 Agent 互相聊天
 

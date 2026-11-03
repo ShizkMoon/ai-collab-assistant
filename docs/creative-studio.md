@@ -132,7 +132,7 @@ run/04-review/cover/choice.json   { "chosen": "cand-02", "rejected": ["cand-01",
 用户回复   → 协调 Worker：点击按钮或回复修改意见，转化为下一步 ev 操作
 ```
 
-协调 Worker 对应一个独立的 Orca Run，其进度状态完全存储在 `task thread:<tid> export` 中，进程中断后可根据 Run ID 与 `thread` 无缝恢复（见 [系统拓扑 §6](system-topology.md#6-会话连续性)）。
+协调 Worker 对应一个独立的 `agent:local` Run，其进度状态完全存储在 `task thread:<tid> export` 与 `runs/<root_id>/` 运行目录中，进程中断后可根据 `root_id` 与 `thread` 无缝恢复（见 [系统拓扑 §6](system-topology.md#6-会话连续性)）。
 
 ## 5. 视频制作管线
 

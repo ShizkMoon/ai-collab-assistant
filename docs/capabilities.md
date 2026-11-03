@@ -63,10 +63,10 @@ enabled = true
 
 | `kind` | 功能说明 | 复用工具链 |
 |---|---|---|
-| `work.code.task` | 代码开发父任务 | Orca + Devin / Codex / Claude Code Worker |
+| `work.code.task` | 代码开发父任务 | `agent:local` 运行时 + Devin / Codex / Claude Code Worker |
 | `work.code.spec` | 将需求整理为结构化开发规格说明（Spec） | `gh issue` / `docs/specs/<slug>.md` |
-| `work.code.verify` | 在隔离终端执行构建与测试并检查退出码 | `orca terminal wait --for exit`、`just check` |
-| `work.code.review` | 调用异构厂商模型审阅代码 Diff | Orca Worktree + LiteLLM |
+| `work.code.verify` | 在隔离终端执行构建与测试并检查退出码 | `ar terminal wait --for exit`、`just check` |
+| `work.code.review` | 调用异构厂商模型审阅代码 Diff | `agent:local` Worktree + LiteLLM |
 | `work.code.merge` | 创建 PR 并在 CI 通过后自动合并 | `gh pr merge --auto` |
 | `work.code.release` | 打标签发版、更新 `winget` / Scoop 或 `upctl` 组件 | `gh release`、`upctl update <section>` |
 | `work.repo.patrol` | 仓库依赖更新与 CI 失败巡检 | Renovate、`gh` CLI |

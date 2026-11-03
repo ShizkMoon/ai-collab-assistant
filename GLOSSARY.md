@@ -6,7 +6,7 @@
 
 **任务（Task）**：
 Taskwarrior 中的一条记录，包含 `kind`、状态和执行摘要，是系统中追踪生命周期的基本单元。
-_避免_：事项、工单（与 Orca 内部对象并列时写明 `Orca Task`）
+_避免_：事项、工单（与运行时节点并列时写明"节点"）
 
 **任务库（Task Store）**：
 Taskwarrior 3 的 `taskchampion.sqlite3` 数据库，作为全系统任务状态的唯一数据源（Single Source of Truth）。
@@ -25,11 +25,12 @@ _避免_：插件（能力是声明，具体实现是 Provider）
 _避免_：提供者
 
 **执行器（Executor）**：
-实际执行任务的后端：`agent:orca`、`ha:*`、`cli:*`、`n8n:*`、`notify`、`me`。
+实际执行任务的后端：`agent:local`、`ha:*`、`cli:*`、`n8n:*`、`notify`、`me`。
+`agent:local` 为自建运行时（`ar` CLI + `runs/` 运行目录），见 [ADR 0008](docs/adr/0008-local-agent-runtime.md)。
 _避免_：执行者、处理器
 
 **Worker**：
-`agent:orca` 内部派发执行具体子任务的最小 Agent 单元，只向协调方汇报结果。
+`agent:local` 内部派发执行具体子任务的最小 Agent 单元（基于 Pi / DSH agent loop），只向协调方汇报结果。
 
 **节点（Node）**：
 多 Agent 运行时中一次派发的单位，以运行目录 `runs/<root_id>/nodes/<path>/` 标识，派发前写入派发信封，完成后写入结果信封。

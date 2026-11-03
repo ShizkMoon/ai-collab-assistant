@@ -64,7 +64,7 @@ config = {
 | `classify` | 入口意图分类、账单分类 | 本地 8B + `guided_choice` | 输入短、要求严格结构化输出、延迟敏感 |
 | `extract` | `life.trip.plan`、邮件字段抽取 | 本地 8B（失败回退云端） | 多字段 JSON 抽取 |
 | `summarize` | 每日早晚报、`info.feed.digest` | 本地 8B（超 8k 上下文转云端） | 高频调用，优先使用本地免费算力 |
-| `longform` | `work.write.longform`、`work.book.polish` | 云端大模型（经 Orca Worker） | 生成质量优先 |
+| `longform` | `work.write.longform`、`work.book.polish` | 云端大模型（经 `agent:local` Worker） | 生成质量优先 |
 | `code` | `work.code.task`、`work.rev.*` | 云端代码模型（Devin / Codex / Claude） | 由执行层 Worker 直接调用 |
 | `vision` | 桌面截图理解、GUI 视觉操作 | 本地 `qwen2.5-vl-7b` | 屏幕截图留在本地处理，保障隐私 |
 | `embed` | `info.recall`、规则聚类挖掘 | 工作站 `bge-m3` / 云端 `bge-small-zh` | 高频向量化，本地低延迟 |

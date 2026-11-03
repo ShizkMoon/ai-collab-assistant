@@ -35,7 +35,7 @@ on_partial = "report"     # report | retry_once | abort
 | 步骤类型 | 配置写法 | 对应执行器 | 典型操作 |
 |---|---|---|---|
 | 设备与命令操作 | `action = "home.*"` / `cli:*` | Home Assistant 服务、本地 CLI | 调节灯光、开关插座、刷新墨水屏 |
-| Agent 生成与规划 | `action = "agent:*"` | Orca Worker | 生成当日携物建议、汇总早报摘要 |
+| Agent 生成与规划 | `action = "agent:*"` | `agent:local` Worker | 生成当日携物建议、汇总早报摘要 |
 | 人工交互确认 | `action = "me:*"` | 交互卡片 `[执行] [延后] [忽略]` | 人工确认、线下动作核对 |
 | 嵌套子场景 | `action = "scene:<id>"` | 递归调用其他场景配置 | 出行前场景 = 行李清单生成 + 离宿断电场景 |
 

@@ -112,7 +112,7 @@ Windows 侧用 `windows_exporter` 采集 CPU、内存、磁盘、服务与进程
 
 ## 6. 日志聚合与链路追踪
 
-工作站的 Windows 事件日志与 Orca / Worker 运行日志统一由 **Grafana Alloy** 采集并写入本地 Loki，保留周期设为 30 天，磁盘配额上限 20GB（上游 Promtail 已于 2025 年停止维护，统一使用 Alloy）：
+工作站的 Windows 事件日志与 `agent:local` / Worker 运行日志统一由 **Grafana Alloy** 采集并写入本地 Loki，保留周期设为 30 天，磁盘配额上限 20GB（上游 Promtail 已于 2025 年停止维护，统一使用 Alloy）：
 
 ```alloy
 loki.source.windowsevent "system" {
@@ -152,7 +152,7 @@ cmd = ["tailscale", "status", "--json"]
 assert = '.Peer[] | select(.HostName=="workstation") | .Online == true'
 
 [[check]]
-name = "orca-worker-heartbeat"
+name = "local-worker-heartbeat"
 cmd = ["aica", "worker", "stale", "--max-age", "30m"]
 
 [[check]]
@@ -187,10 +187,10 @@ cmd = ["aica", "disk", "--min-free-gb", "20", "C:\\", "D:\\"]
 | 工作站断电后恢复供电 | BIOS 配置来电自启（AC Power Loss → Power On），开机后执行 `hc check` 汇总离线期间状态并触发 `ev sync` 补拉事件 | - |
 
 ```xml
-<!-- %ProgramData%\aica\units\orca.xml（WinSW） -->
+<!-- %ProgramData%\aica\units\agent-local.xml（WinSW） -->
 <service>
-  <id>orca</id>
-  <executable>orca.exe</executable>
+  <id>agent-local</id>
+  <executable>ar.exe</executable>
   <onfailure action="restart" delay="5 sec"/>
   <resetfailure>300 sec</resetfailure>
   <failureactions></failureactions>

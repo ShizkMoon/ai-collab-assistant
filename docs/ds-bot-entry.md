@@ -2,7 +2,7 @@
 
 > 状态：选型已定，待部署 · 角色：常驻对话入口与结果通知出口（见 [架构总览 §2](architecture.md#2-意图分类与结构化路由)）
 >
-> 选型结论：采用 DS-Bot 替代早期规划的 Hermes 作为常驻入口。DS-Bot 负责**解析自然语言意图**（从 [能力目录](capabilities.md) 匹配 `kind` 并录入任务库）以及**向用户反馈执行结果与交互卡片**；底层重度任务仍由工作站上的 Orca 编排执行。需要接入更多即时通讯平台（尤其是群聊）时，配合部署 AstrBot。
+> 选型结论：采用 DS-Bot 替代早期规划的 Hermes 作为常驻入口。DS-Bot 负责**解析自然语言意图**（从 [能力目录](capabilities.md) 匹配 `kind` 并录入任务库）以及**向用户反馈执行结果与交互卡片**；底层重度任务仍由工作站上的 `agent:local` 运行时编排执行。需要接入更多即时通讯平台（尤其是群聊）时，配合部署 AstrBot。
 >
 > 版本核对基线（2026-10-28）：DS-Bot `main` 分支提交 `4a7b550`，`ds-bot` 包版本 `0.2.3`，配套 DeepSeek Harness（DSH）版本 `0.2.0-rc.2` / `0.2.1-rc.2`。
 
@@ -25,7 +25,7 @@ DS-Bot 是运行在 [DeepSeek Harness（DSH）](https://github.com/deepseek-ai/d
 | --- | --- |
 | 原生仅提供 Web / Desktop 界面，无内置 IM 通道 | 私聊接入 `@xmanrui/dsh-im` 插件；群聊与更多平台（QQ、飞书、企业微信、Telegram 等）配合部署 **AstrBot** |
 | 无原生移动端系统级推送 | 接入自托管 **ntfy**、Phone Link 与 Home Assistant Companion |
-| Docker 容器版不含本地桌面浏览器，且 ego(lite) 只以本机应用运行、无法在容器内驱动 | 需要操控浏览器或桌面应用的任务直接派发给工作站本地 Worker 执行（`ego-browser` / `orca computer`，见 [本机工具链选型 §2.8](local-toolchain.md#28-浏览器与网页自动化egolite)） |
+| Docker 容器版不含本地桌面浏览器，且 ego(lite) 只以本机应用运行、无法在容器内驱动 | 需要操控浏览器或桌面应用的任务直接派发给工作站本地 Worker 执行（`ego-browser` / `agent-desktop`，见 [本机工具链选型 §2.8](local-toolchain.md#28-浏览器与网页自动化egolite)） |
 | 官方基础镜像未预装 SSH 客户端 | 在自定义容器镜像层中安装 `openssh-client` |
 | 处于早期迭代期，与 DSH 版本强耦合 | 在 `%USERPROFILE%\agent-src\tools\ds-bot\` 的安装脚本中同时锁定 DS-Bot 与 DSH 镜像标签，升级前先在测试环境验证入口链路 |
 
@@ -58,29 +58,29 @@ DS-Bot Desktop 提供 Windows 安装包（Electron 应用）。工作站改为 W
 
 ## 6. 跨机调用工作站边界
 
-DS-Bot 容器仅能直接操作容器自身环境。当任务需要工作站算力或本地文件时，容器通过 Tailscale SSH 调用工作站 `%USERPROFILE%\.local\bin\` 下的受限入口脚本（仅开放创建任务、查询状态、读取输出、发送跟进四项子命令），由该脚本调用工作站本机 `orca` CLI 派发 Worker。
+DS-Bot 容器仅能直接操作容器自身环境。当任务需要工作站算力或本地文件时，容器通过 Tailscale SSH 调用工作站 `%USERPROFILE%\.local\bin\` 下的受限入口脚本（仅开放创建任务、查询状态、读取输出、发送跟进四项子命令），由该脚本调用工作站本机 `ar` CLI 派发 Worker。
 
 ## 7. 与任务库和知识库的对接
 
 | 交互环节 | 对接方式 |
 | --- | --- |
 | 任务录入 | 用户发送消息 → Chief 角色从能力目录匹配 `kind` → 调用 `ev add`（置信度中等时先发卡片追问） |
-| 任务派发 | 由工作站派发器 `evd` 按规则表路由；`agent:orca` 类任务通过受限入口脚本建 Run 派发 |
-| 结果通知 | Orca Worker 完成后调用 `ev done`，DS-Bot 读取一句话执行摘要并推送交互卡片 `[执行] [延后] [忽略]` |
+| 任务派发 | 由工作站派发器 `evd` 按规则表路由；`agent:local` 类任务通过受限入口脚本建 Run 派发 |
+| 结果通知 | Worker 完成后调用 `ev done`，DS-Bot 读取一句话执行摘要并推送交互卡片 `[执行] [延后] [忽略]` |
 | 记忆协同 | DS-Bot 本地仅保留称呼、活跃项目与近期会话摘要；跨周期的偏好与历史做法统一通过 `kn recall` 检索工作站上的 `%LOCALAPPDATA%\aica\data\knowledge\kb.sqlite`（见 [知识库与记忆分层 §7](knowledge-memory.md#7-记忆分层与生命周期)），避免维护两套独立的长期记忆源 |
 
 ## 8. 部署与切换步骤
 
 1. 在工作站上启动 DS-Bot 容器，完成持久化卷挂载、`DSH_TRUSTED_HOST` 与 Tailscale HTTPS 配置。
 2. 配置主入口角色 Chief：接入 LiteLLM 网关，加载能力目录提示词，先验证纯问答与 `ev add` 任务录入。
-3. 配置容器至工作站的受限 SSH 密钥与入口脚本：先验证只读查询（`orca orchestration check`、`worker-list`），再验证创建 Run 与派发 Worker。
+3. 配置容器至工作站的受限 SSH 密钥与入口脚本：先验证只读查询（`ar orchestration check`、`worker-list`），再验证创建 Run 与派发 Worker。
 4. 按需接入 IM 插件（`@xmanrui/dsh-im` 或 AstrBot）。
-5. 若容器或插件升级出现兼容问题，可随时停止容器并回退至工作站本地直接调用 Orca CLI。
+5. 若容器或插件升级出现兼容问题，可随时停止容器并回退至工作站本地直接调用 `ar` CLI。
 
 ## 9. 待实测验证项
 
 - 手机浏览器访问 DS-Bot Web 时的长连接稳定性、附件上传与交互卡片体验。
-- 云端脚本经 Tailscale SSH 调用工作站 Orca CLI 的端到端延迟与断线重连表现。
+- 云端脚本经 Tailscale SSH 调用工作站 `ar` CLI 的端到端延迟与断线重连表现。
 - `@xmanrui/dsh-im` 与 DS-Bot `0.2.3` 的实际兼容性，以及 AstrBot 与 DS-Bot 并行时的消息路由分工。
 
 ## 参考资料

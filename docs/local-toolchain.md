@@ -11,7 +11,7 @@ Agent 调用本地软件时按以下优先级依次选择：
 3. **`CLI-Anything` 封装（Agent Harness）**：针对缺少原生 CLI 的桌面应用，采用 [HKUDS/CLI-Anything](https://github.com/HKUDS/CLI-Anything) 模式封装出命令行接口。
 4. **MCP Server**：作为补充接口接入（如 `re-toolkit` MCP），在需要结构化工具调用时配合使用。
 5. **网页接口（`ego-browser`）**：有登录态或需要多步交互的网页任务走 ego(lite) 的 Space + Snapshot，再降级才是 GUI 自动化（见 §2.8）。
-6. **GUI 自动化（`orca computer` + 视觉点击）**：最后兜底路径，优先读取 UI Automation 无障碍树，自绘画布等特殊场景再结合视觉模型与 AutoHotkey v2 / `SendInput` 操作（见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略)）。
+6. **GUI 自动化（`agent-desktop` + 视觉点击）**：最后兜底路径，优先经 `agent-desktop` 读取 UI Automation 无障碍树并执行 ref 语义动作（headless、不抢焦点），自绘画布等特殊场景再结合视觉模型与 AutoHotkey v2 / `SendInput` 操作（见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略)）。
 
 ## 2. 领域工具选型矩阵
 
@@ -97,21 +97,32 @@ Agent 调用本地软件时按以下优先级依次选择：
 
 - **Space 隔离**：Agent 在独立的 Space 里开标签页，不切换用户当前标签页、不抢键盘焦点；同一浏览器可并行多个任务，上限取决于本机内存与 CPU。
 - **沿用登录态**：首次启动可从 Chrome / Edge 导入资料，Agent 直接使用已登录的账号，不需要另配一套无头 Profile 或导出 Cookie。
-- **接口形态**：控制面是 `ego-browser` Skill（随应用安装，也可 `npx skills add github:CitroLabs/ego-lite/skills/ego-browser` 单独安装）。Agent 通过 stdin 提交一段 Node.js 流程，helper 已预注入，例如：
+- **接口形态**：控制面是 `ego-browser` Skill（已安装至 `%USERPROFILE%\.agents\skills\ego-browser\`，随应用更新）。Agent 通过 `ego-browser nodejs` 提交一段 Node.js 流程（Bash 用 heredoc，PowerShell 写 `.mjs` 文件），helper 已预注入，例如：
 
-  ```powershell
-  @'
-  const task = await useOrCreateTaskSpace('check campus notices')
-  await openOrReuseTab('https://example.edu/notice', { wait: true, timeout: 20 })
-  cliLog(await snapshotText())
-  await completeTaskSpace(task.name)
-  '@ | ego-browser nodejs
+  ```bash
+  ego-browser nodejs <<'EOF'
+  const task = await taskSpace('check campus notices')
+  const page = task.page('p1')
+  await page.goto('https://example.edu/notice')
+  console.log(await page.snapshot())
+  await task.finish({ keep: [] })
+  EOF
   ```
 
-  核心 helper：`useOrCreateTaskSpace`、`openOrReuseTab`、`gotoAndWait`、`snapshotText`、`click`、`fillInput`、`typeText`、`pressKey`、`uploadFile`、`captureScreenshot`、`js`、`cdp`。`snapshotText()` 返回带 `@N` 引用的语义树，`@N` 只对最近一次快照有效，跨轮引用要用 `loc=...` 或 CSS selector。
+  核心 API：`taskSpace` / `listTaskSpaces`（Space 复用与接管）、`task.page` / `page.goto` / `page.snapshot`（语义树）、`page.click` / `page.fill` / `page.keyboard.*` / `page.mouse.*`、`task.adopt` / `task.release` / `task.handOff`、`task.finish({ keep })`（收尾并返回回执）、`task.cdp`。实测基线（2026-11-03）：`ego-browser 0.6.2.5`，隔离 Space 内打开页面、snapshot、收尾关闭全链路通过；跨轮引用 `snapshot` 引用用 `loc=...` 或 CSS selector。
 - **定位边界**：优先用于「必须有登录态、需要多步点击或上传文件」的网页任务（`info.web.browse`）。无登录态的抓取仍走 `agent-reach` / RSS；纯 HTML 转图仍走 Playwright 无头截图；付款、删除、对外发布照常停在确认点。
 
 已知限制（以官方文档为准）：Linux 版在路线图中、Windows 版为 beta；官方文档未列出 profile / 代理参数，也没有 MCP 或 REST 接口，驱动入口只有 `ego-browser`；会话仅限本机，不支持远程或容器内运行（DS-Bot 容器版因此需把浏览器任务派回工作站，见 [DS-Bot 入口 §2](ds-bot-entry.md#2-功能缺口与配套补充方案)）。
+
+### 2.9 桌面应用自动化（agent-desktop）
+
+本机 GUI 自动化选用 **agent-desktop**（Vercel Labs，Apache-2.0，Rust 单文件二进制）：通过 UIA 无障碍树读取桌面应用结构，`snapshot` 返回带 ref 的 JSON 树，ref 语义动作默认 headless——不移动鼠标指针、不抢窗口焦点，与本仓「Agent 后台干活、人继续用同一台机器」的取向一致。
+
+- **安装位置**：`%USERPROFILE%\agent-src\tools\agent-desktop\agent-desktop.exe`（GitHub Releases 原生二进制，无 Node 依赖），经 `%USERPROFILE%\.local\bin\` 封装进入 `PATH`；纳入 `upctl update git` 或自定义分区更新。
+- **headless / headed 边界**：`click` / `set-value` / `toggle` / `scroll` 等走 UIA 语义调用可后台执行；`type` / `right-click` / 双击 / `press` 需 `--headed`（SendInput 物理输入）。最小化窗口、Session 0、锁屏与 UAC 安全桌面不可达（见 [工作站配置 §4.2](workstation-windows.md#42-桌面自动化命令行接口)）。
+- **Agent 调用方式**：Worker 直接调用 CLI；`agent-desktop skills get desktop` 与 `skills get platform` 输出与版本匹配的 agent 使用文档，执行前先读。
+- **实测基线（2026-11-03）**：v1.1.0，`version` / `list-apps` / `snapshot`（WindowsTerminal，19 个交互元素）冒烟通过。
+- **定位边界**：承担 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) 的 UIA 层；自绘画布与树稀疏应用仍走视觉兜底（Jev + AutoHotkey v2）。
 
 ## 3. 工具在事件架构中的角色分类
 
@@ -120,7 +131,7 @@ Agent 调用本地软件时按以下优先级依次选择：
 | 角色层级 | 职责定义 | 典型工具示例 | 调用约束 |
 |---|---|---|---|
 | **事件采集源（Event Source）** | 从外部拉取或监听变化并生成原始输入 | `agent-reach`、`xxt`、`FileSystemWatcher` 目录监听、Git Hook | 仅负责采集并调用 `ev add`，不直接触发下游重操作 |
-| **执行器 / Provider** | 接收派发器调用，独立完成一项能力并返回退出码与摘要 | Home Assistant 服务调用、`biliup`、`orca` CLI、`ebook-convert`、`ego-browser` | 必须支持无交互运行、具备幂等性与明确退出码 |
+| **执行器 / Provider** | 接收派发器调用，独立完成一项能力并返回退出码与摘要 | Home Assistant 服务调用、`biliup`、`ar` CLI、`ebook-convert`、`ego-browser` | 必须支持无交互运行、具备幂等性与明确退出码 |
 | **内部工具（Internal Tool）** | 仅在某个 Worker 执行过程中作为底层命令被调用 | `ffmpeg`、`blender`、`reaper`、ImageMagick、Ghidra | 不直接订阅任务库事件 |
 | **显示端（Output Surface）** | 只读消费任务库与状态数据并渲染展示 | 墨水屏渲染服务、ThinkSmart View、DS-Bot Web | 只读展示，不产生独立的业务状态源 |
 

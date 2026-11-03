@@ -12,7 +12,7 @@
 |---|---|---|
 | `id` | `uuid` | 任务唯一标识 |
 | `ts` | `entry` | 创建时间 |
-| `source` | UDA `source` | 触发来源：`me` / `ha` / `cron` / `github` / `phone` / `email` / `rss` / `net` / `nut` / `orca` |
+| `source` | UDA `source` | 触发来源：`me` / `ha` / `cron` / `github` / `phone` / `email` / `rss` / `net` / `nut` / `local` |
 | `kind` | UDA `kind` | `<域>.<对象>.<动作>`（如 `work.video.make`），全集定义见 [能力目录](capabilities.md) |
 | `subject` | `description` | 任务标题或简述 |
 | `state` | `status` + `start` + tags | 九种状态之一，见 §2 |
@@ -85,7 +85,7 @@ Taskwarrior 原生的报表、过滤条件与同步子命令均可直接混用�
 | 手机端分享 | Phone Link / 微信文件传输 / HA Companion → `ev add` | `phone` |
 | 网络出口变化 | AX6000 `hotplug` 脚本触发 `ev add --kind system.net.egress` | `net` |
 | UPS 电源事件 | NUT 触发 `ev add --kind system.power.*` | `nut` |
-| Agent 任务回调 | Orca Run 完成后调用 `ev done` | `orca` |
+| Agent 任务回调 | `agent:local` Run 完成后调用 `ev done` | `local` |
 
 ## 6. 任务库备份
 

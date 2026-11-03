@@ -9,7 +9,7 @@
 ```mermaid
 flowchart TD
   NET["校园网物理网口"] --> RT["AX6000 192.168.31.1<br/>默认网关 + 认证 + mwan3 + OpenClash + Wi-Fi"]
-  RT -->|192.168.31.0/24| WS["工作站 ws<br/>Orca + 任务库 + evd"]
+  RT -->|192.168.31.0/24| WS["工作站 ws<br/>agent:local + 任务库 + evd"]
   RT -->|Wi-Fi| DEV["手机 / 墨水屏 / ThinkSensor"]
   RT -.->|出站| TS["Tailnet shizuku.ts"]
   WS --> TS
@@ -148,7 +148,7 @@ fallback = { egress = "any", model = "ollama:qwen3-8b" }
 |---|---|---|---|
 | Windows 11 基础系统 + OpenSSH Server + `tailscaled` | 2.0 GB | 2.6 GB | 系统底座（含桌面合成与 Defender） |
 | Taskwarrior + `evd` + `events.sqlite3` | 80 MB | 200 MB | 事件消费 |
-| Orca + 编排服务 | 600 MB | 1.5 GB | 编排核心 |
+| `agent:local` 运行时 + 编排服务 | 600 MB | 1.5 GB | 编排核心 |
 | DS-Bot + DSH | 1.2 GB | 3.0 GB | 常驻对话入口 |
 | LiteLLM 网关 | 350 MB | 700 MB | 统一 API 路由与计费 |
 | ntfy（本地实例） | 30 MB | 60 MB | 与云服务器实例二选一 |

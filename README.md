@@ -26,7 +26,7 @@
 
 ## 执行域
 
-- [系统拓扑](docs/system-topology.md)：常驻入口、Orca 本地编排、Worker 执行与 GUI 自动化
+- [系统拓扑](docs/system-topology.md)：常驻入口、`agent:local` 本地编排、Worker 执行与 GUI 自动化
 - [多 Agent 协作规范](docs/agent-collaboration.md)：规则共享、协作模式与流水线分工
 - [内容创作流水线](docs/creative-studio.md)：视频、音乐、写作、电子书与播客的统一制作管线 · 设计中
 - [开发与逆向工程](docs/work-devsec.md)：代码开发、固件与软件逆向、游戏构建与设计工具链 · 设计中
@@ -69,6 +69,7 @@
 - [ADR 0005](docs/adr/0005-proposal-shadow-promotion.md)：通过提案与影子测试上线新能力
 - [ADR 0006](docs/adr/0006-workstation-windows.md)：工作站改用 Windows 11 原生，放弃 Linux 与 WSL
 - [ADR 0007](docs/adr/0007-deferred-resident-node.md)：常驻入口延后，先单机加云端等待队列
+- [ADR 0008](docs/adr/0008-local-agent-runtime.md)：多 Agent 运行时改用自建 `agent:local`，交互层采用生成式 UI
 
 ## 能力专题
 
