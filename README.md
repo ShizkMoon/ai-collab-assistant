@@ -80,3 +80,7 @@
 ## 归档子树
 
 - `ax6000-campus-records/`：AX6000 路由器实验记录（`git subtree` 归档，不在本仓直接修改）
+
+## 关联仓库
+
+- [`agent-local-runtime`](https://github.com/ShizkMoon/agent-local-runtime)（本机 `C:\Repos\agent-local-runtime`）：`agent:local` 运行时代码（`ar` CLI + daemon + `aica-pi`），设计见 [agent:local 运行时设计](docs/agent-local-runtime.md)；本仓只放设计，代码不入此仓

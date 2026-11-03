@@ -68,7 +68,7 @@ Worker 的工具面由名为 **`aica-pi`** 的 pi package 统一提供：`ev`（
 
 UI 渲染的是运行产物（进度卡片、Run 树、diff 预览），**不渲染 DAG 本身**——图是执行数据不是界面形态，用户面前只有被渲染过的结果。
 
-前置条件：Node.js ≥ 22.19（`winget install OpenJS.NodeJS.LTS`，纳入 `%ProgramData%\aica\managed.list`）；`ar` 源码放 `%USERPROFILE%\agent-src\tools\ar\`。
+前置条件：Node.js ≥ 22.19（已安装 Node v26，纳入 `%ProgramData%\aica\managed.list`）；`pi` ≥ 1.5（npm 全局）。源码仓：`C:\Repos\agent-local-runtime`（GitHub `ShizkMoon/agent-local-runtime`，私有），`ar` 经 `%USERPROFILE%\.local\bin\ar.cmd` 进入 `PATH`。
 
 ## 7. 技术选型
 
