@@ -27,6 +27,7 @@
 ## 执行域
 
 - [系统拓扑](docs/system-topology.md)：常驻入口、`agent:local` 本地编排、Worker 执行与 GUI 自动化
+- [`agent:local` 运行时设计](docs/agent-local-runtime.md)：`ar` CLI + daemon + pi Worker 的组件划分与演进路径 · 设计中
 - [多 Agent 协作规范](docs/agent-collaboration.md)：规则共享、协作模式与流水线分工
 - [内容创作流水线](docs/creative-studio.md)：视频、音乐、写作、电子书与播客的统一制作管线 · 设计中
 - [开发与逆向工程](docs/work-devsec.md)：代码开发、固件与软件逆向、游戏构建与设计工具链 · 设计中

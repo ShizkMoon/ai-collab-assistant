@@ -189,6 +189,7 @@ D:\repo\video\                    # 视频工程目录
 | 核心机制 | [事件运行时与派发器](event-runtime.md) | 九态状态机、派发器守护进程、规则匹配与幂等机制 |
 | 核心机制 | [事件与任务规格](event-spec.md) | 任务字段定义与 `ev` CLI 规范 |
 | 核心机制 | [多 Agent 运行时](multi-agent-runtime.md) | 树与依赖 DAG、`spec` / `result` 信封、发散与收敛、程序化约束 |
+| 核心机制 | [`agent:local` 运行时设计](agent-local-runtime.md) | `ar` CLI + daemon + pi Worker 组件划分、信封扩展与演进路径 |
 | 核心机制 | [知识库与记忆分层](knowledge-memory.md) | 三路混合检索、记忆分层与偏好提炼 |
 | 核心机制 | [IM 采集](im-ingest.md) | 主账号只读采集、双账号分工、会话切分与检索参数 |
 | 核心机制 | [提案库](proposals/README.md) | 候选规则、能力与场景的评审流程 |
