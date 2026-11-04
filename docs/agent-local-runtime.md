@@ -101,3 +101,53 @@ Worker 进程的上下文按"重建而非继承"组装，分三个记忆环：
 - **不发明 Skill 机制**：直接复用 pi packages 与 `%USERPROFILE%\.agents\skills\`。
 - **不给 Worker 全量工具**：工具面随 `spec.json` 声明裁剪，编排者零执行工具。
 - **不在 v0 引入远程 Worker**：`agent` 字段与 daemon 接缝已预留，但常驻节点落地前不实现。
+
+## 11. v3 落地状态（2026-11-04 真机）
+
+> 本节只记「已经能在真机上看到」的东西；设计与验收口径在 [prd-workbench-v3.md](prd-workbench-v3.md) §6（S16–S28）
+> 与 §9（自进化），界面规范在 [workbench-ui.md](workbench-ui.md) §9/§10。
+> 实现与测试仓：`C:\Repos\agent-local-runtime`；研究证据：本仓 [research/](research/)。
+
+### 11.1 R2 切片 S16–S28 全部落地
+
+| 片 | 做了什么 | commit |
+|---|---|---|
+| S16 | 视图契约化：把 `apiView` 的投影抽成纯函数 `workbench/view.ts` + 类型 + 3 个真机 run 的快照测试 | `c8ef2f5` |
+| S17 | 工具时间线：`tool_call/tool_update/file_edit` 投影成 step；补流式投影（`message_update→agent_delta`、按 `call_id` 折叠）；turn 结局闭集 + reason | `c8ef2f5` |
+| S18 / S23 / S24 / S26 | diff 聚合（文件级 `+N −M` + 展开前 40 行）、计划条与 reviewer 三档、命令面板与键盘最小集、健康页 + 审计面 + 断线黄条与全量校准 | `b8487f7` |
+| S19 | 审批重做：决策闭集（`allowed-once/rejected/cancelled/unavailable`）+ fail-closed + 三件套分离 + 危险路径硬拒 + 卡上动作由 `opts[]` 生成 | `62c1a77` |
+| S20 | 用量与上下文：turn 级 tokens、预算前置拦截、压缩三事件、spill + 诚实截断 | `7c083c0` |
+| S21 | 恢复与分叉：事件 `seq`、孤儿归宿、续跑预算、checkpoint、`fork` | `f71cab5` |
+| S22 / S28 | `spawn` 子代理（命名/寻址/隔离 + 并发策略）、回复投递三态（`queue` 落地）；`ev_propose` + `ar propose` 提案目录、路径白名单、stale 保护、字节级回滚 | `fbf9934` |
+| S25 | 状态体系：run 行聚合取最紧急、四态/六值、等待态 shimmer、两档密度、断线态 | `bdafb81` |
+| S27 | 验收脚手架：e2e 夹具（录制回放 + 故障注入）、UI 断言、六道验收门 | `9621bf4` |
+
+**R3 追加（真机在用）**：提案页签、inbox 提案卡、左栏「测试」分组归档、plan mode（只读规划）、`@file` 引用、
+`profile` 闭集（orchestrator/advisor/worker/reviewer/plan）、gate 只读分档、桥启动传 `AICA_REPO_ROOT`
+（`cb34235` / `ed072de` / `41e17ec` / `be01871` / `df2be66`；记录见 `d64742f`）。
+
+### 11.2 测试读数
+
+`node --test workbench/test` → **172 tests / 167 pass / 5 skipped / 0 fail**
+（skip 均为显式原因：夹具无 stdout、严格态尚未实现——不是"跑绿了"的修辞）。
+
+> 复跑注意：工作树里若有未合并的 R4 改动给 `RunView` 加了字段（`profile`/`parallel` 等），
+> 3 个真机快照会因**字段新增**而失配，需 `UPDATE_SNAPSHOTS=1` 重生成；属记录滞后，不是功能回归。
+
+### 11.3 真机证据（2026-11-04 逐条看过）
+
+- **壳无控制台启动**：`workbench.cmd` 起 MyGo 外壳，无黑窗、单实例唤醒、日志落 `state/`；
+- **审批卡三动作**：允许一次 / 本会话都允许（记住 `工具 × tier × 目标`）/ 拒绝并说明原因；卡片出现 500ms 内 `Enter` 不生效；`rm -rf ~` 直接硬拒，任何档都放不过；
+- **预算拦截**：mock 一个超 `budget.tokens` 的节点 → 在超之前被拦，拦截事件在审计面可见；
+- **fork**：从任一节点 fork 出新 run，`seq` 连续、孤儿节点有归宿、旧 run 不被污染；
+- **`ev_propose` 六条验收**：low 提案落盘生效 / high 无 `--force` 拒绝 / 禁止级直接拒 / verify 失败字节级回滚 / 同 slug 第 4 次 apply 标 stale / 坏 patch 不崩；
+- **plan 模式真跑**：`profile=plan` 的 worker 只读源码（gate 只读分档放行读取），产出计划条而不是改动。
+
+### 11.4 剩下的 R4（未开工 / 在途）
+
+- **MCP 客户端**（七家里 5 家有）：worker 现在显式 `--no-mcp`；接入前要先做工具来源校验与审批三件套的映射（T3 A5 的教训）。
+- **`steer` 真插话**：回复目前只有「下一轮生效（`queue`）」与「打断重来（`interrupt`）」；「插话」在 UI 里显式置灰并写明"需 pi RPC"。
+- **提案自动应用（auto-apply）**：现在 `ar propose apply` 一律人审；设置面板里已有「低风险提案自动应用」开关的接缝（`risk=low` 由 daemon 直接应用），未合入。
+- 另有：设置面板本身（并发上限 / 主题 / 闸门默认值，贴右栏 sheet）在途。
+
+**R4 的判据与 R2 相同**：每条都要有"真机可看到的证据"，没有证据不算落地。
