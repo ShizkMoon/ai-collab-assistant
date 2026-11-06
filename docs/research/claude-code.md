@@ -87,7 +87,7 @@ Claude Code 的形态是「**一个模型 + 一套规则 + 一堆生命周期钩
 | 子代理"plan 模式挂只读 Plan subagent" | **部分确认** | 【文档】hooks.md `SubagentStart` matcher 值列 `general-purpose, Explore, Plan, custom agent names`，`Plan` 是内建 agent type；"只读"未直接证实，`需复核` |
 | 上下文：`CLAUDE.md` + `.claude/rules/*.md` 层级（`InstructionsLoaded` 可见加载） | **确认** | 【文档】memory.md 四级作用域表 + rules 的 `paths` frontmatter；hooks.md `InstructionsLoaded` matcher = `session_start/nested_traversal/path_glob_match/include/compact` |
 | SKILL.md 渐进披露 | **确认** | 【文档】memory.md："skills … only load when you invoke them or when Claude determines they are relevant" |
-| auto-compact（`PreCompact/PostCompact`） | **确认** | 【文档】hooks.md 两事件，matcher = `manual|auto` |
+| auto-compact（`PreCompact/PostCompact`） | **确认** | 【文档】hooks.md 两事件，matcher = `manual\|auto` |
 | transcript JSON 异步落盘，hooks 拿 `transcript_path` 但提示可能滞后当轮 | **确认（并强化）** | 【文档】sessions.md 给出路径与"格式内部、随版本变"的警告；hooks.md 的 `additionalContext` 一节明说 resume 时"replays the saved text rather than re-running the hook" |
 | 工具面"全家桶" | **修正为 44 个** | 【包内】`sdk-tools.d.ts:11-56` 44 个 `*Input`（另有 37 个 `*Output`）；v2 完全没写 `Workflow/Cron*/ScheduleWakeup/Monitor/Artifact/ProposeSkills/ProposeGoal/EnterWorktree/ReportFindings/SendFeedback` |
 | hooks = "~32 个生命周期事件" | **修正为 33** | 【文档】hooks.md 事件表逐行数得 33 行（v2 列举其实也是 33 个名字，只是写了 32） |

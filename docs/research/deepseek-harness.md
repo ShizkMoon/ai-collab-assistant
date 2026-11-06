@@ -442,7 +442,7 @@ turn/end
 | Δ3 | **spill**：大结果外溢 + locator + retrievalHint；search 卡 `truncated/total` | `spill.md:5,70-77`；`tools.md:623` | G12/G2 的诚实性补丁 |
 | Δ4 | 压缩**三事件锁** + summary 走 `user/message{surfaceOp:replace}` + orphan 锁检测 | `compaction.md:11-21` | S2 加 surface 投影 + 启动收口 |
 | Δ5 | 任务板 **revision CAS** + `writeScopes` 建议性 + `ready` 派生 + `PERSISTENCE_UNCONFIRMED` | `agent-team.md:56,72,157` | 补 AICA board 语义 |
-| Δ6 | `hook/invoked|result` 审计对 + turn 内约束 + SessionStart 无记录 | `hook-protocol/README.md:67-71`；`session.md:761` | G37 增强 |
+| Δ6 | `hook/invoked\|result` 审计对 + turn 内约束 + SessionStart 无记录 | `hook-protocol/README.md:67-71`；`session.md:761` | G37 增强 |
 | Δ7 | 审批 UI 键盘语义 + pending 锁 + 撤回不可再答 | `ui-approval/README.md:21` | G36 直接抄 |
 | Δ8 | 会话格式**版本号 + 相邻迁移 + 只读打开不改写 + 已提交代际不可变** | `architecture.md:128`；`session-format-status.md:31-49` | 新缺口：格式演进安全 |
 | Δ9 | **turn 结局闭集**（`max-tokens` 压过 `completed`；`interrupted`/`forked` 由恢复/分叉合成） | `session.md:737` | `result.reason` 字段 |
