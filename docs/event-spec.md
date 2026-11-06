@@ -18,7 +18,7 @@
 | `state` | `status` + `start` + tags | 九种状态之一，见 §2 |
 | `summary` | 完成时的注解（annotation） | 一句话执行摘要 |
 | `payload` | UDA `payload` | 原始输入文件路径或结构化 JSON 参数（可为空） |
-| `parent`（可选） | UDA `parent` | 归属节点：派生该子任务的父任务 UUID，决定汇总与升级方向。**不使用原生 `depends`**，原因见 [多 Agent 运行时 §3](multi-agent-runtime.md#3-两棵树不要合并) |
+| `parent_uuid`（可选） | UDA `parent_uuid`（CLI 写作 `--parent`） | 归属节点：派生该子任务的父任务 UUID，决定汇总与升级方向。TW3 的 `parent` 是内置属性、不能作 UDA，故字段名加 `_uuid` 后缀；**不使用原生 `parent` 表达归属**，原因见 [多 Agent 运行时 §3](multi-agent-runtime.md#3-两棵树不要合并) |
 | `depends`（可选） | 原生 `depends` | 执行依赖：开始执行前必须完成的节点，可以有多个；语义是父依赖子，与归属分开存放 |
 | `thread`（可选） | UDA `thread` | 串联同一主题下多条任务的线索 ID（同 `thread` 内默认串行） |
 | `severity`（可选） | UDA `severity` | `info` / `warn` / `critical`，控制推送渠道与免打扰穿透 |

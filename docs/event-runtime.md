@@ -88,7 +88,7 @@ to    = "triage"           # 归入待分类队列，在每日早报中汇总
 
 | 配置项 | 行为说明 |
 |---|---|
-| `aggregate.window` | 将时间窗口内同一 `thread` 的多条任务合并为一条父任务，子任务通过 `parent` 指向父任务归入同一棵节点树 |
+| `aggregate.window` | 将时间窗口内同一 `thread` 的多条任务合并为一条父任务，子任务通过 `parent_uuid` 指向父任务归入同一棵节点树 |
 | `mode = "rollup"` | 窗口结束时生成一条指定 `emit` 类型的汇总任务，正文为各子任务的标题列表 |
 | `mode = "inline"` | 不新建父任务，直接向该 `thread` 最新一条任务追加注解 |
 | `serial = true`（默认） | 同一 `thread` 内部严格串行：前一条任务进入 `done` 或 `dropped` 前不派发下一条 |

@@ -124,6 +124,17 @@ Agent 调用本地软件时按以下优先级依次选择：
 - **实测基线（2026-11-03）**：v1.1.0，`version` / `list-apps` / `snapshot`（WindowsTerminal，19 个交互元素）冒烟通过。
 - **定位边界**：承担 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) 的 UIA 层；自绘画布与树稀疏应用仍走视觉兜底（Jev + AutoHotkey v2）。
 
+### 2.10 任务库（Taskwarrior）
+
+本机任务库选用 **Taskwarrior 3（TW3）**，作为 [事件与任务规格](event-spec.md) 中任务的唯一权威存储。
+
+- **安装路径**：官方无 Windows 二进制，winget / scoop / choco 均不提供；实际路径是 MSYS2 包 —— `winget install MSYS2.MSYS2`，再执行 `C:\msys64\usr\bin\pacman -S mingw-w64-x86_64-task`（或 `pacman -S task`，取 MSYS2 池中的 `task 3.5.0-1`），二进制落在 `C:\msys64\usr\bin\task.exe`。备选是 WSL 内安装，本机未采用（要跨 Windows 路径读写任务文件，MSYS2 更直接）。
+- **配置**：`%LOCALAPPDATA%\aica\state\taskrc`，`data.location` 指向同目录，数据库为 `taskchampion.sqlite3`；UDA 已配 `source` / `kind` / `payload` / `thread` / `severity` / `lifetime` / `reversible` / `attempts` / `lane` / `parent_uuid`。`TASKRC` 已设为用户环境变量。
+- **字段命名坑**：TW3 的 `parent`、`depends` 等是内置属性，**不能**声明为 UDA；归属关系的 UDA 因此命名为 `parent_uuid`（值仍是父任务 UUID），CLI 侧由 `ev add --parent <uuid>` 写入。
+- **调用垫片**：`%USERPROFILE%\.local\bin\task.cmd` 固定 `TASKRC` 后转发 `task.exe`，避免每次手动设环境变量；`%USERPROFILE%\.local\bin\ev.ps1`（及 `ev.cmd`）封装 `add` / `ls` / `next` / `done` / `wait` / `reopen` / `status` / `digest`，默认补 `source:me` 与 `lane:interactive`，写操作直接透传原生 `task` 参数。
+- **Agent 侧接入**：DSH 技能 `task-ledger`（源码 `%USERPROFILE%\agent-src\skills-src\task-ledger`，junction 到 `~\.agents\skills\task-ledger`）规定何时写任务、字段取值与交接约定，Agent 通过 `ev` / `task` 命令行读写，不需要 MCP。
+- **实测基线（2026-11-06）**：`task 3.5.0`，`winget install MSYS2.MSYS2`（20260927）→ pacman 装包 → `task add/done/annotate/wait/export` 全链路通过；`ev add/ls/done/status/digest` 冒烟通过；sqlite 落在 `%LOCALAPPDATA%\aica\state\taskchampion.sqlite3`。
+- **已知限制**：`task` 的报表输出宽度依赖终端（非 TTY 时按 80 列截断）；MSYS2 的路径转换会把 `C:\...` 风格参数改写为 `/c/...`，跨工具调用一律用 `task` 原生命令并传相对/正斜杠路径；`ev` 封装一次性 `TASKRC` override 会打印一行提示，已在该垫片中抑制。
 ## 3. 工具在事件架构中的角色分类
 
 引入任何新工具前，需明确其在系统中的职责层级：

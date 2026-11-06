@@ -2,7 +2,7 @@
 
 > 状态：设计中 · 上位文档：[总体架构设计 §3 五类工作流](architecture-north-star.md#3-五类工作流)、[多 Agent 协作](agent-collaboration.md)
 >
-> 本文统一视频、音乐、长文写作与电子书精修的制作流程，采用**七段式文件管线 + 多候选比选（Best-of-N）+ 协调 Worker + 成品登记表**的架构。能力标识使用 `kind`，底层工具封装为 Provider，阶段交接通过 Taskwarrior 的 `thread` 与 `parent` 关联，仅在最终"对外发布"环节设置人工确认点。
+> 本文统一视频、音乐、长文写作与电子书精修的制作流程，采用**七段式文件管线 + 多候选比选（Best-of-N）+ 协调 Worker + 成品登记表**的架构。能力标识使用 `kind`，底层工具封装为 Provider，阶段交接通过 Taskwarrior 的 `thread` 与 `parent_uuid` 关联，仅在最终"对外发布"环节设置人工确认点。
 
 ## 1. 跨领域流程对齐
 
@@ -38,13 +38,13 @@
 
 1. **文件交接隔离上下文**：下游阶段仅读取上游阶段产出的文件路径，不继承上游 Worker 的对话历史，防止长上下文污染。
 2. **结构化结果回写**：每个阶段完成时向任务库写入一句话执行摘要，产物路径与指标文件路径附在任务注解中。
-3. **`thread` 与 `parent` 追踪进度**：同一作品的所有子任务共享同一个 `thread` ID，阶段先后依赖通过 `parent`（映射到 Taskwarrior `depends`）表达。
+3. **`thread` 与 `parent_uuid` 追踪进度**：同一作品的所有子任务共享同一个 `thread` ID；归属关系写成 UDA `parent_uuid`（父任务 UUID），阶段先后依赖另用原生 `depends` 表达，两者分开存放。
 
 ### 2.1 管线阶段与任务状态机的映射
 
 | 管线事件 | 任务库操作 |
 |---|---|
-| 启动第 N 阶段 | 执行 `task <id> start`，创建带 `parent:<id> thread:<tid>` 的阶段子任务 |
+| 启动第 N 阶段 | 执行 `task <id> start`，创建带 `parent_uuid:<父UUID> thread:<tid>` 的阶段子任务；有前置阶段时另加 `depends:<前置id>` |
 | 阶段子任务完成 | 调用 `ev done <child> "<执行摘要>"`，协调 Worker 检查下一阶段依赖是否就绪 |
 | 多候选比选等待人工挑选 | 主任务设为 `ev wait <id> <+2d>`，推送带 `[选A] [选B] [选C] [全部重做]` 按钮的卡片 |
 | GPU 显存被其他任务占用 | 子任务设为 `ev wait`，等待获取 GPU 文件锁后唤醒 |
@@ -56,9 +56,10 @@
 $thread = [guid]::NewGuid().ToString()
 ev add "剪辑周末爬山 vlog" --kind work.video.make   # 假设返回 id=17
 task 17 modify thread:$thread +video
+$parent = (task 17 export 2>$null | ConvertFrom-Json).uuid
 
-ev add "导入与归一化素材" --kind work.video.ingest --parent 17 thread:$thread
-ev add "生成配乐（ACE-Step）" --kind work.music.compose --parent 17 thread:$thread
+ev add "导入与归一化素材" --kind work.video.ingest --parent $parent --thread $thread
+ev add "生成配乐（ACE-Step）" --kind work.music.compose --parent $parent --thread $thread
 # 按 thread 查询整条流水线状态
 task thread:$thread export
 ```
@@ -119,14 +120,14 @@ run/04-review/cover/choice.json   { "chosen": "cand-02", "rejected": ["cand-01",
 
 | 核心职责 | 明确不做的事项 |
 |---|---|
-| 拆解管线阶段、创建带 `parent` 与 `thread` 的子任务 | 不亲自执行视频剪辑、渲染或长文正文撰写 |
+| 拆解管线阶段、创建带 `parent_uuid` 与 `thread` 的子任务 | 不亲自执行视频剪辑、渲染或长文正文撰写 |
 | 每个阶段结束时检查四件套文件是否齐全，缺失则挂起报错 | 不代替人工对作品质量做主观打分 |
 | 在多候选比选阶段整理候选预览卡片并记录 `choice.json` | 不替用户做最终候选拍板 |
 | 汇总各阶段一句话执行摘要写回主任务 | 不跨任务与其他 Worker 进行自由对话 |
 | 执行失败时按策略重试（最多 3 次并切换备选参数） | 不将超时或半成品静默标记为完成 |
 
 ```text
-协调 Worker → 创建子任务（ev add --parent --thread）
+协调 Worker → 创建子任务（ev add --parent <uuid> --thread <tid>）
 阶段 Worker → 完成回写：ev done <id> "<执行摘要>" + 产物路径
 协调 Worker → 推送给用户：交互卡片（产物预览、时长/字数、[查看] [修改] [选稿] [发布]）
 用户回复   → 协调 Worker：点击按钮或回复修改意见，转化为下一步 ev 操作
@@ -374,7 +375,7 @@ calibredb add run/06-export/<书名>.epub --with-library <书库路径>   # 书�
 | 环节 | 复用的开源工具或规范 | 自建部分与原因 |
 |---|---|---|
 | 阶段产物规范 | `closed-loop-production` Skill 的四件套规范 | 七段管线的目录与文件命名约定 |
-| 任务编排与状态跟踪 | Taskwarrior 3（`thread` / `parent` / `wait` / `recur`） | 协调 Worker 的阶段推进逻辑 |
+| 任务编排与状态跟踪 | Taskwarrior 3（`thread` / `parent_uuid` / `depends` / `wait` / `recur`） | 协调 Worker 的阶段推进逻辑 |
 | 视频渲染与剪辑 | Remotion、HyperFrames、Multiplane、`ffmpeg`、`auto-editor`、`PySceneDetect` | - |
 | 音乐与乐谱 | ACE-Step 1.5、REAPER ReaScript、MuseScore CLI、LilyPond、FluidSynth | - |
 | 语音转写与封面制作 | FunASR / SenseVoice、ComfyUI、`photocraft-cli` | 多候选比选配置文件 `contest.toml` 与 `choice.json` |

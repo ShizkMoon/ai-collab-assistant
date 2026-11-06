@@ -20,7 +20,7 @@
 
 ## 3. S0 / P0 启动实施步骤
 
-1. 安装 `taskwarrior`，并在 `.taskrc` 中配置 UDA 字段：`kind`、`source`、`thread`、`parent`、`payload`、`severity`、`lifetime`、`reversible`、`attempts`、`lane`（见 [事件与任务规格 §1](event-spec.md#1-任务字段定义)）。
+1. 安装 `taskwarrior`，并在 `.taskrc` 中配置 UDA 字段：`kind`、`source`、`thread`、`parent_uuid`、`payload`、`severity`、`lifetime`、`reversible`、`attempts`、`lane`（见 [事件与任务规格 §1](event-spec.md#1-任务字段定义)）。
 2. 编写 `ev` CLI 封装、只写 Spool 队列的 `on-add` / `on-modify` Hook 以及常驻派发器 `evd` 骨架（见 [事件运行时与派发器 §3](event-runtime.md#3-派发器守护进程evd)）。
 3. 首批注册 5 类基础 `kind`：`work.code.task`、`life.maintain.home`、`life.schedule.*`、`info.feed.digest`、`meta.review.weekly`。
 4. 配置任务计划程序每日定时生成早晚报摘要并推送至手机。

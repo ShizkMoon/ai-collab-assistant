@@ -97,7 +97,7 @@ flowchart LR
 
 ## 9. 部署进度
 
-- **已就绪**：工作站已切换 Windows 11 原生；`agent-desktop` 已安装至 `%USERPROFILE%\agent-src\tools\agent-desktop\` 并通过 UIA 冒烟验证；ego(lite) 与 `ego-browser` 可用；云服务器 `orca-pool` 已通过 Tailscale 接入。Orca 暂保留为影子期兜底执行器（[ADR 0008](adr/0008-local-agent-runtime.md)）。
+- **已就绪**：工作站已切换 Windows 11 原生；`agent-desktop` 已安装至 `%USERPROFILE%\agent-src\tools\agent-desktop\` 并通过 UIA 冒烟验证；ego(lite) 与 `ego-browser` 可用；云服务器 `orca-pool` 已通过 Tailscale 接入；任务库 **Taskwarrior 3.5.0** 已安装（MSYS2 包）并完成 `add / done / annotate / wait / export` 与 `ev` 封装冒烟，配置与字段见 [本机工具链 §2.10](local-toolchain.md#210-任务库taskwarrior)。Orca 暂保留为影子期兜底执行器（[ADR 0008](adr/0008-local-agent-runtime.md)）。
 - **待实现**：`agent:local` 运行时的控制面补充（`ar list` / `ar watch`，见 [控制面契约 §2](control-plane-api.md#2-命令面冻结)）；Codex 与 Claude Code 适配器的实测（两家 CLI 本机尚未安装，见 [Worker 适配器](worker-adapters.md)）。
 - **已降级**：生成式 UI 工作台按 [ADR 0009](adr/0009-dsbot-as-control-interface.md) 转为可选旁路，不再作为交付目标。
 - **待部署**：工作站的 `ev sync` 定时拉取、云端的事件落库脚本与 ntfy 转发、工作站受限入口脚本。
