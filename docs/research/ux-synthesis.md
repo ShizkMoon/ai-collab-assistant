@@ -1,20 +1,17 @@
 # 七家 harness 的界面 / 交互横向合成（ux-synthesis）
 
 > **输入**：`docs/research/` 八份研究稿的 §4 「UI/交互」与 §5 清单里的 UI 条目（deepseek-harness / opencode /
-> claude-code / codex / t3code / oh-my-pi / misaka-agent / cindy）；`docs/prd-workbench-v3.md:302-355`（现状结论、
-> 重心规则 R1–R5、六态、关键界面、键盘最小集）；`workbench/prototype/design-demos/direction-approved.md:5-7`
+> claude-code / codex / t3code / oh-my-pi / misaka-agent / cindy）；`workbench/prototype/design-demos/direction-approved.md:5-7`
 > （定稿 = dir-5 骨架 × dir-6 语言）；2026-11-04 两张真机截图（1426×863，三栏 256 / 790 / 380）。
 >
-> **产出**：对 `docs/workbench-ui.md` 的修订 P1–P20（§4）、线框级文字描述（§5）、可逐条核对的验收清单 U01–U28（§6）。
+> **产出**：工作台 UI 规范的修订 P1–P20（§4）、线框级文字描述（§5）、可逐条核对的验收清单 U01–U28（§6）。
 >
 > **证据标记**：`[S]` 源码级、`[D]` 文档级、`[T]` 推断 —— 沿用研究稿的原始口径。标「需复核」= 研究稿未覆盖，
 > 不得当结论用。
 >
-> **基线缺失（必须先说）**：任务书指向的 `docs/workbench-ui.md` 在本次合成时**不存在**——`git log --all --
-> docs/workbench-ui.md` 无记录，仓库内也无同名文件。因此 §4 的 P 条目以 `direction-approved.md` +
-> PRD v3 §5 + 现网 `workbench/public/v1/index.html` 的实装令牌（`index.html:44-45` 的 `--sb-w:256px` /
-> `--rp-w:380px`，`index.html:24-41` 的 clay / serif / 三档圆角 / 三档动效）为基线；该文件落盘时可直接沿用
-> P1–P20 的编号，无需重排。
+> **基线**：§4 的 P 条目以 `direction-approved.md` + 现网 `workbench/public/v1/index.html` 的实装令牌
+> （`index.html:44-45` 的 `--sb-w:256px` / `--rp-w:380px`，`index.html:24-41` 的 clay / serif / 三档圆角 /
+> 三档动效）为基线。
 >
 > **行号说明**：`workbench/public/v1/index.html` 正由 S16/S17 切片（task-7）修改，本文引用的行号取自
 > 14:5x 的工作副本；**以符号名为准**（`pillOf` / `renderSidebar` / `ST_LABEL` / `data-p` / `notifyNewInbox`）。
@@ -238,11 +235,11 @@ DSH 的建议是「单文件版先用 `color-scheme` + 少量变量，不做双�
 
 ---
 
-## 4 对 `docs/workbench-ui.md` 的修订（P1–P20）
+## 4 工作台 UI 规范的修订（P1–P20，规范已废止）
 
 > 每条格式：**被谁支持 / 改成什么 / 为什么**。带「新增」的条目是现规范没有的；带「修订」的是现规范有但
 > 需要改口径的；带「负向」的是要写进「不做」清单的。
-> 基线（临时）：`direction-approved.md`（dir-5 骨架 × dir-6 语言）+ PRD v3 §5（R1–R5、六态）+ 现网令牌。
+> 基线：`direction-approved.md`（dir-5 骨架 × dir-6 语言）+ 现网令牌。
 
 **P1（修订）三栏职责：右栏是「决策队列」，不是「详情区」。**
 被谁支持：DSH §4.1 / §3.7(c)、T3 Code §4（主线只有对话）、Cindy §4-1（协同 tab 常驻 singleton）、PRD §5.1。
@@ -538,22 +535,18 @@ blue 给操作、三档圆角 8/12/14、三档动效 60/120/200ms）。
 
 ## 7 未覆盖与需复核
 
-1. **`docs/workbench-ui.md` 不存在**（见文首）。若该文件由另一任务落盘，请以 P1–P20 编号合入；§5 的线框描述
-   可直接作为它的第 3 章。
-2. **Codex / CC / Cindy 的键盘与主题**研究稿只覆盖到「有 keybinding / 有 spinnerVerbs / 未见」，逐键表与
+1. **Codex / CC / Cindy 的键盘与主题**研究稿只覆盖到「有 keybinding / 有 spinnerVerbs / 未见」，逐键表与
    颜色值**需复核**。
-3. **T3 Code 的 diff 视图**（§1.3）研究稿只覆盖 checkpoint/rollback 语义，未覆盖 diff 组件的呈现方式，**需复核**。
-4. **OpenCode TUI 的视觉细节**由研究稿自陈未读（`opencode.md:511`），本文只采其结构结论。
-5. **DSH 的 diff 呈现**未覆盖（`deepseek-harness.md` §4 无 diff 小节），本文未据此给结论。
-6. 截图里的 `1315:03` 这类时长口径**需现场确认**是「累计 worker 时间」还是「本轮耗时」——P6 要求统一口径后再
+2. **T3 Code 的 diff 视图**（§1.3）研究稿只覆盖 checkpoint/rollback 语义，未覆盖 diff 组件的呈现方式，**需复核**。
+3. **OpenCode TUI 的视觉细节**由研究稿自陈未读（`opencode.md:511`），本文只采其结构结论。
+4. **DSH 的 diff 呈现**未覆盖（`deepseek-harness.md` §4 无 diff 小节），本文未据此给结论。
+5. 截图里的 `1315:03` 这类时长口径**需现场确认**是「累计 worker 时间」还是「本轮耗时」——P6 要求统一口径后再
    决定展示形态。
 
 ---
 
 ## 8 出处汇总
 
-- `docs/prd-workbench-v3.md:302-355`（§5 UI：三栏职责 / R1–R5 / 六态 / 关键界面 / 键盘）、`:231-240`（反模式 A-1…A-6）、
-  `:109-129`（M1–M15）、`:250`（G-6 UI 门）。
 - `workbench/prototype/design-demos/direction-approved.md:5-7`（dir-5 定稿、dir-6 深化方向、用户原话）。
 - `workbench/public/v1/index.html`：`:19-20`（旧主张：右栏滑出）、`:24-45`（clay/serif/圆角/三档宽）、
   `:568-570`（右栏三页签）、`:596`（6 值状态词表）、`:614-651`（poll+SSE、通知基线）、`:714-751`（pill、run 列表）、
@@ -563,3 +556,10 @@ blue 给操作、三档圆角 8/12/14、三档动效 60/120/200ms）。
   `oh-my-pi.md` §4.1–§4.2、§5、§6；`misaka-agent.md` §4、§5、§6；`cindy.md` §3、§4、§5、§6。
 - 真机截图：`C:\Users\Administrator\ego\aica-inspect-20261104-1410\shot-app-cdp.png`、`shot-app-run.png`
   （1426×863，三栏 256 / 790 / 380）。
+
+## 落点
+
+- **采用**：没有一条以「规范条目」的形式进入现行设计。P1–P20 的宿主 `docs/workbench-ui.md` 与 `docs/prd-workbench-v3.md` 已随批 3 删除，§4 标题自己也标了「规范已废止」。仍然成立的是 §0 那五条判断（事件必须先投影再给人看、等待人优先、审批卡是数据、不完整就整行隐藏、间距要有刻度），它们现在的落点是 DSH 原生会话，不再是我们的代码。
+- **搁置**：U01–U29 验收清单没有执行对象。其中 U22 的性能结论（500 runs 下 `p50 = 163.7ms`，瓶颈是每 run 全量读盘）只对已删除的单文件工作台成立，换到 DSH 前端就没有对应物。
+- **影响判断**：支持复用。这篇量化了「自建工作台还要补 29 条验收」，而其中大半是 DSH 的 `dsh-client-ui-*` 已经做到的；[ADR 0011](../adr/0011-dsh-orchestration.md) 判前端不投入，靠的正是这类重复建设的对比。
+- **时效**：2026-11-04 的两张真机截图与 `workbench/public/v1/index.html` 行号。原文自陈行号取自 14:5x 的工作副本、以符号名为准（`pillOf` / `renderSidebar` / `ST_LABEL`）；工作台删除后这些行号无处可核，只剩结论层可用。复查时点：除非重新做自建前端，否则不用复查。

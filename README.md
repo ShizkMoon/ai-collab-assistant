@@ -1,6 +1,6 @@
 # 个人 AI 协作与助理系统
 
-本仓库是一套**个人 AI 协作与助理系统**的设计文档集。语音、消息或外部事件进入系统后，入口解析意图并匹配对应能力，由派发器路由给合适的执行器完成处理，最后将一句话执行摘要写回任务库并按需通知。整体设计坚持**功能优先、开源复用、够用即止**。可执行代码与工具包不放在本仓库（见 [AGENTS.md](AGENTS.md)）。
+本仓库是一套**个人 AI 协作与助理系统**的设计文档集。设计上，语音、消息或外部事件进入系统后，由入口解析意图并匹配对应能力，再路由给执行器完成处理，最后把一句话执行摘要写回任务库并按需通知。当前实际可用的只有任务库：Taskwarrior 3.5.0 由人或 Agent 通过 `ev` / `task` 手动读写，没有进程自动消费它；编排与交互由 DSH 承担，自动派发链路未部署。整体设计坚持**功能优先、开源复用、够用即止**。可执行代码与工具包不放在本仓库（见 [AGENTS.md](AGENTS.md)）。
 
 ## 从哪里开始
 
@@ -12,9 +12,9 @@
 ## 核心机制
 
 - [架构总览](docs/architecture.md)：五层架构与三类确认点（速览入口）
-- [事件运行时与派发器](docs/event-runtime.md)：九态状态机、派发器守护进程（Hook 写 Spool 队列）、规则匹配与幂等控制 · 设计中
-- [事件与任务规格](docs/event-spec.md)：字段定义、状态映射与 `ev` CLI · 设计中
-- [多 Agent 运行时](docs/multi-agent-runtime.md)：归属树与依赖图、派发与结果信封、发散收敛、编排者的能力裁剪 · 设计中
+- [事件与任务规格](docs/event-spec.md)：字段定义、状态映射与 `ev` CLI · 部分完成（任务库与 `ev` 可用，状态机未部署）
+- [事件运行时与派发](docs/event-runtime.md)：九态状态机、派发执行路径、规则匹配与幂等控制 · 未部署（2026-11-06 起不进入实施路径）
+- [多 Agent 运行时](docs/multi-agent-runtime.md)：归属树与依赖图、派发与结果信封、发散收敛、编排者的能力裁剪 · 未部署（执行侧改由 DSH subagent / teammate 承担）
 - [知识库与记忆分层](docs/knowledge-memory.md)：多源索引、三路混合检索、记忆分层与偏好提炼 · 设计中
 - [IM 采集](docs/im-ingest.md)：主账号只读采集、双账号分工、会话切分与检索参数 · 设计中
 - [提案库](docs/proposals/README.md)：规则与能力的迭代流程
@@ -26,10 +26,12 @@
 
 ## 执行域
 
-- [系统拓扑](docs/system-topology.md)：常驻入口、`agent:local` 本地编排、Worker 执行与 GUI 自动化
-- [`agent:local` 运行时设计](docs/agent-local-runtime.md)：`ar` CLI + daemon + pi Worker 的组件划分与演进路径 · 设计中
-- [Worker 适配器](docs/worker-adapters.md)：pi / Claude Code / Codex 的非交互契约、事件映射、审批差异与路由建议 · 设计中
-- [以 dsh-superagent 作执行侧运行时](docs/superagent-runtime.md)：多 Source 结构、`task` Source 接入方案与 `agent:local` 的取舍 · 设计中
+- 编排与交互由 DSH 承担：会话内用领导模式，工作区级用 SuperAgent；执行由 DSH subagent / teammate 完成（决策见 [ADR 0011](docs/adr/0011-dsh-orchestration.md)）
+- [系统拓扑](docs/system-topology.md)：工作站是唯一执行节点，`ar` 只保留控制面定位 · 部分完成
+- [`ar` 控制面 CLI](docs/agent-local-runtime.md)：0.1.0，19 个动词，无 `list` / `watch` · 未部署
+- [控制面契约](docs/control-plane-api.md)：客户端 ↔ `ar` 的命令面、事件订阅与卡片审批映射 · 未部署
+- [Worker 适配器](docs/worker-adapters.md)：pi / Claude Code / Codex 的非交互契约、事件映射与审批差异 · 未部署（执行侧已由 DSH subagent / teammate 覆盖）
+- [以 dsh-superagent 作执行侧运行时](docs/superagent-runtime.md)：多 Source 结构、`task` Source 接入方案与 `agent:local` 的取舍 · 未验证
 - [多 Agent 协作规范](docs/agent-collaboration.md)：规则共享、协作模式与流水线分工
 - [内容创作流水线](docs/creative-studio.md)：视频、音乐、写作、电子书与播客的统一制作管线 · 设计中
 - [开发与逆向工程](docs/work-devsec.md)：代码开发、固件与软件逆向、游戏构建与设计工具链 · 设计中
@@ -39,14 +41,15 @@
 ## 交互与平台
 
 - [Personal Agent 设计](docs/personal-agent.md)：交互约定、通知模式与记忆分层
-- [生成式 UI 工作台](docs/workbench-ui.md)：Tauri 壳 + UI spec 渲染层；自 [ADR 0009](docs/adr/0009-dsbot-as-control-interface.md) 起降为可选旁路，不再是主界面 · 已降级
-- [控制面契约](docs/control-plane-api.md)：前端 ↔ `ar` 的命令面、事件订阅与卡片审批映射 · 设计中
-- [DS-Bot 入口](docs/ds-bot-entry.md)：常驻控制界面、IM 接入与迁移方案；已按 [ADR 0010](docs/adr/0010-retire-dsbot-native-ui.md) 撤回，保留为选型与接入记录
 - [常驻服务分布](docs/assistant-system.md)：服务部署位置与凭据管理
 - [Super-agent 参考架构](docs/super-agent-architecture.md)：DeepSeek Super-agent 架构摘要与本仓取舍
 - [系统运维](docs/platform-ops.md)：规则挖掘、影子测试、监控告警与备份恢复 · 设计中
 - [模型路由与本地推理](docs/model-fleet.md)：模型注册表、按类路由、降级缓存、16GB 显存分配与置信度校准 · 设计中
 - [路线图（历史）](docs/roadmap.md)：早期 P0–P4 划分，已被总体架构设计 §13 取代
+
+## 研究稿
+
+- [research/ 目录说明](docs/research/README.md)：10 篇（8 份 harness 单家研究稿 + UX 横向合成 + 目录说明），结论给 `file:line` 或官方文档 URL，推断处标「需复核」· 已完成
 
 ## 基础设施
 
@@ -75,8 +78,9 @@
 - [ADR 0006](docs/adr/0006-workstation-windows.md)：工作站改用 Windows 11 原生，放弃 Linux 与 WSL
 - [ADR 0007](docs/adr/0007-deferred-resident-node.md)：常驻入口延后，先单机加云端等待队列
 - [ADR 0008](docs/adr/0008-local-agent-runtime.md)：多 Agent 运行时改用自建 `agent:local`，交互层采用生成式 UI
-- [ADR 0009](docs/adr/0009-dsbot-as-control-interface.md)：交互层改用 DS-Bot 作为控制界面，`ar` 收敛为控制面 API（取代 ADR 0008 交互层部分）
-- [ADR 0010](docs/adr/0010-retire-dsbot-native-ui.md)：撤回 ADR 0009，移除 `ds-bot` 插件，交互层回到 DSH 原生会话
+- [ADR 0009](docs/adr/0009-dsbot-as-control-interface.md)：交互层改为独立控制界面，`ar` 收敛为控制面 API（取代 ADR 0008 交互层部分）· 已被 ADR 0010 撤回
+- [ADR 0010](docs/adr/0010-retire-dsbot-native-ui.md)：撤回 ADR 0009，移除该控制界面插件，交互层回到 DSH 原生会话
+- [ADR 0011](docs/adr/0011-dsh-orchestration.md)：编排与交互归 DSH（会话内领导模式、工作区级 SuperAgent），执行由 DSH subagent / teammate 承担 · 已接受
 
 ## 能力专题
 
@@ -88,4 +92,4 @@
 
 ## 关联仓库
 
-- [`agent-local-runtime`](https://github.com/ShizkMoon/agent-local-runtime)（本机 `C:\Repos\agent-local-runtime`）：`agent:local` 运行时代码（`ar` CLI + daemon + `aica-pi`），设计见 [agent:local 运行时设计](docs/agent-local-runtime.md)；本仓只放设计，代码不入此仓
+- [`agent-local-runtime`](https://github.com/ShizkMoon/agent-local-runtime)（本机 `C:\Repos\agent-local-runtime`）：`ar` 控制面 CLI 与 `aica-pi` 扩展包的源码；本仓只放设计，代码不入此仓。编排与执行已归 DSH，该仓定位为控制面补充，接口见 [控制面契约](docs/control-plane-api.md)

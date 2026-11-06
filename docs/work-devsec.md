@@ -8,7 +8,7 @@
 
 | 工具或资产 | 本机实测状态 |
 |---|---|
-| `ar` CLI（自建 `agent:local` 运行时） | 待实现；命令面对齐原 `orca` CLI：`worktree create|ps`、`agent launch`、`terminal create|wait`、`orchestration run-create|task-create|dispatch|gate-create|check|reply`、`repo add`；过渡期内 `orca` CLI 保留为影子期兜底（[ADR 0008](adr/0008-local-agent-runtime.md)） |
+| `ar` CLI（控制面） | 0.1.0，19 个动词（`run-create`、`dispatch`、`node-create`、`resume`、`spawn`、`check`、`reply`、`gate`、`done`、`fail`、`wait`、`event`、`events`、`fork`、`abort`、`propose`、`cmd`、`daemon`、`version`），无 `list` / `watch`；不承担编排与执行，编排与执行由 DSH 会话内完成（[ADR 0011](adr/0011-dsh-orchestration.md)） |
 | `gh` CLI | 已登录 `ShizkMoon`，具备 `repo`、`workflow`、`gist`、`read:org` 权限 |
 | `claude` / `codex` / `gemini` / `dsh` | 均在 `PATH` 中，可用于跨厂商交叉审阅代码 |
 | `git` + `just` + `%USERPROFILE%\agent-src\tools\` | 可用 |
@@ -28,7 +28,7 @@
 | 阶段 | 阶段名 | 执行动作 | 标准命令 | 产出物 | 对应 `kind` |
 |---|---|---|---|---|---|
 | 1 | 需求定义 | 将需求整理为结构化规格说明（Spec） | `gh issue create --repo <owner>/<r> --title <t>` 或编写 `<repo>/docs/specs/<slug>.md` | Issue 或 Spec 文档 | `work.code.spec` |
-| 2 | 仓库注册 | 已存在仓库直接注册；新项目创建私有仓 | `ar repo add --path C:\Repos\<r> --json`；`gh repo create shizkmoon/<r> --private --source=. --push` | 运行时 Repo ID | `work.code.task` |
+| 2 | 仓库注册 | 已存在仓库直接注册；新项目创建私有仓 | `ar repo add --path C:\Repos\<r> --json`；`gh repo create shizkmoon/<r> --private --source=. --push` | `ar` 分配的 Repo ID | `work.code.task` |
 | 3 | 隔离分支 | 单任务单 Worktree，基于 `origin/main` 创建 | `ar worktree create --repo path:$PWD --name <slug> --base-branch origin/main --agent claude --model <id> --json` | 独立 Worktree 与分支 | `work.code.task` |
 | 4 | 代码实现 | Worker 在独立 Worktree 内编码，不在主工作区直接切换分支 | `ar agent launch --worktree name:<slug> --agent codex --prompt "$(cat docs/specs/<slug>.md)"` | Git Commit | `work.code.task` |
 | 5 | 构建与测试 | 在受控终端内运行测试并等待进程退出码 | `ar terminal create --worktree name:<slug> --command "just check && make build" --json` → `ar terminal wait --terminal <h> --for exit --timeout-ms 1800000 --json` | 终端日志 + 退出码 | `work.code.verify` |
@@ -151,7 +151,7 @@
 | 单向 `git subtree` 同步 | 通过 `git subtree add --prefix <device>-records C:\Repos\<device>-records main --squash` 引入；后续更新一律在源仓提交后执行 `git subtree pull`，不在本仓子树目录内直接修改 |
 | 排除大文件与凭据 | 固件二进制、私钥、订阅链接与包含密码的备份包不入库，仅在 `manifest.json` 中记录 SHA256 校验值 |
 
-### 2.5 逆向任务接入派发器
+### 2.5 逆向任务接入派发规则
 
 ```toml
 [[rule]]

@@ -9,7 +9,7 @@
 ```mermaid
 flowchart TD
   NET["校园网物理网口"] --> RT["AX6000 192.168.31.1<br/>默认网关 + 认证 + mwan3 + OpenClash + Wi-Fi"]
-  RT -->|192.168.31.0/24| WS["工作站 ws<br/>agent:local + 任务库 + evd"]
+  RT -->|192.168.31.0/24| WS["工作站 ws<br/>任务库 + DSH 会话"]
   RT -->|Wi-Fi| DEV["手机 / 墨水屏 / ThinkSensor"]
   RT -.->|出站| TS["Tailnet shizuku.ts"]
   WS --> TS
@@ -81,7 +81,7 @@ users  = ["root", "shizuku"]
 
 ## 5. 外部设备接入方式汇总
 
-各类硬件设备接入系统的统一标准是：**状态变化可转化为 `ev add` 任务，或动作可由派发器执行器调用**。下表第 1 至 4 项依赖常驻主机，随 [ADR 0007](adr/0007-deferred-resident-node.md) 一起延后；其余项在工作站上即可运行。
+各类硬件设备接入系统的统一标准是：**状态变化可转化为 `ev add` 任务，或动作可由派发方经执行器调用**。下表第 1 至 4 项依赖常驻主机，随 [ADR 0007](adr/0007-deferred-resident-node.md) 一起延后；其余项在工作站上即可运行。
 
 | 设备或协议类型 | 协议栈承载方 | 事件接入链路 | 适用设备 | 状态 |
 |---|---|---|---|---|
@@ -92,7 +92,7 @@ users  = ["root", "shizuku"]
 | **USB HID / 串口设备** | Windows 设备通知（`WM_DEVICECHANGE`）+ 守护进程 | 插拔或状态事件 → 守护进程 → `ev add` | 数位板、读卡器、UPS 电源 | 工作站可用 |
 | **Linux 远端主机** | 目标主机 `sshd` | 执行器通过 Tailscale SSH 调用远端命令 | `orca-pool` | 可用 |
 | **局域网新设备发现** | Bonjour / mDNS 扫描（`dnssd` 或 `nmap -sn`） | 定时扫描比对已知列表 → `meta.device.discovered` | 检测新入网设备或 IP 变化 | 工作站可用 |
-| **网络与热敏打印机** | Windows 打印队列 / `python-escpos` | 派发器调用 CLI 打印当日清单 | 热敏小票机、常规打印机 | 工作站可用 |
+| **网络与热敏打印机** | Windows 打印队列 / `python-escpos` | 派发方调用 CLI 打印当日清单 | 热敏小票机、常规打印机 | 工作站可用 |
 | **自定义物联网节点** | Mosquitto MQTT Broker | 设备向 `ev/ingest` 主题发布 JSON 消息 | ESP32 自制节点、OpenEPaperLink AP | 工作站可用 |
 | **本地文件目录监听** | 文件系统监听守护进程（`FileSystemWatcher` / `ReadDirectoryChangesW`） | 指定目录新增文件 → 触发服务执行 `ev add` | 扫描件归档、下载目录、新电子书入库 | 工作站可用 |
 
@@ -107,7 +107,7 @@ users  = ["root", "shizuku"]
 
 ## 7. 出口状态感知与任务挂起恢复
 
-为使派发器感知校园网多出口与透明代理状态，采用「路由器上报状态事件 + 能力声明网络依赖 + 规则表自动挂起恢复」三步机制。
+为使派发方感知校园网多出口与透明代理状态，采用「路由器上报状态事件 + 能力声明网络依赖 + 规则表自动挂起恢复」三步机制。
 
 ### 7.1 路由器侧边沿上报脚本（`/etc/hotplug.d/iface/50-ev-egress`）
 
@@ -136,9 +136,9 @@ on_unmet = "park"             # park | fail | fallback:local
 fallback = { egress = "any", model = "ollama:qwen3-8b" }
 ```
 
-### 7.3 派发器自动挂起与恢复
+### 7.3 挂起与恢复由派发方执行
 
-当某条任务的 `needs` 条件未满足时，派发器将其状态设为 `parked`，并注册监听 `system.net.egress` 事件；待网络恢复后自动解除挂起（`unpark`）并重新派发。Agent 仅读取网络与代理状态，不直接自动重启 AX6000 上的 OpenClash 或修改路由表，以免中断正在进行的网络连接。
+当某条任务的 `needs` 条件未满足时，派发方将其状态设为 `parked`，并注册监听 `system.net.egress` 事件；待网络恢复后自动解除挂起（`unpark`）并重新派发。Agent 仅读取网络与代理状态，不直接自动重启 AX6000 上的 OpenClash 或修改路由表，以免中断正在进行的网络连接。
 
 ## 8. 工作站内存预算
 
@@ -147,8 +147,8 @@ fallback = { egress = "any", model = "ollama:qwen3-8b" }
 | 常驻服务 | 常驻内存（RSS） | 峰值内存 | 备注 |
 |---|---|---|---|
 | Windows 11 基础系统 + OpenSSH Server + `tailscaled` | 2.0 GB | 2.6 GB | 系统底座（含桌面合成与 Defender） |
-| Taskwarrior + `evd` + `events.sqlite3` | 80 MB | 200 MB | 事件消费 |
-| `agent:local` 运行时 + 编排服务 | 600 MB | 1.5 GB | 编排核心 |
+| Taskwarrior + `events.sqlite3` | 80 MB | 200 MB | 任务库与事件线索 |
+| `ar` 控制面与运行目录（设计中、未部署，无常驻进程） | 未估算（原估算对象已废止） | 未估算（原估算对象已废止） | 编排由 DSH 会话承担，执行由 subagent / teammate 承担 |
 | DSH 会话 | 1.2 GB | 3.0 GB | 常驻对话入口 |
 | LiteLLM 网关 | 350 MB | 700 MB | 统一 API 路由与计费 |
 | ntfy（本地实例） | 30 MB | 60 MB | 与云服务器实例二选一 |

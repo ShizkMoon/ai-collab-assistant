@@ -1,15 +1,15 @@
-# 事件运行时与派发器
+# 事件运行时与派发
 
-> 状态：设计中 · 上位文档：[总体架构设计](architecture-north-star.md)、[事件与任务规格](event-spec.md)
+> 状态：未部署 · 上位文档：[总体架构设计](architecture-north-star.md)、[事件与任务规格](event-spec.md)
 >
-> 本文定义九态状态机的流转规则、派发器守护进程（`evd`）的模块结构、幂等重放机制以及运行监控方式。
+> 本文定义九态状态机的流转规则、派发执行路径、幂等重放机制以及运行监控方式。以下协议均为设计内容，尚未部署。
 
 ## 0. 核心架构约束
 
 | 约束项 | 具体规定 | 设计原因 |
 |---|---|---|
 | 单一状态存储 | 任务状态、线索（`thread`）、依赖、重试计数全部使用 Taskwarrior 字段表达，不引入第二个状态数据库 | 避免多数据库之间的状态同步开销 |
-| 派发器唯一写回 | 状态流转统一由常驻守护进程 `evd` 执行；Taskwarrior Hook 仅负责向 Spool 目录追加事件文件，不在 Hook 内回调 `task` 命令 | Taskwarrior Hook 在 `task` 进程内同步执行，若在 Hook 内再次调用 `task` 会导致数据库锁死锁 |
+| 状态写回唯一通道 | 状态流转统一由派发方执行，派发方是会话内的 DSH Agent 或人工；Taskwarrior Hook 仅负责向 Spool 目录追加事件文件，不在 Hook 内回调 `task` 命令 | Taskwarrior Hook 在 `task` 进程内同步执行，若在 Hook 内再次调用 `task` 会导致数据库锁死锁 |
 | 执行器幂等可重入 | 每次派发生成确定性幂等键 `ev_id`，重复调用不得产生重复副作用 | 保障进程崩溃恢复、手动重放与 Hook 重复触发时的安全性 |
 
 ## 1. 规则表
@@ -110,7 +110,7 @@ to    = "triage"           # 归入待分类队列，在每日早报中汇总
 | 抑制记录 | 被抑制时写入一条聚合计数任务 `sys.gate.suppressed`（`wait:1h`），不发送即时推送 |
 | 计数存储原因 | 若通过 `task completed end.after:` 查询历史计数，每次需全表扫描；使用独立 JSON 文件可将限流判断保持在 O(1) |
 
-门控逻辑在守护进程 `evd` 内部执行，不在 Taskwarrior Hook 同步路径上运行。
+门控逻辑在派发路径上执行，不在 Taskwarrior Hook 同步路径上运行。
 
 ## 2. 状态机
 
@@ -118,15 +118,17 @@ to    = "triage"           # 归入待分类队列，在每日早报中汇总
 
 | 状态 | Taskwarrior 字段表达 | 进入条件 | 离开条件 | 写入方 |
 |---|---|---|---|---|
-| `new` | `status:pending`，无 `start` | `ev add` 或外部采集写入 | `evd` 认领派发 | 任意入口 |
-| `doing` | `pending` + `start` | `evd` 执行 `task <id> start`（兼作租约起点） | 执行器返回结果，或超时被标为 `stalled` | `evd` |
+| `new` | `status:pending`，无 `start` | `ev add` 或外部采集写入 | 派发方认领 | 任意入口 |
+| `doing` | `pending` + `start` | 派发方执行 `task <id> start`（兼作租约起点） | 执行器返回结果，或超时被标为 `stalled` | 派发方 |
 | `waiting` | `status:waiting` + `wait:` | 执行器返回 `waiting`、人工选择延后、或处于聚合窗口内 | 到期后由 Taskwarrior 自动转回 `pending` | 任意 |
-| `blocked` | `pending` + `depends:<uuid>` | 拆分子任务（`split`）或存在前置任务依赖 | 前置任务完成后自动解除阻塞 | `evd` |
+| `blocked` | `pending` + `depends:<uuid>` | 拆分子任务（`split`）或存在前置任务依赖 | 前置任务完成后自动解除阻塞 | 派发方 |
 | `escalated` | `pending` + `+me`（可选 `priority:H`） | 执行器返回 `me`，或规则配置 `to = "me"` | 人工点击卡片 `[执行] / [延后] / [忽略]` | 人工 / 卡片 |
-| `failed` | `pending` + `+failed` + `uda.attempts` | 执行器返回 `failed` 或超时重派 | 重试成功后移除 `+failed` 标签 | `evd` |
+| `failed` | `pending` + `+failed` + `uda.attempts` | 执行器返回 `failed` 或超时重派 | 重试成功后移除 `+failed` 标签 | 派发方 |
 | `stalled` | `doing` + `+stalled` | 看门狗检测到 `start.age > 2 × lease` | 人工或自动重置回 `new` | 看门狗 |
 | `spec` | `pending` + `+spec` + `wait:<ttl>` | 预生成草稿或待补充规格说明 | 人工采纳转 `done`；放弃或到期转 `dropped` | 执行器 / 人工 |
-| `parked` | `waiting` + `wait:<远未来>` + `+parked` | 通知模式静音、前置环境依赖（`needs`）未满足、或规则连续失败熔断 | 手动恢复，或收到对应的 `system.*` 恢复事件自动解除 | `evd` |
+| `parked` | `waiting` + `wait:<远未来>` + `+parked` | 通知模式静音、前置环境依赖（`needs`）未满足、或规则连续失败熔断 | 手动恢复，或收到对应的 `system.*` 恢复事件自动解除 | 派发方 |
+
+派发方指会话内的 DSH Agent（领导模式）或人工：任务写进任务库后，在会话里交给 subagent / teammate 执行，完成后用 `ev done` 带执行摘要写回。任务库当前没有自动消费进程，因此表中「自动」的动作均指设计中的行为，未部署。
 
 任务的终态对应 Taskwarrior 原生的 `completed`（即 `done`）与 `deleted`（即 `dropped`）。
 
@@ -162,22 +164,24 @@ stateDiagram-v2
 - **`escalated` 使用 `+me` 标签表达**：等待人工处理的任务本质上仍属于 `pending` 状态，使用标签表达可直接复用 Taskwarrior 内置的报表、同步和过滤能力。
 - **`spec` 附带过期时间（TTL）**：预生成的草稿或待确认规格若在 TTL 内无人处理则自动清理，避免任务库堆积陈旧草稿（与 [总体架构设计 §2](architecture-north-star.md#2-核心数据流) 的草稿层对应）。
 
-## 3. 派发器守护进程（`evd`）
+## 3. 派发执行路径
 
-### 3.1 模块划分
+### 3.1 职责划分
 
-```
-%USERPROFILE%\.local\lib\ev\   # 约 700 行 Python 3.12，仅依赖标准库
-  hook.py       60   on-add / on-modify：将变更写入 Spool 目录并原样回显
-  rules.py     120   加载 TOML、预编译通配符、规则匹配、聚合窗口处理
-  gates.py      50   cooldown / rate / window 限流控制
-  daemon.py    220   Spool 消费循环、并发通道（Lane）调度、租约管理、写回 Taskwarrior
-  executors.py 180   local / ha / cli / n8n / notify / me / triage 执行器适配
-  status.py    120   ev status 与 ev doctor 终端状态输出
-  __main__.py   80   CLI 入口
-```
+派发的执行主体是会话内的 DSH Agent（领导模式）或人工，不是常驻进程。职责划分如下，文件与目录尚未确定，实现未开始：
 
-派发器以单进程 Windows 服务 `evd`（WinSW 包装，失败自动重启）运行。任务库与 `evd` 均部署在工作站本地：工作站休眠期间外部事件在云服务器的等待队列中暂存，云服务器离线只影响外部输入，不影响工作站本地任务流转（见 [网络与设备组网 §4](network-fabric.md#4-节点失效影响与恢复阶梯)）。进程间队列直接采用本地 Spool 目录配合独占文件句柄锁（`msvcrt.locking` / 独占打开）实现。
+| 模块 | 职责 |
+|---|---|
+| `hook.py` | `on-add` / `on-modify`：将变更写入 Spool 目录并原样回显 |
+| `rules.py` | 加载 TOML、预编译通配符、规则匹配、聚合窗口处理 |
+| `gates.py` | `cooldown` / `rate` / `window` 限流控制 |
+| `executors.py` | local / ha / cli / n8n / notify / me / triage 执行器适配 |
+| `status.py` | `ev status` 与 `ev doctor` 终端状态输出 |
+| `__main__.py` | CLI 入口 |
+
+一次派发在会话里按下述顺序完成：读取 `spool/` 中的待处理记录，按规则表匹配，检查 `thread` 锁与并发配额，把任务交给 subagent / teammate 执行，收到结果后写回任务库并落盘 `runs/<ev_id>.json`。并发通道（Lane）配额与租约检查目前由人工在会话里判断，看门狗巡检由任务计划程序定期运行无状态脚本（见 §5.2）。
+
+任务库部署在工作站本地：工作站休眠期间外部事件在云服务器的等待队列中暂存，云服务器离线只影响外部输入，不影响工作站本地任务流转（见 [网络与设备组网 §4](network-fabric.md#4-节点失效影响与恢复阶梯)）。进程间队列直接采用本地 Spool 目录配合独占文件句柄锁（`msvcrt.locking` / 独占打开）实现。
 
 ### 3.2 Hook 规范
 
@@ -207,7 +211,7 @@ def on_modify():
 
 | 记录阶段 | 存储位置 | 写入时机 |
 |---|---|---|
-| 待处理输入 | `spool/<ev_id>.json`（原始任务 JSON + 命中规则名 + 规则文件哈希） | 守护进程消费前 |
+| 待处理输入 | `spool/<ev_id>.json`（原始任务 JSON + 命中规则名 + 规则文件哈希） | 派发前 |
 | 执行器输出 | `runs/<ev_id>.json`（返回状态、执行摘要、退出码、stderr 尾部 4KB） | 执行器返回后，**先于** Taskwarrior 写回 |
 | 任务库归档 | Taskwarrior 任务注解 `ev:<ev_id>` | 状态写回任务库时 |
 
@@ -233,23 +237,23 @@ def on_modify():
 {"status":"spec",   "summary":"已生成初稿，等待审阅确认","ttl":"24h"}
 ```
 
-当返回 `failed` 时，`evd` 自动追加失败原因注解并更新 `attempts += 1` 与 `+failed` 标签；当 `attempts >= 3` 时自动升级为 `escalated`（`+me`）交由人工处理。
+当返回 `failed` 时，派发方自动追加失败原因注解并更新 `attempts += 1` 与 `+failed` 标签；当 `attempts >= 3` 时自动升级为 `escalated`（`+me`）交由人工处理。
 
 ### 3.5 长耗时异步任务
 
-- 路由至 `to = "agent:local"` 的任务采用**异步投递模式**：`evd` 创建 `agent:local` Run（`runs/<root_id>/`）并将 `root_id` 写入任务注解后立即返回，任务状态保持为 `doing`。
-- Worker 执行完毕后主动调用 `ev done <id> "<执行摘要>"` 或 `ev fail` 写回状态，`evd` 无需轮询运行时。
+- 路由至 `to = "agent:local"` 的任务采用**异步投递模式**：派发方在会话里把任务交给 subagent / teammate 执行，并把运行标识写入任务注解后立即返回，任务状态保持为 `doing`。设计中的运行目录为 `runs/<root_id>/`，未部署。
+- Worker 执行完毕后主动调用 `ev done <id> "<执行摘要>"` 或 `ev fail` 写回状态；任务库没有自动消费进程，因此不存在轮询。
 - **租约监控**：任务处于 `doing` 状态的时长超过 `2 × lease` 时，看门狗为其添加 `+stalled` 标签并发出告警，不强行中断可能仍在运行的 Worker。
-- **动态续租**：执行器可输出 `{"status":"doing","lease_next":"20m"}` 延长租约，`evd` 收到后刷新租约时间戳。
+- **动态续租**：执行器可输出 `{"status":"doing","lease_next":"20m"}` 延长租约，派发方收到后刷新租约时间戳。
 
 ## 4. 并发控制与顺序保证
 
 | 场景 | 实现机制 |
 |---|---|
-| 同 `thread` 内部串行 | 维护 `thread → asyncio.Lock` 映射表；`evd` 派发前先获取对应 `thread` 锁，不同 `thread` 之间完全并行 |
+| 同 `thread` 内部串行 | 维护 `thread → 锁` 映射表（设计用 `asyncio.Lock`）；派发前先获取对应 `thread` 锁，不同 `thread` 之间完全并行 |
 | 跨 `thread` 并发配额 | 全局并发上限 `lane_parallel`（默认 4），其中批处理通道（`batch` lane）独立配额（默认 2） |
 | Taskwarrior 文件锁竞争 | Taskwarrior 3 写入时锁定数据目录；所有写操作统一经过 `tw()` 包装函数，配合文件锁与最多 4 次指数退避重试 |
-| 人工直接执行 `task` 命令 | 允许人工直接操作 CLI；`on-modify` Hook 将变更写入 Spool，`evd` 读取后同步内部状态而不覆盖人工修改 |
+| 人工直接执行 `task` 命令 | 允许人工直接操作 CLI；`on-modify` Hook 将变更写入 Spool，派发方读取后同步内部状态而不覆盖人工修改 |
 | 乱序事件处理 | 同一 `thread` 内的任务按创建时间 `entry` 排序；若外部信号携带时间戳 `signal.t`，丢弃晚到的旧状态信号 |
 
 ```python
@@ -335,4 +339,4 @@ report.faults.sort=modified-
 | 并发控制 | Python `asyncio` + 按 `thread` 加锁 | 并发上限为 4，无需引入 Celery / Prefect |
 | 状态观测 | Taskwarrior 自定义报表 + 任务计划程序 | 命令行可查，无需单独为任务队列维护监控大盘 |
 | 状态机表达 | Taskwarrior 原生 `status`、`tags` 与 `depends` | 保持单一数据源 |
-| **自建部分** | 规则匹配、幂等控制与执行器适配层（`ev` / `evd`） | 需对接本机 `agent:local` 运行时、Home Assistant 与自定义 CLI，整体约 700 行 Python |
+| **自建部分** | 规则匹配、幂等控制与执行器适配层（`ev` CLI 与派发流程） | 需对接本机 DSH subagent / teammate、Home Assistant 与自定义 CLI；派发由会话内 Agent 或人工发起，未开始 |

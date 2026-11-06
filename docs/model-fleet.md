@@ -150,7 +150,7 @@ $fs = [IO.File]::Open($lease, 'OpenOrCreate', 'ReadWrite', 'None')  # 拿不到�
 try { <启动 Provider> } finally { $fs.Dispose() }
 ```
 
-租约等待 120 秒仍拿不到的，Provider 以退出码 75 结束（`EX_TEMPFAIL`），派发器收到后自动延后重试。常驻 vLLM 由 WinSW 包装为 Windows 服务，等价于：
+租约等待 120 秒仍拿不到的，Provider 以退出码 75 结束（`EX_TEMPFAIL`），派发方收到后自动延后重试。常驻 vLLM 由 WinSW 包装为 Windows 服务，等价于：
 
 ```xml
 <!-- %ProgramData%\aica\units\vllm.xml（WinSW） -->

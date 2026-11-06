@@ -319,7 +319,7 @@ presence     = "ac"            # ac | always | manual
 | `opened` | 用户打开或播放 | 更新 `affinity` 证据 |
 | `dismissed` | 用户关掉提醒 | 抑制重复提醒 |
 
-去重键固定为 `uuid5(task_id, route_revision, attempt)`，与派发器的 `ev_id` 同构。在云端等待队列与工作站之间重放时，重复投递是常态，必须默认会发生。
+去重键固定为 `uuid5(task_id, route_revision, attempt)`，与派发方的 `ev_id` 同构。在云端等待队列与工作站之间重放时，重复投递是常态，必须默认会发生。
 
 失效处理按 effect 分派：
 

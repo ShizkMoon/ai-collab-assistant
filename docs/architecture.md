@@ -1,24 +1,27 @@
 # 架构总览
 
-> 状态：设计中（S0 未实现）· 设计取向见 [设计原则](principles.md)：功能优先、开源复用
+> 状态：部分完成 —— 任务库与 DSH 交互面已就绪，`ar` 运行目录未部署 · 设计取向见 [设计原则](principles.md)：功能优先、开源复用
 
 ## 0. 核心流程
 
-**自然语言输入或外部事件触发 → 入口解析意图并匹配 `kind` → 派发器按规则路由给执行器 → 执行器完成后写回一句话执行摘要并通知用户。** 能力、硬件设备与显示端均可按需增删替换。
+**自然语言输入或外部事件触发 → 入口解析意图并匹配 `kind` → 编排方按 `kind` 选定执行体 → 执行体完成后写回一句话执行摘要并通知用户。** 能力、硬件设备与显示端均可按需增删替换。
 
-## 1. 五层架构与三类确认点
+编排与交互由 DSH 承担：会话内是「领导模式」，工作区与实例级是 SuperAgent。执行由 DSH subagent / teammate 完成。`ar` 是控制面 CLI，负责建 Run、查状态、收发消息与读事件，不承担编排与执行。
+
+## 1. 分层架构与三类确认点
 
 | 层级 | 核心职责 | 包含内容 | 演进特征 | 专题文档 |
 |---|---|---|---|---|
+| **交互与编排层** | 接住输入、拆解任务、委派执行、汇总结果 | DSH 会话；会话内「领导模式」；工作区与实例级 SuperAgent；审批与前端（`dsh-user-approval`、`dsh-permission-presets`、`dsh-client-ui-*`、`dsh-experimental-agent-team`） | 复用 DSH 一方包，不自建 | [Personal Agent 设计](personal-agent.md)、[控制面契约](control-plane-api.md) |
 | **能力层** | 声明系统能处理哪些事务 | 视频制作、配乐生成、长文写作、账单整理、家居场景等 | 开放集合，按需扩充 | [能力目录](capabilities.md) |
 | **状态层** | 追踪任务所处阶段 | 九种状态：`new` / `doing` / `waiting` / `blocked` / `escalated` / `failed` / `stalled` / `spec` / `parked` | 封闭状态机 | [事件与任务规格](event-spec.md) |
-| **执行层** | 具体调用什么工具完成任务 | `agent:local` Worker、CLI 工具、HA 服务调用、浏览器与 GUI 自动化 | 底层实现可随时替换 | [系统拓扑](system-topology.md)、[本机工具链选型](local-toolchain.md) |
+| **执行层** | 具体调用什么工具完成任务 | DSH subagent / teammate、CLI 工具、HA 服务调用、浏览器与 GUI 自动化 | 底层实现可随时替换 | [系统拓扑](system-topology.md)、[本机工具链选型](local-toolchain.md) |
 | **设施层** | 算力、网络与硬件运行环境 | 工作站、AX6000、手机、墨水屏、各类传感器 | 物理设备 + 快照与包管理 | [工作站配置](workstation-windows.md)、[智能家居技术栈](home-automation-stack.md) |
 | **知识层** | 检索历史任务与个人文档 | 任务记录、笔记、会话记录、命令历史的混合检索库 | 可从源数据重建 | [知识库与记忆分层](knowledge-memory.md) |
 
-**人工确认点**固定为三类：**付款、删除、对外发布**（[ADR 0002](adr/0002-three-confirmation-points.md)）。其余操作默认直接执行；可逆操作配备默认 5 分钟的撤销窗口，窗口期内可一键回退。
+**人工确认点**固定为三类：**付款、删除、对外发布**（[ADR 0002](adr/0002-three-confirmation-points.md)）。其余操作默认直接执行；可逆操作配备默认 5 分钟的撤销窗口，窗口期内可一键回退。会话内的审批与权限档由 DSH 的 `dsh-user-approval` 与 `dsh-permission-presets` 承担，本仓不另建策略引擎。
 
-状态机采用九态模型（`new` / `doing` / `waiting` / `blocked` / `escalated` / `failed` / `stalled` / `spec` / `parked`），与 Taskwarrior 字段的具体映射见 [事件与任务规格 §2](event-spec.md#2-任务状态) 和 [事件运行时与派发器 §2](event-runtime.md#2-状态机)。完整闭环设计见 [总体架构设计](architecture-north-star.md)。
+状态机采用九态模型（`new` / `doing` / `waiting` / `blocked` / `escalated` / `failed` / `stalled` / `spec` / `parked`），与 Taskwarrior 字段的具体映射见 [事件与任务规格 §2](event-spec.md#2-任务状态) 和 [事件运行时与派发 §2](event-runtime.md#2-状态机)。完整闭环设计见 [总体架构设计](architecture-north-star.md)。
 
 ## 2. 意图分类与结构化路由
 
@@ -28,28 +31,33 @@ flowchart LR
   I2["机器事件（HA / 定时 / CI / Webhook）"] --> M["直接映射"]
   CL --> K["kind + 参数"]
   M --> K
-  K --> ST["状态流转"] --> EX["执行器"] --> SM["执行摘要"]
+  K --> ST["状态流转"] --> EX["执行体"] --> SM["执行摘要"]
   SM --> OUT["投递路由"] --> U["用户"]
 ```
 
-- **受限意图分类**：入口 Agent 从 [能力目录](capabilities.md) 的候选集中选择匹配的 `kind`，提取结构化参数并输出置信度。高置信度直接派发执行，中等置信度向用户追问确认，低置信度归入待分类队列（`meta.triage.pending`）。
+- **受限意图分类**：入口从 [能力目录](capabilities.md) 的候选集中选择匹配的 `kind`，提取结构化参数并输出置信度。高置信度直接交给编排方派发，中等置信度向用户追问确认，低置信度归入待分类队列（`meta.triage.pending`）。
 - **统一分类接口** `decide(state, schema) → {字段: 概率}`，底层推理后端可按需切换：
   - 工作站 GPU：本地常驻 7–9B 模型（vLLM / Ollama）配合受限解码（XGrammar / GBNF）；
   - 云服务器 CPU：中文小型 Embedding 模型 + SetFit 少样本分类器，在工作站休眠时提供兜底分类；
   - 云端 API：DeepSeek / Qwen，处理长上下文或复杂长尾输入。
   - 三类后端统一通过 [LiteLLM](open-source-reuse.md#3-模型路由与知识检索) 网关调用，由网关管理路由与故障回退。
-- **任务记录即训练样本**：用户每次在卡片上确认或修正分类结果，都会作为带标签样本存入本地库，用于定期更新分类器与置信度阈值。
-- **调用开销**：机器事件按确定性规则直接映射，不调用模型；自然语言输入每条仅在入口分类一次，主要算力消耗集中在后续 Worker 执行阶段。
+- **任务记录即训练样本**：用户每次确认或修正分类结果，都会作为带标签样本存入本地库，用于定期更新分类器与置信度阈值。
+- **调用开销**：机器事件按确定性规则直接映射，不调用模型；自然语言输入每条仅在入口分类一次，主要算力消耗集中在后续执行阶段。
+
+分类本身是一次模型调用，不是常驻服务：会话内的分类由 DSH 的模型调用完成，机器事件走确定性映射，两条路都不需要额外进程。
 
 ## 3. 状态存储：复用 Taskwarrior 与 Home Assistant
 
 | 数据类别 | 存储组件 | 选型原因 |
 |---|---|---|
-| 任务状态与生命周期 | **Taskwarrior 3**（`taskchampion.sqlite3`） | 原生支持延迟唤醒（`wait`）、截止时间（`due`）、周期任务（`recur`）、注解、自定义字段（UDA）、Hook 与多端同步 |
+| 任务状态与生命周期 | **Taskwarrior 3.5.0**（`taskchampion.sqlite3`） | 原生支持延迟唤醒（`wait`）、截止时间（`due`）、周期任务（`recur`）、注解、自定义字段（UDA）、Hook 与多端同步 |
 | 传感器高频状态与原始事件 | **Home Assistant Recorder** | 温湿度、功率等高频时序数据留在 HA，仅需跟进处理的事件才转化为 Taskwarrior 任务 |
-| Agent 执行上下文与过程 | **`agent:local` 运行时**（`runs/` 运行目录 / 节点） | 管理 Worker 的代码分支、终端会话与中间产物（[ADR 0008](adr/0008-local-agent-runtime.md)） |
+| Run 状态与执行过程 | **`ar` 运行目录**（`runs/<root_id>/` 信封 + 产物） | 管理节点树、派发信封与中间产物（[多 Agent 运行时](multi-agent-runtime.md)）；设计中，未部署 |
+| 会话与子智能体过程 | **DSH 会话存储** | 由 DSH 管理，不作为系统事实源，重连后按运行目录续读 |
 
-核心自建组件是一个轻量级**派发器（`evd`）**：Taskwarrior Hook 仅负责将变更事件追加写入本地 Spool 目录（耗时 < 5ms，异常直接放行），由常驻守护进程异步读取并按规则表派发给对应执行器。详细字段定义见 [事件与任务规格](event-spec.md)，运行机制见 [事件运行时与派发器](event-runtime.md)。
+系统不设常驻派发进程。任务库由人或 Agent 通过 `ev` / `task` 手动读写，当前没有任何进程自动消费它；状态迁移由编排方在派发与回收结果时显式写库，因此每一次状态变化都能追到具体的会话或命令。
+
+`ar` 是控制面 CLI（0.1.0，19 个动词：`run-create`、`dispatch`、`node-create`、`resume`、`spawn`、`check`、`reply`、`gate`、`done`、`fail`、`wait`、`event`、`events`、`fork`、`abort`、`propose`、`cmd`、`daemon`、`version`，无 `list` / `watch`）。`ar daemon` 以 `daemon.pid` 与 `runs/index.jsonl` 组成文件队列，不监听 TCP。字段定义见 [事件与任务规格](event-spec.md)，命令面见 [控制面契约](control-plane-api.md)。
 
 ## 4. 规则表：按序匹配的路由配置
 
@@ -58,7 +66,7 @@ flowchart LR
 name  = "video.make"
 order = 50
 match = { kind = "work.video.*" }
-to    = "agent:local"         # 派发给 agent:local Worker
+to    = "agent:local"        # 控制面 + 运行目录；当前由 DSH 子智能体执行
 
 [[rule]]
 name  = "home.device"
@@ -81,15 +89,17 @@ match = { kind = "life.doc.renew" }
 to    = "notify"             # 到期提醒
 ```
 
-规则按 `order` 升序匹配，首个命中即生效；未命中任何规则的任务归入待分类队列（`meta.triage.pending`），在每日早报中汇总提示。规则同时支持 `aggregate`（聚合）、`cooldown`（冷却时间）、`rate`（频率限制）与 `window`（执行时间窗）四类流量控制，完整语法见 [事件运行时与派发器 §1](event-runtime.md#1-规则表)。
+规则按 `order` 升序匹配，首个命中即生效；未命中任何规则的任务归入待分类队列（`meta.triage.pending`），在每日早报中汇总提示。规则同时支持 `aggregate`（聚合）、`cooldown`（冷却时间）、`rate`（频率限制）与 `window`（执行时间窗）四类流量控制，完整语法见 [事件运行时与派发 §1](event-runtime.md#1-规则表)。
 
-设备级本地闭环与安全兜底逻辑直接使用 **Home Assistant Automation** 实现，不在派发器规则表中重复维护。
+规则表是路由声明，当前没有进程自动消费它：编排方按需查阅后决定派给谁，人也可以直接跳过规则表手动派发。
+
+设备级本地闭环与安全兜底逻辑直接使用 **Home Assistant Automation** 实现，不在规则表中重复维护。
 
 ## 5. 执行器列表
 
 | 执行器标识 | 适用场景 | 底层复用工具 |
 |---|---|---|
-| `agent:local` | 多步复杂任务：代码开发、文档编写、视频剪辑、长文写作 | 自建运行时 `ar` + 成熟 CLI Agent Worker（Pi / Codex / Claude Code，见 [Worker 适配器](worker-adapters.md)）；对外命令面即控制面（[ADR 0009](adr/0009-dsbot-as-control-interface.md)） |
+| `agent:local` | 多步复杂任务：代码开发、文档编写、视频剪辑、长文写作 | 控制面契约（`ar` 命令子集）+ 运行目录协议（设计中、未部署）；当前实际执行面为 DSH subagent / teammate，worker 适配由 `dsh-subagent-claude-code` 与 `dsh-subagent-codex` 提供 |
 | `ha:*` | 智能家居设备控制、HA 脚本调用 | Home Assistant REST / 服务调用 |
 | `cli:*` | 单次确定性命令执行 | 现成 CLI 工具（`ffmpeg`、`calibre`、`double-entry-generator` 等） |
 | `n8n:*` | 外部 SaaS 与 Webhook 编排 | n8n 工作流（Webhook、IMAP 邮件、RSS） |
@@ -98,7 +108,7 @@ to    = "notify"             # 到期提醒
 | `me` | 需人工确认或亲自处理的事项 | 交互卡片：`[执行] [延后] [忽略]` |
 | `render` | 触发显示端画面刷新 | [多端显示仲裁](surface-arbiter.md) |
 
-各执行器统一输出七种返回状态：`done`、`waiting`、`me`、`blocked`、`failed`、`split`、`spec`，由派发器映射为任务库中的九种状态。耗时任务采用异步投递加租约机制，不阻塞派发器主循环。
+各执行体统一输出七种返回状态：`done`、`waiting`、`me`、`blocked`、`failed`、`split`、`spec`，由编排方映射为任务库中的九种状态（九态定义见 [事件运行时与派发 §2](event-runtime.md#2-状态机)）。耗时任务由子智能体异步执行，编排方按需 `ar check` 或直接读结果，不阻塞会话。
 
 ## 6. 显示端分配
 

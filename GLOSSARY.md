@@ -1,15 +1,15 @@
 # 术语表（Glossary）
 
-本仓库是个人 AI 协作与助理系统的设计文档集。所有设计文档、配置文件和规则统一使用以下术语。
+本仓库是个人 AI 协作与助理系统的设计文档集。所有设计文档、配置文件和规则统一使用以下术语。本文件是全仓术语的权威源，`docs/capabilities.md` 的 `kind` 取值以本文件定义为准。
 
 ## 核心对象
 
 **任务（Task）**：
-Taskwarrior 中的一条记录，包含 `kind`、状态和执行摘要，是系统中追踪生命周期的基本单元。
-_避免_：事项、工单（与运行时节点并列时写明"节点"）
+Taskwarrior 中的一条记录，包含 `kind`、状态和执行摘要，是系统中追踪生命周期的基本单元。统一用「任务」，不用「工单」「Ticket」。
+_避免_：事项、工单、Ticket
 
 **任务库（Task Store）**：
-Taskwarrior 3 的 `taskchampion.sqlite3` 数据库，作为全系统任务状态的唯一数据源（Single Source of Truth）。
+Taskwarrior 3 的 `taskchampion.sqlite3` 数据库，作为全系统任务状态的唯一数据源（Single Source of Truth）；当前由人工与 Agent 通过 `task` / `ev` 手动读写，无自动消费进程。
 _避免_：账、事项账、待办列表（避免与 Beancount 财务记账混淆）
 
 **`kind`**：
@@ -25,15 +25,19 @@ _避免_：插件（能力是声明，具体实现是 Provider）
 _避免_：提供者
 
 **执行器（Executor）**：
-实际执行任务的后端：`agent:local`、`ha:*`、`cli:*`、`n8n:*`、`notify`、`me`。
-`agent:local` 为自建运行时（`ar` CLI + `runs/` 运行目录），见 [ADR 0008](docs/adr/0008-local-agent-runtime.md)；其对外命令面即系统控制面，见 [控制面契约](docs/control-plane-api.md)。客户端不绑定具体前端，见 [ADR 0010](docs/adr/0010-retire-dsbot-native-ui.md)。
+任务实际执行的后端取值：`agent:local`、`ha:*`、`cli:*`、`n8n:*`、`notify`、`me`。
+`agent:local` 指控制面契约（`ar` CLI 的命令子集）加运行目录协议（`runs/<root_id>/`），设计中、未部署，见 [ADR 0008](docs/adr/0008-local-agent-runtime.md) 与 [控制面契约](docs/control-plane-api.md)。当前实际执行面是 DSH 会话内的 subagent 与 teammate。
 _避免_：执行者、处理器
 
 **Worker**：
-`agent:local` 内部派发执行具体子任务的最小 Agent 单元，只向协调方汇报结果。底层为成熟 CLI Agent（Pi / DSH agent loop / Codex / Claude Code），契约见 [Worker 适配器](docs/worker-adapters.md)。
+`agent:local` 内部派发执行具体子任务的最小 Agent 单元，只向编排者汇报结果。底层为成熟 CLI Agent（Pi / DSH agent loop / Codex / Claude Code），契约见 [Worker 适配器](docs/worker-adapters.md)。
+
+**编排者（Orchestrator）**：
+派发子节点、汇总结果的顶层 Agent，工具面只有「写 `spec.json`」与「读 `result.json`」，没有 shell、文件写与网络，因此无法自己动手做完子任务。取代旧称「协调方」。
+_避免_：协调方、主 Agent、调度 Agent
 
 **节点（Node）**：
-多 Agent 运行时中一次派发的单位，以运行目录 `runs/<root_id>/nodes/<path>/` 标识，派发前写入派发信封，完成后写入结果信封。
+多 Agent 运行时中一次派发的单位，以 `runs/<root_id>/nodes/<path>/` 标识，派发前写入派发信封，完成后写入结果信封。
 _避免_：子 Agent、子会话
 
 **归属（Parent）**：
@@ -42,8 +46,12 @@ _避免_：子 Agent、子会话
 **依赖（Depends）**：
 节点开始执行所需的前置节点集合，可以有多个且构成有向无环图；与归属分开存放。
 
+**DAG（有向无环图）**：
+由 `depends` 连成的执行依赖图，边表示「先完成才能开始」，不允许成环。归属是一棵树，依赖是一张图，两者分开存放，见上文「依赖」与「归属」条目。
+_避免_：流程图、任务树（树指归属）
+
 **派发信封（Dispatch Envelope）**：
-派发节点时写入 `spec.json` 的结构化任务说明，包含归属、依赖、模式、输入引用、验收条件与预算。
+派发节点时写入 `spec.json` 的结构化任务说明，包含归属、依赖、模式、输入引用、验收条件与预算；即「任务说明」的落盘形态。
 
 **结果信封（Result Envelope）**：
 节点完成后写入 `result.json` 的结构化结果，包含状态、摘要、产物引用、检查记录与实际消耗。
@@ -86,7 +94,9 @@ _避免_：话题、会话
 将原始触发信号转化为 Taskwarrior 任务记录的过程。
 
 **状态（State）**：
-任务在任务库中的九种取值，定义见 [事件运行时与派发器](docs/event-runtime.md#2-状态机)。
+任务在任务库中的九种取值：`new`、`doing`、`waiting`、`blocked`、`escalated`、`failed`、`stalled`、`spec`、`parked`，定义见 [事件运行时 §2](docs/event-runtime.md#2-状态机)。
+九态描述任务在库中的位置；执行器返回的是七种完成码（`done`、`waiting`、`me`、`blocked`、`failed`、`split`、`spec`），由派发方转换为九态之一。两者层级不同，不能互相替代。
+_避免_：把完成码当作任务状态，或反之
 
 **草稿（Draft）**：
 会话中尚未确认是否执行的半成品想法或预生成结果；带有 24 小时 TTL，过期自动清理，不污染正式任务库。
@@ -100,16 +110,15 @@ _避免_：落定
 _避免_：回执
 
 **任务说明（Task Spec / Brief）**：
-派发给执行器的结构化上下文：目标、输入路径与验收条件。
+派发给执行器的结构化上下文：目标、输入路径与验收条件。落盘形态即「派发信封」（`spec.json`），两者是同一件事的两个视角。
 _避免_：任务简报、任务书
 
 **派发（Dispatch）**：
-按规则表将任务路由给对应执行器的动作。
-_避免_：分派
+按规则表把任务路由给对应执行器的动作。当前没有自动派发进程：派发由会话内 Agent（领导模式）或人工手动发起，经 `ev` / `task` 写入任务库，再在 DSH 会话内交给 subagent 或 teammate 执行。
+_避免_：分派、派发器、编排引擎
 
-**派发器（Dispatcher）**：
-连接 Taskwarrior 与各执行器的常驻守护进程（`evd`）：读取任务 `kind`、匹配规则表、调用执行器并将结果写回任务库。
-_避免_：分派器、编排引擎
+**幂等 / 幂等键（Idempotency / `ev_id`）**：
+同一任务在同一规则下的同一次尝试只产生一次副作用。键为 `ev_id = uuid5(task.uuid, rule.name, attempt)`，公式见 `docs/event-spec.md:74`。重放、崩溃恢复与 Hook 重复触发都靠它去重。
 
 **规则（Rule）**：
 TOML 规则表中的一条 `match → to` 路由绑定，按优先级顺序匹配，首个命中生效。
@@ -132,11 +141,34 @@ _避免_：自主级别
 ## 执行环境
 
 **控制面（Control Plane）**：
-驱动与观察 Run 的对外契约面：`ar` CLI 的命令子集（建、查、说、读、列、订阅）加 `events.jsonl` 事件流。前端（DSH 会话、工作台、手机端）都是控制面的客户端，不持有 Run 状态，见 [控制面契约](docs/control-plane-api.md)。
+驱动与观察 Run 的对外契约面：`ar` CLI 的命令子集（建、查、说、读；`list` / `watch` 计划中未实现）加 `events.jsonl` 事件流，设计中、未部署，见 [控制面契约](docs/control-plane-api.md)。客户端（DSH 会话、手机端等）都是控制面的调用方，不持有 Run 状态。
+用词约定：本仓说「运行时」时若指 `ar`，一律写「控制面 CLI」；`ar` 不承担编排与执行。
 _避免_：管理后台、控制台 UI（那是客户端，不是控制面）
 
+**Run**：
+一次派发树及其运行目录 `runs/<root_id>/`：根目录放 `plan.v<k>.json` 与 `index.jsonl`，节点目录 `nodes/<path>/` 放 `spec.json`、`result.json`、`stdout.log`、`events.jsonl`，产物归 `artifacts/`。状态权威在磁盘，客户端只缓存摘要；目录可重建、可备份、可审计。设计中、未部署。
+
+**会话（Session）**：
+DSH 中的一次交互上下文，也是编排与执行的交互单元：领导模式在会话内派发 subagent 与 teammate。会话不是事实源，跨设备、跨时间存在的状态必须能从任务库与 `runs/` 重建。
+_避免_：把会话当状态存储（浏览器标签页见「Space」）
+
+**daemon（`ar daemon`）**：
+消费运行目录中派发意图、拉起与回收 Worker 进程的用户会话进程：`daemon.pid` 做单实例心跳，经 `runs/index.jsonl` 文件队列取任务，不监听 TCP 端口，不做路由决策、不写任务库。设计中、未部署。
+_避免_：服务端、后台服务
+
+**租约 / lease**：
+执行器持有某任务执行权的时间片，默认 30 分钟，执行器可续租（`lease_next`）。超期不修改任务内容，只作为看门狗判定 `stalled` 的依据。
+
+**看门狗（Watchdog）**：
+按固定间隔运行的无状态巡检脚本（每 5 分钟），检查任务执行超时（`start.age > 2 × lease`）、同类规则连续失败、事件源静默与队列积压，把异常写成 `system.*` 任务。它不是常驻 Agent 会话。
+_避免_：监控大盘、巡检 Agent
+
+**Spool**：
+任务库变更的落地队列目录：`task` Hook 把 `on-add` / `on-modify` 的原始 JSON 追加为 `spool/<ev_id>.json` 后立即返回（Fail-open，p99 < 5ms），消费方另行异步处理。Hook 内禁止回调 `task`、发起网络请求或拉起子进程。
+
 **Space（浏览器工作区）**：
-ego(lite) 中存放某个 Agent 任务标签页的隔离空间，不切换用户当前标签页、不抢焦点；同一浏览器可并行多个 Space，任务结束后可保留或关闭。_避免_：会话（会话指 Agent 上下文，不是浏览器标签页）
+ego(lite) 中存放某个 Agent 任务标签页的隔离空间，不切换用户当前标签页、不抢焦点；同一浏览器可并行多个 Space，任务结束后可保留或关闭。
+_避免_：会话（会话指 DSH 交互单元，不是浏览器标签页）
 
 ## 显示与通知
 

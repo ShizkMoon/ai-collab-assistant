@@ -415,3 +415,10 @@ cd C:\Users\Administrator\ego\research\codex
 git grep -n "pub enum AskForApproval" -- codex-rs
 git grep -n "GuardianAssessmentAction" -- codex-rs/protocol/src/approvals.rs
 ```
+
+## 落点
+
+- **采用**：这是九篇里被正文引用得最密的一篇，[Worker 适配器](../worker-adapters.md) 有一整张字段映射表就是它的结构。具体三条：`command_execution.status = declined`（`exec_events.rs:150-157`）落成 §4.2-2 的「拒绝 ≠ 失败」；沙箱三档（`ReadOnly` 为默认）落成 §4.2 的 tier 映射表；`--json` 的线程事件与 9 类 item 落成 §3.2 的逐字段对照表。`--output-schema` 还决定了 §6 的选用口径：要机器可校验产物的节点用 Codex。
+- **搁置**：A1 `always_ask`、A2 审批卡的 `opts[]`、A4 grants 用命令前缀、A10 guardian 三元组、A12 `fs_scope` 的落点是 `gate.ts` 与 `index.html`，随自建运行时废止而停摆。14 事件 hook 面、`granular` 的五个类别、`Stdin` 写入审批本来就不抄。
+- **影响判断**：支持复用。Codex 是可被适配器接走的 worker，也是「协议稳定」的正面样本：事件契约能导出 TypeScript 类型，适配器才写得出来；`declined` 这种显式拒绝信号只有它有，「拒绝 ≠ 失败」这条口径因此只能落在这家身上。
+- **时效**：`93b4e5b`（2026-11-04）。§0 记着官方站点对本机返回 403，Codex 一栏以上游源码为据，而源码路径全是 `main` 分支、没锁 commit——[Worker 适配器 §2.1](../worker-adapters.md) 也注明了「待锁定版本后补 commit hash」。复查时点：装好 `codex` 后锁版本重核，并把 `-s` 与 `approval_policy` 的默认值实测一遍。

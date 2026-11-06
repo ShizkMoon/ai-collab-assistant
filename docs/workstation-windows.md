@@ -82,7 +82,7 @@
 | 桌面组件 | 集成用途 |
 |---|---|
 | **PowerToys Run** | `Alt+Space` 呼出输入框直接执行 `ev add` 录入任务，替代 KRunner |
-| **任务栏固定项 + 托盘** | 常驻 `evd` 状态、待处理计数 |
+| **任务栏固定项 + 托盘** | 任务库待处理计数、会话内派发状态 |
 | **Windows 通知中心** | 本地通知输出端，与勿扰模式（Focus Assist）状态同步 |
 | **Rainmeter 或 WebView2 面板** | 桌面待办计数、最近截止倒计时 |
 | **虚拟桌面 + 脚本** | 按通知模式（工作 / 生活 / 专注）切换壁纸与桌面布局 |
@@ -110,7 +110,7 @@
 
 ## 6. 本地服务与电源管理
 
-- **常驻服务**：`agent:local` 运行时（`ar`）、Taskwarrior + 派发器守护进程 `evd`、本地推理服务。桌面应用型服务用 WinSW 或 `sc.exe` 注册为 Windows 服务；用户态进程用「登录时启动」的计划任务。
+- **常驻服务**：Taskwarrior、`ar` 控制面 CLI、本地推理服务。桌面应用型服务用 WinSW 或 `sc.exe` 注册为 Windows 服务；用户态进程用「登录时启动」的计划任务。
 - **定时任务**：统一走任务计划程序（`schtasks` 或任务 XML），替代 `systemd.timer`。任务 XML 纳入 `%ProgramData%\aica\tasks\` 并由安装脚本 `schtasks /create /xml` 注册。
 - **保持唤醒**：工作站独机常驻，接交流电时禁止睡眠——电源计划设为「从不睡眠」，或用调用 `SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED)` 的守护进程在 AC 供电下持有唤醒锁，电池供电时恢复默认策略。
 - **电池保护**：长期插电使用，MyASUS / MSI Center 里把充电上限设到 60–80%。

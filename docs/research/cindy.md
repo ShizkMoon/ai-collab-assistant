@@ -292,3 +292,10 @@ Cindy 的协同 UI 有三次改版，当前形态（`orca-team-architecture.md:2
 - Cindy 的确切 commit 与发布版本（tarball 无 `.git`，`package.json` 无 `version`）→ 若要引用长期结论，需 `git clone` 补 commit。
 - `packages/lizi-mcps/src/orca/server.ts` 的 `createOrcaMcpServer` / `DirectToolSink` 具体签名（本文只依文档 `orca-team-architecture.md:137` 转述）。
 - `apps/desktop/src/renderer/features/right-sidebar/plugins/orca-workers` 与 `orcaLeadWorkerAttention.ts` 的实现细节（本文只依文档 `:229-237` 转述）。
+
+## 落点
+
+- **采用**：A1 的 `send` 与 `steer` 分离，在 [控制面契约 §3](../control-plane-api.md) 落成「回复只有 `queue` 与 `interrupt` 两态，真 steer 需要 pi RPC，尚未实现」；A9 的派发幂等 token，在 [控制面契约 §2](../control-plane-api.md) 的幂等键列（`ev_id`）与 [多 Agent 运行时 §5](../multi-agent-runtime.md) 的 `ev_id = uuid5(task.uuid, rule.name, attempt)` 里。
+- **搁置**：A2 桥版本校验、A3 权限门顺序、A4 Auto 档第二模型评审、A7 loop guard 的 4/30/60 分钟数值、A8 MCP 披露门、A10 聚合取最紧急，落点全在 `gate.ts` 与 `index.html`；Orca 的 21 个 MCP 工具、device-link、worktree 自动回收按 §6 不抄。
+- **影响判断**：支持复用，理由和 T3 一样——Cindy 自己是「不改引擎，只加一层」的宿主，把 Claude Code / Codex / Pi 塞进 Electron，再用注入式扩展补审批。这正是 [ADR 0011](../adr/0011-dsh-orchestration.md) 收敛出的分工。它同时给了反例：三套 adapter 合计约 1.2 MB 源码（§6 第 1 条），自建适配层的代价摆在那里。
+- **时效**：九篇里时间锚最弱的一份。§0 明写按 `main` tarball 抓取、没有 `.git`，`apps/desktop/package.json` 的版本号是 `0.0.0`——没有 commit、没有发布版本，任何结论都无法按版本复核。复查时点：引用它的审批或 Orca 结论前，先 `git clone` 补 commit。

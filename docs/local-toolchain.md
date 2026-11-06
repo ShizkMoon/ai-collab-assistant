@@ -142,7 +142,7 @@ Agent 调用本地软件时按以下优先级依次选择：
 | 角色层级 | 职责定义 | 典型工具示例 | 调用约束 |
 |---|---|---|---|
 | **事件采集源（Event Source）** | 从外部拉取或监听变化并生成原始输入 | `agent-reach`、`xxt`、`FileSystemWatcher` 目录监听、Git Hook | 仅负责采集并调用 `ev add`，不直接触发下游重操作 |
-| **执行器 / Provider** | 接收派发器调用，独立完成一项能力并返回退出码与摘要 | Home Assistant 服务调用、`biliup`、`ar` CLI、`ebook-convert`、`ego-browser` | 必须支持无交互运行、具备幂等性与明确退出码 |
+| **执行器 / Provider** | 接收派发方调用，独立完成一项能力并返回退出码与摘要 | Home Assistant 服务调用、`biliup`、`ar` CLI、`ebook-convert`、`ego-browser` | 必须支持无交互运行、具备幂等性与明确退出码 |
 | **内部工具（Internal Tool）** | 仅在某个 Worker 执行过程中作为底层命令被调用 | `ffmpeg`、`blender`、`reaper`、ImageMagick、Ghidra | 不直接订阅任务库事件 |
 | **显示端（Output Surface）** | 只读消费任务库与状态数据并渲染展示 | 墨水屏渲染服务、ThinkSmart View、DSH 会话 | 只读展示，不产生独立的业务状态源 |
 

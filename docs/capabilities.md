@@ -63,10 +63,10 @@ enabled = true
 
 | `kind` | 功能说明 | 复用工具链 |
 |---|---|---|
-| `work.code.task` | 代码开发父任务 | `agent:local` 运行时 + Devin / Codex / Claude Code Worker |
+| `work.code.task` | 代码开发父任务 | DSH subagent / teammate（`agent:local` 为执行器取值）+ Devin / Codex / Claude Code Worker |
 | `work.code.spec` | 将需求整理为结构化开发规格说明（Spec） | `gh issue` / `docs/specs/<slug>.md` |
 | `work.code.verify` | 在隔离终端执行构建与测试并检查退出码 | `ar terminal wait --for exit`、`just check` |
-| `work.code.review` | 调用异构厂商模型审阅代码 Diff | `agent:local` Worktree + LiteLLM |
+| `work.code.review` | 调用异构厂商模型审阅代码 Diff | 隔离 Worktree + LiteLLM |
 | `work.code.merge` | 创建 PR 并在 CI 通过后自动合并 | `gh pr merge --auto` |
 | `work.code.release` | 打标签发版、更新 `winget` / Scoop 或 `upctl` 组件 | `gh release`、`upctl update <section>` |
 | `work.repo.patrol` | 仓库依赖更新与 CI 失败巡检 | Renovate、`gh` CLI |
@@ -167,7 +167,7 @@ enabled = true
 | `kind` | 产生来源 | 触发条件说明 |
 |---|---|---|
 | `system.task.stalled` | 看门狗定时器 | 任务处于 `doing` 状态的时长超过 `2 × lease` |
-| `system.exec.flapping` | 派发器守护进程 | 同一规则在 1 小时内连续失败 ≥ 3 次并触发自动熔断 |
+| `system.exec.flapping` | 派发方（会话内 DSH Agent） | 同一规则在 1 小时内连续失败 ≥ 3 次并触发自动熔断 |
 | `system.source.silent` | 看门狗定时器 | 外部数据源超过声明的 `max_silence` 时长未产生新事件 |
 | `system.ev.backlog` / `system.ev.gate_stuck` | 看门狗定时器 | Spool 队列积压超限，或门控规则连续抑制达 24 小时 |
 | `system.disk.low` / `system.ledger.stale` | 看门狗定时器 | 磁盘剩余空间不足，或任务库备份同步延迟超限 |
@@ -201,4 +201,4 @@ steps = [
 | 能力组合调用 | 通过创建带 `parent_uuid` 的子任务进行编排（如视频制作任务派生配乐子任务），不在 Provider 内部硬编码耦合其他能力的脚本 |
 | 能力下线 | 设置 `enabled = false` 观察 90 天后移除配置，并将旧 `kind` 在路由表中映射到替代能力 |
 | 确定优化优先级 | 依据每周复盘报表中各能力的调用频次与返工率排序 |
-| 新增 `kind` 完整步骤 | 1. 登记本文件 → 2. 配置路由规则（[事件运行时与派发器 §1](event-runtime.md#1-规则表)）→ 3. 打包 Provider → 4. 将正反例句导入知识库索引 |
+| 新增 `kind` 完整步骤 | 1. 登记本文件 → 2. 配置路由规则（[事件运行时与派发 §1](event-runtime.md#1-规则表)）→ 3. 打包 Provider → 4. 将正反例句导入知识库索引 |

@@ -269,7 +269,7 @@ Get-Content .\query.json -Raw | kn recall --json
 |---|---|---|---|---|
 | 全局与系统规则 | `%USERPROFILE%\.claude\CLAUDE.md`、`%USERPROFILE%\.agents\SKILLS.md`、各仓 `AGENTS.md` | 人工编写，或由 `meta.capability.propose` 提交 PR | 永久 | 以 Markdown 原文件为准，`kb.sqlite` 仅建索引 |
 | 项目级约定 | 各代码仓库的 `AGENTS.md` | 人工或随代码 PR 更新 | 永久 | 以仓库原文件为准 |
-| 任务执行历史 | Taskwarrior + `agent:local` 运行目录 | 派发器与 Worker 写回 | 永久 | 以任务库与 `runs/` 信封为准 |
+| 任务执行历史 | Taskwarrior + `agent:local` 运行目录 | 派发方与 Worker 写回 | 永久 | 以任务库与 `runs/` 信封为准 |
 | 能力偏好（`pref`） | `kb.sqlite` 的 `mem` 表（`layer='pref'`） | 从历史任务选择与返工记录中提炼 | 半衰期 180 天 | 以 `mem` 表为准，可导出快照 |
 | 交互设定（`persona`） | `kb.sqlite` 的 `mem` 表（`layer='persona'`） | DSH 会话摘要写入 | 半衰期 365 天 | 以 `mem` 表为准 |
 

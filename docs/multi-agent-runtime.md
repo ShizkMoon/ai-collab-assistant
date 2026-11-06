@@ -1,8 +1,10 @@
 # 多 Agent 运行时：树、信封与程序化约束
 
-> 状态：设计中 · 上位文档：[总体架构设计](architecture-north-star.md) · 关联：[事件运行时与派发器](event-runtime.md)、[任务规格](event-spec.md)、[多 Agent 协作规范](agent-collaboration.md)
+> 状态：部分完成（协议为设计中；`runs/` 运行目录与派发链路未部署） · 上位文档：[总体架构设计](architecture-north-star.md) · 关联：[事件运行时](event-runtime.md)、[任务规格](event-spec.md)、[多 Agent 协作规范](agent-collaboration.md)、[ADR 0011](adr/0011-dsh-orchestration.md)
 >
-> 本文规定多个 Agent 之间如何传递工作、如何避免自由对话的上下文成本，以及「让模型决定发散还是收敛」如何在不依赖提示词的情况下落地。协作模式的业务分类见 [多 Agent 协作规范](agent-collaboration.md)，本文只讲机制。本文即 `agent:local` 运行时（`ar` CLI）的实现规格，见 [ADR 0008](adr/0008-local-agent-runtime.md)。
+> 本文规定多个 Agent 之间如何传递工作、如何避免自由对话的上下文成本，以及「让模型决定发散还是收敛」如何在不依赖提示词的情况下落地。协作模式的业务分类见 [多 Agent 协作规范](agent-collaboration.md)，本文只讲机制。
+>
+> 编排与交互由 DSH 承担：会话内用领导模式拆活、派活，teammate 并行执行；工作区与实例级由 SuperAgent 承担。`ar` 只是控制面 CLI（0.1.0，19 个动词，无 `list` / `watch`），不承担编排与执行，运行目录与事件面属设计中、未部署。本文描述的是协议层内容，落地载体是会话内的编排者与 Taskwarrior 任务库。
 
 ## 1. 为什么不让 Agent 互相聊天
 
@@ -75,12 +77,12 @@ flowchart TD
 
 | 字段 | 约束 | 由谁校验 |
 |---|---|---|
-| `id` | `uuid5(root_id, 路径)`，可重复计算 | 派发器 |
-| `parent` | 必填，且必须已存在；不构成环 | 派发器 |
-| `depends` | 可空；只允许指向本树内节点 | 派发器 |
-| `mode` | `diverge` / `converge` / `execute` 三选一；`diverge` 必须有 `axis` | 派发器 |
+| `id` | `uuid5(root_id, 路径)`，可重复计算 | 编排者 |
+| `parent` | 必填，且必须已存在；不构成环 | 编排者 |
+| `depends` | 可空；只允许指向本树内节点 | 编排者 |
+| `mode` | `diverge` / `converge` / `execute` 三选一；`diverge` 必须有 `axis` | 编排者 |
 | `accept` | 至少一条，且必须是可执行的检查 | 执行器 |
-| `budget.depth_left` | 子节点必须严格小于父节点 | 派发器 |
+| `budget.depth_left` | 子节点必须严格小于父节点 | 编排者 |
 
 `already_known` 是检索分层的结果：祖先节点已经查过的资料向下传递，子节点不再重复检索同一来源。这一条单独就能砍掉大量重复读取。
 
@@ -98,7 +100,7 @@ flowchart TD
 }
 ```
 
-`status` 复用派发器已有的七种返回状态（`done` / `waiting` / `me` / `blocked` / `failed` / `split` / `spec`），不新增枚举。`split` 是唯一允许在 `result.json` 中携带 `children` 的路径，也即数据驱动的派发。
+`status` 沿用既有的七种返回状态（`done` / `waiting` / `me` / `blocked` / `failed` / `split` / `spec`），不新增枚举。`split` 是唯一允许在 `result.json` 中携带 `children` 的路径，也即数据驱动的派发。
 
 ### 4.3 运行目录
 
@@ -112,6 +114,8 @@ runs/<root_id>/
 ```
 
 目录是数据面的边界，也是权限边界：Worker 只能写自己节点的目录与 `artifacts/`，不能写兄弟节点。这比在提示词里写「不要修改别人的文件」可靠。
+
+本节属设计中、未部署：`%LOCALAPPDATA%\aica\state\runs` 当前不存在，没有进程按此目录协议写入。
 
 ## 5. 调度循环
 
@@ -128,7 +132,7 @@ flowchart LR
   RE --> Q
 ```
 
-调度器本身就是 `evd`，不引入第二套执行引擎。任务 `thread` 作为串行边界，同一 `thread` 内不并行；`lane` 区分交互与批处理。
+调度在会话内由 DSH Agent 完成：领导模式负责拆活与派活，teammate 负责并行执行，不引入第二套执行引擎。任务 `thread` 作为串行边界，同一 `thread` 内不并行；`lane` 区分交互与批处理。幂等落在任务库的幂等键上——`ev_id = uuid5(task.uuid, rule.name, attempt)`（见[任务规格](event-spec.md)），同一任务的同一次尝试不重复产生副作用；重试落在会话内，节点失败后由编排者决定重跑、换手还是升级。以上为设计内容，派发链路未部署。
 
 ## 6. 程序化约束：把能力拿走，而不是劝说
 
@@ -144,7 +148,7 @@ flowchart LR
 多 Agent 编排必须落在档 2 与档 3：
 
 - **编排者没有执行工具。** 顶层 Agent 的工具列表里只有「写 `spec.json`」与「读 `result.json`」，没有 shell、没有文件写、没有网络。它无法「顺手自己做完」，因为能力不存在。
-- **派发是数据，不是工具调用。** 编排者输出一条 `expand` 记录，由派发器读取并建子任务。这样派发可审计、可重放、可在派发前校验 `parent` 与 `budget`。
+- **派发是数据，不是工具调用。** 编排者输出一条 `expand` 记录，随后按记录建子任务并落盘 `spec.json`。这样派发可审计、可重放、可在派发前校验 `parent` 与 `budget`。
 - **子任务必须带 `accept`。** 没有可执行验收条件的节点在派发时被拒，而不是在执行后才发现无法判断好坏。
 - **越界写直接报错。** 运行目录按节点隔离，写到兄弟目录会被文件系统权限拦下。
 
@@ -183,6 +187,19 @@ flowchart LR
 ## 9. 明确不做
 
 - **不做 Agent 间自由对话。** 需要交换的信息只有三种：产物（走数据面）、进度（走控制面）、事实（走知识面）。
-- **不引入独立的编排引擎。** 调度、幂等、重试全部复用 `evd`。
+- **不引入独立的编排引擎。** 调度在会话内由 DSH Agent 完成；幂等落在任务库的幂等键上，重试落在会话内的重试上。
 - **不把会话当作状态。** 任何需要跨设备、跨时间存在的上下文都必须能从任务库与产物重建。
 - **不在派发链路上叠加人工确认。** 只保留付款、删除、对外发布三类确认点（[ADR 0002](adr/0002-three-confirmation-points.md)）。
+
+## 10. 状态与部署
+
+| 内容 | 状态 |
+|---|---|
+| 归属树（UDA `parent_uuid`）与依赖 DAG（原生 `depends`） | 设计中 |
+| 派发信封 `spec.json` 与结果信封 `result.json` | 设计中，未部署 |
+| `runs/<root_id>/` 运行目录与 `plan.v(k).json` 版本化 | 设计中，未部署 |
+| 编排者能力裁剪（档 2 / 档 3） | 部分完成：会话内的工具面与审批由 DSH 的权限预设与审批插件提供 |
+| 发散收敛判据（候选余弦相似度阈值 0.95） | 设计中，未验证 |
+| 任务库读写（`ev` / `task`） | 已完成：Taskwarrior 3.5.0 可用，无进程自动消费 |
+| 会话内拆活、派活与并行（领导模式 + subagent / teammate） | 部分完成：会话内可用，跨机任务图未确认 |
+| 控制面 CLI `ar` 的运行目录协议 | 未部署：`%LOCALAPPDATA%\aica\state\runs` 不存在 |

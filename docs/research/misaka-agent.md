@@ -296,3 +296,10 @@ edges:
 **外部参照（README 自述，未独立验证）**
 
 - pi（`github.com/earendil-works/pi`）— agent 内核来源；herdr — panel 来源；hermes-lcm — LCM 压缩；PageIndex — 文档分层索引。`README.md:356-365`。
+
+## 落点
+
+- **采用**：本稿的机制基本没有被直接采用。唯一同向的是 A7 的 driver 租约与「进程存在 ≠ 任务活着」，对应 [`ar` 控制面与运行目录 §5](../agent-local-runtime.md) 的「租约与 `+stalled` 看门狗归运行目录协议」；但同一文件 §10 把租约看门狗记为「已独立收敛」，所以这条不是从这里吸来的。
+- **搁置**：A1 波次屏障与层间 reconciliation、A2 串行预热、A3 持久 phase、A4 声明式回传、A5 计划审批、A9 四值权限判定、A10 分级曝光全部没有实现。[多 Agent 运行时 §3](../multi-agent-runtime.md) 的两棵树是「归属 + 依赖」，不是 Misaka 的图内核；要在文件态运行时上补波次与 reconcile，先得背下它那套 `journal` / `lease` / `snapshot` / `constraints`（§6 估约 60 KB 源码）。
+- **影响判断**：作用是排除方向——「自建图内核」这条路被否掉，任务图交给 DSH 的 `dsh-experimental-agent-team`（任务板 + `blockedBy`）更省。按题目口径算支持复用，但用的是反证：自建这张图要付多少代价，这篇量得最清楚。
+- **时效**：`0.19.23` / `43f0c1f`（2026-11-03），Python 3.12+，包内 476,405 行。注意 §0 记了一次自我更正：初稿断言「Misaka 没有 tool_call 拦截」被二轮 grep 证伪——引用它的权限结论前先看 §3.5 的重写版。复查时点：真要抄波次屏障或 reconcile 时。

@@ -8,7 +8,7 @@
 
 路由器作为全系统的网络底座，其连接状态直接决定外部事件源（IM、邮件、RSS、GitHub）能否到达：
 
-- **外部数据源静默检测**：当外网中断时，外部事件源不会主动报错，只会停止产生新事件。为此，看门狗（`ev-watchdog.timer`，见 [事件运行时与派发器 §5.2](event-runtime.md#52-看门狗巡检项ev-watchdogtimer每-5-分钟执行)）会定期检查各数据源最后一次录入任务的时间戳，一旦超过该数据源声明的 `max_silence` 阈值，立即生成 `system.source.silent` 告警任务。
+- **外部数据源静默检测**：当外网中断时，外部事件源不会主动报错，只会停止产生新事件。为此，看门狗（`ev-watchdog.timer`，见 [事件运行时与派发 §5.2](event-runtime.md#52-看门狗巡检项ev-watchdogtimer每-5-分钟执行)）会定期检查各数据源最后一次录入任务的时间戳，一旦超过该数据源声明的 `max_silence` 阈值，立即生成 `system.source.silent` 告警任务。
 - **出口状态边沿上报**：路由器自身的拨号连接、mwan3 分流与 OpenClash 代理状态在发生变化（`ifup` / `ifdown`）时，通过 `hotplug` 脚本向 MQTT 发送一条 `system.net.egress` 事件，用于触发依赖特定网络环境的任务自动挂起（`parked`）或恢复（`unpark`）。
 
 ## 2. 当前软硬件与网络状态
@@ -43,14 +43,14 @@
 flowchart TD
   NET["校园网入户网口"] --> RT["AX6000<br/>默认网关 + Wi-Fi AP + ESurfing 四拨 + mwan3 + TTL64 + OpenClash"]
   RT -->|Wi-Fi| DEV["手机 / 墨水屏 / ThinkSmart View / 传感器"]
-  RT -->|LAN 192.168.31.0/24| WS["工作站<br/>agent:local + 任务库 + evd"]
+  RT -->|LAN 192.168.31.0/24| WS["工作站<br/>任务库 + DSH 会话"]
   WS -.->|Tailscale 隧道| CLOUD["云服务器 orca-pool<br/>等待队列 + ntfy"]
 ```
 
 各节点网络职责边界：
 
 - **AX6000**：作为局域网唯一默认网关，统一负责校园网认证、多 WAN 负载均衡、TTL 改写、DNS 分流与局域网透明代理。
-- **工作站**：运行任务库、派发器 `evd` 与 `agent:local` Worker，通过有线网口接入局域网，是局域网内唯一的应用服务节点。
+- **工作站**：运行任务库与会话内的 DSH Agent（派发方），执行由 DSH subagent / teammate 承担；通过有线网口接入局域网，是局域网内唯一的应用服务节点。
 - **云服务器**：只通过 Tailscale 与工作站互联，不接入宿舍局域网，也不承担子网路由或 Exit Node（[网络与设备组网 §3](network-fabric.md#3-子网路由与-exit-node)）。
 
 ## 5. 应用服务节点的硬件规格（延后采购）

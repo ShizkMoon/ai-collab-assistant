@@ -8,9 +8,9 @@
 
 | 服务组件 | 部署位置 | 底层实现 |
 |---|---|---|
-| 任务库 + `ev` CLI + 派发器守护进程 `evd` | 工作站 | Taskwarrior 3 + 自建轻量守护进程 |
+| 任务库 + `ev` CLI | 工作站 | Taskwarrior 3 + `ev` 封装；派发方为会话内 DSH Agent 或人工，无常驻守护进程 |
 | 事件库与线索（`events.sqlite3`） | 工作站（主）/ 云服务器（入站暂存） | SQLite，见 [输入端口与输出路由 §3](output-routing.md#3-事件线索与线索上下文) |
-| 多 Agent 任务编排 | 工作站 | `agent:local` 运行时（`ar` CLI，自建） |
+| 多 Agent 任务编排 | 工作站 | DSH 会话（领导模式）编排，DSH subagent / teammate 执行 |
 | 本地大模型与向量推理 | 工作站 | vLLM / Ollama |
 | 统一模型网关 | 工作站 | LiteLLM |
 | 入口解析与 IM 收发 | 工作站 | DSH 会话 / AstrBot |
