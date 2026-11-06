@@ -77,7 +77,7 @@ Taskwarrior 原生的报表、过滤条件与同步子命令均可直接混用�
 
 | 触发源 | 接入链路 | `source` 字段取值 |
 |---|---|---|
-| 自然语言输入 | DS-Bot / AstrBot → 入口意图分类选出 `kind` → `ev add` | `me` |
+| 自然语言输入 | DSH 会话 / AstrBot → 入口意图分类选出 `kind` → `ev add` | `me` |
 | 智能家居设备 | Home Assistant Automation → 仅在需要跟进时调用 `ev add` | `ha` |
 | 定时调度 | 任务计划程序或 Taskwarrior `recur` | 任务计划程序 |
 | GitHub / 飞书 / Webhook | 云端等待队列接收后写入事件表，工作站拉取并调用 `ev add` | `github` / `webhook` |

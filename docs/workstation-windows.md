@@ -1,6 +1,6 @@
 # 工作站配置：Windows 11 原生
 
-> 状态：规划中（本机当前仍为 NixOS，尚未重装） · 角色：本地计算与执行环境基础设施 · 决策见 [ADR 0006](adr/0006-workstation-windows.md)
+> 状态：部分已部署（2026-11-06 复核：本机为 Windows 11 专业工作站版；还原点与备份演练未验证） · 角色：本地计算与执行环境基础设施 · 决策见 [ADR 0006](adr/0006-workstation-windows.md)
 >
 > 选型结论：工作站只保留 **Windows 11 Pro 原生环境**，不装 WSL、不保留 Linux 分区。全部工具使用 Windows 原生版本，路径按 Windows 惯例分开放置。桌面环境为 Windows 11 自带 shell（Explorer + 任务栏 + 开始菜单），不额外引入第三方壳。
 
@@ -43,7 +43,7 @@
 | 运行时状态：Spool、队列、影子测试输出、游标 | `%LOCALAPPDATA%\aica\state\` |
 | 导出数据、模型权重缓存、索引 | `%LOCALAPPDATA%\aica\data\` |
 | 任务库 | `%LOCALAPPDATA%\aica\state\taskchampion.sqlite3` |
-| 项目与视频工程 | `D:\repo\` |
+| 项目与视频工程 | `C:\Repos\` |
 | 大文件：成片、固件镜像、书库、备份暂存 | `D:\aica\` |
 | Provider 工具源码 | `%USERPROFILE%\agent-src\tools\` |
 | 单体二进制与 Wrapper | `%USERPROFILE%\.local\bin\`（并加入用户 `PATH`） |
@@ -51,6 +51,7 @@
 - **系统包**：`winget` 为主、`scoop` 管便携式命令行工具。两者都写进 `upctl` 对应分区，不留手动下载的摊子。
 - **Provider 工具**：源码留在 `%USERPROFILE%\agent-src\tools\`，构建产物放 `%USERPROFILE%\.local\bin`，由 `upctl update git` 统一 `git pull` 并重建。
 - **配置纳管**：`%ProgramData%\aica\` 下本系统接管的文件列在 `managed.list`，用于重装后比对还原；其余配置不进纳管。
+- **旧路径**：2026-11-06 复核后，文档中的 `D:\repo` 已统一为 `C:\Repos`；`kpw5-analysis` 一类历史分析仓尚未迁移，引用时以本机实际为准。
 
 ## 4. 桌面与自动化接口
 
@@ -103,7 +104,7 @@
 | 系统级故障（无法进桌面、驱动冲突） | 系统还原点回滚；必要时用安装介质修复 | 还原点 + `D:\aica\backup` |
 | 数据误删或损坏 | `restic restore` 从 `D:\aica\backup` 取回 | 卷影副本（VSS）保留最近 30 天 |
 
-自动规则：`upctl` 在每次安装或升级前调用 `Checkpoint-Computer` 建还原点；`restic` 每日 02:00 增量备份 `%LOCALAPPDATA%\aica` 与 `D:\repo`，保留 7 日 / 4 周 / 6 月三档。**还原点不覆盖用户数据**，业务数据只靠 `restic` 与 VSS。
+自动规则：`upctl` 在每次安装或升级前调用 `Checkpoint-Computer` 建还原点；`restic` 每日 02:00 增量备份 `%LOCALAPPDATA%\aica` 与 `C:\Repos`，保留 7 日 / 4 周 / 6 月三档。**还原点不覆盖用户数据**，业务数据只靠 `restic` 与 VSS。
 
 **重装系统不重建业务状态**：任务库、Spool 与游标位于 `%LOCALAPPDATA%\aica\state`，恢复备份即可继续；回滚系统不应回滚已发生的任务事实。
 

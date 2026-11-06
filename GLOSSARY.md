@@ -26,11 +26,11 @@ _避免_：提供者
 
 **执行器（Executor）**：
 实际执行任务的后端：`agent:local`、`ha:*`、`cli:*`、`n8n:*`、`notify`、`me`。
-`agent:local` 为自建运行时（`ar` CLI + `runs/` 运行目录），见 [ADR 0008](docs/adr/0008-local-agent-runtime.md)。
+`agent:local` 为自建运行时（`ar` CLI + `runs/` 运行目录），见 [ADR 0008](docs/adr/0008-local-agent-runtime.md)；其对外命令面即系统控制面，见 [控制面契约](docs/control-plane-api.md)。客户端不绑定具体前端，见 [ADR 0010](docs/adr/0010-retire-dsbot-native-ui.md)。
 _避免_：执行者、处理器
 
 **Worker**：
-`agent:local` 内部派发执行具体子任务的最小 Agent 单元（基于 Pi / DSH agent loop），只向协调方汇报结果。
+`agent:local` 内部派发执行具体子任务的最小 Agent 单元，只向协调方汇报结果。底层为成熟 CLI Agent（Pi / DSH agent loop / Codex / Claude Code），契约见 [Worker 适配器](docs/worker-adapters.md)。
 
 **节点（Node）**：
 多 Agent 运行时中一次派发的单位，以运行目录 `runs/<root_id>/nodes/<path>/` 标识，派发前写入派发信封，完成后写入结果信封。
@@ -130,6 +130,10 @@ _避免_：仪式、宏
 _避免_：自主级别
 
 ## 执行环境
+
+**控制面（Control Plane）**：
+驱动与观察 Run 的对外契约面：`ar` CLI 的命令子集（建、查、说、读、列、订阅）加 `events.jsonl` 事件流。前端（DSH 会话、工作台、手机端）都是控制面的客户端，不持有 Run 状态，见 [控制面契约](docs/control-plane-api.md)。
+_避免_：管理后台、控制台 UI（那是客户端，不是控制面）
 
 **Space（浏览器工作区）**：
 ego(lite) 中存放某个 Agent 任务标签页的隔离空间，不切换用户当前标签页、不抢焦点；同一浏览器可并行多个 Space，任务结束后可保留或关闭。_避免_：会话（会话指 Agent 上下文，不是浏览器标签页）

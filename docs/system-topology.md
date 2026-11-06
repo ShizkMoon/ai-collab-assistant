@@ -2,7 +2,7 @@
 
 > 状态：部分已部署 · 角色：执行层中 `agent:local` 链路的部署拓扑（见 [架构总览 §5](architecture.md#5-执行器列表)）
 >
-> 编排层已改用自建 `agent:local` 运行时（`ar` CLI + `runs/` 运行目录），Worker agent loop 基于 Pi / DSH 深度定制，交互界面为自建生成式 UI，见 [ADR 0008](adr/0008-local-agent-runtime.md)。
+> 编排层已改用自建 `agent:local` 运行时（`ar` CLI + `runs/` 运行目录），Worker 以成熟 CLI Agent（Pi / Codex / Claude Code）为执行后端，交互层为 DSH 原生会话、`ar` 命令面即控制面契约，见 [ADR 0008](adr/0008-local-agent-runtime.md)、[ADR 0010](adr/0010-retire-dsbot-native-ui.md) 与 [控制面契约](control-plane-api.md)。
 >
 > 常驻节点因成本原因延后（[ADR 0007](adr/0007-deferred-resident-node.md)），当前拓扑只有一个执行节点：工作站。云服务器 `orca-pool` 只承担消息接收与等待队列，不执行任何任务。
 
@@ -63,8 +63,9 @@ flowchart LR
 
 ## 5. 状态展示与交互界面
 
-- **生成式 UI 工作台（自建）**：Run 树视图、Worker 中间输出、diff 预览、多候选比选与升级卡片的展示组件由模型按需渲染（形态参考 T3Code 一类生成式界面），作为回到工作站桌面后的主要接管界面；TUI 仅保留为调试与兜底入口。
-- **DS-Bot Web / Desktop**：展示任务进度卡片、中间输出与多候选比选结果。
+- **DSH 原生会话（主界面）**：任务进度卡片、中间输出、审批与提问卡片、多候选比选结果由 DSH 的 Web / Desktop 会话呈现；Run 的创建、查询、跟进与读取全部经 [控制面契约](control-plane-api.md) 的命令面完成，会话不持有 Run 状态。
+- **生成式 UI 工作台（可选旁路）**：Run 树、diff 预览与 fork 的图形化查看仍在 `C:\Repos\agent-local-runtime\workbench`，按 [ADR 0009](adr/0009-dsbot-as-control-interface.md) 降为可选旁路，不是主界面；需要常驻图形视图时再评估是否恢复扩展。
+- **运行目录直读**：`runs/<root_id>/` 与 `events.jsonl` 是任何前端的唯一数据源，兜底路径为直接打开目录或读 `ar events`。
 - **即时通讯（IM）**：私聊通过 `@xmanrui/dsh-im` 插件接入；群聊或更多平台通过 AstrBot 接入，将交互卡片渲染为图片发送。
 - 前端界面展示的任务状态直接读取自 `runs/` 运行目录与 Taskwarrior，不在前端维护独立的状态副本。
 
@@ -72,7 +73,7 @@ flowchart LR
 
 - 任务的完整执行状态保存在工作站 `runs/<root_id>/` 运行目录中（派发信封、结果信封与中间产物）。入口仅缓存 `root_id`、节点路径与最新摘要，网络重连后按目录与信封 ID 即可恢复跟踪。
 - 跨设备、跨渠道的上下文不依赖会话状态，由 [线索上下文](output-routing.md#3-事件线索与线索上下文)从事件重建。
-- 用户回到工作站桌面后，可在生成式 UI 工作台中查看并接管同一批 Worktree 与 Run；兜底路径为 `ev status` 终端面板加直接打开对应运行目录。
+- 用户回到工作站桌面后，主路径是 DSH 会话按 `root_id` 续读 `events.jsonl`；需要图形化查看 Run 树与 diff 时打开可选工作台；兜底路径为 `ar events` 与直接打开对应运行目录。
 
 ## 7. GUI 自动化分级策略
 
@@ -97,6 +98,7 @@ flowchart LR
 ## 9. 部署进度
 
 - **已就绪**：工作站已切换 Windows 11 原生；`agent-desktop` 已安装至 `%USERPROFILE%\agent-src\tools\agent-desktop\` 并通过 UIA 冒烟验证；ego(lite) 与 `ego-browser` 可用；云服务器 `orca-pool` 已通过 Tailscale 接入。Orca 暂保留为影子期兜底执行器（[ADR 0008](adr/0008-local-agent-runtime.md)）。
-- **待实现**：`agent:local` 运行时（`ar` CLI + `runs/` 信封协议，Worker 基于 Pi / DSH）；生成式 UI 工作台。
+- **待实现**：`agent:local` 运行时的控制面补充（`ar list` / `ar watch`，见 [控制面契约 §2](control-plane-api.md#2-命令面冻结)）；Codex 与 Claude Code 适配器的实测（两家 CLI 本机尚未安装，见 [Worker 适配器](worker-adapters.md)）。
+- **已降级**：生成式 UI 工作台按 [ADR 0009](adr/0009-dsbot-as-control-interface.md) 转为可选旁路，不再作为交付目标。
 - **待部署**：工作站的 `ev sync` 定时拉取、云端的事件落库脚本与 ntfy 转发、工作站受限入口脚本。
 - **推进顺序**：先在工作站本地跑通「创建 Run → 派发 Worker → 回收结果 → 写回任务库」的完整闭环，再接入云端事件拉取。

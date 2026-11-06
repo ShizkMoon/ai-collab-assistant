@@ -22,7 +22,7 @@
 
 | 功能需求 | 选用开源项目 | 说明 |
 |---|---|---|
-| 对话与卡片入口 | **DS-Bot**（基于 DeepSeek Harness）；多平台群聊配合 **AstrBot** | AstrBot（AGPL-3.0）支持 QQ、企业微信、飞书、钉钉、公众号、Telegram 及 MCP 插件 |
+| 对话与卡片入口 | **DSH 原生会话**（DeepSeek Harness）；多平台群聊配合 **AstrBot** | AstrBot（AGPL-3.0）支持 QQ、企业微信、飞书、钉钉、公众号、Telegram 及 MCP 插件 |
 | 手机与桌面互联 | **Phone Link** | 通知同步、短信与通话记录；文件分享仍走 IM 或 Tailscale 直传 |
 | 手机消息推送 | **ntfy**（自托管） / Home Assistant Companion | 支持按告警级别设置免打扰穿透 |
 | 桌面快捷录入 | **PowerToys Run** 插件 | `Alt+Space` 呼出直接录入任务 |
@@ -38,7 +38,9 @@
 | 云端 CPU 兜底分类 | `sentence-transformers` + `bge-small-zh` + **SetFit** | 工作站休眠时在云服务器 CPU 上运行，仅输出预测 `kind` |
 | 本地知识检索 | **SQLite FTS5 + `jieba` + `sqlite-vec`**（封装为 `kn` CLI） | 单文件三路混合召回与 RRF 融合，见 [知识库与记忆分层](knowledge-memory.md) |
 | Agent 会话历史检索 | **Obelisk**（待验证） | 开源 coding agent session 检索，直接支持 Pi / Claude Code / Codex 会话格式（对话、工具调用、子 agent、工作流），SQLite FTS5 + agent 主动查询；`events.jsonl` 对齐其 schema 即接入，见 [agent:local 运行时设计 §4](agent-local-runtime.md#4-数据面唯一新增eventsjsonl) |
-| 代码与多步任务编排 | **自建 `agent:local` 运行时**（`ar` CLI + `runs/` 信封协议）+ Pi / DSH agent loop + Devin / Codex / Claude Code Worker | 管理 Git Worktree 与多 Worker 协同；交互界面为自建生成式 UI（[ADR 0008](adr/0008-local-agent-runtime.md)） |
+| 生成式 UI 产物 | **answer-me-with-html**（待验证） | Agent 写 Markdown 稿（~600 token）→ CLI 算版面/配色/坐标 → 整页自包含 HTML（无 CDN 离线可开，页内评论/决策回流 agent）；支持 Pi/Claude Code/Codex 等。作工作台「页即产物」候选，见 [workbench §8.6](workbench-ui.md#86-生成层产物形态页即产物answer-me-with-html-启发) |
+| 代码与多步任务编排 | **自建 `agent:local` 运行时**（`ar` CLI + `runs/` 信封协议）+ 成熟 CLI Agent Worker（Pi / Codex / Claude Code） | 管理 Git Worktree 与多 Worker 协同；交互界面为 DSH 原生会话 + 控制面契约，前端可替换（[ADR 0010](adr/0010-retire-dsbot-native-ui.md)） |
+| 代码与多步任务编排（替代方案，已评估） | **Multica**（`multica-ai/multica`，Multica License / Apache 2.0 + 条件） | 自托管、daemon 发现本机 CLI 注册为 runtime、issue → run → 本地执行，支持 28 个工具（含 Claude Code / Codex / DSH / Pi）。**不采纳为主运行时**：工作单元是 issue（project/git 形状）、run 记录在服务端、无信封级 `accept` 判据，且其 daemon 与 `ar daemon` 会争同一目录（`waiting_local_directory` 目录锁）。可选用法与判据见 [ADR 0009](adr/0009-dsbot-as-control-interface.md) |
 | GUI 桌面软件控制 | `CLI-Anything` 封装 → `agent-desktop`（UIA 无障碍树 + ref 语义动作）→ 视觉点击（Jev + AutoHotkey v2 / `SendInput`） | 见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略) |
 | 外部平台只读抓取 | **`agent-reach`**（已安装） | 聚合 `yt-dlp`、`bili-cli`、`twitter-cli`、`rdt-cli` 等工具 |
 | 需要登录态的网页操作 | **ego(lite)** + `ego-browser` Skill | 独立 Chromium，Agent 在隔离 Space 内操作并沿用本机登录态；接口为页面内 JS（Snapshot + `click` / `fill`），不抢用户标签页与焦点，见 [本机工具链选型 §2.8](local-toolchain.md#28-浏览器与网页自动化egolite) |
@@ -69,8 +71,8 @@
 | 自建模块 | 自建原因 | 代码规模 |
 |---|---|---|
 | `ev` CLI + Hook + 派发器守护进程 `evd` | 将 Taskwarrior UDA 字段与个人路由规则表、`agent:local` 运行时、Home Assistant 对接 | 约 700 行 Python，见 [事件运行时与派发器 §3](event-runtime.md#3-派发器守护进程evd) |
-| `agent:local` 运行时（`ar` CLI） | Run / 节点生命周期、Worktree 隔离、Worker 派发与升级通道；无现成开源实现与本仓信封协议完全同构 | 预计 1.5–3k 行（Pi / DSH agent loop 复用），见 [多 Agent 运行时](multi-agent-runtime.md) 与 [ADR 0008](adr/0008-local-agent-runtime.md) |
-| 生成式 UI 工作台 | 消费 `runs/` 运行目录渲染 Run 树、diff 预览与升级卡片；第三方控制面均绑定各自 runtime，无法消费本仓信封协议 | 与渲染管线复用（[ADR 0008](adr/0008-local-agent-runtime.md)） |
+| `agent:local` 运行时（`ar` CLI） | Run / 节点生命周期、Worktree 隔离、Worker 派发与升级通道；无现成开源实现与本仓信封协议完全同构 | 预计 1.5–3k 行（Worker 用成熟 CLI Agent，不自写 agent loop）；对外命令面即控制面契约，见 [控制面契约](control-plane-api.md) 与 [ADR 0009](adr/0009-dsbot-as-control-interface.md) |
+| 生成式 UI 工作台（可选旁路） | 消费 `runs/` 运行目录渲染 Run 树、diff 预览与升级卡片；第三方控制面均绑定各自 runtime，无法消费本仓信封协议 | 已按 [ADR 0009](adr/0009-dsbot-as-control-interface.md) 降为可选旁路；[ADR 0010](adr/0010-retire-dsbot-native-ui.md) 撤回 DS-Bot 后交互层回到 DSH 原生会话，工作台仍不恢复为主界面 |
 | 能力与场景 TOML 配置集 | 声明个人使用的能力目录、触发示例与跨设备场景 | 声明式配置文件 + 提示词模板 |
 | 显示端 HTML 渲染模板 + **显示仲裁器** | 跨墨水屏、状态灯、桌面组件的动态优先级分配与帧哈希去重 | 渲染模板 + 约 400 行 Python，见 [多端显示仲裁](surface-arbiter.md) |
 | `kn` 知识库检索与数据源适配器 | 将 Taskwarrior、`agent:local` 运行目录、学习通（`xxt`）、`biliup` 接入同一个 SQLite + `sqlite-vec` 索引库 | 核心 SQL + 约 600 行适配器，见 [知识库与记忆分层](knowledge-memory.md) |

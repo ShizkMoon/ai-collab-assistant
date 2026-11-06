@@ -136,12 +136,12 @@ run/04-review/cover/choice.json   { "chosen": "cand-02", "rejected": ["cand-01",
 
 ## 5. 视频制作管线
 
-### 5.1 工程目录结构（`D:\repo\video\<片名>\`）
+### 5.1 工程目录结构（`C:\Repos\video\<片名>\`）
 
 在 `%USERPROFILE%\.agents\notes\video.md`（以原生文件为准）规范的基础上，补充 `run/` 与 `out/` 目录：
 
 ```
-D:\repo\video\<片名>\
+C:\Repos\video\<片名>\
   NOTES.md               记录使用的 Skill、目标时长与画幅、BGM 与音效出处及许可协议
   run/
     01-ingest/manifest.json

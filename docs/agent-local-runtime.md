@@ -1,6 +1,6 @@
 # agent:local 运行时设计
 
-> 状态：设计中 · 上位文档：[ADR 0008](adr/0008-local-agent-runtime.md)、[多 Agent 运行时](multi-agent-runtime.md) · 关联：[系统拓扑](system-topology.md)、[事件运行时与派发器](event-runtime.md)
+> 状态：设计中 · 上位文档：[ADR 0008](adr/0008-local-agent-runtime.md)、[多 Agent 运行时](multi-agent-runtime.md)、[ADR 0009](adr/0009-dsbot-as-control-interface.md) · 关联：[系统拓扑](system-topology.md)、[事件运行时与派发器](event-runtime.md)、[控制面契约](control-plane-api.md)、[Worker 适配器](worker-adapters.md)
 >
 > 本文定义 `agent:local` 运行时（`ar` CLI + `ar daemon`）的组件划分、职责边界与演进路径。[多 Agent 运行时](multi-agent-runtime.md)是协议规格（信封、节点树、程序化约束），本文是落地形态。
 
@@ -102,6 +102,16 @@ Worker 进程的上下文按"重建而非继承"组装，分三个记忆环：
 - **不给 Worker 全量工具**：工具面随 `spec.json` 声明裁剪，编排者零执行工具。
 - **不在 v0 引入远程 Worker**：`agent` 字段与 daemon 接缝已预留，但常驻节点落地前不实现。
 
+## 10. dsh-superagent 对照吸收
+
+> DeepSeek 开源的主动 coding agent 原型（`deepseek-ai/dsh-superagent-prototype`，2026-10）经逐文档核对。我们已独立收敛的部分：异步派发、租约看门狗、thread 串行、收件箱界面、accept 信封、祖先升级。值得吸收的增量：
+
+- **`waits_on` 等待对象代数**（最高性价比）：dsh 的 stage 不由生命周期枚举，由"它在等什么"派生——`person:answer|review|delivery` / `dependency` / `trigger` / `working` / `queued`。给节点状态加派生字段 `waits_on`，收件箱即 `person/*` 投影（界面侧见 [workbench §8.5](workbench-ui.md#85-内容面再定位验收事实节点为中心)）。
+- **派发决策可审计 + observe 模式**：`evd` 的 `decide()` 目前只留结果；把每次语义准入决策记成 `{candidate, decision, reason, rule_version}` 落到 `runs/`，规则可加 `observe` 标志——只记录不派发，用于安全试错新自动化。
+- **完成即事件**：长任务/后台作业完成=注入节点的一条新 trigger，不是轮询返回值。与 §3.5 异步派发模型同构，统一语义。
+- **单调性派发校验**（MCDT 唯一可计算部分）：`split` 时校验子节点 `accept` 合取覆盖父节点 `accept`，不满足即档 2 拒绝——分解的"覆盖性"从隐含约定升级为显式不变量。
+- **看门狗诚实版**：dsh 的语义进度看门狗连他们自己都未实现；我们的计时看门狗是行业常态非短板。廉价升级：`events.jsonl` 连续 N 次同参失败工具调用→标记疑似死循环（80% 效果，0 token）。
+
 ## 11. v3 落地状态（2026-11-04 真机）
 
 > 本节只记「已经能在真机上看到」的东西；设计与验收口径在 [prd-workbench-v3.md](prd-workbench-v3.md) §6（S16–S28）
@@ -151,3 +161,17 @@ Worker 进程的上下文按"重建而非继承"组装，分三个记忆环：
 - 另有：设置面板本身（并发上限 / 主题 / 闸门默认值，贴右栏 sheet）在途。
 
 **R4 的判据与 R2 相同**：每条都要有"真机可看到的证据"，没有证据不算落地。
+
+## 12. 交互层回调：DS-Bot 前端 + 控制面契约（ADR 0009）
+
+> 2026-11-04 起，交互层不再以 [§11](#11-v3-落地状态2026-11-04-真机) 所述工作台为主界面（[ADR 0009](adr/0009-dsbot-as-control-interface.md)）；2026-11-06 起 DS-Bot 前端亦撤回，交互层回到 DSH 原生会话（[ADR 0010](adr/0010-retire-dsbot-native-ui.md)）。**执行层结论全部不变**：`runs/` 仍是唯一权威，`events.jsonl` 仍是唯一数据面。
+
+**三处变化**：
+
+- **主界面换成 DS-Bot**。§4 的 `events.jsonl` 消费者从"工作台投影"改为"控制面 `ar watch` → 任意前端"；DS-Bot 只缓存 `root_id` 与摘要行，不持有 Run 状态（[控制面契约 §5](control-plane-api.md#5-状态权威)）。
+- **工作台降为可选旁路**。`workbench/` 保留（Run 树、diff、fork 的图形查看），不再作为交付目标扩展；§11.1 的 R2/R3 切片与 172 个测试转为回归基线，不再有新增切片。
+- **命令面冻结**。`src/cli.ts` 的子命令分两类：契约内（`run-create` / `node-create` / `check` / `wait` / `reply` / `gate` / `events` / `read` / `done` / `fail` / `abort` / `fork` / `propose`，外加新增 `list` 与 `watch`）与内部（`dispatch` / `spawn` / `cmd` / `daemon` / `version`）。内部子命令不进契约，可自由演进。
+
+**仍然有效、不要误读为被推翻的部分**：§2 的 Worker 进程隔离与 `aica-pi` 工具面、§3 的信封 `agent` 字段、§5「不重复 evd 职责」、§8 的三环上下文与前缀缓存纪律、§9 的全部"明确不做"。
+
+**唯一需要重写实现的一处**：`aica-pi` 的 `gate.ts` 是 pi 扩展形态的工具面闸门；Codex 与 Claude Code 没有等价扩展点，其工具面收窄只能靠各自 flags，审批因此前移到派发点（见 [控制面契约 §4](control-plane-api.md#4-卡片语义与审批) 与 [Worker 适配器 §4](worker-adapters.md)）。

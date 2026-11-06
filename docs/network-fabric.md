@@ -33,7 +33,7 @@ flowchart TD
 | MagicDNS 域名后缀 | `shizuku.ts` |
 | 主机命名规范 | 统一使用简短角色名（`ws`、`orca-pool`、`kpw`、`phone`、`rt`） |
 | 服务暴露方式 | 统一使用 `tailscale serve`（自动签发内网 HTTPS 证书），不开公网端口映射 |
-| 核心服务端口 | 渲染服务 `7777`、DS-Bot `13080`、LiteLLM `4000`、ntfy `2586`（云服务器） |
+| 核心服务端口 | 渲染服务 `7777`、LiteLLM `4000`、ntfy `2586`（云服务器） |
 
 工作站侧安装与启动：
 
@@ -149,7 +149,7 @@ fallback = { egress = "any", model = "ollama:qwen3-8b" }
 | Windows 11 基础系统 + OpenSSH Server + `tailscaled` | 2.0 GB | 2.6 GB | 系统底座（含桌面合成与 Defender） |
 | Taskwarrior + `evd` + `events.sqlite3` | 80 MB | 200 MB | 事件消费 |
 | `agent:local` 运行时 + 编排服务 | 600 MB | 1.5 GB | 编排核心 |
-| DS-Bot + DSH | 1.2 GB | 3.0 GB | 常驻对话入口 |
+| DSH 会话 | 1.2 GB | 3.0 GB | 常驻对话入口 |
 | LiteLLM 网关 | 350 MB | 700 MB | 统一 API 路由与计费 |
 | ntfy（本地实例） | 30 MB | 60 MB | 与云服务器实例二选一 |
 | `windows_exporter` | 30 MB | 50 MB | 主机指标导出 |

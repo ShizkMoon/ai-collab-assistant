@@ -155,7 +155,7 @@ flowchart LR
 ## 10. 仓库与目录布局
 
 ```
-D:\repo\ai-collab-assistant\     # 架构与设计文档（本仓）
+C:\Repos\ai-collab-assistant\     # 架构与设计文档（本仓）
   docs\                          # 专题设计文档
   docs\proposals\                # 演进提案库
   docs\adr\                      # 架构决策记录（ADR）
@@ -164,8 +164,8 @@ D:\repo\ai-collab-assistant\     # 架构与设计文档（本仓）
 %LOCALAPPDATA%\aica\state\       # 运行时状态：Spool、队列、运行目录、游标、校准参数、任务库
 %LOCALAPPDATA%\aica\data\        # 导出数据、模型权重缓存、知识库索引
 D:\aica\                         # 大体积文件：成片、书库、固件镜像、备份暂存
-D:\repo\                          # 个人项目仓库（视频/音乐/代码/游戏）
-D:\repo\video\                    # 视频工程目录
+C:\Repos\                          # 个人项目仓库（视频/音乐/代码/游戏）
+C:\Repos\video\                    # 视频工程目录
 %USERPROFILE%\agent-src\tools\   # Provider 源码仓（re-toolkit 等）
 %USERPROFILE%\.agents\            # Skill、规则、笔记（待纳入 Git 管理）
   %USERPROFILE%\.agents\vendor\   # 第三方大型技能库（gamedev / music）
@@ -193,19 +193,22 @@ D:\repo\video\                    # 视频工程目录
 | 核心机制 | [知识库与记忆分层](knowledge-memory.md) | 三路混合检索、记忆分层与偏好提炼 |
 | 核心机制 | [IM 采集](im-ingest.md) | 主账号只读采集、双账号分工、会话切分与检索参数 |
 | 核心机制 | [提案库](proposals/README.md) | 候选规则、能力与场景的评审流程 |
-| 决策记录 | [ADR](adr/) | 0001 任务库；0002 三类确认点；0003 入口与循环分离；0004 草稿 TTL；0005 提案与影子测试；0006 工作站改用 Windows 11 原生；0007 常驻节点延后；0008 自建 `agent:local` 运行时与生成式 UI |
+| 决策记录 | [ADR](adr/) | 0001 任务库；0002 三类确认点；0003 入口与循环分离；0004 草稿 TTL；0005 提案与影子测试；0006 工作站改用 Windows 11 原生；0007 常驻节点延后；0008 自建 `agent:local` 运行时与生成式 UI；0009 交互层改用 DS-Bot，`ar` 收敛为控制面；0010 撤回 0009，交互层回到 DSH 原生会话 |
 | 能力与选型 | [能力目录](capabilities.md) | `kind` 全集的唯一权威来源 |
 | 能力与选型 | [开源复用清单](open-source-reuse.md) | 各模块复用的开源项目与自建边界 |
 | 执行域 | [系统拓扑](system-topology.md) | 常驻入口、`agent:local` 编排与 Worker 分工 |
+| 执行域 | [Worker 适配器](worker-adapters.md) | pi / Claude Code / Codex 的命令契约、事件映射、审批语义与路由 |
+| 执行域 | [以 dsh-superagent 作执行侧运行时](superagent-runtime.md) | 多 Source 结构、`task` Source 接入、与 `agent:local` 的取舍 |
 | 执行域 | [多 Agent 协作规范](agent-collaboration.md) | 规则统一、协作模式与流水线分工 |
 | 执行域 | [内容创作流水线](creative-studio.md) | 视频、音乐、写作、电子书与播客管线 |
 | 执行域 | [开发与逆向工程](work-devsec.md) | 代码开发、逆向分析、游戏构建与设计工具链 |
 | 执行域 | [日常事务管理](life-operations.md) | 日程、健康、财务、物品、社交与学习 |
 | 执行域 | [自动化场景](ritual-scenes.md) | 14 个跨设备场景、触发方式与部分完成处理 |
 | 交互 | [Personal Agent 设计](personal-agent.md) | 交互约定、通知模式与记忆分层 |
-| 交互 | [生成式 UI 工作台](workbench-ui.md) | Tauri 壳 + UI spec 渲染层、数据面契约与界面分工 |
+| 交互 | [控制面契约](control-plane-api.md) | 前端 ↔ `ar` 的命令面、事件订阅、卡片审批与状态权威 |
+| 交互 | [生成式 UI 工作台](workbench-ui.md) | Tauri 壳 + UI spec 渲染层；ADR 0009 起为可选旁路 |
 | 交互 | [常驻服务分布](assistant-system.md) | 服务部署位置与凭据管理 |
-| 交互 | [DS-Bot 入口](ds-bot-entry.md) | 常驻宿主、IM 接入与迁移方案 |
+| 交互 | [DS-Bot 入口](ds-bot-entry.md) | 常驻宿主、IM 接入与迁移方案；ADR 0010 起已撤回，仅存记录 |
 | 交互 | [Super-agent 参考架构](super-agent-architecture.md) | 外部参考架构摘要与本仓取舍 |
 | 平台运维 | [系统运维](platform-ops.md) | 规则挖掘、影子测试、监控告警与备份恢复 |
 | 平台运维 | [模型路由与本地推理](model-fleet.md) | 模型注册表、路由降级、显存分配与置信度校准 |
@@ -235,6 +238,8 @@ D:\repo\video\                    # 视频工程目录
 | `decide()` 接口 | 补充受限解码（Guided Decoding）与温度缩放校准 | 详见 [模型路由与本地推理](model-fleet.md) |
 | 确认点 | 维持付款、删除、对外发布三类确认点 | 不增加日常操作摩擦 |
 | 规则与能力迭代 | 从周报口头建议升级为"提案 → 影子测试 → 上线"流程 | 确保规则变更可追溯、可回退 |
+| 交互层 | 由自建生成式 UI 工作台回调为 DS-Bot 前端 + `ar` 控制面契约（[ADR 0009](adr/0009-dsbot-as-control-interface.md)） | 工作台是最贵且最不设防的自建块；控制面契约自有即可换前端 |
+| 交互层 | DS-Bot 前端撤回，交互层回到 DSH 原生会话，`ds-bot` 插件与其状态目录一并移除（[ADR 0010](adr/0010-retire-dsbot-native-ui.md)） | 回复含 `dsh-ui` 围栏时 DS-Bot 界面失去响应；它只提供界面却与 DSH 版本强耦合，维护双份记忆与状态目录不划算 |
 
 ## 13. 实施阶段
 

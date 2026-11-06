@@ -89,7 +89,7 @@ to    = "notify"             # 到期提醒
 
 | 执行器标识 | 适用场景 | 底层复用工具 |
 |---|---|---|
-| `agent:local` | 多步复杂任务：代码开发、文档编写、视频剪辑、长文写作 | 自建运行时 `ar` + Pi / DSH agent loop + Devin / Codex / Claude Code Worker（[ADR 0008](adr/0008-local-agent-runtime.md)） |
+| `agent:local` | 多步复杂任务：代码开发、文档编写、视频剪辑、长文写作 | 自建运行时 `ar` + 成熟 CLI Agent Worker（Pi / Codex / Claude Code，见 [Worker 适配器](worker-adapters.md)）；对外命令面即控制面（[ADR 0009](adr/0009-dsbot-as-control-interface.md)） |
 | `ha:*` | 智能家居设备控制、HA 脚本调用 | Home Assistant REST / 服务调用 |
 | `cli:*` | 单次确定性命令执行 | 现成 CLI 工具（`ffmpeg`、`calibre`、`double-entry-generator` 等） |
 | `n8n:*` | 外部 SaaS 与 Webhook 编排 | n8n 工作流（Webhook、IMAP 邮件、RSS） |
@@ -112,7 +112,7 @@ to    = "notify"             # 到期提醒
 | ThinkSmart View | 桌面触控面板与语音入口 | HA Dashboard / Kiosk 浏览器，见 [桌面主控台](thinksmart-view-console.md) |
 | 手机 / 手表 | 待确认计数与即时推送 | Phone Link、ntfy、HA Companion |
 | 音箱 / 电视 / 耳机 | 语音播报与播放 | 投递路由的 `playback` 效果，见 [输入端口与输出路由 §5](output-routing.md#5-输出效果类型优先于设备) |
-| IM 客户端 | 交互确认卡片、每日早报与晚报 | DS-Bot / AstrBot |
+| IM 客户端 | 交互确认卡片、每日早报与晚报 | DSH IM 插件 / AstrBot |
 | 热敏打印机 | 纸质当日清单、采购清单 | `python-escpos` |
 
 **首屏原则**：任何显示端的第一屏只展示当前亟需处理的事项。

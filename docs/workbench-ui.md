@@ -1,6 +1,6 @@
 # 生成式 UI 工作台
 
-> 状态：v0 已实现（固定组件 + Edge `--app` 壳），生成层（UI spec）仍属 v3 · 上位文档：[ADR 0008](adr/0008-local-agent-runtime.md)、[agent:local 运行时设计](agent-local-runtime.md) · 关联：[Personal Agent 设计](personal-agent.md)、[多端显示仲裁](surface-arbiter.md)、[统一渲染管线](render-pipeline.md)
+> 状态：**可选旁路（2026-11-04 起）**。按 [ADR 0009](adr/0009-dsbot-as-control-interface.md) 主控制界面曾改为 [DS-Bot](ds-bot-entry.md) + [控制面契约](control-plane-api.md)；该决定已由 [ADR 0010](adr/0010-retire-dsbot-native-ui.md) 撤回，交互层回到 DSH 原生会话。本文所述工作台保留为需要 Run 树 / diff / fork 图形视图时的旁路，不恢复为主界面，也不作为交付目标继续扩展。v0 已实现（固定组件 + Edge `--app` 壳），生成层（UI spec）不再排期 · 上位文档：[ADR 0008](adr/0008-local-agent-runtime.md)、[ADR 0010](adr/0010-retire-dsbot-native-ui.md)、[agent:local 运行时设计](agent-local-runtime.md) · 关联：[Personal Agent 设计](personal-agent.md)、[多端显示仲裁](surface-arbiter.md)、[统一渲染管线](render-pipeline.md)
 >
 > 本文定义工作站桌面上的人机交互界面：用户查看与接管 `agent:local` Run 的主要界面。形态参考 T3Code / Grok / Codex Desktop / DSBot 一类对话流工作台——v0 已实现三栏+事件流卡片+composer 直派任务（`C:\Repos\agent-local-runtime\workbench\`），生成层（模型按需产出界面组件）为 v3 目标。
 

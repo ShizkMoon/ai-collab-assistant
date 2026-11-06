@@ -4,7 +4,7 @@
 >
 > 本文梳理开源并行墨水屏驱动栈 **epdiy**（利用 ESP32 / ESP32-S3 直接驱动商用并口 EPD 裸屏的软硬件方案）的硬件演进、波形查找表（Waveform LUT）结构、温度补偿、ESP32-S3 `LCD_CAM` 并口 DMA 通路以及支持面板清单。
 >
-> **资料来源**：[`vroland/epdiy`](https://github.com/vroland/epdiy) 主仓库源码与 Wiki、[`fread-ink/inkwave`](https://github.com/fread-ink/inkwave) 波形解析工具，以及本机 KPW5 固件逆向笔记（`D:\repo\kpw5-analysis`）。
+> **资料来源**：[`vroland/epdiy`](https://github.com/vroland/epdiy) 主仓库源码与 Wiki、[`fread-ink/inkwave`](https://github.com/fread-ink/inkwave) 波形解析工具，以及本机 KPW5 固件逆向笔记（`C:\Repos\kpw5-analysis`）。
 
 ## 0. 技术定位：并行 TTL 直驱与 SPI 模组的区别
 
@@ -53,7 +53,7 @@ EpdWaveform            { num_modes, num_temp_ranges, temp_intervals[], mode_data
   - `01` = **Darken（+15V，驱动黑色粒子上浮）**
   - `10` = **Lighten（−15V，驱动白色粒子上浮）**
   - `11` = **保留 / No-op**
-- 16×16 的灰度转移矩阵每帧共需 $16 \times 16 \times 2\text{ bit} = 64\text{ Bytes}$。完成一次灰度过渡需连续输出 `num_phases` 帧（例如 `GC16` 通常包含 40–60 个 Phase），每一帧对全屏所有像素按各自的 `(src_gray, dst_gray)` 查表输出一次 2-bit 脉冲。这与本机在 `D:\repo\kpw5-analysis\notes\waveform-lut-decoded.md` 中逆向出的 Kindle `wf_lut` 结构完全同源。
+- 16×16 的灰度转移矩阵每帧共需 $16 \times 16 \times 2\text{ bit} = 64\text{ Bytes}$。完成一次灰度过渡需连续输出 `num_phases` 帧（例如 `GC16` 通常包含 40–60 个 Phase），每一帧对全屏所有像素按各自的 `(src_gray, dst_gray)` 查表输出一次 2-bit 脉冲。这与本机在 `C:\Repos\kpw5-analysis\notes\waveform-lut-decoded.md` 中逆向出的 Kindle `wf_lut` 结构完全同源。
 
 ### 2.3 支持的刷新模式（`EpdDrawMode`）
 
@@ -115,4 +115,4 @@ EpdWaveform            { num_modes, num_temp_ranges, temp_intervals[], mode_data
 - [`vroland/epdiy` 主仓库](https://github.com/vroland/epdiy) · [epdiy 硬件工程仓库](https://github.com/vroland/epdiy-hardware)
 - [epdiy Wiki：并行墨水屏像素驱动原理](https://github.com/vroland/epdiy/wiki/How-pixels-are-driven-in-a-parallel-epaper-with-epdiy) · [波形时序说明](https://github.com/vroland/epdiy/wiki/Waveform-timings-for-epdiy)
 - [`fread-ink/inkwave`（E Ink `.wbf`/`.wrf` 波形解析工具）](https://github.com/fread-ink/inkwave)
-- 本机 KPW5 逆向分析存档（以原生文件为准）：`D:\repo\kpw5-analysis\notes\waveform-lut-decoded.md`、`epdc-temperature-policy.md`、`wrf-format.md`
+- 本机 KPW5 逆向分析存档（以原生文件为准）：`C:\Repos\kpw5-analysis\notes\waveform-lut-decoded.md`、`epdc-temperature-policy.md`、`wrf-format.md`

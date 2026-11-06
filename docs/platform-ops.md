@@ -210,7 +210,7 @@ cmd = ["aica", "disk", "--min-free-gb", "20", "C:\\", "D:\\"]
 | Home Assistant 配置与 Recorder | 每日 | HA 原生备份 + Restic | 每季度 |
 | `%LOCALAPPDATA%\aica\data\knowledge\kb.sqlite`（知识库） | 每日 | Restic | 每月 |
 | Calibre 书库、音乐库 | 每周 | Restic | 每季度 |
-| `D:\repo`（含文档与 Provider 源码） | 每日 | Git + Restic | 每月 |
+| `C:\Repos`（含文档与 Provider 源码） | 每日 | Git + Restic | 每月 |
 | 应用凭据 | 变更时触发 | 原生位置（Windows 凭据管理器 / DPAPI）+ 加密归档 | 每季度 |
 
 每日定时备份脚本（`%ProgramData%\aica\backup.ps1`，由任务计划程序 02:00 触发）：
@@ -228,8 +228,8 @@ $out = Join-Path $snap ("ev-{0}.sqlite3" -f (Get-Date -Format 'yyyy-MM-dd-HH'))
 sqlite3 $db ".backup '$out'"
 
 restic backup --tag daily $snap (Join-Path $st 'litellm') (Join-Path $st 'calibration') `
-  (Join-Path $env:LOCALAPPDATA 'aica\data\knowledge') 'D:\repo' `
-  --exclude 'D:\repo\video\*\render' --exclude 'D:\repo\video\*\node_modules'
+  (Join-Path $env:LOCALAPPDATA 'aica\data\knowledge') 'C:\Repos' `
+  --exclude 'C:\Repos\video\*\render' --exclude 'C:\Repos\video\*\node_modules'
 restic forget --keep-daily 7 --keep-weekly 4 --keep-monthly 6 --prune
 ```
 

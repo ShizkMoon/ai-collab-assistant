@@ -28,7 +28,7 @@
 | 阶段 | 阶段名 | 执行动作 | 标准命令 | 产出物 | 对应 `kind` |
 |---|---|---|---|---|---|
 | 1 | 需求定义 | 将需求整理为结构化规格说明（Spec） | `gh issue create --repo <owner>/<r> --title <t>` 或编写 `<repo>/docs/specs/<slug>.md` | Issue 或 Spec 文档 | `work.code.spec` |
-| 2 | 仓库注册 | 已存在仓库直接注册；新项目创建私有仓 | `ar repo add --path D:\repo\<r> --json`；`gh repo create shizkmoon/<r> --private --source=. --push` | 运行时 Repo ID | `work.code.task` |
+| 2 | 仓库注册 | 已存在仓库直接注册；新项目创建私有仓 | `ar repo add --path C:\Repos\<r> --json`；`gh repo create shizkmoon/<r> --private --source=. --push` | 运行时 Repo ID | `work.code.task` |
 | 3 | 隔离分支 | 单任务单 Worktree，基于 `origin/main` 创建 | `ar worktree create --repo path:$PWD --name <slug> --base-branch origin/main --agent claude --model <id> --json` | 独立 Worktree 与分支 | `work.code.task` |
 | 4 | 代码实现 | Worker 在独立 Worktree 内编码，不在主工作区直接切换分支 | `ar agent launch --worktree name:<slug> --agent codex --prompt "$(cat docs/specs/<slug>.md)"` | Git Commit | `work.code.task` |
 | 5 | 构建与测试 | 在受控终端内运行测试并等待进程退出码 | `ar terminal create --worktree name:<slug> --command "just check && make build" --json` → `ar terminal wait --terminal <h> --for exit --timeout-ms 1800000 --json` | 终端日志 + 退出码 | `work.code.verify` |
@@ -96,7 +96,7 @@
 | `re-toolkit` MCP | 源码与安装脚本位于 `%USERPROFILE%\agent-src\tools\re-toolkit`（v0.3.0），已注册至 `%APPDATA%\devin\mcp_config.json` 与 `%USERPROFILE%\.claude.json`，共暴露 16 个工具函数（含 `apk_analyze`） |
 | 底层分析工具 | Ghidra 12.1.4、`binwalk`、`unblob`、QEMU、`mitmproxy`、Frida、`rizin`、`jadx`、`apktool`、`payload-dumper-go`、Kaitai Struct、`tshark`、`flashrom`、`openocd`、`sigrok-cli`、`picocom`、`nmap` |
 | 配套 Skill | `%USERPROFILE%\.agents\skills\reverse-engineering`（REX）及 `%USERPROFILE%\.agents\vendor\rex` |
-| 历史分析仓库 | `D:\repo\kpw5-analysis`、`D:\repo\mu22mk2-analysis`、`D:\repo\chaoxing-app-analysis`、`D:\repo\d3v-analysis`、`D:\repo\sports-world-campus-analysis` |
+| 历史分析仓库 | `C:\Repos\kpw5-analysis`、`C:\Repos\mu22mk2-analysis`、`C:\Repos\chaoxing-app-analysis`、`C:\Repos\d3v-analysis`、`C:\Repos\sports-world-campus-analysis` |
 
 ### 2.2 六类逆向分析流水线
 
@@ -146,9 +146,9 @@
 
 | 规范项 | 具体做法 |
 |---|---|
-| 独立源仓库维护 | 每台受管设备建立独立的实验记录仓库 `D:\repo\<device>-records`，原始调试 JSON 与恢复脚本在源仓库提交 |
+| 独立源仓库维护 | 每台受管设备建立独立的实验记录仓库 `C:\Repos\<device>-records`，原始调试 JSON 与恢复脚本在源仓库提交 |
 | 设计结论提炼入 `docs/` | 跨设备复用的架构结论写入本仓 `docs/`，原始实验数据保留在子树内 |
-| 单向 `git subtree` 同步 | 通过 `git subtree add --prefix <device>-records D:\repo\<device>-records main --squash` 引入；后续更新一律在源仓提交后执行 `git subtree pull`，不在本仓子树目录内直接修改 |
+| 单向 `git subtree` 同步 | 通过 `git subtree add --prefix <device>-records C:\Repos\<device>-records main --squash` 引入；后续更新一律在源仓提交后执行 `git subtree pull`，不在本仓子树目录内直接修改 |
 | 排除大文件与凭据 | 固件二进制、私钥、订阅链接与包含密码的备份包不入库，仅在 `manifest.json` 中记录 SHA256 校验值 |
 
 ### 2.5 逆向任务接入派发器
@@ -157,7 +157,7 @@
 [[rule]]
 match = { kind = "work.rev.firmware" }
 to = "agent:local"
-exec = { workdir = 'D:\repo\<case>-analysis', agent = "claude", model = "deepseek-chat" }
+exec = { workdir = 'C:\Repos\<case>-analysis', agent = "claude", model = "deepseek-chat" }
 
 [[rule]]
 match = { kind = "work.rev.apk" }
@@ -213,12 +213,12 @@ blender -b art/source/character.blend -P tools/export_gltf.py -- --out build/ass
 | 处理需求 | 调用入口 | 标准命令示例 |
 |---|---|---|
 | 格式转换与 PSD 图层处理 | `photocraft-cli convert` | `photocraft-cli convert in.psd out.png --quality 92`（保留 TIFF 图层加 `--tiff-layers`） |
-| 批量预设动作（封面裁切、墨水屏抖动） | `photocraft-cli batch` | `photocraft-cli batch --actions D:\repo\design\actions\covers.json --in raw --out out --format png` |
+| 批量预设动作（封面裁切、墨水屏抖动） | `photocraft-cli batch` | `photocraft-cli batch --actions C:\Repos\design\actions\covers.json --in raw --out out --format png` |
 | 脚本化图层编辑 | `photocraft-cli run` | `photocraft-cli run in.pcraft --cmd layer.new.layer --params '{...}' --out out.pcraft` |
 | 生成式图像制作 | ComfyUI HTTP API（`127.0.0.1:8188`） | `curl -s -X POST 127.0.0.1:8188/prompt -H 'content-type: application/json' -d @wf-api.json`，轮询 `/history/<prompt_id>` 获取输出文件 |
 | 矢量图形与 UI 设计 | VectorCraft / FigCraft CLI | 通过 `craft-apps` Skill 调用对应无头 CLI |
 
-ComfyUI 工作流统一保存为 API 格式 JSON（存放于 `D:\repo\design\comfy\<用途>.json`），并在元数据中记录 `prompt_id`、工作流哈希与随机种子以保证可复现。调用 ComfyUI 出图前需先获取 `%LOCALAPPDATA%\aica\state\gpu-lease` 显存锁。
+ComfyUI 工作流统一保存为 API 格式 JSON（存放于 `C:\Repos\design\comfy\<用途>.json`），并在元数据中记录 `prompt_id`、工作流哈希与随机种子以保证可复现。调用 ComfyUI 出图前需先获取 `%LOCALAPPDATA%\aica\state\gpu-lease` 显存锁。
 
 ### 3.4 Windows 侧游戏日常托管（MAA）
 

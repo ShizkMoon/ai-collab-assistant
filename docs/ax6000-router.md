@@ -67,11 +67,11 @@ N100 迷你主机因成本原因暂不采购（[ADR 0007](adr/0007-deferred-resi
 ## 6. 关键网络配置约束
 
 1. **Tailscale 流量必须加入 OpenClash 直连绕过列表**：路由器开启局域网透明代理后，需将工作站的 Tailscale 端口（`41641/udp` 与 STUN `3478/udp`）设为直连，防止 WireGuard 流量被透明代理劫持至境外节点导致内网延迟飙升至数百毫秒。
-2. **容器权限隔离**：运行 DS-Bot 的容器不挂载宿主机根目录、不挂载容器运行时 Socket、也不存放明文私钥。
+2. **容器权限隔离**：任何对话入口容器不挂载宿主机根目录、不挂载容器运行时 Socket、也不存放明文私钥。
 3. **跨机 SSH 命令限制**：云端脚本访问工作站的专用 SSH 公钥在 `authorized_keys` 中通过 `command="..."` 限制为仅允许调用 `%USERPROFILE%\.local\bin\` 下的受限入口脚本（仅含创建任务、查询状态、读取输出、发送跟进四项操作）。
 
 ## 7. 关联文档
 
-- 对话入口容器部署与 IM 插件接入：[DS-Bot 入口部署与接入](ds-bot-entry.md)
+- 对话入口已回到 DSH 原生会话，容器部署与 IM 接入见 [ADR 0010](adr/0010-retire-dsbot-native-ui.md)
 - 跨机任务派发与 GUI 自动化：[系统拓扑](system-topology.md)
 - 路由器底层实测数据与恢复手册：[`ax6000-campus-records/`](../ax6000-campus-records/README.md)

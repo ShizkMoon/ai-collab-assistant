@@ -112,7 +112,7 @@ Agent 调用本地软件时按以下优先级依次选择：
   核心 API：`taskSpace` / `listTaskSpaces`（Space 复用与接管）、`task.page` / `page.goto` / `page.snapshot`（语义树）、`page.click` / `page.fill` / `page.keyboard.*` / `page.mouse.*`、`task.adopt` / `task.release` / `task.handOff`、`task.finish({ keep })`（收尾并返回回执）、`task.cdp`。实测基线（2026-11-03）：`ego-browser 0.6.2.5`，隔离 Space 内打开页面、snapshot、收尾关闭全链路通过；跨轮引用 `snapshot` 引用用 `loc=...` 或 CSS selector。
 - **定位边界**：优先用于「必须有登录态、需要多步点击或上传文件」的网页任务（`info.web.browse`）。无登录态的抓取仍走 `agent-reach` / RSS；纯 HTML 转图仍走 Playwright 无头截图；付款、删除、对外发布照常停在确认点。
 
-已知限制（以官方文档为准）：Linux 版在路线图中、Windows 版为 beta；官方文档未列出 profile / 代理参数，也没有 MCP 或 REST 接口，驱动入口只有 `ego-browser`；会话仅限本机，不支持远程或容器内运行（DS-Bot 容器版因此需把浏览器任务派回工作站，见 [DS-Bot 入口 §2](ds-bot-entry.md#2-功能缺口与配套补充方案)）。
+已知限制（以官方文档为准）：Linux 版在路线图中、Windows 版为 beta；官方文档未列出 profile / 代理参数，也没有 MCP 或 REST 接口，驱动入口只有 `ego-browser`；会话仅限本机，不支持远程或容器内运行（浏览器任务只能在已登录的工作站会话内运行）。
 
 ### 2.9 桌面应用自动化（agent-desktop）
 
@@ -133,7 +133,7 @@ Agent 调用本地软件时按以下优先级依次选择：
 | **事件采集源（Event Source）** | 从外部拉取或监听变化并生成原始输入 | `agent-reach`、`xxt`、`FileSystemWatcher` 目录监听、Git Hook | 仅负责采集并调用 `ev add`，不直接触发下游重操作 |
 | **执行器 / Provider** | 接收派发器调用，独立完成一项能力并返回退出码与摘要 | Home Assistant 服务调用、`biliup`、`ar` CLI、`ebook-convert`、`ego-browser` | 必须支持无交互运行、具备幂等性与明确退出码 |
 | **内部工具（Internal Tool）** | 仅在某个 Worker 执行过程中作为底层命令被调用 | `ffmpeg`、`blender`、`reaper`、ImageMagick、Ghidra | 不直接订阅任务库事件 |
-| **显示端（Output Surface）** | 只读消费任务库与状态数据并渲染展示 | 墨水屏渲染服务、ThinkSmart View、DS-Bot Web | 只读展示，不产生独立的业务状态源 |
+| **显示端（Output Surface）** | 只读消费任务库与状态数据并渲染展示 | 墨水屏渲染服务、ThinkSmart View、DSH 会话 | 只读展示，不产生独立的业务状态源 |
 
 ## 4. 维护与升级约定
 

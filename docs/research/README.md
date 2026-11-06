@@ -29,6 +29,7 @@
 | 7 | [misaka-agent.md](misaka-agent.md) | Misaka DAG 研究图/波次屏障 | 源码级（`43f0c1f`, v0.19.23） | 2026-11-03 |
 | 8 | [cindy.md](cindy.md) | Cindy 拦截式审批/Orca 会话制 | 源码级（main tarball，无 commit） | 2026-11-04 |
 | 9 | [ux-synthesis.md](ux-synthesis.md) | 七家界面横向合成 + U 验收清单 | 前 8 份的 §4/§5 二次合成 + 2 张真机截图 | 2026-11-04 |
+| 10 | [super-agent-dsbot.md](super-agent-dsbot.md) | Super-agent 十机制在 DS-Bot + `ar` + Codex/CC 上的落点（架构类，非 harness 画像） | 对 [../super-agent-architecture.md](../super-agent-architecture.md) 全文的机制级复核 + 本仓文档行号 | 2026-11-04 |
 
 ## 每家最强 3 条结论
 
@@ -103,6 +104,8 @@
 3. **P1–P20 修订 + U01–U29 验收清单**：P 是对 `workbench-ui.md` 的硬改动，U 是可逐条核的验收项（U22 性能未达标，已转 S26；U04/U07/U29 有实测后的口径修订）。
 
 > 证据锚点：§1 对照矩阵、§2 共识、§3 分歧、§4 修订、§6 验收清单、§7 未覆盖与需复核。
+
+> 第 10 份与前 9 份口径不同：它复核的是**外部参考架构**落到本仓的位置，不画像某一家 harness；证据等级 `[X]` 外部文献 / `[D]` 本仓文档 / `[T]` 推断。
 
 ## 怎么用这批稿子
 

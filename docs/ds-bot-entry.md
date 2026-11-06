@@ -1,8 +1,10 @@
 # DS-Bot 入口部署与接入
 
-> 状态：选型已定，待部署 · 角色：常驻对话入口与结果通知出口（见 [架构总览 §2](architecture.md#2-意图分类与结构化路由)）
+> 状态：**已撤回（2026-11-06）**，见 [ADR 0010](adr/0010-retire-dsbot-native-ui.md)：`ds-bot` 插件已从 profile 移除，`~/.dsh/bot` 与 `D:\aica\dsbot-workspace` 已删除，ws 检索改为 profile 级 MCP。本文保留为选型、部署与接入记录，不再是交付目标 · 角色：常驻对话入口与结果通知出口（见 [架构总览 §2](architecture.md#2-意图分类与结构化路由)）
 >
-> 选型结论：采用 DS-Bot 替代早期规划的 Hermes 作为常驻入口。DS-Bot 负责**解析自然语言意图**（从 [能力目录](capabilities.md) 匹配 `kind` 并录入任务库）以及**向用户反馈执行结果与交互卡片**；底层重度任务仍由工作站上的 `agent:local` 运行时编排执行。需要接入更多即时通讯平台（尤其是群聊）时，配合部署 AstrBot。
+> 选型结论：采用 DS-Bot 替代早期规划的 Hermes 作为常驻入口，并在 [ADR 0009](adr/0009-dsbot-as-control-interface.md) 中升格为**主控制界面**：它经 [控制面契约](control-plane-api.md) 的 `ar` 命令面驱动 Run，自身不持有 Run 状态。
+>
+> 原结论：采用 DS-Bot 替代早期规划的 Hermes 作为常驻入口。DS-Bot 负责**解析自然语言意图**（从 [能力目录](capabilities.md) 匹配 `kind` 并录入任务库）以及**向用户反馈执行结果与交互卡片**；底层重度任务仍由工作站上的 `agent:local` 运行时编排执行。需要接入更多即时通讯平台（尤其是群聊）时，配合部署 AstrBot。
 >
 > 版本核对基线（2026-10-28）：DS-Bot `main` 分支提交 `4a7b550`，`ds-bot` 包版本 `0.2.3`，配套 DeepSeek Harness（DSH）版本 `0.2.0-rc.2` / `0.2.1-rc.2`。
 

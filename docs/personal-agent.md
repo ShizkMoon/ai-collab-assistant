@@ -10,14 +10,14 @@ Personal Agent 是本系统的用户交互层，负责将多端输入统一转�
 2. **异步跟进免盯屏**：任务派发后由派发器与 `agent:local` 运行时持续跟踪至终态并主动汇报；执行期间用户可随时查询当前进度。
 3. **多端状态一致**：手机、工作站桌面、墨水屏与桌面小组件均从同一个 Taskwarrior 任务库读取状态。
 4. **从反馈中积累偏好**：用户每次在卡片上的确认、分类修正与返工操作均自动记录为样本，用于优化后续意图分类准确率与能力默认参数。
-5. **组件可替换**：DS-Bot、`agent:local` 运行时、具体 Provider 或推理模型均可独立替换，不影响整体交互方式。
+5. **组件可替换**：DSH 会话、`agent:local` 运行时、具体 Provider 或推理模型均可独立替换，不影响整体交互方式。
 6. **数据默认留存本地**：原始素材与长会话保留在工作站本地，远端入口仅传输精简的任务说明与执行摘要。
 
 ## 2. 交互入口
 
 | 入口渠道 | 适用场景 | 底层实现 |
 |---|---|---|
-| IM（DS-Bot / AstrBot） | 手机端随时发送指令、通过交互卡片点击确认 | 见 [DS-Bot 入口](ds-bot-entry.md) |
+| IM（DSH IM 插件 / AstrBot） | 手机端随时发送指令、通过交互卡片点击确认 | 见 [DS-Bot 入口](ds-bot-entry.md)（已撤回，保留接入记录） |
 | PowerToys Run | 工作站桌面按 `Alt+Space` 一句话快速录入任务 | PowerToys Run 插件 |
 | Phone Link / IM 分享 | 手机截图、照片、网页链接、文件一键分享录入任务 | Phone Link、微信文件传输助手 |
 | 语音输入 | 桌面 ThinkSmart View 主控台或手机语音指令 | FunASR / SenseVoice + CosyVoice |
@@ -73,7 +73,7 @@ flowchart LR
 | 任务执行历史 | Taskwarrior + `agent:local` 运行目录 | 历史任务状态、执行摘要与中间产物 |
 | 能力偏好配置 | 能力目录旁 `prefs.toml` | 各能力的默认审美与参数倾向 |
 | 结构化检索记忆 | `%LOCALAPPDATA%\aica\data\knowledge\kb.sqlite` 的 `mem` 表（`event` / `pref` / `persona`） | 带原始证据引用、支持时间衰减与升级的结论条目 |
-| 入口轻量设定 | DS-Bot 侧配置 | 常用称呼、活跃项目列表与近期对话摘要 |
+| 入口轻量设定 | DSH profile 与 `AGENTS.md` | 常用称呼、活跃项目列表与近期对话摘要 |
 
 记忆条目的写入、升级与时间衰减机制详见 [知识库与记忆分层 §7](knowledge-memory.md#7-记忆分层与生命周期)。
 

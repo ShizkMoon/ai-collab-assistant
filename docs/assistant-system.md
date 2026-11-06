@@ -13,7 +13,7 @@
 | 多 Agent 任务编排 | 工作站 | `agent:local` 运行时（`ar` CLI，自建） |
 | 本地大模型与向量推理 | 工作站 | vLLM / Ollama |
 | 统一模型网关 | 工作站 | LiteLLM |
-| 入口解析与 IM 收发 | 工作站 | DS-Bot / AstrBot |
+| 入口解析与 IM 收发 | 工作站 | DSH 会话 / AstrBot |
 | 消息接收与等待队列 | 云服务器 `orca-pool` | 端口轮询脚本 + `events.sqlite3` |
 | 消息推送服务 | 云服务器 `orca-pool` | ntfy |
 | 任务库增量备份 | 云服务器 `orca-pool` | Litestream + 每日 `.backup` + Restic |

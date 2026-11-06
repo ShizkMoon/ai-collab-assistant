@@ -1,6 +1,6 @@
 # IM 采集：聊天记录作为数据面
 
-> 状态：设计中 · 上位文档：[输入端口与输出路由](output-routing.md)、[知识库与记忆分层](knowledge-memory.md) · 关联：[DS-Bot 入口](ds-bot-entry.md)、[网络与设备组网](network-fabric.md)
+> 状态：设计中 · 上位文档：[输入端口与输出路由](output-routing.md)、[知识库与记忆分层](knowledge-memory.md) · 关联：[ADR 0010](adr/0010-retire-dsbot-native-ui.md)、[网络与设备组网](network-fabric.md)
 >
 > 本文只规定**采集**：IM 消息如何进入系统、如何落库、如何被检索。消息如何触发任务仍由 [输入端口与输出路由 §4](output-routing.md#4-三级分流) 决定；消息如何被投递仍由 [§8](output-routing.md#8-输出端口草案surfacestoml) 决定。
 

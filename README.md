@@ -28,6 +28,8 @@
 
 - [系统拓扑](docs/system-topology.md)：常驻入口、`agent:local` 本地编排、Worker 执行与 GUI 自动化
 - [`agent:local` 运行时设计](docs/agent-local-runtime.md)：`ar` CLI + daemon + pi Worker 的组件划分与演进路径 · 设计中
+- [Worker 适配器](docs/worker-adapters.md)：pi / Claude Code / Codex 的非交互契约、事件映射、审批差异与路由建议 · 设计中
+- [以 dsh-superagent 作执行侧运行时](docs/superagent-runtime.md)：多 Source 结构、`task` Source 接入方案与 `agent:local` 的取舍 · 设计中
 - [多 Agent 协作规范](docs/agent-collaboration.md)：规则共享、协作模式与流水线分工
 - [内容创作流水线](docs/creative-studio.md)：视频、音乐、写作、电子书与播客的统一制作管线 · 设计中
 - [开发与逆向工程](docs/work-devsec.md)：代码开发、固件与软件逆向、游戏构建与设计工具链 · 设计中
@@ -37,8 +39,9 @@
 ## 交互与平台
 
 - [Personal Agent 设计](docs/personal-agent.md)：交互约定、通知模式与记忆分层
-- [生成式 UI 工作台](docs/workbench-ui.md)：Tauri 壳 + UI spec 渲染层，Run 查看与接管主界面 · 设计中
-- [DS-Bot 入口](docs/ds-bot-entry.md)：常驻宿主、IM 接入与迁移方案
+- [生成式 UI 工作台](docs/workbench-ui.md)：Tauri 壳 + UI spec 渲染层；自 [ADR 0009](docs/adr/0009-dsbot-as-control-interface.md) 起降为可选旁路，不再是主界面 · 已降级
+- [控制面契约](docs/control-plane-api.md)：前端 ↔ `ar` 的命令面、事件订阅与卡片审批映射 · 设计中
+- [DS-Bot 入口](docs/ds-bot-entry.md)：常驻控制界面、IM 接入与迁移方案；已按 [ADR 0010](docs/adr/0010-retire-dsbot-native-ui.md) 撤回，保留为选型与接入记录
 - [常驻服务分布](docs/assistant-system.md)：服务部署位置与凭据管理
 - [Super-agent 参考架构](docs/super-agent-architecture.md)：DeepSeek Super-agent 架构摘要与本仓取舍
 - [系统运维](docs/platform-ops.md)：规则挖掘、影子测试、监控告警与备份恢复 · 设计中
@@ -72,6 +75,8 @@
 - [ADR 0006](docs/adr/0006-workstation-windows.md)：工作站改用 Windows 11 原生，放弃 Linux 与 WSL
 - [ADR 0007](docs/adr/0007-deferred-resident-node.md)：常驻入口延后，先单机加云端等待队列
 - [ADR 0008](docs/adr/0008-local-agent-runtime.md)：多 Agent 运行时改用自建 `agent:local`，交互层采用生成式 UI
+- [ADR 0009](docs/adr/0009-dsbot-as-control-interface.md)：交互层改用 DS-Bot 作为控制界面，`ar` 收敛为控制面 API（取代 ADR 0008 交互层部分）
+- [ADR 0010](docs/adr/0010-retire-dsbot-native-ui.md)：撤回 ADR 0009，移除 `ds-bot` 插件，交互层回到 DSH 原生会话
 
 ## 能力专题
 
