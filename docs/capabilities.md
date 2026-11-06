@@ -76,7 +76,7 @@ enabled = true
 
 | `kind` | 功能说明 | 复用工具链 |
 |---|---|---|
-| `work.rev.firmware` | 固件镜像提取、解包、静态反编译与 QEMU 仿真 | `re-toolkit` MCP、`unblob`、Ghidra、QEMU |
+| `work.rev.firmware` | 固件镜像提取、解包、静态反编译与 QEMU 仿真 | `re-toolkit` MCP（16 个工具）、`binwalk`、`squashfs-tools`、`ubi_reader`、Ghidra 12.2、QEMU 11.1（`unblob` 在 Windows 原生不可用，见 [re-toolkit Windows 落位](re-toolkit-windows.md)） |
 | `work.rev.apk` | Android APK 与 OTA 包逆向分析 | `apk_analyze`、`jadx`、Frida |
 | `work.rev.elf` | Linux ELF 二进制与内核驱动分析 | `disasm`、`ghidra_analyze`、`frida_trace` |
 | `work.rev.protocol` | 网络与串口私有协议抓包及结构解析 | `pcap_capture`、`mitm_capture`、Kaitai Struct |

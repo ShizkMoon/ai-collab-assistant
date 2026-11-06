@@ -2,7 +2,7 @@
 
 > 状态：设计中 · 上位文档：[架构总览](architecture.md)、[能力目录](capabilities.md)、[本机工具链选型](local-toolchain.md)、[内容创作流水线](creative-studio.md)
 >
-> 本文细化 `work.*` 域下代码开发、固件与软件逆向、游戏构建及图形设计工具链的执行流程。文中所涉命令与软件状态均按 2026-11-01 本机实测结果核对。
+> 本文细化 `work.*` 域下代码开发、固件与软件逆向、游戏构建及图形设计工具链的执行流程。文中所涉命令与软件状态均按 2026-11-06 本机实测结果核对。
 
 ## 0. 本机工具链实测基线
 
@@ -17,7 +17,7 @@
 | ComfyUI | Windows 服务 `comfyui`（WinSW）运行中，`127.0.0.1:8188` 响应正常 |
 | `adb` | 可用 |
 | `godot` / `butler` / `pre-commit` / `mergiraf` / `jj` / `git-absorb` | 当前未安装 |
-| `%USERPROFILE%\.agents` | 包含 71 个 Skill 及 `vendor/` 子库，当前尚未初始化 Git 仓库 |
+| `%USERPROFILE%\.agents` | `skills\` 下 50 个 Skill 目录（均含 `SKILL.md`），无 `vendor/` 子库；尚未初始化 Git 仓库（`.git` 不存在） |
 
 存储路径说明：工作站的 `D:` 数据卷（4TB NTFS）存放全部大体积文件，统一规划存放在 `D:\aica\`（首次使用前执行 `New-Item -ItemType Directory D:\aica`），目录建好前暂存至 `%LOCALAPPDATA%\aica\data\`。
 
@@ -76,13 +76,13 @@
 
 ### 1.4 Skill 开发与维护生命周期
 
-当前 `%USERPROFILE%\.agents\` 下共有 71 个自定义 Skill 与 `vendor/` 下的四个外部技能集（`gamedev`、`litrev`、`music`、`rex`）。需尽快执行 `git init %USERPROFILE%\.agents` 将其纳入版本控制。
+当前 `%USERPROFILE%\.agents\skills\` 下有 50 个 Skill 目录（2026-11-06 实测，均含 `SKILL.md`），`vendor\` 子库不存在——此前记录的「71 个 Skill 与 `gamedev` / `litrev` / `music` / `rex` 四个外部技能集」与实况不符。需尽快执行 `git init %USERPROFILE%\.agents` 将其纳入版本控制。
 
 | 阶段 | 执行规范 |
 |---|---|
 | 编写 | 遵循 `writing-for-agents` 规范，每个 Skill 独立目录（`SKILL.md` + `scripts/` + `references/`），`description` 字段写明触发场景与用户常见表述 |
 | 验证 | 使用 `skills-stocktake` 审查描述清晰度；在真实任务中测试触发准确性，并在干净 Shell 中验证全部配套脚本 |
-| 版本控制 | `%USERPROFILE%\.agents\skills\` 纳入 Git 管理，`vendor/` 下的第三方技能库作为只读上游（通过入口 Skill 路由，不直接修改上游文件） |
+| 版本控制 | `%USERPROFILE%\.agents\skills\` 纳入 Git 管理；将来若引入第三方技能集，作为只读上游（通过入口 Skill 路由，不直接修改上游文件） |
 | 分享与发布 | 对外分享前剥离本机绝对路径与私有主机名，通过独立仓库 `%USERPROFILE%\agent-src\skills\` 或 `npx skills` 发布 |
 | 定期清理 | 连续 30 天未触发或与其它 Skill 功能重叠的条目，经 `config-gc` 盘点确认后归档至 `%USERPROFILE%\.agents\_gc_trash\` |
 
@@ -92,10 +92,11 @@
 
 | 工具层 | 本机配置状态 |
 |---|---|
-| `re-toolkit` MCP | 源码与安装脚本位于 `%USERPROFILE%\agent-src\tools\re-toolkit`（v0.3.0），已注册至 `%APPDATA%\devin\mcp_config.json` 与 `%USERPROFILE%\.claude.json`，共暴露 16 个工具函数（含 `apk_analyze`） |
-| 底层分析工具 | Ghidra 12.1.4、`binwalk`、`unblob`、QEMU、`mitmproxy`、Frida、`rizin`、`jadx`、`apktool`、`payload-dumper-go`、Kaitai Struct、`tshark`、`flashrom`、`openocd`、`sigrok-cli`、`picocom`、`nmap` |
-| 配套 Skill | `%USERPROFILE%\.agents\skills\reverse-engineering`（REX）及 `%USERPROFILE%\.agents\vendor\rex` |
-| 历史分析仓库 | `C:\Repos\kpw5-analysis`、`C:\Repos\mu22mk2-analysis`、`C:\Repos\chaoxing-app-analysis`、`C:\Repos\d3v-analysis`、`C:\Repos\sports-world-campus-analysis` |
+| `re-toolkit` MCP | 16 个工具函数，注册在 DSH desktop profile 的 `C:\Users\Administrator\.dsh\profiles\desktop\cordis.patch.yml`（条目 `mcp-re-toolkit`，stdio）；源码与工作副本在 `C:\Users\Administrator\agent-src\tools\re-toolkit`（源码 `master@58d5b76` 的 shallow 检出，工作副本是 junction）。**状态：部分完成 · 待复验**——`disasm`、`kaitai_compile` 等实测仍报「工具缺失」。详见 [re-toolkit 在 Windows 的落位与验证](re-toolkit-windows.md) |
+| 并行 MCP | `mcp-rea`（`rea` 6.8.0，229 个工具，Ghidra / JADX / rizin / tshark 统一后端），挂在同一份 `cordis.patch.yml` 的 `insert:` 列表下 |
+| 底层分析工具 | Ghidra 12.2（配 JDK 25）、`rizin` 0.9.1、`jadx` 1.5.6、`apktool` 3.0.3、`binwalk` 3.1.0、`squashfs-tools` 4.7.5、`ubi_reader` 0.8.16、`kindletool` 1.6.6、QEMU 11.1.0、`mitmproxy` 12.3.1、`frida-tools` 14.11.0、Kaitai Struct 0.11、`tshark` 4.7.4、`flashrom` 1.8.0、`openocd` 0.12.0、`sigrok-cli` 0.8.0、`picocom`、`nmap` 7.993、`adb` 1.0.41。**`unblob` 在 Windows 原生不可用**，`apkanalyzer` 装不上，Hopper 与 IDA 不可用 |
+| 配套 Skill | `%USERPROFILE%\.agents\skills\re-toolkit`；`reverse-engineering`（REX）与 `vendor\rex` 在本机不存在 |
+| 历史分析仓库 | `C:\Repos\kpw5-analysis`（本机现存）；`mu22mk2-analysis`、`chaoxing-app-analysis`、`d3v-analysis`、`sports-world-campus-analysis` 本机已不存在 |
 
 ### 2.2 六类逆向分析流水线
 
@@ -103,7 +104,7 @@
 
 | 目标类型 | 标准步骤与调用的 MCP / CLI 工具 | 阶段产物 |
 |---|---|---|
-| **路由器与 IoT 固件** | 获取固件镜像（官方包 / OTA / `flash_read` 提取）→ `firmware_scan` → `firmware_extract`（优先 `unblob`）→ `firmware_inventory` → `disasm` 扫描启动脚本 → `ghidra_analyze` 反编译关键服务 → `qemu_boot` 仿真 | 解包文件树、启动链路说明、二进制资产清单 |
+| **路由器与 IoT 固件** | 获取固件镜像（官方包 / OTA / `flash_read` 提取）→ `firmware_scan` → `firmware_extract`（`binwalk` → `unsquashfs` / `ubireader` / `7z` 链；`unblob` 在 Windows 不可用）→ `firmware_inventory` → `disasm` 扫描启动脚本 → `ghidra_analyze` 反编译关键服务 → `qemu_boot` 仿真 | 解包文件树、启动链路说明、二进制资产清单 |
 | **Android APK / OTA** | 校验 `SHA256SUMS` → `apk_analyze` → `java_decompile`（`jadx`）→ Native 库交由 `ghidra_analyze` / `disasm` → 在 Waydroid（ARM64 + `libndk`）或真机上运行 `frida_trace` | 组件暴露面、通信协议与加密逻辑分析 |
 | **Linux ELF / 驱动模块** | `toolkit_status` → `disasm` 提取符号与字符串 → `ghidra_analyze` 交叉引用追踪 → `frida_trace` 动态验证 | 核心函数调用图与单函数反编译伪代码 |
 | **私有网络/串口协议** | `pcap_capture` 或 `mitm_capture` 抓包 → 编写 Kaitai Struct `.ksy` 格式定义 → `kaitai_compile` 生成解析器验证 | `.ksy` 协议规范、样本流量包与字段说明 |
@@ -132,7 +133,7 @@
       adjudication.md  # 多 Agent 结论分歧裁定记录
 ```
 
-证据质量要求（沿用 `reverse-engineering` Skill 规范）：
+证据质量要求（沿用逆向分析的证据规范）：
 
 1. **完整证据链**：每条确认的缺陷必须具备完整的 `source → sink → guard → principal` 四要素；链条不完整的推断归入 `unresolved` 假设列表。
 2. **明确状态分级**：结论状态严格区分 `confirmed`、`likely`、`unresolved`、`refuted`。

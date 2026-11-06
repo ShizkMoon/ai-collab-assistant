@@ -177,9 +177,8 @@ C:\Repos\ai-collab-assistant\     # 架构与设计文档（本仓）
 D:\aica\                         # 大体积文件：成片、书库、固件镜像、备份暂存
 C:\Repos\                          # 个人项目仓库（视频/音乐/代码/游戏）
 C:\Repos\video\                    # 视频工程目录
-%USERPROFILE%\agent-src\tools\   # Provider 源码仓（re-toolkit 等）
-%USERPROFILE%\.agents\            # Skill、规则、笔记（待纳入 Git 管理）
-  %USERPROFILE%\.agents\vendor\   # 第三方大型技能库（gamedev / music）
+%USERPROFILE%\agent-src\tools\   # Provider 源码仓与二进制落位（re-toolkit、rea 等，见 docs/re-toolkit-windows.md）
+%USERPROFILE%\.agents\            # Skill、规则、笔记（50 个 Skill 目录，待纳入 Git 管理）
 <书库路径>                       # Calibre 书库（以本机实际路径为准）
 ```
 
@@ -225,6 +224,7 @@ C:\Repos\video\                    # 视频工程目录
 | 基础设施 | [网络与设备组网](network-fabric.md) | Tailscale 组网、出口感知与外设接入 |
 | 基础设施 | [工作站：Windows 11 原生](workstation-windows.md) | 工作站软硬件配置、还原点与备份回滚、桌面自动化接口 |
 | 基础设施 | [本机工具链选型](local-toolchain.md) | 本地软件选型与 CLI 调用优先级 |
+| 基础设施 | [re-toolkit 在 Windows 的落位与验证](re-toolkit-windows.md) | 安装路径、MCP 注册点、16 个工具与后端映射、不可用项与复验状态 |
 | 基础设施 | [AX6000 校园网路由](ax6000-router.md) | 多出口认证、分流与透明代理拓扑 |
 | 基础设施 | [智能家居技术栈](home-automation-stack.md) | HA、Zigbee2MQTT 与 ESPHome 的部署细节 |
 | 显示终端 | [多端显示仲裁](surface-arbiter.md) | 多显示端的内容优先级与刷新预算分配 |

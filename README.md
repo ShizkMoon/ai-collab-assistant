@@ -56,6 +56,7 @@
 - [输入端口与输出路由](docs/output-routing.md)：`sources` / `surfaces` 约定、效果分类、可打扰性门控、投递回执与去重 · 设计中（显示端未定）
 - [工作站：Windows 11 原生](docs/workstation-windows.md)
 - [本机工具链选型](docs/local-toolchain.md)
+- [re-toolkit 在 Windows 的落位与验证](docs/re-toolkit-windows.md)：16 个 MCP 工具与后端映射、垫片清单、不可用项与替代路径 · 部分完成（待复验）
 - [网络与设备组网](docs/network-fabric.md)：Tailscale 组网、出口感知与外设接入 · 设计中
 - [AX6000 校园网路由](docs/ax6000-router.md)
 - [智能家居技术栈](docs/home-automation-stack.md)、[宿舍智能家居方案](docs/dorm-smart.md)

@@ -9,7 +9,7 @@ Agent 调用本地软件时按以下优先级依次选择：
 1. **原生 CLI**：可直接通过命令行参数调用、具备明确退出码与标准输出。
 2. **内嵌脚本 API**：支持无头运行 Python / Lua / JS 脚本（如 Blender `bpy`、REAPER ReaScript），通过薄封装脚本转为标准 CLI。
 3. **`CLI-Anything` 封装（Agent Harness）**：针对缺少原生 CLI 的桌面应用，采用 [HKUDS/CLI-Anything](https://github.com/HKUDS/CLI-Anything) 模式封装出命令行接口。
-4. **MCP Server**：作为补充接口接入（如 `re-toolkit` MCP），在需要结构化工具调用时配合使用。
+4. **MCP Server**：作为补充接口接入（如 `re-toolkit` 的 16 个原子工具、`rea` 的 229 个统一后端工具），在需要结构化工具调用时配合使用。两者都注册在 DSH desktop profile 的 `cordis.patch.yml`；`re-toolkit` 当前状态为「部分完成 · 待复验」，落位见 [re-toolkit 在 Windows 的落位与验证](re-toolkit-windows.md)。
 5. **网页接口（`ego-browser`）**：有登录态或需要多步交互的网页任务走 ego(lite) 的 Space + Snapshot，再降级才是 GUI 自动化（见 §2.8）。
 6. **GUI 自动化（`agent-desktop` + 视觉点击）**：最后兜底路径，优先经 `agent-desktop` 读取 UI Automation 无障碍树并执行 ref 语义动作（headless、不抢焦点），自绘画布等特殊场景再结合视觉模型与 AutoHotkey v2 / `SendInput` 操作（见 [系统拓扑 §7](system-topology.md#7-gui-自动化分级策略)）。
 
