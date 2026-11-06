@@ -2,7 +2,7 @@
 
 > 状态：设计定稿（部署待常驻节点落地） · 上位文档：[宿舍智能家居方案](dorm-smart.md)、[网络与设备组网](network-fabric.md)
 >
-> 本文记录 Home Assistant + Mosquitto + Zigbee2MQTT + ESPHome 的选型、传感器刷机与接线方法、本地自动化分层兜底、密钥管理以及断电断网恢复行为。常驻节点因成本原因暂不采购（[ADR 0007](adr/0007-deferred-resident-node.md)），第 1 节曾记录 NixOS 模块配置，工作站改用 Windows 后已改写为部署形态无关的写法，其余章节与部署形态无关。
+> 本文记录 Home Assistant + Mosquitto + Zigbee2MQTT + ESPHome 的选型、传感器刷机与接线方法、本地自动化分层兜底、密钥管理以及断电断网恢复行为。常驻节点因成本原因暂不采购，第 1 节曾记录 NixOS 模块配置，工作站改用 Windows 后已改写为部署形态无关的写法，其余章节与部署形态无关。
 >
 > **参考资料来源**：Zigbee2MQTT 官方文档、ESPHome 官方文档、`atc1441` / `pvvx` 开源固件仓库、Tailscale 官方文档；早期 NixOS 特定配置项来自当时的 NixOS Wiki 与 `nixpkgs` 模块源码，现已按 Windows / 容器形态改写。
 

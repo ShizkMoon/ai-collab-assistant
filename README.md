@@ -26,7 +26,7 @@
 
 ## 执行域
 
-- 编排与交互由 DSH 承担：会话内用领导模式，工作区级用 SuperAgent；执行由 DSH subagent / teammate 完成（决策见 [ADR 0011](docs/adr/0011-dsh-orchestration.md)）
+- 编排与交互由 DSH 承担：会话内用领导模式，工作区级用 SuperAgent；执行由 DSH subagent / teammate 完成
 - [系统拓扑](docs/system-topology.md)：工作站是唯一执行节点，`ar` 只保留控制面定位 · 部分完成
 - [`ar` 控制面 CLI](docs/agent-local-runtime.md)：0.1.0，19 个动词，无 `list` / `watch` · 未部署
 - [控制面契约](docs/control-plane-api.md)：客户端 ↔ `ar` 的命令面、事件订阅与卡片审批映射 · 未部署
@@ -67,20 +67,6 @@
 - [统一渲染管线](docs/render-pipeline.md)
 - [墨水屏硬件选型](docs/eink-display-modules.md)、[墨水屏交互设计](docs/eink-modules-ux.md)、[墨水屏改造方案](docs/eink-devkit-plan.md)、[E-Ink 技术术语表](docs/eink-tech-glossary.md)
 - [OpenEPaperLink 内部机制](docs/oepl-internals.md)、[epdiy 内部机制](docs/epdiy-internals.md)、[电子价签刷机与验收](docs/esl-tag-ops.md)
-
-## 架构决策记录（ADR）
-
-- [ADR 0001](docs/adr/0001-taskwarrior-as-event-store.md)：使用 Taskwarrior 作为任务库
-- [ADR 0002](docs/adr/0002-three-confirmation-points.md)：仅对三类操作设置确认点
-- [ADR 0003](docs/adr/0003-loop-local-entry-remote.md)：入口与编排循环分离
-- [ADR 0004](docs/adr/0004-draft-layer-ttl.md)：草稿层设置 24 小时 TTL
-- [ADR 0005](docs/adr/0005-proposal-shadow-promotion.md)：通过提案与影子测试上线新能力
-- [ADR 0006](docs/adr/0006-workstation-windows.md)：工作站改用 Windows 11 原生，放弃 Linux 与 WSL
-- [ADR 0007](docs/adr/0007-deferred-resident-node.md)：常驻入口延后，先单机加云端等待队列
-- [ADR 0008](docs/adr/0008-local-agent-runtime.md)：多 Agent 运行时改用自建 `agent:local`，交互层采用生成式 UI
-- [ADR 0009](docs/adr/0009-dsbot-as-control-interface.md)：交互层改为独立控制界面，`ar` 收敛为控制面 API（取代 ADR 0008 交互层部分）· 已被 ADR 0010 撤回
-- [ADR 0010](docs/adr/0010-retire-dsbot-native-ui.md)：撤回 ADR 0009，移除该控制界面插件，交互层回到 DSH 原生会话
-- [ADR 0011](docs/adr/0011-dsh-orchestration.md)：编排与交互归 DSH（会话内领导模式、工作区级 SuperAgent），执行由 DSH subagent / teammate 承担 · 已接受
 
 ## 能力专题
 

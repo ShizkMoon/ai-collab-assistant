@@ -26,7 +26,7 @@ _避免_：提供者
 
 **执行器（Executor）**：
 任务实际执行的后端取值：`agent:local`、`ha:*`、`cli:*`、`n8n:*`、`notify`、`me`。
-`agent:local` 指控制面契约（`ar` CLI 的命令子集）加运行目录协议（`runs/<root_id>/`），设计中、未部署，见 [ADR 0008](docs/adr/0008-local-agent-runtime.md) 与 [控制面契约](docs/control-plane-api.md)。当前实际执行面是 DSH 会话内的 subagent 与 teammate。
+`agent:local` 指控制面契约（`ar` CLI 的命令子集）加运行目录协议（`runs/<root_id>/`），设计中、未部署，见 [控制面契约](docs/control-plane-api.md)。当前实际执行面是 DSH 会话内的 subagent 与 teammate。
 _避免_：执行者、处理器
 
 **Worker**：

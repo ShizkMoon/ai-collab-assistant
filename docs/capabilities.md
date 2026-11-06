@@ -22,7 +22,7 @@ autonomy = "L2"                  # 可选，见总体架构设计 §5
 enabled = true
 ```
 
-能力、场景与端口定义统一放在 `%ProgramData%\aica\` 下并纳入 Git 管理，随 `restic` 备份与系统还原点留存版本。**新编写的能力默认设置 `enabled = false`**，经过提案与影子测试达标后再正式启用（见 [ADR 0005](adr/0005-proposal-shadow-promotion.md)）。
+能力、场景与端口定义统一放在 `%ProgramData%\aica\` 下并纳入 Git 管理，随 `restic` 备份与系统还原点留存版本。**新编写的能力默认设置 `enabled = false`**，经过提案与影子测试达标后再正式启用。
 
 ## 2. `kind` 分类清单
 

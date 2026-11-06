@@ -1,6 +1,6 @@
 # 以 dsh-superagent 作执行侧运行时
 
-> 状态：设计中（未实施）· 上位文档：[总体架构设计](architecture-north-star.md) · 相关：[系统拓扑](system-topology.md)、[多 Agent 运行时](multi-agent-runtime.md)、[ADR 0008](adr/0008-local-agent-runtime.md)、[ADR 0010](adr/0010-retire-dsbot-native-ui.md)、[ADR 0011](adr/0011-dsh-orchestration.md)
+> 状态：设计中（未实施）· 上位文档：[总体架构设计](architecture-north-star.md) · 相关：[系统拓扑](system-topology.md)、[多 Agent 运行时](multi-agent-runtime.md)
 >
 > 本文记录一个待决策选项：把 `dsh-superagent`（官方研究室原型）的运行时当作执行侧候选，补充 DSH 内的编排与执行链路。按 2026-11-06 口径，编排与交互由 DSH 承担（会话内领导模式；工作区级 SuperAgent），执行由 DSH subagent / teammate 完成，`ar` 只提供控制面接口。事实部分已于 2026-11-06 核对源码，结论部分尚未验证。
 
@@ -9,7 +9,7 @@
 - `dsh-superagent` **不是 GitHub 专用**，它是多 Source 运行时；GitHub 与 Feishu 只是两个 Source 实现，共用同一套引擎。
 - 它已经具备本系统设计里还没实现的部分：持久任务状态库（自带 sqlite store）、投递 outbox（幂等 + 重试 + 永久失败判定）、健康检查、准入政策、面板。缺的是与任务库的对接。
 - 建议的第一步不是改造它，而是**写一个 `task` Source**：轮询任务库中的待办任务，转成 Trigger，其余交给它的任务、评估、执行、回复链路。任务权威仍留在 Taskwarrior。
-- 它与 `ar` 不在同一层，也不是替代关系：`ar` 是控制面 CLI（0.1.0，未部署），superagent 是执行侧候选运行时。一个自带状态库与面板、跟随上游成本高；一个只有命令面、缺 UI 与审批。是否采用需要单独一份 ADR。
+- 它与 `ar` 不在同一层，也不是替代关系：`ar` 是控制面 CLI（0.1.0，未部署），superagent 是执行侧候选运行时。一个自带状态库与面板、跟随上游成本高；一个只有命令面、缺 UI 与审批。是否采用需要单独评估。
 
 ## 1. 已核实的事实（2026-11-06）
 
@@ -111,10 +111,10 @@
 1. **双状态机对账**：原型侧 Ticket 状态与任务九态需要一张映射表，且必须单向权威（任务库优先），否则迟早分叉。
 2. **研究原型**：代码风格不统一、可能有 bug；改动会被上游版本推着走。
 3. **Setup 一段式体验缺失**：新 Source 不会自动出现在向导弹里。
-4. **面板是第二套 UI**：与 [ADR 0010](adr/0010-retire-dsbot-native-ui.md) 的结论（交互层回到 DSH 原生会话）并不冲突，但要注意别让两套界面各自维护状态。
+4. **面板是第二套 UI**：与「交互层回到 DSH 原生会话」的结论并不冲突，但要注意别让两套界面各自维护状态。
 
 ## 7. 下一步
 
 1. 写只读 `task` Source，只接收、不写回，验证 Trigger 翻译与去重。
 2. 打开写回（`task annotate`），影子运行 7 天，与人工在任务库上的处置结果对照。
-3. 依据对照结果评估是否采用 superagent 作执行侧；层级归属已由 [ADR 0011](adr/0011-dsh-orchestration.md) 定在 DSH，任务库权威不变。
+3. 依据对照结果评估是否采用 superagent 作执行侧；层级归属已定在 DSH，任务库权威不变。

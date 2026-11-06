@@ -1,6 +1,6 @@
 # 事件与任务规格：字段、状态与 CLI
 
-> 状态：未部署 · 上位文档：[架构总览](architecture.md)、[事件运行时与派发](event-runtime.md)、[ADR 0001](adr/0001-taskwarrior-as-event-store.md)
+> 状态：未部署 · 上位文档：[架构总览](architecture.md)、[事件运行时与派发](event-runtime.md)
 >
 > 本文规定任务的数据结构、状态映射与 `ev` 命令行工具接口。规则匹配、派发执行路径、并发与幂等机制见 [事件运行时与派发](event-runtime.md)。
 

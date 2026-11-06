@@ -532,6 +532,6 @@ leader 默认 `ctrl+x`（`keybind.ts:41`）。以下均来自 `keybind.ts`：
 ## 落点
 
 - **采用**：A5 的工具输出截断契约（2000 行 / 50KiB、头截断 + 全文落盘 + 带行范围的路径 marker）、A8 的 `queue` / `interrupt` 两态、A9 的 claim + 续跑次数预算，在 [`ar` 控制面与运行目录 §11](../agent-local-runtime.md) 记为已验证协议点（commit `7c083c0` / `fbf9934` / `f71cab5`）；A6 的 `call_id` 折叠与 turn 结局闭集也在同一节（`c8ef2f5`）。A8 的「运行中不能真插话」在 [控制面契约 §3](../control-plane-api.md) 写成「事件面是通知面，不是注入面」。
-- **搁置**：A1 的资源级规则集（`{action,resource,effect}` 有序数组、deny 先行）没有采用——`ar` 的审批仍是 tier 加硬拒路径，DSH 侧是 sandbox × approval 双旋钮，两家都不是资源级规则集。A2 外目录审批、A3 grant 落资源、A4 授权管理面、A7 分组 verbosity、A13 快照回滚、A14 导出脱敏、A15 Code Mode、A16 SSE 可靠性、A17 测试策略的落点都在 `gate.ts`、`server.ts`、`workbench/`，[ADR 0011](../adr/0011-dsh-orchestration.md) 之后不再投入。
+- **搁置**：A1 的资源级规则集（`{action,resource,effect}` 有序数组、deny 先行）没有采用——`ar` 的审批仍是 tier 加硬拒路径，DSH 侧是 sandbox × approval 双旋钮，两家都不是资源级规则集。A2 外目录审批、A3 grant 落资源、A4 授权管理面、A7 分组 verbosity、A13 快照回滚、A14 导出脱敏、A15 Code Mode、A16 SSE 可靠性、A17 测试策略的落点都在 `gate.ts`、`server.ts`、`workbench/`，自建运行时废止后不再投入。
 - **影响判断**：中立参考。它补的是 `ar` 数据面的语义（`seq`、claim、续跑预算），对「执行侧该自建还是复用」不给答案——OpenCode 自己是竞品 harness，没有适配器可以给我们用。整篇最值钱的是那句判断：把不确定的模型行为关进可重放的状态机。
 - **时效**：快照 `2.2.5` / `d852834`（`dev`，2026-11-04）。官方文档仍在讲 v1 行为（§7.2 已逐页标出），`doom_loop` 只有配置兼容键、找不到运行时判定，引用前必须回源码。复查时点：真要抄 A1 或 A6 时，对当时 `dev` 重核行号，别用本文的行号。

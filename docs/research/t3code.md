@@ -512,5 +512,5 @@ pi.on("tool_call", async (event, ctx) => {
 
 - **采用**：A2「process-bound effect 不得重放」（pid 死即 `orphaned`，不二次 spawn）与 A3 的 `queue` / `interrupt` 语义，在 [`ar` 控制面与运行目录 §11](../agent-local-runtime.md) 的「孤儿节点有归宿」「回复投递三态」里记为已验证协议点（commit `f71cab5` / `fbf9934`）；A1 的 `seq` 加命令回执幂等，对上了同一节的「事件 `seq` 连续」与 [控制面契约 §2](../control-plane-api.md) 的幂等键列。
 - **搁置**：A8 Run/Attempt 分离、A9 快照三件套（`latest_seq` / `snapshot_seq` / `pruned_below`）、A10 预算化 handoff 都还停在 R2，没有落地；§6 已判不抄的全套 Effect-TS + SQLite 事件溯源、8 家 provider 矩阵、「投影即真相」，在自建运行时收缩后更没有位置。
-- **影响判断**：支持复用。T3 自己不做 agent 引擎，只把别家 CLI 包在一条事件溯源的控制总线后面——这与 [ADR 0011](../adr/0011-dsh-orchestration.md) 收敛出的形态同构（交互与编排在外，执行交给现成 harness）。所以它是「控制面该长什么样」的参照，不是「执行侧该自建」的证据。
+- **影响判断**：支持复用。T3 自己不做 agent 引擎，只把别家 CLI 包在一条事件溯源的控制总线后面——这与本仓现在的形态同构（交互与编排在外，执行交给现成 harness）。所以它是「控制面该长什么样」的参照，不是「执行侧该自建」的证据。
 - **时效**：`e68e19d`（2026-11-03）。仓库正处在 orchestration-v2 重写期，`Orchestrator.ts`（14,308 行）与 `ProjectionStore.ts`（330KB）本文没有通读，只按 grep 命中取证（§0 已自陈）。复查时点：真要抄 A8 或 A9 时重核，v2 的目录结构很可能已经变了。

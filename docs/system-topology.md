@@ -4,7 +4,7 @@
 >
 > 编排与交互由 DSH 承担：会话内为「领导模式」，工作区与实例级为 SuperAgent；执行由 DSH subagent / teammate 完成。`ar` 是控制面 CLI（0.1.0，19 个动词），`runs/<root_id>/` 信封协议与 `events.jsonl` 设计中、未部署，见 [控制面契约](control-plane-api.md) 与 [多 Agent 运行时](multi-agent-runtime.md)。
 >
-> 常驻节点因成本原因延后（[ADR 0007](adr/0007-deferred-resident-node.md)），当前拓扑只有一个执行节点：工作站。云服务器 `orca-pool` 只承担消息接收与等待队列，不执行任何任务。
+> 常驻节点因成本原因延后，当前拓扑只有一个执行节点：工作站。云服务器 `orca-pool` 只承担消息接收与等待队列，不执行任何任务。
 
 ## 1. 两层职责划分
 
@@ -38,7 +38,7 @@ flowchart LR
 | 控制面 | `ar` CLI（0.1.0，19 个动词） | 建 Run、加节点、派发、查、说、裁决、读事件、收口、分叉；`runs/<root_id>/` 是 Run 状态的权威位置，设计中、未部署 |
 | 任务执行 | DSH subagent / teammate，以及各能力 Provider | 在隔离的 Worktree 或运行目录内完成具体派发的子任务，完成后写回执行摘要 |
 
-与 [Super-agent 参考架构](super-agent-architecture.md) 的云端 Router / 端侧守护进程模式相比，本系统保持 [ADR 0003](adr/0003-loop-local-entry-remote.md) 的方向：**编排循环与执行留在工作站，远端只做搬运**。在途消息以事件形式持久化，而不是以会话状态形式存在。
+与 [Super-agent 参考架构](super-agent-architecture.md) 的云端 Router / 端侧守护进程模式相比，本系统保持同一方向：**编排循环与执行留在工作站，远端只做搬运**。在途消息以事件形式持久化，而不是以会话状态形式存在。
 
 ## 2. 能做什么由端口决定
 
@@ -53,7 +53,7 @@ flowchart LR
 ## 3. 跨机通信通道
 
 - **云端队列拉取**：工作站由任务计划程序每 2 分钟拉起一次 `ev sync`，按端口游标增量拉取事件并推进游标；拉取使用 [输入端口](output-routing.md#2-输入端口sourcestoml) 中声明的 `cursor.mode`。
-- **虚拟局域网**：各节点通过 Tailscale 互联。工作站、云服务器与手机在同一个 Tailnet；Kindle KPW5 以 Userspace 网络模式接入，仅支持出站连接。子网路由与 Exit Node 暂不由本机房节点提供（[ADR 0007](adr/0007-deferred-resident-node.md)）。
+- **虚拟局域网**：各节点通过 Tailscale 互联。工作站、云服务器与手机在同一个 Tailnet；Kindle KPW5 以 Userspace 网络模式接入，仅支持出站连接。子网路由与 Exit Node 暂不由本机房节点提供。
 - **命令调用通道**：云端脚本通过 Tailscale SSH 调用工作站上的受限入口脚本，底层转发至本机 `ar` CLI。
 - **受限入口脚本**：在工作站 `%USERPROFILE%\.local\bin\` 下放置封装脚本（PowerShell），仅向远端暴露四项受控操作：创建任务、查询状态、读取输出、发送跟进回复。
 

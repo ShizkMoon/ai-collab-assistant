@@ -625,7 +625,7 @@ URL：<https://github.com/deepseek-ai/deepseek-harness>
 ## 落点
 
 - **采用**：§3.4 的审批裁决闭集（`allowed-once` / `rejected` / `cancelled` / `unavailable`）与 fail-closed 归一化，落进了 [Worker 适配器 §4.2](../worker-adapters.md) 的「拒绝 ≠ 失败」「审批超时按 `unavailable` 记」两条口径；§3.2 的 surface 分离与 §3.3 的 `truncated/total`，落进了 [控制面契约 §3、§4](../control-plane-api.md) 的「事件面是通知面，不是注入面」与 `gate` 超时即拒。
-- **采用（作为判断依据）**：§2–§3 逐条查清了 DSH 有哪些机制，[ADR 0011](../adr/0011-dsh-orchestration.md) §1 那句「四块已被一方包覆盖」才站得住——审批对 `dsh-user-approval` + `dsh-permission-presets`，子代理对 `dsh-subagent-claude-code` / `dsh-subagent-codex`，任务板对 `dsh-experimental-agent-team`。这些包各自做什么，目前只有这一篇有逐条记录。
-- **搁置**：A3 权限双轴、A5 step 级工具准入、A10 任务板 CAS、A11 hook 审计对、A12 会话格式版本化、A14 Agent Notes 的落点全在 `src/daemon.ts`、`gate.ts`、`workbench/`。[ADR 0011](../adr/0011-dsh-orchestration.md) §2 废止自建适配层与工作台之后这些文件不再投入，条目只剩参考价值。§4 的 UI 规格同此：它服务单文件工作台，宿主文档已随批 3 删除。
+- **采用（作为判断依据）**：§2–§3 逐条查清了 DSH 有哪些机制，「四块已被一方包覆盖」这个判断才站得住——审批对 `dsh-user-approval` + `dsh-permission-presets`，子代理对 `dsh-subagent-claude-code` / `dsh-subagent-codex`，任务板对 `dsh-experimental-agent-team`。这些包各自做什么，目前只有这一篇有逐条记录。
+- **搁置**：A3 权限双轴、A5 step 级工具准入、A10 任务板 CAS、A11 hook 审计对、A12 会话格式版本化、A14 Agent Notes 的落点全在 `src/daemon.ts`、`gate.ts`、`workbench/`。自建适配层与工作台废止之后，这些文件不再投入，条目只剩参考价值。§4 的 UI 规格同此：它服务单文件工作台，宿主文档已随批 3 删除。
 - **影响判断**：支持复用，是九篇里证据最硬的一篇。它证明的不是「DSH 功能多」，而是「我们要自建的四层它都做成了库内一等类型」——结论因此不是「不必抄」，是「不该自建」。
 - **时效**：证据取 master `8bd0733`（2026-11-03）与本机 asar `0.2.1-rc.5`；§0.1 自陈的「0.2.1→0.2.2 行为差异未穷举」至今没补，本机安装包也已不是当日的 182,766,714 字节（现 213,202,918 字节），版本对照表要重跑。行号只对那个 commit 成立。复查时点：动 `ar` 协议、或重新考虑把某块能力收回自建时。

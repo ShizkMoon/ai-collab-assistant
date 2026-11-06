@@ -544,6 +544,6 @@ Select-String -Path "$d\pkg\package\sdk-tools.d.ts" -Pattern '^export interface 
 ## 落点
 
 - **采用**：§3.3 的六档权限模式与 `dontAsk`「会问即拒」、`--tools` / `--disallowedTools` 的工具面收窄、`-p` 自 v2.1.302 起默认 Manual（需审批的调用直接被拒），进了 [Worker 适配器](../worker-adapters.md) 的 §2.1 能力对照表与 §4.2「同一份约束在三家的落地方式」；§4.1 的「默认 Manual 等于天然 fail-closed，但表现为工具调用失败」也是从这一条推出来的，写在同篇 §4.1 的表格里。
-- **搁置**：A1–A14 的落点是 `gate.ts`、`daemon.ts`、`runs.ts`、`ev_wait`，属自建运行时；[ADR 0011](../adr/0011-dsh-orchestration.md) 把执行侧交给 DSH 适配器后，这些条目没有实现位置。44 个工具面本身没有被复刻——§1 的结论正好相反：能抄的是权限与子代理语义，工具清单不是可抄的东西。§6 已判不抄的 33 个 hook 全量、`auto` 的第二模型分类器、`Artifact`、`EnterWorktree` 维持原判。
-- **影响判断**：支持复用。这是三家 CLI 里权限模型最完整的一家，而 DSH 的 `dsh-subagent-claude-code` 已经按协议接了它；[Worker 适配器 §0](../worker-adapters.md) 写清了自建转写为什么把 `stream-json` 整体落进 `_raw`——这句是 ADR 0011「执行归 DSH」的直接依据之一。
+- **搁置**：A1–A14 的落点是 `gate.ts`、`daemon.ts`、`runs.ts`、`ev_wait`，属自建运行时；执行侧交给 DSH 适配器后，这些条目没有实现位置。44 个工具面本身没有被复刻——§1 的结论正好相反：能抄的是权限与子代理语义，工具清单不是可抄的东西。§6 已判不抄的 33 个 hook 全量、`auto` 的第二模型分类器、`Artifact`、`EnterWorktree` 维持原判。
+- **影响判断**：支持复用。这是三家 CLI 里权限模型最完整的一家，而 DSH 的 `dsh-subagent-claude-code` 已经按协议接了它；[Worker 适配器 §0](../worker-adapters.md) 写清了自建转写为什么把 `stream-json` 整体落进 `_raw`——这句是「执行归 DSH」的直接依据之一。
 - **时效**：证据是 `@anthropic-ai/claude-code@2.1.318`（2026-11-04 拉取）。最要紧的事实变化在 §0.1：包已改成原生二进制，2.1.318 的 npm 包只有 7 个文件、29,472 字节，「`npm pack` 解包看 bundle」这条调研路径从此失效，后续只能靠文档、CHANGELOG 与 340MB 平台包里的字符串。复查时点：本机装好 `claude` 后，按 [Worker 适配器 §7](../worker-adapters.md) 的待实测清单逐条核。

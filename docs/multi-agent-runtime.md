@@ -1,6 +1,6 @@
 # 多 Agent 运行时：树、信封与程序化约束
 
-> 状态：部分完成（协议为设计中；`runs/` 运行目录与派发链路未部署） · 上位文档：[总体架构设计](architecture-north-star.md) · 关联：[事件运行时](event-runtime.md)、[任务规格](event-spec.md)、[多 Agent 协作规范](agent-collaboration.md)、[ADR 0011](adr/0011-dsh-orchestration.md)
+> 状态：部分完成（协议为设计中；`runs/` 运行目录与派发链路未部署） · 上位文档：[总体架构设计](architecture-north-star.md) · 关联：[事件运行时](event-runtime.md)、[任务规格](event-spec.md)、[多 Agent 协作规范](agent-collaboration.md)
 >
 > 本文规定多个 Agent 之间如何传递工作、如何避免自由对话的上下文成本，以及「让模型决定发散还是收敛」如何在不依赖提示词的情况下落地。协作模式的业务分类见 [多 Agent 协作规范](agent-collaboration.md)，本文只讲机制。
 >
@@ -189,7 +189,7 @@ flowchart LR
 - **不做 Agent 间自由对话。** 需要交换的信息只有三种：产物（走数据面）、进度（走控制面）、事实（走知识面）。
 - **不引入独立的编排引擎。** 调度在会话内由 DSH Agent 完成；幂等落在任务库的幂等键上，重试落在会话内的重试上。
 - **不把会话当作状态。** 任何需要跨设备、跨时间存在的上下文都必须能从任务库与产物重建。
-- **不在派发链路上叠加人工确认。** 只保留付款、删除、对外发布三类确认点（[ADR 0002](adr/0002-three-confirmation-points.md)）。
+- **不在派发链路上叠加人工确认。** 只保留付款、删除、对外发布三类确认点。
 
 ## 10. 状态与部署
 

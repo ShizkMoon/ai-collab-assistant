@@ -1,8 +1,8 @@
 # 控制面契约：客户端 ↔ `ar`
 
-> 状态：设计中、未部署 · 上位文档：[ADR 0010](adr/0010-retire-dsbot-native-ui.md)（撤回 ADR 0009） · 关联：[`ar` 控制面 CLI 与运行目录](agent-local-runtime.md)、[多 Agent 运行时](multi-agent-runtime.md)、[Worker 适配器](worker-adapters.md)
+> 状态：设计中、未部署 · 关联：[`ar` 控制面 CLI 与运行目录](agent-local-runtime.md)、[多 Agent 运行时](multi-agent-runtime.md)、[Worker 适配器](worker-adapters.md)
 >
-> 2026-11-06 [ADR 0010](adr/0010-retire-dsbot-native-ui.md) 撤回 ADR 0009：交互层回到 DSH 原生会话，客户端是 DSH 会话或手机端。下文动词表、事件面、卡片语义与状态权威逐条不变。
+> 2026-11-06 交互层回到 DSH 原生会话，客户端是 DSH 会话或手机端。下文动词表、事件面、卡片语义与状态权威逐条不变。
 >
 > 本文只定义两件事：客户端能用什么命令驱动 `ar`，以及它能看到什么事件。Run 语义（信封、节点树、预算、升级）不在此重复，见 [多 Agent 运行时](multi-agent-runtime.md) 与 [`ar` 控制面 CLI 与运行目录](agent-local-runtime.md)。
 

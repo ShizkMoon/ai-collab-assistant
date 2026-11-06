@@ -1,6 +1,6 @@
 # Worker 非交互契约：Claude Code / Codex（附 pi 对照）
 
-> 状态：部分完成（pi 一列已验证；claude / codex 两列为文档与源码推断，标「待实测」；执行侧适配未部署） · 上位文档：[多 Agent 运行时](multi-agent-runtime.md)（信封与节点树） · 关联：[ADR 0011](adr/0011-dsh-orchestration.md)、[开源复用清单](open-source-reuse.md)
+> 状态：部分完成（pi 一列已验证；claude / codex 两列为文档与源码推断，标「待实测」；执行侧适配未部署） · 上位文档：[多 Agent 运行时](multi-agent-runtime.md)（信封与节点树） · 关联：[开源复用清单](open-source-reuse.md)
 >
 > 实测基线：2026-11-04，本机 Windows 工作站。**pi 1.5.0 已安装并实测**（`C:\Users\Administrator\AppData\Roaming\npm\pi.ps1`，以原生文件为准）；**codex 与 claude 本机未安装**（`Get-Command` = MISSING），其结论以官方文档与上游源码为据并标「待实测」。
 >
@@ -8,7 +8,7 @@
 
 ## 0. 结论：适配由 DSH 提供
 
-适配已由 DSH 的 `dsh-subagent-claude-code` 与 `dsh-subagent-codex` 提供：命令拼装、事件转写、审批对接都在适配器里完成，属于协议级适配（[ADR 0011](adr/0011-dsh-orchestration.md)）。自建 Worker 适配层废止，本篇不再描述自建实现。
+适配已由 DSH 的 `dsh-subagent-claude-code` 与 `dsh-subagent-codex` 提供：命令拼装、事件转写、审批对接都在适配器里完成，属于协议级适配。自建 Worker 适配层废止，本篇不再描述自建实现。
 
 **为什么自建转写会把两家 CLI 的输出整体落进 `_raw`**：自建转写的实现只覆盖 pi 的 `--mode json`，claude 的 `stream-json` 与 codex 的 JSONL 没有对应 parser，未识别行只能整行落进兜底记录，结构化字段一个也拿不到。这不是参数没传全，是事件语义由谁定义的问题。
 

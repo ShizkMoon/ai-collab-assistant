@@ -17,7 +17,7 @@ Personal Agent 是本系统的用户交互层，负责将多端输入统一转�
 
 | 入口渠道 | 适用场景 | 底层实现 |
 |---|---|---|
-| IM（DSH IM 插件 / AstrBot） | 手机端随时发送指令、通过交互卡片点击确认 | `dsh-im` 插件；DS-Bot 入口方案已由 [ADR 0010](adr/0010-retire-dsbot-native-ui.md) 撤回 |
+| IM（DSH IM 插件 / AstrBot） | 手机端随时发送指令、通过交互卡片点击确认 | `dsh-im` 插件；DS-Bot 入口方案已撤回 |
 | PowerToys Run | 工作站桌面按 `Alt+Space` 一句话快速录入任务 | PowerToys Run 插件 |
 | Phone Link / IM 分享 | 手机截图、照片、网页链接、文件一键分享录入任务 | Phone Link、微信文件传输助手 |
 | 语音输入 | 桌面 ThinkSmart View 主控台或手机语音指令 | FunASR / SenseVoice + CosyVoice |

@@ -19,7 +19,7 @@
 | **设施层** | 算力、网络与硬件运行环境 | 工作站、AX6000、手机、墨水屏、各类传感器 | 物理设备 + 快照与包管理 | [工作站配置](workstation-windows.md)、[智能家居技术栈](home-automation-stack.md) |
 | **知识层** | 检索历史任务与个人文档 | 任务记录、笔记、会话记录、命令历史的混合检索库 | 可从源数据重建 | [知识库与记忆分层](knowledge-memory.md) |
 
-**人工确认点**固定为三类：**付款、删除、对外发布**（[ADR 0002](adr/0002-three-confirmation-points.md)）。其余操作默认直接执行；可逆操作配备默认 5 分钟的撤销窗口，窗口期内可一键回退。会话内的审批与权限档由 DSH 的 `dsh-user-approval` 与 `dsh-permission-presets` 承担，本仓不另建策略引擎。
+**人工确认点**固定为三类：**付款、删除、对外发布**。其余操作默认直接执行；可逆操作配备默认 5 分钟的撤销窗口，窗口期内可一键回退。会话内的审批与权限档由 DSH 的 `dsh-user-approval` 与 `dsh-permission-presets` 承担，本仓不另建策略引擎。
 
 状态机采用九态模型（`new` / `doing` / `waiting` / `blocked` / `escalated` / `failed` / `stalled` / `spec` / `parked`），与 Taskwarrior 字段的具体映射见 [事件与任务规格 §2](event-spec.md#2-任务状态) 和 [事件运行时与派发 §2](event-runtime.md#2-状态机)。完整闭环设计见 [总体架构设计](architecture-north-star.md)。
 

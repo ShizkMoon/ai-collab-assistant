@@ -8,7 +8,7 @@
 
 | 工具或资产 | 本机实测状态 |
 |---|---|
-| `ar` CLI（控制面） | 0.1.0，19 个动词（`run-create`、`dispatch`、`node-create`、`resume`、`spawn`、`check`、`reply`、`gate`、`done`、`fail`、`wait`、`event`、`events`、`fork`、`abort`、`propose`、`cmd`、`daemon`、`version`），无 `list` / `watch`；不承担编排与执行，编排与执行由 DSH 会话内完成（[ADR 0011](adr/0011-dsh-orchestration.md)） |
+| `ar` CLI（控制面） | 0.1.0，19 个动词（`run-create`、`dispatch`、`node-create`、`resume`、`spawn`、`check`、`reply`、`gate`、`done`、`fail`、`wait`、`event`、`events`、`fork`、`abort`、`propose`、`cmd`、`daemon`、`version`），无 `list` / `watch`；不承担编排与执行，编排与执行由 DSH 会话内完成 |
 | `gh` CLI | 已登录 `ShizkMoon`，具备 `repo`、`workflow`、`gist`、`read:org` 权限 |
 | `claude` / `codex` / `gemini` / `dsh` | 均在 `PATH` 中，可用于跨厂商交叉审阅代码 |
 | `git` + `just` + `%USERPROFILE%\agent-src\tools\` | 可用 |
@@ -73,7 +73,6 @@
 | `%USERPROFILE%\.agents\rules\common\` | 跨仓库复用的具体工程规则 | 由周报提案合入 |
 | `<repo>/AGENTS.md` | 单个项目的目录结构、构建命令与测试方法 | 随项目代码提交维护 |
 | `%USERPROFILE%\.agents\link-skills.ps1` | 将同一套规则与 Skill 符号链接至各家 Agent 配置目录 | 脚本同步 |
-| `docs/adr/` | 关键架构决策记录 | 做出不可逆选型时编写 |
 
 ### 1.4 Skill 开发与维护生命周期
 

@@ -488,6 +488,6 @@ R1（transcript 轻量版）；R2（output schema）。
 ## 落点
 
 - **采用**：A9「审批无 UI 即拒」与 A4 的 fail-closed 三兜底，在 [控制面契约 §4](../control-plane-api.md) 落成「`gate` 超时（默认 2 分钟）视为拒绝，客户端不可达同样视为拒绝」——两分钟这个值就是 A9 里「建议降到 2min 并可配」的落地。A6 的 delivery 三态在同一份契约 §3 只剩 `queue` 与 `interrupt` 两态，真 steer 明写「需要 pi RPC，尚未实现」。
-- **搁置**：A1 审批解析器、A3 grant 记 tier、A8 跨轮 canonical hash 的 loop guard、A10 advisor 三档严重度、A11 admission 语义，落点都在 `gate.ts` 与 `aica-pi/`，随 [ADR 0011](../adr/0011-dsh-orchestration.md) 废止自建适配层而停摆。A2「必问」与「必拒」分离也没有采用：`ar` 现在只有 tier 与 `deny` 路径，表达不了「这个目录我要每次亲自看」。TTSR 的 LLM 判题、Bun + Rust 原生层本来就不抄。
+- **搁置**：A1 审批解析器、A3 grant 记 tier、A8 跨轮 canonical hash 的 loop guard、A10 advisor 三档严重度、A11 admission 语义，落点都在 `gate.ts` 与 `aica-pi/`，随自建适配层废止而停摆。A2「必问」与「必拒」分离也没有采用：`ar` 现在只有 tier 与 `deny` 路径，表达不了「这个目录我要每次亲自看」。TTSR 的 LLM 判题、Bun + Rust 原生层本来就不抄。
 - **影响判断**：中立偏复用。它把「pi 之上还能加多少层」查得很清楚（审批、纠偏、顾问、子代理四套闸门），也顺带量出了这些层全是自建成本；DSH 把审批与子代理做进插件之后，同样的活不值得在 pi 侧再写一遍。
 - **时效**：`ff0a986`（2026-11-03），对照基线是本机 pi 1.5.0。§0 记下的关键差异是 pi 1.5.0 的 docs 里没有 approval-mode / ttsr / agent-hub 任何一篇——这个差异一旦 pi 上游补齐，「OMP 是增量」这个判断就得重写。复查时点：pi 升级，或又要考虑在 pi 侧补审批时。

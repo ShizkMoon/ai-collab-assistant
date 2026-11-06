@@ -1,6 +1,6 @@
 # `ar` 控制面 CLI 与运行目录
 
-> 状态：设计中、未部署 · 上位文档：[ADR 0008](adr/0008-local-agent-runtime.md)、[多 Agent 运行时](multi-agent-runtime.md)、[ADR 0010](adr/0010-retire-dsbot-native-ui.md) · 关联：[系统拓扑](system-topology.md)、[控制面契约](control-plane-api.md)、[Worker 适配器](worker-adapters.md)
+> 状态：设计中、未部署 · 上位文档：[多 Agent 运行时](multi-agent-runtime.md) · 关联：[系统拓扑](system-topology.md)、[控制面契约](control-plane-api.md)、[Worker 适配器](worker-adapters.md)
 >
 > 本文定义 `ar` 控制面 CLI（0.1.0，19 个动词）与运行目录 `runs/<root_id>/` 的职责边界、协议细节与演进路径。编排与交互由 DSH 承担（会话内领导模式，工作区级 SuperAgent），执行落在 DSH subagent / teammate；`ar` 只做控制面，不做编排，也不做执行。[多 Agent 运行时](multi-agent-runtime.md) 是协议规格（信封、节点树、程序化约束），本文是落地形态。
 
